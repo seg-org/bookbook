@@ -11,8 +11,9 @@ export async function POST(req: NextRequest) {
   try {
     const data: CreateBookRequest = await req.json();
 
-    if (!data.title || !data.author || !data.publishedYear) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    const missingFields = checkMissingFields(data);
+    if (missingFields.length > 0) {
+      return NextResponse.json({ error: `Missing required fields: ${missingFields.join(", ")}` }, { status: 400 });
     }
 
     const newBook = await prisma.book.create({ data });
@@ -25,7 +26,28 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  const books = await prisma.book.findMany();
+  try {
+    const books = await prisma.book.findMany();
 
-  return Response.json(books);
+    return NextResponse.json(books);
+  } catch (error) {
+    console.error("Error getting books", error);
+    return NextResponse.json({ error: "Cannot get books" }, { status: 500 });
+  }
 }
+
+const checkMissingFields = (body: CreateBookRequest) => {
+  const missingFields = [];
+
+  if (!body.title) {
+    missingFields.push("title");
+  }
+  if (!body.author) {
+    missingFields.push("author");
+  }
+  if (!body.publishedYear) {
+    missingFields.push("publishedYear");
+  }
+
+  return missingFields;
+};
