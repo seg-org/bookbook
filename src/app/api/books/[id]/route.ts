@@ -4,10 +4,13 @@ import { NextRequest, NextResponse } from "next/server";
 interface UpdateBookRequest {
   title?: string;
   author?: string;
-  publishedYear?: number;
+  genre?: string;
+  description?: string;
+  isbn?: string;
+  pages?: number;
 }
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
   try {
     const book = await prisma.book.findUnique({
       where: { id: params.id },
@@ -35,6 +38,10 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     }
 
     const updatedData: UpdateBookRequest = await req.json();
+    const errors = checkInvalidTypes(updatedData);
+    if (errors.length > 0) {
+      return NextResponse.json({ error: `Invalid fields: ${errors.join(", ")}` }, { status: 400 });
+    }
 
     const updatedBook = await prisma.book.update({
       where: { id: params.id },
@@ -47,3 +54,20 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json({ error: "Cannot update the book" }, { status: 500 });
   }
 }
+
+const checkInvalidTypes = (body: UpdateBookRequest) => {
+  const fieldTypes: { key: keyof UpdateBookRequest; type: string }[] = [
+    { key: "title", type: "string" },
+    { key: "author", type: "string" },
+    { key: "genre", type: "string" },
+    { key: "description", type: "string" },
+    { key: "isbn", type: "string" },
+    { key: "pages", type: "number" },
+  ];
+
+  const invalidFields = fieldTypes
+    .filter(({ key, type }) => key in body && typeof body[key] !== type)
+    .map(({ key, type }) => `${key} (expected ${type})`);
+
+  return invalidFields;
+};
