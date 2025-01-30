@@ -60,6 +60,22 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 }
 
+export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const post = await prisma.post.findUnique({ where: { id: params.id } });
+    if (!post) {
+      return NextResponse.json({ error: `Post with id ${params.id} not found` }, { status: 404 });
+    }
+
+    await prisma.post.delete({ where: { id: params.id } });
+
+    return NextResponse.json({ message: `Post with id ${params.id} deleted successfully` }, { status: 200 });
+  } catch (error) {
+    console.error(`Error deleting post with id ${params.id}`, error);
+    return NextResponse.json({ error: "Cannot delete post" }, { status: 500 });
+  }
+}
+
 const checkInvalidTypes = (body: UpdatePostRequest) => {
   const fieldTypes: { key: keyof UpdatePostRequest; type: string }[] = [
     { key: "title", type: "string" },

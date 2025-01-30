@@ -55,6 +55,30 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 }
 
+export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const book = await prisma.book.findUnique({ where: { id: params.id } });
+    if (!book) {
+      return NextResponse.json({ error: `Book with id ${params.id} not found` }, { status: 404 });
+    }
+
+    const posts = await prisma.post.findMany({ where: { bookId: params.id } });
+    if (posts.length > 0) {
+      return NextResponse.json(
+        { error: `Cannot delete book with id ${params.id} because it has posts` },
+        { status: 400 }
+      );
+    }
+
+    await prisma.book.delete({ where: { id: params.id } });
+
+    return NextResponse.json({ message: `Book with id ${params.id} deleted successfully` }, { status: 200 });
+  } catch (error) {
+    console.error(`Error deleting book with id ${params.id}`, error);
+    return NextResponse.json({ error: "Cannot delete book" }, { status: 500 });
+  }
+}
+
 const checkInvalidTypes = (body: UpdateBookRequest) => {
   const fieldTypes: { key: keyof UpdateBookRequest; type: string }[] = [
     { key: "title", type: "string" },
