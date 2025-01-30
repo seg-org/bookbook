@@ -10,31 +10,33 @@ interface UpdateBookRequest {
   pages?: number;
 }
 
-export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const { id } = await props.params;
   try {
     const book = await prisma.book.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!book) {
-      return NextResponse.json({ error: `Book with id ${params.id} not found` }, { status: 404 });
+      return NextResponse.json({ error: `Book with id ${id} not found` }, { status: 404 });
     }
 
     return NextResponse.json(book);
   } catch (error) {
-    console.error(`Error getting book with id ${params.id}`, error);
+    console.error(`Error getting book with id ${id}`, error);
     return NextResponse.json({ error: "Cannot get a book" }, { status: 500 });
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const { id } = await props.params;
   try {
     const book = await prisma.book.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!book) {
-      return NextResponse.json({ error: `Book with id ${params.id} not found` }, { status: 404 });
+      return NextResponse.json({ error: `Book with id ${id} not found` }, { status: 404 });
     }
 
     const updatedData: UpdateBookRequest = await req.json();
@@ -44,18 +46,19 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     }
 
     const updatedBook = await prisma.book.update({
-      where: { id: params.id },
+      where: { id },
       data: updatedData,
     });
 
     return NextResponse.json(updatedBook);
   } catch (error) {
-    console.error(`Error updating book with id ${params.id}`, error);
+    console.error(`Error updating book with id ${id}`, error);
     return NextResponse.json({ error: "Cannot update the book" }, { status: 500 });
   }
 }
 
-export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(_: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   try {
     const book = await prisma.book.findUnique({ where: { id: params.id } });
     if (!book) {
