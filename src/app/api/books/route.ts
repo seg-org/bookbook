@@ -4,7 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 interface CreateBookRequest {
   title: string;
   author: string;
-  publishedYear: number;
+  genre: string;
+  description: string;
+  isbn: string;
+  pages: number;
 }
 
 export async function POST(req: NextRequest) {
@@ -37,17 +40,21 @@ export async function GET() {
 }
 
 const checkMissingFields = (body: CreateBookRequest) => {
-  const missingFields = [];
+  const requiredFields: { key: keyof CreateBookRequest; type: string }[] = [
+    { key: "title", type: "string" },
+    { key: "author", type: "string" },
+    { key: "genre", type: "string" },
+    { key: "description", type: "string" },
+    { key: "isbn", type: "string" },
+    { key: "pages", type: "number" },
+  ];
 
-  if (!body.title) {
-    missingFields.push("title");
-  }
-  if (!body.author) {
-    missingFields.push("author");
-  }
-  if (!body.publishedYear) {
-    missingFields.push("publishedYear");
-  }
+  const missingFields = requiredFields
+    .filter(({ key, type }) => {
+      const value = body[key];
+      return value === undefined || typeof value !== type;
+    })
+    .map(({ key, type }) => `${key} (expected ${type})`);
 
   return missingFields;
 };
