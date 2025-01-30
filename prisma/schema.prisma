@@ -16,8 +16,12 @@ datasource db {
 model Book {
   id        String  @id @default(cuid())
   title     String
-  author    String?
-  published Boolean @default(false)
+  author    String
+  genre     String
+  description String
+  isbn      String
+  pages     Int
+  // imageId  String
   // seller    User     @relation(fields: [sellerId], references: [id])
   // sellerId  String
   Post      Post[]
