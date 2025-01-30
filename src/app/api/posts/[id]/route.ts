@@ -1,12 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-interface UpdatePostRequest {
-  title?: string;
-  content?: string;
-  published?: boolean;
-  bookId?: string;
-}
+const updatePostRequest = z.object({
+  title: z.string().optional(),
+  content: z.string().optional(),
+  published: z.boolean().optional(),
+  bookId: z.string().optional(),
+});
 
 export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -37,22 +38,21 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       return NextResponse.json({ error: `Post with id ${id} not found` }, { status: 404 });
     }
 
-    const updatedData: UpdatePostRequest = await req.json();
-    const errors = checkInvalidTypes(updatedData);
-    if (errors.length > 0) {
-      return NextResponse.json({ error: `Invalid fields: ${errors.join(", ")}` }, { status: 400 });
+    const parsedData = updatePostRequest.safeParse(await req.json());
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
     const book = await prisma.book.findUnique({
-      where: { id: updatedData.bookId },
+      where: { id: parsedData.data.bookId },
     });
     if (!book) {
-      return NextResponse.json({ error: `Book with id ${updatedData.bookId} not found` }, { status: 404 });
+      return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
     }
 
     const updatedPost = await prisma.post.update({
       where: { id },
-      data: updatedData,
+      data: parsedData.data,
     });
 
     return NextResponse.json(updatedPost);
@@ -78,18 +78,3 @@ export async function DELETE(_: NextRequest, props: { params: Promise<{ id: stri
     return NextResponse.json({ error: "Cannot delete post" }, { status: 500 });
   }
 }
-
-const checkInvalidTypes = (body: UpdatePostRequest) => {
-  const fieldTypes: { key: keyof UpdatePostRequest; type: string }[] = [
-    { key: "title", type: "string" },
-    { key: "content", type: "string" },
-    { key: "published", type: "boolean" },
-    { key: "bookId", type: "string" },
-  ];
-
-  const invalidFields = fieldTypes
-    .filter(({ key, type }) => key in body && typeof body[key] !== type)
-    .map(({ key, type }) => `${key} (expected ${type})`);
-
-  return invalidFields;
-};

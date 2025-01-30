@@ -1,25 +1,24 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-interface CreateBookRequest {
-  title: string;
-  author: string;
-  genre: string;
-  description: string;
-  isbn: string;
-  pages: number;
-}
+const createBookRequest = z.object({
+  title: z.string(),
+  author: z.string(),
+  genre: z.string(),
+  description: z.string(),
+  isbn: z.string(),
+  pages: z.number(),
+});
 
 export async function POST(req: NextRequest) {
   try {
-    const data: CreateBookRequest = await req.json();
-
-    const missingFields = checkMissingFields(data);
-    if (missingFields.length > 0) {
-      return NextResponse.json({ error: `Missing required fields: ${missingFields.join(", ")}` }, { status: 400 });
+    const parsedData = createBookRequest.safeParse(await req.json());
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    const newBook = await prisma.book.create({ data });
+    const newBook = await prisma.book.create({ data: parsedData.data });
 
     return NextResponse.json(newBook, { status: 201 });
   } catch (error) {
@@ -38,23 +37,3 @@ export async function GET() {
     return NextResponse.json({ error: "Cannot get books" }, { status: 500 });
   }
 }
-
-const checkMissingFields = (body: CreateBookRequest) => {
-  const requiredFields: { key: keyof CreateBookRequest; type: string }[] = [
-    { key: "title", type: "string" },
-    { key: "author", type: "string" },
-    { key: "genre", type: "string" },
-    { key: "description", type: "string" },
-    { key: "isbn", type: "string" },
-    { key: "pages", type: "number" },
-  ];
-
-  const missingFields = requiredFields
-    .filter(({ key, type }) => {
-      const value = body[key];
-      return value === undefined || typeof value !== type;
-    })
-    .map(({ key, type }) => `${key} (expected ${type})`);
-
-  return missingFields;
-};

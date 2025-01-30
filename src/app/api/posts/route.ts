@@ -1,30 +1,29 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-interface CreatePostRequest {
-  title: string;
-  content: string;
-  published: boolean;
-  bookId: string;
-}
+const createPostRequest = z.object({
+  title: z.string(),
+  content: z.string(),
+  published: z.boolean(),
+  bookId: z.string(),
+});
 
 export async function POST(req: NextRequest) {
   try {
-    const data: CreatePostRequest = await req.json();
-
-    const missingFields = checkMissingFields(data);
-    if (missingFields.length > 0) {
-      return NextResponse.json({ error: `Missing required fields: ${missingFields.join(", ")}` }, { status: 400 });
+    const parsedData = createPostRequest.safeParse(await req.json());
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
     const book = await prisma.book.findUnique({
-      where: { id: data.bookId },
+      where: { id: parsedData.data.bookId },
     });
     if (!book) {
-      return NextResponse.json({ error: `Book with id ${data.bookId} not found` }, { status: 404 });
+      return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
     }
 
-    const newPost = await prisma.post.create({ data });
+    const newPost = await prisma.post.create({ data: parsedData.data });
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
@@ -43,21 +42,3 @@ export async function GET() {
     return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });
   }
 }
-
-const checkMissingFields = (body: CreatePostRequest) => {
-  const requiredFields: { key: keyof CreatePostRequest; type: string }[] = [
-    { key: "title", type: "string" },
-    { key: "content", type: "string" },
-    { key: "published", type: "boolean" },
-    { key: "bookId", type: "string" },
-  ];
-
-  const missingFields = requiredFields
-    .filter(({ key, type }) => {
-      const value = body[key];
-      return value === undefined || typeof value !== type;
-    })
-    .map(({ key, type }) => `${key} (expected ${type})`);
-
-  return missingFields;
-};
