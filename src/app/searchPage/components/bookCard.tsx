@@ -11,7 +11,7 @@ function bookCard({ book }: any) {
                     <span>{book.price} ฿</span>
                 </div>
                 <div className="flex flex-row m-2.5">
-                    <Image className="m-2.5 max-h-[30%] w-auto rounded-lg" src={bookCover} alt="Book Cover"></Image>
+                    <Image className="m-2.5 max-h-[60%] w-auto rounded-lg" src={bookCover} alt="Book Cover"></Image>
                     <div className="flex flex-col">
                         <div><strong>ผู้เขียน  </strong>{book.author}</div>
                         <div><div><strong>รายละเอียด</strong></div> {book.desc}</div>
