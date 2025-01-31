@@ -1,4 +1,4 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -13,12 +13,6 @@
     --foreground: #ededed;
   }
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */
 
 
 * {
@@ -37,52 +31,20 @@ body {
   margin: 0px;
   color: #333;
   min-height: 100vh;
-}
+} 
 
 
-/* header css==================================== */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
-}
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #007bff;
-  line-height: 1.2;
-}
 
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-}
 
-nav ul li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
+
 
 nav ul li a:hover{
   color : #304674;
   text-decoration: underline;
 }
 
-.profile img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
 
-/* ========================================= */
 
 main {
   margin: 20px;
@@ -93,42 +55,13 @@ main {
   
 }
 
-.search-section {
-  display: flex;
-  gap: 70px;
-  /* margin-bottom: 30px; */
-}
 
-.illustration img {
-  max-width: 300px;
-  height:  auto;
-}
 
-.search-form{
-  width: 200%;
-}
 
-.search-form h2 {
-  font-size: 30px;
-  margin-bottom: 10px;
-}
 
-.quick-search {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 20px;
-}
-
-.quick-search input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
 
 .quick-search button {
   padding: 10px 10px;
-  /* margin: 10px; */
   background: #9dc4de;
   color: #fff;
   border: none;
@@ -180,77 +113,7 @@ main {
   font-size: 20px;
 }
 
-.book-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.book-card img {
-  margin: 10px;
-  /* max-height: 30%; */
-  width: auto;
-  border-radius: 10px;
-}
-
-.book-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.book-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.book-footer span {
-  font-size: 15px;
-  font-weight: bold;
-  color: #007bff;
-}
-
-.book_desc_container , .book_name_price{
-  display: flex;
-  flex-direction: row;
-  margin: 10px;
-}
-
-.book_name_price{
-  justify-content: space-between;
-  font-size: 20px;
-}
-
-.book-footer button {
-  margin: 10px;
-  cursor: pointer;
-}
-
 .book-footer button:hover {
   background: #0056b3;
 }
 
-.detail{
-  border: #B8B8B8 2px solid;
-  background-color: white;
-  color: black;
-  padding: 5px;
-  font-size: 15px;
-  border-radius: 5px;
-}
-
-.addToCart{
-  border: #B8B8B8 2px solid;
-  background-color: #8BB9D8;
-  color: white;
-  padding: 5px;
-  font-size: 15px;
-  border-radius: 5px;
-}
-
-/* =================================== */
