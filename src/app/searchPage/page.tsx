@@ -25,7 +25,7 @@ function SearchPage() {
   const [specialSearch, setSpecialSearch] = useState(false);
 
 
-  const books = [
+  const books = [ //tmp
     {
       id: 0,
       bookname: "สถาปัตยกรรมคอมพิวเตอร์",
@@ -35,9 +35,9 @@ function SearchPage() {
     },
     {
       id: 1,
-      bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-      author: "ดร.เกริก พิรมย์โสภา",
-      desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
+      bookname: "人妻教師が教え子の女子高生にドはまりする話",
+      author: "人 間 人 間",
+      desc: "人妻教師が教え子の女子高生にドはまりする話",
       price: 129
     },
     {
@@ -95,48 +95,6 @@ function SearchPage() {
       author: "ดร.เกริก พิรมย์โสภา",
       desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
       price: 129
-    },
-    {
-      id: 10,
-      bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-      author: "ดร.เกริก พิรมย์โสภา",
-      desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-      price: 129
-    },
-    {
-      id: 11,
-      bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-      author: "ดร.เกริก พิรมย์โสภา",
-      desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-      price: 129
-    },
-    {
-      id: 12,
-      bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-      author: "ดร.เกริก พิรมย์โสภา",
-      desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-      price: 129
-    },
-    {
-      id: 13,
-      bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-      author: "ดร.เกริก พิรมย์โสภา",
-      desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-      price: 129
-    },
-    {
-      id: 14,
-      bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-      author: "ดร.เกริก พิรมย์โสภา",
-      desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-      price: 129
-    },
-    {
-      id: 15,
-      bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-      author: "ดร.เกริก พิรมย์โสภา",
-      desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-      price: 129
     }
   ]
 
@@ -157,8 +115,8 @@ function SearchPage() {
                   <button className="p-2.5 bg-[#9dc4de] text-white border-none rounded-md cursor-pointer">ค้นหาข้อมูล</button>
                 </div>
                 <div className="advanced-search-toggle">
-                  <button className={specialSearch ? "btnAct" : "btnUnact"} onClick={() => { setSpecialSearch(true); setDetailSearch(false) }}>ค้นหาด้วยเงื่อนไขพิเศษ</button>
-                  <button className={detailSearch ? "btnAct" : "btnUnact"} onClick={() => { setDetailSearch(true); setSpecialSearch(false) }}>ค้นหาด้วยรายละเอียดเพิ่มเติม</button>
+                <button className={`p-3.5 m-[15px_15px_10px_15px] mb-5 ${specialSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} text-white border-none rounded-sm cursor-pointer`} onClick={() => { setSpecialSearch(true); setDetailSearch(false) }}>ค้นหาด้วยเงื่อนไขพิเศษ</button>
+                <button className={`p-3.5 m-[15px_15px_10px_15px] mb-5 ${detailSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} text-white border-none rounded-sm cursor-pointer`} onClick={() => { setDetailSearch(true); setSpecialSearch(false) }}>ค้นหาด้วยรายละเอียดเพิ่มเติม</button>
                 </div>
                 {(detailSearch && !specialSearch) && <SearchByDetail></SearchByDetail>}
                 {(!detailSearch && specialSearch) && <div>ขี้เกียจทำละ</div>}

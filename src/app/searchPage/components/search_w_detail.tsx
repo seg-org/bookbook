@@ -1,11 +1,11 @@
 function SearchByDetail() {
     return (
         <>
-        <form className="advanced-search">
-              <input type="text" placeholder="ชื่อหนังสือ"></input>
-              <input type="text" placeholder="ผู้เขียน"></input>
-              <input type="text" placeholder="สำนักพิมพ์"></input>
-              <input type="text" placeholder="ISBN"></input>
+        <form className="grid gap-2.5">
+              <input className="p-2.5 border border-gray-300 rounded-sm" type="text" placeholder="ชื่อหนังสือ"></input>
+              <input className="p-2.5 border border-gray-300 rounded-sm" type="text" placeholder="ผู้เขียน"></input>
+              <input className="p-2.5 border border-gray-300 rounded-sm" type="text" placeholder="สำนักพิมพ์"></input>
+              <input className="p-2.5 border border-gray-300 rounded-sm" type="text" placeholder="ISBN"></input>
         </form> 
         </>
     );
