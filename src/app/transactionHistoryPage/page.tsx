@@ -22,8 +22,8 @@ function TransactionPage() {
       id: 1,
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
-      price: 129,
-      type: "buy",
+      price: 69,
+      type: "sell",
       date: new Date(2001,9,11,8,15),
       status: "approving"
     },
@@ -32,7 +32,7 @@ function TransactionPage() {
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
       price: 129,
-      type: "buy",
+      type: "sell",
       date: new Date(2001,9,11,8,15),
       status: "complete"
     },
@@ -40,7 +40,7 @@ function TransactionPage() {
       id: 3,
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
-      price: 129,
+      price: 112,
       type: "buy",
       date: new Date(2001,9,11,8,15),
       status: "fail"
@@ -50,7 +50,7 @@ function TransactionPage() {
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
       price: 129,
-      type: "buy",
+      type: "sell",
       date: new Date(2001,9,11,8,15),
       status: "paying"
     },
@@ -59,7 +59,7 @@ function TransactionPage() {
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
       price: 129,
-      type: "buy",
+      type: "sell",
       date: new Date(2001,9,11,8,15),
       status: "complete"
     },
@@ -67,7 +67,7 @@ function TransactionPage() {
       id: 6,
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
-      price: 129,
+      price: 420,
       type: "buy",
       date: new Date(2001,9,11,8,15),
       status: "fail"
@@ -77,7 +77,7 @@ function TransactionPage() {
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
       price: 129,
-      type: "buy",
+      type: "sell",
       date: new Date(2001,9,11,8,15),
       status: "fail"
     },
@@ -94,7 +94,7 @@ function TransactionPage() {
       id: 9,
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
-      price: 129,
+      price: 30,
       type: "buy",
       date: new Date(2001,9,11,8,15),
       status: "complete"
@@ -104,7 +104,7 @@ function TransactionPage() {
       name: "สถาปัตยกรรมคอมพิวเตอร์",
       image: "../pic/bookCover.jpg",
       price: 129,
-      type: "buy",
+      type: "sell",
       date: new Date(2001,9,11,8,15),
       status: "paying"
     },
