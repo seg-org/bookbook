@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
 
@@ -21,7 +22,11 @@ export interface TransactionBoxProps{
 }
 
 const TransactionBox = ({ id,name,image,price,type,date,status } : TransactionBoxProps) => {
- 
+
+  const cap_overflow_string = (str: string) => {
+    if(str.length >= 30) return str.substring(0,30) + "...";
+    else return str
+  }
 
   return (
     <div className='relative p-4 bg-white rounded-lg border border-gray-300 flex flex-row items-center justify-between gap-x-10'>
@@ -29,8 +34,8 @@ const TransactionBox = ({ id,name,image,price,type,date,status } : TransactionBo
       <div className='flex flex-row items-center justify-start gap-5'>
         <Image src={ImageDummySrc} alt="Book Cover" width={90} height={160}></Image>
         <div className='flex flex-col'>
-          <label className='font-semibold text-xl'>{name}</label>
-          <label className='text-gray-400 text-lg'>{date.getDate()}/{date.getMonth()}/{date.getFullYear()} | {date.getHours()}:{date.getMinutes()}</label>
+          <label className='font-semibold text-xl'>{cap_overflow_string(name)}</label>
+          <label className='text-gray-400 text-lg'>{date.toDateString()} {date.getHours()}:{date.getMinutes()}</label>
           <label className='text-xl'>{price}.-</label>
         </div>
       </div>

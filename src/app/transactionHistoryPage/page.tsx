@@ -38,7 +38,7 @@ function TransactionPage() {
     },
     {
       id: 3,
-      name: "สถาปัตยกรรมคอมพิวเตอร์",
+      name: "สถาปัตยกรรมคอมพิวเตอร์ เไรีนไเรีไำนพรีไำพยรีๆำไนพรีไำนพรไำ่นกร่ำไนกร่ไำกนร่ไำกสาพ่ำไสพร่ไำสพรำไ่พสาก่สร่",
       image: "../pic/bookCover.jpg",
       price: 112,
       type: "buy",
@@ -51,7 +51,7 @@ function TransactionPage() {
       image: "../pic/bookCover.jpg",
       price: 129,
       type: "sell",
-      date: new Date(2001,9,11,8,15),
+      date: new Date(),
       status: "paying"
     },
     {
@@ -60,7 +60,7 @@ function TransactionPage() {
       image: "../pic/bookCover.jpg",
       price: 129,
       type: "sell",
-      date: new Date(2001,9,11,8,15),
+      date: new Date(),
       status: "complete"
     },
     {
@@ -87,7 +87,7 @@ function TransactionPage() {
       image: "../pic/bookCover.jpg",
       price: 129,
       type: "buy",
-      date: new Date(2001,9,11,8,15),
+      date: new Date(),
       status: "complete"
     },
     {
@@ -106,6 +106,42 @@ function TransactionPage() {
       price: 129,
       type: "sell",
       date: new Date(2001,9,11,8,15),
+      status: "paying"
+    },
+    {
+      id: 11,
+      name: "สถาปัตยกรรมคอมพิวเตอร์",
+      image: "../pic/bookCover.jpg",
+      price: 129,
+      type: "sell",
+      date: new Date("2025-02-03"),
+      status: "paying"
+    },
+    {
+      id: 12,
+      name: "สถาปัตยกรรมคอมพิวเตอร์",
+      image: "../pic/bookCover.jpg",
+      price: 1290.9,
+      type: "sell",
+      date: new Date("2025-02-04"),
+      status: "paying"
+    },
+    {
+      id: 13,
+      name: "สถาปัตยกรรมคอมพิวเตอร์",
+      image: "../pic/bookCover.jpg",
+      price: 1290.9,
+      type: "sell",
+      date: new Date("2025-01-01"),
+      status: "paying"
+    },
+    {
+      id: 14,
+      name: "สถาปัตยกรรมคอมพิวเตอร์",
+      image: "../pic/bookCover.jpg",
+      price: 1290.9,
+      type: "sell",
+      date: new Date("2025-01-06"),
       status: "paying"
     },
   ]
