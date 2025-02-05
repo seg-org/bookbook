@@ -26,7 +26,7 @@ function Header() {
           </li>
           <li>
             <div className="h-10 w-10 rounded-full bg-gray-300">
-              <Image src={profile} alt="Profile"></Image>
+              <Image src={profile} alt="Profile" />
             </div>
           </li>
         </ul>
