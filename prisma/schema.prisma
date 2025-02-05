@@ -14,17 +14,19 @@ datasource db {
 }
 
 model Book {
-  id        String  @id @default(cuid())
-  title     String
-  author    String
-  genre     String
-  description String
-  isbn      String
-  pages     Int
-  // imageId  String
+  id            String  @id @default(cuid())
+  title         String
+  author        String
+  genre         String
+  description   String
+  isbn          String
+  pages         Int
+  coverImageUrl String? @map("cover_image_url")
   // seller    User     @relation(fields: [sellerId], references: [id])
   // sellerId  String
-  Post      Post[]
+  posts         Post[]
+
+  @@map("book")
 }
 
 model Post {
@@ -35,5 +37,7 @@ model Post {
   // seller    User     @relation(fields: [sellerId], references: [id])
   // sellerId  String
   book      Book    @relation(fields: [bookId], references: [id])
-  bookId    String
+  bookId    String  @map("book_id")
+
+  @@map("post")
 }
