@@ -1,6 +1,6 @@
-import bookCover from "@/app/searchPage/pic/bookCover.png";
 import { Book } from "@/types/book";
 import Image from "next/image";
+import bookCover from "../pic/bookCover.jpg";
 import YbookCover from "../pic/YuriShosetsu.png";
 
 type BookCardProps = {
@@ -22,7 +22,7 @@ function BookCard({ book }: BookCardProps) {
             width={500}
             height={500}
             alt="Book Cover"
-          ></Image>
+          />
           <div className="flex h-screen max-h-[275px] flex-col justify-between">
             <div>
               <div>
