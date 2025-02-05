@@ -21,8 +21,8 @@
 } */
 
 body {
-  font-family:  kanit, sans-serif;
-  background-image: linear-gradient(to bottom right,white,lightblue);
+  font-family: kanit, sans-serif;
+  background-image: linear-gradient(to bottom right, white, lightblue);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -30,10 +30,10 @@ body {
   margin: 0px;
   color: #333;
   min-height: 100vh;
-} 
+}
 
-nav ul li a:hover{
-  color : #304674;
+nav ul li a:hover {
+  color: #304674;
   text-decoration: underline;
 }
 
@@ -50,7 +50,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 30px;
-  padding : 30px;
+  padding: 30px;
   width: 100%;
   font-size: 20px;
 }
@@ -58,4 +58,3 @@ main {
 .book-footer button:hover {
   background: #0056b3;
 }
-
