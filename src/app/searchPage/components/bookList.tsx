@@ -7,10 +7,9 @@ type BookListProps = {
 
 function BookList({ books }: BookListProps) {
   return (
-    // TODO: change this to tailwind
-    <div className="book-list">
+    <div className="grid-cols-auto-fit-400 grid w-full gap-8 p-8 text-lg">
       {books.map((book: Book) => (
-        <BookCard book={book} key={book.id}></BookCard>
+        <BookCard book={book} key={book.id} />
       ))}
     </div>
   );

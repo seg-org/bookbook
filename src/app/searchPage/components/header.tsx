@@ -1,4 +1,3 @@
-import profile from "@/app/searchPage/pic/profile.jpg";
 import Image from "next/image";
 
 function Header() {
@@ -25,8 +24,8 @@ function Header() {
             </a>
           </li>
           <li>
-            <div className="h-10 w-10 rounded-full bg-gray-300">
-              <Image src={profile} alt="Profile" />
+            <div className="relative h-10 w-10 rounded-full bg-gray-300">
+              <Image src="/images/profile.jpg" alt="Profile" fill={true} />
             </div>
           </li>
         </ul>

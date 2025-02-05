@@ -1,7 +1,5 @@
 import { Book } from "@/types/book";
 import Image from "next/image";
-import bookCover from "../pic/bookCover.jpg";
-import YbookCover from "../pic/YuriShosetsu.png";
 
 type BookCardProps = {
   book: Book;
@@ -18,7 +16,7 @@ function BookCard({ book }: BookCardProps) {
         <div className="m-2.5 flex flex-row">
           <Image
             className="m-2.5 h-40 w-auto rounded-lg"
-            src={book.id == 1 ? YbookCover : bookCover}
+            src={book.picture}
             width={500}
             height={500}
             alt="Book Cover"
