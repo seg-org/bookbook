@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 // Function to generate a seeded random number
 function seededRandom(seed: number) {
