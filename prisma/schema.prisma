@@ -38,8 +38,9 @@ model Post {
   published Boolean @default(false)
   // seller    User     @relation(fields: [sellerId], references: [id])
   // sellerId  String
-  book      Book    @relation(fields: [bookId], references: [id])
-  bookId    String  @unique @map("book_id")
+  book         Book          @relation(fields: [bookId], references: [id])
+  bookId       String        @map("book_id")
+  transactions Transaction[]
 
   @@map("post")
 }
@@ -50,6 +51,68 @@ model User {
   email     String   @unique
   password  String // Hash?
   createdAt DateTime @default(now())
+  buyTransactions  Transaction[] @relation("BuyerTransaction")
+  sellTransactions Transaction[] @relation("SellerTransaction")
 
   @@map("user")
+}
+
+model Transaction {
+  id             String            @id @default(cuid())
+  // transaction data
+  buyer          User              @relation("BuyerTransaction", fields: [buyerId], references: [id])
+  buyerId        String            @map("buyer_id")
+  seller         User              @relation("SellerTransaction", fields: [sellerId], references: [id])
+  sellerId       String            @map("seller_id")
+  post           Post              @relation(fields: [postId], references: [id])
+  postId         String            @map("post_id")
+  createOn       DateTime          @default(now()) @map("create_on")
+  updateOn       DateTime          @updatedAt() @map("update_on")
+  status         TransactionStatus
+  failData       TransactionFail?
+  // payment data
+  paymentMethod  PaymentMethod
+  hashId         String            @map("hashId")
+  paidOn         DateTime          @default(now()) @map("paid_on")
+  amount         Int
+  // shipment data
+  shipmentMethod ShipmentMethod
+  trackingURL    String            @map("tracking_url")
+  isDelivered    Boolean           @map("is_delivered")
+
+  @@index([buyerId, createOn])
+  @@index([sellerId, createOn])
+  @@map("transaction")
+}
+
+model TransactionFail {
+  id            String              @id @default(cuid())
+  transaction   Transaction         @relation(fields: [transactionId], references: [id])
+  transactionId String              @unique @map("transaction_id")
+  evidenceURL   String              @map("evidence_url")
+  detail        String
+  failType      TransactionFailType @map("fail_type")
+
+  @@map("transaction_fail")
+}
+
+enum TransactionStatus {
+  APPROVING @map("approving")
+  PAYING    @map("paying")
+  VERIFYING @map("verifying")
+  COMPLETE  @map("complete")
+  FAIL      @map("fail")
+}
+
+enum TransactionFailType {
+  CHEAT @map("cheat")
+}
+
+enum PaymentMethod {
+  CREDIT_CARD    @map("credit_card")
+  ONLINE_BANKING @map("online_banking")
+}
+
+enum ShipmentMethod {
+  DELIVERY @map("delivery")
 }
