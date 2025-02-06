@@ -1,0 +1,128 @@
+Functional requirement list
+
+9. Functional Requirements
+Seller Features
+- The system shall allow sellers to post their books for sale.
+- The system shall allow sellers to add extra description&book condition in
+their post.
+- The system shall filled in the book description in the post from book database
+when sufficient initial data is provided to accurately identify the book.
+- The system shall allow sellers to view data on books in the database.
+- The system shall allow sellers to request for new book to be add into book
+database.
+- The system shall allow sellers to match with buyer when the buyer’s search
+criteria align with the seller's post description.
+- The system shall allow sellers to respond to buyers question through a chat
+feature.
+- The system shall allow seller to initiate transaction when the transaction
+detail including the book description, the book condition, the shipment detail,
+payment amount and payment method are confirm
+- The system shall assist the seller in package shipment by recommend
+shipping method.
+- The system shall allow seller to add shipment tracking number to the system
+after the shipment is made.
+- The system shall facilitate the transfer of payment to the seller's account
+upon completion of the transaction.
+- The system shall notify sellers of the transaction status when the transaction
+is finished in both complete transaction and fail transaction case.
+- The system shall show recommended prices for books to sell.
+- The system shall allow sellers to view past transactions.
+- The system shall allow sellers to view and edit their post.
+- The system shall allow sellers to make a report to administrators in cases of
+policy violations in posts or inappropriate behavior in chats.
+- The system shall allow sellers to respond to administrator inquiries during
+the investigation of a report.
+
+
+
+Buyer Features
+- The system shall allow buyers to perform searches for seller’s post with book
+data, book description and book condition.
+- The system shall assist buyer when performing the search by fill in the book
+description in the search criteria from book database when sufficient initial
+data is provided to accurately identify the book.
+- The system shall allow buyers to match with seller’s post when the buyer’s
+search criteria align with the seller's post description.
+- The system shall allow buyers to communicate with sellers through chat
+feature to negotiate terms, ask questions, or discuss details about the books
+after the match is made.
+- The system shall handle payment transactions for books bought by buyers,
+including processing payments through credit card and digital wallets.
+- The system shall hold buyers payment until completion of transaction.
+- The system shall allow buyers to view a their transactions, including details
+such as purchase dates, amounts spent, and transaction statuses.
+- The system shall allow buyers to track the status of their orders, including
+shipment tracking and delivery updates given by the sellers.
+- The system shall allow buyers to confirm completion of transactions after the
+shipment is arrived.
+- The system shall allow buyers to deny the completion of a transaction by
+providing a reason and supporting evidence for their denial.
+- The system shall make an automated report to administrator in case of fail
+transaction.
+- The system shall allow buyers to make a report to administrators in cases of
+policy violations in posts or inappropriate behavior in chats.
+- The system shall allow buyers to respond to administrator inquiries during
+the investigation of a report.
+- The system shall allow buyers to save or bookmark books they are interested
+in for easy access later.
+- The system shall provide recommendations for books
+based on the buyer’s search history, preferences, and past transactions.
+- The system shall allow buyers to leave reviews and ratings for completed
+transaction.
+
+
+Administration Features
+- The system shall allow administrators to view, add, edit, and remove seller
+and buyer accounts.
+- The system shall allow administrators to verify and approve new seller and
+buyer accounts.
+- The system shall allow administrators to review and approve or reject book
+listings posted by sellers.
+- The system shall allow administrators to view, edit, delete, or update book
+data in the database.
+- The system shall allow administrators to verify data of books added by
+sellers.
+- The system shall allow administrators to view all transactions between
+buyers and sellers.
+- The system shall notify administrators when a new report is submitted.
+- The system shall allow administrators to set or update guidelines for
+recommended prices for books.
+- The system shall allow administrators to generate reports on sales,
+transactions, user activity, and other relevant metrics.
+- The system shall allow administrators to view user posts.
+- The system shall allow administrators to configure system settings, including
+payment gateways, user status, and user permissions.
+
+
+login/register
+purchase system (create buy/sell posts)
+chat system
+admin
+searching
+post-purchase (e.g. confirm received product, rating)
+
+
+Actors
+Buyers
+Sellers
+
+1. Register/login
+Email, name, pass
+If signup as seller: OTP + ID Card for admin
+
+2. Browsing
+Search in recommended feed, select tags e.g. genre, no. of pages
+If book not found: create buy post
+Sellers can create sell post and admin will review first
+3. If buy and sell match (buyer see sell post or seller see buy post?)
+Private chat
+Negotiate price
+Different shipping methods + prices
+4. After negotiation,
+Buyer transfers money to system
+Seller delivers the book, gives system the courier service used
+System gives buyer the tracking of courier service
+5. After buyer receives the books, there are 3 cases
+Book in good condition, confirm in the system, seller gets money, record transaction as complete
+Book in bad condition, report problem within time limit, admin will approve + refund. If it is seller’s false, seller gets penalty
+Did not receive book, system will refund buyer, seller will be penalized if there’s no good reasons.
