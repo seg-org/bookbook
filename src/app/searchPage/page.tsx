@@ -24,7 +24,7 @@ function SearchPage() {
         <main className={`${KanitFont.className}`}>
           <div className="flex gap-16">
             <div className="relative h-auto min-w-[300px] max-w-[300px]">
-              <Image src="/images/Picture1.png" alt="Illustration" fill={true} />
+              <Image src="/images/searchPage/man-with-book.png" alt="Illustration" fill={true} />
             </div>
             <div className="w-[200%]">
               <h2 className="mb-2.5 text-3xl">ค้นหาหนังสือ</h2>
