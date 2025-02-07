@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(newBook, { status: 201 });
   } catch (error) {
-    console.error("Error creating book", error);
+    if (error instanceof Error) console.error("Error creating book", error.stack);
     return NextResponse.json({ error: "Cannot create a book" }, { status: 500 });
   }
 }
@@ -34,7 +34,7 @@ export async function GET() {
 
     return NextResponse.json(books);
   } catch (error) {
-    console.error("Error getting books", error);
+    if (error instanceof Error) console.error("Error getting books", error.stack);
     return NextResponse.json({ error: "Cannot get books" }, { status: 500 });
   }
 }

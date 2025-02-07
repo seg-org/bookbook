@@ -22,7 +22,7 @@ export async function GET(_: NextRequest, props: { params: Promise<{ id: string 
 
     return NextResponse.json(post);
   } catch (error) {
-    console.error(`Error getting post with id ${id}`, error);
+    if (error instanceof Error) console.error(`Error getting post with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot get a post" }, { status: 500 });
   }
 }
@@ -57,7 +57,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     return NextResponse.json(updatedPost);
   } catch (error) {
-    console.error(`Error updating post with id ${id}`, error);
+    if (error instanceof Error) console.error(`Error updating post with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot update the post" }, { status: 500 });
   }
 }
@@ -74,7 +74,7 @@ export async function DELETE(_: NextRequest, props: { params: Promise<{ id: stri
 
     return NextResponse.json({ message: `Post with id ${id} deleted successfully` }, { status: 200 });
   } catch (error) {
-    console.error(`Error deleting post with id ${id}`, error);
+    if (error instanceof Error) console.error(`Error deleting post with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot delete post" }, { status: 500 });
   }
 }
