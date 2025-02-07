@@ -6,7 +6,7 @@ import SearchByDetail from "@/app/searchPage/components/SearchByDetail";
 import { books } from "@/data/book";
 import { Kanit } from "next/font/google";
 import { useState } from "react";
-import BookList from "./components/bookList";
+import BookList from "./components/BookList";
 
 const KanitFont = Kanit({
   subsets: ["latin"],

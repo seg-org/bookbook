@@ -1,5 +1,5 @@
 import { Book } from "@/types/book";
-import BookCard from "./bookCard";
+import BookCard from "./BookCard";
 
 type BookListProps = {
   books: Book[];
