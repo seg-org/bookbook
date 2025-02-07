@@ -15,8 +15,9 @@ export async function PUT(req: NextRequest) {
     }
 
     const data = await uploadToBucket(folder, file);
+    const key = data.Key.split("/")[1];
 
-    return NextResponse.json({ fileUrl: data.Location }, { status: 200 });
+    return NextResponse.json({ folder, key }, { status: 200 });
   } catch (error) {
     console.error("Error uploading file:", error);
     return NextResponse.json({ error: "File upload failed" }, { status: 500 });
