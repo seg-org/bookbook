@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { deleteObject, getPresignedUrl } from "../s3";
 
-export async function GET(req: NextRequest, { params }: { params: { key: string } }) {
+export async function GET(req: NextRequest, props: { params: Promise<{ key: string }> }) {
   try {
-    const key = params.key;
+    const { key } = await props.params;
     const { searchParams } = new URL(req.url);
     const folder = searchParams.get("folder");
 
@@ -23,9 +23,9 @@ export async function GET(req: NextRequest, { params }: { params: { key: string 
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { key: string } }) {
+export async function DELETE(req: NextRequest, props: { params: Promise<{ key: string }> }) {
   try {
-    const key = params.key;
+    const { key } = await props.params;
     const folder = req.nextUrl.searchParams.get("folder");
 
     if (!key) {
