@@ -10,7 +10,7 @@
     "postinstall": "prisma generate"
   },
   "prisma": {
-    "seed": "node prisma/seed.mjs"
+    "seed": "node prisma/seed/seed.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
