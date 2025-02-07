@@ -22,7 +22,7 @@ model Book {
   description   String
   isbn          String
   pages         Int
-  coverImageUrl String? @map("cover_image_url")
+  coverImageKey String @map("cover_image_key")
   // seller    User     @relation(fields: [sellerId], references: [id])
   // sellerId  String
   posts         Post[]
@@ -34,6 +34,7 @@ model Post {
   id        String  @id @default(cuid())
   title     String
   content   String?
+  price     Int
   published Boolean @default(false)
   // seller    User     @relation(fields: [sellerId], references: [id])
   // sellerId  String
