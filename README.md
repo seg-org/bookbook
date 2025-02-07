@@ -27,9 +27,3 @@ Download these tools before you start working on the project.
 6. Run `npx prisma generate` to generate the Prisma client
 7. Run `npx prisma db seed` to seed the database
 8. Run `pnpm dev` to start the application
-
-## Seeding the database
-
-```bash
-pnpm prisma db seed
-```
