@@ -1,0 +1,30 @@
+import AWS from "aws-sdk";
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
+const s3 = new AWS.S3();
+
+export const uploadToBucket = async (folder: string, file: File) => {
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const uploadParams = {
+      Bucket: process.env.AWS_BUCKET_NAME!,
+      Key: `${folder}/${Date.now()}-${file.name}`,
+      Body: buffer,
+      ContentType: file.type,
+    };
+
+    const data = await s3.upload(uploadParams).promise();
+
+    return data;
+  } catch (error) {
+    console.error("Error uploading file", error);
+    throw new Error("Cannot upload file");
+  }
+};
