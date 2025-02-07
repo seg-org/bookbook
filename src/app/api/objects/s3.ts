@@ -28,3 +28,28 @@ export const uploadToBucket = async (folder: string, file: File) => {
     throw new Error("Cannot upload file");
   }
 };
+
+export const getPresignedUrl = async (folder: string, key: string) => {
+  const signedUrl = s3.getSignedUrl("getObject", {
+    Bucket: process.env.AWS_BUCKET_NAME!,
+    Key: `${folder}/${key}`,
+    Expires: 3600,
+  });
+
+  return signedUrl;
+};
+
+export const deleteObject = async (folder: string, key: string): Promise<boolean> => {
+  try {
+    const params = {
+      Bucket: process.env.AWS_BUCKET_NAME!,
+      Key: `${folder}/${key}`,
+    };
+
+    await s3.deleteObject(params).promise();
+    return true;
+  } catch (error) {
+    console.error("Error deleting object from S3:", error);
+    return false;
+  }
+};

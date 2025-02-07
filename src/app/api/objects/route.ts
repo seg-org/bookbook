@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToBucket } from "./s3";
 
-export async function POST(req: NextRequest) {
+export async function PUT(req: NextRequest) {
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
     const folder = formData.get("folder") as string | null;
 
     if (!file) {
-      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+      return NextResponse.json({ error: "No file uploaded in field 'file'" }, { status: 400 });
     }
     if (!folder) {
-      return NextResponse.json({ error: "No folder specified e.g. book_images, user_images" }, { status: 400 });
+      return NextResponse.json({ error: "No 'folder' field specified e.g. book_images, user_images" }, { status: 400 });
     }
 
     const data = await uploadToBucket(folder, file);
