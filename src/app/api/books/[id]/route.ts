@@ -25,7 +25,7 @@ export async function GET(_: NextRequest, props: { params: Promise<{ id: string 
 
     return NextResponse.json(book);
   } catch (error) {
-    console.error(`Error getting book with id ${id}`, error);
+    if (error instanceof Error) console.error(`Error getting book with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot get a book" }, { status: 500 });
   }
 }
@@ -53,7 +53,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     return NextResponse.json(updatedBook);
   } catch (error) {
-    console.error(`Error updating book with id ${id}`, error);
+    if (error instanceof Error) console.error(`Error updating book with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot update the book" }, { status: 500 });
   }
 }
@@ -78,7 +78,7 @@ export async function DELETE(_: NextRequest, props: { params: Promise<{ id: stri
 
     return NextResponse.json({ message: `Book with id ${params.id} deleted successfully` }, { status: 200 });
   } catch (error) {
-    console.error(`Error deleting book with id ${params.id}`, error);
+    if (error instanceof Error) console.error(`Error deleting book with id ${params.id}`, error.stack);
     return NextResponse.json({ error: "Cannot delete book" }, { status: 500 });
   }
 }
