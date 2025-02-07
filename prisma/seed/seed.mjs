@@ -15,6 +15,11 @@ AWS.config.update({
 const prisma = new PrismaClient();
 const s3 = new AWS.S3();
 
+/**
+ * Uploads a file to S3
+ * @param {string} folder - The S3 folder name
+ * @param {string} filePath - The local file path
+ */
 const uploadToBucket = async (folder, filePath) => {
   try {
     const fileName = basename(filePath);
@@ -22,7 +27,7 @@ const uploadToBucket = async (folder, filePath) => {
     const fileContentType = "image/jpeg";
 
     const uploadParams = {
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_BUCKET_NAME || "",
       Key: `${folder}/${Date.now()}-${fileName}`,
       Body: buffer,
       ContentType: fileContentType,
