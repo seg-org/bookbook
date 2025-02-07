@@ -10,7 +10,7 @@ export default function Home() {
       </h1>
 
       <h1>Pages list</h1>
-      <ul style={{ listStyleType: "circle"}}>
+      <ul style={{ listStyleType: "circle" }}>
         <li>
           <Link href="/searchPage" style={{ color: "blue", textDecoration: "underline" }}>
             searchPage
@@ -18,7 +18,7 @@ export default function Home() {
         </li>
         <li>
           <Link href="/sellBook" style={{ color: "blue", textDecoration: "underline" }}>
-          sellBook
+            sellBook
           </Link>
         </li>
       </ul>
