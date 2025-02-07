@@ -1,84 +1,14 @@
-import { Book } from "@/types/book";
+import { AxiosResponse } from "axios";
+import { apiClient } from "./axios";
+import { Book } from "./dto/book.dto";
 
-export const books: Book[] = [
-  {
-    id: 0,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 1,
-    bookname: "人妻教師が教え子の女子高生にドはまりする話",
-    author: "人 間 人 間",
-    desc: "人妻教師が教え子の女子高生にドはまりする話",
-    price: 129,
-    picture: "/images/hitozuma-1.jpg",
-  },
-  {
-    id: 2,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 3,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 4,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 5,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 6,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 7,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 8,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-  {
-    id: 9,
-    bookname: "สถาปัตยกรรมคอมพิวเตอร์",
-    author: "ดร.เกริก พิรมย์โสภา",
-    desc: "หนังสือง่าย ๆ สำหรับการออกแบบสถาปัตยกรรมเนื้อหาประกอบด้วยการวิเคราะห์สมรรถภาพและสถาปัตยกรรมแบบต่าง ๆ",
-    price: 129,
-    picture: "/images/krerk-csa-book.jpg",
-  },
-];
+export const getAllBooks = async () => {
+  try {
+    const res: AxiosResponse<Book[]> = await apiClient.get("/books");
+
+    return res.data;
+  } catch (error) {
+    console.error("Failed to get all books", error);
+    return Error("Failed to get all books");
+  }
+};

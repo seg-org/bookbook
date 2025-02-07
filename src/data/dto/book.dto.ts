@@ -1,4 +1,4 @@
-export type BookDTO = {
+export type Book = {
   id: string;
   title: string;
   author: string;
@@ -6,4 +6,5 @@ export type BookDTO = {
   description: string;
   isbn: string;
   pages: number;
+  coverImageUrl: string;
 };
