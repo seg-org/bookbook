@@ -42,7 +42,8 @@ const books = await prisma.book.findMany();
 if (books.length === 0) {
   const booksDataWithKey = await Promise.all(
     booksData.map(async (book) => {
-      const key = await uploadToBucket("book_images", book.coverImagePath);
+      const keyWithFolder = await uploadToBucket("book_images", book.coverImagePath);
+      const key = keyWithFolder.split("/")[1];
       return {
         title: book.title,
         author: book.author,
