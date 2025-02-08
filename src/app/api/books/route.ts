@@ -9,6 +9,7 @@ const createBookRequest = z.object({
   description: z.string(),
   isbn: z.string(),
   pages: z.number(),
+  coverImageKey: z.string(),
 });
 
 export async function POST(req: NextRequest) {
