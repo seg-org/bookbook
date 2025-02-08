@@ -17,6 +17,9 @@ CREATE TYPE "PaymentMethod" AS ENUM ('credit_card', 'online_banking');
 -- CreateEnum
 CREATE TYPE "ShipmentMethod" AS ENUM ('delivery');
 
+-- DropIndex
+DROP INDEX "post_book_id_key";
+
 -- AlterTable
 ALTER TABLE "book" ADD COLUMN     "sellerId" TEXT NOT NULL;
 
