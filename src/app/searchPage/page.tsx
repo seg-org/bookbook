@@ -16,7 +16,6 @@ function SearchPage() {
   const [detailSearch, setDetailSearch] = useState(false);
   const [specialSearch, setSpecialSearch] = useState(false);
 
-  // console.log(detailSearch);
   return (
     <>
       <div className="m-0 box-border p-0">
