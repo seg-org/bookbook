@@ -8,7 +8,6 @@ const createPostRequest = z.object({
   price: z.number(),
   published: z.boolean(),
   bookId: z.string(),
-  price: z.number(),
 });
 
 export async function POST(req: NextRequest) {
