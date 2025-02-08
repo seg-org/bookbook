@@ -1,0 +1,41 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup node with cache
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: pnpm
+
+      - name: NO CRLF
+        run: pnpm dlx crlf-phobia *
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build everything
+        run: pnpm build
+
+      - name: Lint
+        run: pnpm lint
+
+      # - name: Test
+      #   run: pnpm test
