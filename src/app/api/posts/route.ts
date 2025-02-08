@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -28,6 +29,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
+      return NextResponse.json(
+        { error: "Duplicate key violation (there is already a post with this book id)" },
+        { status: 409 }
+      );
+    }
     if (error instanceof Error) console.error("Error creating post", error.stack);
     return NextResponse.json({ error: "Cannot create a post" }, { status: 500 });
   }
@@ -35,7 +42,9 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+      include: { book: true },
+    });
 
     return NextResponse.json(posts);
   } catch (error) {
