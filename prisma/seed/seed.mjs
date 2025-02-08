@@ -5,6 +5,7 @@ import AWS from "aws-sdk";
 import fs from "fs";
 import { basename } from "path";
 import booksData from "./books.json" assert { type: "json" };
+import postsData from "./posts.json" assert { type: "json" };
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -64,4 +65,20 @@ if (books.length === 0) {
   await prisma.book.createMany({
     data: booksDataWithKey,
   });
+
+  console.log("Books seeded successfully");
+
+  const books = await prisma.book.findMany();
+  const postsDataWithKey = postsData.map((post, i) => {
+    return {
+      ...post,
+      bookId: books[i].id,
+    };
+  });
+
+  await prisma.post.createMany({
+    data: postsDataWithKey,
+  });
+
+  console.log("Posts seeded successfully");
 }
