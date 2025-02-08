@@ -5,6 +5,7 @@ import { z } from "zod";
 const updatePostRequest = z.object({
   title: z.string().optional(),
   content: z.string().optional(),
+  price: z.number().optional(),
   published: z.boolean().optional(),
   bookId: z.string().optional(),
 });
