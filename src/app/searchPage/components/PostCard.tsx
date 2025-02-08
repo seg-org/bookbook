@@ -1,37 +1,37 @@
-import { Book } from "@/data/dto/book.dto";
+import { Post } from "@/data/dto/post.dto";
 import Image from "next/image";
 
-type BookCardProps = {
-  book: Book;
+type PostCardProps = {
+  post: Post;
 };
 
-function BookCard({ book }: BookCardProps) {
+function PostCard({ post }: PostCardProps) {
   return (
     <>
       <div className="flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2.5">
         <div className="m-2.5 flex flex-row justify-between text-lg">
-          <h3>{book.title}</h3>
-          {/* <span>{book.price} ฿</span> */}
+          <h3>{post.title}</h3>
+          <span>{post.price} ฿</span>
         </div>
         <div className="m-2.5 flex flex-row">
           <Image
             className="m-2.5 h-40 w-auto rounded-lg"
-            src={book.coverImageUrl}
+            src={post.book.coverImageUrl}
             width={500}
             height={500}
-            alt="Book Cover"
+            alt="Post Cover"
           />
           <div className="flex h-screen max-h-[275px] flex-col justify-between">
             <div>
               <div>
                 <strong>ผู้เขียน </strong>
-                {book.author}
+                {post.book.author}
               </div>
               <div>
                 <div>
                   <strong>รายละเอียด</strong>
                 </div>{" "}
-                {book.description}
+                {post.book.description}
               </div>
             </div>
             <div className="mt-2.5 flex items-center justify-center">
@@ -49,4 +49,4 @@ function BookCard({ book }: BookCardProps) {
   );
 }
 
-export default BookCard;
+export default PostCard;

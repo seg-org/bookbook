@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { getPresignedUrl } from "../objects/s3";
 
 const createPostRequest = z.object({
   title: z.string(),
@@ -46,7 +47,20 @@ export async function GET() {
       include: { book: true },
     });
 
-    return NextResponse.json(posts);
+    const postsWithImageUrl = await Promise.all(
+      posts.map(async (post) => {
+        const url = await getPresignedUrl("book_images", post.book.coverImageKey);
+        return {
+          ...post,
+          book: {
+            ...post.book,
+            coverImageUrl: url,
+          },
+        };
+      })
+    );
+
+    return NextResponse.json(postsWithImageUrl);
   } catch (error) {
     if (error instanceof Error) console.error("Error getting posts", error.stack);
     return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });

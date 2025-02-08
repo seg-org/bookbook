@@ -5,7 +5,7 @@ import SearchByDetail from "@/app/searchPage/components/SearchByDetail";
 
 import { Kanit } from "next/font/google";
 import { useState } from "react";
-import { BookList } from "./components/BookList";
+import { PostList } from "./components/PostList";
 
 const KanitFont = Kanit({
   subsets: ["latin"],
@@ -60,7 +60,7 @@ function SearchPage() {
               {!detailSearch && specialSearch && <div>ขี้เกียจทำละ</div>}
             </div>
           </div>
-          {!detailSearch && !specialSearch && <BookList />}
+          {!detailSearch && !specialSearch && <PostList />}
         </main>
       </div>
     </>
