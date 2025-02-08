@@ -1,8 +1,8 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const bookSchema = z.object({
@@ -26,60 +26,70 @@ export default function SellerPostPage() {
 
   const [message, setMessage] = useState("");
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     console.log("Mock Submission:", data);
     setMessage("Book posted successfully (mock data)!");
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10">
+    <div className="mx-auto mt-10 max-w-lg">
       {/* Title */}
-      <h1 className="text-2xl font-bold mb-4 text-center">Post a Book for Sale</h1>
+      <h1 className="mb-4 text-center text-2xl font-bold">Post a Book for Sale</h1>
 
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <label>
           Book Title:
-          <input {...register("title")} placeholder="Book Title" className="block w-full input mt-1" />
+          <input {...register("title")} placeholder="Book Title" className="input mt-1 block w-full" />
           {errors.title?.message && <p className="text-red-500">{String(errors.title.message)}</p>}
         </label>
 
         <label>
           Author:
-          <input {...register("author")} placeholder="Author" className="block w-full input mt-1" />
+          <input {...register("author")} placeholder="Author" className="input mt-1 block w-full" />
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
         <label>
           Genre:
-          <input {...register("genre")} placeholder="Genre" className="block w-full input mt-1" />
+          <input {...register("genre")} placeholder="Genre" className="input mt-1 block w-full" />
           {errors.genre?.message && <p className="text-red-500">{String(errors.genre.message)}</p>}
         </label>
 
         <label>
           Description:
-          <textarea {...register("description")} placeholder="Description" className="block w-full input mt-1"></textarea>
+          <textarea
+            {...register("description")}
+            placeholder="Description"
+            className="input mt-1 block w-full"
+          ></textarea>
         </label>
 
         <label>
           ISBN:
-          <input {...register("isbn")} placeholder="ISBN" className="block w-full input mt-1" />
+          <input {...register("isbn")} placeholder="ISBN" className="input mt-1 block w-full" />
           {errors.isbn?.message && <p className="text-red-500">{String(errors.isbn.message)}</p>}
         </label>
 
         <label>
           Number of Pages:
-          <input type="number" {...register("pages")} placeholder="Number of Pages" className="block w-full input mt-1" />
+          <input
+            type="number"
+            {...register("pages")}
+            placeholder="Number of Pages"
+            className="input mt-1 block w-full"
+          />
           {errors.pages?.message && <p className="text-red-500">{String(errors.pages.message)}</p>}
         </label>
 
         <label>
           Cover Image URL:
-          <input {...register("coverImageUrl")} placeholder="Cover Image URL" className="block w-full input mt-1" />
+          <input {...register("coverImageUrl")} placeholder="Cover Image URL" className="input mt-1 block w-full" />
           {errors.coverImageUrl?.message && <p className="text-red-500">{String(errors.coverImageUrl.message)}</p>}
         </label>
 
-        <button type="submit" className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700">
+        <button type="submit" className="w-full rounded-lg bg-blue-500 py-2 text-white hover:bg-blue-700">
           Post Book
         </button>
       </form>

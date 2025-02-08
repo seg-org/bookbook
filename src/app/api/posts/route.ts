@@ -5,6 +5,7 @@ import { z } from "zod";
 const createPostRequest = z.object({
   title: z.string(),
   content: z.string(),
+  price: z.number(),
   published: z.boolean(),
   bookId: z.string(),
 });
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
-    console.error("Error creating post", error);
+    if (error instanceof Error) console.error("Error creating post", error.stack);
     return NextResponse.json({ error: "Cannot create a post" }, { status: 500 });
   }
 }
@@ -38,7 +39,7 @@ export async function GET() {
 
     return NextResponse.json(posts);
   } catch (error) {
-    console.error("Error getting posts", error);
+    if (error instanceof Error) console.error("Error getting posts", error.stack);
     return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });
   }
 }

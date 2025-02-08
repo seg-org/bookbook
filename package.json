@@ -10,11 +10,13 @@
     "postinstall": "prisma generate"
   },
   "prisma": {
-    "seed": "node prisma/seed.mjs"
+    "seed": "node prisma/seed/seed.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "^6.3.0",
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.7.9",
     "next": "15.1.6",
     "prisma": "^6.3.0",
     "react": "^19.0.0",
