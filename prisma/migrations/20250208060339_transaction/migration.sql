@@ -1,3 +1,10 @@
+/*
+  Warnings:
+
+  - Added the required column `sellerId` to the `book` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `sellerId` to the `post` table without a default value. This is not possible if the table is not empty.
+
+*/
 -- CreateEnum
 CREATE TYPE "TransactionStatus" AS ENUM ('approving', 'paying', 'verifying', 'complete', 'fail');
 
@@ -10,12 +17,11 @@ CREATE TYPE "PaymentMethod" AS ENUM ('credit_card', 'online_banking');
 -- CreateEnum
 CREATE TYPE "ShipmentMethod" AS ENUM ('delivery');
 
--- CreateTable
-CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
+-- AlterTable
+ALTER TABLE "book" ADD COLUMN     "sellerId" TEXT NOT NULL;
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
+-- AlterTable
+ALTER TABLE "post" ADD COLUMN     "sellerId" TEXT NOT NULL;
 
 -- CreateTable
 CREATE TABLE "transaction" (
@@ -58,10 +64,16 @@ CREATE INDEX "transaction_seller_id_create_on_idx" ON "transaction"("seller_id",
 CREATE UNIQUE INDEX "transaction_fail_transaction_id_key" ON "transaction_fail"("transaction_id");
 
 -- AddForeignKey
-ALTER TABLE "transaction" ADD CONSTRAINT "transaction_buyer_id_fkey" FOREIGN KEY ("buyer_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "book" ADD CONSTRAINT "book_sellerId_fkey" FOREIGN KEY ("sellerId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "transaction" ADD CONSTRAINT "transaction_seller_id_fkey" FOREIGN KEY ("seller_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "post" ADD CONSTRAINT "post_sellerId_fkey" FOREIGN KEY ("sellerId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "transaction" ADD CONSTRAINT "transaction_buyer_id_fkey" FOREIGN KEY ("buyer_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "transaction" ADD CONSTRAINT "transaction_seller_id_fkey" FOREIGN KEY ("seller_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "transaction" ADD CONSTRAINT "transaction_post_id_fkey" FOREIGN KEY ("post_id") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

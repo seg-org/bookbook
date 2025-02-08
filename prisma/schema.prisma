@@ -23,21 +23,21 @@ model Book {
   isbn          String
   pages         Int
   coverImageKey String @map("cover_image_key")
-  // seller    User     @relation(fields: [sellerId], references: [id])
-  // sellerId  String
+  seller        User   @relation(fields: [sellerId], references: [id])
+  sellerId      String
   posts         Post[]
 
   @@map("book")
 }
 
 model Post {
-  id        String  @id @default(cuid())
-  title     String
-  content   String?
-  price     Int
-  published Boolean @default(false)
-  // seller    User     @relation(fields: [sellerId], references: [id])
-  // sellerId  String
+  id           String        @id @default(cuid())
+  title        String
+  content      String?
+  price        Int
+  published    Boolean       @default(false)
+  seller       User          @relation(fields: [sellerId], references: [id])
+  sellerId     String
   book         Book          @relation(fields: [bookId], references: [id])
   bookId       String        @map("book_id")
   transactions Transaction[]
@@ -46,13 +46,15 @@ model Post {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String // Hash?
-  createdAt DateTime @default(now())
+  id               String        @id @default(cuid())
+  name             String
+  email            String        @unique
+  password         String // Hash?
+  createdAt        DateTime      @default(now())
   buyTransactions  Transaction[] @relation("BuyerTransaction")
   sellTransactions Transaction[] @relation("SellerTransaction")
+  Book             Book[]
+  Post             Post[]
 
   @@map("user")
 }

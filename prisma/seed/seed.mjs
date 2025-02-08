@@ -51,6 +51,7 @@ if (books.length === 0) {
       const keyWithFolder = await uploadToBucket("book_images", book.coverImagePath);
       const key = keyWithFolder.split("/")[1];
       return {
+        id: book.id,
         title: book.title,
         author: book.author,
         genre: book.genre,
@@ -58,6 +59,7 @@ if (books.length === 0) {
         isbn: book.isbn,
         pages: book.pages,
         coverImageKey: key,
+        sellerId: book.sellerId,
       };
     })
   );
@@ -72,7 +74,6 @@ if (books.length === 0) {
   const postsDataWithKey = postsData.map((post, i) => {
     return {
       ...post,
-      bookId: books[i].id,
     };
   });
 
