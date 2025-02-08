@@ -24,6 +24,10 @@ function PostCard({ post }: PostCardProps) {
           <div className="flex h-screen max-h-[275px] flex-col justify-between">
             <div>
               <div>
+                <strong>ชื่อหนังสือ </strong>
+                {post.book.title}
+              </div>
+              <div>
                 <strong>ผู้เขียน </strong>
                 {post.book.author}
               </div>
