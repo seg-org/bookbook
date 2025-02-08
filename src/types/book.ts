@@ -4,5 +4,6 @@ export type Book = {
   author: string;
   desc: string;
   price: number;
+  popular:number;
   picture: string;
 };

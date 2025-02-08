@@ -7,6 +7,7 @@ import { books } from "@/data/book";
 import { Kanit } from "next/font/google";
 import { useState } from "react";
 import BookList from "./components/bookList";
+import SpecialSearch from "./components/SpecialSearch";
 
 const KanitFont = Kanit({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ function SearchPage() {
       <div className="m-0 box-border p-0">
         <main className={`${KanitFont.className}`}>
           <div className="flex gap-16">
-            <div className="relative h-auto min-w-[300px] max-w-[300px]">
+            <div className="relative max-h-[200px] min-w-[300px] max-w-[300px]">
               <Image src="/images/Picture1.png" alt="Illustration" fill={true} />
             </div>
             <div className="w-[200%]">
@@ -59,7 +60,7 @@ function SearchPage() {
                 </button>
               </div>
               {detailSearch && !specialSearch && <SearchByDetail />}
-              {!detailSearch && specialSearch && <div>ขี้เกียจทำละ</div>}
+              {!detailSearch && specialSearch && <SpecialSearch/>}
             </div>
           </div>
           {!detailSearch && !specialSearch && <BookList books={books} />}

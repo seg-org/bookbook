@@ -26,11 +26,6 @@ body {
   min-height: 100vh;
 }
 
-nav ul li a:hover {
-  color: #304674;
-  text-decoration: underline;
-}
-
 main {
   margin: 20px;
   padding: 20px;
