@@ -16,6 +16,7 @@ const KanitFont = Kanit({
 function SearchPage() {
   const [detailSearch, setDetailSearch] = useState(false);
   const [specialSearch, setSpecialSearch] = useState(false);
+  const [inputValue,setInputValue] = useState("");
 
   return (
     <>
@@ -32,6 +33,8 @@ function SearchPage() {
                   className="flex-1 rounded-md border border-gray-300 p-2.5"
                   type="text"
                   placeholder="ชื่อหนังสือ"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
                 ></input>
                 <button className="cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white">
                   ค้นหาข้อมูล
@@ -61,7 +64,7 @@ function SearchPage() {
               {!detailSearch && specialSearch && <SpecialSearch/>}
             </div>
           </div>
-          {!detailSearch && !specialSearch && <PostList />}
+          {!detailSearch && !specialSearch && <PostList prop={inputValue}/>}
         </main>
       </div>
     </>
