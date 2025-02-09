@@ -108,12 +108,12 @@ if (transactions.length === 0) {
   console.log("Transaction seeded successful");
 }
 
-const transactionsFail = await prisma.transaction.findMany();
+const transactionsFail = await prisma.transactionFail.findMany();
 if (transactionsFail.length === 0) {
   await prisma.transactionFail.createMany({
     data: transactionsFailData.map(entry => ({
       ...entry,
-      failType : (entry.failType == "CHAET" && TransactionFailType.CHEAT) ||
+      failType : (entry.failType == "CHEAT" && TransactionFailType.CHEAT) ||
                  (TransactionFailType.CHEAT)
     }))
   });
