@@ -16,7 +16,7 @@ const cut=(s:String)=>{
 function PostCard({ post }: PostCardProps) {
   return (
     <>
-  <div className="flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2.5">
+  <div className="flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2.5 w-[425px]">
     <div className="m-2.5 flex flex-row justify-between text-lg">
       <h3>{post.title}</h3>
       <span>{post.price} ฿</span>

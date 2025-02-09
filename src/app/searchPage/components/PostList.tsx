@@ -29,7 +29,7 @@ export const PostList = ({prop}) => {
     <button onClick={()=>setPriceAsc(-1*priceAsc)} className="rounded-m bg-white text-sm">ราคา {priceAsc==1 ? "▲":"▼"}</button>
     <button onClick={()=>setPopAsc(-1*popAsc)} className="rounded-m bg-white text-sm">ความนิยม {popAsc==1 ? "▲":"▼"}</button>
   </div>
-  <div className="grid-cols-auto-fit-400 grid w-full gap-8 p-8 text-lg">
+  <div className="flex flex-wrap w-full gap-8 p-8 text-lg">
     {filter_posts.map((post: Post) => (
       <PostCard post={post} key={post.id} />
     ))}
