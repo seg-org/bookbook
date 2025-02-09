@@ -22,15 +22,15 @@ function SearchPage() {
     <>
       <div className="m-0 box-border p-0">
         <main className={`${KanitFont.className}`}>
-          <div className="flex gap-16">
-            <div className="relative max-h-[200px] min-w-[300px] max-w-[300px]">
+          <div className="flex gap-16 max-md:flex-col">
+            <div className="relative h-[200px] min-w-[300px]">
               <Image src="/images/searchPage/man-with-book.png" alt="Illustration" fill={true} />
             </div>
-            <div className="w-[200%]">
-              <h2 className="mb-2.5 text-3xl">ค้นหาหนังสือ</h2>
+            <div className="w-[100%]">
+              <h2 className="mb-2.5 text-3xl max-sm:text-2xl">ค้นหาหนังสือ</h2>
               <div className="mb-5 flex flex-row">
                 <input
-                  className="flex-1 rounded-md border border-gray-300 p-2.5"
+                  className="flex-1 rounded-md border border-gray-300 p-1"
                   type="text"
                   placeholder="ชื่อหนังสือ"
                   value={inputValue}
@@ -40,9 +40,9 @@ function SearchPage() {
                   ค้นหาข้อมูล
                 </button>
               </div>
-              <div className="advanced-search-toggle">
+              <div className="advanced-search-toggle flex flex-row">
                 <button
-                  className={`m-[15px_15px_10px_15px] mb-5 p-3.5 ${specialSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-sm border-none text-white`}
+                  className={`m-[10px] mb-5 p-3.5 ${specialSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-sm border-none text-white`}
                   onClick={() => {
                     setSpecialSearch(true);
                     setDetailSearch(false);
@@ -51,7 +51,7 @@ function SearchPage() {
                   ค้นหาด้วยเงื่อนไขพิเศษ
                 </button>
                 <button
-                  className={`m-[15px_15px_10px_15px] mb-5 p-3.5 ${detailSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-sm border-none text-white`}
+                  className={`m-[10px] mb-5 p-3.5 ${detailSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-sm border-none text-white`}
                   onClick={() => {
                     setDetailSearch(true);
                     setSpecialSearch(false);
@@ -64,7 +64,7 @@ function SearchPage() {
               {!detailSearch && specialSearch && <SpecialSearch/>}
             </div>
           </div>
-          {!detailSearch && !specialSearch && <PostList prop={inputValue}/>}
+          {!detailSearch && !specialSearch && <PostList inputSearchValue={inputValue}/>}
         </main>
       </div>
     </>

@@ -14,6 +14,10 @@
   }
 }
 
+*{
+  box-sizing: border-box;
+}
+
 body {
   font-family: kanit, sans-serif;
   background-image: linear-gradient(to bottom right, white, lightblue);
@@ -27,8 +31,8 @@ body {
 }
 
 main {
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
