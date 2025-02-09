@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(newTransaction, { status: 201 });
   } catch (error) {
-    if (error instanceof Error) console.error("Error creating transaction", error.stack);
+    if (error instanceof Error) console.error("Error creating a transaction", error.stack);
     return NextResponse.json({ error: "Cannot create a transaction" }, { status: 500 });
   }
 }
@@ -71,7 +71,7 @@ export async function GET() {
 
     return NextResponse.json(transactions);
   } catch (error) {
-    if (error instanceof Error) console.error("Error getting posts", error.stack);
-    return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });
+    if (error instanceof Error) console.error("Error getting transactions", error.stack);
+    return NextResponse.json({ error: "Cannot get transactions" }, { status: 500 });
   }
 }
