@@ -17,8 +17,8 @@ export default function Home() {
           </Link>
         </li>
         <li>
-          <Link href="/sellBook" style={{ color: "blue", textDecoration: "underline" }}>
-            sellBook
+          <Link href="/sell-book" style={{ color: "blue", textDecoration: "underline" }}>
+            sell-book
           </Link>
         </li>
       </ul>
