@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionFailType } from "@prisma/client";
-import { equal } from "assert";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -46,7 +45,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
     }
 
     if(parsedData.data.status == "FAIL") {
-      const updateTransactionFail = await prisma.transactionFail.create({
+      await prisma.transactionFail.create({
         data: {
           transactionId: updateTransaction.id,
           evidenceURL: parsedData.data.evidenceURL,

@@ -10,6 +10,7 @@ const createPostRequest = z.object({
   price: z.number(),
   published: z.boolean(),
   bookId: z.string(),
+  sellerId: z.string()
 });
 
 export async function POST(req: NextRequest) {
@@ -24,6 +25,13 @@ export async function POST(req: NextRequest) {
     });
     if (!book) {
       return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
+    }
+
+    const seller = await prisma.user.findUnique({
+      where: { id: parsedData.data.sellerId },
+    })
+    if(!seller) {
+      return NextResponse.json({ error: `seller with id ${parsedData.data.sellerId} not found` }, { status: 404 });
     }
 
     const newPost = await prisma.post.create({ data: parsedData.data });

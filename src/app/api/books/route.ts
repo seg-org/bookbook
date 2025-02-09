@@ -11,6 +11,7 @@ const createBookRequest = z.object({
   isbn: z.string(),
   pages: z.number(),
   coverImageKey: z.string(),
+  sellerId: z.string()
 });
 
 export async function POST(req: NextRequest) {
@@ -18,6 +19,13 @@ export async function POST(req: NextRequest) {
     const parsedData = createBookRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
+    }
+
+    const seller = await prisma.user.findUnique({
+      where: { id: parsedData.data.sellerId },
+    })
+    if(!seller) {
+      return NextResponse.json({ error: `buyer with id ${parsedData.data.sellerId} not found` }, { status: 404 });
     }
 
     const newBook = await prisma.book.create({ data: parsedData.data });
