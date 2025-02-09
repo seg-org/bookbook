@@ -45,8 +45,19 @@ const mockBuyerMatches = [
   },
 ];
 
+type Buyer = {
+  id: number;
+  name: string;
+  searchCriteria: {
+    title: string;
+    author: string;
+    condition: string;
+  };
+  interestedTags: string[];
+};
+
 const PotentialMatches: React.FC = () => {
-  const [matchedBuyers, setMatchedBuyers] = useState<any[]>([]);
+  const [matchedBuyers, setMatchedBuyers] = useState<Buyer[]>([]);
 
   useEffect(() => {
     // Filter buyers based on book match
