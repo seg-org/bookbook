@@ -21,6 +21,11 @@ export default function Home() {
             sell-book
           </Link>
         </li>
+        <li>
+          <Link href="/potential-matches" style={{ color: "blue", textDecoration: "underline" }}>
+            potential-matches
+          </Link>
+        </li>
       </ul>
     </main>
   );
