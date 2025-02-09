@@ -82,8 +82,8 @@ export async function GET(_: NextRequest, props : { params: Promise<{ id: string
 
     return NextResponse.json(transaction);
   } catch (error) {
-    if (error instanceof Error) console.error(`Error updating transaction with id ${id}`, error.stack);
-    return NextResponse.json({ error: "Cannot update the transaction" }, { status: 500 });
+    if (error instanceof Error) console.error(`Error getting transaction with id ${id}`, error.stack);
+    return NextResponse.json({ error: "Cannot get the transaction" }, { status: 500 });
   }
 }
 
