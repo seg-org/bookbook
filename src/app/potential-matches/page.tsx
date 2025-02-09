@@ -1,6 +1,6 @@
-"use client";  // ✅ This tells Next.js it's a client component
+"use client"; // ✅ This tells Next.js it's a client component
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Mockup data for sellers' book posts
 const sellerBookPost = {
@@ -53,22 +53,21 @@ const PotentialMatches: React.FC = () => {
     const matches = mockBuyerMatches.filter((buyer) => {
       return (
         buyer.searchCriteria.title === sellerBookPost.title &&
-        (buyer.searchCriteria.condition === sellerBookPost.condition ||
-          buyer.searchCriteria.condition === "Any")
+        (buyer.searchCriteria.condition === sellerBookPost.condition || buyer.searchCriteria.condition === "Any")
       );
     });
     setMatchedBuyers(matches);
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Potential Buyer Matches</h2>
+    <div className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-md">
+      <h2 className="mb-4 text-2xl font-bold">Potential Buyer Matches</h2>
       {matchedBuyers.length === 0 ? (
         <p className="text-gray-500">No buyers found matching your book post.</p>
       ) : (
         <ul className="space-y-4">
           {matchedBuyers.map((buyer) => (
-            <li key={buyer.id} className="p-4 border rounded-lg shadow-sm flex justify-between items-center">
+            <li key={buyer.id} className="flex items-center justify-between rounded-lg border p-4 shadow-sm">
               <div>
                 <h3 className="text-lg font-semibold">{buyer.name}</h3>
                 <p className="text-gray-600">
@@ -76,7 +75,7 @@ const PotentialMatches: React.FC = () => {
                 </p>
               </div>
               <button
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+                className="rounded-lg bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
                 onClick={() => alert(`Initiating chat with ${buyer.name}`)}
               >
                 Chat
