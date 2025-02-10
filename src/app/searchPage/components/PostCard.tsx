@@ -28,28 +28,27 @@ function PostCard({ post }: PostCardProps) {
             height={500}
             alt="Post Cover"
           />
-          <div className="flex flex-col flex-end justify-between pr-8">
-            <div>
+
+          <div className="flex flex-col h-full w-full pr-8 lg:h-[290px]">
+            <div className="flex-grow">
               <div>
                 <strong>ชื่อหนังสือ </strong>
                 {post.book.title}
               </div>
               <div>
                 <strong>ผู้เขียน </strong>
-                {cut(post.book.author,20)}
+                {post.book.author}
               </div>
               <div>
-                <div>
                   <strong>รายละเอียด</strong>
-                </div>
-                {cut(post.book.description,50)}
+                  {cut(post.book.description,80)}
               </div>
             </div>
-            <div className="flex justify-end gap-2 mt-auto">
-              <button className="m-1 cursor-pointer rounded-sm border-2 border-[#B8B8B8] bg-white p-1.5 text-sm text-black">
+            <div className="flex gap-2 mt-auto self-end">
+              <button className="cursor-pointer rounded-sm border-2 border-[#B8B8B8] bg-white p-1.5 text-sm text-black">
                 ดูข้อมูล
               </button>
-              <button className="m-1 cursor-pointer rounded-sm border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
+              <button className="cursor-pointer rounded-sm border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
                 เพิ่มใส่ตะกร้า
               </button>
             </div>
