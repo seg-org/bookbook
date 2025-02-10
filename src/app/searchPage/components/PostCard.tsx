@@ -45,10 +45,10 @@ function PostCard({ post }: PostCardProps) {
               </div>
             </div>
             <div className="flex gap-2 mt-auto self-end">
-              <button className="cursor-pointer rounded-sm border-2 border-[#B8B8B8] bg-white p-1.5 text-sm text-black">
+              <button className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-white p-1.5 text-sm text-black">
                 ดูข้อมูล
               </button>
-              <button className="cursor-pointer rounded-sm border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
+              <button className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
                 เพิ่มใส่ตะกร้า
               </button>
             </div>

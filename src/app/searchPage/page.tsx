@@ -36,13 +36,13 @@ function SearchPage() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                 ></input>
-                <button className="cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white">
+                <button className="cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white ml-1.5">
                   ค้นหาข้อมูล
                 </button>
               </div>
               <div className="advanced-search-toggle flex flex-row">
                 <button
-                  className={`m-[10px] mb-5 p-3.5 ${specialSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-sm border-none text-white`}
+                  className={`m-[10px] mb-5 p-3.5 ${specialSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-lg border-none text-white`}
                   onClick={() => {
                     setSpecialSearch(true);
                     setDetailSearch(false);
@@ -51,7 +51,7 @@ function SearchPage() {
                   ค้นหาด้วยเงื่อนไขพิเศษ
                 </button>
                 <button
-                  className={`m-[10px] mb-5 p-3.5 ${detailSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-sm border-none text-white`}
+                  className={`m-[10px] mb-5 p-3.5 ${detailSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-lg border-none text-white`}
                   onClick={() => {
                     setDetailSearch(true);
                     setSpecialSearch(false);
