@@ -25,7 +25,7 @@ export function PDPAConsent() {
         throw new Error("Failed to save consent");
       }
 
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       console.error(error);
     } finally {

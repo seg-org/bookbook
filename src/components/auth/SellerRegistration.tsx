@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/card";
 import { Form, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/Input";
-import { useToast } from "@/components/ui/Toast";
+import { useToast } from "@/hooks/useToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -84,7 +84,7 @@ export function SellerRegistration() {
         description: "Your seller registration is pending approval.",
       });
 
-      router.push("/dashboard?status=pending-approval");
+      router.push("/");
     } catch (error) {
       toast({
         title: "Error",

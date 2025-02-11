@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
 
   if (isAuthPage) {
     if (token) {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
     return NextResponse.next();
   }
@@ -31,12 +31,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/dashboard/:path*",
-    "/seller-registration/:path*",
-    "/login",
-    "/register",
-    "/verify/:path*",
-    "/pdpa-consent",
-  ],
+  matcher: ["/seller-registration/:path*", "/login", "/register", "/verify/:path*", "/pdpa-consent"],
 };
