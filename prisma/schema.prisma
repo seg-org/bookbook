@@ -26,6 +26,7 @@ model User {
   isVerified    Boolean   @default(false) @map("is_verified")
   emailVerified DateTime? @map("email_verified")
   phoneVerified DateTime? @map("phone_verified")
+  pdpaConsent   Boolean  @default(false) @map("pdpa_consent")
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
   sellerProfile SellerProfile?
