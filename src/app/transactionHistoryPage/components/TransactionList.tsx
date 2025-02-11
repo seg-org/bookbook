@@ -1,7 +1,6 @@
 import React from 'react'
-import TransactionBox, { TransactionBoxProps } from './transactionBox'
-import TransactionPage from '../page';
-import LineSeparator from './lineSperator';
+import TransactionBox, { TransactionBoxProps } from './TransactionBox'
+import LineSeparator from './LineSperator';
 
 const TransactionList = ({ transactions } : {transactions : TransactionBoxProps[]}) => {
 

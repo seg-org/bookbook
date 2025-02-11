@@ -1,9 +1,8 @@
 "use client"
-import Header from "@/app/transactionHistoryPage/components/header";
-import FilterBar from "./components/filterBar";
-import TransactionList from "./components/transactionList";
+import FilterBar from "./components/FilterBar";
+import TransactionList from "./components/TransactionList";
 
-import { TransactionBoxProps } from "./components/transactionBox";
+import { TransactionBoxProps } from "./components/TransactionBox";
 
 // Note 1: Currently using header and filter in local components.
 
@@ -148,7 +147,6 @@ function TransactionPage() {
 
   return (
     <>
-      <Header />
       <FilterBar />
       <TransactionList transactions = {transactions}/>
     </>

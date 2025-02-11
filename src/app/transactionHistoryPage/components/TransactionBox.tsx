@@ -3,7 +3,6 @@ import React from 'react'
 import Image from 'next/image'
 
 import ImageDummySrc from "../pic/bookCover.jpg"
-import TransactionList from './transactionList'
 
 import BoughtIcon from "../pic/BoughtIcon.png"
 import SoldIcon from "../pic/soldIcon.png"
