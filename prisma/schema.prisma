@@ -83,25 +83,6 @@ model Post {
   @@map("posts")
 }
 
-model VerificationToken {
-  id        String   @id @default(cuid())
-  email     String
-  token     String   @unique
-  type      String // 'email' or 'phone'
-  expires   DateTime
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@unique([email, type])
-  @@map("verification_tokens")
-}
-
-model PhoneVerification {
-  id          String   @id @default(cuid())
-  phoneNumber String   @unique
-  code        String   @unique
-  expires     DateTime
-}
-
 model Transaction {
   id             String            @id @default(cuid())
   // transaction data
@@ -127,7 +108,7 @@ model Transaction {
 
   @@index([buyerId, createOn])
   @@index([sellerId, createOn])
-  @@map("transaction")
+  @@map("transactions")
 }
 
 model TransactionFail {
@@ -138,7 +119,7 @@ model TransactionFail {
   detail        String
   failType      TransactionFailType @map("fail_type")
 
-  @@map("transaction_fail")
+  @@map("transaction_fails")
 }
 
 enum TransactionStatus {

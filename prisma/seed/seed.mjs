@@ -1,14 +1,14 @@
 // @ts-check
 
-import { PrismaClient, TransactionStatus, TransactionFailType, PaymentMethod, ShipmentMethod } from "@prisma/client";
+import { PaymentMethod, PrismaClient, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import AWS from "aws-sdk";
 import fs from "fs";
 import { basename } from "path";
-import usersData from "./users.json" with { type : "json" };
-import booksData from "./books.json" with { type: "json" };
-import postsData from "./posts.json" with { type: "json" };
-import transactionsData from "./transactions.json" with { type : "json" }
-import transactionsFailData from "./transactionsFail.json" with { type : "json" }
+import booksData from "./books.json" assert { type: "json" };
+import postsData from "./posts.json" assert { type: "json" };
+import transactionsData from "./transactions.json" assert { type: "json" };
+import transactionsFailData from "./transactionsFail.json" assert { type: "json" };
+import usersData from "./users.json" assert { type: "json" };
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -47,7 +47,7 @@ const uploadToBucket = async (folder, filePath) => {
 };
 
 const users = await prisma.user.findMany();
-if(users.length === 0) {
+if (users.length === 0) {
   await prisma.user.createMany({
     data: usersData,
   });
@@ -90,20 +90,21 @@ if (posts.length === 0) {
 const transactions = await prisma.transaction.findMany();
 if (transactions.length === 0) {
   await prisma.transaction.createMany({
-    data: transactionsData.map(entry => ({
+    data: transactionsData.map((entry) => ({
       ...entry,
-      status : (entry.status == "APPROVING" && TransactionStatus.APPROVING) ||
-               (entry.status == "PAYING" && TransactionStatus.PAYING) ||
-               (entry.status == "VERIFYING" && TransactionStatus.VERIFYING) ||
-               (entry.status == "COMPLETE" && TransactionStatus.COMPLETE) ||
-               (entry.status == "FAIL" && TransactionStatus.FAIL) || 
-               (TransactionStatus.APPROVING),
-      paymentMethod : (entry.paymentMethod == "CREDIT_CARD" && PaymentMethod.CREDIT_CARD) ||
-                      (entry.paymentMethod == "ONLINE_BANKING" && PaymentMethod.ONLINE_BANKING) ||
-                      (PaymentMethod.CREDIT_CARD),
-      shipmentMethod : (entry.shipmentMethod == "DELIVERY" && ShipmentMethod.DELIVERY) ||
-                       (ShipmentMethod.DELIVERY)
-    }))
+      status:
+        (entry.status == "APPROVING" && TransactionStatus.APPROVING) ||
+        (entry.status == "PAYING" && TransactionStatus.PAYING) ||
+        (entry.status == "VERIFYING" && TransactionStatus.VERIFYING) ||
+        (entry.status == "COMPLETE" && TransactionStatus.COMPLETE) ||
+        (entry.status == "FAIL" && TransactionStatus.FAIL) ||
+        TransactionStatus.APPROVING,
+      paymentMethod:
+        (entry.paymentMethod == "CREDIT_CARD" && PaymentMethod.CREDIT_CARD) ||
+        (entry.paymentMethod == "ONLINE_BANKING" && PaymentMethod.ONLINE_BANKING) ||
+        PaymentMethod.CREDIT_CARD,
+      shipmentMethod: (entry.shipmentMethod == "DELIVERY" && ShipmentMethod.DELIVERY) || ShipmentMethod.DELIVERY,
+    })),
   });
   console.log("Transaction seeded successful");
 }
@@ -111,11 +112,10 @@ if (transactions.length === 0) {
 const transactionsFail = await prisma.transactionFail.findMany();
 if (transactionsFail.length === 0) {
   await prisma.transactionFail.createMany({
-    data: transactionsFailData.map(entry => ({
+    data: transactionsFailData.map((entry) => ({
       ...entry,
-      failType : (entry.failType == "CHEAT" && TransactionFailType.CHEAT) ||
-                 (TransactionFailType.CHEAT)
-    }))
+      failType: (entry.failType == "CHEAT" && TransactionFailType.CHEAT) || TransactionFailType.CHEAT,
+    })),
   });
-  console.log("TransctionFail seeded successful")
+  console.log("TransctionFail seeded successful");
 }
