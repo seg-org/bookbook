@@ -10,7 +10,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    // Check if the user exists
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) {
@@ -28,7 +27,6 @@ export async function POST(req: Request) {
       create: { email, token, type: "email", expires },
     });
 
-    // Send verification email
     await sendVerificationEmail(email, token);
 
     return NextResponse.json({ message: "Verification email sent" });

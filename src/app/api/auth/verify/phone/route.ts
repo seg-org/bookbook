@@ -9,7 +9,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing verification code" }, { status: 400 });
     }
 
-    // Find the OTP in the database
     const existingOTP = await prisma.phoneVerification.findUnique({
       where: { code },
     });

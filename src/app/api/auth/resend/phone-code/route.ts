@@ -31,7 +31,6 @@ export async function POST(req: Request) {
       create: { phoneNumber, code, expires: new Date(Date.now() + 10 * 60 * 1000) },
     });
 
-    // Send the new verification code via SMS
     await sendVerificationSMS(phoneNumber, code);
 
     return NextResponse.json({ message: "Verification code resent" });

@@ -9,7 +9,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { email, password, firstName, lastName, phoneNumber, address } = body;
 
-    // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -18,10 +17,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Email already exists" }, { status: 400 });
     }
 
-    // Hash password
     const hashedPassword = await hash(password, 10);
 
-    // Create user
     const user = await prisma.user.create({
       data: {
         email,
@@ -33,10 +30,8 @@ export async function POST(req: Request) {
       },
     });
 
-    // Generate verification token
     const verificationToken = await generateVerificationToken(email);
 
-    // Send verification email
     await sendVerificationEmail(email, verificationToken.token);
 
     return NextResponse.json({
