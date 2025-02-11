@@ -29,7 +29,7 @@ function PostCard({ post }: PostCardProps) {
             alt="Post Cover"
           />
 
-          <div className="flex flex-col h-full w-full pr-8 lg:h-[290px]">
+          <div className="flex flex-col w-full pr-8 lg:h-[290px] xl:h-[320px]">
             <div className="flex-grow">
               <div>
                 <strong>ชื่อหนังสือ </strong>
@@ -37,11 +37,11 @@ function PostCard({ post }: PostCardProps) {
               </div>
               <div>
                 <strong>ผู้เขียน </strong>
-                {post.book.author}
+                {cut(post.book.author,40)}
               </div>
               <div>
                   <strong>รายละเอียด</strong>
-                  {cut(post.book.description,80)}
+                  {cut(post.book.description,65)}
               </div>
             </div>
             <div className="flex gap-2 mt-auto self-end">
