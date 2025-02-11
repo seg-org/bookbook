@@ -27,7 +27,7 @@ model Book {
   sellerId       String
   posts          Post[]
 
-  @@map("book")
+  @@map("books")
 }
 
 model Post {
@@ -42,7 +42,7 @@ model Post {
   bookId       String        @map("book_id")
   transactions Transaction[]
 
-  @@map("post")
+  @@map("posts")
 }
 
 model User {
@@ -56,7 +56,7 @@ model User {
   Book             Book[]
   Post             Post[]
 
-  @@map("user")
+  @@map("users")
 }
 
 model Transaction {
@@ -84,7 +84,7 @@ model Transaction {
 
   @@index([buyerId, createOn])
   @@index([sellerId, createOn])
-  @@map("transaction")
+  @@map("transactions")
 }
 
 model TransactionFail {
@@ -95,7 +95,7 @@ model TransactionFail {
   detail        String
   failType      TransactionFailType @map("fail_type")
 
-  @@map("transaction_fail")
+  @@map("transaction_fails")
 }
 
 enum TransactionStatus {
