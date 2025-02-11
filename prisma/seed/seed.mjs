@@ -57,7 +57,7 @@ const books = await prisma.book.findMany();
 if (books.length === 0) {
   const booksDataWithKey = await Promise.all(
     booksData.map(async (book) => {
-      const keyWithFolder = await uploadToBucket("book_images", book.coverImageKey);
+      const keyWithFolder = await uploadToBucket("book_images", book.coverImagePath);
       const key = keyWithFolder.split("/")[1];
       return {
         id: book.id,
@@ -67,7 +67,7 @@ if (books.length === 0) {
         description: book.description,
         isbn: book.isbn,
         pages: book.pages,
-        coverImageKey: key,
+        coverImagePath: key,
         sellerId: book.sellerId,
       };
     })

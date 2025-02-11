@@ -10,7 +10,7 @@ const createBookRequest = z.object({
   description: z.string(),
   isbn: z.string(),
   pages: z.number(),
-  coverImageKey: z.string(),
+  coverImagePath: z.string(),
   sellerId: z.string()
 });
 
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
       where: { id: parsedData.data.sellerId },
     })
     if(!seller) {
-      return NextResponse.json({ error: `buyer with id ${parsedData.data.sellerId} not found` }, { status: 404 });
+      return NextResponse.json({ error: `seller with id ${parsedData.data.sellerId} not found` }, { status: 404 });
     }
 
     const newBook = await prisma.book.create({ data: parsedData.data });
@@ -42,7 +42,7 @@ export async function GET() {
     const books = await prisma.book.findMany();
     const booksWithImageUrl = await Promise.all(
       books.map(async (book) => {
-        const url = await getPresignedUrl("book_images", book.coverImageKey);
+        const url = await getPresignedUrl("book_images", book.coverImagePath);
         return {
           ...book,
           coverImageUrl: url,

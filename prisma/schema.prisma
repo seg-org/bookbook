@@ -15,17 +15,17 @@ datasource db {
 }
 
 model Book {
-  id            String @id @default(cuid())
-  title         String
-  author        String
-  genre         String
-  description   String
-  isbn          String
-  pages         Int
-  coverImageKey String @map("cover_image_key")
-  seller        User   @relation(fields: [sellerId], references: [id])
-  sellerId      String
-  posts         Post[]
+  id             String @id @default(cuid())
+  title          String
+  author         String
+  genre          String
+  description    String
+  isbn           String
+  pages          Int
+  coverImagePath String @map("cover_image_key")
+  seller         User   @relation(fields: [sellerId], references: [id])
+  sellerId       String
+  posts          Post[]
 
   @@map("book")
 }
