@@ -57,7 +57,7 @@ export async function GET() {
 
     const postsWithImageUrl = await Promise.all(
       posts.map(async (post) => {
-        const url = await getPresignedUrl("book_images", post.book.coverImagePath);
+        const url = await getPresignedUrl("book_images", post.book.coverImageKey);
         return {
           ...post,
           book: {

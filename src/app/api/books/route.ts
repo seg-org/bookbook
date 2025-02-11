@@ -10,7 +10,7 @@ const createBookRequest = z.object({
   description: z.string(),
   isbn: z.string(),
   pages: z.number(),
-  coverImagePath: z.string(),
+  coverImageKey: z.string(),
   sellerId: z.string()
 });
 
@@ -42,7 +42,7 @@ export async function GET() {
     const books = await prisma.book.findMany();
     const booksWithImageUrl = await Promise.all(
       books.map(async (book) => {
-        const url = await getPresignedUrl("book_images", book.coverImagePath);
+        const url = await getPresignedUrl("book_images", book.coverImageKey);
         return {
           ...book,
           coverImageUrl: url,

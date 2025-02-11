@@ -22,7 +22,7 @@ model Book {
   description    String
   isbn           String
   pages          Int
-  coverImagePath String @map("cover_image_key")
+  coverImageKey String @map("cover_image_key")
   seller         User   @relation(fields: [sellerId], references: [id])
   sellerId       String
   posts          Post[]

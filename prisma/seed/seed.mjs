@@ -67,7 +67,7 @@ if (books.length === 0) {
         description: book.description,
         isbn: book.isbn,
         pages: book.pages,
-        coverImagePath: key,
+        coverImageKey: key,
         sellerId: book.sellerId,
       };
     })

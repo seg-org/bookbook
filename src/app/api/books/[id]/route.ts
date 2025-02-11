@@ -9,7 +9,7 @@ const updateBookRequest = z.object({
   description: z.string().optional(),
   isbn: z.string().optional(),
   pages: z.number().optional(),
-  coverImagePath: z.string().optional(),
+  coverImageKey: z.string().optional(),
 });
 
 export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
