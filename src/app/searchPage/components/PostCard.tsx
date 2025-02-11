@@ -29,7 +29,7 @@ function PostCard({ post }: PostCardProps) {
             alt="Post Cover"
           />
 
-          <div className="flex flex-col w-full pr-8 lg:h-[290px] xl:h-[320px]">
+          <div className="flex flex-col w-full pr-8 lg:h-[290px] xl:h-[320px] 2xl:h-[280px]">
             <div className="flex-grow">
               <div>
                 <strong>ชื่อหนังสือ </strong>
