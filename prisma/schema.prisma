@@ -27,6 +27,8 @@ model User {
   emailVerified DateTime? @map("email_verified")
   phoneVerified DateTime? @map("phone_verified")
   pdpaConsent   Boolean  @default(false) @map("pdpa_consent")
+  buyTransactions  Transaction[] @relation("BuyerTransaction")
+  sellTransactions Transaction[] @relation("SellerTransaction")
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
   sellerProfile SellerProfile?
@@ -51,13 +53,13 @@ model SellerProfile {
 }
 
 model Book {
-  id            String @id @default(cuid())
-  title         String
-  author        String
-  genre         String
-  description   String
-  isbn          String
-  pages         Int
+  id             String @id @default(cuid())
+  title          String
+  author         String
+  genre          String
+  description    String
+  isbn           String
+  pages          Int
   coverImageKey String @map("cover_image_key")
   seller        User   @relation(fields: [sellerId], references: [id])
   sellerId      String @map("seller_id")
@@ -76,6 +78,7 @@ model Post {
   sellerId  String  @map("seller_id")
   book      Book    @relation(fields: [bookId], references: [id])
   bookId    String  @unique @map("book_id")
+  transactions Transaction[]
 
   @@map("posts")
 }
@@ -97,4 +100,66 @@ model PhoneVerification {
   phoneNumber String   @unique
   code        String   @unique
   expires     DateTime
+}
+
+model Transaction {
+  id             String            @id @default(cuid())
+  // transaction data
+  buyer          User              @relation("BuyerTransaction", fields: [buyerId], references: [id])
+  buyerId        String            @map("buyer_id")
+  seller         User              @relation("SellerTransaction", fields: [sellerId], references: [id])
+  sellerId       String            @map("seller_id")
+  post           Post              @relation(fields: [postId], references: [id])
+  postId         String            @map("post_id")
+  createOn       DateTime          @default(now()) @map("create_on")
+  updateOn       DateTime          @updatedAt() @map("update_on")
+  status         TransactionStatus
+  failData       TransactionFail?
+  // payment data
+  paymentMethod  PaymentMethod
+  hashId         String            @map("hashId")
+  paidOn         DateTime          @default(now()) @map("paid_on")
+  amount         Int
+  // shipment data
+  shipmentMethod ShipmentMethod
+  trackingURL    String            @map("tracking_url")
+  isDelivered    Boolean           @map("is_delivered")
+
+  @@index([buyerId, createOn])
+  @@index([sellerId, createOn])
+  @@map("transaction")
+}
+
+
+
+model TransactionFail {
+  id            String              @id @default(cuid())
+  transaction   Transaction         @relation(fields: [transactionId], references: [id])
+  transactionId String              @unique @map("transaction_id")
+  evidenceURL   String              @map("evidence_url")
+  detail        String
+  failType      TransactionFailType @map("fail_type")
+
+  @@map("transaction_fail")
+}
+
+enum TransactionStatus {
+  APPROVING @map("approving")
+  PAYING    @map("paying")
+  VERIFYING @map("verifying")
+  COMPLETE  @map("complete")
+  FAIL      @map("fail")
+}
+
+enum TransactionFailType {
+  CHEAT @map("cheat")
+}
+
+enum PaymentMethod {
+  CREDIT_CARD    @map("credit_card")
+  ONLINE_BANKING @map("online_banking")
+}
+
+enum ShipmentMethod {
+  DELIVERY @map("delivery")
 }
