@@ -19,6 +19,11 @@ const updateTransactionRequest = z.object({
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;  
   try {
+    const parsedData = updateTransactionRequest.safeParse(await req.json());
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
+    }
+
     const transaction = await prisma.transaction.findFirst({
       where: { id: id },
     });
@@ -27,35 +32,36 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       return NextResponse.json({ error: `Transaction with id ${id} not found` }, { status: 404 });
     }
 
-    const parsedData = updateTransactionRequest.safeParse(await req.json());
-    if (!parsedData.success) {
-      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
-    }
-
-    const updateTransaction = await prisma.transaction.update({
-      where: { id: id },
-      data: {
-        status: parsedData.data.status,
-        isDelivered: parsedData.data.isDelivered
-      }
-    });
-
-    if(transaction.status == "FAIL") {
-      await prisma.transactionFail.deleteMany({ where: { transactionId : id } });
-    }
-
-    if(parsedData.data.status == "FAIL") {
-      await prisma.transactionFail.create({
+    const result = await prisma.$transaction(async (prisma) => {
+      const updateTransaction = await prisma.transaction.update({
+        where: { id: id },
         data: {
-          transactionId: updateTransaction.id,
-          evidenceURL: parsedData.data.evidenceURL,
-          detail: parsedData.data.detail,
-          failType: (parsedData.data.failType ?? TransactionFailType.CHEAT)
+          status: parsedData.data.status,
+          isDelivered: parsedData.data.isDelivered
         }
       });
-    }
 
-    return NextResponse.json(updateTransaction);
+      if(transaction.status == "FAIL") {
+        await prisma.transactionFail.deleteMany({
+          where: { transactionId : id } 
+        });
+      }
+
+      if(parsedData.data.status == "FAIL") {
+        await prisma.transactionFail.create({
+          data: {
+            transactionId: updateTransaction.id,
+            evidenceURL: parsedData.data.evidenceURL,
+            detail: parsedData.data.detail,
+            failType: (parsedData.data.failType ?? TransactionFailType.CHEAT)
+          }
+        })
+      }
+
+      return updateTransaction
+    });
+
+    return NextResponse.json(result);
   } catch (error) {
     if (error instanceof Error) console.error(`Error updating transaction with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot update the transaction" }, { status: 500 });
