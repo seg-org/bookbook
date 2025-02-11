@@ -1,11 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function Header() {
   return (
     <header className="flex flex-row items-center justify-between border-b border-gray-300 bg-white p-2.5">
-      <div className="text-2xl font-bold leading-tight text-blue-500">
-        BOOK<br></br>BOOK
-      </div>
+      <Link href="/" className="text-2xl font-bold leading-tight text-blue-500">
+        BOOK
+        <br />
+        BOOK
+      </Link>
       <nav>
         <ul className="flex list-none items-center justify-between gap-4">
           <li>
