@@ -10,17 +10,17 @@ function Header() {
       <nav>
         <ul className="flex list-none items-center justify-between gap-4">
           <li className="max-sm:invisible sm:visible">
-            <Link href="#" className="font-bold text-gray-800 hover:text-[#304674] hover:underline">
+            <Link href="/" className="font-bold text-gray-800 hover:text-[#304674] hover:underline">
               ค้นหาหนังสือ
             </Link>
           </li>
           <li className="max-sm:invisible sm:visible">
-            <Link href="#" className="font-bold text-gray-800 hover:text-[#304674] hover:underline">
+            <Link href="/" className="font-bold text-gray-800 hover:text-[#304674] hover:underline">
               ประวัติการสั่งซื้อ
             </Link>
           </li>
           <li className="max-sm:invisible sm:visible">
-            <Link href="#" className="font-bold text-gray-800 hover:text-[#304674] hover:underline">
+            <Link href="/" className="font-bold text-gray-800 hover:text-[#304674] hover:underline">
               ติดต่อเรา
             </Link>
           </li>
