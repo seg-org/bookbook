@@ -26,6 +26,11 @@ export default function Home() {
             potential-matches
           </Link>
         </li>
+        <li>
+          <Link href="/transaction-initiation" style={{ color: "blue", textDecoration: "underline" }}>
+            transaction-initiation
+          </Link>
+        </li>
       </ul>
     </main>
   );
