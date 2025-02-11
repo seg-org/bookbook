@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "ID card image is required" }, { status: 400 });
     }
 
-    // Upload image to blob storage (change it to supabase  s3 later)
+    // Upload image to blob storage (change it to supabase s3 later)
     const blob = await put(idCardImage.name, idCardImage, {
       access: "public",
     });

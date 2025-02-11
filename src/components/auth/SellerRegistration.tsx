@@ -104,7 +104,6 @@ export function SellerRegistration() {
           <Card className="space-y-4 p-4">
             <h3 className="font-semibold">Shop Information</h3>
             <FormField
-              control={form.control}
               name="shopName"
               render={({ field }) => (
                 <FormItem>
@@ -115,7 +114,6 @@ export function SellerRegistration() {
               )}
             />
             <FormField
-              control={form.control}
               name="shopDescription"
               render={({ field }) => (
                 <FormItem>
@@ -130,7 +128,6 @@ export function SellerRegistration() {
           <Card className="space-y-4 p-4">
             <h3 className="font-semibold">Personal Information</h3>
             <FormField
-              control={form.control}
               name="idCardNumber"
               render={({ field }) => (
                 <FormItem>
@@ -143,7 +140,6 @@ export function SellerRegistration() {
             />
 
             <FormField
-              control={form.control}
               name="idCardImage"
               render={({ field }) => (
                 <FormItem>
@@ -169,7 +165,6 @@ export function SellerRegistration() {
           <Card className="space-y-4 p-4">
             <h3 className="font-semibold">Bank Information</h3>
             <FormField
-              control={form.control}
               name="bankAccount"
               render={({ field }) => (
                 <FormItem>
@@ -181,7 +176,6 @@ export function SellerRegistration() {
             />
 
             <FormField
-              control={form.control}
               name="bankName"
               render={({ field }) => (
                 <FormItem>

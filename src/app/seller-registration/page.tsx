@@ -1,3 +1,5 @@
+"use client";
+
 import { SellerRegistration } from "@/components/auth/SellerRegistration";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 

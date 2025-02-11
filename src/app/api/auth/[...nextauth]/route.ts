@@ -12,7 +12,6 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
     signUp: "/register",
-    verifyRequest: "/verify",
   },
   providers: [
     CredentialsProvider({

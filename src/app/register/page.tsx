@@ -1,3 +1,5 @@
+"use client";
+
 import { RegisterForm } from "@/components/auth/RegisterForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 

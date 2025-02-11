@@ -14,7 +14,7 @@ const registerSchema = z.object({
   lastName: z.string().min(2, "Last name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
-  phoneNumber: z.string().regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number"),
+  phoneNumber: z.string().regex(/^\+?\d{1,14}$/, "Invalid phone number"),
   address: z.string().min(10, "Address must be at least 10 characters"),
   acceptTerms: z.boolean().refine((val) => val === true, {
     message: "You must accept the terms and conditions",
@@ -57,98 +57,89 @@ export function RegisterForm() {
       setIsLoading(false);
     }
   }
-  console.log("FORM", form.handleSubmit);
+  console.log("FORM", form);
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="firstName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>First Name</FormLabel>
-              <Input {...field} disabled={isLoading} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="lastName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last Name</FormLabel>
-              <Input {...field} disabled={isLoading} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <Input {...field} type="email" disabled={isLoading} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <Input {...field} type="password" disabled={isLoading} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="phoneNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone Number</FormLabel>
-              <Input {...field} type="tel" disabled={isLoading} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Address</FormLabel>
-              <Input {...field} disabled={isLoading} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="acceptTerms"
-          render={({ field }) => (
-            <FormItem className="flex items-center space-x-2">
-              <Input
-                type="checkbox"
-                checked={field.value}
-                onChange={field.onChange}
-                disabled={isLoading}
-                className="h-4 w-4"
-              />
-              <FormLabel>I accept the terms and conditions</FormLabel>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={isLoading} className="w-full">
-          {isLoading ? "Registering..." : "Register"}
-        </Button>
-      </form>
+    <Form form={form} onSubmit={onSubmit}>
+      <FormField
+        name="firstName"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>First Name</FormLabel>
+            <Input {...field} disabled={isLoading} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        name="lastName"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Last Name</FormLabel>
+            <Input {...field} disabled={isLoading} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Email</FormLabel>
+            <Input {...field} type="email" disabled={isLoading} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        name="password"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Password</FormLabel>
+            <Input {...field} type="password" disabled={isLoading} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        name="phoneNumber"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Phone Number</FormLabel>
+            <Input {...field} type="tel" disabled={isLoading} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        name="address"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Address</FormLabel>
+            <Input {...field} disabled={isLoading} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        name="acceptTerms"
+        render={({ field }) => (
+          <FormItem className="flex items-center space-x-2">
+            <Input
+              type="checkbox"
+              checked={field.value}
+              onChange={field.onChange}
+              disabled={isLoading}
+              className="h-4 w-4"
+            />
+            <FormLabel>I accept the terms and conditions</FormLabel>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <Button type="submit" disabled={isLoading} className="w-full">
+        {isLoading ? "Registering..." : "Register"}
+      </Button>
     </Form>
   );
 }
