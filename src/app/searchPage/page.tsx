@@ -16,7 +16,7 @@ const KanitFont = Kanit({
 function SearchPage() {
   const [detailSearch, setDetailSearch] = useState(false);
   const [specialSearch, setSpecialSearch] = useState(false);
-  const [inputValue,setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <>
@@ -36,7 +36,7 @@ function SearchPage() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                 ></input>
-                <button className="cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white ml-1.5">
+                <button className="ml-1.5 cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white">
                   ค้นหาข้อมูล
                 </button>
               </div>
@@ -61,10 +61,10 @@ function SearchPage() {
                 </button>
               </div>
               {detailSearch && !specialSearch && <SearchByDetail />}
-              {!detailSearch && specialSearch && <SpecialSearch/>}
+              {!detailSearch && specialSearch && <SpecialSearch />}
             </div>
           </div>
-          {!detailSearch && !specialSearch && <PostList inputSearchValue={inputValue}/>}
+          {!detailSearch && !specialSearch && <PostList inputSearchValue={inputValue} />}
         </main>
       </div>
     </>

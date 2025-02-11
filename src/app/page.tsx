@@ -21,6 +21,11 @@ export default function Home() {
             potential-matches
           </Link>
         </li>
+        <li>
+          <Link href="/update-new-book-post" style={{ color: "blue", textDecoration: "underline" }}>
+            update new book post
+          </Link>
+        </li>
       </ul>
     </main>
   );
