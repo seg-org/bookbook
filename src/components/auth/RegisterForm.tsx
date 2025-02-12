@@ -57,7 +57,6 @@ export function RegisterForm() {
       setIsLoading(false);
     }
   }
-  console.log("FORM", form);
 
   return (
     <Form form={form} onSubmit={onSubmit}>

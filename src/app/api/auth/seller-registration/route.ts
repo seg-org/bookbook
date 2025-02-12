@@ -16,8 +16,6 @@ export async function POST(request: Request) {
     const idCardNumber = formData.get("idCardNumber") as string;
     const bankAccount = formData.get("bankAccount") as string;
     const bankName = formData.get("bankName") as string;
-    const shopName = formData.get("shopName") as string;
-    const shopDescription = formData.get("shopDescription") as string;
     const idCardImage = formData.get("idCardImage") as File;
 
     if (!idCardImage) {
@@ -46,8 +44,6 @@ export async function POST(request: Request) {
         idCardImage: blob.url,
         bankAccount,
         bankName,
-        shopName,
-        shopDescription,
       },
     });
 

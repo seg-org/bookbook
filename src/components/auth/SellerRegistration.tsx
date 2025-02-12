@@ -24,8 +24,6 @@ const sellerSchema = z.object({
       (files) => ["image/jpeg", "image/png", "image/jpg"].includes(files?.[0]?.type),
       "Only .jpg, .jpeg, and .png formats are supported"
     ),
-  shopName: z.string().min(2, "Shop name is required"),
-  shopDescription: z.string().min(10, "Shop description must be at least 10 characters"),
 });
 
 export function SellerRegistration() {
@@ -41,8 +39,6 @@ export function SellerRegistration() {
       bankAccount: "",
       bankName: "",
       idCardImage: undefined,
-      shopName: "",
-      shopDescription: "",
     },
   });
 
@@ -66,8 +62,6 @@ export function SellerRegistration() {
       formData.append("bankAccount", values.bankAccount);
       formData.append("bankName", values.bankName);
       formData.append("idCardImage", values.idCardImage[0]);
-      formData.append("shopName", values.shopName);
-      formData.append("shopDescription", values.shopDescription);
 
       const response = await fetch("/api/auth/seller-registration", {
         method: "POST",
@@ -101,30 +95,6 @@ export function SellerRegistration() {
       <h2 className="text-center text-2xl font-bold">Seller Registration</h2>
       <Form form={form} onSubmit={onSubmit}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <Card className="space-y-4 p-4">
-            <h3 className="font-semibold">Shop Information</h3>
-            <FormField
-              name="shopName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shop Name</FormLabel>
-                  <Input {...field} disabled={isLoading} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="shopDescription"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shop Description</FormLabel>
-                  <Input {...field} disabled={isLoading} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </Card>
-
           <Card className="space-y-4 p-4">
             <h3 className="font-semibold">Personal Information</h3>
             <FormField

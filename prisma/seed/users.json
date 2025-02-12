@@ -1,158 +1,184 @@
 [
   {
-    "id":"user_1",
-    "name":"Alice",
-    "email":"alice@gmail.com",
-    "password":"Cit99/&o"
+    "id": "user_1",
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "email": "alice@gmail.com",
+    "password": "Cit99/&o"
   },
   {
-    "id":"user_2",
-    "name":"Bob",
-    "email":"bob@gmail.com",
-    "password":"S7{M;l@Q"
+    "id": "user_2",
+    "firstName": "Bob",
+    "lastName": "Smith",
+    "email": "bob@gmail.com",
+    "password": "S7{M;l@Q"
   },
   {
-    "id":"user_3",
-    "name":"Charlie",
-    "email":"charlie@gmail.com",
-    "password":"hq$9aWQ+"
+    "id": "user_3",
+    "firstName": "Charlie",
+    "lastName": "Brown",
+    "email": "charlie@gmail.com",
+    "password": "hq$9aWQ+"
   },
   {
-    "id":"user_4",
-    "name":"David",
-    "email":"david@gmail.com",
-    "password":"_HYM;[g0"
+    "id": "user_4",
+    "firstName": "David",
+    "lastName": "White",
+    "email": "david@gmail.com",
+    "password": "_HYM;[g0"
   },
   {
-    "id":"user_5",
-    "name":"Eve",
-    "email":"eve@gmail.com",
-    "password":"!QtqotKl"
+    "id": "user_5",
+    "firstName": "Eve",
+    "lastName": "Davis",
+    "email": "eve@gmail.com",
+    "password": "!QtqotKl"
   },
   {
-    "id":"user_6",
-    "name":"Frank",
-    "email":"frank@gmail.com",
-    "password":"G(,CQ8Aa"
+    "id": "user_6",
+    "firstName": "Frank",
+    "lastName": "Taylor",
+    "email": "frank@gmail.com",
+    "password": "G(,CQ8Aa"
   },
   {
-    "id":"user_7",
-    "name":"Grace",
-    "email":"grace@gmail.com",
-    "password":"`]R;}~-t"
+    "id": "user_7",
+    "firstName": "Grace",
+    "lastName": "Moore",
+    "email": "grace@gmail.com",
+    "password": "`]R;}~-t"
   },
   {
-    "id":"user_8",
-    "name":"Hannah",
-    "email":"hannah@gmail.com",
-    "password":"MimhY-P_"
+    "id": "user_8",
+    "firstName": "Hannah",
+    "lastName": "Miller",
+    "email": "hannah@gmail.com",
+    "password": "MimhY-P_"
   },
   {
-    "id":"user_9",
-    "name":"Isaac",
-    "email":"isaac@gmail.com",
-    "password":"l/cCf]`7"
+    "id": "user_9",
+    "firstName": "Isaac",
+    "lastName": "Wilson",
+    "email": "isaac@gmail.com",
+    "password": "l/cCf]`7"
   },
   {
-    "id":"user_10",
-    "name":"Jack",
-    "email":"jack@gmail.com",
-    "password":"b~K#|3l7"
+    "id": "user_10",
+    "firstName": "Jack",
+    "lastName": "Anderson",
+    "email": "jack@gmail.com",
+    "password": "b~K#|3l7"
   },
   {
-    "id":"user_11",
-    "name":"Karen",
-    "email":"karen@gmail.com",
-    "password":"gOd61QtH"
+    "id": "user_11",
+    "firstName": "Karen",
+    "lastName": "Thomas",
+    "email": "karen@gmail.com",
+    "password": "gOd61QtH"
   },
   {
-    "id":"user_12",
-    "name":"Liam",
-    "email":"liam@gmail.com",
-    "password":"<6sW%S4&"
+    "id": "user_12",
+    "firstName": "Liam",
+    "lastName": "Harris",
+    "email": "liam@gmail.com",
+    "password": "<6sW%S4&"
   },
   {
-    "id":"user_13",
-    "name":"Mia",
-    "email":"mia@gmail.com",
-    "password":"HiesIVQj"
+    "id": "user_13",
+    "firstName": "Mia",
+    "lastName": "Clark",
+    "email": "mia@gmail.com",
+    "password": "HiesIVQj"
   },
   {
-    "id":"user_14",
-    "name":"Noah",
-    "email":"noah@gmail.com",
-    "password":".vL7wk:s"
+    "id": "user_14",
+    "firstName": "Noah",
+    "lastName": "Lewis",
+    "email": "noah@gmail.com",
+    "password": ".vL7wk:s"
   },
   {
-    "id":"user_15",
-    "name":"Olivia",
-    "email":"olivia@gmail.com",
-    "password":"&^a@wIpQ"
+    "id": "user_15",
+    "firstName": "Olivia",
+    "lastName": "Walker",
+    "email": "olivia@gmail.com",
+    "password": "&^a@wIpQ"
   },
   {
-    "id":"user_16",
-    "name":"Peter",
-    "email":"peter@gmail.com",
-    "password":"r93`2mmi"
+    "id": "user_16",
+    "firstName": "Peter",
+    "lastName": "Hall",
+    "email": "peter@gmail.com",
+    "password": "r93`2mmi"
   },
   {
-    "id":"user_17",
-    "name":"Quinn",
-    "email":"quinn@gmail.com",
-    "password":"7(H'!ref"
+    "id": "user_17",
+    "firstName": "Quinn",
+    "lastName": "Young",
+    "email": "quinn@gmail.com",
+    "password": "7(H'!ref"
   },
   {
-    "id":"user_18",
-    "name":"Rachel",
-    "email":"rachel@gmail.com",
-    "password":"Q4WubU(+"
+    "id": "user_18",
+    "firstName": "Rachel",
+    "lastName": "Allen",
+    "email": "rachel@gmail.com",
+    "password": "Q4WubU(+"
   },
   {
-    "id":"user_19",
-    "name":"Sam",
-    "email":"sam@gmail.com",
-    "password":"U)YtH]/T"
+    "id": "user_19",
+    "firstName": "Sam",
+    "lastName": "King",
+    "email": "sam@gmail.com",
+    "password": "U)YtH]/T"
   },
   {
-    "id":"user_20",
-    "name":"Tom",
-    "email":"tom@gmail.com",
-    "password":"x8.FO+h6"
+    "id": "user_20",
+    "firstName": "Tom",
+    "lastName": "Scott",
+    "email": "tom@gmail.com",
+    "password": "x8.FO+h6"
   },
   {
-    "id":"user_21",
-    "name":"Uma",
-    "email":"uma@gmail.com",
-    "password":"}BrQ?s!c"
+    "id": "user_21",
+    "firstName": "Uma",
+    "lastName": "Adams",
+    "email": "uma@gmail.com",
+    "password": "}BrQ?s!c"
   },
   {
-    "id":"user_22",
-    "name":"Victor",
-    "email":"victor@gmail.com",
-    "password":"<IU[&k%K"
+    "id": "user_22",
+    "firstName": "Victor",
+    "lastName": "Baker",
+    "email": "victor@gmail.com",
+    "password": "<IU[&k%K"
   },
   {
-    "id":"user_23",
-    "name":"Wendy",
-    "email":"wendy@gmail.com",
-    "password":"(y5E.tJE"
+    "id": "user_23",
+    "firstName": "Wendy",
+    "lastName": "Green",
+    "email": "wendy@gmail.com",
+    "password": "(y5E.tJE"
   },
   {
-    "id":"user_24",
-    "name":"Xander",
-    "email":"xander@gmail.com",
-    "password":"UG@zj{mC"
+    "id": "user_24",
+    "firstName": "Xander",
+    "lastName": "Nelson",
+    "email": "xander@gmail.com",
+    "password": "UG@zj{mC"
   },
   {
-    "id":"user_25",
-    "name":"Yasmine",
-    "email":"yasmine@gmail.com",
-    "password":"0C6ji`[N"
+    "id": "user_25",
+    "firstName": "Yasmine",
+    "lastName": "Carter",
+    "email": "yasmine@gmail.com",
+    "password": "0C6ji`[N"
   },
   {
-    "id":"user_26",
-    "name":"Zane",
-    "email":"zane@gmail.com",
-    "password":"(?+}=rQy"
+    "id": "user_26",
+    "firstName": "Zane",
+    "lastName": "Mitchell",
+    "email": "zane@gmail.com",
+    "password": "(?+}=rQy"
   }
 ]
