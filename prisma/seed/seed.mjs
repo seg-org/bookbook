@@ -4,11 +4,12 @@ import { PaymentMethod, PrismaClient, ShipmentMethod, TransactionFailType, Trans
 import AWS from "aws-sdk";
 import fs from "fs";
 import { basename } from "path";
-import booksData from "./books.json" assert { type: "json" };
-import postsData from "./posts.json" assert { type: "json" };
-import transactionsData from "./transactions.json" assert { type: "json" };
-import transactionsFailData from "./transactionsFail.json" assert { type: "json" };
-import usersData from "./users.json" assert { type: "json" };
+import booksData from "./books.json" with { type: "json" };
+import postsData from "./posts.json" with { type: "json" };
+import transactionsData from "./transactions.json" with { type: "json" };
+import transactionsFailData from "./transactionsFail.json" with { type: "json" };
+import usersData from "./users.json" with { type: "json" };
+import sellerProfilesData from "./sellerProfiles.json" with { type: "json" };
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -50,6 +51,30 @@ const users = await prisma.user.findMany();
 if (users.length === 0) {
   await prisma.user.createMany({
     data: usersData,
+  });
+}
+
+const sellerProfiles = await prisma.sellerProfile.findMany();
+if (sellerProfiles.length === 0) {
+  const sellerProfileWithKey = await Promise.all(
+    sellerProfilesData.map(async (sellerProfile) => {
+      const keyWithFolder = await uploadToBucket("idCard_images", sellerProfile.idCardImage);
+      const key = keyWithFolder.split("/")[1];
+      return {
+        id: sellerProfile.id,
+        idCardNumber: sellerProfile.idCardNumber,
+        idCardImageKey: key,
+        bankAccount: sellerProfile.bankAccount,
+        bankName: sellerProfile.bankName,
+        isApproved: sellerProfile.isApproved,
+        approvedAt: sellerProfile.approvedAt,
+        userId: sellerProfile.userId
+      };
+    })
+  );
+
+  await prisma.sellerProfile.createMany({
+    data: sellerProfileWithKey,
   });
 }
 
