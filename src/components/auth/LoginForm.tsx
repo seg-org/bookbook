@@ -56,7 +56,7 @@ export function LoginForm() {
         </Button>
       </form>
       <p className="text-center text-base">
-        ไม่มีบัญชีหรอ?{" "}
+        ไม่มีบัญชี?{" "}
         <Link href="/register" className="text-blue-500 hover:underline">
           ลงทะเบียน
         </Link>

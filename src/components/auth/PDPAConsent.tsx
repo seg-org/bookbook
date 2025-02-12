@@ -22,7 +22,7 @@ export function PDPAConsent() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save consent");
+        throw new Error("บันทึกการยินยอมล้มเหลว");
       }
 
       router.push("/");
@@ -35,31 +35,28 @@ export function PDPAConsent() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6 p-6">
-      <h2 className="text-2xl font-bold">Personal Data Protection Act Consent</h2>
-
       <div className="prose prose-sm">
-        <h3>Collection of Personal Data</h3>
+        <h3>การเก็บรวบรวมข้อมูลส่วนบุคคล</h3>
         <p>
-          We collect personal data including but not limited to your name, contact information, and identification
-          details for the purpose of providing our services.
+          เราจะเก็บรวบรวมข้อมูลส่วนบุคคลของท่าน เช่น ชื่อ ข้อมูลติดต่อ และข้อมูลระบุตัวตน เพื่อใช้ในการให้บริการของเรา
         </p>
 
-        <h3>Use of Personal Data</h3>
+        <h3>การใช้ข้อมูลส่วนบุคคล</h3>
         <p>
-          Your personal data will be used for: - Account creation and management - Verification of identity - Processing
-          of transactions - Communication about our services - Legal and regulatory compliance
+          ข้อมูลส่วนบุคคลของท่านจะถูกนำไปใช้เพื่อ: - การสร้างและจัดการบัญชีผู้ใช้ - การยืนยันตัวตน - การดำเนินธุรกรรม -
+          การติดต่อเกี่ยวกับบริการของเรา - การปฏิบัติตามกฎหมายและข้อบังคับ
         </p>
 
-        <h3>Disclosure of Personal Data</h3>
+        <h3>การเปิดเผยข้อมูลส่วนบุคคล</h3>
         <p>
-          We may share your personal data with: - Service providers and partners - Legal authorities when required by
-          law - Other users (limited to necessary information for transactions)
+          เราอาจเปิดเผยข้อมูลส่วนบุคคลของท่านให้กับ: - ผู้ให้บริการและพันธมิตร - หน่วยงานกฎหมายเมื่อจำเป็นตามกฎหมาย -
+          ผู้ใช้รายอื่น (จำกัดเฉพาะข้อมูลที่จำเป็นต่อธุรกรรม)
         </p>
 
-        <h3>Your Rights</h3>
+        <h3>สิทธิของท่าน</h3>
         <p>
-          You have the right to: - Access your personal data - Request corrections to your data - Withdraw consent -
-          Request data deletion (subject to legal requirements)
+          ท่านมีสิทธิที่จะ: - ขอเข้าถึงข้อมูลส่วนบุคคลของท่าน - ขอแก้ไขข้อมูลของท่าน - ถอนความยินยอม -
+          ขอให้ลบข้อมูลของท่าน (ภายใต้ข้อกำหนดทางกฎหมาย)
         </p>
       </div>
 
@@ -67,12 +64,12 @@ export function PDPAConsent() {
         <div className="flex items-center space-x-2">
           <Checkbox id="consent" checked={accepted} onCheckedChange={(checked) => setAccepted(checked as boolean)} />
           <label htmlFor="consent" className="text-sm">
-            I have read and agree to the collection, use, and disclosure of my personal data as described above
+            ข้าพเจ้าได้อ่านและยอมรับการเก็บรวบรวม การใช้ และการเปิดเผยข้อมูลส่วนบุคคลของข้าพเจ้าตามที่ระบุไว้ข้างต้น
           </label>
         </div>
 
         <Button type="submit" disabled={!accepted || isLoading} className="w-full">
-          {isLoading ? "Saving..." : "Accept and Continue"}
+          {isLoading ? "กำลังบันทึก..." : "ยอมรับและดำเนินการต่อ"}
         </Button>
       </form>
     </div>

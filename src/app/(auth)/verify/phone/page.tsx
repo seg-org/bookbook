@@ -6,7 +6,7 @@ export default function VerifyPhonePage() {
     <main className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center">Verify Your Phone</CardTitle>
+          <CardTitle className="text-center">ยืนยันเบอร์โทรศัพท์</CardTitle>
         </CardHeader>
         <CardContent>
           <PhoneVerification />
