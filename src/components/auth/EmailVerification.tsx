@@ -3,15 +3,19 @@
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function EmailVerification() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState<string | null>(null);
+
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const email = useMemo(() => searchParams.get("email") || "", [searchParams]);
+  useEffect(() => {
+    setEmail(searchParams.get("email") || "");
+  }, [searchParams]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,7 +63,9 @@ export function EmailVerification() {
   return (
     <div className="mx-auto max-w-md space-y-4">
       <h2 className="text-center text-2xl font-bold">Verify your email</h2>
-      {email ? (
+      {email === null ? (
+        <p className="text-center text-gray-600">Loading...</p>
+      ) : email ? (
         <p className="text-center text-gray-600">We have sent a verification code to {email}</p>
       ) : (
         <p className="text-center text-gray-600">No email provided.</p>
