@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Transaction } from '@/data/dto/transaction.dto'
 import { TransactionStatus } from '@prisma/client'
 
-import BoughtIcon from "../pic/BoughtIcon.png"
+import BoughtIcon from "../pic/boughtIcon.png"
 import SoldIcon from "../pic/soldIcon.png"
 
 // Note 1: type and sttatus should be enum type
@@ -29,7 +29,7 @@ const TransactionBox = ({ transaction, type } : TransactionBoxProps) => {
         <Image className="m-2.5 h-40 w-auto rounded-lg" src={transaction.post.book.coverImageUrl} alt="Book Cover" height={90} width={160}></Image>
         <div className='flex flex-col'>
           <label className='font-semibold text-xl'>{cap_overflow_string(transaction.post.book.title)}</label>
-          <label className='text-gray-400 text-lg'>{transaction.createOn.toDateString()} {transaction.createOn.getHours()}:{transaction.createOn.getMinutes()}</label>
+          <label className='text-gray-400 text-lg'>{transaction.createdAt.toDateString()} {transaction.createdAt.getHours()}:{transaction.createdAt.getMinutes()}</label>
           <label className='text-xl'>{transaction.amount}.-</label>
         </div>
       </div>

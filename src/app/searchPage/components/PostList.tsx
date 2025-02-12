@@ -13,7 +13,6 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
   if (error) {
     return <div>Failed to get posts</div>;
   }
-  console.log("cover : ",posts[0].book.coverImageUrl,"end")
 
   const filter_posts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
 
@@ -28,13 +27,13 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           <div className="ml-3.5 mr-auto mt-1 text-lg">เรียงโดย</div>
           <button
             onClick={() => setPriceAsc(-1 * priceAsc)}
-            className="rounded-lg border border-gray-300 bg-white p-2 text-lg text-sm"
+            className="rounded-lg border border-gray-300 bg-white p-2 text-lg"
           >
             ราคา <span className="ml-2">{priceAsc == 1 ? "▲" : "▼"}</span>
           </button>
           <button
             onClick={() => setPopAsc(-1 * popAsc)}
-            className="rounded-lg border border-gray-300 bg-white p-2 text-lg text-sm"
+            className="rounded-lg border border-gray-300 bg-white p-2 text-lg"
           >
             ความนิยม <span className="ml-2">{popAsc == 1 ? "▲" : "▼"}</span>
           </button>

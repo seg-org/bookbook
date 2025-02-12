@@ -21,8 +21,8 @@ export const getTransaction = async ( filter: FilterType, userId: string ) => {
 
     return res.data.map((val) => ({
       ...val,
-      createOn: new Date(val.createOn),
-      updateOn: new Date(val.updateOn),
+      createdAt: new Date(val.createdAt),
+      updatedAt: new Date(val.updatedAt),
       paidOn: new Date(val.paidOn)
     }));
   } catch (error) {

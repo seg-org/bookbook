@@ -12,8 +12,8 @@ export type Transaction = {
   sellerId: String,
   post: Post,
   postId: string,
-  createOn: Date,
-  updateOn: Date,
+  createdAt: Date,
+  updatedAt: Date,
   status: TransactionStatus,
   
   paymentMethod: PaymentMethod,
