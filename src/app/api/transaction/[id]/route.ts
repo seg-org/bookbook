@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionFailType } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { getPresignedUrl } from "../../objects/s3";
 import { z } from "zod";
 
 const updateTransactionRequest = z.object({
@@ -76,7 +77,11 @@ export async function GET(_: NextRequest, props : { params: Promise<{ id: string
       include : {
         buyer: true,
         seller: true,
-        post: true,
+        post: {
+          include : {
+            book: true
+          }
+        },
         failData: true
       }
     });
@@ -85,7 +90,19 @@ export async function GET(_: NextRequest, props : { params: Promise<{ id: string
       return NextResponse.json({ error: `Transaction with id ${id} not found` }, { status: 404 });
     }
 
-    return NextResponse.json(transaction);
+    const url = await getPresignedUrl("book_images", transaction.post.book.coverImageKey);
+    const transactionWithURL = {
+      ...transaction,
+      post: {
+        ...transaction.post,
+        book: {
+          ...transaction.post.book,
+          coverImageUrl: url,
+        }
+      }
+    };
+
+    return NextResponse.json(transactionWithURL);
   } catch (error) {
     if (error instanceof Error) console.error(`Error getting transaction with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot get the transaction" }, { status: 500 });

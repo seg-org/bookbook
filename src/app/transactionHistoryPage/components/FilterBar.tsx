@@ -24,13 +24,13 @@ const FilterBar = ({ filter, setFilter } : setStateProps) => {
             onChange={(e) => setFilter({...filter, startDate: e.target.value ? new Date(e.target.value) : null})}/>
           <label className='text-gray-800 font-medium'>ถึงวันที่</label>
           <input className='rounded-lg p-1 border border-gray-300 transition-transform duration-200 transform hover:scale-105 hover:shadow-xl' type='date' 
-            onChange={(e) => setFilter({...filter, endDate: e.target.value ? new Date(e.target.value) : null})}/>
+            onChange={(e) => setFilter({...filter, endDate: e.target.value ? new Date(new Date(e.target.value).setDate(new Date(e.target.value).getDate() + 1)) : null})}/>
         </div>
         <div className='space-x-2.5 items-center flex flex-row'>
-          <input className='h-5 w-5 transition-transform duration-200' type='checkbox' checked={true} 
+          <input className='h-5 w-5 transition-transform duration-200' type='checkbox' checked={filter.asBuyer} 
             onChange={(e) => setFilter({...filter, asBuyer: e.target.checked})}/>
           <label className='text-gray-800 font-medium'>ซื้อ</label>
-          <input className='h-5 w-5 transition-transform duration-200' type='checkbox' checked={true} 
+          <input className='h-5 w-5 transition-transform duration-200' type='checkbox' checked={filter.asSeller} 
             onChange={(e) => setFilter({...filter, asSeller: e.target.checked})}/>
           <label className='text-gray-800 font-medium'>ขาย</label>
         </div>

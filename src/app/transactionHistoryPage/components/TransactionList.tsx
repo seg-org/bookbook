@@ -12,7 +12,7 @@ interface TransactionListProps {
 
 const TransactionList = ({ filter, userId }: TransactionListProps) => {
 
-  const { transactions, loading, error } = useGetTransaction(filter, "");
+  const { transactions, loading, error } = useGetTransaction(filter, userId);
   if (loading) {
     return <div className='text-4xl font-bold text-gray-400 grid place-items-center h-screen v-screen'>Loading...</div>;
   }
@@ -41,7 +41,7 @@ const TransactionList = ({ filter, userId }: TransactionListProps) => {
     child_components.push(<LineSeparator key={"today_line"} text={first_date.toDateString()}/>)
   while(it < sort_transactions.length && sort_transactions[it].createOn >= first_date) {
     let ts = sort_transactions[it];
-    child_components.push(<TransactionBox key={ts.id} id={ts.id} name={ts.post.book.title} image={ts.post.book.coverImageUrl} price={ts.amount} type={userId == ts.sellerId ? "sell" : "buy"} date={ts.createOn} status={ts.status}/>);
+    child_components.push(<TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"}/>);
     ++it;
   }
 
@@ -49,7 +49,7 @@ const TransactionList = ({ filter, userId }: TransactionListProps) => {
     child_components.push(<LineSeparator key={"yesterday_line"} text="Yesterday"/>);
   while(it < sort_transactions.length && sort_transactions[it].createOn >= second_date) {
     let ts = sort_transactions[it];
-    child_components.push(<TransactionBox key={ts.id} id={ts.id} name={ts.post.book.title} image={ts.post.book.coverImageUrl} price={ts.amount} type={userId == ts.sellerId ? "sell" : "buy"} date={ts.createOn} status={ts.status}/>);
+    child_components.push(<TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"}/>);
     ++it;
   }
 
@@ -57,7 +57,7 @@ const TransactionList = ({ filter, userId }: TransactionListProps) => {
     child_components.push(<LineSeparator key={"previous_month_line"} text="This Month"/>);
   while(it < sort_transactions.length && sort_transactions[it].createOn >= previous_month) {
     let ts = sort_transactions[it];
-    child_components.push(<TransactionBox key={ts.id} id={ts.id} name={ts.post.book.title} image={ts.post.book.coverImageUrl} price={ts.amount} type={userId == ts.sellerId ? "sell" : "buy"} date={ts.createOn} status={ts.status}/>);
+    child_components.push(<TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"}/>);
     ++it;
   }
 
@@ -65,7 +65,7 @@ const TransactionList = ({ filter, userId }: TransactionListProps) => {
     child_components.push(<LineSeparator key={"this_year_line"} text="This Year"/>);
   while(it < sort_transactions.length && sort_transactions[it].createOn >= this_year) {
     let ts = sort_transactions[it];
-    child_components.push(<TransactionBox key={ts.id} id={ts.id} name={ts.post.book.title} image={ts.post.book.coverImageUrl} price={ts.amount} type={userId == ts.sellerId ? "sell" : "buy"} date={ts.createOn} status={ts.status}/>);
+    child_components.push(<TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"}/>);
     ++it;
   }
 
@@ -76,11 +76,9 @@ const TransactionList = ({ filter, userId }: TransactionListProps) => {
       year.setFullYear(new Date(sort_transactions[it].createOn).getFullYear())
       child_components.push(<LineSeparator key={year.getFullYear() + "year_line"} text={year.getFullYear().toString()}/>);
     } 
-    child_components.push(<TransactionBox key={ts.id} id={ts.id} name={ts.post.book.title} image={ts.post.book.coverImageUrl} price={ts.amount} type={userId == ts.sellerId ? "sell" : "buy"} date={ts.createOn} status={ts.status}/>);
+    child_components.push(<TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"}/>);
     ++it;
   }
-
-  console.log(child_components)
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols_5 gap-4 p-4'>

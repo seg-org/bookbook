@@ -13,6 +13,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
   if (error) {
     return <div>Failed to get posts</div>;
   }
+  console.log("cover : ",posts[0].book.coverImageUrl,"end")
 
   const filter_posts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
 
