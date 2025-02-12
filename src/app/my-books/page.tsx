@@ -18,8 +18,8 @@ export default function MyBooksPage() {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="mx-auto mt-10 max-w-lg">
-      <h1 className="mb-4 text-center text-2xl font-bold">My Books</h1>
+    <div className="mx-auto mt-10 max-w-6xl">
+      <h1 className="text-center text-2xl font-bold">หนังสือของฉัน</h1>
       <BookList books={books} />
     </div>
   );
