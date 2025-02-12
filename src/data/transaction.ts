@@ -6,7 +6,14 @@ import { FilterType } from "@/app/transactionHistoryPage/components/FilterBar";
 export const getTransaction = async ( filter: FilterType, userId: string ) => {
   try {
     const params: Partial<FilterType> & { userId?: string } = {
-      ...Object.fromEntries(Object.entries(filter).filter(([_, value]) => value !== null)),
+      ...Object.fromEntries(
+        Object.entries(filter).map(([key, value]) => {
+          if (key === "asBuyer" || key === "asSeller") {
+            return [key, value ? "true" : "false"]; // Convert boolean to string ("true" or "false")
+          }
+          return [key, value]; // Keep other values unchanged
+        }).filter(([_, value]) => value !== null) // Exclude null values
+      ),
       ...(userId !== '' ? { userId: userId } : {})
     }
 
