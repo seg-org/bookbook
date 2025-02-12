@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export function Loading() {
+export function LoadingAnimation() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center space-y-4">
       <motion.div
