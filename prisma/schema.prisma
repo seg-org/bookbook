@@ -52,15 +52,15 @@ model VerificationToken {
 }
 
 model SellerProfile {
-  id           String    @id @default(cuid())
-  idCardNumber String    @map("id_card_number")
-  idCardImage  String    @map("id_card_image")
-  bankAccount  String    @map("bank_account")
-  bankName     String    @map("bank_name")
-  isApproved   Boolean   @default(false) @map("is_approved")
-  approvedAt   DateTime? @map("approved_at")
-  user         User      @relation(fields: [userId], references: [id])
-  userId       String    @unique @map("user_id")
+  id             String    @id @default(cuid())
+  idCardNumber   String    @map("id_card_number")
+  idCardImageKey String    @map("id_card_image_key")
+  bankAccount    String    @map("bank_account")
+  bankName       String    @map("bank_name")
+  isApproved     Boolean   @default(false) @map("is_approved")
+  approvedAt     DateTime? @map("approved_at")
+  user           User      @relation(fields: [userId], references: [id])
+  userId         String    @unique @map("user_id")
 
   @@map("seller_profiles")
 }
@@ -71,10 +71,10 @@ model Book {
   author        String
   genre         String
   description   String
-  isbn          String
+  isbn          String @unique
   pages         Int
   coverImageKey String @map("cover_image_key")
-  seller        User?   @relation(fields: [sellerId], references: [id])
+  seller        User?  @relation(fields: [sellerId], references: [id])
   sellerId      String @map("seller_id")
   posts         Post[]
 
@@ -105,8 +105,8 @@ model Transaction {
   sellerId       String            @map("seller_id")
   post           Post              @relation(fields: [postId], references: [id])
   postId         String            @map("post_id")
-  createOn       DateTime          @default(now()) @map("create_on")
-  updateOn       DateTime          @updatedAt() @map("update_on")
+  createdAt      DateTime          @default(now()) @map("create_on")
+  updatedAt      DateTime          @updatedAt() @map("update_on")
   status         TransactionStatus
   failData       TransactionFail?
   // payment data
@@ -119,8 +119,8 @@ model Transaction {
   trackingURL    String            @map("tracking_url")
   isDelivered    Boolean           @map("is_delivered")
 
-  @@index([buyerId, createOn])
-  @@index([sellerId, createOn])
+  @@index([buyerId, createdAt])
+  @@index([sellerId, createdAt])
   @@map("transactions")
 }
 

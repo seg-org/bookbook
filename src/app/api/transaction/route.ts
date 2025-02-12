@@ -84,7 +84,7 @@ export async function GET(req : NextRequest) {
 
     const transactions = await prisma.transaction.findMany({
       where: {
-        createOn: {
+        createdAt: {
           gte: parsedData.data.startDate,
           lte: parsedData.data.endDate,
         },
