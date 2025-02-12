@@ -1,5 +1,6 @@
 import { Post } from "@/data/dto/post.dto";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type PostCardProps = {
   post: Post;
@@ -13,6 +14,14 @@ const cut = (s: string, n: number) => {
 };
 
 function PostCard({ post }: PostCardProps) {
+  const router = useRouter();
+
+  const initiate_transaction = () => {
+    const encodedPostId = encodeURIComponent(post.id);
+    const encodedBookTitle = encodeURIComponent(post.book.title);
+    router.push(`/transaction-initiation?postId=${encodedPostId}&bookTitle=${encodedBookTitle}`);
+  }
+
   return (
     <>
       <div className="flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white max-md:w-full md:w-[100%] lg:w-[48%] xl:w-[32%]">
@@ -48,7 +57,7 @@ function PostCard({ post }: PostCardProps) {
               <button className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-white p-1.5 text-sm text-black">
                 ดูข้อมูล
               </button>
-              <button className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
+              <button onClick={initiate_transaction} className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
                 เพิ่มใส่ตะกร้า
               </button>
             </div>
