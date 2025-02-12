@@ -34,6 +34,11 @@ export default function Home() {
             </Link>
           </li>
           <li>
+            <Link href="/my-books" className="block text-blue-600 hover:text-blue-800">
+              📚 รายการหนังสือของฉัน
+            </Link>
+          </li>
+          <li>
             <Link href="/potential-matches" className="block text-blue-600 hover:text-blue-800">
               🤝 แนะนำหนังสือที่ตรงกับคุณ
             </Link>
