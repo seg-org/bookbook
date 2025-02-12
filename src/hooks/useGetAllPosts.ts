@@ -15,9 +15,8 @@ export const useGetAllPosts = () => {
       }
 
       setPosts(res);
+      setLoading(false);
     })();
-
-    setLoading(false);
   }, []);
 
   return { posts, loading, error };

@@ -15,9 +15,8 @@ export const useGetAllBooks = () => {
       }
 
       setBooks(res);
+      setLoading(false);
     })();
-
-    setLoading(false);
   }, []);
 
   return { books, loading, error };

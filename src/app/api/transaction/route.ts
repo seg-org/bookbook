@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { getPresignedUrl } from "../objects/s3";
 import { z } from "zod";
 
 
@@ -92,10 +93,36 @@ export async function GET(req : NextRequest) {
           (parsedData.data.asBuyer) ? { buyerId: parsedData.data.userId } : {},
           (parsedData.data.asSeller) ? { sellerId: parsedData.data.userId } : {},
         ].filter(Boolean) } : {}),
+      },
+      include: {
+        post: {
+          include : {
+            book: true
+          }
+        },
+        buyer: true,
+        seller: true,
+        failData: true
       }
     })
 
-    return NextResponse.json(transactions, { status: 201 });
+    const transactionsWithURL = await Promise.all(
+      transactions.map(async (transaction) => {
+        const url = await getPresignedUrl("book_images", transaction.post.book.coverImageKey);
+        return {
+          ...transaction,
+          post: {
+            ...transaction.post,
+            book: {
+              ...transaction.post.book,
+              coverImageUrl: url,
+            }
+          }
+        };
+      })
+    );
+
+    return NextResponse.json(transactionsWithURL, { status: 201 });
   } catch (error) {
     if (error instanceof Error) console.error("Error getting transactions", error.stack);
     return NextResponse.json({ error: "Cannot get a transaction" }, { status: 500 });
