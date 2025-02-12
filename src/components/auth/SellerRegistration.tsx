@@ -33,20 +33,18 @@ export function SellerRegistration() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof sellerSchema>>({
     resolver: zodResolver(sellerSchema),
     defaultValues: {
       idCardNumber: "",
       bankAccount: "",
       bankName: "",
-      idCardImage: undefined,
+      idCardImage: undefined as unknown as FileList,
     },
   });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-
-    if (!e.target.files) return;
 
     if (file) {
       form.setValue("idCardImage", e.target.files);
@@ -118,12 +116,7 @@ export function SellerRegistration() {
               render={() => (
                 <FormItem>
                   <FormLabel>ID Card Image</FormLabel>
-                  <Input
-                    type="file"
-                    accept="image/jpeg,image/png,image/jpg"
-                    onChange={handleImageChange}
-                    disabled={isLoading}
-                  />
+                  <Input type="file" accept="image/*" onChange={handleImageChange} disabled={isLoading} />
                   <FormDescription>Upload a clear photo of your ID card (max 5MB)</FormDescription>
                   {previewUrl && (
                     <div className="mt-2">
