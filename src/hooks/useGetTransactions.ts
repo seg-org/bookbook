@@ -1,6 +1,6 @@
+import { FilterType } from "@/app/transaction-history-page/components/FilterBar";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { getTransaction } from "@/data/transaction";
-import { FilterType } from "@/app/transaction-history-page/components/FilterBar";
 import { useEffect, useState } from "react";
 
 export const useGetTransaction = (filter: FilterType, userId: string) => {
@@ -18,7 +18,7 @@ export const useGetTransaction = (filter: FilterType, userId: string) => {
       settransactions(res);
       setLoading(false);
     })();
-  }, [filter]);
+  }, [filter, userId]);
 
   return { transactions, loading, error };
 };
