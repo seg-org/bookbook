@@ -8,7 +8,7 @@ export default function VerifyPage() {
     <main className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center">Verify Your Email</CardTitle>
+          <CardTitle className="text-center">ยืนยันอีเมล</CardTitle>
         </CardHeader>
         <CardContent>
           <EmailVerification />

@@ -8,7 +8,7 @@ export default function LoginPage() {
     <main className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center">Login</CardTitle>
+          <CardTitle className="text-center">เข้าสู่ระบบ</CardTitle>
         </CardHeader>
         <CardContent>
           <LoginForm />

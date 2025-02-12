@@ -28,7 +28,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="mb-6 text-2xl font-bold">Profile Settings</h1>
+      <h1 className="mb-6 text-2xl font-bold">ข้อมูลผู้ใช้</h1>
       <ProfileForm initialData={userProfile} />
     </div>
   );

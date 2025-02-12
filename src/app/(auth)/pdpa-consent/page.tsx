@@ -6,7 +6,7 @@ export default function PDPAConsentPage() {
     <main className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-2xl">
         <CardHeader>
-          <CardTitle className="text-center">PDPA Consent</CardTitle>
+          <CardTitle className="text-center">ความยินยอมตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล (PDPA)</CardTitle>
         </CardHeader>
         <CardContent>
           <PDPAConsent />

@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 import { useEffect } from "react";
 import { FilterType } from "./FilterBar";
@@ -28,7 +29,7 @@ const TransactionList = ({ filter, userId, setTotalBuy, setTotalSell }: Transact
   }, [setTotalBuy, setTotalSell, transactions, userId]);
 
   if (loading) {
-    return <div className="v-screen grid h-screen place-items-center text-4xl font-bold text-gray-400">Loading...</div>;
+    return <LoadingAnimation />;
   }
   if (error) {
     return (
