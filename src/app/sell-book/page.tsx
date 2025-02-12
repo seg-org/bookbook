@@ -38,7 +38,7 @@ export default function SellerPostPage() {
     redirect("/login");
   }
 
-  setValue("sellerId", session?.user?.id);
+  setValue("sellerId", session.user.id);
 
   const [message, setMessage] = useState("");
   const [loadingDescription, setLoadingDescription] = useState(false);
@@ -123,7 +123,10 @@ export default function SellerPostPage() {
 
   return (
     <div className="mx-auto mt-10 max-w-lg">
-      <h1 className="mb-4 text-center text-2xl font-bold">Post a Book for Sale</h1>
+      <h1 className="mb-4 text-center text-2xl font-bold">Create a Book for Sale</h1>
+      <p className="mb-4 text-center text-gray-500">
+        you still have to create a post with the book to declare that it is for sale
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <label>
