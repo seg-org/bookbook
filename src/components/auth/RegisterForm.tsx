@@ -15,7 +15,7 @@ const registerSchema = z.object({
   lastName: z.string().min(2, "นามสกุลต้องมีอย่างน้อย 2 ตัวอักษร"),
   email: z.string().email("รูปแบบอีเมลไม่ถูกต้อง"),
   password: z.string().min(8, "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร"),
-  phoneNumber: z.string().regex(/^"+?\d{1,14}$/, "หมายเลขโทรศัพท์ไม่ถูกต้อง"),
+  phoneNumber: z.string().regex(/^\+?\d{1,14}$/, "หมายเลขโทรศัพท์ไม่ถูกต้อง"),
   address: z.string().min(10, "ที่อยู่ต้องมีอย่างน้อย 10 ตัวอักษร"),
   acceptTerms: z.boolean().refine((val) => val === true, {
     message: "คุณต้องยอมรับเงื่อนไขและข้อตกลง",
@@ -67,6 +67,10 @@ export function RegisterForm() {
       }
 
       router.push("/");
+
+      // TODO:
+      // TODO : Add email verify
+      // router.push("/verify?email=" + encodeURIComponent(values.email));
     } catch (error) {
       setErrorMessage(error as string);
     } finally {
