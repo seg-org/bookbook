@@ -3,14 +3,15 @@
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export function EmailVerification() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
-  const email = searchParams.get("email");
+
+  const email = useMemo(() => searchParams.get("email") || "", [searchParams]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ export function EmailVerification() {
 
       router.push("/verify/phone");
     } catch (error) {
-      setError("Invalid verification code : " + { error });
+      setError("Invalid verification code: " + String(error));
     } finally {
       setIsLoading(false);
     }
@@ -51,14 +52,18 @@ export function EmailVerification() {
         throw new Error("Failed to resend verification");
       }
     } catch (error) {
-      setError("Failed to resend verification email : " + { error });
+      setError("Failed to resend verification email: " + String(error));
     }
   };
 
   return (
     <div className="mx-auto max-w-md space-y-4">
       <h2 className="text-center text-2xl font-bold">Verify your email</h2>
-      <p className="text-center text-gray-600">We have sent a verification code to {email}</p>
+      {email ? (
+        <p className="text-center text-gray-600">We have sent a verification code to {email}</p>
+      ) : (
+        <p className="text-center text-gray-600">No email provided.</p>
+      )}
       <form onSubmit={onSubmit} className="space-y-4">
         <Input name="token" type="text" placeholder="Enter verification code" disabled={isLoading} />
         {error && <p className="text-sm text-red-500">{error}</p>}
