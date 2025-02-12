@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import * as z from "zod";
-import { authOptions } from "../../auth/[...nextauth]/auth";
+import { authOptions } from "../../../../lib/auth";
 
 const sellerProfileSchema = z.object({
   bankAccount: z.string().min(10, "Bank account number must be at least 10 characters"),
