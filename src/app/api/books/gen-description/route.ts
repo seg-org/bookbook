@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    const bookName = parsedData.data.title;
-    if (!bookName) {
+    const title = parsedData.data.title;
+    if (!title) {
       return NextResponse.json({ error: "Missing book name" }, { status: 400 });
     }
 
@@ -26,11 +26,15 @@ export async function POST(req: NextRequest) {
         Authorization: `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ inputs: `Describe the book '${bookName}' briefly.` }),
+      body: JSON.stringify({
+        inputs: `Describe the book '${title}' briefly. Do not put other things, I wany ONLY the description (no quotations)`,
+      }),
     });
 
-    const data = await response.json();
-    return NextResponse.json({ bookName, description: data[0]?.generated_text || "No description generated." });
+    const data: { generated_text: string }[] = await response.json();
+    const description = data[0].generated_text.split("\n\n").slice(1).join("\n\n");
+
+    return NextResponse.json({ title, description: description || "No description generated." });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Failed to generate description" }, { status: 500 });
