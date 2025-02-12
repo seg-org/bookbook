@@ -17,7 +17,6 @@
     "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "^6.3.0",
     "aws-sdk": "^2.1692.0",
-    "axios": "^1.7.9",
     "next": "15.1.6",
     "prisma": "^6.3.0",
     "react": "^19.0.0",
@@ -27,7 +26,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/axios": "^0.14.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
