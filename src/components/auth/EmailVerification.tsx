@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { useRouter, useSearchParams } from "next/navigation";
+import { getSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function EmailVerification() {
@@ -12,11 +13,21 @@ export function EmailVerification() {
   const [mounted, setMounted] = useState(false);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     setMounted(true);
-    setEmail(searchParams.get("email"));
+
+    // Fetch the session and get the email from it
+    const fetchSession = async () => {
+      const session = await getSession();
+      if (session?.user?.email) {
+        setEmail(session.user.email); // Set the email from the session
+      } else {
+        setError("No email found in session.");
+      }
+    };
+
+    fetchSession();
   }, []);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,6 +38,10 @@ export function EmailVerification() {
     try {
       const formData = new FormData(e.currentTarget);
       const token = formData.get("token");
+
+      if (!email) {
+        throw new Error("Email not found.");
+      }
 
       const response = await fetch("/api/auth/verify/email", {
         method: "POST",
@@ -49,6 +64,10 @@ export function EmailVerification() {
 
   const resendVerification = async () => {
     try {
+      if (!email) {
+        throw new Error("Email not found.");
+      }
+
       const response = await fetch("/api/auth/resend/email-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,7 +84,6 @@ export function EmailVerification() {
   };
 
   if (!mounted) {
-    // Don't render anything until client-side hydration completes
     return null;
   }
 
@@ -75,7 +93,7 @@ export function EmailVerification() {
       {email ? (
         <p className="text-center text-gray-600">We have sent a verification code to {email}</p>
       ) : (
-        <p className="text-center text-gray-600">No email provided.</p>
+        <p className="text-center text-gray-600">No email found in session.</p>
       )}
       <form onSubmit={onSubmit} className="space-y-4">
         <Input name="token" type="text" placeholder="Enter verification code" disabled={isLoading} />
