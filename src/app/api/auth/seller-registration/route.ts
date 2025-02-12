@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { put } from "@vercel/blob";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../[...nextauth]/route";
+import { authOptions } from "../[...nextauth]/auth";
 
 export async function POST(request: Request) {
   try {
