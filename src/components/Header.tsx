@@ -44,8 +44,8 @@ function Header() {
                   </div>
                 </Link>
                 <button
-                  onClick={() => signOut()}
-                  className="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-600"
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="rounded bg-red-400 px-2 py-2 font-bold text-white hover:bg-red-500"
                 >
                   ออกจากระบบ
                 </button>

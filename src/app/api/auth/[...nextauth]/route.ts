@@ -11,7 +11,6 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
-    signOut: /
   },
   providers: [
     CredentialsProvider({
