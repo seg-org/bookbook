@@ -13,6 +13,7 @@ online book store.
 
 Download these tools before you start working on the project.
 
+- node.js 22 or later
 - pnpm 9.5.0 or later
 - Prettier VSCode extension (also set format on save)
 - Docker (if you want to run the database locally)
