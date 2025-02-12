@@ -33,7 +33,7 @@ function Header() {
           </li>
           <li>
             <Link href="/about-us" className="transition hover:text-yellow-300">
-              ติดต่อเรา
+              เกี่ยวกับเรา
             </Link>
           </li>
         </ul>
