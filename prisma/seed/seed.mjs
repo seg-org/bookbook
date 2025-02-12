@@ -56,8 +56,25 @@ if (users.length === 0) {
 
 const sellerProfiles = await prisma.sellerProfile.findMany();
 if (sellerProfiles.length === 0) {
+  const sellerProfileWithKey = await Promise.all(
+    sellerProfilesData.map(async (sellerProfile) => {
+      const keyWithFolder = await uploadToBucket("idCard_images", sellerProfile.idCardImage);
+      const key = keyWithFolder.split("/")[1];
+      return {
+        id: sellerProfile.id,
+        idCardNumber: sellerProfile.idCardNumber,
+        idCardImageKey: key,
+        bankAccount: sellerProfile.bankAccount,
+        bankName: sellerProfile.bankName,
+        isApproved: sellerProfile.isApproved,
+        approvedAt: sellerProfile.approvedAt,
+        userId: sellerProfile.userId
+      };
+    })
+  );
+
   await prisma.sellerProfile.createMany({
-    data: sellerProfilesData,
+    data: sellerProfileWithKey,
   });
 }
 

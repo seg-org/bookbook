@@ -39,15 +39,15 @@ model User {
 }
 
 model SellerProfile {
-  id           String    @id @default(cuid())
-  idCardNumber String    @map("id_card_number")
-  idCardImage  String    @map("id_card_image")
-  bankAccount  String    @map("bank_account")
-  bankName     String    @map("bank_name")
-  isApproved   Boolean   @default(false) @map("is_approved")
-  approvedAt   DateTime? @map("approved_at")
-  user         User      @relation(fields: [userId], references: [id])
-  userId       String    @unique @map("user_id")
+  id             String    @id @default(cuid())
+  idCardNumber   String    @map("id_card_number")
+  idCardImageKey String    @map("id_card_image_key")
+  bankAccount    String    @map("bank_account")
+  bankName       String    @map("bank_name")
+  isApproved     Boolean   @default(false) @map("is_approved")
+  approvedAt     DateTime? @map("approved_at")
+  user           User      @relation(fields: [userId], references: [id])
+  userId         String    @unique @map("user_id")
 
   @@map("seller_profiles")
 }
