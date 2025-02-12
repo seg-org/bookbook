@@ -38,6 +38,18 @@ model User {
   @@map("users")
 }
 
+model VerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  type      String // 'email' or 'phone'
+  expires   DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([email, type])
+  @@map("verification_tokens")
+}
+
 model SellerProfile {
   id           String    @id @default(cuid())
   idCardNumber String    @map("id_card_number")

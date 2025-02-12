@@ -11,7 +11,6 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
-    signUp: "/register",
   },
   providers: [
     CredentialsProvider({
@@ -35,9 +34,14 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        if (!user.emailVerified) {
-          throw new Error("Please verify your email first");
-        }
+        // TODO : Add check email/phone verification
+        // if (!user.emailVerified) {
+        //   throw new Error("Please verify your email first");
+        // }
+
+        // if (!user.phoneVerified) {
+        //   throw new Error("Please verify your phone first");
+        // }
 
         const isValid = await compare(credentials.password, user.password);
 

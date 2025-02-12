@@ -9,28 +9,33 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing verification code" }, { status: 400 });
     }
 
-    const existingOTP = await prisma.phoneVerification.findUnique({
-      where: { code },
+    const verificationToken = await prisma.verificationToken.findUnique({
+      where: { token: code, type: "phone" }, // Ensure the token is for phone verification
     });
 
-    if (!existingOTP) {
+    if (!verificationToken) {
       return NextResponse.json({ error: "Invalid or expired code" }, { status: 400 });
     }
 
-    // Check if OTP has expired
-    if (new Date(existingOTP.expires) < new Date()) {
+    if (new Date(verificationToken.expires) < new Date()) {
       return NextResponse.json({ error: "Verification code expired" }, { status: 400 });
     }
 
-    // Update user's phone verification status
+    const user = await prisma.user.findUnique({
+      where: { email: verificationToken.email },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
     await prisma.user.update({
-      where: { phoneNumber: existingOTP.phoneNumber },
+      where: { id: user.id },
       data: { phoneVerified: new Date() },
     });
 
-    // Delete OTP after successful verification
-    await prisma.phoneVerification.delete({
-      where: { code },
+    await prisma.verificationToken.delete({
+      where: { id: verificationToken.id },
     });
 
     return NextResponse.json({ message: "Phone number verified successfully" });

@@ -17,23 +17,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid or expired token" }, { status: 400 });
     }
 
-    // Check if the token belongs to the correct email
     if (existingToken.email !== email) {
       return NextResponse.json({ error: "Invalid token for this email" }, { status: 400 });
     }
 
-    // Check if the token has expired
     if (new Date(existingToken.expires) < new Date()) {
       return NextResponse.json({ error: "Token expired" }, { status: 400 });
     }
 
-    // Mark the user as verified
     await prisma.user.update({
       where: { email },
       data: { emailVerified: new Date() },
     });
 
-    // Delete the token after successful verification
     await prisma.verificationToken.delete({
       where: { token },
     });
