@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { sendVerificationSMS } from "@/lib/sms";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -25,14 +24,14 @@ export async function POST(req: Request) {
     const token = Math.floor(100000 + Math.random() * 900000).toString();
     const expires = new Date(Date.now() + 10 * 60 * 1000); // Expires in 10 minutes
 
-    // Store the verification token in the database
     await prisma.verificationToken.upsert({
       where: { email_type: { email: user.email, type: "phone" } },
       update: { token, expires },
       create: { email: user.email, token, type: "phone", expires },
     });
 
-    await sendVerificationSMS(phoneNumber, token);
+    // TODO : Add SMS
+    // await sendVerificationSMS(phoneNumber, token);
 
     return NextResponse.json({ message: "Verification code resent" });
   } catch (error) {
