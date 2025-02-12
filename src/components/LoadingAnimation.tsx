@@ -27,7 +27,7 @@ export function LoadingAnimation() {
           transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.4 }}
         />
       </motion.div>
-      <p className="text-sm text-gray-500">Loading, please wait...</p>
+      <p className="text-sm text-gray-500">กำลังโหลด... โปรดรอสักครู่</p>
     </div>
   );
 }
