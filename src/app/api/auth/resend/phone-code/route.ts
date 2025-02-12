@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Phone number is required" }, { status: 400 });
     }
 
-    // Check if the phone number is already verified
+    // Check if the phone number exists
     const user = await prisma.user.findUnique({ where: { phoneNumber } });
 
     if (!user) {
@@ -22,16 +22,17 @@ export async function POST(req: Request) {
     }
 
     // Generate a new 6-digit verification code
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    const token = Math.floor(100000 + Math.random() * 900000).toString();
+    const expires = new Date(Date.now() + 10 * 60 * 1000); // Expires in 10 minutes
 
-    // Store the new code in the database
+    // Store the verification token in the database
     await prisma.verificationToken.upsert({
-      where: { phoneNumber: { email, type: "phone" } },
-      update: { code, expires: new Date(Date.now() + 10 * 60 * 1000) }, // Expires in 10 min
-      create: { phoneNumber, code, expires: new Date(Date.now() + 10 * 60 * 1000) },
+      where: { email_type: { email: user.email, type: "phone" } },
+      update: { token, expires },
+      create: { email: user.email, token, type: "phone", expires },
     });
 
-    await sendVerificationSMS(phoneNumber, code);
+    await sendVerificationSMS(phoneNumber, token);
 
     return NextResponse.json({ message: "Verification code resent" });
   } catch (error) {
