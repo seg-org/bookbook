@@ -1,6 +1,6 @@
 import { Transaction } from "@/data/dto/transaction.dto";
 import { getTransaction } from "@/data/transaction";
-import { FilterType } from "@/app/transactionHistoryPage/components/FilterBar";
+import { FilterType } from "@/app/transaction-history-page/components/FilterBar";
 import { useEffect, useState } from "react";
 
 export const useGetTransaction = (filter: FilterType, userId: string) => {

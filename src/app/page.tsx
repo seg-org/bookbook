@@ -26,6 +26,11 @@ export default function Home() {
             transaction-initiation
           </Link>
         </li>
+        <li>
+          <Link href="/transaction-history-page" style={{ color: "blue", textDecoration: "underline" }}>
+            transaction-history
+          </Link>
+        </li>
       </ul>
     </main>
   );

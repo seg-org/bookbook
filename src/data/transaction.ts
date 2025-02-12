@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { apiClient } from "./axios";
 import { Transaction } from "./dto/transaction.dto";
-import { FilterType } from "@/app/transactionHistoryPage/components/FilterBar";
+import { FilterType } from "@/app/transaction-history-page/components/FilterBar";
 
 export const getTransaction = async ( filter: FilterType, userId: string ) => {
   try {
