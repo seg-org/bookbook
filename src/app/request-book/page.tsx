@@ -6,7 +6,7 @@ const RequestBook = () => {
   return (
     <div className="m-8 mx-auto max-w-lg p-6">
       <div className="relative h-[200px] w-[300px]">
-        <Image src="/images/searchPage/man-with-book.png" alt="Illustration" fill={true} />
+        <Image src="/images/search/man-with-book.png" alt="Illustration" fill={true} />
       </div>
       <h1 className="mb-4 text-2xl font-bold">Request a New Book</h1>
       <form className="space-y-4">
