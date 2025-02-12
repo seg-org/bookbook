@@ -9,7 +9,7 @@ import { useState } from "react";
 type Seller = {
   id: string;
   idCardNumber: string;
-  idCardImage: string;
+  idCardImageKey: string;
   bankAccount: string;
   bankName: string;
   user: {
@@ -77,7 +77,7 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
               </div>
               <div className="md:col-span-2">
                 <h3 className="mb-2 font-semibold">ID Card Image</h3>
-                <Image src={seller.idCardImage} alt="ID Card" className="max-w-md rounded-lg" />
+                <Image src={seller.idCardImageKey} alt="ID Card" className="max-w-md rounded-lg" />
               </div>
               <div className="flex space-x-4 md:col-span-2">
                 <Button

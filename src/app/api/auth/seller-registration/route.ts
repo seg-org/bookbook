@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       data: {
         userId: session.user.id,
         idCardNumber,
-        idCardImage: blob.url,
+        idCardImageKey: blob.url,
         bankAccount,
         bankName,
       },

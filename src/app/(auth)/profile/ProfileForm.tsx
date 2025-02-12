@@ -31,14 +31,17 @@ type UserProfile = {
   phoneNumber: string | null;
   address: string | null;
   isSeller: boolean;
-  sellerProfile: {
-    id: string;
-    bankAccount: string;
-    bankName: string;
-    idCardNumber: string;
-    idCardImage: string;
-    isApproved: boolean;
-  } | null;
+  sellerProfile?:
+    | {
+        id: string;
+        bankAccount: string;
+        bankName: string;
+        idCardNumber: string;
+        idCardImageKey: string;
+        isApproved: boolean;
+      }
+    | null
+    | undefined;
 };
 
 export function ProfileForm({ initialData }: { initialData: UserProfile }) {
@@ -225,11 +228,11 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 )}
               />
 
-              {initialData.sellerProfile?.idCardImage && (
+              {initialData.sellerProfile?.idCardImageKey && (
                 <div>
                   <FormLabel>ID Card Image</FormLabel>
                   <Image
-                    src={initialData.sellerProfile.idCardImage}
+                    src={initialData.sellerProfile.idCardImageKey}
                     alt="ID Card"
                     className="mt-2 max-w-md rounded-lg"
                   />

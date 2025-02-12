@@ -28,8 +28,8 @@ export async function POST(req: Request) {
       },
     });
 
+    // TODO : Add verify token
     // const verificationToken = await generateVerificationToken(email);
-
     // await sendVerificationEmail(email, verificationToken.token);
 
     return NextResponse.json({

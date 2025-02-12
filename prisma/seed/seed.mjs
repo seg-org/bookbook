@@ -6,10 +6,10 @@ import fs from "fs";
 import { basename } from "path";
 import booksData from "./books.json" with { type: "json" };
 import postsData from "./posts.json" with { type: "json" };
+import sellerProfilesData from "./sellerProfiles.json" with { type: "json" };
 import transactionsData from "./transactions.json" with { type: "json" };
 import transactionsFailData from "./transactionsFail.json" with { type: "json" };
 import usersData from "./users.json" with { type: "json" };
-import sellerProfilesData from "./sellerProfiles.json" with { type: "json" };
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -68,7 +68,7 @@ if (sellerProfiles.length === 0) {
         bankName: sellerProfile.bankName,
         isApproved: sellerProfile.isApproved,
         approvedAt: sellerProfile.approvedAt,
-        userId: sellerProfile.userId
+        userId: sellerProfile.userId,
       };
     })
   );
