@@ -7,7 +7,7 @@ interface DialogProps {
   children: React.ReactNode;
 }
 
-const Dialog: React.FC<DialogProps> = ({ open, onClose, children }) => {
+const Dialog: React.FC<DialogProps> = ({ open, children }) => {
   if (!open) return null;
 
   return (

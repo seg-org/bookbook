@@ -1,28 +1,25 @@
-import { User } from "./user.dto";
+import { PaymentMethod, ShipmentMethod, TransactionStatus } from "@prisma/client";
 import { Post } from "./post.dto";
-import { TransactionStatus } from "@prisma/client";
-import { PaymentMethod } from "@prisma/client";
-import { ShipmentMethod } from "@prisma/client";
+import { User } from "./user.dto";
 
 export type Transaction = {
-  id: string,
-  buyer: User,
-  buyerId: String,
-  seller: User,
-  sellerId: String,
-  post: Post,
-  postId: string,
-  createdAt: Date,
-  updatedAt: Date,
-  status: TransactionStatus,
-  
-  paymentMethod: PaymentMethod,
-  hasId: String,
-  paidOn: Date,
-  amount: number,
+  id: string;
+  buyer: User;
+  buyerId: string;
+  seller: User;
+  sellerId: string;
+  post: Post;
+  postId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  status: TransactionStatus;
 
-  shipmentMethod: ShipmentMethod,
-  trackingURL: string,
-  isDelivered: boolean
+  paymentMethod: PaymentMethod;
+  hasId: string;
+  paidOn: Date;
+  amount: number;
+
+  shipmentMethod: ShipmentMethod;
+  trackingURL: string;
+  isDelivered: boolean;
 };
-  

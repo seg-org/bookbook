@@ -25,7 +25,7 @@ export default function SellerInitiateTransaction() {
 
   // ✅ Validate form before submission
   const validateForm = () => {
-    let newErrors: { selectedBook?: string; buyerEmail?: string; negotiatedPrice?: string } = {};
+    const newErrors: { selectedBook?: string; buyerEmail?: string; negotiatedPrice?: string } = {};
     if (!selectedBook) newErrors.selectedBook = "Select a book to sell.";
     if (!buyerEmail || !buyerEmail.includes("@")) newErrors.buyerEmail = "Enter a valid buyer email.";
     if (!negotiatedPrice || isNaN(Number(negotiatedPrice)) || Number(negotiatedPrice) <= 0)

@@ -1,4 +1,3 @@
-import { sendVerificationEmail } from "@/lib/mail";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -20,14 +19,14 @@ export async function POST(req: Request) {
     const token = Math.random().toString(36).substr(2, 8);
     const expires = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes expiration
 
-    // Store the token in the database (overwrite any existing token)
     await prisma.verificationToken.upsert({
       where: { email_type: { email, type: "email" } },
       update: { token, expires },
       create: { email, token, type: "email", expires },
     });
 
-    await sendVerificationEmail(email, token);
+    // TODO : Add Email
+    // await sendVerificationEmail(email, token);
 
     return NextResponse.json({ message: "Verification email sent" });
   } catch (error) {

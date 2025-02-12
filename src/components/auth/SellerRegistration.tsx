@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/useToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,8 +25,6 @@ const sellerSchema = z.object({
       (files) => ["image/jpeg", "image/png", "image/jpg"].includes(files?.[0]?.type),
       "Only .jpg, .jpeg, and .png formats are supported"
     ),
-  shopName: z.string().min(2, "Shop name is required"),
-  shopDescription: z.string().min(10, "Shop description must be at least 10 characters"),
 });
 
 export function SellerRegistration() {
@@ -34,20 +33,19 @@ export function SellerRegistration() {
   const router = useRouter();
   const { toast } = useToast();
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof sellerSchema>>({
     resolver: zodResolver(sellerSchema),
     defaultValues: {
       idCardNumber: "",
       bankAccount: "",
       bankName: "",
-      idCardImage: undefined,
-      shopName: "",
-      shopDescription: "",
+      idCardImage: undefined as unknown as FileList,
     },
   });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (file) {
       form.setValue("idCardImage", e.target.files);
       const reader = new FileReader();
@@ -66,8 +64,6 @@ export function SellerRegistration() {
       formData.append("bankAccount", values.bankAccount);
       formData.append("bankName", values.bankName);
       formData.append("idCardImage", values.idCardImage[0]);
-      formData.append("shopName", values.shopName);
-      formData.append("shopDescription", values.shopDescription);
 
       const response = await fetch("/api/auth/seller-registration", {
         method: "POST",
@@ -102,30 +98,6 @@ export function SellerRegistration() {
       <Form form={form} onSubmit={onSubmit}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <Card className="space-y-4 p-4">
-            <h3 className="font-semibold">Shop Information</h3>
-            <FormField
-              name="shopName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shop Name</FormLabel>
-                  <Input {...field} disabled={isLoading} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="shopDescription"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shop Description</FormLabel>
-                  <Input {...field} disabled={isLoading} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </Card>
-
-          <Card className="space-y-4 p-4">
             <h3 className="font-semibold">Personal Information</h3>
             <FormField
               name="idCardNumber"
@@ -141,19 +113,14 @@ export function SellerRegistration() {
 
             <FormField
               name="idCardImage"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel>ID Card Image</FormLabel>
-                  <Input
-                    type="file"
-                    accept="image/jpeg,image/png,image/jpg"
-                    onChange={handleImageChange}
-                    disabled={isLoading}
-                  />
+                  <Input type="file" accept="image/*" onChange={handleImageChange} disabled={isLoading} />
                   <FormDescription>Upload a clear photo of your ID card (max 5MB)</FormDescription>
                   {previewUrl && (
                     <div className="mt-2">
-                      <img src={previewUrl} alt="ID Card Preview" className="h-auto max-w-full rounded-lg" />
+                      <Image src={previewUrl} alt="ID Card Preview" className="h-auto max-w-full rounded-lg" />
                     </div>
                   )}
                   <FormMessage />

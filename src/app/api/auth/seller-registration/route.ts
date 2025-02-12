@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { put } from "@vercel/blob";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../[...nextauth]/route";
+import { authOptions } from "../[...nextauth]/auth";
 
 export async function POST(request: Request) {
   try {
@@ -16,8 +16,6 @@ export async function POST(request: Request) {
     const idCardNumber = formData.get("idCardNumber") as string;
     const bankAccount = formData.get("bankAccount") as string;
     const bankName = formData.get("bankName") as string;
-    const shopName = formData.get("shopName") as string;
-    const shopDescription = formData.get("shopDescription") as string;
     const idCardImage = formData.get("idCardImage") as File;
 
     if (!idCardImage) {
@@ -43,11 +41,9 @@ export async function POST(request: Request) {
       data: {
         userId: session.user.id,
         idCardNumber,
-        idCardImage: blob.url,
+        idCardImageKey: blob.url,
         bankAccount,
         bankName,
-        shopName,
-        shopDescription,
       },
     });
 

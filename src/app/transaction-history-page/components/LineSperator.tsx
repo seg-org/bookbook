@@ -1,19 +1,16 @@
-"use client"
-import React from 'react'
+"use client";
 
-interface Props{
-  text: string
+interface Props {
+  text: string;
 }
 
 const LineSeparator = ({ text }: Props) => {
   return (
-    <div className="col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-4 3xl:col-span_5 flex items-center">
-      <span className="left-0 px-4 bg-transparent text-gray-400 z-10">
-        {text}
-      </span>
-      <div className="flex-grow border-t border-gray-400 overflow-hidden"></div>
+    <div className="3xl:col-span_5 col-span-1 flex items-center lg:col-span-2 xl:col-span-3 2xl:col-span-4">
+      <span className="left-0 z-10 bg-transparent px-4 text-gray-400">{text}</span>
+      <div className="flex-grow overflow-hidden border-t border-gray-400"></div>
     </div>
-  )
-}
+  );
+};
 
-export default LineSeparator
+export default LineSeparator;

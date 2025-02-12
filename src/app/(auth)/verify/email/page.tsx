@@ -1,3 +1,5 @@
+"use client";
+
 import { EmailVerification } from "@/components/auth/EmailVerification";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 

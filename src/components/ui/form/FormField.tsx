@@ -1,9 +1,9 @@
-import React from "react";
+import { ReactElement } from "react";
 import { Controller, ControllerRenderProps, FieldValues, Path, useFormContext } from "react-hook-form";
 
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>;
-  render: (props: { field: ControllerRenderProps<T, Path<T>> }) => React.ReactNode;
+  render: (props: { field: ControllerRenderProps<T, Path<T>> }) => ReactElement;
 }
 
 export const FormField = <T extends FieldValues>({ name, render }: FormFieldProps<T>) => {
