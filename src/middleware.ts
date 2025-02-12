@@ -4,11 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
-  const isAuthPage =
-    request.nextUrl.pathname.startsWith("/login") ||
-    request.nextUrl.pathname.startsWith("/register") ||
-    request.nextUrl.pathname.startsWith("/verify") ||
-    request.nextUrl.pathname.startsWith("/pdpa-consent");
+  const isAuthPage = request.nextUrl.pathname.startsWith("/login") || request.nextUrl.pathname.startsWith("/register");
 
   if (isAuthPage) {
     if (token) {
