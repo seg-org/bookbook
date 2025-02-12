@@ -1,11 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-const API_KEY = process.env.HF_API_KEY; // Store your API key in .env
+const API_KEY = process.env.HF_API_KEY;
 const MODEL = "mistralai/Mistral-7B-Instruct-v0.2";
+
+const genBookDescRequest = z.object({
+  title: z.string(),
+});
 
 export async function POST(req: NextRequest) {
   try {
-    const { bookName } = await req.json();
+    const parsedData = genBookDescRequest.safeParse(await req.json());
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
+    }
+
+    const bookName = parsedData.data.title;
     if (!bookName) {
       return NextResponse.json({ error: "Missing book name" }, { status: 400 });
     }
