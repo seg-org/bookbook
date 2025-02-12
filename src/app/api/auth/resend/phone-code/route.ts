@@ -25,8 +25,8 @@ export async function POST(req: Request) {
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
     // Store the new code in the database
-    await prisma.phoneVerification.upsert({
-      where: { phoneNumber },
+    await prisma.verificationToken.upsert({
+      where: { phoneNumber: { email, type: "phone" } },
       update: { code, expires: new Date(Date.now() + 10 * 60 * 1000) }, // Expires in 10 min
       create: { phoneNumber, code, expires: new Date(Date.now() + 10 * 60 * 1000) },
     });
