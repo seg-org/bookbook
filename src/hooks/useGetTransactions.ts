@@ -1,3 +1,5 @@
+"use client";
+
 import { FilterType } from "@/app/transaction-history-page/components/FilterBar";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { getTransaction } from "@/data/transaction";

@@ -9,13 +9,15 @@ export function EmailVerification() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [email, setEmail] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    setEmail(searchParams.get("email") || "");
-  }, [searchParams]);
+    setMounted(true);
+    setEmail(searchParams.get("email"));
+  }, []);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,12 +35,13 @@ export function EmailVerification() {
       });
 
       if (!response.ok) {
-        throw new Error("Verification failed");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Verification failed");
       }
 
       router.push("/verify/phone");
     } catch (error) {
-      setError("Invalid verification code: " + String(error));
+      setError(`Invalid verification code: ${error instanceof Error ? error.message : "Unknown error"}`);
     } finally {
       setIsLoading(false);
     }
@@ -53,19 +56,23 @@ export function EmailVerification() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to resend verification");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to resend verification");
       }
     } catch (error) {
-      setError("Failed to resend verification email: " + String(error));
+      setError(`Failed to resend verification email: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
+
+  if (!mounted) {
+    // Don't render anything until client-side hydration completes
+    return null;
+  }
 
   return (
     <div className="mx-auto max-w-md space-y-4">
       <h2 className="text-center text-2xl font-bold">Verify your email</h2>
-      {email === null ? (
-        <p className="text-center text-gray-600">Loading...</p>
-      ) : email ? (
+      {email ? (
         <p className="text-center text-gray-600">We have sent a verification code to {email}</p>
       ) : (
         <p className="text-center text-gray-600">No email provided.</p>
@@ -77,9 +84,11 @@ export function EmailVerification() {
           {isLoading ? "Verifying..." : "Verify Email"}
         </Button>
       </form>
-      <Button type="button" className="w-full" onClick={resendVerification} disabled={isLoading}>
-        Resend verification email
-      </Button>
+      {email && (
+        <Button type="button" className="w-full" onClick={resendVerification} disabled={isLoading}>
+          Resend verification email
+        </Button>
+      )}
     </div>
   );
 }
