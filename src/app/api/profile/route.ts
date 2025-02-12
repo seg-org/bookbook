@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import * as z from "zod";
-import { authOptions } from "../auth/[...nextauth]/auth";
+import { authOptions } from "../../../lib/auth";
 
 const userUpdateSchema = z.object({
   firstName: z.string().min(1, "First name is required"),

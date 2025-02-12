@@ -1,9 +1,16 @@
-// app/api/auth/pdpa-consent/route.ts
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
     const { accepted } = body;
 
@@ -11,16 +18,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid consent status" }, { status: 400 });
     }
 
-    // Get the user ID from the session or token (you may need to implement authentication)
-    // For now, assume the user ID is passed in the request body
-    const { userId } = body;
-
-    if (!userId) {
-      return NextResponse.json({ error: "User ID is required" }, { status: 400 });
-    }
-
     const user = await prisma.user.update({
-      where: { id: userId },
+      where: { id: session.user.id },
       data: { pdpaConsent: accepted },
     });
 
