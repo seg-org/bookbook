@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     }
 
     const existingToken = await prisma.verificationToken.findUnique({
-      where: { token },
+      where: { token, type: "email" },
     });
 
     if (!existingToken) {
