@@ -3,7 +3,6 @@ import React from 'react'
 import Image from 'next/image'
 
 import ImageDummySrc from "../pic/bookCover.jpg"
-
 import BoughtIcon from "../pic/BoughtIcon.png"
 import SoldIcon from "../pic/soldIcon.png"
 
@@ -11,7 +10,7 @@ import SoldIcon from "../pic/soldIcon.png"
 // Note 2: currently using image dummy source
 
 export interface TransactionBoxProps{
-  id: number,
+  id: string,
   name: string,
   image: string,
   price: number,
@@ -28,7 +27,7 @@ const TransactionBox = ({ id,name,image,price,type,date,status } : TransactionBo
   }
 
   return (
-    <div className='relative p-4 bg-white rounded-lg border border-gray-300 flex flex-row items-center justify-between gap-x-10'>
+    <div className='relative p-4 bg-white rounded-lg border border-gray-300 flex flex-row items-center justify-between gap-x-10 transition-transform duration-200 transform hover:scale-105 hover:shadow-xl'>
       
       <div className='flex flex-row items-center justify-start gap-5'>
         <Image src={ImageDummySrc} alt="Book Cover" width={90} height={160}></Image>

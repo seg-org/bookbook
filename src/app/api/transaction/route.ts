@@ -92,6 +92,16 @@ export async function GET(req : NextRequest) {
           (parsedData.data.asBuyer) ? { buyerId: parsedData.data.userId } : {},
           (parsedData.data.asSeller) ? { sellerId: parsedData.data.userId } : {},
         ].filter(Boolean) } : {}),
+      },
+      include: {
+        post: {
+          include : {
+            book: true
+          }
+        },
+        buyer: true,
+        seller: true,
+        failData: true
       }
     })
 
