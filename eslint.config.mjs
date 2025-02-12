@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import eslintPluginReact from "eslint-plugin-react";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -12,7 +13,17 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    plugins: ["react"],
+    files: ["**/*.tsx", "**/*.jsx"],
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    plugins: {
+      react: eslintPluginReact,
+    },
     rules: {
       "react/no-unescaped-entities": "warn",
     },
