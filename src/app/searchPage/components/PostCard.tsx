@@ -5,15 +5,22 @@ type PostCardProps = {
   post: Post;
 };
 
+const cut = (s: string, n: number) => {
+  if (s.length > n) {
+    return s.slice(0, n) + "...";
+  }
+  return s;
+};
+
 function PostCard({ post }: PostCardProps) {
   return (
     <>
-      <div className="flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2.5">
+      <div className="flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white max-md:w-full md:w-[100%] lg:w-[48%] xl:w-[32%]">
         <div className="m-2.5 flex flex-row justify-between text-lg">
           <h3>{post.title}</h3>
           <span>{post.price} ฿</span>
         </div>
-        <div className="m-2.5 flex flex-row">
+        <div className="m-2 flex w-full flex-row max-sm:text-sm">
           <Image
             className="m-2.5 h-40 w-auto rounded-lg"
             src={post.book.coverImageUrl}
@@ -21,28 +28,27 @@ function PostCard({ post }: PostCardProps) {
             height={500}
             alt="Post Cover"
           />
-          <div className="flex h-screen max-h-[275px] flex-col justify-between">
-            <div>
+
+          <div className="flex w-full flex-col pr-8 lg:h-[290px] xl:h-[320px] 2xl:h-[280px]">
+            <div className="flex-grow">
               <div>
                 <strong>ชื่อหนังสือ </strong>
                 {post.book.title}
               </div>
               <div>
                 <strong>ผู้เขียน </strong>
-                {post.book.author}
+                {cut(post.book.author, 40)}
               </div>
               <div>
-                <div>
-                  <strong>รายละเอียด</strong>
-                </div>{" "}
-                {post.book.description}
+                <strong>รายละเอียด</strong>
+                {cut(post.book.description, 65)}
               </div>
             </div>
-            <div className="mt-2.5 flex items-center justify-center">
-              <button className="m-2.5 cursor-pointer rounded-sm border-2 border-[#B8B8B8] bg-white p-1.5 px-4 py-2 pl-2 pr-2 text-sm text-black">
-                <div>ดูข้อมูล</div>
+            <div className="mt-auto flex gap-2 self-end">
+              <button className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-white p-1.5 text-sm text-black">
+                ดูข้อมูล
               </button>
-              <button className="rounded-sm border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 px-4 py-2 pl-2 pr-2 text-sm text-white">
+              <button className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
                 เพิ่มใส่ตะกร้า
               </button>
             </div>
