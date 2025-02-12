@@ -1,7 +1,13 @@
+"use client";
+
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
 function Header() {
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
   return (
     <header className="flex flex-row items-center justify-between border-b border-gray-300 bg-white p-2.5">
       <Link href="/" className="text-2xl font-bold leading-tight text-blue-500">
@@ -25,9 +31,33 @@ function Header() {
             </Link>
           </li>
           <li>
-            <div className="relative h-10 w-10 rounded-full bg-gray-300">
-              <Image src="/images/profile.jpg" alt="Profile" fill={true} />
-            </div>
+            {isAuthenticated ? (
+              <div className="flex items-center gap-4">
+                <Link href="/profile">
+                  <div className="relative h-10 w-10 rounded-full bg-gray-300">
+                    <Image
+                      src={session?.user?.image || "/images/profile.jpg"}
+                      alt="Profile"
+                      fill={true}
+                      className="rounded-full"
+                    />
+                  </div>
+                </Link>
+                <button
+                  onClick={() => signOut()}
+                  className="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-600"
+                >
+                  ออกจากระบบ
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => signIn()}
+                className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+              >
+                เข้าสู่ระบบ
+              </button>
+            )}
           </li>
         </ul>
       </nav>

@@ -11,6 +11,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
+    signOut: /
   },
   providers: [
     CredentialsProvider({
@@ -53,6 +54,7 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: `${user.firstName} ${user.lastName}`,
+          isAdmin: user.isAdmin,
         };
       },
     }),
@@ -63,6 +65,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
+        session.user.isAdmin = token.isAdmin;
       }
       return session;
     },
