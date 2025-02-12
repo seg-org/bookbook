@@ -33,7 +33,7 @@ export function EmailVerification() {
 
       router.push("/verify/phone");
     } catch (error) {
-      setError("Invalid verification code");
+      setError("Invalid verification code : " + { error });
     } finally {
       setIsLoading(false);
     }
@@ -51,14 +51,14 @@ export function EmailVerification() {
         throw new Error("Failed to resend verification");
       }
     } catch (error) {
-      setError("Failed to resend verification email");
+      setError("Failed to resend verification email : " + { error });
     }
   };
 
   return (
     <div className="mx-auto max-w-md space-y-4">
       <h2 className="text-center text-2xl font-bold">Verify your email</h2>
-      <p className="text-center text-gray-600">We've sent a verification code to {email}</p>
+      <p className="text-center text-gray-600">We have sent a verification code to {email}</p>
       <form onSubmit={onSubmit} className="space-y-4">
         <Input name="token" type="text" placeholder="Enter verification code" disabled={isLoading} />
         {error && <p className="text-sm text-red-500">{error}</p>}

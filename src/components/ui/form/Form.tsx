@@ -3,8 +3,8 @@ import { FormProvider, SubmitHandler, UseFormReturn } from "react-hook-form";
 
 interface FormProps {
   children: React.ReactNode;
-  form: UseFormReturn<any>;
-  onSubmit: SubmitHandler<any>;
+  form: UseFormReturn<never>;
+  onSubmit: SubmitHandler<never>;
   className?: string;
 }
 

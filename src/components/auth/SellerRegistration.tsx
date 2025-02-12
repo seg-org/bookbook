@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/useToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -44,6 +45,9 @@ export function SellerRegistration() {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
+    if (!e.target.files) return;
+
     if (file) {
       form.setValue("idCardImage", e.target.files);
       const reader = new FileReader();
@@ -111,7 +115,7 @@ export function SellerRegistration() {
 
             <FormField
               name="idCardImage"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel>ID Card Image</FormLabel>
                   <Input
@@ -123,7 +127,7 @@ export function SellerRegistration() {
                   <FormDescription>Upload a clear photo of your ID card (max 5MB)</FormDescription>
                   {previewUrl && (
                     <div className="mt-2">
-                      <img src={previewUrl} alt="ID Card Preview" className="h-auto max-w-full rounded-lg" />
+                      <Image src={previewUrl} alt="ID Card Preview" className="h-auto max-w-full rounded-lg" />
                     </div>
                   )}
                   <FormMessage />

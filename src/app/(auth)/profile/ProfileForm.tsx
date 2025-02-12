@@ -6,6 +6,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/useToast";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -84,7 +85,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to update profile",
+        description: "Failed to update profile :" + { error },
         variant: "destructive",
       });
     }
@@ -108,7 +109,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to update seller profile",
+        description: "Failed to update seller profile : " + { error },
         variant: "destructive",
       });
     }
@@ -227,7 +228,11 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
               {initialData.sellerProfile?.idCardImage && (
                 <div>
                   <FormLabel>ID Card Image</FormLabel>
-                  <img src={initialData.sellerProfile.idCardImage} alt="ID Card" className="mt-2 max-w-md rounded-lg" />
+                  <Image
+                    src={initialData.sellerProfile.idCardImage}
+                    alt="ID Card"
+                    className="mt-2 max-w-md rounded-lg"
+                  />
                 </div>
               )}
 

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/useToast";
+import Image from "next/image";
 import { useState } from "react";
 
 type Seller = {
@@ -49,7 +50,7 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to process verification",
+        description: "Failed to process verification : " + { error },
         variant: "destructive",
       });
     } finally {
@@ -82,7 +83,7 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
               </div>
               <div className="md:col-span-2">
                 <h3 className="mb-2 font-semibold">ID Card Image</h3>
-                <img src={seller.idCardImage} alt="ID Card" className="max-w-md rounded-lg" />
+                <Image src={seller.idCardImage} alt="ID Card" className="max-w-md rounded-lg" />
               </div>
               <div className="flex space-x-4 md:col-span-2">
                 <Button
