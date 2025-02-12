@@ -43,7 +43,6 @@ export function LoginForm() {
 
   return (
     <div className="mx-auto max-w-md space-y-4">
-      <h2 className="text-center text-2xl font-bold">Login to your account</h2>
       <form onSubmit={onSubmit} className="space-y-4">
         <div>
           <Input name="email" type="email" placeholder="Email" disabled={isLoading} />
@@ -56,10 +55,10 @@ export function LoginForm() {
           {isLoading ? "Logging in..." : "Login"}
         </Button>
       </form>
-      <p className="text-center text-sm">
-        Do not have an account?{" "}
+      <p className="text-center text-base">
+        ไม่มีบัญชีหรอ?{" "}
         <Link href="/register" className="text-blue-500 hover:underline">
-          Register
+          ลงทะเบียน
         </Link>
       </p>
     </div>
