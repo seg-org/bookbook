@@ -97,7 +97,6 @@ export default function SellerPostPage() {
         throw new Error("Cover image upload is required.");
       }
 
-      // Step 2: Send book data to API
       const response = await fetch("/api/books", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -123,17 +122,18 @@ export default function SellerPostPage() {
 
   return (
     <div className="mx-auto mt-10 max-w-lg">
-      <h1 className="mb-4 text-center text-2xl font-bold">Create a Book for Sale</h1>
+      <h1 className="mb-4 text-center text-2xl font-bold">เพิ่มหนังสือเพื่อเตรียมขาย</h1>
       <p className="mb-4 text-center text-gray-500">
-        you still have to create a post with the book to declare that it is for sale
+        หนังสือที่เพิ่มยังไม่ถือว่าประกาศขาย
+        ผู้ใช้จะต้องสร้างโพสต์ขายหนังสือที่แนบหนังสือที่สร้างแล้วเพื่อให้สามารถประกาศขายได้
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <label>
-          Book Title:
+          ชื่อหนังสือ:
           <input
             {...register("title")}
-            placeholder="Book Title"
+            placeholder="ชื่อหนังสือ"
             className="input mt-1 block w-full"
             onBlur={(e) => fetchDescription(e.target.value)}
           />
@@ -141,25 +141,25 @@ export default function SellerPostPage() {
         </label>
 
         <label>
-          Author:
-          <input {...register("author")} placeholder="Author" className="input mt-1 block w-full" />
+          ผู้แต่ง:
+          <input {...register("author")} placeholder="ผู้แต่ง" className="input mt-1 block w-full" />
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
         <label>
-          Genre:
-          <input {...register("genre")} placeholder="Genre" className="input mt-1 block w-full" />
+          ประเภทหนังสือ:
+          <input {...register("genre")} placeholder="ประเภทหนังสือ" className="input mt-1 block w-full" />
           {errors.genre?.message && <p className="text-red-500">{String(errors.genre.message)}</p>}
         </label>
 
         <label>
-          Description:
+          เนื้อเรื่องย่อ:
           <textarea
             {...register("description")}
-            placeholder="Description"
+            placeholder="เนื้อเรื่องย่อ"
             className="input mt-1 block w-full"
           ></textarea>
-          {loadingDescription && <p className="text-blue-500">Generating description...</p>}
+          {loadingDescription && <p className="text-blue-500">กำลังสรุปเนื้อเรื่องย่อย...</p>}
         </label>
 
         <label>
@@ -169,18 +169,13 @@ export default function SellerPostPage() {
         </label>
 
         <label>
-          Number of Pages:
-          <input
-            type="number"
-            {...register("pages")}
-            placeholder="Number of Pages"
-            className="input mt-1 block w-full"
-          />
+          จำนวนหน้า:
+          <input type="number" {...register("pages")} placeholder="จำนวนหน้า" className="input mt-1 block w-full" />
           {errors.pages?.message && <p className="text-red-500">{String(errors.pages.message)}</p>}
         </label>
 
         <label>
-          Cover Image:
+          รูปหน้าปก:
           <input
             type="file"
             accept="image/*"
@@ -201,7 +196,7 @@ export default function SellerPostPage() {
           className="w-full rounded-lg bg-blue-500 py-2 text-white hover:bg-blue-700"
           disabled={loading || uploading}
         >
-          {loading ? "Posting..." : "Post Book"}
+          {loading ? "กำลังสร้างหนังสือ..." : "สร้างหนังสือ"}
         </button>
       </form>
 
