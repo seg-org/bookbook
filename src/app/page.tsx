@@ -7,8 +7,8 @@ export default function Home() {
       <h1>Pages list</h1>
       <ul style={{ listStyleType: "circle" }}>
         <li>
-          <Link href="/searchPage" style={{ color: "blue", textDecoration: "underline" }}>
-            searchPage
+          <Link href="/search" style={{ color: "blue", textDecoration: "underline" }}>
+            search
           </Link>
         </li>
         <li>

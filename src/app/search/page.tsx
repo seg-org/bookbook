@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 
-import SearchByDetail from "@/app/searchPage/components/SearchByDetail";
+import SearchByDetail from "@/app/search/components/SearchByDetail";
 
 import { Kanit } from "next/font/google";
 import { useState } from "react";
@@ -24,7 +24,7 @@ function SearchPage() {
         <main className={`${KanitFont.className}`}>
           <div className="flex gap-16 max-md:flex-col">
             <div className="relative h-[200px] min-w-[300px] max-md:w-[200px]">
-              <Image src="/images/searchPage/man-with-book.png" alt="Illustration" fill={true} />
+              <Image src="/images/search/man-with-book.png" alt="Illustration" fill={true} />
             </div>
             <div className="w-[100%]">
               <h2 className="mb-2.5 text-3xl max-sm:text-2xl">ค้นหาหนังสือ</h2>
