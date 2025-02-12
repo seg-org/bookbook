@@ -1,7 +1,15 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import * as z from "zod";
 import { authOptions } from "../auth/[...nextauth]/auth";
+
+const userUpdateSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  phoneNumber: z.string().min(10, "Phone number must be at least 10 digits").optional(),
+  address: z.string().min(5, "Address must be at least 5 characters").optional(),
+});
 
 export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
@@ -12,14 +20,15 @@ export async function PATCH(req: Request) {
 
   try {
     const data = await req.json();
+
+    const parsedData = userUpdateSchema.safeParse(data);
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
+    }
+
     const updatedUser = await prisma.user.update({
       where: { id: session.user.id },
-      data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        phoneNumber: data.phoneNumber,
-        address: data.address,
-      },
+      data: parsedData.data,
     });
 
     return NextResponse.json(updatedUser);

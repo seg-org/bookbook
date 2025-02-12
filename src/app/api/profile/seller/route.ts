@@ -1,7 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import * as z from "zod";
 import { authOptions } from "../../auth/[...nextauth]/auth";
+
+const sellerProfileSchema = z.object({
+  bankAccount: z.string().min(10, "Bank account number must be at least 10 characters"),
+  bankName: z.string().min(2, "Bank name is required"),
+  idCardNumber: z.string().min(13, "ID card number must be 13 characters"),
+});
 
 export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
@@ -12,13 +19,15 @@ export async function PATCH(req: Request) {
 
   try {
     const data = await req.json();
+
+    const parsedData = sellerProfileSchema.safeParse(data);
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
+    }
+
     const updatedSellerProfile = await prisma.sellerProfile.update({
       where: { userId: session.user.id },
-      data: {
-        bankAccount: data.bankAccount,
-        bankName: data.bankName,
-        idCardNumber: data.idCardNumber,
-      },
+      data: parsedData.data,
     });
 
     return NextResponse.json(updatedSellerProfile);
