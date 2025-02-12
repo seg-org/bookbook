@@ -2,6 +2,7 @@
 
 import { PaymentMethod, PrismaClient, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import AWS from "aws-sdk";
+import { hash } from "bcrypt";
 import fs from "fs";
 import { basename } from "path";
 import booksData from "./books.json" with { type: "json" };
@@ -49,8 +50,14 @@ const uploadToBucket = async (folder, filePath) => {
 
 const users = await prisma.user.findMany();
 if (users.length === 0) {
-  await prisma.user.createMany({
-    data: usersData,
+  usersData.forEach(async (user) => {
+    const hashedPassword = await hash(user.password, 10);
+    await prisma.user.create({
+      data: {
+        ...user,
+        password: hashedPassword,
+      },
+    });
   });
 }
 

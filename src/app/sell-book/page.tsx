@@ -2,7 +2,9 @@
 
 import { getObjectUrl, putObject } from "@/data/object";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,11 +13,13 @@ const bookSchema = z.object({
   title: z.string().min(1, "Title is required"),
   author: z.string().min(1, "Author is required"),
   genre: z.string().min(1, "Genre is required"),
-  description: z.string().optional(),
+  description: z.string(),
   isbn: z.string().min(10, "ISBN must be at least 10 characters"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
-  coverImageKey: z.string().optional(),
+  coverImageKey: z.string(),
+  sellerId: z.string(),
 });
+type CreateBookFormData = z.infer<typeof bookSchema>;
 
 export default function SellerPostPage() {
   const {
@@ -23,17 +27,24 @@ export default function SellerPostPage() {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<CreateBookFormData>({
     resolver: zodResolver(bookSchema),
   });
+
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
+  if (!isAuthenticated) {
+    redirect("/login");
+  }
+
+  setValue("sellerId", session?.user?.id);
 
   const [message, setMessage] = useState("");
   const [loadingDescription, setLoadingDescription] = useState(false);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
-
-  const sellerId = "mock_seller_123";
 
   const fetchDescription = async (title: string) => {
     if (!title) return;
@@ -79,12 +90,9 @@ export default function SellerPostPage() {
     }
   };
 
-  // **Upload Book Data to API**
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: CreateBookFormData) => {
     setLoading(true);
-
     try {
-      // Ensure coverImageKey exists
       if (!data.coverImageKey) {
         throw new Error("Cover image upload is required.");
       }
@@ -95,7 +103,6 @@ export default function SellerPostPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
-          sellerId,
         }),
       });
 
