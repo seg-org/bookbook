@@ -14,18 +14,56 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+model User {
+  id               String         @id @default(cuid())
+  email            String         @unique
+  firstName        String         @map("first_name")
+  lastName         String         @map("last_name")
+  password         String
+  phoneNumber      String?        @unique @map("phone_number")
+  address          String?
+  isSeller         Boolean        @default(false) @map("is_seller")
+  isVerified       Boolean        @default(false) @map("is_verified")
+  emailVerified    DateTime?      @map("email_verified")
+  phoneVerified    DateTime?      @map("phone_verified")
+  pdpaConsent      Boolean        @default(false) @map("pdpa_consent")
+  buyTransactions  Transaction[]  @relation("BuyerTransaction")
+  sellTransactions Transaction[]  @relation("SellerTransaction")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  sellerProfile    SellerProfile?
+  posts            Post[]
+  books            Book[]
+
+  @@map("users")
+}
+
+model SellerProfile {
+  id           String    @id @default(cuid())
+  idCardNumber String    @map("id_card_number")
+  idCardImage  String    @map("id_card_image")
+  bankAccount  String    @map("bank_account")
+  bankName     String    @map("bank_name")
+  isApproved   Boolean   @default(false) @map("is_approved")
+  approvedAt   DateTime? @map("approved_at")
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String    @unique @map("user_id")
+
+  @@map("seller_profiles")
+}
+
 model Book {
-  id             String @id @default(cuid())
-  title          String
-  author         String
-  genre          String
-  description    String
-  isbn           String
-  pages          Int
+  id            String @id @default(cuid())
+  title         String
+  author        String
+  genre         String
+  description   String
+  isbn          String
+  pages         Int
   coverImageKey String @map("cover_image_key")
-  seller         User   @relation(fields: [sellerId], references: [id])
-  sellerId       String
-  posts          Post[]
+  seller        User?   @relation(fields: [sellerId], references: [id])
+  sellerId      String @map("seller_id")
+  posts         Post[]
 
   @@map("books")
 }
@@ -37,26 +75,12 @@ model Post {
   price        Int
   published    Boolean       @default(false)
   seller       User          @relation(fields: [sellerId], references: [id])
-  sellerId     String
+  sellerId     String        @map("seller_id")
   book         Book          @relation(fields: [bookId], references: [id])
-  bookId       String        @map("book_id")
+  bookId       String        @unique @map("book_id")
   transactions Transaction[]
 
   @@map("posts")
-}
-
-model User {
-  id               String        @id @default(cuid())
-  name             String
-  email            String        @unique
-  password         String // Hash?
-  createdAt        DateTime      @default(now())
-  buyTransactions  Transaction[] @relation("BuyerTransaction")
-  sellTransactions Transaction[] @relation("SellerTransaction")
-  Book             Book[]
-  Post             Post[]
-
-  @@map("users")
 }
 
 model Transaction {
