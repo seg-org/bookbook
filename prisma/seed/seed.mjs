@@ -59,6 +59,7 @@ if (users.length === 0) {
       },
     });
   });
+  console.log("Users seeded successfully");
 }
 
 const sellerProfiles = await prisma.sellerProfile.findMany();
@@ -87,10 +88,26 @@ if (sellerProfiles.length === 0) {
 
 const books = await prisma.book.findMany();
 if (books.length === 0) {
+  const bookImageKeys = new Map();
   const booksDataWithKey = await Promise.all(
     booksData.map(async (book) => {
-      const keyWithFolder = await uploadToBucket("book_images", book.coverImagePath);
-      const key = keyWithFolder.split("/")[1];
+      let key;
+      const normalizedPath = book.coverImagePath.split("/").slice(-1)[0];
+      if (bookImageKeys.has(normalizedPath)) {
+        key = bookImageKeys.get(normalizedPath);
+      } else {
+        bookImageKeys.set(
+          normalizedPath,
+          uploadToBucket("book_images", book.coverImagePath).then((keyWithFolder) => {
+            const extractedKey = keyWithFolder.split("/")[1];
+            bookImageKeys.set(normalizedPath, extractedKey);
+            return extractedKey;
+          })
+        );
+      }
+
+      key = await bookImageKeys.get(normalizedPath);
+
       return {
         id: book.id,
         title: book.title,
