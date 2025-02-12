@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import TransactionBox, { TransactionBoxProps } from './TransactionBox'
 import LineSeparator from './LineSperator';
 import { FilterType } from './FilterBar';
@@ -7,12 +7,29 @@ import { useGetTransaction } from '@/hooks/useGetTransactions';
 
 interface TransactionListProps {
   filter: FilterType,
-  userId: string
+  userId: string,
+  setTotalBuy: (totalBuy : number) => void,
+  setTotalSell: (totalBuy : number) => void
 }
 
-const TransactionList = ({ filter, userId }: TransactionListProps) => {
+const TransactionList = ({ filter, userId , setTotalBuy, setTotalSell}: TransactionListProps) => {
 
   const { transactions, loading, error } = useGetTransaction(filter, userId);
+
+  useEffect(() => {
+    let totalBuy = 0
+    let totalSell = 0
+    transactions.map((ts) => {
+      if(ts.buyerId == userId)
+        totalBuy += ts.amount
+      if(ts.sellerId == userId)
+        totalSell += ts.amount
+      
+    })
+    setTotalBuy(totalBuy)
+    setTotalSell(totalSell)
+  }, [transactions]);
+
   if (loading) {
     return <div className='text-4xl font-bold text-gray-400 grid place-items-center h-screen v-screen'>Loading...</div>;
   }

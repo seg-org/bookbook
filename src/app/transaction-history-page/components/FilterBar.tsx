@@ -9,12 +9,14 @@ export interface FilterType{
 }
 
 interface setStateProps{
-  filter: FilterType
-  setFilter: (newdata : FilterType) => void
+  filter: FilterType,
+  setFilter: (newdata : FilterType) => void,
+  totalBuy: number,
+  totalSell: number
 }
 
 // Note 2: The pop=up calendar can not be configured
-const FilterBar = ({ filter, setFilter } : setStateProps) => {
+const FilterBar = ({ filter, setFilter , totalBuy, totalSell} : setStateProps) => {
   return (
     <div className='flex lg:flex-row items-center p-2.5 justify-between flex-col'>
       <div className='justify-start space-x-5 flex flex-row'>
@@ -38,13 +40,13 @@ const FilterBar = ({ filter, setFilter } : setStateProps) => {
       <div className='justify-start space-x-10 flex flex-row items-center'>
         <div className='space-x-2.5 items-center flex flex-row'>
           <label className='text-gray-800 font-medium'>ยอดซื้อ :</label>
-          <label className='text-gray-800 font-medium'>30.0</label>
+          <label className='text-gray-800 font-medium'>{totalBuy.toFixed(2).toString()}</label>
           <label className='text-gray-800 font-medium'>ยอดขาย :</label>
-          <label className='text-gray-800 font-medium'>70.0</label>
+          <label className='text-gray-800 font-medium'>{totalSell.toFixed(2).toString()}</label>
         </div>
         <div className='space-x-2.5 items-center flex flex-row'>
           <label className='text-gray-800 font-medium'>ยอดรวม :</label>
-          <label className='text-gray-800 font-medium'>40.0</label>
+          <label className='text-gray-800 font-medium'>{(totalSell - totalBuy).toFixed(2).toString()}</label>
         </div>
       </div>
     </div>

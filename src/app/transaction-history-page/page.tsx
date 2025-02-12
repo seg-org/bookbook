@@ -17,11 +17,13 @@ function TransactionPage() {
     asBuyer: true,
     asSeller: true
   });
+  const [ totalBuy, setTotalBuy ] = useState(0);
+  const [ totalSell, setTotalSell ] = useState(0);
 
   return (
     <>
-      <FilterBar filter={filter} setFilter={setFilter}/>
-      <TransactionList filter={filter} userId="user_3"/>
+      <FilterBar filter={filter} setFilter={setFilter} totalBuy={totalBuy} totalSell={totalSell}/>
+      <TransactionList filter={filter} userId="user_3" setTotalBuy={setTotalBuy} setTotalSell={setTotalSell}/>
     </>
   );
 }
