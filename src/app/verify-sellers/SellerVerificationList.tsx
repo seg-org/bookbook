@@ -12,8 +12,6 @@ type Seller = {
   idCardImage: string;
   bankAccount: string;
   bankName: string;
-  shopName: string;
-  shopDescription: string;
   user: {
     email: string;
     firstName: string;
@@ -63,9 +61,9 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
       {sellers.map((seller) => (
         <Card key={seller.id}>
           <CardHeader>
-            <CardTitle>{seller.shopName}</CardTitle>
+            <CardTitle>{seller.user.email}</CardTitle>
             <CardDescription>
-              {seller.user.firstName} {seller.user.lastName} ({seller.user.email})
+              {seller.user.firstName} {seller.user.lastName}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -76,10 +74,6 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
                 <p>ID Card: {seller.idCardNumber}</p>
                 <p>Bank Account: {seller.bankAccount}</p>
                 <p>Bank Name: {seller.bankName}</p>
-              </div>
-              <div>
-                <h3 className="mb-2 font-semibold">Shop Information</h3>
-                <p>{seller.shopDescription}</p>
               </div>
               <div className="md:col-span-2">
                 <h3 className="mb-2 font-semibold">ID Card Image</h3>
