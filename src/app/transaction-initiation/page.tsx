@@ -6,22 +6,31 @@ import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
-// Mock seller's books
-const mockBooks = [
-  { id: "book1", title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: 250 },
-  { id: "book2", title: "1984", author: "George Orwell", price: 200 },
-];
+import { useEffect, useState } from "react";
 
 export default function SellerInitiateTransaction() {
+  const [books, setBooks] = useState([]); // Books fetched from API
   const [selectedBook, setSelectedBook] = useState("");
-  const [buyerEmail, setBuyerEmail] = useState(""); // Buyer email input
+  const [buyerEmail, setBuyerEmail] = useState("");
   const [negotiatedPrice, setNegotiatedPrice] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ selectedBook?: string; buyerEmail?: string; negotiatedPrice?: string }>({});
   const router = useRouter();
+  const sellerId = "user_6"; // Replace with actual seller ID from session
+
+  // ✅ Fetch books from backend
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get(`/api/books/seller/${sellerId}`);
+        setBooks(response.data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+    fetchBooks();
+  }, []);
 
   // ✅ Validate form before submission
   const validateForm = () => {
@@ -42,16 +51,16 @@ export default function SellerInitiateTransaction() {
 
     try {
       const response = await axios.post("/api/transaction/invite", {
-        sellerId: "user456", // Mock seller ID (Replace with actual logged-in seller ID)
-        buyerEmail, // Now sending email instead of buyer ID
+        sellerId, // Use the actual seller ID
+        buyerEmail,
         bookId: selectedBook,
         negotiatedPrice: Number(negotiatedPrice),
-        status: "PENDING_BUYER_CONFIRMATION", // Buyer must confirm before proceeding
+        status: "PENDING_BUYER_CONFIRMATION",
       });
 
       if (response.status === 201) {
         alert("Transaction invitation sent successfully!");
-        router.push("/transactionHistoryPage"); // Redirect to transaction history
+        router.push("/transactionHistoryPage");
       }
     } catch (error) {
       console.error("Error sending transaction invitation:", error);
@@ -75,11 +84,15 @@ export default function SellerInitiateTransaction() {
                 <SelectValue placeholder="Select a book" />
               </SelectTrigger>
               <SelectContent>
-                {mockBooks.map((book) => (
-                  <SelectItem key={book.id} value={book.id}>
-                    {book.title} - {book.author} ({book.price} THB)
-                  </SelectItem>
-                ))}
+                {books.length > 0 ? (
+                  books.map((book) => (
+                    <SelectItem key={book.id} value={book.id}>
+                      {book.title} - {book.author}
+                    </SelectItem>
+                  ))
+                ) : (
+                  <p className="text-sm text-gray-500">No books available</p>
+                )}
               </SelectContent>
             </Select>
             {errors.selectedBook && <p className="text-sm text-red-500">{errors.selectedBook}</p>}
@@ -123,7 +136,7 @@ export default function SellerInitiateTransaction() {
           </DialogHeader>
           <p>Are you sure you want to send this transaction invitation?</p>
           <p>
-            <strong>Book:</strong> {mockBooks.find((b) => b.id === selectedBook)?.title}
+            <strong>Book:</strong> {books.find((b) => b.id === selectedBook)?.title}
           </p>
           <p>
             <strong>Agreed Price:</strong> {negotiatedPrice} THB
@@ -140,7 +153,7 @@ export default function SellerInitiateTransaction() {
               disabled={loading}
               className="bg-blue-500 text-white hover:bg-blue-600"
             >
-              Send Invitation
+              Send
             </Button>
           </DialogFooter>
         </DialogContent>
