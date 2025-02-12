@@ -27,7 +27,7 @@ function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/" className="transition hover:text-yellow-300">
+            <Link href="/transaction-history-page" className="transition hover:text-yellow-300">
               ประวัติการสั่งซื้อ
             </Link>
           </li>
