@@ -34,6 +34,7 @@ model User {
   updatedAt        DateTime       @updatedAt @map("updated_at")
   sellerProfile    SellerProfile?
   posts            Post[]
+  chatMessages     ChatMessage[]
 
   @@map("users")
 }
@@ -90,8 +91,35 @@ model Post {
   book         Book          @relation(fields: [bookId], references: [id])
   bookId       String        @map("book_id")
   transactions Transaction[]
+  ChatRoom     ChatRoom[]
 
   @@map("posts")
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  sender    User     @relation(fields: [senderId], references: [id])
+  senderId  String   @map("sender_id")
+  room      ChatRoom @relation(fields: [roomId], references: [id])
+  roomId    String   @map("room_id")
+  message   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([roomId])
+  @@map("chat_messages")
+}
+
+model ChatRoom {
+  id        String   @id @default(cuid())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @map("post_id")
+  userIds   String[] @map("user_ids")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  messages ChatMessage[]
+
+  @@index([postId])
+  @@map("chat_rooms")
 }
 
 model Transaction {
