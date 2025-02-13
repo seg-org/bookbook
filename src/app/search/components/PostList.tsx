@@ -50,7 +50,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
           {filter_posts.map((post: Post, idx: number) =>
-            idx < 3 ? <RecommendPostCard post={post} /> : <PostCard post={post} />
+            idx < 3 ? <RecommendPostCard post={post} key={post.id} /> : <PostCard post={post} key={post.id} />
           )}
           {/* {filter_posts.map((post: Post) => (
             <PostCard post={post} key={post.id} />

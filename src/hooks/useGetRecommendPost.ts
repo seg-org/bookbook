@@ -17,7 +17,7 @@ export const useGetRecommendPost = (userId: string) => {
       setRecommend_post(res);
       setRecommend_post_loading(false);
     })();
-  }, []);
+  }, [userId]);
 
   return { recommend_post, recommend_post_loading, recommend_post_error };
 };
