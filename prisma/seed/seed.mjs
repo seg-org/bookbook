@@ -117,7 +117,6 @@ if (books.length === 0) {
         isbn: book.isbn,
         pages: book.pages,
         coverImageKey: key,
-        sellerId: book.sellerId,
       };
     })
   );
