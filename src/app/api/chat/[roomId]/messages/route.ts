@@ -1,5 +1,45 @@
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+
+const createChatMessageRequest = z.object({
+  message: z.string(),
+  roomId: z.string(),
+});
+
+export async function POST(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const parsedData = createChatMessageRequest.safeParse(await req.json());
+    if (!parsedData.success) {
+      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
+    }
+
+    // check chatRoom exists and user is a member
+    const room = await prisma.chatRoom.findUnique({ where: { id: parsedData.data.roomId } });
+    if (!room) {
+      return NextResponse.json({ error: `Room with id ${parsedData.data.roomId} not found` }, { status: 404 });
+    }
+    if (!room.userIds.includes(session.user.id)) {
+      return NextResponse.json({ error: "You are not a member of this room" }, { status: 403 });
+    }
+
+    const chatMessage = await prisma.chatMessage.create({
+      data: { message: parsedData.data.message, roomId: parsedData.data.roomId, senderId: session.user.id },
+    });
+
+    return NextResponse.json(chatMessage, { status: 200 });
+  } catch (error) {
+    if (error instanceof Error) console.error("Error creating chatMessage", error.stack);
+    return NextResponse.json({ error: "Cannot create a chatMessage" }, { status: 500 });
+  }
+}
 
 export async function GET(_: NextRequest, props: { params: Promise<{ roomId: string }> }) {
   const { roomId } = await props.params;
