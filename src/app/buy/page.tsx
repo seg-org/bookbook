@@ -19,7 +19,11 @@ export default function SellerInitiateTransaction() {
   const [negotiatedPrice] = useState(postPrice);
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [errors, setErrors] = useState<{
+    selectedBook?: string;
+    buyerEmail?: string;
+    negotiatedPrice?: string;
+  }>({});
   const router = useRouter();
 
   // Validate form before submission
