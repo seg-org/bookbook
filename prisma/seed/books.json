@@ -88,5 +88,15 @@
     "isbn": "9786163170187",
     "pages": 252,
     "coverImagePath": "./prisma/seed/images/book/pasa-patee.jpg"
+  },
+  {
+    "id": "book_10",
+    "title": "Who สุเทพ เทือกสุบรรณ",
+    "author": "สุเทพ เทือกสุบรรณ",
+    "genre": "การ์ตูนความรู้ ประวัติศาสตร์",
+    "description": "ผู้ใช้มือเปล่าและหัวใจต่อสู้ เพื่อเรียกร้องการปฏิรูปการเมืองไทย",
+    "isbn": "9786160418602",
+    "pages": 168,
+    "coverImagePath": "./prisma/seed/images/book/who-sutep.gif"
   }
 ]
