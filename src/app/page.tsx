@@ -40,12 +40,12 @@ export default function Home() {
           </li>
           <li>
             <Link href="/potential-matches" className="block text-blue-600 hover:text-blue-800">
-              🤝 แนะนำหนังสือที่ตรงกับคุณ
+              🤝 แนะนำผู้ซื้อที่ตรงกับคุณ
             </Link>
           </li>
           <li>
             <Link href="/transaction-initiation" className="block text-blue-600 hover:text-blue-800">
-              💰 สั่งซื้อ
+              💰 ใบเสนอขาย
             </Link>
           </li>
           <li>
