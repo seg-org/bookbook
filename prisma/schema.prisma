@@ -113,6 +113,7 @@ model ChatRoom {
   id        String   @id @default(cuid())
   post      Post     @relation(fields: [postId], references: [id])
   postId    String   @map("post_id")
+  // TODO: add report
   userIds   String[] @map("user_ids")
   createdAt DateTime @default(now()) @map("created_at")
 
