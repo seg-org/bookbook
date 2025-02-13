@@ -1,3 +1,4 @@
+import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Post } from "@/data/dto/post.dto";
 import { useGetAllPosts } from "@/hooks/useGetAllPosts";
 import { useState } from "react";
@@ -8,7 +9,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
 
   const { posts, loading, error } = useGetAllPosts();
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingAnimation />;
   }
   if (error) {
     return <div>Failed to get posts</div>;

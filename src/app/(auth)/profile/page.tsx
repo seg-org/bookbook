@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../../api/auth/[...nextauth]/auth";
+import { authOptions } from "../../../lib/auth";
 import { ProfileForm } from "./ProfileForm";
 
 async function getUserProfile(userId: string) {
@@ -28,7 +28,7 @@ export default async function ProfilePage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="mb-6 text-2xl font-bold">Profile Settings</h1>
+      <h1 className="mb-6 text-2xl font-bold">ข้อมูลผู้ใช้</h1>
       <ProfileForm initialData={userProfile} />
     </div>
   );

@@ -41,6 +41,7 @@ export default function SellerInitiateTransaction() {
   };
 
   // Simulate sending the transaction invitation
+  // Simulate sending the transaction invitation
   const sendTransactionInvitation = async () => {
     if (!validateForm()) return;
     setLoading(true);

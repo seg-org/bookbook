@@ -1,17 +1,11 @@
 "use client";
 import Image from "next/image";
 
-import SearchByDetail from "@/app/searchPage/components/SearchByDetail";
+import SearchByDetail from "@/app/search/components/SearchByDetail";
 
-import { Kanit } from "next/font/google";
 import { useState } from "react";
 import { PostList } from "./components/PostList";
 import SpecialSearch from "./components/SpecialSearch";
-
-const KanitFont = Kanit({
-  subsets: ["latin"],
-  weight: "400",
-});
 
 function SearchPage() {
   const [detailSearch, setDetailSearch] = useState(false);
@@ -21,10 +15,10 @@ function SearchPage() {
   return (
     <>
       <div className="m-0 box-border p-0">
-        <main className={`${KanitFont.className}`}>
+        <div className="m-2 flex flex-col items-center p-2">
           <div className="flex gap-16 max-md:flex-col">
             <div className="relative h-[200px] min-w-[300px] max-md:w-[200px]">
-              <Image src="/images/searchPage/man-with-book.png" alt="Illustration" fill={true} />
+              <Image src="/images/search/man-with-book.png" alt="Illustration" fill={true} />
             </div>
             <div className="w-[100%]">
               <h2 className="mb-2.5 text-3xl max-sm:text-2xl">ค้นหาหนังสือ</h2>
@@ -65,7 +59,7 @@ function SearchPage() {
             </div>
           </div>
           {!detailSearch && !specialSearch && <PostList inputSearchValue={inputValue} />}
-        </main>
+        </div>
       </div>
     </>
   );

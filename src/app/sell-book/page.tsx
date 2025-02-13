@@ -1,6 +1,10 @@
 "use client";
 
+import { getObjectUrl, putObject } from "@/data/object";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -9,61 +13,153 @@ const bookSchema = z.object({
   title: z.string().min(1, "Title is required"),
   author: z.string().min(1, "Author is required"),
   genre: z.string().min(1, "Genre is required"),
-  description: z.string().optional(),
+  description: z.string(),
   isbn: z.string().min(10, "ISBN must be at least 10 characters"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
-  coverImageUrl: z.string().url().optional(),
+  coverImageKey: z.string(),
+  sellerId: z.string(),
 });
+type CreateBookFormData = z.infer<typeof bookSchema>;
 
 export default function SellerPostPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<CreateBookFormData>({
     resolver: zodResolver(bookSchema),
   });
 
-  const [message, setMessage] = useState("");
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data: any) => {
-    console.log("Mock Submission:", data);
-    setMessage("Book posted successfully (mock data)!");
+  if (!isAuthenticated) {
+    redirect("/login");
+  }
+
+  setValue("sellerId", session.user.id);
+
+  const [message, setMessage] = useState("");
+  const [loadingDescription, setLoadingDescription] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const fetchDescription = async (title: string) => {
+    if (!title) return;
+    setLoadingDescription(true);
+
+    try {
+      const response = await fetch("/api/books/gen-description", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title }),
+      });
+
+      const data = await response.json();
+      if (response.ok && data.description) {
+        setValue("description", data.description);
+      }
+    } catch (error) {
+      console.error("Error fetching description:", error);
+    } finally {
+      setLoadingDescription(false);
+    }
+  };
+
+  const handleFileUpload = async (file: File) => {
+    setUploading(true);
+    try {
+      const uploadedImage = await putObject(file);
+      if (uploadedImage instanceof Error) {
+        throw new Error("Failed to upload cover image");
+      }
+      const getObjectRes = await getObjectUrl(uploadedImage.key, uploadedImage.folder);
+      if (getObjectRes instanceof Error) {
+        throw new Error("Failed to get object URL");
+      }
+
+      setValue("coverImageKey", uploadedImage.key);
+      setImageUrl(getObjectRes.signedUrl);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      setMessage("Failed to upload cover image.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const onSubmit = async (data: CreateBookFormData) => {
+    setLoading(true);
+    try {
+      if (!data.coverImageKey) {
+        throw new Error("Cover image upload is required.");
+      }
+
+      const response = await fetch("/api/books", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setMessage("Book posted successfully!");
+      } else {
+        setMessage(`Error: ${result.error}`);
+      }
+    } catch (error) {
+      console.error("Error posting book:", error);
+      setMessage("Failed to post book.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="mx-auto mt-10 max-w-lg">
-      {/* Title */}
-      <h1 className="mb-4 text-center text-2xl font-bold">Post a Book for Sale</h1>
+      <h1 className="mb-4 text-center text-2xl font-bold">เพิ่มหนังสือเพื่อเตรียมขาย</h1>
+      <p className="mb-4 text-center text-gray-500">
+        หนังสือที่เพิ่มยังไม่ถือว่าประกาศขาย
+        ผู้ใช้จะต้องสร้างโพสต์ขายหนังสือที่แนบหนังสือที่สร้างแล้วเพื่อให้สามารถประกาศขายได้
+      </p>
 
-      {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <label>
-          Book Title:
-          <input {...register("title")} placeholder="Book Title" className="input mt-1 block w-full" />
+          ชื่อหนังสือ:
+          <input
+            {...register("title")}
+            placeholder="ชื่อหนังสือ"
+            className="input mt-1 block w-full"
+            onBlur={(e) => fetchDescription(e.target.value)}
+          />
           {errors.title?.message && <p className="text-red-500">{String(errors.title.message)}</p>}
         </label>
 
         <label>
-          Author:
-          <input {...register("author")} placeholder="Author" className="input mt-1 block w-full" />
+          ผู้แต่ง:
+          <input {...register("author")} placeholder="ผู้แต่ง" className="input mt-1 block w-full" />
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
         <label>
-          Genre:
-          <input {...register("genre")} placeholder="Genre" className="input mt-1 block w-full" />
+          ประเภทหนังสือ:
+          <input {...register("genre")} placeholder="ประเภทหนังสือ" className="input mt-1 block w-full" />
           {errors.genre?.message && <p className="text-red-500">{String(errors.genre.message)}</p>}
         </label>
 
         <label>
-          Description:
+          เนื้อเรื่องย่อ:
           <textarea
             {...register("description")}
-            placeholder="Description"
+            placeholder="เนื้อเรื่องย่อ"
             className="input mt-1 block w-full"
           ></textarea>
+          {loadingDescription && <p className="text-blue-500">กำลังสรุปเนื้อเรื่องย่อย...</p>}
         </label>
 
         <label>
@@ -73,24 +169,34 @@ export default function SellerPostPage() {
         </label>
 
         <label>
-          Number of Pages:
-          <input
-            type="number"
-            {...register("pages")}
-            placeholder="Number of Pages"
-            className="input mt-1 block w-full"
-          />
+          จำนวนหน้า:
+          <input type="number" {...register("pages")} placeholder="จำนวนหน้า" className="input mt-1 block w-full" />
           {errors.pages?.message && <p className="text-red-500">{String(errors.pages.message)}</p>}
         </label>
 
         <label>
-          Cover Image URL:
-          <input {...register("coverImageUrl")} placeholder="Cover Image URL" className="input mt-1 block w-full" />
-          {errors.coverImageUrl?.message && <p className="text-red-500">{String(errors.coverImageUrl.message)}</p>}
+          รูปหน้าปก:
+          <input
+            type="file"
+            accept="image/*"
+            className="input mt-1 block w-full"
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                handleFileUpload(e.target.files[0]);
+              }
+            }}
+          />
+          {uploading && <p className="text-blue-500">Uploading image...</p>}
+          {errors.coverImageKey?.message && <p className="text-red-500">{String(errors.coverImageKey.message)}</p>}
         </label>
+        {imageUrl && <Image src={imageUrl} alt="Cover Image" width={200} height={200} />}
 
-        <button type="submit" className="w-full rounded-lg bg-blue-500 py-2 text-white hover:bg-blue-700">
-          Post Book
+        <button
+          type="submit"
+          className="w-full rounded-lg bg-blue-500 py-2 text-white hover:bg-blue-700"
+          disabled={loading || uploading}
+        >
+          {loading ? "กำลังสร้างหนังสือ..." : "สร้างหนังสือ"}
         </button>
       </form>
 

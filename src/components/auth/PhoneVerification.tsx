@@ -53,17 +53,16 @@ export function PhoneVerification() {
 
   return (
     <div className="mx-auto max-w-md space-y-4">
-      <h2 className="text-center text-2xl font-bold">Verify your phone number</h2>
-      <p className="text-center text-gray-600">We have sent a verification code to your phone</p>
+      <p className="text-center text-gray-600">เราส่งรหัส OTP ไปที่เบอร์โทรศัพท์ของคุณ</p>
       <form onSubmit={onSubmit} className="space-y-4">
         <Input name="code" type="text" placeholder="Enter 6-digit code" disabled={isLoading} />
         {error && <p className="text-sm text-red-500">{error}</p>}
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Verifying..." : "Verify Phone"}
+          {isLoading ? "กำลังยืนยัน..." : "ยืนยัน"}
         </Button>
       </form>
       <Button type="button" className="w-full" onClick={resendCode} disabled={isLoading}>
-        Resend code
+        ส่งรหัส OTP อีกครั้ง
       </Button>
     </div>
   );

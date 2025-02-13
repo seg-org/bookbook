@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { AuthProvider } from "@/providers/auth-provider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Kanit } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 
@@ -14,6 +14,11 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const KanitFont = Kanit({
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${KanitFont.className} antialiased`}>
         <AuthProvider>
           <Header />
           <Suspense fallback={<LoadingAnimation />}>{children}</Suspense>

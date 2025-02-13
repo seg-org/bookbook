@@ -14,16 +14,16 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 const sellerSchema = z.object({
-  idCardNumber: z.string().min(13, "ID card number must be valid"),
-  bankAccount: z.string().min(10, "Bank account number must be valid"),
-  bankName: z.string().min(2, "Bank name is required"),
+  idCardNumber: z.string().min(13, "หมายเลขบัตรประชาชนต้องถูกต้อง"),
+  bankAccount: z.string().min(10, "หมายเลขบัญชีต้องถูกต้อง"),
+  bankName: z.string().min(2, "กรุณาระบุชื่อธนาคาร"),
   idCardImage: z
     .any()
-    .refine((files) => files?.length === 1, "ID card image is required")
-    .refine((files) => files?.[0]?.size <= 5000000, "Image must be less than 5MB")
+    .refine((files) => files?.length === 1, "ต้องอัปโหลดรูปบัตรประชาชน")
+    .refine((files) => files?.[0]?.size <= 5000000, "ขนาดไฟล์ต้องไม่เกิน 5MB")
     .refine(
       (files) => ["image/jpeg", "image/png", "image/jpg"].includes(files?.[0]?.type),
-      "Only .jpg, .jpeg, and .png formats are supported"
+      "รองรับเฉพาะไฟล์ .jpg, .jpeg และ .png"
     ),
 });
 
@@ -72,19 +72,19 @@ export function SellerRegistration() {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.message || "Registration failed");
+        throw new Error(error.message || "การลงทะเบียนล้มเหลว");
       }
 
       toast({
-        title: "Registration submitted",
-        description: "Your seller registration is pending approval.",
+        title: "ส่งข้อมูลการลงทะเบียนแล้ว",
+        description: "การลงทะเบียนของคุณกำลังรอการอนุมัติ",
       });
 
       router.push("/");
     } catch (error) {
       toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Registration failed",
+        title: "ข้อผิดพลาด",
+        description: error instanceof Error ? error.message : "การลงทะเบียนล้มเหลว",
         variant: "destructive",
       });
     } finally {
@@ -94,18 +94,18 @@ export function SellerRegistration() {
 
   return (
     <div className="mx-auto max-w-md space-y-6">
-      <h2 className="text-center text-2xl font-bold">Seller Registration</h2>
+      <h2 className="text-center text-2xl font-bold">ลงทะเบียนผู้ขาย</h2>
       <Form form={form} onSubmit={onSubmit}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <Card className="space-y-4 p-4">
-            <h3 className="font-semibold">Personal Information</h3>
+            <h3 className="font-semibold">ข้อมูลส่วนตัว</h3>
             <FormField
               name="idCardNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>ID Card Number</FormLabel>
+                  <FormLabel>หมายเลขบัตรประชาชน</FormLabel>
                   <Input {...field} disabled={isLoading} />
-                  <FormDescription>Enter your 13-digit national ID number</FormDescription>
+                  <FormDescription>กรุณากรอกหมายเลขบัตรประชาชน 13 หลัก</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -115,12 +115,12 @@ export function SellerRegistration() {
               name="idCardImage"
               render={() => (
                 <FormItem>
-                  <FormLabel>ID Card Image</FormLabel>
+                  <FormLabel>รูปบัตรประชาชน</FormLabel>
                   <Input type="file" accept="image/*" onChange={handleImageChange} disabled={isLoading} />
-                  <FormDescription>Upload a clear photo of your ID card (max 5MB)</FormDescription>
+                  <FormDescription>อัปโหลดรูปบัตรประชาชนที่ชัดเจน (ขนาดไม่เกิน 5MB)</FormDescription>
                   {previewUrl && (
                     <div className="mt-2">
-                      <Image src={previewUrl} alt="ID Card Preview" className="h-auto max-w-full rounded-lg" />
+                      <Image src={previewUrl} alt="ตัวอย่างบัตรประชาชน" className="h-auto max-w-full rounded-lg" />
                     </div>
                   )}
                   <FormMessage />
@@ -130,12 +130,12 @@ export function SellerRegistration() {
           </Card>
 
           <Card className="space-y-4 p-4">
-            <h3 className="font-semibold">Bank Information</h3>
+            <h3 className="font-semibold">ข้อมูลธนาคาร</h3>
             <FormField
               name="bankAccount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Bank Account Number</FormLabel>
+                  <FormLabel>หมายเลขบัญชีธนาคาร</FormLabel>
                   <Input {...field} disabled={isLoading} />
                   <FormMessage />
                 </FormItem>
@@ -146,7 +146,7 @@ export function SellerRegistration() {
               name="bankName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Bank Name</FormLabel>
+                  <FormLabel>ชื่อธนาคาร</FormLabel>
                   <Input {...field} disabled={isLoading} />
                   <FormMessage />
                 </FormItem>
@@ -158,10 +158,10 @@ export function SellerRegistration() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Submitting...
+                กำลังส่งข้อมูล...
               </>
             ) : (
-              "Submit Registration"
+              "ส่งข้อมูลการลงทะเบียน"
             )}
           </Button>
         </form>
