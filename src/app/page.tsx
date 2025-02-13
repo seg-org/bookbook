@@ -29,8 +29,8 @@ export default function Home() {
             </Link>
           </li>
           <li>
-            <Link href="/sell-book" className="block text-blue-600 hover:text-blue-800">
-              📖 ขายหนังสือ
+            <Link href="/add-book" className="block text-blue-600 hover:text-blue-800">
+              📖 เพิ่มหนังสือ
             </Link>
           </li>
           <li>
