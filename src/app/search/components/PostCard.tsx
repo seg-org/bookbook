@@ -19,7 +19,8 @@ function PostCard({ post }: PostCardProps) {
   const initiate_transaction = () => {
     const encodedPostId = encodeURIComponent(post.id);
     const encodedBookTitle = encodeURIComponent(post.book.title);
-    router.push(`/transaction-initiation?postId=${encodedPostId}&bookTitle=${encodedBookTitle}`);
+    const encodedPostPrice = encodeURIComponent(post.price.toString());
+    router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
   }
 
   return (

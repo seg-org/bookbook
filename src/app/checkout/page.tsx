@@ -27,12 +27,8 @@ function Home() {
           <div className="mb-10">
             <h1 className="text-4xl font-extrabold mb-2">{bookTitle}</h1>
             <h2 className="text-2xl">
-              negotiated price: 
+              Price (THB): 
               <span className="font-bold"> ฿{amount}</span>
-            </h2>
-            <h2 className="text-2xl">
-              Buyer email: 
-              <span className="font-bold"> {email}</span>
             </h2>
           </div>
     
