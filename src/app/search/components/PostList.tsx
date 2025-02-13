@@ -2,9 +2,18 @@ import { Post } from "@/data/dto/post.dto";
 import { useGetAllPosts } from "@/hooks/useGetAllPosts";
 import { useState } from "react";
 import PostCard from "./PostCard";
+import RecommendPostCard from "./RecommendPostCard";
 export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
+
+  // const { recommend_post, recommend_post_loading, recommend_post_error } = useGetRecommendPost("dfdgfh");
+  // if (recommend_post_loading) {
+  //   return <div>Loading...</div>;
+  // }
+  // if (recommend_post_error) {
+  //   return <div>Failed to get posts</div>;
+  // }
 
   const { posts, loading, error } = useGetAllPosts();
   if (loading) {
@@ -39,9 +48,12 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           </button>
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
-          {filter_posts.map((post: Post) => (
+          {filter_posts.map((post: Post, idx: number) =>
+            idx < 3 ? <RecommendPostCard post={post} /> : <PostCard post={post} />
+          )}
+          {/* {filter_posts.map((post: Post) => (
             <PostCard post={post} key={post.id} />
-          ))}
+          ))} */}
         </div>
       </div>
     </>
