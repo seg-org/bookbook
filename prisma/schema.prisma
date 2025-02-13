@@ -87,7 +87,7 @@ model Post {
   seller       User          @relation(fields: [sellerId], references: [id])
   sellerId     String        @map("seller_id")
   book         Book          @relation(fields: [bookId], references: [id])
-  bookId       String        @unique @map("book_id")
+  bookId       String        @map("book_id")
   transactions Transaction[]
 
   @@map("posts")

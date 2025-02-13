@@ -48,5 +48,15 @@
     "isbn": "9786168266403",
     "pages": 296,
     "coverImagePath": "./prisma/seed/images/book/ethical-algo.webp"
+  },
+  {
+    "id": "book_6",
+    "title": "新完全マスタ−読解日本語能力試験Ｎ１",
+    "author": "福岡理恵子 / 清水知子（日本語教育）",
+    "genre": "ภาษาญี่ปุ่น",
+    "description": "「対比」「言い換え」など、読み取りのポイントを提示。広告・ビジネス文書など実用的な文章（情報素材）が豊富。「文章全体の主旨や目的をつかむ力」と「文章の細かい部分を読み取る力」が身につく。",
+    "isbn": "9784883195718",
+    "pages": 207,
+    "coverImagePath": "./prisma/seed/images/book/n1-dokkai.jpg"
   }
 ]
