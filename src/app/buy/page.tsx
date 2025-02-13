@@ -1,41 +1,34 @@
 "use client";
+
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/card";
 import Dialog, { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
-import { Input } from "@/components/ui/Input";
 import { useRouter, useSearchParams } from "next/navigation";
-import path from "path";
 import { useState } from "react";
 
 export default function SellerInitiateTransaction() {
-  const searchParms = useSearchParams();
-  const encodedBookTitle = searchParms.get("bookTitle");
+  const searchParams = useSearchParams();
+  const encodedBookTitle = searchParams.get("bookTitle");
   const bookTitle = encodedBookTitle ? decodeURIComponent(encodedBookTitle) : "";
-  const encodedPostId = searchParms.get("postId");
+  const encodedPostId = searchParams.get("postId");
   const postId = encodedPostId ? decodeURIComponent(encodedPostId) : "";
-  const encodedPostPriceString = searchParms.get("postPrice");
+  const encodedPostPriceString = searchParams.get("postPrice");
   const postPrice = encodedPostPriceString ? Number(decodeURIComponent(encodedPostPriceString)) : 0;
 
-  const [selectedBook, setSelectedBook] = useState(bookTitle);
-  const [buyerEmail, setBuyerEmail] = useState("");
-  const [negotiatedPrice, setNegotiatedPrice] = useState(postPrice);
+  const [selectedBook] = useState(bookTitle);
+  const [negotiatedPrice] = useState(postPrice);
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<{
-    selectedBook?: string;
-    buyerEmail?: string;
-    negotiatedPrice?: string;
-  }>({});
+
   const router = useRouter();
 
   // Validate form before submission
   const validateForm = () => {
-    const newErrors: { selectedBook?: string; negotiatedPrice?: number } = {};
+    const newErrors: { selectedBook?: string } = {};
     if (!selectedBook) newErrors.selectedBook = "Select a book to sell.";
     return Object.keys(newErrors).length === 0;
   };
 
-  // Simulate sending the transaction invitation
   // Simulate sending the transaction invitation
   const sendTransactionInvitation = async () => {
     if (!validateForm()) return;
@@ -43,10 +36,9 @@ export default function SellerInitiateTransaction() {
     setOpenDialog(false);
     try {
       const encodedNegotiatedPrice = encodeURIComponent(negotiatedPrice);
-      const encodedSellerEmail = encodeURIComponent(buyerEmail);
       const encodedPostId = encodeURIComponent(postId);
       const encodedBookTitle = encodeURIComponent(selectedBook);
-      router.push(`/checkout?amount=${encodedNegotiatedPrice}&email=${encodedSellerEmail}&postId=${encodedPostId}&bookTitle=${encodedBookTitle}`);
+      router.push(`/checkout?amount=${encodedNegotiatedPrice}&postId=${encodedPostId}&bookTitle=${encodedBookTitle}`);
     } catch (error) {
       console.error("Error sending transaction invitation:", error);
       alert("Failed to send transaction invitation. Please try again.");
@@ -60,21 +52,14 @@ export default function SellerInitiateTransaction() {
       <Card className="w-96 p-4">
         <CardContent>
           <h2 className="mb-4 text-xl font-bold">Buy this book</h2>
-
-          {/* Select Book (native dropdown) */}
           <div className="mt-4">
             <label className="mb-1 block font-medium">Book Title</label>
-            <p className="px-3 py-2 border rounded bg-gray-100">{bookTitle}</p>
-            {errors.selectedBook && <p className="text-sm text-red-500">{errors.selectedBook}</p>}
+            <p className="rounded border bg-gray-100 px-3 py-2">{bookTitle}</p>
           </div>
-
-          {/* Negotiated Price Input */}
           <div className="mt-4">
             <label className="mb-1 block font-medium">Price (THB)</label>
-            <p className="px-3 py-2 border rounded bg-gray-100">฿ {postPrice}</p>
-            {errors.negotiatedPrice && <p className="text-sm text-red-500">{errors.negotiatedPrice}</p>}
+            <p className="rounded border bg-gray-100 px-3 py-2">฿ {postPrice}</p>
           </div>
-
           <Button
             className="mt-4 w-full"
             onClick={() => {
@@ -88,8 +73,6 @@ export default function SellerInitiateTransaction() {
           </Button>
         </CardContent>
       </Card>
-
-      {/* Confirmation Dialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         <DialogContent>
           <DialogHeader>
@@ -97,7 +80,7 @@ export default function SellerInitiateTransaction() {
           </DialogHeader>
           <p>Are you sure you want to send this transaction invitation?</p>
           <p>
-            <strong>Book Title:</strong> {selectedBook ? selectedBook : "N/A"}
+            <strong>Book Title:</strong> {selectedBook || "N/A"}
           </p>
           <p>
             <strong>Price (THB):</strong> {negotiatedPrice} THB

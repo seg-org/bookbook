@@ -151,7 +151,7 @@ export function RegisterForm() {
               checked={field.value}
               onChange={field.onChange}
               disabled={isLoading}
-              className="h-[1rem] w-[1rem]"
+              className="h-2 w-2"
             />
             <FormLabel>ฉันยอมรับเงื่อนไขและข้อตกลง</FormLabel>
             <FormMessage />

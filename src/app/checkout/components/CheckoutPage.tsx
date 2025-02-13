@@ -1,13 +1,9 @@
 "use client";
 
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  useStripe,
-  useElements,
-  PaymentElement,
-} from "@stripe/react-stripe-js";
 
-const CheckoutPage = ({ amount, postId }: { amount: number, postId: string }) => {
+const CheckoutPage = ({ amount, postId }: { amount: number; postId: string }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -36,19 +32,19 @@ const CheckoutPage = ({ amount, postId }: { amount: number, postId: string }) =>
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                buyerId: "user_3",
-                postId: postId,
-                status: "PAYING",
-                paymentMethod: "CREDIT_CARD",
-                hashId: "aEc!K/NGQ'9?6.UGaPr\"^!&Gyj8.2j?}",
-                shipmentMethod: "DELIVERY",
-                trackingURL: "_.V59O4-Q}KkUr^U!zL-2o8PpVQgb]N!",
-                amount: amount,
-            })
+              buyerId: "user_3",
+              postId: postId,
+              status: "PAYING",
+              paymentMethod: "CREDIT_CARD",
+              hashId: "aEc!K/NGQ'9?6.UGaPr\"^!&Gyj8.2j?}",
+              shipmentMethod: "DELIVERY",
+              trackingURL: "_.V59O4-Q}KkUr^U!zL-2o8PpVQgb]N!",
+              amount: amount,
+            }),
           });
         }
       });
-  }, [amount]);
+  }, [amount, postId]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -68,8 +64,8 @@ const CheckoutPage = ({ amount, postId }: { amount: number, postId: string }) =>
 
     // console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/transaction-history-page`);
 
-    if(process.env.NEXT_PUBLIC_BASE_URL === undefined) {
-        console.log("NEXT_PUBLIC_BASE_URL is undefined");
+    if (process.env.NEXT_PUBLIC_BASE_URL === undefined) {
+      console.log("NEXT_PUBLIC_BASE_URL is undefined");
     }
     const { error } = await stripe.confirmPayment({
       elements,
@@ -95,7 +91,7 @@ const CheckoutPage = ({ amount, postId }: { amount: number, postId: string }) =>
     return (
       <div className="flex items-center justify-center">
         <div
-          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+          className="text-surface inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
           role="status"
         >
           <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
@@ -107,14 +103,14 @@ const CheckoutPage = ({ amount, postId }: { amount: number, postId: string }) =>
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-2 rounded-md">
+    <form onSubmit={handleSubmit} className="rounded-md bg-white p-2">
       {clientSecret && <PaymentElement />}
 
       {errorMessage && <div>{errorMessage}</div>}
 
       <button
         disabled={!stripe || loading}
-        className="text-white w-full p-5 bg-black mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse"
+        className="mt-2 w-full rounded-md bg-black p-5 font-bold text-white disabled:animate-pulse disabled:opacity-50"
       >
         {!loading ? `Pay ฿${amount}` : "Processing..."}
       </button>
