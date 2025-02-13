@@ -11,14 +11,14 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 const registerSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-  phoneNumber: z.string().regex(/^\+?\d{1,14}$/, "Invalid phone number"),
-  address: z.string().min(10, "Address must be at least 10 characters"),
+  firstName: z.string().min(2, "ชื่อต้องมีอย่างน้อย 2 ตัวอักษร"),
+  lastName: z.string().min(2, "นามสกุลต้องมีอย่างน้อย 2 ตัวอักษร"),
+  email: z.string().email("รูปแบบอีเมลไม่ถูกต้อง"),
+  password: z.string().min(8, "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร"),
+  phoneNumber: z.string().regex(/^\+?\d{1,14}$/, "หมายเลขโทรศัพท์ไม่ถูกต้อง"),
+  address: z.string().min(10, "ที่อยู่ต้องมีอย่างน้อย 10 ตัวอักษร"),
   acceptTerms: z.boolean().refine((val) => val === true, {
-    message: "You must accept the terms and conditions",
+    message: "คุณต้องยอมรับเงื่อนไขและข้อตกลง",
   }),
 });
 
@@ -53,10 +53,9 @@ export function RegisterForm() {
 
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error || "Registration failed");
+        throw new Error(data.error || "การลงทะเบียนล้มเหลว");
       }
 
-      // Auto-login after successful registration
       const loginResponse = await signIn("credentials", {
         email: values.email,
         password: values.password,
@@ -69,6 +68,7 @@ export function RegisterForm() {
 
       router.push("/");
 
+      // TODO:
       // TODO : Add email verify
       // router.push("/verify?email=" + encodeURIComponent(values.email));
     } catch (error) {
@@ -86,7 +86,7 @@ export function RegisterForm() {
         name="firstName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>First Name</FormLabel>
+            <FormLabel>ชื่อ</FormLabel>
             <Input {...field} disabled={isLoading} />
             <FormMessage />
           </FormItem>
@@ -96,7 +96,7 @@ export function RegisterForm() {
         name="lastName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Last Name</FormLabel>
+            <FormLabel>นามสกุล</FormLabel>
             <Input {...field} disabled={isLoading} />
             <FormMessage />
           </FormItem>
@@ -106,7 +106,7 @@ export function RegisterForm() {
         name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>อีเมล</FormLabel>
             <Input {...field} type="email" disabled={isLoading} />
             <FormMessage />
           </FormItem>
@@ -116,7 +116,7 @@ export function RegisterForm() {
         name="password"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>รหัสผ่าน</FormLabel>
             <Input {...field} type="password" disabled={isLoading} />
             <FormMessage />
           </FormItem>
@@ -126,7 +126,7 @@ export function RegisterForm() {
         name="phoneNumber"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Phone Number</FormLabel>
+            <FormLabel>เบอร์โทรศัพท์</FormLabel>
             <Input {...field} type="tel" disabled={isLoading} />
             <FormMessage />
           </FormItem>
@@ -136,7 +136,7 @@ export function RegisterForm() {
         name="address"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Address</FormLabel>
+            <FormLabel>ที่อยู่</FormLabel>
             <Input {...field} disabled={isLoading} />
             <FormMessage />
           </FormItem>
@@ -145,21 +145,21 @@ export function RegisterForm() {
       <FormField
         name="acceptTerms"
         render={({ field }) => (
-          <FormItem className="flex items-center space-x-2">
+          <FormItem className="flex items-baseline space-x-2 py-2">
             <Input
               type="checkbox"
               checked={field.value}
               onChange={field.onChange}
               disabled={isLoading}
-              className="h-4 w-4"
+              className="h-[1rem] w-[1rem]"
             />
-            <FormLabel>I accept the terms and conditions</FormLabel>
+            <FormLabel>ฉันยอมรับเงื่อนไขและข้อตกลง</FormLabel>
             <FormMessage />
           </FormItem>
         )}
       />
       <Button type="submit" disabled={isLoading} className="w-full">
-        {isLoading ? "Registering..." : "Register"}
+        {isLoading ? "กำลังลงทะเบียน..." : "ลงทะเบียน"}
       </Button>
     </Form>
   );

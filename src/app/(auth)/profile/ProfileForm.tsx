@@ -123,8 +123,8 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle>Personal Information</CardTitle>
-            <Button onClick={() => setIsEditing(!isEditing)}>{isEditing ? "Cancel" : "Edit"}</Button>
+            <CardTitle>ข้อมูลส่วนตัว</CardTitle>
+            <Button onClick={() => setIsEditing(!isEditing)}>{isEditing ? "ยกเลิก" : "แก้ไข"}</Button>
           </div>
         </CardHeader>
         <CardContent>
@@ -134,7 +134,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>อีเมล</FormLabel>
                     <Input {...field} disabled={true} />
                     <FormMessage />
                   </FormItem>
@@ -144,7 +144,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name</FormLabel>
+                    <FormLabel>ชื่อจริง</FormLabel>
                     <Input {...field} disabled={!isEditing} />
                     <FormMessage />
                   </FormItem>
@@ -154,7 +154,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name</FormLabel>
+                    <FormLabel>นามสกุล</FormLabel>
                     <Input {...field} disabled={!isEditing} />
                     <FormMessage />
                   </FormItem>
@@ -164,7 +164,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel>เบอร์โทรศัพท์</FormLabel>
                     <Input {...field} value={field.value || ""} disabled={true} />
                     <FormMessage />
                   </FormItem>
@@ -175,7 +175,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Address</FormLabel>
+                    <FormLabel>ที่อยู่</FormLabel>
                     <Input {...field} value={field.value || ""} disabled={!isEditing} />
                     <FormMessage />
                   </FormItem>
@@ -183,7 +183,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
               />
             </div>
 
-            {isEditing && <Button type="submit">Save Changes</Button>}
+            {isEditing && <Button type="submit">บันทึก</Button>}
           </Form>
         </CardContent>
       </Card>
@@ -191,7 +191,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
       {initialData.isSeller && (
         <Card>
           <CardHeader>
-            <CardTitle>Seller Information</CardTitle>
+            <CardTitle>ข้อมูลผู้ขาย</CardTitle>
           </CardHeader>
           <CardContent>
             <Form form={sellerForm} onSubmit={onSellerSubmit}>
@@ -199,7 +199,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="bankAccount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Bank Account</FormLabel>
+                    <FormLabel>บัญชีธนาคาร</FormLabel>
                     <Input {...field} disabled={!isEditing} />
                     <FormMessage />
                   </FormItem>
@@ -210,7 +210,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="bankName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Bank Name</FormLabel>
+                    <FormLabel>ชื่อธนาคาร</FormLabel>
                     <Input {...field} disabled={!isEditing} />
                     <FormMessage />
                   </FormItem>
@@ -221,7 +221,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 name="idCardNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>ID Card Number</FormLabel>
+                    <FormLabel>เลขบัตรประชาชน</FormLabel>
                     <Input {...field} disabled={!isEditing} />
                     <FormMessage />
                   </FormItem>
@@ -230,7 +230,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
 
               {initialData.sellerProfile?.idCardImageKey && (
                 <div>
-                  <FormLabel>ID Card Image</FormLabel>
+                  <FormLabel>รูปถ่ายบัตรประชาชน</FormLabel>
                   <Image
                     src={initialData.sellerProfile.idCardImageKey}
                     alt="ID Card"
@@ -239,7 +239,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 </div>
               )}
 
-              {isEditing && <Button type="submit">Update Seller Profile</Button>}
+              {isEditing && <Button type="submit">บันทึกข้อมูลผู้ขาย</Button>}
             </Form>
           </CardContent>
         </Card>

@@ -17,11 +17,10 @@ export function EmailVerification() {
   useEffect(() => {
     setMounted(true);
 
-    // Fetch the session and get the email from it
     const fetchSession = async () => {
       const session = await getSession();
       if (session?.user?.email) {
-        setEmail(session.user.email); // Set the email from the session
+        setEmail(session.user.email);
       } else {
         setError("No email found in session.");
       }
@@ -89,22 +88,21 @@ export function EmailVerification() {
 
   return (
     <div className="mx-auto max-w-md space-y-4">
-      <h2 className="text-center text-2xl font-bold">Verify your email</h2>
       {email ? (
-        <p className="text-center text-gray-600">We have sent a verification code to {email}</p>
+        <p className="text-center text-gray-600">เราส่งอีเมลยืนยันให้ท่านที่ {email}</p>
       ) : (
-        <p className="text-center text-gray-600">No email found in session.</p>
+        <p className="text-center text-gray-600">ไม่พบอีเมล กรุณาเข้าสู่ระบบอีกครั้ง</p>
       )}
       <form onSubmit={onSubmit} className="space-y-4">
-        <Input name="token" type="text" placeholder="Enter verification code" disabled={isLoading} />
+        <Input name="token" type="text" placeholder="กรอกรหัสยืนยัน" disabled={isLoading} />
         {error && <p className="text-sm text-red-500">{error}</p>}
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Verifying..." : "Verify Email"}
+          {isLoading ? "กำลังยีนยัน..." : "ยืนยัน"}
         </Button>
       </form>
       {email && (
         <Button type="button" className="w-full" onClick={resendVerification} disabled={isLoading}>
-          Resend verification email
+          ส่งรหัสยืนยันอีกครั้ง
         </Button>
       )}
     </div>
