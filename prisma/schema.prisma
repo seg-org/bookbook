@@ -11,7 +11,7 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("POSTGRES_URL")
-  //directUrl = env("DIRECT_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -34,7 +34,6 @@ model User {
   updatedAt        DateTime       @updatedAt @map("updated_at")
   sellerProfile    SellerProfile?
   posts            Post[]
-  books            Book[]
 
   @@map("users")
 }
@@ -74,9 +73,8 @@ model Book {
   isbn          String @unique
   pages         Int
   coverImageKey String @map("cover_image_key")
-  seller        User?  @relation(fields: [sellerId], references: [id])
-  sellerId      String @map("seller_id")
   posts         Post[]
+  // TODO verifiedBy Admin
 
   @@map("books")
 }
@@ -90,7 +88,7 @@ model Post {
   seller       User          @relation(fields: [sellerId], references: [id])
   sellerId     String        @map("seller_id")
   book         Book          @relation(fields: [bookId], references: [id])
-  bookId       String        @unique @map("book_id")
+  bookId       String        @map("book_id")
   transactions Transaction[]
 
   @@map("posts")
@@ -110,12 +108,12 @@ model Transaction {
   status         TransactionStatus
   failData       TransactionFail?
   // payment data
-  paymentMethod  PaymentMethod
+  paymentMethod  PaymentMethod     @map("payment_method")
   hashId         String            @map("hashId")
   paidOn         DateTime          @default(now()) @map("paid_on")
   amount         Int
   // shipment data
-  shipmentMethod ShipmentMethod
+  shipmentMethod ShipmentMethod    @map("shipment_method")
   trackingURL    String            @map("tracking_url")
   isDelivered    Boolean           @map("is_delivered")
 
@@ -141,17 +139,25 @@ enum TransactionStatus {
   VERIFYING @map("verifying")
   COMPLETE  @map("complete")
   FAIL      @map("fail")
+
+  @@map("transaction_status_type")
 }
 
 enum TransactionFailType {
   CHEAT @map("cheat")
+
+  @@map("transaction_fail_type")
 }
 
 enum PaymentMethod {
   CREDIT_CARD    @map("credit_card")
   ONLINE_BANKING @map("online_banking")
+
+  @@map("payment_method_type")
 }
 
 enum ShipmentMethod {
   DELIVERY @map("delivery")
+
+  @@map("shipment_method_type")
 }

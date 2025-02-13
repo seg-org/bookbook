@@ -17,11 +17,10 @@ const bookSchema = z.object({
   isbn: z.string().min(10, "ISBN must be at least 10 characters"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
-  sellerId: z.string(),
 });
 type CreateBookFormData = z.infer<typeof bookSchema>;
 
-export default function SellerPostPage() {
+export default function AddBookPage() {
   const {
     register,
     handleSubmit,
@@ -31,14 +30,12 @@ export default function SellerPostPage() {
     resolver: zodResolver(bookSchema),
   });
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const isAuthenticated = status === "authenticated";
 
   if (!isAuthenticated) {
     redirect("/login");
   }
-
-  setValue("sellerId", session.user.id);
 
   const [message, setMessage] = useState("");
   const [loadingDescription, setLoadingDescription] = useState(false);
