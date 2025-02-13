@@ -50,7 +50,7 @@
     "coverImagePath": "./prisma/seed/images/book/pid-med.jpg"
   },
   {
-    "id": "book_5",
+    "id": "book_6",
     "title": "AI ที่มีหัวใจ The Ethical Algorithm",
     "author": "ไมเคิล เคินส์ และ แอรอน รอท (Michael Kearns and Aaron Roth) / ผู้ช่วยศาสตราจารย์ ดร. จิตร์ทัศน์ ฝักเจริญผล",
     "genre": "คอมพิวเตอร์",
@@ -60,7 +60,7 @@
     "coverImagePath": "./prisma/seed/images/book/ethical-algo.webp"
   },
   {
-    "id": "book_6",
+    "id": "book_7",
     "title": "新完全マスタ−読解日本語能力試験Ｎ１",
     "author": "福岡理恵子 / 清水知子（日本語教育）",
     "genre": "ภาษาญี่ปุ่น",
@@ -70,7 +70,7 @@
     "coverImagePath": "./prisma/seed/images/book/n1-dokkai.jpg"
   },
   {
-    "id": "book_7",
+    "id": "book_8",
     "title": "การทวนสอบเชิงรูปนัย",
     "author": "วิวัฒน์ วัฒนาวุฒิ",
     "genre": "คอมพิวเตอร์",

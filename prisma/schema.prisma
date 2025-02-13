@@ -74,6 +74,7 @@ model Book {
   pages         Int
   coverImageKey String @map("cover_image_key")
   posts         Post[]
+  // TODO verifiedBy Admin
 
   @@map("books")
 }
@@ -107,12 +108,12 @@ model Transaction {
   status         TransactionStatus
   failData       TransactionFail?
   // payment data
-  paymentMethod  PaymentMethod
+  paymentMethod  PaymentMethod     @map("payment_method")
   hashId         String            @map("hashId")
   paidOn         DateTime          @default(now()) @map("paid_on")
   amount         Int
   // shipment data
-  shipmentMethod ShipmentMethod
+  shipmentMethod ShipmentMethod    @map("shipment_method")
   trackingURL    String            @map("tracking_url")
   isDelivered    Boolean           @map("is_delivered")
 
@@ -138,17 +139,25 @@ enum TransactionStatus {
   VERIFYING @map("verifying")
   COMPLETE  @map("complete")
   FAIL      @map("fail")
+
+  @@map("transaction_status_type")
 }
 
 enum TransactionFailType {
   CHEAT @map("cheat")
+
+  @@map("transaction_fail_type")
 }
 
 enum PaymentMethod {
   CREDIT_CARD    @map("credit_card")
   ONLINE_BANKING @map("online_banking")
+
+  @@map("payment_method_type")
 }
 
 enum ShipmentMethod {
   DELIVERY @map("delivery")
+
+  @@map("shipment_method_type")
 }
