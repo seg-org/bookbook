@@ -43,7 +43,20 @@ export async function POST(req: NextRequest) {
 
 export async function GET(_: NextRequest, props: { params: Promise<{ roomId: string }> }) {
   const { roomId } = await props.params;
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
+    // check chatRoom exists and user is a member
+    const room = await prisma.chatRoom.findUnique({ where: { id: roomId } });
+    if (!room) {
+      return NextResponse.json({ error: `Room with id ${roomId} not found` }, { status: 404 });
+    }
+    if (!room.userIds.includes(session.user.id)) {
+      return NextResponse.json({ error: "You are not a member of this room" }, { status: 403 });
+    }
+
     const chatMessages = await prisma.chatMessage.findMany({
       where: { roomId },
     });
