@@ -29,9 +29,10 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
     return <div>Failed to get posts</div>;
   }
 
-  const filter_posts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
+  let filteredPosts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
+  filteredPosts = filteredPosts.filter((post) => post.sellerId !== session?.user.id);
 
-  filter_posts.sort(function (a, b) {
+  filteredPosts.sort(function (a, b) {
     return priceAsc * (a.price - b.price);
   });
 
@@ -55,7 +56,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
           {recommendedPosts.length > 0 && <RecommendPostCard post={recommendedPosts[0]} key={recommendedPosts[0].id} />}
-          {filter_posts.map((post: Post) => (
+          {filteredPosts.map((post: Post) => (
             <PostCard post={post} key={post.id} />
           ))}
         </div>
