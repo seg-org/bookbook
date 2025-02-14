@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/Button";
+import { createChatRoom } from "@/data/chat";
 import { Post } from "@/data/dto/post.dto";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaShoppingBasket } from "react-icons/fa";
@@ -20,6 +22,9 @@ const cut = (s: string, n: number) => {
 };
 
 function PostCard({ post, isRecommended }: PostCardProps) {
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
   const router = useRouter();
 
   const initiate_transaction = () => {
@@ -27,6 +32,16 @@ function PostCard({ post, isRecommended }: PostCardProps) {
     const encodedBookTitle = encodeURIComponent(post.book.title);
     const encodedPostPrice = encodeURIComponent(post.price.toString());
     router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
+  };
+
+  const handleChatWithSeller = async (postId: string) => {
+    if (!isAuthenticated || !session?.user) {
+      router.push("/login");
+      return;
+    }
+
+    await createChatRoom({ subject: "post", subjectId: postId });
+    router.push(`/chat`);
   };
 
   return (
@@ -74,7 +89,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
             </div>
           </Button>
-          <Button onClick={() => router.push(`/chat`)}>
+          <Button onClick={() => handleChatWithSeller(post.id)}>
             <div className="flex items-center justify-center gap-x-2">
               <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
             </div>
