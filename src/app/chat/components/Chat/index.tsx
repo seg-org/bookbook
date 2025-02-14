@@ -1,3 +1,4 @@
+import { sendMessage } from "@/data/chat";
 import { useEffect, useState } from "react";
 import { ChatRoom } from "../../page";
 
@@ -9,29 +10,22 @@ function Chat({ chatRoom }: ChatProps) {
   const [message, setMessage] = useState("");
   useEffect(() => {}, []);
 
-  const sendMessage = async () => {
+  const handleSendMessage = async () => {
     if (!message.trim()) return;
 
-    try {
-      await fetch("/api/send-message", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chatRoomId: chatRoom.id,
-          message,
-        }),
-      });
-
-      setMessage(""); // Clear input after sending
-    } catch (error) {
-      console.error("Failed to send message:", error);
+    const messageRes = await sendMessage(chatRoom.id, message);
+    if (messageRes instanceof Error) {
+      console.error("Failed to send message:", messageRes);
+      return;
     }
+
+    setMessage("");
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      sendMessage();
+      handleSendMessage();
     }
   };
 
@@ -50,7 +44,10 @@ function Chat({ chatRoom }: ChatProps) {
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
         />
-        <button className="ml-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" onClick={sendMessage}>
+        <button
+          className="ml-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          onClick={handleSendMessage}
+        >
           ส่ง
         </button>
       </div>

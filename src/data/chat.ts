@@ -12,3 +12,15 @@ export const getChatMessagesByRoom = async (roomId: string) => {
     return Error(`Failed to get ChatMessages with roomId ${roomId}`);
   }
 };
+
+export const sendMessage = async (roomId: string, message: string) => {
+  try {
+    const res: AxiosResponse<ChatMessage> = await apiClient.post(`/chat/${roomId}/messages`, { message, roomId });
+    // socketio
+
+    return res.data;
+  } catch (error) {
+    console.error("Failed to send message", error);
+    return Error("Failed to send message");
+  }
+};

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/Button";
 import { Post } from "@/data/dto/post.dto";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -21,7 +22,7 @@ function PostCard({ post }: PostCardProps) {
     const encodedBookTitle = encodeURIComponent(post.book.title);
     const encodedPostPrice = encodeURIComponent(post.price.toString());
     router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
-  }
+  };
 
   return (
     <>
@@ -58,7 +59,16 @@ function PostCard({ post }: PostCardProps) {
               <button className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-white p-1.5 text-sm text-black">
                 ดูข้อมูล
               </button>
-              <button onClick={initiate_transaction} className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white">
+              <Button
+                onClick={() => router.push(`/chat`)}
+                // className="rounded-lg border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white"
+              >
+                แชทกับผู้ขาย
+              </Button>
+              <button
+                onClick={initiate_transaction}
+                className="cursor-pointer rounded-lg border-2 border-[#B8B8B8] bg-[#8BB9D8] p-1.5 text-sm text-white"
+              >
                 เพิ่มใส่ตะกร้า
               </button>
             </div>
