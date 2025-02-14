@@ -29,9 +29,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
     return <div>Failed to get posts</div>;
   }
 
-  const filter_posts = posts
-    .slice(1)
-    .filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
+  const filter_posts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
 
   filter_posts.sort(function (a, b) {
     return priceAsc * (a.price - b.price);
