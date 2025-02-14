@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/Button";
+import { getChatRoom } from "@/data/chat";
 import { Post } from "@/data/dto/post.dto";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -17,6 +19,9 @@ const cut = (s: string, n: number) => {
 };
 
 function PostCard({ post, isRecommended }: PostCardProps) {
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
   const router = useRouter();
 
   const initiate_transaction = () => {
@@ -24,6 +29,16 @@ function PostCard({ post, isRecommended }: PostCardProps) {
     const encodedBookTitle = encodeURIComponent(post.book.title);
     const encodedPostPrice = encodeURIComponent(post.price.toString());
     router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
+  };
+
+  const handleChatWithSeller = async (postId: string) => {
+    if (!isAuthenticated || !session?.user) {
+      router.push("/login");
+      return;
+    }
+
+    await getChatRoom({ subject: "post", subjectId: postId, userId: session.user.id });
+    router.push(`/chat`);
   };
 
   return (
@@ -67,7 +82,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
         </div>
         <div className="mr-8 mt-auto flex gap-2 self-end">
           <Button variant="secondary">ดูข้อมูล</Button>
-          <Button onClick={() => router.push(`/chat`)}>แชทกับผู้ขาย</Button>
+          <Button onClick={() => handleChatWithSeller(post.id)}>แชทกับผู้ขาย</Button>
           <Button variant="success" onClick={initiate_transaction}>
             เพิ่มใส่ตะกร้า
           </Button>

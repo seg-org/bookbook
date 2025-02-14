@@ -11,3 +11,9 @@ export type ChatRoom = {
   postId: string;
   userIds: string[];
 };
+
+export type CreateChatRoom = {
+  subject: "post" | "report";
+  subjectId: string;
+  userId: string;
+};
