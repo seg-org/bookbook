@@ -6,12 +6,13 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import Chat from "./components/Chat";
+import StartChat from "./components/Chat/StartChat";
 import ChatCard from "./components/ChatCard";
 
 function ChatPage() {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const isAuthenticated = status === "authenticated";
-  if (!isAuthenticated) {
+  if (!isAuthenticated || !session?.user) {
     redirect("/login");
   }
 
@@ -39,8 +40,8 @@ function ChatPage() {
             />
           ))}
         </div>
-        <div className="h-full w-[65%] bg-orange-100">
-          <Chat chatRoom={currentChatRoom} />
+        <div className="h-full w-[65%]">
+          {currentChatRoom ? <Chat chatRoom={currentChatRoom} user={session.user} /> : <StartChat />}
         </div>
       </div>
     </>

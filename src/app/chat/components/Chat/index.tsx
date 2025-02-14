@@ -1,23 +1,20 @@
 import { sendMessage } from "@/data/chat";
 import { ChatRoom } from "@/data/dto/chat.dto";
+import { useGetChatMessages } from "@/hooks/useGetChatMessages";
+import { SessionUser } from "@/lib/auth";
 import { useEffect, useState } from "react";
-import { IoLogoWechat } from "react-icons/io5";
 
 type ChatProps = {
-  chatRoom?: ChatRoom;
+  chatRoom: ChatRoom;
+  user: SessionUser;
 };
 
-function Chat({ chatRoom }: ChatProps) {
+function Chat({ chatRoom, user }: ChatProps) {
   const [message, setMessage] = useState("");
+
   useEffect(() => {}, []);
 
-  if (!chatRoom)
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center bg-gray-50 text-gray-600">
-        <IoLogoWechat className="h-1/4 w-1/4" />
-        <p className="text-xl">เริ่มแชทกัน</p>
-      </div>
-    );
+  const messages = useGetChatMessages(chatRoom.id);
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
@@ -38,11 +35,23 @@ function Chat({ chatRoom }: ChatProps) {
     }
   };
 
+  const getUsername = (userId: string) => {
+    if (userId === user.id) {
+      return user.name;
+    } else {
+      return `${chatRoom.userB.firstName} ${chatRoom.userB.lastName}`;
+    }
+  };
+
   return (
     <div className="h-full w-full bg-gray-50">
       <div className="h-[90%] border-b p-4">
-        <p>{chatRoom.id}</p>
-        <p>{chatRoom.postId}</p>
+        {messages.chatMessages.map((m) => (
+          <div key={m.id} className="mb-2 flex flex-col">
+            <p className="text-sm">{getUsername(m.senderId)}</p>
+            <p>{m.message}</p>
+          </div>
+        ))}
       </div>
       <div className="flex h-[10%] items-center border-t p-4">
         <input
