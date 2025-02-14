@@ -12,3 +12,14 @@ export const getAllPosts = async () => {
     return Error("Failed to get all posts");
   }
 };
+
+export const getPost = async (id: string) => {
+  try {
+    const res: AxiosResponse<Post> = await apiClient.get(`/posts/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to get post with id ${id}`, error);
+    return Error(`Failed to get post with id ${id}`);
+  }
+};

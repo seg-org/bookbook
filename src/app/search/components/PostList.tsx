@@ -5,7 +5,6 @@ import { useGetRecommendPost } from "@/hooks/useGetRecommendPost";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PostCard from "./PostCard";
-import RecommendPostCard from "./RecommendPostCard";
 export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
@@ -55,7 +54,9 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           </button>
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
-          {recommendedPosts.length > 0 && <RecommendPostCard post={recommendedPosts[0]} key={recommendedPosts[0].id} />}
+          {recommendedPosts.length > 0 && (
+            <PostCard post={recommendedPosts[0]} key={recommendedPosts[0].id} isRecommended />
+          )}
           {filteredPosts.map((post: Post) => (
             <PostCard post={post} key={post.id} />
           ))}
