@@ -11,6 +11,7 @@ export async function GET() {
 
   const chatRooms = await prisma.chatRoom.findMany({
     where: { userIds: { hasSome: [session.user.id] } },
+    include: { post: { include: { book: true } } },
   });
 
   return NextResponse.json(chatRooms);
