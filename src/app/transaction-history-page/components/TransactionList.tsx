@@ -115,7 +115,7 @@ const TransactionList = ({ filter, userId, setTotalBuy, setTotalSell }: Transact
   }
 
   return (
-    <div className="3xl:grid-cols_5 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+    <div className="5xl:grid-cols_5 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
       {child_components}
     </div>
   );
