@@ -15,6 +15,17 @@ export const createChatRoom = async (dto: CreateChatRoom) => {
   }
 };
 
+export const getMyChatRooms = async () => {
+  try {
+    const res: AxiosResponse<ChatRoom[]> = await apiClient.post(`/chat/my-rooms`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to get my ChatRooms`, error);
+    return Error(`Failed to get my ChatRooms`);
+  }
+};
+
 export const getChatMessagesByRoom = async (roomId: string) => {
   try {
     const res: AxiosResponse<ChatMessage[]> = await apiClient.get(`/chat/${roomId}/messages`);
