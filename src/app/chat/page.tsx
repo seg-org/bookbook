@@ -12,7 +12,7 @@ import ChatCard from "./components/ChatCard";
 function ChatPage() {
   const { status, data: session } = useSession();
   const isAuthenticated = status === "authenticated";
-  if (!isAuthenticated || !session?.user) {
+  if (status !== "loading" && (!isAuthenticated || !session?.user)) {
     redirect("/login");
   }
 
@@ -33,7 +33,7 @@ function ChatPage() {
         <div className="h-full w-[35%] border-r border-gray-200 bg-yellow-100">
           {chatRooms.map((chatRoom) => (
             <ChatCard
-              key={chatRoom.postId}
+              key={chatRoom.id}
               chatRoom={chatRoom}
               isActive={chatRoom.id === currentChatRoom?.id}
               onClick={() => setCurrentChatRoom(chatRoom)}
@@ -41,7 +41,7 @@ function ChatPage() {
           ))}
         </div>
         <div className="h-full w-[65%]">
-          {currentChatRoom ? <Chat chatRoom={currentChatRoom} user={session.user} /> : <StartChat />}
+          {currentChatRoom ? <Chat chatRoom={currentChatRoom} user={session!.user} /> : <StartChat />}
         </div>
       </div>
     </>

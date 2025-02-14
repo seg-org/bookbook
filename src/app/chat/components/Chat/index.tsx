@@ -3,6 +3,7 @@ import { ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
 import { SessionUser } from "@/lib/auth";
 import { useEffect, useState } from "react";
+import { MessageBubble } from "./MessageBubble";
 
 type ChatProps = {
   chatRoom: ChatRoom;
@@ -37,7 +38,7 @@ function Chat({ chatRoom, user }: ChatProps) {
 
   const getUsername = (userId: string) => {
     if (userId === user.id) {
-      return user.name;
+      return "คุณ";
     } else {
       return `${chatRoom.userB.firstName} ${chatRoom.userB.lastName}`;
     }
@@ -47,10 +48,13 @@ function Chat({ chatRoom, user }: ChatProps) {
     <div className="h-full w-full bg-gray-50">
       <div className="h-[90%] border-b p-4">
         {messages.chatMessages.map((m) => (
-          <div key={m.id} className="mb-2 flex flex-col">
-            <p className="text-sm">{getUsername(m.senderId)}</p>
-            <p>{m.message}</p>
-          </div>
+          <MessageBubble
+            key={m.id}
+            isMine={m.senderId === user.id}
+            username={getUsername(m.senderId)}
+            message={m.message}
+            isSent
+          />
         ))}
       </div>
       <div className="flex h-[10%] items-center border-t p-4">
