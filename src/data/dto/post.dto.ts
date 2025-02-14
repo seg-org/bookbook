@@ -8,4 +8,5 @@ export type Post = {
   published: boolean;
   bookId: string;
   book: Book;
+  sellerId: string;
 };
