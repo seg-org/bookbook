@@ -1,6 +1,8 @@
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Post } from "@/data/dto/post.dto";
+import { useGetAllPosts } from "@/hooks/useGetAllPosts";
 import { useGetRecommendPost } from "@/hooks/useGetRecommendPost";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PostCard from "./PostCard";
 import RecommendPostCard from "./RecommendPostCard";
@@ -8,15 +10,24 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
 
-  const { posts, loading, error } = useGetRecommendPost("5894974");
+  const { posts, loading: loadingAll, error: errorAll } = useGetAllPosts();
+
+  const { data: session } = useSession();
+  const {
+    posts: recommendedPosts,
+    loading: loadingRecommended,
+    error: errorRecommended,
+  } = useGetRecommendPost(session?.user.id);
+
+  const loading = loadingAll || loadingRecommended;
+  const error = errorAll || errorRecommended;
+
   if (loading) {
     return <LoadingAnimation />;
   }
   if (error) {
     return <div>Failed to get posts</div>;
   }
-
-  const recommendPost = posts[0];
 
   const filter_posts = posts
     .slice(1)
@@ -45,7 +56,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           </button>
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
-          <RecommendPostCard post={recommendPost} key={recommendPost.id}></RecommendPostCard>
+          {recommendedPosts.length > 0 && <RecommendPostCard post={recommendedPosts[0]} key={recommendedPosts[0].id} />}
           {filter_posts.map((post: Post) => (
             <PostCard post={post} key={post.id} />
           ))}
