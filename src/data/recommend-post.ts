@@ -4,7 +4,7 @@ import { Post } from "./dto/post.dto";
 
 export const getRecommendPosts = async (userId: string) => {
     try {
-      const res: AxiosResponse<Post> = await apiClient.get("/posts/recommend", {
+      const res: AxiosResponse<Post[]> = await apiClient.get("/posts/recommend", {
         params: { user_id: userId },
       });
   

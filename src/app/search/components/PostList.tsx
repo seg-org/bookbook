@@ -1,6 +1,8 @@
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Post } from "@/data/dto/post.dto";
 import { useGetAllPosts } from "@/hooks/useGetAllPosts";
+import { useGetRecommendPost } from "@/hooks/useGetRecommendPost";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PostCard from "./PostCard";
 import RecommendPostCard from "./RecommendPostCard";
@@ -8,15 +10,18 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
 
-  // const { recommend_post, recommend_post_loading, recommend_post_error } = useGetRecommendPost("dfdgfh");
-  // if (recommend_post_loading) {
-  //   return <div>Loading...</div>;
-  // }
-  // if (recommend_post_error) {
-  //   return <div>Failed to get posts</div>;
-  // }
+  const { posts, loading: loadingAll, error: errorAll } = useGetAllPosts();
 
-  const { posts, loading, error } = useGetAllPosts();
+  const { data: session } = useSession();
+  const {
+    posts: recommendedPosts,
+    loading: loadingRecommended,
+    error: errorRecommended,
+  } = useGetRecommendPost(session?.user.id);
+
+  const loading = loadingAll || loadingRecommended;
+  const error = errorAll || errorRecommended;
+
   if (loading) {
     return <LoadingAnimation />;
   }
@@ -24,9 +29,10 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
     return <div>Failed to get posts</div>;
   }
 
-  const filter_posts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
+  let filteredPosts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
+  filteredPosts = filteredPosts.filter((post) => post.sellerId !== session?.user.id);
 
-  filter_posts.sort(function (a, b) {
+  filteredPosts.sort(function (a, b) {
     return priceAsc * (a.price - b.price);
   });
 
@@ -49,12 +55,10 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           </button>
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
-          {filter_posts.map((post: Post, idx: number) =>
-            idx < 3 ? <RecommendPostCard post={post} key={post.id} /> : <PostCard post={post} key={post.id} />
-          )}
-          {/* {filter_posts.map((post: Post) => (
+          {recommendedPosts.length > 0 && <RecommendPostCard post={recommendedPosts[0]} key={recommendedPosts[0].id} />}
+          {filteredPosts.map((post: Post) => (
             <PostCard post={post} key={post.id} />
-          ))} */}
+          ))}
         </div>
       </div>
     </>
