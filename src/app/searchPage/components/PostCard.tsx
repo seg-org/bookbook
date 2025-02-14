@@ -5,11 +5,11 @@ type PostCardProps = {
   post: Post;
 };
 
-const cut = (s: string, n: number) => {
-  if (s.length > n) {
-    return s.slice(0, n) + "...";
+const cut = (str: string, maxLength: number) => {
+  if (str.length > maxLength) {
+    return str.slice(0, maxLength) + "...";
   }
-  return s;
+  return str;
 };
 
 function PostCard({ post }: PostCardProps) {
