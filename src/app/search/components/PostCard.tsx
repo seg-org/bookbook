@@ -3,6 +3,9 @@ import { Post } from "@/data/dto/post.dto";
 import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FaShoppingBasket } from "react-icons/fa";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { IoLogoWechat } from "react-icons/io5";
 
 type PostCardProps = {
   post: Post;
@@ -65,11 +68,21 @@ function PostCard({ post, isRecommended }: PostCardProps) {
             {isRecommended && <h3 className="self-end dark:text-white">(RECOMMENDED)</h3>}
           </div>
         </div>
-        <div className="mr-8 mt-auto flex gap-2 self-end">
-          <Button variant="secondary">ดูข้อมูล</Button>
-          <Button onClick={() => router.push(`/chat`)}>แชทกับผู้ขาย</Button>
+        <div className="mt-auto flex gap-2 self-end">
+          <Button variant="secondary">
+            <div className="flex items-center justify-center gap-x-2">
+              <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
+            </div>
+          </Button>
+          <Button onClick={() => router.push(`/chat`)}>
+            <div className="flex items-center justify-center gap-x-2">
+              <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
+            </div>
+          </Button>
           <Button variant="success" onClick={initiate_transaction}>
-            เพิ่มใส่ตะกร้า
+            <div className="flex items-center justify-center gap-x-2">
+              <FaShoppingBasket className="h-6 w-6" /> เพิ่มใส่ตะกร้า
+            </div>
           </Button>
         </div>
       </div>
