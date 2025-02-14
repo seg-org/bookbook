@@ -1,39 +1,30 @@
 "use client";
 
+import { ChatRoom } from "@/data/dto/chat.dto";
+import { useGetMyChatRooms } from "@/hooks/useGetMyChatRooms";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import Chat from "./components/Chat";
 import ChatCard from "./components/ChatCard";
 
-export type ChatRoom = {
-  id: string;
-  subject: "post" | "report";
-  subjectId: string;
-};
-
 function ChatPage() {
   const { status } = useSession();
   const isAuthenticated = status === "authenticated";
-
   if (!isAuthenticated) {
     redirect("/login");
   }
 
-  const chatRooms: ChatRoom[] = [
-    {
-      id: "1",
-      subject: "post",
-      subjectId: "1",
-    },
-    {
-      id: "2",
-      subject: "report",
-      subjectId: "2",
-    },
-  ];
+  const { chatRooms, loading, error } = useGetMyChatRooms();
 
-  const [currentChatRoom, setCurrentChatRoom] = useState(chatRooms[0]);
+  const [currentChatRoom, setCurrentChatRoom] = useState<ChatRoom | undefined>(chatRooms[0]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <>
@@ -41,9 +32,9 @@ function ChatPage() {
         <div className="h-full w-[35%] border-r border-gray-200 bg-yellow-100">
           {chatRooms.map((chatRoom) => (
             <ChatCard
-              key={chatRoom.subjectId}
+              key={chatRoom.postId}
               chatRoom={chatRoom}
-              isActive={chatRoom.id === currentChatRoom.id}
+              isActive={chatRoom.id === currentChatRoom?.id}
               onClick={() => setCurrentChatRoom(chatRoom)}
             />
           ))}

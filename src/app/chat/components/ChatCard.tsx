@@ -1,6 +1,6 @@
+import { ChatRoom } from "@/data/dto/chat.dto";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { ChatRoom } from "../page";
 
 type ChatCardProps = {
   chatRoom: ChatRoom;
@@ -18,8 +18,8 @@ function ChatCard({ chatRoom, isActive, onClick }: ChatCardProps) {
   if (!isMounted) {
     return (
       <div className="h-[10%] w-full bg-gray-50 p-4">
-        <p>{chatRoom.subject}</p>
-        <p>{chatRoom.subjectId}</p>
+        <p>{chatRoom.id}</p>
+        <p>{chatRoom.postId}</p>
       </div>
     );
   }
@@ -32,8 +32,8 @@ function ChatCard({ chatRoom, isActive, onClick }: ChatCardProps) {
       )}
       onClick={() => onClick()}
     >
-      <p>{chatRoom.subject}</p>
-      <p>{chatRoom.subjectId}</p>
+      <p>{chatRoom.id}</p>
+      <p>{chatRoom.postId}</p>
     </div>
   );
 }

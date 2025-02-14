@@ -1,14 +1,21 @@
 import { sendMessage } from "@/data/chat";
+import { ChatRoom } from "@/data/dto/chat.dto";
 import { useEffect, useState } from "react";
-import { ChatRoom } from "../../page";
 
 type ChatProps = {
-  chatRoom: ChatRoom;
+  chatRoom?: ChatRoom;
 };
 
 function Chat({ chatRoom }: ChatProps) {
   const [message, setMessage] = useState("");
   useEffect(() => {}, []);
+
+  if (!chatRoom)
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-gray-50 text-gray-600">
+        <p className="text-xl">เริ่มแชทกัน</p>
+      </div>
+    );
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
@@ -32,8 +39,8 @@ function Chat({ chatRoom }: ChatProps) {
   return (
     <div className="h-full w-full bg-gray-50">
       <div className="h-[90%] border-b p-4">
-        <p>{chatRoom.subject}</p>
-        <p>{chatRoom.subjectId}</p>
+        <p>{chatRoom.id}</p>
+        <p>{chatRoom.postId}</p>
       </div>
       <div className="flex h-[10%] items-center border-t p-4">
         <input
