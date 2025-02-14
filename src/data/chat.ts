@@ -3,9 +3,9 @@ import { AxiosResponse } from "axios";
 import { apiClient } from "./axios";
 import { ChatRoom, CreateChatRoom } from "./dto/chat.dto";
 
-export const getChatRoom = async (dto: CreateChatRoom) => {
+export const createChatRoom = async (dto: CreateChatRoom) => {
   try {
-    // creates a new chat room if not exist
+    // only creates a new chat room if not exist
     const res: AxiosResponse<ChatRoom> = await apiClient.post(`/chat`, dto);
 
     return res.data;

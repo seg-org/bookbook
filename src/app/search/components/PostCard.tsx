@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { getChatRoom } from "@/data/chat";
+import { createChatRoom } from "@/data/chat";
 import { Post } from "@/data/dto/post.dto";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
@@ -37,7 +37,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
       return;
     }
 
-    await getChatRoom({ subject: "post", subjectId: postId, userId: session.user.id });
+    await createChatRoom({ subject: "post", subjectId: postId });
     router.push(`/chat`);
   };
 

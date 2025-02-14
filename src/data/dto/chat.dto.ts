@@ -15,5 +15,4 @@ export type ChatRoom = {
 export type CreateChatRoom = {
   subject: "post" | "report";
   subjectId: string;
-  userId: string;
 };
