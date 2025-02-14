@@ -89,7 +89,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
             </div>
           </Button>
-          <Button onClick={() => router.push(`/chat`)}>
+          <Button onClick={() => handleChatWithSeller(post.id)}>
             <div className="flex items-center justify-center gap-x-2">
               <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
             </div>
