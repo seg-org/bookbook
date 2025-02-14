@@ -15,6 +15,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
+    const user = await prisma.user.findUnique({
+      where: { id: parsedData.data.userId },
+    });
+    if (!user) return NextResponse.json({ error: `User with id ${parsedData.data.userId} not found` }, { status: 404 });
+
     if (parsedData.data.subject === "post") {
       let chatRoom = await prisma.chatRoom.findFirst({
         where: { postId: parsedData.data.subjectId, userIds: { hasSome: [parsedData.data.userId] } },
@@ -39,7 +44,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(chatRoom, { status: 200 });
     }
   } catch (error) {
-    if (error instanceof Error) console.error("Error creating post", error.stack);
-    return NextResponse.json({ error: "Cannot create a post" }, { status: 500 });
+    if (error instanceof Error) console.error("Error creating a chatroom", error.stack);
+    return NextResponse.json({ error: "Cannot create a chatroom" }, { status: 500 });
   }
 }
