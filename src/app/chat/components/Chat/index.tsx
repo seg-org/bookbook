@@ -1,6 +1,7 @@
 import { sendMessage } from "@/data/chat";
 import { ChatRoom } from "@/data/dto/chat.dto";
 import { useEffect, useState } from "react";
+import { IoLogoWechat } from "react-icons/io5";
 
 type ChatProps = {
   chatRoom?: ChatRoom;
@@ -12,7 +13,8 @@ function Chat({ chatRoom }: ChatProps) {
 
   if (!chatRoom)
     return (
-      <div className="flex h-full w-full items-center justify-center bg-gray-50 text-gray-600">
+      <div className="flex h-full w-full flex-col items-center justify-center bg-gray-50 text-gray-600">
+        <IoLogoWechat className="h-1/4 w-1/4" />
         <p className="text-xl">เริ่มแชทกัน</p>
       </div>
     );
