@@ -27,8 +27,8 @@ function ChatCard({ chatRoom, isActive, onClick }: ChatCardProps) {
   return (
     <div
       className={clsx(
-        isActive && "bg-gray-200",
-        "h-[10%] w-full bg-gray-50 p-4 hover:cursor-pointer hover:bg-gray-200"
+        "h-[10%] w-full p-4 hover:cursor-pointer hover:bg-gray-200",
+        isActive ? "bg-gray-200" : "bg-gray-50"
       )}
       onClick={() => onClick()}
     >
