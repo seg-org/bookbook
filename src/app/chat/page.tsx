@@ -1,5 +1,7 @@
 "use client";
 
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import Chat from "./components/Chat";
 import ChatCard from "./components/ChatCard";
@@ -11,6 +13,13 @@ export type ChatRoom = {
 };
 
 function ChatPage() {
+  const { status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
+  if (!isAuthenticated) {
+    redirect("/login");
+  }
+
   const chatRooms: ChatRoom[] = [
     {
       id: "1",
