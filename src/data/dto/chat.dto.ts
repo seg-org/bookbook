@@ -1,4 +1,5 @@
 import { Post } from "./post.dto";
+import { User } from "./user.dto";
 
 export type ChatMessage = {
   id: string;
@@ -13,6 +14,8 @@ export type ChatRoom = {
   postId: string;
   userIds: string[];
   post: Post;
+  userB: User;
+  lastMessage: ChatMessage | null;
 };
 
 export type CreateChatRoom = {
