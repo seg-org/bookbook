@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 import { getPresignedUrl } from "../../objects/s3";
-import { number } from "zod";
 
 // Function to generate a seeded random number
 function seededRandom(seed: number) {
