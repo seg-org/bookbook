@@ -22,7 +22,7 @@ const TransactionBox = ({ transaction, type }: TransactionBoxProps) => {
   };
 
   return (
-    <div className="relative flex transform flex-row items-center justify-between gap-x-10 rounded-lg border border-gray-300 bg-white p-4 transition-transform duration-200 hover:scale-105 hover:shadow-xl">
+    <div className="relative flex transform flex-row items-center justify-between gap-x-5 rounded-lg border border-gray-300 bg-white p-4 transition-transform duration-200 hover:scale-105 hover:shadow-xl">
       <div className="flex flex-row items-center justify-start gap-5">
         <Image
           className="m-2.5 h-40 w-auto rounded-lg"
@@ -32,7 +32,7 @@ const TransactionBox = ({ transaction, type }: TransactionBoxProps) => {
           width={160}
         ></Image>
         <div className="flex flex-col">
-          <label className="text-xl font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>
+          <label className="text-lg font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>
           <label className="text-lg text-gray-400">
             {transaction.createdAt.toDateString()} {transaction.createdAt.getHours()}:
             {transaction.createdAt.getMinutes()}
