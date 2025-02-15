@@ -28,8 +28,8 @@ const TransactionBox = ({ transaction, type }: TransactionBoxProps) => {
           className="m-2.5 h-40 w-auto rounded-lg"
           src={transaction.post.book.coverImageUrl}
           alt="Book Cover"
-          height={90}
-          width={160}
+          height={160}
+          width={90}
         ></Image>
         <div className="flex flex-col">
           <label className="text-lg font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>

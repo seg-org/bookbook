@@ -77,26 +77,26 @@ const TransactionList = ({ filter, userId, setTotalBuy, setTotalSell }: Transact
     }
 
     setChildComponent(newChildComponents)
-  }, [transactions]);
+  }, [transactions, loading, error]);
 
-  if (loading) {
-    return <LoadingAnimation />;
-  }
-  if (error) {
-    return (
-      <div className="v-screen grid h-screen place-items-center text-4xl font-bold text-gray-400">
-        Failed to get transactions
-      </div>
-    );
+  if(userId === "---") {
+    return <div key="NoFound" className="flex-1 overflow-auto grid h-screen place-items-center text-4xl font-bold text-gray-400">
+      Please login to see transactions
+    </div>
   }
   if (transactions.length == 0) {
-    return (
-      <div className="v-screen grid h-screen place-items-center text-4xl font-bold text-gray-400">
-        No transaction found
-      </div>
-    );
+    return <div key="NoFound" className="flex-1 overflow-auto grid h-screen place-items-center text-4xl font-bold text-gray-400">
+      No transaction found
+    </div>
   }
-
+  if (loading) {
+    return <LoadingAnimation key="loading" />
+  }
+  if (error) {
+    return <div key="Fail" className="flex-1 overflow-auto grid h-screen place-items-center text-4xl font-bold text-gray-400">
+      Failed to get transactions
+    </div>
+  }
   
   return (
     <div className="5xl:grid-cols_5 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">

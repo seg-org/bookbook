@@ -1,5 +1,3 @@
-"use client";
-
 export interface FilterType {
   startDate: Date | null;
   endDate: Date | null;

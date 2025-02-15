@@ -12,12 +12,14 @@ export const useGetTransaction = (filter: FilterType, userId: string) => {
 
   useEffect(() => {
     (async () => {
-      const res = await getTransaction(filter, userId);
-      if (res instanceof Error) {
-        return setError(res);
-      }
+      if(userId !== "---") {
+        const res = await getTransaction(filter, userId);
+        if (res instanceof Error) {
+          return setError(res);
+        }
 
-      settransactions(res);
+        settransactions(res);
+      }
       setLoading(false);
     })();
   }, [filter, userId]);
