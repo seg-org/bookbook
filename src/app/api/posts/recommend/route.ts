@@ -24,7 +24,7 @@ export async function GET(request: Request) {
           include: { book: true },
         });
     
-    const postsWithImageUrl = await Promise.all(
+    let postsWithImageUrl = await Promise.all(
         posts.map(async (post) => {
         const url = await getPresignedUrl("book_images", post.book.coverImageKey);
         return {
@@ -45,9 +45,13 @@ export async function GET(request: Request) {
     const seed = parseInt(userId, 10) || 0;
     const randomIndex = Math.floor(seededRandom(seed) * postsWithImageUrl.length);
 
-    const recommendedPost = posts[randomIndex];
+    const recommendedPost = postsWithImageUrl[randomIndex];
 
-    return NextResponse.json(recommendedPost);
+    postsWithImageUrl = postsWithImageUrl.filter((post)=>post.id!=recommendedPost.id);
+
+    postsWithImageUrl = [recommendedPost,...postsWithImageUrl];
+
+    return NextResponse.json(postsWithImageUrl);
   } catch (error) {
     console.error("Error fetching recommended post:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
