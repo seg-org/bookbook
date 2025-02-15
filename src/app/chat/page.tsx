@@ -1,5 +1,6 @@
 "use client";
 
+import { readMessages } from "@/data/chat";
 import { ChatRoom } from "@/data/dto/chat.dto";
 import * as Ably from "ably";
 import { AblyProvider, ChannelProvider } from "ably/react";
@@ -21,12 +22,21 @@ function ChatPage() {
 
   const client = new Ably.Realtime({ authUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/socket` });
 
+  const handleChangeCurrentRoom = async (chatRoom: ChatRoom) => {
+    setCurrentChatRoom(chatRoom);
+    await readMessages(chatRoom.id, session?.user.id ?? "");
+  };
+
   return (
     <AblyProvider client={client}>
       <ChannelProvider channelName="chat">
         <div className="flex h-[calc(100vh-72px)]">
           <div className="h-full w-[35%] border-r border-gray-200 bg-gray-50">
-            <ChatRoomList currentChatRoom={currentChatRoom} setCurrentChatRoom={setCurrentChatRoom} />
+            <ChatRoomList
+              currentChatRoom={currentChatRoom}
+              setCurrentChatRoom={handleChangeCurrentRoom}
+              userId={session?.user.id ?? ""}
+            />
           </div>
           <div className="h-full w-[65%]">
             {currentChatRoom ? <Chat chatRoom={currentChatRoom} user={session!.user} /> : <StartChat />}

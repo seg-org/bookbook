@@ -7,17 +7,12 @@ import { ChatRoomCard } from "./ChatRoomCard";
 type ChatRoomListProps = {
   currentChatRoom?: ChatRoom;
   setCurrentChatRoom: (chatRoom: ChatRoom) => void;
+  userId: string;
 };
 
-export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom }: ChatRoomListProps) => {
+export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom, userId }: ChatRoomListProps) => {
   const { chatRooms, setChatRooms, loading, error } = useGetMyChatRooms();
   const [roomId, setRoomId] = useState<string | null>(null);
-  // const [lastMessages, setLastMessages] = useState<(string | undefined)[]>([]);
-
-  // useEffect(() => {
-  //   if (loading || error) return;
-  //   setLastMessages(chatRooms.map((cr) => cr.lastMessage?.message));
-  // }, [chatRooms, loading, error]);
 
   const sortedChatRooms = useMemo(() => {
     return [...chatRooms].sort((a, b) => {
@@ -33,9 +28,11 @@ export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom }: ChatRoomLi
   useChannel("chat", (message) => {
     const roomId: string = message.data.roomId;
     const messageText: string = message.data.message;
+    const senderId: string = message.data.senderId;
     setChatRooms((prev) => {
       const idx = prev.findIndex((cr) => cr.id === roomId);
       const updated = [...prev];
+      const lastRead = senderId === updated[idx].userIds[0] ? "lastReadA" : "lastReadB";
       if (idx !== -1) {
         updated[idx] = {
           ...updated[idx],
@@ -46,13 +43,30 @@ export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom }: ChatRoomLi
             message: messageText,
             createdAt: new Date(),
           },
+          [lastRead]: new Date(),
         };
       }
       return updated;
     });
-    console.log("roomId", roomId);
     setRoomId(roomId);
   });
+
+  const handleChangeCurrentRoom = (chatRoom: ChatRoom) => {
+    setChatRooms((prev) => {
+      const idx = prev.findIndex((cr) => cr.id === chatRoom.id);
+      const updated = [...prev];
+      if (idx !== -1) {
+        const lastRead = userId === chatRoom.userIds[0] ? "lastReadA" : "lastReadB";
+        updated[idx] = {
+          ...updated[idx],
+          [lastRead]: new Date(),
+        };
+      }
+      return updated;
+    });
+
+    setCurrentChatRoom(chatRoom);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -67,7 +81,8 @@ export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom }: ChatRoomLi
           key={chatRoom.id}
           chatRoom={chatRoom}
           isActive={chatRoom.id === currentChatRoom?.id}
-          onClick={() => setCurrentChatRoom(chatRoom)}
+          onClick={() => handleChangeCurrentRoom(chatRoom)}
+          userId={userId}
         />
       ))}
     </>

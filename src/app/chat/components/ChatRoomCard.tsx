@@ -7,6 +7,7 @@ type ChatRoomCardProps = {
   chatRoom: ChatRoom;
   isActive: boolean;
   onClick: () => void;
+  userId: string;
 };
 
 const cut = (s: string, n: number) => {
@@ -16,7 +17,7 @@ const cut = (s: string, n: number) => {
   return s;
 };
 
-export const ChatRoomCard = ({ chatRoom, isActive, onClick }: ChatRoomCardProps) => {
+export const ChatRoomCard = ({ chatRoom, isActive, onClick, userId }: ChatRoomCardProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -26,6 +27,9 @@ export const ChatRoomCard = ({ chatRoom, isActive, onClick }: ChatRoomCardProps)
   if (!isMounted) {
     return <div className="h-[10%] w-full bg-gray-50 p-4"></div>;
   }
+
+  const lastRead = userId === chatRoom.userIds[0] ? "lastReadA" : "lastReadB";
+  const haveUnreadMessages = chatRoom.lastMessage ? chatRoom.lastMessage.createdAt > chatRoom[lastRead] : false;
 
   return (
     <div
@@ -47,7 +51,9 @@ export const ChatRoomCard = ({ chatRoom, isActive, onClick }: ChatRoomCardProps)
       </div>
       <div className="flex flex-col justify-center">
         <p>{`${chatRoom.userB.firstName} ${chatRoom.userB.lastName}`}</p>
-        <p>{chatRoom.lastMessage && cut(chatRoom.lastMessage.message, 40)}</p>
+        <p className={clsx(haveUnreadMessages ? "font-bold text-black" : "text-gray-500")}>
+          {chatRoom.lastMessage && cut(chatRoom.lastMessage.message, 40)}
+        </p>
       </div>
     </div>
   );
