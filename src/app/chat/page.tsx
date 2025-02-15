@@ -19,6 +19,12 @@ function ChatPage() {
   }
 
   const { chatRooms, loading, error } = useGetMyChatRooms();
+  chatRooms.sort((a, b) => {
+    if (!a.lastMessage) return -1;
+    if (!b.lastMessage) return 1;
+
+    return b.lastMessage.createdAt.getTime() - a.lastMessage.createdAt.getTime();
+  });
 
   const [currentChatRoom, setCurrentChatRoom] = useState<ChatRoom | undefined>(chatRooms[0]);
 

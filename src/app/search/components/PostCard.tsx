@@ -76,7 +76,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                <strong>รายละเอียด</strong>
+                <strong>รายละเอียด </strong>
                 {cut(post.book.description, 65)}
               </div>
             </div>
