@@ -2,10 +2,9 @@ import { sendMessage } from "@/data/chat";
 import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
 import { SessionUser } from "@/lib/auth";
+import { useChannel } from "ably/react";
 import { useEffect, useState } from "react";
 import { MessageBubble } from "./MessageBubble";
-
-// const socket = io(process.env.NEXT_PUBLIC_BASE_URL);
 
 type ChatProps = {
   chatRoom: ChatRoom;
@@ -16,22 +15,25 @@ function Chat({ chatRoom, user }: ChatProps) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const initialMessages = useGetChatMessages(chatRoom.id);
+  const { channel } = useChannel("chat", (message) => {
+    const history = messages.slice(-199);
+    const newMessage: ChatMessage = {
+      id: message.id as string,
+      senderId: message.data.senderId,
+      message: message.data.message,
+      roomId: chatRoom.id,
+      createdAt: new Date(),
+    };
+    setMessages([...history, newMessage]);
+  });
 
   useEffect(() => {
     setMessages(initialMessages.chatMessages);
-
-    // socket.emit("joinRoom", chatRoom.id);
-    // socket.on("receiveMessage", (newMessage) => {
-    //   setMessages((prev) => [...prev, newMessage]);
-    // });
-
-    // return () => {
-    //   socket.off("receiveMessage");
-    // };
   }, [chatRoom.id, initialMessages.chatMessages]);
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
+    channel.publish("message", { senderId: user.id, message });
 
     const messageRes = await sendMessage(chatRoom.id, message);
     if (messageRes instanceof Error) {
@@ -59,12 +61,12 @@ function Chat({ chatRoom, user }: ChatProps) {
 
   return (
     <div className="h-full w-full bg-gray-50">
-      <div className="h-[90%] border-b p-4">
-        {messages.map((m) => (
+      <div className="h-[90%] overflow-scroll border-b p-4">
+        {messages.map((m, idx) => (
           <MessageBubble
-            key={m.id}
+            key={idx}
             isMine={m.senderId === user.id}
-            username={getUsername(m.senderId)}
+            username={getUsername(m.senderId as string)}
             message={m.message}
             isSent
           />
