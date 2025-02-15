@@ -1,9 +1,11 @@
 import { sendMessage } from "@/data/chat";
-import { ChatRoom } from "@/data/dto/chat.dto";
+import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
 import { SessionUser } from "@/lib/auth";
 import { useEffect, useState } from "react";
 import { MessageBubble } from "./MessageBubble";
+
+// const socket = io(process.env.NEXT_PUBLIC_BASE_URL);
 
 type ChatProps = {
   chatRoom: ChatRoom;
@@ -12,10 +14,21 @@ type ChatProps = {
 
 function Chat({ chatRoom, user }: ChatProps) {
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const initialMessages = useGetChatMessages(chatRoom.id);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setMessages(initialMessages.chatMessages);
 
-  const messages = useGetChatMessages(chatRoom.id);
+    // socket.emit("joinRoom", chatRoom.id);
+    // socket.on("receiveMessage", (newMessage) => {
+    //   setMessages((prev) => [...prev, newMessage]);
+    // });
+
+    // return () => {
+    //   socket.off("receiveMessage");
+    // };
+  }, [chatRoom.id, initialMessages.chatMessages]);
 
   const handleSendMessage = async () => {
     if (!message.trim()) return;
@@ -47,7 +60,7 @@ function Chat({ chatRoom, user }: ChatProps) {
   return (
     <div className="h-full w-full bg-gray-50">
       <div className="h-[90%] border-b p-4">
-        {messages.chatMessages.map((m) => (
+        {messages.map((m) => (
           <MessageBubble
             key={m.id}
             isMine={m.senderId === user.id}
