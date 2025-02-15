@@ -40,6 +40,14 @@ const getTransactionRequest = z.object({
     .string()
     .optional()
     .transform((val) => (val == undefined ? true : val == "true")),
+  skip: z
+    .string()
+    .optional()
+    .transform((val) => (val == undefined ? 0 : Math.max(0,parseInt(val)))),
+  take: z
+    .string()
+    .optional()
+    .transform((val) => (val == undefined ? -1 : Math.max(0,parseInt(val)))),
 });
 
 export async function POST(req: NextRequest) {
@@ -92,7 +100,11 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
+    console.log(parsedData.data)
+
     const transactions = await prisma.transaction.findMany({
+      skip: parsedData.data.skip,
+      ...(parsedData.data.take !== -1 ? {take: parsedData.data.take} : {}),
       where: {
         createdAt: {
           gte: parsedData.data.startDate,

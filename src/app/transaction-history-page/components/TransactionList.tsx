@@ -11,6 +11,8 @@ import { Transaction } from "@/data/dto/transaction.dto";
 interface TransactionListProps {
   filter: FilterType;
   userId: string;
+  transactionPerPage: number;
+  selectingPage: number;
   setTotalBuy: (totalBuy: number) => void;
   setTotalSell: (totalBuy: number) => void;
 }
@@ -33,8 +35,8 @@ function PutComponents( child_components:React.JSX.Element[],
   return it
 }
 
-const TransactionList = ({ filter, userId, setTotalBuy, setTotalSell }: TransactionListProps) => {
-  const { transactions, loading, error } = useGetTransaction(filter, userId);
+const TransactionList = ({ filter, userId, transactionPerPage, selectingPage, setTotalBuy, setTotalSell }: TransactionListProps) => {
+  const { transactions, loading, error } = useGetTransaction(filter, userId, transactionPerPage * (selectingPage - 1), transactionPerPage);
   const [ child_components, setChildComponent ] = useState<React.JSX.Element[]>([])
   const [ newTotalBuy, newTotalSell ] = useMemo(() => {
     let newTotalBuy = 0;
@@ -84,17 +86,17 @@ const TransactionList = ({ filter, userId, setTotalBuy, setTotalSell }: Transact
       Please login to see transactions
     </div>
   }
-  if (transactions.length == 0) {
-    return <div key="NoFound" className="flex-1 overflow-auto grid h-screen place-items-center text-4xl font-bold text-gray-400">
-      No transaction found
-    </div>
-  }
   if (loading) {
     return <LoadingAnimation key="loading" />
   }
   if (error) {
     return <div key="Fail" className="flex-1 overflow-auto grid h-screen place-items-center text-4xl font-bold text-gray-400">
       Failed to get transactions
+    </div>
+  }
+  if (transactions.length == 0) {
+    return <div key="NoFound" className="flex-1 overflow-auto grid h-screen place-items-center text-4xl font-bold text-gray-400">
+      No transaction found
     </div>
   }
   
