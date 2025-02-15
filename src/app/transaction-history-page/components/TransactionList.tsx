@@ -1,7 +1,7 @@
 "user client"
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { useGetTransaction } from "@/hooks/useGetTransactions";
+import { useGetQueryTransaction } from "@/hooks/useGetTransactions";
 import { useState, useMemo, useEffect } from "react";
 import { FilterType } from "./FilterBar";
 import LineSeparator from "./LineSperator";
@@ -13,6 +13,7 @@ interface TransactionListProps {
   userId: string;
   transactionPerPage: number;
   selectingPage: number;
+  setSelectingTransaction: (val: string) => void;
   setTotalBuy: (totalBuy: number) => void;
   setTotalSell: (totalBuy: number) => void;
 }
@@ -22,21 +23,22 @@ function PutComponents( child_components:React.JSX.Element[],
                         it:number,
                         dateScope:Date,
                         sort_transactions:Transaction[],
-                        displayString:string ) {
+                        displayString:string,
+                        setSelectingTransaction:(val: string) => void) {
   if (it < sort_transactions.length && sort_transactions[it].createdAt >= dateScope)
     child_components.push(<LineSeparator key={displayString} text={displayString} />);
   while (it < sort_transactions.length && sort_transactions[it].createdAt >= dateScope) {
     const ts = sort_transactions[it];
     child_components.push(
-      <TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"} />
+      <TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"} setSelectingTransaction={setSelectingTransaction} />
     );
     ++it;
   }
   return it
 }
 
-const TransactionList = ({ filter, userId, transactionPerPage, selectingPage, setTotalBuy, setTotalSell }: TransactionListProps) => {
-  const { transactions, loading, error } = useGetTransaction(filter, userId, transactionPerPage * (selectingPage - 1), transactionPerPage);
+const TransactionList = ({ filter, userId, transactionPerPage, selectingPage, setSelectingTransaction, setTotalBuy, setTotalSell }: TransactionListProps) => {
+  const { transactions, loading, error } = useGetQueryTransaction(filter, userId, transactionPerPage * (selectingPage - 1), transactionPerPage);
   const [ child_components, setChildComponent ] = useState<React.JSX.Element[]>([])
   const [ newTotalBuy, newTotalSell ] = useMemo(() => {
     let newTotalBuy = 0;
@@ -67,15 +69,15 @@ const TransactionList = ({ filter, userId, transactionPerPage, selectingPage, se
 
     let it = 0;
 
-    it = PutComponents(newChildComponents,userId,it,first_date,sort_transactions,"Today")
-    it = PutComponents(newChildComponents,userId,it,second_date,sort_transactions,"Yesterday")
-    it = PutComponents(newChildComponents,userId,it,previous_month,sort_transactions,"This Month")
-    it = PutComponents(newChildComponents,userId,it,previous_month,sort_transactions,"This Year")
+    it = PutComponents(newChildComponents,userId,it,first_date,sort_transactions,"Today",setSelectingTransaction)
+    it = PutComponents(newChildComponents,userId,it,second_date,sort_transactions,"Yesterday",setSelectingTransaction)
+    it = PutComponents(newChildComponents,userId,it,previous_month,sort_transactions,"This Month",setSelectingTransaction)
+    it = PutComponents(newChildComponents,userId,it,previous_month,sort_transactions,"This Year",setSelectingTransaction)
 
     const year = new Date(this_year);
     while (it < sort_transactions.length) {
       year.setFullYear(new Date(sort_transactions[it].createdAt).getFullYear());
-      it = PutComponents(newChildComponents,userId,it,year,sort_transactions,year.getFullYear().toString())
+      it = PutComponents(newChildComponents,userId,it,year,sort_transactions,year.getFullYear().toString(),setSelectingTransaction)
     }
 
     setChildComponent(newChildComponents)

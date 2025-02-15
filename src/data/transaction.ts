@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 import { apiClient } from "./axios";
 import { Transaction } from "./dto/transaction.dto";
 
-export const getTransaction = async (filter: FilterType, userId: string, skip: number, take: number) => {
+export const getQueryTransaction = async (filter: FilterType, userId: string, skip: number, take: number) => {
   try {
     const params: Partial<FilterType> & { userId?: string, skip?: number, take?: number} = {
       ...Object.fromEntries(
@@ -31,10 +31,21 @@ export const getTransaction = async (filter: FilterType, userId: string, skip: n
       paidOn: new Date(val.paidOn),
     }));
   } catch (error) {
-    console.error("Failed to get all transaction", error);
-    return Error("Failed to get all transaction");
+    console.error("Failed to get query transaction", error);
+    return Error("Failed to get query transaction");
   }
 };
+
+export const getTransaction = async (id: string) => {
+  try {
+    const res: AxiosResponse<Transaction> = await apiClient.get(`/transaction/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to get transaction with id ${id}`, error);
+    return Error(`Failed to get transaction with id ${id}`);
+  }
+} 
 
 export const getTransactionCount = async (filter: FilterType, userId: string) => {
   try {
@@ -57,7 +68,7 @@ export const getTransactionCount = async (filter: FilterType, userId: string) =>
 
     return res.data;
   } catch (error) {
-    console.error("Failed to get all transaction", error);
-    return Error("Failed to get all transaction");
+    console.error("Failed to get transaction count", error);
+    return Error("Failed to get transaction count");
   }
 }

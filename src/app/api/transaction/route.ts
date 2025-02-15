@@ -100,8 +100,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    console.log(parsedData.data)
-
     const transactions = await prisma.transaction.findMany({
       skip: parsedData.data.skip,
       ...(parsedData.data.take !== -1 ? {take: parsedData.data.take} : {}),

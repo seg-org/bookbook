@@ -13,16 +13,18 @@ import SoldIcon from "../pic/soldIcon.png";
 export interface TransactionBoxProps {
   transaction: Transaction;
   type: string;
+  setSelectingTransaction: (val: string) => void
 }
 
-const TransactionBox = ({ transaction, type }: TransactionBoxProps) => {
+const TransactionBox = ({ transaction, type, setSelectingTransaction }: TransactionBoxProps) => {
   const cap_overflow_string = (str: string) => {
     if (str.length >= 30) return str.substring(0, 30) + "...";
     else return str;
   };
 
   return (
-    <div className="relative flex transform flex-row items-center justify-between gap-x-5 rounded-lg border border-gray-300 bg-white p-4 transition-transform duration-200 hover:scale-105 hover:shadow-xl">
+    <div className="relative flex transform flex-row items-center justify-between gap-x-5 rounded-lg border border-gray-300 bg-white p-4 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+      onClick={() => { setSelectingTransaction(transaction.id) }}>
       <div className="flex flex-row items-center justify-start gap-5">
         <Image
           className="m-2.5 h-40 w-auto rounded-lg"

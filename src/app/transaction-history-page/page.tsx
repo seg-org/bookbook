@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import FilterBar, { FilterType } from "./components/FilterBar";
 import TransactionList from "./components/TransactionList";
 import Paginator from "./components/Paginator";
-import { useGetTransactionCount } from "@/hooks/useGetTransactions";
+import TransactionDetailPopUp from "./components/TransactionDetailPopUp"
 
 // Note 1: Currently using header and filter in local components.
 
@@ -26,6 +26,7 @@ function TransactionPage() {
   const [totalBuy, setTotalBuy] = useState(0);
   const [totalSell, setTotalSell] = useState(0);
   const [selectingPage, setSelectingPage] = useState(1);
+  const [selectingTransaction, setSelectingTransaction] = useState("---")
 
   return (
     <>
@@ -37,6 +38,7 @@ function TransactionPage() {
                        userId={userId}
                        transactionPerPage={transactionPerPage}
                        selectingPage={selectingPage}
+                       setSelectingTransaction={setSelectingTransaction}
                        setTotalBuy={setTotalBuy}
                        setTotalSell={setTotalSell} />
       <Paginator filter={filter}
@@ -44,6 +46,8 @@ function TransactionPage() {
                  selectingPage={selectingPage}
                  setSelectingPage={setSelectingPage}
                  transactionPerPage={transactionPerPage}/>
+      <TransactionDetailPopUp selectingTransaction={selectingTransaction}
+                              setSelectingTransaction={setSelectingTransaction}/>
     </>
   );
 }

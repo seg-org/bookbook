@@ -80,6 +80,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
   try {
+    
     const transaction = await prisma.transaction.findFirst({
       where: { id: id },
       include: {
