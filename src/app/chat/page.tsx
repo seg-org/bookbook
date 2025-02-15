@@ -1,7 +1,6 @@
 "use client";
 
 import { ChatRoom } from "@/data/dto/chat.dto";
-import { useGetMyChatRooms } from "@/hooks/useGetMyChatRooms";
 import * as Ably from "ably";
 import { AblyProvider, ChannelProvider } from "ably/react";
 import { useSession } from "next-auth/react";
@@ -9,7 +8,7 @@ import { redirect } from "next/navigation";
 import { useState } from "react";
 import Chat from "./components/Chat";
 import StartChat from "./components/Chat/StartChat";
-import ChatCard from "./components/ChatCard";
+import { ChatRoomList } from "./components/ChatRoomList";
 
 function ChatPage() {
   const { status, data: session } = useSession();
@@ -18,38 +17,16 @@ function ChatPage() {
     redirect("/login");
   }
 
-  const { chatRooms, loading, error } = useGetMyChatRooms();
-  chatRooms.sort((a, b) => {
-    if (!a.lastMessage) return -1;
-    if (!b.lastMessage) return 1;
+  const [currentChatRoom, setCurrentChatRoom] = useState<ChatRoom | undefined>(undefined);
 
-    return b.lastMessage.createdAt.getTime() - a.lastMessage.createdAt.getTime();
-  });
-
-  const [currentChatRoom, setCurrentChatRoom] = useState<ChatRoom | undefined>(chatRooms[0]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  const client = new Ably.Realtime({ authUrl: "/api/chat/socket" });
+  const client = new Ably.Realtime({ authUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/socket` });
 
   return (
     <AblyProvider client={client}>
       <ChannelProvider channelName="chat">
-        <div className="flex h-[calc(100vh-72px)] bg-red-100">
-          <div className="h-full w-[35%] border-r border-gray-200 bg-yellow-100">
-            {chatRooms.map((chatRoom) => (
-              <ChatCard
-                key={chatRoom.id}
-                chatRoom={chatRoom}
-                isActive={chatRoom.id === currentChatRoom?.id}
-                onClick={() => setCurrentChatRoom(chatRoom)}
-              />
-            ))}
+        <div className="flex h-[calc(100vh-72px)]">
+          <div className="h-full w-[35%] border-r border-gray-200 bg-gray-50">
+            <ChatRoomList currentChatRoom={currentChatRoom} setCurrentChatRoom={setCurrentChatRoom} />
           </div>
           <div className="h-full w-[65%]">
             {currentChatRoom ? <Chat chatRoom={currentChatRoom} user={session!.user} /> : <StartChat />}

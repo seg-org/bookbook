@@ -16,6 +16,7 @@ export type ChatRoom = {
   post: Post;
   userB: User;
   lastMessage: ChatMessage | null;
+  createdAt: Date;
 };
 
 export type CreateChatRoom = {

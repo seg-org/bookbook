@@ -19,5 +19,5 @@ export const useGetMyChatRooms = () => {
     })();
   }, []);
 
-  return { chatRooms, loading, error };
+  return { chatRooms, setChatRooms, loading, error };
 };

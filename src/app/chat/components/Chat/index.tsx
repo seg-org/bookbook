@@ -17,7 +17,8 @@ function Chat({ chatRoom, user }: ChatProps) {
   const messageEnd = useRef<HTMLDivElement>(null);
   const initialMessages = useGetChatMessages(chatRoom.id);
   const { channel } = useChannel("chat", (message) => {
-    const history = messages.slice(-199);
+    if (message.data.roomId !== chatRoom.id) return;
+
     const newMessage: ChatMessage = {
       id: message.id as string,
       senderId: message.data.senderId,
@@ -25,6 +26,8 @@ function Chat({ chatRoom, user }: ChatProps) {
       roomId: chatRoom.id,
       createdAt: new Date(),
     };
+
+    const history = messages.slice(-199);
     setMessages([...history, newMessage]);
 
     setTimeout(() => {
@@ -45,7 +48,7 @@ function Chat({ chatRoom, user }: ChatProps) {
     const text = message.trim();
     setMessage("");
     if (!text) return;
-    channel.publish("message", { senderId: user.id, message });
+    channel.publish("message", { senderId: user.id, roomId: chatRoom.id, message });
 
     const messageRes = await sendMessage(chatRoom.id, text);
     if (messageRes instanceof Error) {

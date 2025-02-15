@@ -3,7 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-type ChatCardProps = {
+type ChatRoomCardProps = {
   chatRoom: ChatRoom;
   isActive: boolean;
   onClick: () => void;
@@ -16,7 +16,7 @@ const cut = (s: string, n: number) => {
   return s;
 };
 
-function ChatCard({ chatRoom, isActive, onClick }: ChatCardProps) {
+export const ChatRoomCard = ({ chatRoom, isActive, onClick }: ChatRoomCardProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -51,6 +51,4 @@ function ChatCard({ chatRoom, isActive, onClick }: ChatCardProps) {
       </div>
     </div>
   );
-}
-
-export default ChatCard;
+};
