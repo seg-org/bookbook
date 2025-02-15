@@ -116,7 +116,7 @@ model ChatRoom {
   // TODO: add report
   userIds   String[] @map("user_ids")
   createdAt DateTime @default(now()) @map("created_at")
-
+  lastRead  DateTime  @default(now()) @map("last_read")
   messages ChatMessage[]
 
   @@index([postId])
