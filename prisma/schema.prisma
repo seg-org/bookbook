@@ -110,14 +110,15 @@ model ChatMessage {
 }
 
 model ChatRoom {
-  id        String   @id @default(cuid())
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    String   @map("post_id")
+  id        String        @id @default(cuid())
+  post      Post          @relation(fields: [postId], references: [id])
+  postId    String        @map("post_id")
   // TODO: add report
-  userIds   String[] @map("user_ids")
-  createdAt DateTime @default(now()) @map("created_at")
-  lastRead  DateTime  @default(now()) @map("last_read")
-  messages ChatMessage[]
+  userIds   String[]      @map("user_ids")
+  createdAt DateTime      @default(now()) @map("created_at")
+  lastReadA DateTime      @default(now()) @map("last_read_a")
+  lastReadB DateTime      @default(now()) @map("last_read_b")
+  messages  ChatMessage[]
 
   @@index([postId])
   @@map("chat_rooms")
