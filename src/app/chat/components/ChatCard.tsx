@@ -9,6 +9,13 @@ type ChatCardProps = {
   onClick: () => void;
 };
 
+const cut = (s: string, n: number) => {
+  if (s.length > n) {
+    return s.slice(0, n) + "...";
+  }
+  return s;
+};
+
 function ChatCard({ chatRoom, isActive, onClick }: ChatCardProps) {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -39,8 +46,8 @@ function ChatCard({ chatRoom, isActive, onClick }: ChatCardProps) {
         />
       </div>
       <div className="flex flex-col justify-center">
-        <p>{chatRoom.userB.email}</p>
-        <p>{chatRoom.lastMessage?.message}</p>
+        <p>{`${chatRoom.userB.firstName} ${chatRoom.userB.lastName}`}</p>
+        <p>{chatRoom.lastMessage && cut(chatRoom.lastMessage.message, 40)}</p>
       </div>
     </div>
   );
