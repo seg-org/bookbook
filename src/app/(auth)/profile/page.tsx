@@ -1,17 +1,17 @@
-import { prisma } from "@/lib/prisma";
+import { getUserProfile } from "@/data/user";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "../../../lib/auth";
 import { ProfileForm } from "./ProfileForm";
 
-async function getUserProfile(userId: string) {
-  return await prisma.user.findUnique({
-    where: { id: userId },
-    include: {
-      sellerProfile: true,
-    },
-  });
-}
+// async function getUserProfile(userId: string) {
+//   return await prisma.user.findUnique({
+//     where: { id: userId },
+//     include: {
+//       sellerProfile: true,
+//     },
+//   });
+// }
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions);
@@ -22,7 +22,7 @@ export default async function ProfilePage() {
 
   const userProfile = await getUserProfile(session.user.id);
 
-  if (!userProfile) {
+  if (!userProfile || userProfile instanceof Error) {
     redirect("/");
   }
 
