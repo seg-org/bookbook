@@ -35,6 +35,7 @@ model User {
   sellerProfile    SellerProfile?
   posts            Post[]
   chatMessages     ChatMessage[]
+  Bookmark         Bookmark[]
 
   @@map("users")
 }
@@ -92,8 +93,20 @@ model Post {
   bookId       String        @map("book_id")
   transactions Transaction[]
   ChatRoom     ChatRoom[]
+  Bookmark     Bookmark[]
 
   @@map("posts")
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @map("user_id")
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @map("post_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("bookmarks")
 }
 
 model ChatMessage {
