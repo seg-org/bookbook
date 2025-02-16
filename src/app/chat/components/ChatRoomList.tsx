@@ -8,7 +8,8 @@ type ChatRoomListProps = {
 };
 
 export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
-  const { currentChatRoom, chatRooms, setChatRooms, loading, error } = useChatContext();
+  const { currentChatRoom, chatRooms, loading, error, updateChatRoomLastMessage } = useChatContext();
+  // roomId = room id of the most recent message from any room
   const [roomId, setRoomId] = useState<string | null>(null);
 
   const sortedChatRooms = useMemo(() => {
@@ -23,28 +24,11 @@ export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
   }, [chatRooms, roomId]);
 
   useChannel("chat", (message) => {
+    const messageId = message.id as string;
     const roomId: string = message.data.roomId;
     const messageText: string = message.data.message;
     const senderId: string = message.data.senderId;
-    setChatRooms((prev) => {
-      const idx = prev.findIndex((cr) => cr.id === roomId);
-      const updated = [...prev];
-      const lastRead = senderId === updated[idx].userIds[0] ? "lastReadA" : "lastReadB";
-      if (idx !== -1) {
-        updated[idx] = {
-          ...updated[idx],
-          lastMessage: {
-            id: message.id as string,
-            senderId: message.data.senderId,
-            roomId: roomId,
-            message: messageText,
-            createdAt: new Date(),
-          },
-          [lastRead]: new Date(),
-        };
-      }
-      return updated;
-    });
+    updateChatRoomLastMessage(messageId, roomId, messageText, senderId);
     setRoomId(roomId);
   });
 

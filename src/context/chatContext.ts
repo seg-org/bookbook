@@ -11,6 +11,7 @@ interface ChatContext {
   messages: ChatMessage[];
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
   changeCurrentRoom: (chatRoom: ChatRoom, userId: string) => void;
+  updateChatRoomLastMessage: (messageId: string, roomId: string, message: string, senderId: string) => void;
 }
 
 export const ChatContext = createContext<ChatContext>({
@@ -23,6 +24,7 @@ export const ChatContext = createContext<ChatContext>({
   messages: [],
   setMessages: () => {},
   changeCurrentRoom: () => {},
+  updateChatRoomLastMessage: () => {},
 });
 
 export const useChatContext = () => {

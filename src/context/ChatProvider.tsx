@@ -30,6 +30,28 @@ export const ChatProvider: FC<PropsWithChildren> = ({ children }) => {
     await readMessages(chatRoom.id, userId);
   };
 
+  const updateChatRoomLastMessage = (messageId: string, roomId: string, message: string, senderId: string) => {
+    setChatRooms((prev) => {
+      const idx = prev.findIndex((cr) => cr.id === roomId);
+      const updated = [...prev];
+      const lastRead = senderId === updated[idx].userIds[0] ? "lastReadA" : "lastReadB";
+      if (idx !== -1) {
+        updated[idx] = {
+          ...updated[idx],
+          lastMessage: {
+            id: messageId,
+            senderId,
+            roomId,
+            message,
+            createdAt: new Date(),
+          },
+          [lastRead]: new Date(),
+        };
+      }
+      return updated;
+    });
+  };
+
   return (
     <ChatContext.Provider
       value={{
@@ -42,6 +64,7 @@ export const ChatProvider: FC<PropsWithChildren> = ({ children }) => {
         messages,
         setMessages,
         changeCurrentRoom,
+        updateChatRoomLastMessage,
       }}
     >
       {children}
