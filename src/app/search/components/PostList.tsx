@@ -5,7 +5,9 @@ import { useMemo, useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import PostCard from "./PostCard";
 export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
   const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
@@ -61,9 +63,11 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           >
             ความนิยม <span className="ml-2">{popAsc == 1 ? "▲" : "▼"}</span>
           </button>
-          <div className="hover:cursor-pointer" onClick={() => setIsBookmarkOnly((prev) => !prev)}>
-            {isBookmarkOnly ? <FaBookmark className="h-6 w-6" /> : <FaRegBookmark className="h-6 w-6" />}
-          </div>
+          {isAuthenticated && (
+            <div className="hover:cursor-pointer" onClick={() => setIsBookmarkOnly((prev) => !prev)}>
+              {isBookmarkOnly ? <FaBookmark className="h-6 w-6" /> : <FaRegBookmark className="h-6 w-6" />}
+            </div>
+          )}
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
           {filteredRecommendedPosts.length > 0 && (
