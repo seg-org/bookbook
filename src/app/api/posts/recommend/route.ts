@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
-import { getPresignedUrl } from "../../objects/s3";
+import { getUrl } from "../../objects/s3";
 
 // Function to generate a seeded random number
 function seededRandom(seed: number) {
@@ -21,20 +21,20 @@ export async function GET(request: Request) {
 
     // Get all posts from the database
     const posts = await prisma.post.findMany({
-          include: { book: true },
-        });
-    
+      include: { book: true },
+    });
+
     let postsWithImageUrl = await Promise.all(
-        posts.map(async (post) => {
-        const url = await getPresignedUrl("book_images", post.book.coverImageKey);
+      posts.map(async (post) => {
+        const url = await getUrl("book_images", post.book.coverImageKey);
         return {
-            ...post,
-            book: {
+          ...post,
+          book: {
             ...post.book,
             coverImageUrl: url,
-            },
+          },
         };
-        })
+      })
     );
 
     if (postsWithImageUrl.length === 0) {
@@ -47,9 +47,9 @@ export async function GET(request: Request) {
 
     const recommendedPost = postsWithImageUrl[randomIndex];
 
-    postsWithImageUrl = postsWithImageUrl.filter((post)=>post.id!=recommendedPost.id);
+    postsWithImageUrl = postsWithImageUrl.filter((post) => post.id != recommendedPost.id);
 
-    postsWithImageUrl = [recommendedPost,...postsWithImageUrl];
+    postsWithImageUrl = [recommendedPost, ...postsWithImageUrl];
 
     return NextResponse.json(postsWithImageUrl);
   } catch (error) {

@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { TransactionStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { getPresignedUrl } from "../objects/s3";
+import { getUrl } from "../objects/s3";
 
 const createTransactionRequest = z.object({
   buyerId: z.string(),
@@ -121,7 +121,7 @@ export async function GET(req: NextRequest) {
 
     const transactionsWithURL = await Promise.all(
       transactions.map(async (transaction) => {
-        const url = await getPresignedUrl("book_images", transaction.post.book.coverImageKey);
+        const url = await getUrl("book_images", transaction.post.book.coverImageKey);
         return {
           ...transaction,
           post: {

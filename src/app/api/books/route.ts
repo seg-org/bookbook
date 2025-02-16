@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { getPresignedUrl } from "../objects/s3";
+import { getUrl } from "../objects/s3";
 
 const createBookRequest = z.object({
   title: z.string(),
@@ -34,7 +34,7 @@ export async function GET() {
     const books = await prisma.book.findMany();
     const booksWithImageUrl = await Promise.all(
       books.map(async (book) => {
-        const url = await getPresignedUrl("book_images", book.coverImageKey);
+        const url = await getUrl("book_images", book.coverImageKey);
         return {
           ...book,
           coverImageUrl: url,

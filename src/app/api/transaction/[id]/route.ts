@@ -1,24 +1,32 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionFailType } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { getPresignedUrl } from "../../objects/s3";
 import { z } from "zod";
+import { getUrl } from "../../objects/s3";
 
-const updateTransactionRequest = z.object({
-  status: z.enum(["APPROVING","PAYING","VERIFYING","COMPLETE","FAIL"]),
-  isDelivered: z.boolean(),
+const updateTransactionRequest = z
+  .object({
+    status: z.enum(["APPROVING", "PAYING", "VERIFYING", "COMPLETE", "FAIL"]),
+    isDelivered: z.boolean(),
 
-  // for fail status only
-  evidenceURL: z.string().optional().transform(value => value ?? ""),
-  detail: z.string().optional().transform(value => value ?? ""),  
-  failType: z.enum(["CHEAT"]).optional(),
-}).refine(data => data.status !== "FAIL" || (data.evidenceURL && data.detail && data.failType),{
-  message: "If status is fail, evidenceURL, detail, and failType must be given",
-  path: ["status"]
-})
+    // for fail status only
+    evidenceURL: z
+      .string()
+      .optional()
+      .transform((value) => value ?? ""),
+    detail: z
+      .string()
+      .optional()
+      .transform((value) => value ?? ""),
+    failType: z.enum(["CHEAT"]).optional(),
+  })
+  .refine((data) => data.status !== "FAIL" || (data.evidenceURL && data.detail && data.failType), {
+    message: "If status is fail, evidenceURL, detail, and failType must be given",
+    path: ["status"],
+  });
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
-  const { id } = await props.params;  
+  const { id } = await props.params;
   try {
     const parsedData = updateTransactionRequest.safeParse(await req.json());
     if (!parsedData.success) {
@@ -38,28 +46,28 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
         where: { id: id },
         data: {
           status: parsedData.data.status,
-          isDelivered: parsedData.data.isDelivered
-        }
+          isDelivered: parsedData.data.isDelivered,
+        },
       });
 
-      if(transaction.status == "FAIL") {
+      if (transaction.status == "FAIL") {
         await prisma.transactionFail.deleteMany({
-          where: { transactionId : id } 
+          where: { transactionId: id },
         });
       }
 
-      if(parsedData.data.status == "FAIL") {
+      if (parsedData.data.status == "FAIL") {
         await prisma.transactionFail.create({
           data: {
             transactionId: updateTransaction.id,
             evidenceURL: parsedData.data.evidenceURL,
             detail: parsedData.data.detail,
-            failType: (parsedData.data.failType ?? TransactionFailType.CHEAT)
-          }
-        })
+            failType: parsedData.data.failType ?? TransactionFailType.CHEAT,
+          },
+        });
       }
 
-      return updateTransaction
+      return updateTransaction;
     });
 
     return NextResponse.json(result);
@@ -69,28 +77,28 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
   }
 }
 
-export async function GET(_: NextRequest, props : { params: Promise<{ id: string}> }) {
-  const { id } = await props.params;  
+export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const { id } = await props.params;
   try {
     const transaction = await prisma.transaction.findFirst({
       where: { id: id },
-      include : {
+      include: {
         buyer: true,
         seller: true,
         post: {
-          include : {
-            book: true
-          }
+          include: {
+            book: true,
+          },
         },
-        failData: true
-      }
+        failData: true,
+      },
     });
 
     if (!transaction) {
       return NextResponse.json({ error: `Transaction with id ${id} not found` }, { status: 404 });
     }
 
-    const url = await getPresignedUrl("book_images", transaction.post.book.coverImageKey);
+    const url = await getUrl("book_images", transaction.post.book.coverImageKey);
     const transactionWithURL = {
       ...transaction,
       post: {
@@ -98,8 +106,8 @@ export async function GET(_: NextRequest, props : { params: Promise<{ id: string
         book: {
           ...transaction.post.book,
           coverImageUrl: url,
-        }
-      }
+        },
+      },
     };
 
     return NextResponse.json(transactionWithURL);
@@ -110,14 +118,16 @@ export async function GET(_: NextRequest, props : { params: Promise<{ id: string
 }
 
 export async function DELETE(_: NextRequest, props: { params: Promise<{ id: string }> }) {
-  const { id } = await props.params;  
+  const { id } = await props.params;
   try {
-
-    await prisma.transactionFail.deleteMany({ where: { transactionId : id } });
+    await prisma.transactionFail.deleteMany({ where: { transactionId: id } });
 
     const result = await prisma.transaction.deleteMany({ where: { id: id } });
 
-    return NextResponse.json({ message: `${result.count} transactions with id ${id} deleted successfully` }, { status: 200 });
+    return NextResponse.json(
+      { message: `${result.count} transactions with id ${id} deleted successfully` },
+      { status: 200 }
+    );
   } catch (error) {
     if (error instanceof Error) console.error(`Error deleting book with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot delete book" }, { status: 500 });
