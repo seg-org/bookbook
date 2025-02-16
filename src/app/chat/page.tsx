@@ -17,7 +17,6 @@ function ChatPage() {
   }
 
   const { currentChatRoom } = useChatContext();
-
   const client = new Ably.Realtime({ authUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/socket` });
 
   return (

@@ -10,6 +10,7 @@ interface ChatContext {
   error: Error | null;
   messages: ChatMessage[];
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
+  changeCurrentRoom: (chatRoom: ChatRoom, userId: string) => void;
 }
 
 export const ChatContext = createContext<ChatContext>({
@@ -21,6 +22,7 @@ export const ChatContext = createContext<ChatContext>({
   error: null,
   messages: [],
   setMessages: () => {},
+  changeCurrentRoom: () => {},
 });
 
 export const useChatContext = () => {

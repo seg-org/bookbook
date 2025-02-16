@@ -1,7 +1,4 @@
 import { useChatContext } from "@/context/chatContext";
-import { readMessages } from "@/data/chat";
-import { ChatRoom } from "@/data/dto/chat.dto";
-import { useGetMyChatRooms } from "@/hooks/useGetMyChatRooms";
 import { useChannel } from "ably/react";
 import { useMemo, useState } from "react";
 import { ChatRoomCard } from "./ChatRoomCard";
@@ -11,8 +8,7 @@ type ChatRoomListProps = {
 };
 
 export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
-  const { currentChatRoom, setCurrentChatRoom } = useChatContext();
-  const { chatRooms, setChatRooms, loading, error } = useGetMyChatRooms();
+  const { currentChatRoom, chatRooms, setChatRooms, loading, error } = useChatContext();
   const [roomId, setRoomId] = useState<string | null>(null);
 
   const sortedChatRooms = useMemo(() => {
@@ -52,24 +48,6 @@ export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
     setRoomId(roomId);
   });
 
-  const handleChangeCurrentRoom = async (chatRoom: ChatRoom) => {
-    setChatRooms((prev) => {
-      const idx = prev.findIndex((cr) => cr.id === chatRoom.id);
-      const updated = [...prev];
-      if (idx !== -1) {
-        const lastRead = userId === chatRoom.userIds[0] ? "lastReadA" : "lastReadB";
-        updated[idx] = {
-          ...updated[idx],
-          [lastRead]: new Date(),
-        };
-      }
-      return updated;
-    });
-
-    setCurrentChatRoom(chatRoom);
-    await readMessages(chatRoom.id, userId);
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -83,7 +61,6 @@ export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
           key={chatRoom.id}
           chatRoom={chatRoom}
           isActive={chatRoom.id === currentChatRoom?.id}
-          onClick={() => handleChangeCurrentRoom(chatRoom)}
           userId={userId}
         />
       ))}
