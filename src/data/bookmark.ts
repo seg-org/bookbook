@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import { apiClient } from "./axios";
 import { Bookmark } from "./dto/bookmark.dto";
 
-export const createBookmark = async (postId: string) => {
+export const toggleBookmark = async (postId: string) => {
   try {
     const res: AxiosResponse<Bookmark> = await apiClient.put("/bookmarks", { postId });
 

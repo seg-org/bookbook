@@ -11,6 +11,7 @@ interface PostContext {
   bookmarks: Bookmark[];
   loading: boolean;
   error: Error | null;
+  changeBookmark: (postId: string) => Promise<void>;
 }
 
 export const PostContext = createContext<PostContext>({
@@ -19,6 +20,7 @@ export const PostContext = createContext<PostContext>({
   bookmarks: [],
   loading: false,
   error: null,
+  changeBookmark: () => Promise.resolve(),
 });
 
 export const usePostContext = () => {

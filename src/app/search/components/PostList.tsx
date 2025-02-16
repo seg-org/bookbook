@@ -29,15 +29,13 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
   });
 
   const filteredRecommendedPosts = useMemo(() => {
-    let filteredPosts = recommendedPosts.filter((post) =>
+    let filteredRecommendedPosts = recommendedPosts.filter((post) =>
       post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase())
     );
-    filteredPosts = filteredPosts.filter((post) => post.sellerId !== session?.user.id);
-    if (isBookmarkOnly) {
-      filteredPosts = filteredPosts.filter((post) => post.isBookmarked);
-    }
-    return filteredPosts;
-  }, [recommendedPosts, inputSearchValue, session?.user.id, isBookmarkOnly]);
+    filteredRecommendedPosts = filteredRecommendedPosts.filter((post) => post.sellerId !== session?.user.id);
+
+    return filteredRecommendedPosts;
+  }, [recommendedPosts, inputSearchValue, session?.user.id]);
 
   if (loading) {
     return <LoadingAnimation />;
@@ -70,7 +68,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           )}
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
-          {filteredRecommendedPosts.length > 0 && (
+          {!isBookmarkOnly && filteredRecommendedPosts.length > 0 && (
             <PostCard post={filteredRecommendedPosts[0]} key={filteredRecommendedPosts[0].id} isRecommended />
           )}
           {filteredPosts.map((post) => (

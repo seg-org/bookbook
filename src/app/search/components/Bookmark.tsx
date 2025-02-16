@@ -1,4 +1,4 @@
-import { createBookmark } from "@/data/bookmark";
+import { usePostContext } from "@/context/postContext";
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
@@ -9,11 +9,12 @@ type BookmarkProps = {
 
 export const Bookmark = ({ postId, initialState }: BookmarkProps) => {
   const [isMarked, setIsMarked] = useState(initialState);
+  const { changeBookmark } = usePostContext();
 
   const handleClick = async () => {
     setIsMarked((prev) => !prev);
 
-    await createBookmark(postId);
+    await changeBookmark(postId);
   };
 
   return (
