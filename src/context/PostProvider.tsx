@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, PropsWithChildren, useState } from "react";
+import { FC, PropsWithChildren } from "react";
 
 import { Bookmark } from "@/data/dto/bookmark.dto";
 import { Post } from "@/data/dto/post.dto";
@@ -8,7 +8,7 @@ import { useGetAllPosts } from "@/hooks/useGetAllPosts";
 import { useGetMyBookmarks } from "@/hooks/useGetMyBookmarks";
 import { useGetRecommendedPost } from "@/hooks/useGetRecommendedPost";
 import { useSession } from "next-auth/react";
-import { PostContext, PostWithBookmark } from "./postContext";
+import { PostContext } from "./postContext";
 
 export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
   const { data: session } = useSession();
@@ -21,11 +21,8 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
   } = useGetRecommendedPost(session?.user.id);
   const { bookmarks, loading: loadingBookmark, error: errorBookmark } = useGetMyBookmarks();
 
-  const [postsWithBookmarks, setPostsWithBookmarks] = useState<PostWithBookmark[]>([]);
-  setPostsWithBookmarks(matchBookmarksToPosts(posts, bookmarks));
-
-  const [recommendedPostsWithBookmarks, setRecommendedPostsWithBookmarks] = useState<PostWithBookmark[]>([]);
-  setRecommendedPostsWithBookmarks(matchBookmarksToPosts(recommendedPosts, bookmarks));
+  const postsWithBookmarks = matchBookmarksToPosts(posts, bookmarks);
+  const recommendedPostsWithBookmarks = matchBookmarksToPosts(recommendedPosts, bookmarks);
 
   const loading = loadingAll || loadingRecommended || loadingBookmark;
   const error = errorAll || errorRecommended || errorBookmark;
