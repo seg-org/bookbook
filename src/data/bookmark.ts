@@ -2,9 +2,9 @@ import { AxiosResponse } from "axios";
 import { apiClient } from "./axios";
 import { Bookmark } from "./dto/bookmark.dto";
 
-export const createBookmark = async () => {
+export const createBookmark = async (postId: string) => {
   try {
-    const res: AxiosResponse<Bookmark> = await apiClient.get("/posts");
+    const res: AxiosResponse<Bookmark> = await apiClient.post("/bookmarks", { postId });
 
     return res.data;
   } catch (error) {

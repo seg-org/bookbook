@@ -1,11 +1,18 @@
+import { createBookmark } from "@/data/bookmark";
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
-export const Bookmark = () => {
+type BookmarkProps = {
+  postId: string;
+};
+
+export const Bookmark = ({ postId }: BookmarkProps) => {
   const [isMarked, setIsMarked] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setIsMarked((prev) => !prev);
+
+    await createBookmark(postId);
   };
 
   return (

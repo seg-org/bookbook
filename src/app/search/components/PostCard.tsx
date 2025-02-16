@@ -57,7 +57,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           <h3>{post.title}</h3>
           <div className="flex items-center space-x-4">
             <span>{post.price} ฿</span>
-            <Bookmark />
+            <Bookmark postId={post.id} />
           </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">
