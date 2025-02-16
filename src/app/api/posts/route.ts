@@ -55,7 +55,7 @@ export async function GET() {
       include: { book: true },
     });
 
-    const postsWithImageUrl = posts.map(async (post) => {
+    const postsWithImageUrl = posts.map((post) => {
       const url = getUrl("book_images", post.book.coverImageKey);
       return {
         ...post,
