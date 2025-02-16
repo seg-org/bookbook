@@ -2,6 +2,7 @@ import { useChatContext } from "@/context/chatContext";
 import { useChannel } from "ably/react";
 import { useMemo, useState } from "react";
 import { ChatRoomCard } from "./ChatRoomCard";
+import { ChatRoomSkeleton } from "./ChatRoomSkeleton";
 
 type ChatRoomListProps = {
   userId: string;
@@ -33,13 +34,13 @@ export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <ChatRoomSkeleton />;
   }
   if (error) {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <>
+    <div className="h-full w-full overflow-y-scroll">
       {sortedChatRooms.map((chatRoom) => (
         <ChatRoomCard
           key={chatRoom.id}
@@ -48,6 +49,6 @@ export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
           userId={userId}
         />
       ))}
-    </>
+    </div>
   );
 };
