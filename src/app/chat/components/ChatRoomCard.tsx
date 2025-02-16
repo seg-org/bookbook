@@ -1,3 +1,4 @@
+import { useChatContext } from "@/context/chatContext";
 import { ChatRoom } from "@/data/dto/chat.dto";
 import clsx from "clsx";
 import Image from "next/image";
@@ -6,7 +7,6 @@ import { useEffect, useState } from "react";
 type ChatRoomCardProps = {
   chatRoom: ChatRoom;
   isActive: boolean;
-  onClick: () => void;
   userId: string;
 };
 
@@ -17,7 +17,8 @@ const cut = (s: string, n: number) => {
   return s;
 };
 
-export const ChatRoomCard = ({ chatRoom, isActive, onClick, userId }: ChatRoomCardProps) => {
+export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) => {
+  const { changeCurrentRoom } = useChatContext();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export const ChatRoomCard = ({ chatRoom, isActive, onClick, userId }: ChatRoomCa
         "flex h-[10%] w-full space-x-4 p-2 px-4 hover:cursor-pointer hover:bg-gray-200",
         isActive ? "bg-gray-200" : "bg-gray-50"
       )}
-      onClick={() => onClick()}
+      onClick={() => changeCurrentRoom(chatRoom, userId)}
     >
       <div className="flex h-full items-center">
         <Image

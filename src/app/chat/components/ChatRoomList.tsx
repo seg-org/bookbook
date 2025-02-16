@@ -1,17 +1,16 @@
-import { ChatRoom } from "@/data/dto/chat.dto";
-import { useGetMyChatRooms } from "@/hooks/useGetMyChatRooms";
+import { useChatContext } from "@/context/chatContext";
 import { useChannel } from "ably/react";
 import { useMemo, useState } from "react";
 import { ChatRoomCard } from "./ChatRoomCard";
+import { ChatRoomSkeleton } from "./ChatRoomSkeleton";
 
 type ChatRoomListProps = {
-  currentChatRoom?: ChatRoom;
-  setCurrentChatRoom: (chatRoom: ChatRoom) => void;
   userId: string;
 };
 
-export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom, userId }: ChatRoomListProps) => {
-  const { chatRooms, setChatRooms, loading, error } = useGetMyChatRooms();
+export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
+  const { currentChatRoom, chatRooms, loading, error, updateChatRoomLastMessage } = useChatContext();
+  // roomId = room id of the most recent message from any room
   const [roomId, setRoomId] = useState<string | null>(null);
 
   const sortedChatRooms = useMemo(() => {
@@ -26,65 +25,30 @@ export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom, userId }: Ch
   }, [chatRooms, roomId]);
 
   useChannel("chat", (message) => {
+    const messageId = message.id as string;
     const roomId: string = message.data.roomId;
     const messageText: string = message.data.message;
     const senderId: string = message.data.senderId;
-    setChatRooms((prev) => {
-      const idx = prev.findIndex((cr) => cr.id === roomId);
-      const updated = [...prev];
-      const lastRead = senderId === updated[idx].userIds[0] ? "lastReadA" : "lastReadB";
-      if (idx !== -1) {
-        updated[idx] = {
-          ...updated[idx],
-          lastMessage: {
-            id: message.id as string,
-            senderId: message.data.senderId,
-            roomId: roomId,
-            message: messageText,
-            createdAt: new Date(),
-          },
-          [lastRead]: new Date(),
-        };
-      }
-      return updated;
-    });
+    updateChatRoomLastMessage(messageId, roomId, messageText, senderId);
     setRoomId(roomId);
   });
 
-  const handleChangeCurrentRoom = (chatRoom: ChatRoom) => {
-    setChatRooms((prev) => {
-      const idx = prev.findIndex((cr) => cr.id === chatRoom.id);
-      const updated = [...prev];
-      if (idx !== -1) {
-        const lastRead = userId === chatRoom.userIds[0] ? "lastReadA" : "lastReadB";
-        updated[idx] = {
-          ...updated[idx],
-          [lastRead]: new Date(),
-        };
-      }
-      return updated;
-    });
-
-    setCurrentChatRoom(chatRoom);
-  };
-
   if (loading) {
-    return <div>Loading...</div>;
+    return <ChatRoomSkeleton />;
   }
   if (error) {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <>
+    <div className="h-full w-full overflow-y-scroll">
       {sortedChatRooms.map((chatRoom) => (
         <ChatRoomCard
           key={chatRoom.id}
           chatRoom={chatRoom}
           isActive={chatRoom.id === currentChatRoom?.id}
-          onClick={() => handleChangeCurrentRoom(chatRoom)}
           userId={userId}
         />
       ))}
-    </>
+    </div>
   );
 };

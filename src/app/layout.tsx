@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { AuthProvider } from "@/providers/auth-provider";
+import { AppProvider } from "@/context/AppContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Kanit } from "next/font/google";
 import { Suspense } from "react";
@@ -34,10 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${KanitFont.className} antialiased`}>
-        <AuthProvider>
+        <AppProvider>
           <Header />
           <Suspense fallback={<LoadingAnimation />}>{children}</Suspense>
-        </AuthProvider>
+        </AppProvider>
       </body>
     </html>
   );

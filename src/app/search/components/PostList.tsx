@@ -1,25 +1,15 @@
 import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { usePostContext } from "@/context/postContext";
 import { Post } from "@/data/dto/post.dto";
-import { useGetAllPosts } from "@/hooks/useGetAllPosts";
-import { useGetRecommendPost } from "@/hooks/useGetRecommendPost";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PostCard from "./PostCard";
 export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
+  const { data: session } = useSession();
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
 
-  const { posts, loading: loadingAll, error: errorAll } = useGetAllPosts();
-
-  const { data: session } = useSession();
-  const {
-    posts: recommendedPosts,
-    loading: loadingRecommended,
-    error: errorRecommended,
-  } = useGetRecommendPost(session?.user.id);
-
-  const loading = loadingAll || loadingRecommended;
-  const error = errorAll || errorRecommended;
+  const { posts, recommendedPosts, loading, error } = usePostContext();
 
   if (loading) {
     return <LoadingAnimation />;

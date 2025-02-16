@@ -1,8 +1,8 @@
 import { Post } from "@/data/dto/post.dto";
-import { getRecommendPosts } from "@/data/recommend-post";
+import { getRecommendedPosts } from "@/data/post";
 import { useEffect, useState } from "react";
 
-export const useGetRecommendPost = (userId: string | undefined) => {
+export const useGetRecommendedPost = (userId: string | undefined) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -11,7 +11,7 @@ export const useGetRecommendPost = (userId: string | undefined) => {
     (async () => {
       let posts: Post[] | Error = [];
       if (userId) {
-        posts = await getRecommendPosts(userId);
+        posts = await getRecommendedPosts(userId);
       }
 
       if (posts instanceof Error) {
