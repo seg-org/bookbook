@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
+import { Bookmark } from "./Bookmark";
 
 type PostCardProps = {
   post: Post;
@@ -54,7 +55,10 @@ function PostCard({ post, isRecommended }: PostCardProps) {
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
           <h3>{post.title}</h3>
-          <span>{post.price} ฿</span>
+          <div className="flex items-center space-x-4">
+            <span>{post.price} ฿</span>
+            <Bookmark />
+          </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">
           <Image
