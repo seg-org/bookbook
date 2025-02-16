@@ -18,7 +18,7 @@ function SearchPage() {
         <div className="m-2 flex flex-col items-center p-2">
           <div className="flex gap-16 max-md:flex-col">
             <div className="relative h-[200px] min-w-[300px] max-md:w-[200px]">
-              <Image src="/images/search/man-with-book.png" alt="Illustration" fill={true} />
+              <Image src="/images/search/man-with-book.png" alt="Illustration" fill />
             </div>
             <div className="w-[100%]">
               <h2 className="mb-2.5 text-3xl max-sm:text-2xl">ค้นหาหนังสือ</h2>
@@ -29,16 +29,16 @@ function SearchPage() {
                   placeholder="ชื่อหนังสือ"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                ></input>
+                />
                 <button className="ml-1.5 cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white">
                   ค้นหาข้อมูล
                 </button>
               </div>
-              <div className="advanced-search-toggle flex flex-row">
+              <div className="flex flex-row">
                 <button
                   className={`m-[10px] mb-5 p-3.5 ${specialSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-lg border-none text-white`}
                   onClick={() => {
-                    setSpecialSearch(true);
+                    setSpecialSearch((prev) => !prev);
                     setDetailSearch(false);
                   }}
                 >
@@ -47,7 +47,7 @@ function SearchPage() {
                 <button
                   className={`m-[10px] mb-5 p-3.5 ${detailSearch ? `bg-[#48AFF3]` : `bg-[#babcbd]`} cursor-pointer rounded-lg border-none text-white`}
                   onClick={() => {
-                    setDetailSearch(true);
+                    setDetailSearch((prev) => !prev);
                     setSpecialSearch(false);
                   }}
                 >
@@ -58,7 +58,7 @@ function SearchPage() {
               {!detailSearch && specialSearch && <SpecialSearch />}
             </div>
           </div>
-          {!detailSearch && !specialSearch && <PostList inputSearchValue={inputValue} />}
+          <PostList inputSearchValue={inputValue} />
         </div>
       </div>
     </>

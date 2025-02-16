@@ -1,12 +1,12 @@
-import { getMyChatRooms } from "@/data/chat";
-import { ChatRoom } from "@/data/dto/chat.dto";
+import { getMyBookmarks } from "@/data/bookmark";
+import { Bookmark } from "@/data/dto/bookmark.dto";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-export const useGetMyChatRooms = () => {
+export const useGetMyBookmarks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-  const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const { status, data: session } = useSession();
   const isAuthenticated = status === "authenticated";
 
@@ -14,19 +14,19 @@ export const useGetMyChatRooms = () => {
     (async () => {
       if (!isAuthenticated || !session?.user) {
         setLoading(false);
-        setChatRooms([]);
+        setBookmarks([]);
         return;
       }
 
-      const res = await getMyChatRooms();
+      const res = await getMyBookmarks();
       if (res instanceof Error) {
         return setError(res);
       }
 
-      setChatRooms(res);
+      setBookmarks(res);
       setLoading(false);
     })();
   }, [isAuthenticated, session]);
 
-  return { chatRooms, setChatRooms, loading, error };
+  return { bookmarks, setBookmarks, loading, error };
 };

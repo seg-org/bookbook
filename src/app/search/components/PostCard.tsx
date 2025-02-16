@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
+import { PostWithBookmark } from "@/context/postContext";
 import { createChatRoom } from "@/data/chat";
-import { Post } from "@/data/dto/post.dto";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
+import { Bookmark } from "./Bookmark";
 
 type PostCardProps = {
-  post: Post;
+  post: PostWithBookmark;
   isRecommended?: boolean;
 };
 
@@ -54,7 +55,10 @@ function PostCard({ post, isRecommended }: PostCardProps) {
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
           <h3>{post.title}</h3>
-          <span>{post.price} ฿</span>
+          <div className="flex items-center space-x-4">
+            <span>{post.price} ฿</span>
+            {isAuthenticated && <Bookmark postId={post.id} initialState={post.isBookmarked} />}
+          </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">
           <Image
