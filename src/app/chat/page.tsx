@@ -1,12 +1,10 @@
 "use client";
 
-import { readMessages } from "@/data/chat";
-import { ChatRoom } from "@/data/dto/chat.dto";
+import { useChatContext } from "@/context/chatContext";
 import * as Ably from "ably";
 import { AblyProvider, ChannelProvider } from "ably/react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useState } from "react";
 import Chat from "./components/Chat";
 import StartChat from "./components/Chat/StartChat";
 import { ChatRoomList } from "./components/ChatRoomList";
@@ -18,25 +16,16 @@ function ChatPage() {
     redirect("/login");
   }
 
-  const [currentChatRoom, setCurrentChatRoom] = useState<ChatRoom | undefined>(undefined);
+  const { currentChatRoom } = useChatContext();
 
   const client = new Ably.Realtime({ authUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/socket` });
-
-  const handleChangeCurrentRoom = async (chatRoom: ChatRoom) => {
-    setCurrentChatRoom(chatRoom);
-    await readMessages(chatRoom.id, session?.user.id ?? "");
-  };
 
   return (
     <AblyProvider client={client}>
       <ChannelProvider channelName="chat">
         <div className="flex h-[calc(100vh-72px)]">
           <div className="h-full w-[35%] border-r border-gray-200 bg-gray-50">
-            <ChatRoomList
-              currentChatRoom={currentChatRoom}
-              setCurrentChatRoom={handleChangeCurrentRoom}
-              userId={session?.user.id ?? ""}
-            />
+            <ChatRoomList userId={session?.user.id ?? ""} />
           </div>
           <div className="h-full w-[65%]">
             {currentChatRoom ? <Chat chatRoom={currentChatRoom} user={session!.user} /> : <StartChat />}

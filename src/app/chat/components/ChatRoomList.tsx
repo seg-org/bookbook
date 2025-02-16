@@ -1,3 +1,5 @@
+import { useChatContext } from "@/context/chatContext";
+import { readMessages } from "@/data/chat";
 import { ChatRoom } from "@/data/dto/chat.dto";
 import { useGetMyChatRooms } from "@/hooks/useGetMyChatRooms";
 import { useChannel } from "ably/react";
@@ -5,12 +7,11 @@ import { useMemo, useState } from "react";
 import { ChatRoomCard } from "./ChatRoomCard";
 
 type ChatRoomListProps = {
-  currentChatRoom?: ChatRoom;
-  setCurrentChatRoom: (chatRoom: ChatRoom) => void;
   userId: string;
 };
 
-export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom, userId }: ChatRoomListProps) => {
+export const ChatRoomList = ({ userId }: ChatRoomListProps) => {
+  const { currentChatRoom, setCurrentChatRoom } = useChatContext();
   const { chatRooms, setChatRooms, loading, error } = useGetMyChatRooms();
   const [roomId, setRoomId] = useState<string | null>(null);
 
@@ -51,7 +52,7 @@ export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom, userId }: Ch
     setRoomId(roomId);
   });
 
-  const handleChangeCurrentRoom = (chatRoom: ChatRoom) => {
+  const handleChangeCurrentRoom = async (chatRoom: ChatRoom) => {
     setChatRooms((prev) => {
       const idx = prev.findIndex((cr) => cr.id === chatRoom.id);
       const updated = [...prev];
@@ -66,6 +67,7 @@ export const ChatRoomList = ({ currentChatRoom, setCurrentChatRoom, userId }: Ch
     });
 
     setCurrentChatRoom(chatRoom);
+    await readMessages(chatRoom.id, userId);
   };
 
   if (loading) {

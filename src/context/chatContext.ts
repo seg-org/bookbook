@@ -3,7 +3,7 @@ import { createContext, Dispatch, SetStateAction, useContext } from "react";
 
 interface ChatContext {
   currentChatRoom: ChatRoom | undefined;
-  setCurrentChatRoom?: Dispatch<SetStateAction<ChatRoom | undefined>>;
+  setCurrentChatRoom: Dispatch<SetStateAction<ChatRoom | undefined>>;
   chatRooms: ChatRoom[];
   setChatRooms: Dispatch<SetStateAction<ChatRoom[]>>;
   loading: boolean;

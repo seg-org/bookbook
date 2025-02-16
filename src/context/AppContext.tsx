@@ -7,7 +7,7 @@ import { ChatProvider } from "./ChatProvider";
 export const AppProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <SessionProvider>
-      <ChatProvider>{children}</ChatProvider>;
+      <ChatProvider>{children}</ChatProvider>
     </SessionProvider>
   );
 };
