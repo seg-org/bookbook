@@ -120,8 +120,8 @@ export async function GET(req: NextRequest) {
     });
 
     const transactionsWithURL = await Promise.all(
-      transactions.map(async (transaction) => {
-        const url = await getUrl("book_images", transaction.post.book.coverImageKey);
+      transactions.map((transaction) => {
+        const url = getUrl("book_images", transaction.post.book.coverImageKey);
         return {
           ...transaction,
           post: {

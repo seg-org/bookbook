@@ -55,18 +55,16 @@ export async function GET() {
       include: { book: true },
     });
 
-    const postsWithImageUrl = await Promise.all(
-      posts.map(async (post) => {
-        const url = await getUrl("book_images", post.book.coverImageKey);
-        return {
-          ...post,
-          book: {
-            ...post.book,
-            coverImageUrl: url,
-          },
-        };
-      })
-    );
+    const postsWithImageUrl = posts.map(async (post) => {
+      const url = getUrl("book_images", post.book.coverImageKey);
+      return {
+        ...post,
+        book: {
+          ...post.book,
+          coverImageUrl: url,
+        },
+      };
+    });
 
     return NextResponse.json(postsWithImageUrl);
   } catch (error) {

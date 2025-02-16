@@ -98,7 +98,7 @@ export async function GET(_: NextRequest, props: { params: Promise<{ id: string 
       return NextResponse.json({ error: `Transaction with id ${id} not found` }, { status: 404 });
     }
 
-    const url = await getUrl("book_images", transaction.post.book.coverImageKey);
+    const url = getUrl("book_images", transaction.post.book.coverImageKey);
     const transactionWithURL = {
       ...transaction,
       post: {

@@ -32,15 +32,13 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   try {
     const books = await prisma.book.findMany();
-    const booksWithImageUrl = await Promise.all(
-      books.map(async (book) => {
-        const url = await getUrl("book_images", book.coverImageKey);
-        return {
-          ...book,
-          coverImageUrl: url,
-        };
-      })
-    );
+    const booksWithImageUrl = books.map(async (book) => {
+      const url = getUrl("book_images", book.coverImageKey);
+      return {
+        ...book,
+        coverImageUrl: url,
+      };
+    });
 
     return NextResponse.json(booksWithImageUrl);
   } catch (error) {

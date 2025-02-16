@@ -29,7 +29,7 @@ export const uploadToBucket = async (folder: string, file: File) => {
   }
 };
 
-export const getUrl = async (folder: string, key: string) => {
+export const getUrl = (folder: string, key: string) => {
   // const signedUrl = s3.getSignedUrl("getObject", {
   //   Bucket: process.env.AWS_BUCKET_NAME!,
   //   Key: `${folder}/${key}`,

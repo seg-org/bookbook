@@ -25,8 +25,8 @@ export async function GET(request: Request) {
     });
 
     let postsWithImageUrl = await Promise.all(
-      posts.map(async (post) => {
-        const url = await getUrl("book_images", post.book.coverImageKey);
+      posts.map((post) => {
+        const url = getUrl("book_images", post.book.coverImageKey);
         return {
           ...post,
           book: {
