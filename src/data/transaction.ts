@@ -40,7 +40,12 @@ export const getTransaction = async (id: string) => {
   try {
     const res: AxiosResponse<Transaction> = await apiClient.get(`/transaction/${id}`);
 
-    return res.data;
+    return {
+      ...res.data,
+      createdAt: new Date(res.data.createdAt),
+      updatedAt: new Date(res.data.updatedAt),
+      paidOn: new Date(res.data.paidOn),
+    };
   } catch (error) {
     console.error(`Failed to get transaction with id ${id}`, error);
     return Error(`Failed to get transaction with id ${id}`);
