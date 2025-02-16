@@ -99,13 +99,14 @@ model Post {
 }
 
 model Bookmark {
-  id        String   @id @default(cuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @map("user_id")
   post      Post     @relation(fields: [postId], references: [id])
   postId    String   @map("post_id")
   createdAt DateTime @default(now()) @map("created_at")
 
+  @@id([userId, postId])
+  @@index([userId])
   @@map("bookmarks")
 }
 
