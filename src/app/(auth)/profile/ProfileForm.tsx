@@ -233,6 +233,8 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                   <FormLabel>รูปถ่ายบัตรประชาชน</FormLabel>
                   <Image
                     src={initialData.sellerProfile.idCardImageKey}
+                    width={300}
+                    height={200}
                     alt="ID Card"
                     className="mt-2 max-w-md rounded-lg"
                   />
