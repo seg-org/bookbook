@@ -1,6 +1,5 @@
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { usePostContext } from "@/context/postContext";
-import { Post } from "@/data/dto/post.dto";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import PostCard from "./PostCard";
@@ -47,7 +46,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
           {recommendedPosts.length > 0 && (
             <PostCard post={recommendedPosts[0]} key={recommendedPosts[0].id} isRecommended />
           )}
-          {filteredPosts.map((post: Post) => (
+          {filteredPosts.map((post) => (
             <PostCard post={post} key={post.id} />
           ))}
         </div>

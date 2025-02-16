@@ -4,10 +4,11 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 type BookmarkProps = {
   postId: string;
+  initialState: boolean;
 };
 
-export const Bookmark = ({ postId }: BookmarkProps) => {
-  const [isMarked, setIsMarked] = useState(false);
+export const Bookmark = ({ postId, initialState }: BookmarkProps) => {
+  const [isMarked, setIsMarked] = useState(initialState);
 
   const handleClick = async () => {
     setIsMarked((prev) => !prev);
