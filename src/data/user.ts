@@ -4,7 +4,9 @@ import { User } from "./dto/user.dto";
 
 export const getUserProfile = async (id: string) => {
   try {
-    const res: AxiosResponse<User> = await apiClient.get(`/profile/seller/user_1`);
+    const res: AxiosResponse<User> = await apiClient.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/profile/seller/${id}`
+    );
 
     return res.data;
   } catch (error) {

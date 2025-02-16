@@ -38,6 +38,7 @@ type UserProfile = {
         bankName: string;
         idCardNumber: string;
         idCardImageKey: string;
+        idCardImageUrl: string;
         isApproved: boolean;
       }
     | null
@@ -232,7 +233,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
                 <div>
                   <FormLabel>รูปถ่ายบัตรประชาชน</FormLabel>
                   <Image
-                    src={initialData.sellerProfile.idCardImageKey}
+                    src={initialData.sellerProfile.idCardImageUrl}
                     width={300}
                     height={200}
                     alt="ID Card"
