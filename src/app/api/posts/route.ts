@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { getUrl } from "../objects/s3";
 
 const createPostRequest = z.object({
   title: z.string(),
@@ -8,6 +10,7 @@ const createPostRequest = z.object({
   price: z.number(),
   published: z.boolean(),
   bookId: z.string(),
+  sellerId: z.string(),
 });
 
 export async function POST(req: NextRequest) {
@@ -24,10 +27,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
     }
 
+    const seller = await prisma.user.findUnique({
+      where: { id: parsedData.data.sellerId },
+    });
+    if (!seller) {
+      return NextResponse.json({ error: `seller with id ${parsedData.data.sellerId} not found` }, { status: 404 });
+    }
+
     const newPost = await prisma.post.create({ data: parsedData.data });
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
+      return NextResponse.json(
+        { error: "Duplicate key violation (there is already a post with this book id)" },
+        { status: 409 }
+      );
+    }
     if (error instanceof Error) console.error("Error creating post", error.stack);
     return NextResponse.json({ error: "Cannot create a post" }, { status: 500 });
   }
@@ -35,9 +51,22 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+      include: { book: true },
+    });
 
-    return NextResponse.json(posts);
+    const postsWithImageUrl = posts.map((post) => {
+      const url = getUrl("book_images", post.book.coverImageKey);
+      return {
+        ...post,
+        book: {
+          ...post.book,
+          coverImageUrl: url,
+        },
+      };
+    });
+
+    return NextResponse.json(postsWithImageUrl);
   } catch (error) {
     if (error instanceof Error) console.error("Error getting posts", error.stack);
     return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });

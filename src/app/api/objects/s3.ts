@@ -29,14 +29,15 @@ export const uploadToBucket = async (folder: string, file: File) => {
   }
 };
 
-export const getPresignedUrl = async (folder: string, key: string) => {
-  const signedUrl = s3.getSignedUrl("getObject", {
-    Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: `${folder}/${key}`,
-    Expires: 3600,
-  });
+export const getUrl = (folder: string, key: string) => {
+  // const signedUrl = s3.getSignedUrl("getObject", {
+  //   Bucket: process.env.AWS_BUCKET_NAME!,
+  //   Key: `${folder}/${key}`,
+  //   Expires: 3600,
+  // });
 
-  return signedUrl;
+  // return signedUrl;
+  return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${folder}/${key}`;
 };
 
 export const deleteObject = async (folder: string, key: string): Promise<boolean> => {

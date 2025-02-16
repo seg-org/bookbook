@@ -9,47 +9,185 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_URL")
   directUrl = env("DIRECT_URL")
 }
 
+model User {
+  id               String         @id @default(cuid())
+  email            String         @unique
+  firstName        String         @map("first_name")
+  lastName         String         @map("last_name")
+  password         String
+  phoneNumber      String?        @unique @map("phone_number")
+  address          String?
+  isAdmin          Boolean        @default(false) @map("is_admin")
+  isSeller         Boolean        @default(false) @map("is_seller")
+  isVerified       Boolean        @default(false) @map("is_verified")
+  emailVerified    DateTime?      @map("email_verified")
+  phoneVerified    DateTime?      @map("phone_verified")
+  pdpaConsent      Boolean        @default(false) @map("pdpa_consent")
+  buyTransactions  Transaction[]  @relation("BuyerTransaction")
+  sellTransactions Transaction[]  @relation("SellerTransaction")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  sellerProfile    SellerProfile?
+  posts            Post[]
+  chatMessages     ChatMessage[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  type      String // 'email' or 'phone'
+  expires   DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([email, type])
+  @@map("verification_tokens")
+}
+
+model SellerProfile {
+  id             String    @id @default(cuid())
+  idCardNumber   String    @map("id_card_number")
+  idCardImageKey String    @map("id_card_image_key")
+  bankAccount    String    @map("bank_account")
+  bankName       String    @map("bank_name")
+  isApproved     Boolean   @default(false) @map("is_approved")
+  approvedAt     DateTime? @map("approved_at")
+  user           User      @relation(fields: [userId], references: [id])
+  userId         String    @unique @map("user_id")
+
+  @@map("seller_profiles")
+}
+
 model Book {
-  id            String  @id @default(cuid())
+  id            String @id @default(cuid())
   title         String
   author        String
   genre         String
   description   String
-  isbn          String
+  isbn          String @unique
   pages         Int
   coverImageKey String @map("cover_image_key")
-  // seller    User     @relation(fields: [sellerId], references: [id])
-  // sellerId  String
   posts         Post[]
+  // TODO verifiedBy Admin
 
-  @@map("book")
+  @@map("books")
 }
 
 model Post {
-  id        String  @id @default(cuid())
-  title     String
-  content   String?
-  price     Int
-  published Boolean @default(false)
-  // seller    User     @relation(fields: [sellerId], references: [id])
-  // sellerId  String
-  book      Book    @relation(fields: [bookId], references: [id])
-  bookId    String  @map("book_id")
+  id           String        @id @default(cuid())
+  title        String
+  content      String?
+  price        Int
+  published    Boolean       @default(false)
+  seller       User          @relation(fields: [sellerId], references: [id])
+  sellerId     String        @map("seller_id")
+  book         Book          @relation(fields: [bookId], references: [id])
+  bookId       String        @map("book_id")
+  transactions Transaction[]
+  ChatRoom     ChatRoom[]
 
-  @@map("post")
+  @@map("posts")
 }
 
-model User {
+model ChatMessage {
   id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String // Hash?
-  createdAt DateTime @default(now())
+  sender    User     @relation(fields: [senderId], references: [id])
+  senderId  String   @map("sender_id")
+  room      ChatRoom @relation(fields: [roomId], references: [id])
+  roomId    String   @map("room_id")
+  message   String
+  createdAt DateTime @default(now()) @map("created_at")
 
-  @@map("user")
+  @@index([roomId])
+  @@map("chat_messages")
+}
+
+model ChatRoom {
+  id        String        @id @default(cuid())
+  post      Post          @relation(fields: [postId], references: [id])
+  postId    String        @map("post_id")
+  // TODO: add report
+  userIds   String[]      @map("user_ids")
+  createdAt DateTime      @default(now()) @map("created_at")
+  lastReadA DateTime      @default(now()) @map("last_read_a")
+  lastReadB DateTime      @default(now()) @map("last_read_b")
+  messages  ChatMessage[]
+
+  @@index([postId])
+  @@map("chat_rooms")
+}
+
+model Transaction {
+  id             String            @id @default(cuid())
+  // transaction data
+  buyer          User              @relation("BuyerTransaction", fields: [buyerId], references: [id])
+  buyerId        String            @map("buyer_id")
+  seller         User              @relation("SellerTransaction", fields: [sellerId], references: [id])
+  sellerId       String            @map("seller_id")
+  post           Post              @relation(fields: [postId], references: [id])
+  postId         String            @map("post_id")
+  createdAt      DateTime          @default(now()) @map("create_on")
+  updatedAt      DateTime          @updatedAt() @map("update_on")
+  status         TransactionStatus
+  failData       TransactionFail?
+  // payment data
+  paymentMethod  PaymentMethod     @map("payment_method")
+  hashId         String            @map("hashId")
+  paidOn         DateTime          @default(now()) @map("paid_on")
+  amount         Int
+  // shipment data
+  shipmentMethod ShipmentMethod    @map("shipment_method")
+  trackingURL    String            @map("tracking_url")
+  isDelivered    Boolean           @map("is_delivered")
+
+  @@index([buyerId, createdAt])
+  @@index([sellerId, createdAt])
+  @@map("transactions")
+}
+
+model TransactionFail {
+  id            String              @id @default(cuid())
+  transaction   Transaction         @relation(fields: [transactionId], references: [id])
+  transactionId String              @unique @map("transaction_id")
+  evidenceURL   String              @map("evidence_url")
+  detail        String
+  failType      TransactionFailType @map("fail_type")
+
+  @@map("transaction_fails")
+}
+
+enum TransactionStatus {
+  APPROVING @map("approving")
+  PAYING    @map("paying")
+  VERIFYING @map("verifying")
+  COMPLETE  @map("complete")
+  FAIL      @map("fail")
+
+  @@map("transaction_status_type")
+}
+
+enum TransactionFailType {
+  CHEAT @map("cheat")
+
+  @@map("transaction_fail_type")
+}
+
+enum PaymentMethod {
+  CREDIT_CARD    @map("credit_card")
+  ONLINE_BANKING @map("online_banking")
+
+  @@map("payment_method_type")
+}
+
+enum ShipmentMethod {
+  DELIVERY @map("delivery")
+
+  @@map("shipment_method_type")
 }

@@ -1,0 +1,107 @@
+[
+    {
+        "id": "transaction_fail_1",
+        "transactionId": "transaction_5",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_2",
+        "transactionId": "transaction_9",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_3",
+        "transactionId": "transaction_10",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_4",
+        "transactionId": "transaction_16",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_5",
+        "transactionId": "transaction_21",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_6",
+        "transactionId": "transaction_23",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_7",
+        "transactionId": "transaction_35",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_8",
+        "transactionId": "transaction_48",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_9",
+        "transactionId": "transaction_50",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_10",
+        "transactionId": "transaction_54",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_11",
+        "transactionId": "transaction_55",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_12",
+        "transactionId": "transaction_58",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_13",
+        "transactionId": "transaction_72",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_14",
+        "transactionId": "transaction_73",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    },
+    {
+        "id": "transaction_fail_15",
+        "transactionId": "transaction_76",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "He has a skin color I don't like",
+        "failType": "CHEAT"
+    }
+]
