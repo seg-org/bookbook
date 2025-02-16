@@ -14,4 +14,15 @@ export type User = {
   pdpaConsent: boolean;
   createdAt: string;
   updatedAt: string;
+  sellerProfile?: {
+    id: string;
+    idCardNumber: string;
+    idCardImageKey: string;
+    idCardImageUrl: string;
+    bankAccount: string;
+    bankName: string;
+    isApproved: boolean;
+    approvedAt: string;
+    userId: string;
+  };
 };
