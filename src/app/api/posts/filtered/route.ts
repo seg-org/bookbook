@@ -6,9 +6,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export async function POST(req: Request) {
   const {title, author, publisher, isbn} = await req.json();
-  console.log(title);
+  console.log(title,"gettttttttttttttttttttttt")
   try {
-    const posts1 = await prisma.post.findMany({
+    const posts1 = await prisma.post.findMany({//GPT said The issue is that Prisma currently does not support querying JSON fields using `path`. 
       include: { book: true },
       where : {
         AND : [
@@ -23,10 +23,10 @@ export async function POST(req: Request) {
     const posts = posts1.filter(post => {
         return  post.book.title.toLowerCase().includes(title.toLowerCase()) &&
                 post.book.author.toLowerCase().includes(author.toLowerCase()) &&
+                // post.book.publisher.toLowerCase().includes(publisher.toLowerCase()) &&
                 post.book.isbn.toLowerCase().includes(isbn.toLowerCase());
     });
     
-
     const postsWithImageUrl = await Promise.all(
       posts.map(async (post) => {
         const url = await getPresignedUrl("book_images", post.book.coverImageKey);

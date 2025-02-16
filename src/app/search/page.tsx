@@ -54,10 +54,10 @@ function SearchPage() {
                   ค้นหาด้วยรายละเอียดเพิ่มเติม
                 </button>
               </div>
-              {detailSearch && !specialSearch && <SearchByDetail />}
-              {!detailSearch && specialSearch && <SpecialSearch />}
             </div>
           </div>
+          {detailSearch && !specialSearch && <SearchByDetail />}
+          {!detailSearch && specialSearch && <SpecialSearch />}
           {!detailSearch && !specialSearch && <PostList inputSearchValue={inputValue} />}
         </div>
       </div>
