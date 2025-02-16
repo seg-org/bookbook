@@ -4,7 +4,7 @@ import { Bookmark } from "./dto/bookmark.dto";
 
 export const createBookmark = async (postId: string) => {
   try {
-    const res: AxiosResponse<Bookmark> = await apiClient.post("/bookmarks", { postId });
+    const res: AxiosResponse<Bookmark> = await apiClient.put("/bookmarks", { postId });
 
     return res.data;
   } catch (error) {

@@ -9,7 +9,7 @@ const createBookmarkRequest = z.object({
   postId: z.string(),
 });
 
-export async function POST(req: NextRequest) {
+export async function PUT(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user?.id) {
@@ -28,11 +28,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `Post with id ${parsedData.data.postId} not found` }, { status: 404 });
     }
 
-    const newBookmark = await prisma.bookmark.create({
-      data: { postId: parsedData.data.postId, userId: session.user.id },
+    const currentBookmark = await prisma.bookmark.findFirst({
+      where: { postId: parsedData.data.postId, userId: session.user.id },
     });
 
-    return NextResponse.json(newBookmark, { status: 201 });
+    if (currentBookmark) {
+      await prisma.bookmark.delete({
+        where: { userId_postId: { postId: parsedData.data.postId, userId: session.user.id } },
+      });
+
+      return NextResponse.json({ message: "Bookmark deleted" });
+    } else {
+      const newBookmark = await prisma.bookmark.create({
+        data: { postId: parsedData.data.postId, userId: session.user.id },
+      });
+
+      return NextResponse.json(newBookmark, { status: 201 });
+    }
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
       return NextResponse.json(
