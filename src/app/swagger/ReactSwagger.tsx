@@ -1,7 +1,6 @@
 "use client";
 
-import SwaggerUI from "swagger-ui-react";
-import "swagger-ui-react/swagger-ui.css";
+import { RedocStandalone } from "redoc";
 
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,7 +8,7 @@ type Props = {
 };
 
 function ReactSwagger({ spec }: Props) {
-  return <SwaggerUI spec={spec} />;
+  return <RedocStandalone spec={spec} />;
 }
 
 export default ReactSwagger;
