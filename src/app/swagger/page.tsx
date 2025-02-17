@@ -1,10 +1,15 @@
-"use client";
+import { getApiDocs } from "@/lib/swagger";
+import { notFound } from "next/navigation";
+import ReactSwagger from "./ReactSwagger";
 
-import dynamic from "next/dynamic";
-import "swagger-ui-react/swagger-ui.css";
+export default async function IndexPage() {
+  const spec = await getApiDocs();
 
-const SwaggerUI = dynamic(() => import("swagger-ui-react"), { ssr: false });
+  if (process.env.NODE_ENV !== "development") notFound();
 
-export default function SwaggerPage() {
-  return <SwaggerUI url="/api/swagger" />;
+  return (
+    <section className="container">
+      <ReactSwagger spec={spec} />
+    </section>
+  );
 }
