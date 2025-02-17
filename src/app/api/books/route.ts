@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getUrl } from "../objects/s3";
-import { BookResponse, CreateBookRequest } from "./schemas";
+import { BookResponse, BooksResponse, CreateBookRequest } from "./schemas";
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,8 +11,12 @@ export async function POST(req: NextRequest) {
     }
 
     const newBook = await prisma.book.create({ data: parsedData.data });
+    const newBookWithImageUrl = {
+      ...newBook,
+      coverImageUrl: getUrl("book_images", newBook.coverImageKey),
+    };
 
-    return NextResponse.json(BookResponse.parse(newBook), { status: 201 });
+    return NextResponse.json(BookResponse.parse(newBookWithImageUrl), { status: 201 });
   } catch (error) {
     if (error instanceof Error) console.error("Error creating book", error.stack);
     return NextResponse.json({ error: "Cannot create a book" }, { status: 500 });
@@ -30,7 +34,7 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json(booksWithImageUrl);
+    return NextResponse.json(BooksResponse.parse(booksWithImageUrl));
   } catch (error) {
     if (error instanceof Error) console.error("Error getting books", error.stack);
     return NextResponse.json({ error: "Cannot get books" }, { status: 500 });

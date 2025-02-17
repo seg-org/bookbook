@@ -9,7 +9,7 @@ export const CreateBookRequest = z
     author: z.string().openapi({ example: "J.R.R. Tolkien" }),
     genre: z.string().openapi({ example: "Fantasy" }),
     description: z.string().openapi({ example: "The Hobbit is a fantasy novel by J.R.R. Tolkien" }),
-    isbn: z.string().openapi({ example: "978-3-16-148410-0" }),
+    isbn: z.string().openapi({ example: "9783161484100" }),
     pages: z.number().openapi({ example: 310 }),
     publisher: z.string().openapi({ example: "George Allen & Unwin" }),
     coverImageKey: z.string().openapi({ example: "the-hobbit.jpg" }),
@@ -18,14 +18,17 @@ export const CreateBookRequest = z
 
 export const BookResponse = z
   .object({
-    title: z.string(),
-    author: z.string(),
-    genre: z.string(),
-    description: z.string(),
-    isbn: z.string(),
-    pages: z.number(),
-    publisher: z.string(),
-    coverImageKey: z.string(),
+    title: z.string().openapi({ example: "The Hobbit" }),
+    author: z.string().openapi({ example: "J.R.R. Tolkien" }),
+    genre: z.string().openapi({ example: "Fantasy" }),
+    description: z.string().openapi({ example: "The Hobbit is a fantasy novel by J.R.R. Tolkien" }),
+    isbn: z.string().openapi({ example: "9783161484100" }),
+    pages: z.number().openapi({ example: 310 }),
+    publisher: z.string().openapi({ example: "George Allen & Unwin" }),
+    coverImageKey: z.string().openapi({ example: "the-hobbit.jpg" }),
+    coverImageUrl: z.string().openapi({ example: "https://example.com/the-hobbit.jpg" }),
     id: z.string(),
   })
   .openapi("Book");
+
+export const BooksResponse = z.array(BookResponse).openapi("Books");

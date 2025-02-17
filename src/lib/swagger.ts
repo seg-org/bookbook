@@ -1,14 +1,16 @@
 import { bookRegistry } from "@/app/api/books/swagger";
 import { OpenApiGeneratorV3 } from "@asteasolutions/zod-to-openapi";
+import { OpenAPIObjectConfig } from "@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator";
 
 export const getApiDocs = async () => {
   const generator = new OpenApiGeneratorV3([...bookRegistry.definitions]);
-  const config = {
+  const config: OpenAPIObjectConfig = {
     openapi: "3.0.0",
     info: {
       title: "Next.js API Docs",
       version: "1.0.0",
     },
+    servers: [{ url: "/api" }],
   };
 
   return generator.generateDocument(config);
