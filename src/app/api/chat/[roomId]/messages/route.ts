@@ -2,12 +2,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-
-const createChatMessageRequest = z.object({
-  message: z.string(),
-  roomId: z.string(),
-});
+import { ChatMessageResponse, ChatMessagesResponse, CreateChatMessageRequest } from "../../schemas";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -16,7 +11,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const parsedData = createChatMessageRequest.safeParse(await req.json());
+    const parsedData = CreateChatMessageRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
@@ -44,7 +39,7 @@ export async function POST(req: NextRequest) {
       return message;
     });
 
-    return NextResponse.json(chatMessage, { status: 200 });
+    return NextResponse.json(ChatMessageResponse.parse(chatMessage), { status: 200 });
   } catch (error) {
     if (error instanceof Error) console.error("Error creating chatMessage", error.stack);
     return NextResponse.json({ error: "Cannot create a chatMessage" }, { status: 500 });
@@ -75,7 +70,7 @@ export async function GET(_: NextRequest, props: { params: Promise<{ roomId: str
       return NextResponse.json({ error: `ChatMessages with roomId ${roomId} not found` }, { status: 404 });
     }
 
-    return NextResponse.json(chatMessages);
+    return NextResponse.json(ChatMessagesResponse.parse(chatMessages));
   } catch (error) {
     if (error instanceof Error) console.error(`Error getting chatMessages with roomId ${roomId}`, error.stack);
     return NextResponse.json({ error: "Cannot get chatMessages" }, { status: 500 });

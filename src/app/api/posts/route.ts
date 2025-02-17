@@ -1,21 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { getUrl } from "../objects/s3";
-
-const createPostRequest = z.object({
-  title: z.string(),
-  content: z.string(),
-  price: z.number(),
-  published: z.boolean(),
-  bookId: z.string(),
-  sellerId: z.string(),
-});
+import { CreatePostRequest, PostResponse, PostsResponse } from "./schemas";
 
 export async function POST(req: NextRequest) {
   try {
-    const parsedData = createPostRequest.safeParse(await req.json());
+    const parsedData = CreatePostRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
@@ -34,9 +25,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `seller with id ${parsedData.data.sellerId} not found` }, { status: 404 });
     }
 
-    const newPost = await prisma.post.create({ data: parsedData.data });
+    const newPost = await prisma.post.create({ data: parsedData.data, include: { book: true } });
+    const newPostWithImageUrl = {
+      ...newPost,
+      book: {
+        ...newPost.book,
+        coverImageUrl: getUrl("book_images", newPost.book.coverImageKey),
+      },
+    };
 
-    return NextResponse.json(newPost, { status: 201 });
+    return NextResponse.json(PostResponse.parse(newPostWithImageUrl), { status: 201 });
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
       return NextResponse.json(
@@ -66,7 +64,7 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json(postsWithImageUrl);
+    return NextResponse.json(PostsResponse.parse(postsWithImageUrl));
   } catch (error) {
     if (error instanceof Error) console.error("Error getting posts", error.stack);
     return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });

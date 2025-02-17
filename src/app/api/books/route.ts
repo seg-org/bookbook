@@ -1,29 +1,22 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { getUrl } from "../objects/s3";
-
-const createBookRequest = z.object({
-  title: z.string(),
-  author: z.string(),
-  genre: z.string(),
-  description: z.string(),
-  isbn: z.string(),
-  pages: z.number(),
-  publisher: z.string(),
-  coverImageKey: z.string(),
-});
+import { BookResponse, BooksResponse, CreateBookRequest } from "./schemas";
 
 export async function POST(req: NextRequest) {
   try {
-    const parsedData = createBookRequest.safeParse(await req.json());
+    const parsedData = CreateBookRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
     const newBook = await prisma.book.create({ data: parsedData.data });
+    const newBookWithImageUrl = {
+      ...newBook,
+      coverImageUrl: getUrl("book_images", newBook.coverImageKey),
+    };
 
-    return NextResponse.json(newBook, { status: 201 });
+    return NextResponse.json(BookResponse.parse(newBookWithImageUrl), { status: 201 });
   } catch (error) {
     if (error instanceof Error) console.error("Error creating book", error.stack);
     return NextResponse.json({ error: "Cannot create a book" }, { status: 500 });
@@ -41,7 +34,7 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json(booksWithImageUrl);
+    return NextResponse.json(BooksResponse.parse(booksWithImageUrl));
   } catch (error) {
     if (error instanceof Error) console.error("Error getting books", error.stack);
     return NextResponse.json({ error: "Cannot get books" }, { status: 500 });

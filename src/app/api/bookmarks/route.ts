@@ -3,11 +3,11 @@ import { prisma } from "@/lib/prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
+import { BookmarkResponse, BookmarksResponse, CreateBookmarkRequest } from "./schemas";
 
-const createBookmarkRequest = z.object({
-  postId: z.string(),
-});
+// const createBookmarkRequest = z.object({
+//   postId: z.string(),
+// });
 
 export async function PUT(req: NextRequest) {
   try {
@@ -16,7 +16,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const parsedData = createBookmarkRequest.safeParse(await req.json());
+    const parsedData = CreateBookmarkRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
@@ -43,7 +43,7 @@ export async function PUT(req: NextRequest) {
         data: { postId: parsedData.data.postId, userId: session.user.id },
       });
 
-      return NextResponse.json(newBookmark, { status: 201 });
+      return NextResponse.json(BookmarkResponse.parse(newBookmark), { status: 201 });
     }
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
@@ -68,7 +68,7 @@ export async function GET() {
       where: { userId: session.user.id },
     });
 
-    return NextResponse.json(bookmarks);
+    return NextResponse.json(BookmarksResponse.parse(bookmarks));
   } catch (error) {
     if (error instanceof Error) console.error("Error getting bookmarks", error.stack);
     return NextResponse.json({ error: "Cannot get bookmarks" }, { status: 500 });

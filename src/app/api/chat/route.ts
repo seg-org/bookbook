@@ -2,12 +2,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-
-const createChatRoomRequest = z.object({
-  subject: z.enum(["post", "report"]),
-  subjectId: z.string(),
-});
+import { ChatRoomResponse, CreateChatRoomRequest } from "./schemas";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -16,7 +11,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const parsedData = createChatRoomRequest.safeParse(await req.json());
+    const parsedData = CreateChatRoomRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
@@ -47,7 +42,7 @@ export async function POST(req: NextRequest) {
         });
       }
 
-      return NextResponse.json(chatRoom, { status: 200 });
+      return NextResponse.json(ChatRoomResponse.parse(chatRoom), { status: 200 });
     }
   } catch (error) {
     if (error instanceof Error) console.error("Error creating a chatroom", error.stack);
