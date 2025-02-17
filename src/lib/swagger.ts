@@ -1,5 +1,6 @@
 import { bookmarkRegistry } from "@/app/api/bookmarks/swagger";
 import { bookRegistry } from "@/app/api/books/swagger";
+import { chatRegistry } from "@/app/api/chat/swagger";
 import { objectRegistry } from "@/app/api/objects/swagger";
 import { postRegistry } from "@/app/api/posts/swagger";
 import { OpenApiGeneratorV3 } from "@asteasolutions/zod-to-openapi";
@@ -11,6 +12,7 @@ export const getApiDocs = async () => {
     ...postRegistry.definitions,
     ...objectRegistry.definitions,
     ...bookmarkRegistry.definitions,
+    ...chatRegistry.definitions,
   ]);
   const config: OpenAPIObjectConfig = {
     openapi: "3.0.0",
