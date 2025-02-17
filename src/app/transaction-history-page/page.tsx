@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import FilterBar, { FilterType } from "./components/FilterBar";
 import TransactionList from "./components/TransactionList";
@@ -14,7 +14,7 @@ const endOfTime = new Date("9999-12-31T23:59:59Z");
 const transactionPerPage = 5;
 
 function TransactionPage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const userId = session?.user?.id || "---"
   
   const [filter, setFilter] = useState<FilterType>({

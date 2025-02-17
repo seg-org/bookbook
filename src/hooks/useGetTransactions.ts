@@ -4,7 +4,6 @@ import { FilterType } from "@/app/transaction-history-page/components/FilterBar"
 import { Transaction } from "@/data/dto/transaction.dto";
 import { getQueryTransaction, getTransaction, getTransactionCount } from "@/data/transaction";
 import { useEffect, useState } from "react";
-import { TranscriptContextImpl } from "twilio/lib/rest/intelligence/v2/transcript";
 
 export const useGetQueryTransaction = (filter: FilterType, userId: string, skip?: number, take?: number) => {
   const [loading, setLoading] = useState(true);

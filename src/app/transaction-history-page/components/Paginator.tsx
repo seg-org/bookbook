@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageBox from "./PageBox"
 import { FilterType } from './FilterBar'
 import { useGetTransactionCount } from '@/hooks/useGetTransactions'
@@ -37,7 +37,7 @@ const Paginator = ({ filter, userId, selectingPage, setSelectingPage, transactio
     }
 
     setChildCompoent(newChildComponents)
-  }, [transactionCount, selectingPage, error, loading, userId, filter])
+  }, [transactionCount, selectingPage, error, loading, userId, filter, transactionPerPage, setSelectingPage])
 
   return (
     <div className="flex justify-center items-center gap-2 w-full mb-4">
