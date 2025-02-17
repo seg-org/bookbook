@@ -49,7 +49,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
     <>
       <div
         className={clsx(
-          "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] xl:w-[32%]",
+          "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
           isRecommended && "border-4 border-amber-300"
         )}
       >
