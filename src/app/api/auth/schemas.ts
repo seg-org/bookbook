@@ -17,6 +17,6 @@ export const UserResponse = z.object({
   emailVerified: z.string().optional().openapi({ example: "2021-09-30T15:00:00.000Z" }),
   phoneVerified: z.string().optional().openapi({ example: "2021-09-30T15:00:00.000Z" }),
   pdpaConsent: z.boolean().openapi({ example: true }),
-  createdAt: z.string().openapi({ example: "2021-09-30T15:00:00.000Z" }),
-  updatedAt: z.string().openapi({ example: "2021-09-30T15:00:00.000Z" }),
+  createdAt: z.date().openapi({ example: "2021-09-01T00:00:00.000Z" }),
+  updatedAt: z.date().openapi({ example: "2021-09-01T00:00:00.000Z" }),
 });
