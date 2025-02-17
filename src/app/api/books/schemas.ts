@@ -18,6 +18,7 @@ export const CreateBookRequest = z
 
 export const BookResponse = z
   .object({
+    id: z.string().openapi({ example: "book_1" }),
     title: z.string().openapi({ example: "The Hobbit" }),
     author: z.string().openapi({ example: "J.R.R. Tolkien" }),
     genre: z.string().openapi({ example: "Fantasy" }),
@@ -27,7 +28,6 @@ export const BookResponse = z
     publisher: z.string().openapi({ example: "George Allen & Unwin" }),
     coverImageKey: z.string().openapi({ example: "the-hobbit.jpg" }),
     coverImageUrl: z.string().openapi({ example: "https://example.com/the-hobbit.jpg" }),
-    id: z.string(),
   })
   .openapi("Book");
 

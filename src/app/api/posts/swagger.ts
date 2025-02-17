@@ -1,63 +1,63 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
-import { BookResponse, BooksResponse, CreateBookRequest } from "./schemas";
+import { CreatePostRequest, PostResponse, PostsResponse } from "./schemas";
 
-export const bookRegistry = new OpenAPIRegistry();
+export const postRegistry = new OpenAPIRegistry();
 
-bookRegistry.registerPath({
-  tags: ["Books"],
+postRegistry.registerPath({
+  tags: ["Posts"],
   method: "post",
-  path: "/books",
-  summary: "Creates a book",
+  path: "/posts",
+  summary: "Creates a post",
   request: {
     body: {
       content: {
         "application/json": {
-          schema: CreateBookRequest,
+          schema: CreatePostRequest,
         },
       },
     },
   },
   responses: {
     201: {
-      description: "Book created successfully.",
+      description: "Post created successfully.",
       content: {
         "application/json": {
-          schema: BookResponse,
+          schema: PostResponse,
         },
       },
     },
   },
 });
 
-bookRegistry.registerPath({
-  tags: ["Books"],
+postRegistry.registerPath({
+  tags: ["Posts"],
   method: "get",
-  path: "/books",
-  summary: "Gets all books",
+  path: "/posts",
+  summary: "Gets all posts",
   responses: {
     200: {
-      description: "Array of books.",
+      description: "Array of posts.",
       content: {
         "application/json": {
-          schema: BooksResponse,
+          schema: PostsResponse,
         },
       },
     },
   },
 });
 
-bookRegistry.registerPath({
-  tags: ["Books"],
+postRegistry.registerPath({
+  tags: ["Posts"],
   method: "post",
-  path: "/books/{id}",
+  path: "/posts/{id}",
   summary: "Get a single user",
   request: {
     params: z.object({ id: z.string() }),
     body: {
       content: {
         "application/json": {
-          schema: CreateBookRequest,
+          schema: CreatePostRequest,
         },
       },
     },
@@ -68,7 +68,7 @@ bookRegistry.registerPath({
       description: "Object with user data.",
       content: {
         "application/json": {
-          schema: BookResponse,
+          schema: PostResponse,
         },
       },
     },
