@@ -1,6 +1,13 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
-import { BookResponse, BooksResponse, CreateBookRequest, UpdateBookRequest } from "./schemas";
+import {
+  BookResponse,
+  BooksResponse,
+  CreateBookRequest,
+  GenBookDescRequest,
+  GenBookDescResponse,
+  UpdateBookRequest,
+} from "./schemas";
 
 export const bookRegistry = new OpenAPIRegistry();
 
@@ -113,6 +120,32 @@ bookRegistry.registerPath({
               message: { type: "string", example: "Book with id book_1 deleted successfully`" },
             },
           },
+        },
+      },
+    },
+  },
+});
+
+bookRegistry.registerPath({
+  tags: ["Books"],
+  method: "post",
+  path: "/books/gen-description",
+  summary: "Generates description for title",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: GenBookDescRequest,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: "Description generated successfully.",
+      content: {
+        "application/json": {
+          schema: GenBookDescResponse,
         },
       },
     },
