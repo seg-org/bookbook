@@ -14,7 +14,7 @@ objectRegistry.registerPath({
       content: {
         "multipart/form-data": {
           schema: z.object({
-            file: z.string().openapi({ example: "file.jpg" }),
+            file: z.string().openapi({ example: "file.jpg (as FILE, not string)" }),
             folder: z.string().openapi({ example: "book_images" }),
           }),
         },
