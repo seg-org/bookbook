@@ -4,9 +4,9 @@ import {
   ChatMessageResponse,
   ChatMessagesResponse,
   ChatRoomResponse,
-  ChatRoomsResponse,
   CreateChatMessageRequest,
   CreateChatRoomRequest,
+  MyRoomsResponse,
   ReadMessageRequest,
 } from "./schemas";
 
@@ -48,7 +48,7 @@ chatRegistry.registerPath({
       description: "Array of chat rooms.",
       content: {
         "application/json": {
-          schema: ChatRoomsResponse,
+          schema: MyRoomsResponse,
         },
       },
     },
@@ -104,7 +104,7 @@ chatRegistry.registerPath({
 
 chatRegistry.registerPath({
   tags: ["Chats"],
-  method: "put",
+  method: "patch",
   path: "/chats/{roomId}/messages/read",
   summary: "Read all messages in a chat room for current user",
   request: {
