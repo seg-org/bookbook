@@ -1,6 +1,6 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
-import { BookResponse, BooksResponse, CreateBookRequest } from "./schemas";
+import { BookResponse, BooksResponse, CreateBookRequest, UpdateBookRequest } from "./schemas";
 
 export const bookRegistry = new OpenAPIRegistry();
 
@@ -51,24 +51,68 @@ bookRegistry.registerPath({
   tags: ["Books"],
   method: "post",
   path: "/books/{id}",
-  summary: "Get a single user",
+  summary: "Get a single book",
+  request: {
+    params: z.object({ id: z.string() }),
+  },
+  responses: {
+    200: {
+      description: "A single book.",
+      content: {
+        "application/json": {
+          schema: BookResponse,
+        },
+      },
+    },
+  },
+});
+
+bookRegistry.registerPath({
+  tags: ["Books"],
+  method: "patch",
+  path: "/books/{id}",
+  summary: "Updates a book",
   request: {
     params: z.object({ id: z.string() }),
     body: {
       content: {
         "application/json": {
-          schema: CreateBookRequest,
+          schema: UpdateBookRequest,
         },
       },
     },
   },
-
   responses: {
     200: {
-      description: "Object with user data.",
+      description: "Book updated successfully.",
       content: {
         "application/json": {
           schema: BookResponse,
+        },
+      },
+    },
+  },
+});
+
+bookRegistry.registerPath({
+  tags: ["Books"],
+  method: "delete",
+  path: "/books/{id}",
+  summary: "Deletes a book",
+  request: {
+    params: z.object({ id: z.string() }),
+  },
+  responses: {
+    200: {
+      description: "Book deleted successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              message: { type: "string", example: "Book with id book_1 deleted successfully`" },
+            },
+          },
         },
       },
     },

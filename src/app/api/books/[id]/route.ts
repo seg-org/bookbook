@@ -1,16 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-
-const updateBookRequest = z.object({
-  title: z.string().optional(),
-  author: z.string().optional(),
-  genre: z.string().optional(),
-  description: z.string().optional(),
-  isbn: z.string().optional(),
-  pages: z.number().optional(),
-  coverImageKey: z.string().optional(),
-});
+import { getUrl } from "../../objects/s3";
+import { BookResponse, UpdateBookRequest } from "../schemas";
 
 export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -18,12 +9,16 @@ export async function GET(_: NextRequest, props: { params: Promise<{ id: string 
     const book = await prisma.book.findUnique({
       where: { id },
     });
-
     if (!book) {
       return NextResponse.json({ error: `Book with id ${id} not found` }, { status: 404 });
     }
 
-    return NextResponse.json(book);
+    const bookWithImageUrl = {
+      ...book,
+      coverImageUrl: getUrl("book_images", book.coverImageKey),
+    };
+
+    return NextResponse.json(BookResponse.parse(bookWithImageUrl));
   } catch (error) {
     if (error instanceof Error) console.error(`Error getting book with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot get a book" }, { status: 500 });
@@ -41,7 +36,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       return NextResponse.json({ error: `Book with id ${id} not found` }, { status: 404 });
     }
 
-    const parsedData = updateBookRequest.safeParse(await req.json());
+    const parsedData = UpdateBookRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
