@@ -10,6 +10,7 @@ const createBookRequest = z.object({
   description: z.string(),
   isbn: z.string(),
   pages: z.number(),
+  publisher: z.string(),
   coverImageKey: z.string(),
 });
 
