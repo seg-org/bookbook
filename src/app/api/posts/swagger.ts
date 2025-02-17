@@ -49,7 +49,7 @@ postRegistry.registerPath({
 
 postRegistry.registerPath({
   tags: ["Posts"],
-  method: "post",
+  method: "get",
   path: "/posts/{id}",
   summary: "Get a single post",
   request: {

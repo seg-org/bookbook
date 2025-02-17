@@ -56,7 +56,7 @@ bookRegistry.registerPath({
 
 bookRegistry.registerPath({
   tags: ["Books"],
-  method: "post",
+  method: "get",
   path: "/books/{id}",
   summary: "Get a single book",
   request: {

@@ -1,3 +1,4 @@
+import { bookmarkRegistry } from "@/app/api/bookmarks/swagger";
 import { bookRegistry } from "@/app/api/books/swagger";
 import { objectRegistry } from "@/app/api/objects/swagger";
 import { postRegistry } from "@/app/api/posts/swagger";
@@ -9,6 +10,7 @@ export const getApiDocs = async () => {
     ...bookRegistry.definitions,
     ...postRegistry.definitions,
     ...objectRegistry.definitions,
+    ...bookmarkRegistry.definitions,
   ]);
   const config: OpenAPIObjectConfig = {
     openapi: "3.0.0",
