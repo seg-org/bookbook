@@ -2,7 +2,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { getPresignedUrl } from "../../objects/s3";
+import { getUrl } from "../../objects/s3";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -17,7 +17,7 @@ export async function GET() {
 
   const chatRoomsWithInfo = await Promise.all(
     chatRooms.map(async (cr) => {
-      const url = await getPresignedUrl("book_images", cr.post.book.coverImageKey);
+      const url = getUrl("book_images", cr.post.book.coverImageKey);
       const otherUserId = cr.userIds.find((id) => id !== session.user.id);
       const userB = await prisma.user.findUnique({ where: { id: otherUserId } });
       const lastMessage = await prisma.chatMessage.findFirst({

@@ -1,8 +1,9 @@
 import { sendMessage } from "@/data/chat";
-import { ChatRoom } from "@/data/dto/chat.dto";
+import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
 import { SessionUser } from "@/lib/auth";
-import { useEffect, useState } from "react";
+import { useChannel } from "ably/react";
+import { useEffect, useRef, useState } from "react";
 import { MessageBubble } from "./MessageBubble";
 
 type ChatProps = {
@@ -12,21 +13,48 @@ type ChatProps = {
 
 function Chat({ chatRoom, user }: ChatProps) {
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const messageEnd = useRef<HTMLDivElement>(null);
+  const initialMessages = useGetChatMessages(chatRoom.id);
+  const { channel } = useChannel("chat", (message) => {
+    if (message.data.roomId !== chatRoom.id) return;
 
-  useEffect(() => {}, []);
+    const newMessage: ChatMessage = {
+      id: message.id as string,
+      senderId: message.data.senderId,
+      message: message.data.message,
+      roomId: chatRoom.id,
+      createdAt: new Date(),
+    };
 
-  const messages = useGetChatMessages(chatRoom.id);
+    const history = messages.slice(-199);
+    setMessages([...history, newMessage]);
+
+    setTimeout(() => {
+      messageEnd.current?.scrollIntoView({ behavior: "instant" });
+    }, 100);
+  });
+
+  useEffect(() => {
+    setMessages(initialMessages.chatMessages);
+    const timeout = setTimeout(() => {
+      messageEnd.current?.scrollIntoView({ behavior: "instant" });
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [chatRoom.id, initialMessages.chatMessages]);
 
   const handleSendMessage = async () => {
-    if (!message.trim()) return;
+    const text = message.trim();
+    setMessage("");
+    if (!text) return;
+    channel.publish("message", { senderId: user.id, roomId: chatRoom.id, message });
 
-    const messageRes = await sendMessage(chatRoom.id, message);
+    const messageRes = await sendMessage(chatRoom.id, text);
     if (messageRes instanceof Error) {
       console.error("Failed to send message:", messageRes);
       return;
     }
-
-    setMessage("");
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -46,16 +74,17 @@ function Chat({ chatRoom, user }: ChatProps) {
 
   return (
     <div className="h-full w-full bg-gray-50">
-      <div className="h-[90%] border-b p-4">
-        {messages.chatMessages.map((m) => (
+      <div className="h-[90%] overflow-scroll border-b p-4">
+        {messages.map((m, idx) => (
           <MessageBubble
-            key={m.id}
+            key={idx}
             isMine={m.senderId === user.id}
-            username={getUsername(m.senderId)}
+            username={getUsername(m.senderId as string)}
             message={m.message}
             isSent
           />
         ))}
+        <div ref={messageEnd} />
       </div>
       <div className="flex h-[10%] items-center border-t p-4">
         <input

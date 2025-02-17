@@ -6,5 +6,6 @@ export type Book = {
   description: string;
   isbn: string;
   pages: number;
+  publisher: string;
   coverImageUrl: string;
 };

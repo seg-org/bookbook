@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
+import { PostWithBookmark } from "@/context/postContext";
 import { createChatRoom } from "@/data/chat";
-import { Post } from "@/data/dto/post.dto";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
+import { Bookmark } from "./Bookmark";
 
 type PostCardProps = {
-  post: Post;
+  post: PostWithBookmark;
   isRecommended?: boolean;
 };
 
@@ -48,13 +49,16 @@ function PostCard({ post, isRecommended }: PostCardProps) {
     <>
       <div
         className={clsx(
-          "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] xl:w-[32%]",
+          "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
           isRecommended && "border-4 border-amber-300"
         )}
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
           <h3>{post.title}</h3>
-          <span>{post.price} ฿</span>
+          <div className="flex items-center space-x-4">
+            <span>{post.price} ฿</span>
+            {isAuthenticated && <Bookmark postId={post.id} initialState={post.isBookmarked} />}
+          </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">
           <Image
@@ -66,7 +70,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           />
 
           <div className="flex w-full flex-col pr-8 lg:h-[290px] xl:h-[320px] 2xl:h-[280px]">
-            <div className="flex-grow">
+            <div className="flex flex-grow flex-col gap-2">
               <div>
                 <strong>ชื่อหนังสือ </strong>
                 {post.book.title}
@@ -76,7 +80,11 @@ function PostCard({ post, isRecommended }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                <strong>รายละเอียด</strong>
+                <strong>สำนักพิมพ์ </strong>
+                {cut(post.book.publisher, 40)}
+              </div>
+              <div>
+                <strong>รายละเอียด </strong>
                 {cut(post.book.description, 65)}
               </div>
             </div>

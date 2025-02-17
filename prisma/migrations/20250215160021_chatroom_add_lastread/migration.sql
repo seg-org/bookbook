@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "chat_rooms" ADD COLUMN     "last_read" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { deleteObject, getPresignedUrl } from "../s3";
+import { deleteObject, getUrl } from "../s3";
 
 export async function GET(req: NextRequest, props: { params: Promise<{ key: string }> }) {
   try {
@@ -14,9 +14,9 @@ export async function GET(req: NextRequest, props: { params: Promise<{ key: stri
       return NextResponse.json({ error: "Query paramater 'folder' is required" }, { status: 400 });
     }
 
-    const signedUrl = await getPresignedUrl(folder, key);
+    const url = getUrl(folder, key);
 
-    return NextResponse.json({ signedUrl }, { status: 200 });
+    return NextResponse.json({ url }, { status: 200 });
   } catch (error) {
     console.error("Error generating pre-signed URL:", error);
     return NextResponse.json({ error: "Failed to generate pre-signed URL" }, { status: 500 });

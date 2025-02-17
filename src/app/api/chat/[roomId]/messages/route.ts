@@ -30,8 +30,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "You are not a member of this room" }, { status: 403 });
     }
 
-    const chatMessage = await prisma.chatMessage.create({
-      data: { message: parsedData.data.message, roomId: parsedData.data.roomId, senderId: session.user.id },
+    const chatMessage = await prisma.$transaction(async (prisma) => {
+      const message = await prisma.chatMessage.create({
+        data: { message: parsedData.data.message, roomId: parsedData.data.roomId, senderId: session.user.id },
+      });
+
+      const lastRead = session.user.id === room.userIds[0] ? "lastReadA" : "lastReadB";
+      await prisma.chatRoom.update({
+        where: { id: parsedData.data.roomId },
+        data: { [lastRead]: new Date() },
+      });
+
+      return message;
     });
 
     return NextResponse.json(chatMessage, { status: 200 });
