@@ -74,6 +74,7 @@ model Book {
   description   String
   isbn          String @unique
   pages         Int
+  publisher     String
   coverImageKey String @map("cover_image_key")
   posts         Post[]
   // TODO verifiedBy Admin

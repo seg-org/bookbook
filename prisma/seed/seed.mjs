@@ -116,6 +116,7 @@ if (books.length === 0) {
         description: book.description,
         isbn: book.isbn,
         pages: book.pages,
+        publisher: book.publisher,
         coverImageKey: key,
       };
     })
