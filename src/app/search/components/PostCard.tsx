@@ -70,7 +70,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           />
 
           <div className="flex w-full flex-col pr-8 lg:h-[290px] xl:h-[320px] 2xl:h-[280px]">
-            <div className="flex-grow">
+            <div className="flex flex-grow flex-col gap-2">
               <div>
                 <strong>ชื่อหนังสือ </strong>
                 {post.book.title}
@@ -78,6 +78,10 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               <div>
                 <strong>ผู้เขียน </strong>
                 {cut(post.book.author, 40)}
+              </div>
+              <div>
+                <strong>สำนักพิมพ์ </strong>
+                {cut(post.book.publisher, 40)}
               </div>
               <div>
                 <strong>รายละเอียด </strong>
