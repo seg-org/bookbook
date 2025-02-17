@@ -2,11 +2,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-
-const readMessageRequest = z.object({
-  userId: z.string(),
-});
+import { ReadMessageRequest } from "../../../schemas";
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ roomId: string }> }) {
   const { roomId } = await props.params;
@@ -15,7 +11,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ roomId:
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const parsedData = readMessageRequest.safeParse(await req.json());
+  const parsedData = ReadMessageRequest.safeParse(await req.json());
   if (!parsedData.success) {
     return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
   }
