@@ -7,7 +7,7 @@ import PostCard from "./PostCard";
 function SearchByDetail() {
   const [formData, setFormData] = useState<PostFilterCondition>({ title: "", author: "", publisher: "", isbn: "" });
   // const { posts, loading, error } = useFilteredPosts(formData);
-  let [postsFromFilter, setPostsFromFilter] = useState([]);
+  const [postsFromFilter, setPostsFromFilter] = useState([]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -69,7 +69,7 @@ function SearchByDetail() {
             value={formData.isbn}
             onChange={handleChange}
           ></input>
-          <button className="cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white">
+          <button className="cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white hover:scale-105 hover:bg-[#48AFF3]">
             ค้นหาข้อมูลด้วยรายละเอียดเพิ่มเติม
           </button>
         </form>
