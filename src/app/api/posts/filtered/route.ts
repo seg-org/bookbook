@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
+
 import { getUrl } from "../../objects/s3";
 
 export async function POST(req: NextRequest) {

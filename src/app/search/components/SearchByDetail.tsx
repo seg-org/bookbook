@@ -1,12 +1,12 @@
 import { Post } from "@/data/dto/post.dto";
 import { PostFilterCondition } from "@/data/dto/postFilterCondition";
-import { useFilteredPosts } from "@/hooks/useGetFilteredPostsSearch";
+// import { useFilteredPosts } from "@/hooks/useGetFilteredPostsSearch";
 import React, { useState } from "react";
 import PostCard from "./PostCard";
 
 function SearchByDetail() {
   const [formData, setFormData] = useState<PostFilterCondition>({ title: "", author: "", publisher: "", isbn: "" });
-  const { posts, loading, error } = useFilteredPosts(formData);
+  // const { posts, loading, error } = useFilteredPosts(formData);
   let [postsFromFilter, setPostsFromFilter] = useState([]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
