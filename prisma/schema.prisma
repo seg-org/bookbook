@@ -67,16 +67,18 @@ model SellerProfile {
 }
 
 model Book {
-  id                  String               @id @default(cuid())
-  title               String
-  author              String
-  genre               String
-  description         String
-  isbn                String               @unique
-  pages               Int
-  publisher           String
-  coverImageKey       String               @map("cover_image_key")
-  posts               Post[]
+  id            String    @id @default(cuid())
+  title         String
+  author        String
+  genre         String
+  description   String
+  isbn          String    @unique
+  pages         Int
+  publisher     String
+  coverImageKey String    @map("cover_image_key")
+  posts         Post[]
+  bookGenres    Genre[]
+  bookTags      BookTag[]
   // TODO verifiedBy Admin
 
   @@map("books")
@@ -253,9 +255,78 @@ enum SpecialDescriptionType {
 
 model Damage {
   postId           String
-  damagePictureURL String  @map("damage_picture_url")
-  post             Post    @relation(fields: [postId], references: [id])
+  damagePictureURL String @map("damage_picture_url")
+  post             Post   @relation(fields: [postId], references: [id])
 
   @@id([postId, damagePictureURL])
   @@map("damages")
+}
+
+model Genre {
+  bookId    String
+  genreType GenreType
+  book      Book      @relation(fields: [bookId], references: [id])
+
+  @@id([bookId, genreType])
+  @@map("book_genres")
+}
+
+enum GenreType {
+  FICTION               @map("fiction")
+  NON_FICTION           @map("non_fiction")
+  MYSTERY               @map("mystery")
+  THRILLER              @map("thriller")
+  ROMANCE               @map("romance")
+  SCIENCE_FICTION       @map("science_fiction")
+  FANTASY               @map("fantasy")
+  HISTORICAL_FICTION    @map("historical_fiction")
+  HORROR                @map("horror")
+  BIOGRAPHY             @map("biography")
+  MEMOIR                @map("memoir")
+  SELF_HELP             @map("self_help")
+  HEALTH_WELLNESS       @map("health_wellness")
+  PSYCHOLOGY            @map("psychology")
+  POETRY                @map("poetry")
+  DRAMA                 @map("drama")
+  ADVENTURE             @map("adventure")
+  CHILDRENS_LITERATURE  @map("childrens_literature")
+  YOUNG_ADULT           @map("young_adult")
+  GRAPHIC_NOVELS_COMICS @map("graphic_novels_comics")
+  CRIME                 @map("crime")
+  TRUE_CRIME            @map("true_crime")
+  DYSTOPIAN             @map("dystopian")
+  CONTEMPORARY          @map("contemporary")
+  RELIGIOUS_SPIRITUAL   @map("religious_spiritual")
+}
+
+model BookTag {
+  bookId  String
+  tagType BookTagType
+  book    Book        @relation(fields: [bookId], references: [id])
+
+  @@id([bookId, tagType])
+  @@map("book_tags")
+}
+
+enum BookTagType {
+  BESTSELLER           @map("bestseller")
+  NEW_RELEASE          @map("new_release")
+  CLASSIC              @map("classic")
+  AWARD_WINNING        @map("award_winning")
+  MUST_READ            @map("must_read")
+  HIGHLY_RECOMMENDED   @map("highly_recommended")
+  INSPIRATIONAL        @map("inspirational")
+  COMING_OF_AGE        @map("coming_of_age")
+  FAMILY_SAGA          @map("family_saga")
+  HISTORICAL           @map("historical")
+  DARK_FANTASY         @map("dark_fantasy")
+  DETECTIVE            @map("detective")
+  LGBTQ_PLUS           @map("lgbtq_plus")
+  YOUNG_ADULT          @map("young_adult")
+  CHILDRENS_BOOK       @map("childrens_book")
+  SHORT_STORIES        @map("short_stories")
+  MYSTERY              @map("mystery")
+  SELF_HELP            @map("self_help")
+  THRILLER             @map("thriller")
+  ROMANTIC_COMEDY      @map("romantic_comedy")
 }
