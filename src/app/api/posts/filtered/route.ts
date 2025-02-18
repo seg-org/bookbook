@@ -1,44 +1,33 @@
 import { prisma } from "@/lib/prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
-import { getPresignedUrl } from "../../objects/s3";
-import { NextApiRequest, NextApiResponse } from "next";
+import { z } from "zod";
+import { getUrl } from "../../objects/s3";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const {title, author, publisher, isbn} = await req.json();
-  console.log(title,"gettttttttttttttttttttttt")
   try {
-    const posts1 = await prisma.post.findMany({//GPT said The issue is that Prisma currently does not support querying JSON fields using `path`. 
+    let posts = await prisma.post.findMany({
       include: { book: true },
-      where : {
-        AND : [
-            // {book: {path:["title"], contains: title, mode: "insensitive" }} ,
-            // {book: {path:["author"], contains: author, mode: "insensitive" }}, 
-            // {book: {path:["publisher"], contains: publisher, mode: "insensitive" }},
-            // {book: {path:["isbn"], contains: isbn, mode: "insensitive" }},
-        ]
-      }
     });
 
-    const posts = posts1.filter(post => {
-        return  post.book.title.toLowerCase().includes(title.toLowerCase()) &&
-                post.book.author.toLowerCase().includes(author.toLowerCase()) &&
-                // post.book.publisher.toLowerCase().includes(publisher.toLowerCase()) &&
-                post.book.isbn.toLowerCase().includes(isbn.toLowerCase());
+    posts = posts.filter(post => {
+      return  post.book.title.toLowerCase().includes(title.toLowerCase()) &&
+              post.book.author.toLowerCase().includes(author.toLowerCase()) &&
+              post.book.publisher.toLowerCase().includes(publisher.toLowerCase()) &&
+              post.book.isbn.toLowerCase().includes(isbn.toLowerCase());
+  });
+
+    const postsWithImageUrl = posts.map((post) => {
+      const url = getUrl("book_images", post.book.coverImageKey);
+      return {
+        ...post,
+        book: {
+          ...post.book,
+          coverImageUrl: url,
+        },
+      };
     });
-    
-    const postsWithImageUrl = await Promise.all(
-      posts.map(async (post) => {
-        const url = await getPresignedUrl("book_images", post.book.coverImageKey);
-        return {
-          ...post,
-          book: {
-            ...post.book,
-            coverImageUrl: url,
-          },
-        };
-      })
-    );
 
     return NextResponse.json(postsWithImageUrl);
   } catch (error) {
@@ -46,3 +35,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });
   }
 }
+
