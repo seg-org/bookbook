@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   const {title, author, publisher, isbn} = await req.json();
   try {
     let posts = await prisma.post.findMany({
-      include: { book: true },
+      include: { book: true , Bookmark : true},
     });
 
     posts = posts.filter(post => {
