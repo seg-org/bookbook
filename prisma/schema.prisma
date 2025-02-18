@@ -67,41 +67,40 @@ model SellerProfile {
 }
 
 model Book {
-  id            String @id @default(cuid())
-  title         String
-  author        String
-  genre         String
-  description   String
-  isbn          String @unique
-  pages         Int
-  publisher     String
-  coverImageKey String @map("cover_image_key")
-  posts         Post[]
-  specialDescriptions SpecialDescription[]
-  damages             Damage[]
+  id                  String               @id @default(cuid())
+  title               String
+  author              String
+  genre               String
+  description         String
+  isbn                String               @unique
+  pages               Int
+  publisher           String
+  coverImageKey       String               @map("cover_image_key")
+  posts               Post[]
   // TODO verifiedBy Admin
 
   @@map("books")
 }
 
 model Post {
-  id           String        @id @default(cuid())
-  title        String
-  content      String?
-  price        Int
-  published    Boolean       @default(false)
-  seller       User          @relation(fields: [sellerId], references: [id])
-  sellerId     String        @map("seller_id")
-  book         Book          @relation(fields: [bookId], references: [id])
-  bookId       String        @map("book_id")
-  transactions Transaction[]
-  ChatRoom     ChatRoom[]
-  Bookmark     Bookmark[]
+  id                 String               @id @default(cuid())
+  title              String
+  content            String?
+  price              Int
+  published          Boolean              @default(false)
+  seller             User                 @relation(fields: [sellerId], references: [id])
+  sellerId           String               @map("seller_id")
+  book               Book                 @relation(fields: [bookId], references: [id])
+  bookId             String               @map("book_id")
+  transactions       Transaction[]
+  ChatRoom           ChatRoom[]
+  Bookmark           Bookmark[]
   SpecialDescription SpecialDescription[]
   Damage             Damage[]
 
   @@map("posts")
 }
+
 model Bookmark {
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @map("user_id")
@@ -214,8 +213,6 @@ model SpecialDescription {
   postId      String
   specialType SpecialDescriptionType
   post        Post                   @relation(fields: [postId], references: [id])
-  Book        Book?                  @relation(fields: [bookId], references: [id])
-  bookId      String?
 
   @@id([postId, specialType])
   @@map("special_descriptions")
@@ -258,8 +255,6 @@ model Damage {
   postId           String
   damagePictureURL String  @map("damage_picture_url")
   post             Post    @relation(fields: [postId], references: [id])
-  Book             Book?   @relation(fields: [bookId], references: [id])
-  bookId           String?
 
   @@id([postId, damagePictureURL])
   @@map("damages")
