@@ -77,6 +77,8 @@ model Book {
   publisher     String
   coverImageKey String @map("cover_image_key")
   posts         Post[]
+  specialDescriptions SpecialDescription[]
+  damages             Damage[]
   // TODO verifiedBy Admin
 
   @@map("books")
@@ -95,10 +97,11 @@ model Post {
   transactions Transaction[]
   ChatRoom     ChatRoom[]
   Bookmark     Bookmark[]
+  SpecialDescription SpecialDescription[]
+  Damage             Damage[]
 
   @@map("posts")
 }
-
 model Bookmark {
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @map("user_id")
@@ -205,4 +208,59 @@ enum ShipmentMethod {
   DELIVERY @map("delivery")
 
   @@map("shipment_method_type")
+}
+
+model SpecialDescription {
+  postId      String
+  specialType SpecialDescriptionType
+  post        Post                   @relation(fields: [postId], references: [id])
+  Book        Book?                  @relation(fields: [bookId], references: [id])
+  bookId      String?
+
+  @@id([postId, specialType])
+  @@map("special_descriptions")
+}
+
+enum SpecialDescriptionType {
+  AUTHOR_SIGNATURE            @map("author_signature")
+  LIMITED_EDITION             @map("limited_edition")
+  FIRST_EDITION               @map("first_edition")
+  SPECIAL_COVER_ART           @map("special_cover_art")
+  ILLUSTRATED_EDITION         @map("illustrated_edition")
+  COLLECTORS_EDITION          @map("collectors_edition")
+  SLIPCASE_EDITION            @map("slipcase_edition")
+  LEATHER_BOUND               @map("leather_bound")
+  GILDED_EDGES                @map("gilded_edges")
+  DECKLE_EDGES                @map("deckle_edges")
+  POP_UP_ELEMENTS             @map("pop_up_elements")
+  FOLD_OUT_PAGES              @map("fold_out_pages")
+  HANDWRITTEN_NOTES_BY_AUTHOR @map("handwritten_notes_by_author")
+  PERSONALIZED_MESSAGE        @map("personalized_message")
+  NUMBERED_EDITION            @map("numbered_edition")
+  EXCLUSIVE_ARTWORK           @map("exclusive_artwork")
+  EMBOSSED_COVER              @map("embossed_cover")
+  GOLD_FOIL_STAMPING          @map("gold_foil_stamping")
+  BOX_SET                     @map("box_set")
+  ANNIVERSARY_EDITION         @map("anniversary_edition")
+  HARDCOVER_WITH_DUST_JACKET  @map("hardcover_with_dust_jacket")
+  TRANSPARENT_COVER           @map("transparent_cover")
+  ANNOTATED_EDITION           @map("annotated_edition")
+  SIGNED_BY_ILLUSTRATOR       @map("signed_by_illustrator")
+  MAP_INSERT                  @map("map_insert")
+  SUPPLEMENTARY_MATERIALS     @map("supplementary_materials")
+  EXCLUSIVE_CONTENT           @map("exclusive_content")
+  FAN_ART_EDITION             @map("fan_art_edition")
+  INTERACTIVE_ELEMENTS        @map("interactive_elements")
+  BILINGUAL_EDITION           @map("bilingual_edition")
+}
+
+model Damage {
+  postId           String
+  damagePictureURL String  @map("damage_picture_url")
+  post             Post    @relation(fields: [postId], references: [id])
+  Book             Book?   @relation(fields: [bookId], references: [id])
+  bookId           String?
+
+  @@id([postId, damagePictureURL])
+  @@map("damages")
 }
