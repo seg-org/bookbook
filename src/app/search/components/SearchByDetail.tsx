@@ -1,4 +1,4 @@
-import { Post } from "@/data/dto/post.dto";
+import { PostWithBookmark } from "@/context/postContext";
 import { PostFilterCondition } from "@/data/dto/postFilterCondition";
 // import { useFilteredPosts } from "@/hooks/useGetFilteredPostsSearch";
 import React, { useState } from "react";
@@ -15,7 +15,7 @@ function SearchByDetail() {
     e.preventDefault();
 
     //----------------------------------
-    //cant use hook inside an event handler. idk
+    //ChatGpt : cant use hook inside an event handler. idk
     const filteredPost = await fetch("/api/posts/filtered", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -27,8 +27,10 @@ function SearchByDetail() {
     }
 
     const data = await filteredPost.json(); // Convert response to JSON
+    data.map((post: PostWithBookmark) => {
+      return { ...post, isBookmarked: false };
+    });
     setPostsFromFilter(data);
-    console.log("Filtered posts:", data);
     //-----------------------------------
   };
 
@@ -76,7 +78,7 @@ function SearchByDetail() {
       </div>
       {postsFromFilter.length != 0 && (
         <div className="ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
-          {postsFromFilter.map((post: Post) => (
+          {postsFromFilter.map((post: PostWithBookmark) => (
             <PostCard post={post} key={post.id} />
           ))}
         </div>
