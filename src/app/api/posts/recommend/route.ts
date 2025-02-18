@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 import { getUrl } from "../../objects/s3";
+import { PostsResponse } from "../schemas";
 
 // Function to generate a seeded random number
 function seededRandom(seed: number) {
@@ -51,7 +52,7 @@ export async function GET(request: Request) {
 
     postsWithImageUrl = [recommendedPost, ...postsWithImageUrl];
 
-    return NextResponse.json(postsWithImageUrl);
+    return NextResponse.json(PostsResponse.parse(postsWithImageUrl));
   } catch (error) {
     console.error("Error fetching recommended post:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
