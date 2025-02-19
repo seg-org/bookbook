@@ -217,12 +217,15 @@ enum TransactionFailType {
 enum PaymentMethod {
   CREDIT_CARD    @map("credit_card")
   ONLINE_BANKING @map("online_banking")
+  UNDEFINED      @map("undefined")
 
   @@map("payment_method_type")
 }
 
 enum ShipmentMethod {
-  DELIVERY @map("delivery")
+  STANDARD  @map("standard")
+  EXPRESS   @map("express")
+  UNDEFINED @map("undefined")
 
   @@map("shipment_method_type")
 }

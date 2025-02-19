@@ -9,7 +9,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "B%Mi6T9Ms$nW$+\"B!W&F%X{otf<oxzsh",
     "amount": 145,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "1&!1sXn;$tFdGq9+N{u@1q|do#7&qhJ%",
     "isDelivered": false
   },
@@ -23,7 +23,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "bhWOX}>i(P{Y@#pfT+{+{KvmU=+&([ft",
     "amount": 277,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "yVMhyM)0-vLQC/5D=pFSXc5z>Y9mMs/b",
     "isDelivered": false
   },
@@ -37,7 +37,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "nciimtlbB^=oicjJNAw}f(j/1>)iJh5X",
     "amount": 26,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "m@mx6:873yS8nb+S17C4?{5[U5pL/_I9",
     "isDelivered": true
   },
@@ -51,7 +51,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "Y)YhN+o[W=XJp{?&V5[-CLy4/TXPB_L$",
     "amount": 11,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": ",:0thI\"Km!i\"pS(JTD0JF(VSEprwooEC",
     "isDelivered": false
   },
@@ -65,7 +65,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "TV<|qGpwExBPe:*{{0$H$ZGjAC@^,eE7",
     "amount": 286,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": ">w!VAr[io6l<?*x_%9L9W5^2agaP}ae_",
     "isDelivered": false
   },
@@ -79,7 +79,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "MLYdfHBE8jt/hc8eaq:N45jYc4(TWFiC",
     "amount": 354,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "u6BP9U@tz,QM?-?f@s|1r#mQt]q\"d:!]",
     "isDelivered": false
   },
@@ -93,7 +93,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "g^#L.rJn<^)+zP=1ct2QRvJB?lneVQAj",
     "amount": 97,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "TU/|qd-\"yj3AoiUL@P8!WL9}muGjnaRD",
     "isDelivered": false
   },
@@ -107,7 +107,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "8&;h.@DAeV]GmM[h15qJUS+[CQ(qlp-v",
     "amount": 273,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "1K8!xn9zVwdU]<juR/-GR*'xRr$zja#?",
     "isDelivered": false
   },
@@ -121,7 +121,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "3:4ZPoJ\"Ex)YDvMfn']uCc^uq5I^#FO%",
     "amount": 167,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "fa_'wi}Doe!j;-Qo,-b4ebdQ'@Dfgn{y",
     "isDelivered": false
   },
@@ -135,7 +135,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "RjE,W{'J'#?uabgXSq,!;^@dvQeVJ0^k",
     "amount": 270,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "TgL\"b@I|dsU6_r:iTASQplqejCTUg&Kw",
     "isDelivered": false
   },
@@ -149,7 +149,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "&{:{6W?(:|azJtC{\"Zl_>Gy-7{4?M:H)",
     "amount": 66,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "oEim3uZd|NB?/fMOEDkdOnVW_(IVPHIE",
     "isDelivered": false
   },
@@ -163,7 +163,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": ",AX/,n'0m-6D7;D{=ofr+U]gosc!:WHA",
     "amount": 38,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "Utbk{r\"fx&453QoH_P%?!EZQ+K6BzW9W",
     "isDelivered": false
   },
@@ -177,7 +177,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "}An_KH7>nDR_.yyKg*/)VwlA|!7.<s\"{",
     "amount": 16,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "tp;CM2Ct::E[((:W?u:OE,yg,d.$Qt./",
     "isDelivered": false
   },
@@ -191,7 +191,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "_n7Q(ehZ,^:wtC}l&EY\"_7&O$ST)t}ag",
     "amount": 174,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "2|Mk.?0I$M%v#B^7%&.]$^F^n&{)==%)",
     "isDelivered": false
   },
@@ -205,7 +205,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "q5#(%aAD?X%-tRQKRXkOkQ&$0(iz#Ms!",
     "amount": 394,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "Q[7E?v$sZ]#KoMmK>%&FY]A+;9Y;RN\"o",
     "isDelivered": true
   },
@@ -219,7 +219,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "g5_7w$fzS-[+O\"}yRY6OSLE<jH9]>Dzx",
     "amount": 53,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "=,r@$ax',/Tcwu_,W\"eW8XgRgb]gXc/e",
     "isDelivered": false
   },
@@ -233,7 +233,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": ",b%(%^QWuft/>NyX?kNzEe(HLM5y2*yA",
     "amount": 380,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "cF8m?21WMufdGKv3(HNxYZF5t,N<iDE?",
     "isDelivered": false
   },
@@ -247,7 +247,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "+]7xvXQTIz>}G&@UNC.Ol@&>dC\"m@4nY",
     "amount": 12,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "On%)3^Inq7rH.q;ur;G46EHMx%.SL3'H",
     "isDelivered": false
   },
@@ -261,7 +261,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "cfOD5/-Gg2<^,>EOQs4{km}t.ChXL^\"}",
     "amount": 363,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "s\"D:r!BZLRq^!<k?|(m.%v9_NJlKjIUn",
     "isDelivered": true
   },
@@ -275,7 +275,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "g[b=2eTpI^aw|0Kjl5{_PM@B>P@eD5tW",
     "amount": 203,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "cLFh#$TjjC1c9,KB7sT}M|wxTx9<([ib",
     "isDelivered": false
   },
@@ -289,7 +289,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "k)b}?Qg>MrCdB{!Q8HE/5UE0'svG>T)}",
     "amount": 144,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "PzdZ|woc6H%^9[})?+c}.m.c&jwy^mi9",
     "isDelivered": false
   },
@@ -303,7 +303,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "ZU,HMjgijle4K)#mp&?dL\"G83T}@=\"F-",
     "amount": 69,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "{^[gz5jv*lbXw]Z&fB'kyOyq\"zRm\"\"g4",
     "isDelivered": false
   },
@@ -317,7 +317,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "4IM$(4%4MB41E]$&gW8)Qaa^]pwwf}Aa",
     "amount": 322,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "0y|BQ[t{IYm$B@!^(y26^dx$N^/G:>Rq",
     "isDelivered": false
   },
@@ -331,7 +331,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "$^'l#7\"Ud)z>>Wk^2yUkv'qdA/{0qHQ_",
     "amount": 132,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "k)'HnW-S?QHpqw1>73XmfICfkb]h8m:[",
     "isDelivered": false
   },
@@ -345,7 +345,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": ";4tR8cnV+o#lPSYe>ixvQrw2|0#Xu,nH",
     "amount": 258,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "?:wqXAsO.gpN24>uZ9hGV]VZ.IShV+t|",
     "isDelivered": false
   },
@@ -359,7 +359,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "pSfD9+;Rkk<^VC8qq,7P2(?l7(uA7RRY",
     "amount": 235,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "{.a70o!t@]0|t[#5POwJ)_#{#{V7.{o;",
     "isDelivered": false
   },
@@ -373,7 +373,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "7}te{tKIe\"(*L}z:IvS{af?Kack|5Jb-",
     "amount": 226,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": ">affiE@ZC?v*TI64o=Xn85dYB+kE%|mh",
     "isDelivered": false
   },
@@ -387,7 +387,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": ";o14PD1Th.l?\"o,(GJwrdT_cIynKy|<o",
     "amount": 38,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "NC$'Sx.-mYqfF\"Yx8K_aIOK'Jxw7q)SB",
     "isDelivered": false
   },
@@ -401,7 +401,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "yB=J$tcjOX$'G8#H*KZ|18SphwLLM_[H",
     "amount": 168,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "Ymq<>*ofuBt&6&oO5?r4!3Hw^8&zX1mf",
     "isDelivered": true
   },
@@ -415,7 +415,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": ".j8H$,1q{Ofn<9|u}5=4fH<phtBW[H'z",
     "amount": 161,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "F'C\"6]7!DCZqN33n$?v!c,FV!3ZZ}Y0i",
     "isDelivered": false
   },
@@ -429,7 +429,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "B{Q$[TR5m\"RXzF0=1<C]lYRGv4-N3+41",
     "amount": 275,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "sC..|='TH*&Az^#!U5}C>\"xN|nV*{E$D",
     "isDelivered": false
   },
@@ -443,7 +443,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": ">,Ltu{@$OYL3=<9;-(2#wDRRQv_Toyb%",
     "amount": 69,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "2|56};T$W(55[6IN+4D..y.[k,GCBvev",
     "isDelivered": false
   },
@@ -457,7 +457,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "{7h3Sjh2!QwhE,70VRV)'k6)QmCAI\"U3",
     "amount": 75,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "_J[6U8dp.7[R2%T&Nc<G-x!c#M#]uQ@M",
     "isDelivered": true
   },
@@ -471,7 +471,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": ",]/paBrK-?b!qw7}b?g74](iHp$9bqgq",
     "amount": 17,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "vn^*0BKu6SDE$dn!@FLvLcFCj+id8\"RM",
     "isDelivered": false
   },
@@ -485,7 +485,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "r3FPebe3[UwprR{8px-KaG_A'-g|v^H>",
     "amount": 132,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "Df;J&JNjq)^]jf-U-!no0g5oV7,Mh<|v",
     "isDelivered": false
   },
@@ -499,7 +499,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "d?Hn*yF]'@ghIzpXX5AM=kfx*0oS:a2:",
     "amount": 234,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "yv>9*X}1;$XwI*,<39!2&a(]q8t1'4Ma",
     "isDelivered": false
   },
@@ -513,7 +513,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "stBES)-EHTraKQ3D2^w&|%jFMBnU\"g|P",
     "amount": 2,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "3g7[X:au8{]FN;0{,7L,lM>HJ%tb7w#h",
     "isDelivered": false
   },
@@ -527,7 +527,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "0H*1c5JB&;pOKQl8S\")!TE(@EL.-Q<9r",
     "amount": 268,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "O>[RH902*PK=HeQe*5{!!_crtl'\"330J",
     "isDelivered": false
   },
@@ -541,7 +541,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "NG@-CpQV:)hO-{E&7xez):<g@g4AV@=f",
     "amount": 328,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "^9N\"05aLC\"o1VV^)'c=,oU<p5|R{x{K%",
     "isDelivered": false
   },
@@ -555,7 +555,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "Gdp>D:{$Z}X{O@q[On<o/O,1FwT)d4M2",
     "amount": 249,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "v$I;ita?YT{J1Hwh$.E!VBKXSYb|N<Q0",
     "isDelivered": false
   },
@@ -569,7 +569,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "jbm=//F'_o-1Zb!-K#}2xr&y3^kB,se<",
     "amount": 205,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "&mGO-(yxB/5I5Kmv+WoOG[]7,?!RD#57",
     "isDelivered": false
   },
@@ -583,7 +583,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "y$3'l>p%*TgQ'C/+wGsJG:@R.fxp{(ny",
     "amount": 229,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "x{a&tisw%4RjOqWg1W)_/1)0.=47?.Eb",
     "isDelivered": true
   },
@@ -597,7 +597,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "bu40=Xqf^9a*J8*6L]8)i9WJ<=w|H5X>",
     "amount": 345,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "X\"FKU!rmdB)2Z.g(riDN;@;Iy!)$0L7B",
     "isDelivered": false
   },
@@ -611,7 +611,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "FWGVyu&;:C9!iNAA*rW%+{asNwhc:sw,",
     "amount": 34,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "I/,|B(l6.(z#Iu/uvka#4!rt_hW,@A0a",
     "isDelivered": false
   },
@@ -625,7 +625,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "yM9@'.5%D!;pA43@yJ9-y%j%&gc)=$EJ",
     "amount": 263,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "CNlpJ<S!&dRM3'a*?3t+A;y_6fJ%f,EV",
     "isDelivered": false
   },
@@ -639,7 +639,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "=)Hm&Lma-T*)DcS1*B4eN{H+\"L\"mSE<}",
     "amount": 312,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "1}-WXcE9l^7vaHo'UbR@U'%]OO6w3Z|Z",
     "isDelivered": false
   },
@@ -653,7 +653,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "@#bA@,JY<JZS{oqRus1Jk)9@)iDs%<}3",
     "amount": 328,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "rZ&+y9N^RkJgz0kK{fr|/euj(uwA>:G8",
     "isDelivered": false
   },
@@ -667,7 +667,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "\"/mn]d_?jW/9R^t*Ec1OoXkkYSVrHh(7",
     "amount": 7,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "xB><*_.V?X>\",QKYep?)J:[6lkE}[M1{",
     "isDelivered": false
   },
@@ -681,7 +681,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "uCE[Wj[0Jgj[)GOm\"7ys|J|H{TR6)u/j",
     "amount": 210,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "TMn^f!WNqpeRcoMP*gKPO?89h#7.1P=T",
     "isDelivered": false
   },
@@ -695,7 +695,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "2d)gouJ#(=*BE:1S%mYAk4O4b(w,pw9@",
     "amount": 96,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "]=Cvb?B+xF]I(drx@Qvjd<zb$/.RC$O>",
     "isDelivered": false
   },
@@ -709,7 +709,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "f5&C?g[$J<D:_V{pCqk;0L|>+c{8H,Z]",
     "amount": 17,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "i@M'r]4)BSvihCt?;kP',>z|?)V?q{*j",
     "isDelivered": false
   },
@@ -723,7 +723,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "E*\"-fE=l,<r[Q}5fYNGuu9,4b3I'Qj9@",
     "amount": 126,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "pkZS1|&A^@:JI[nv*>f/k7R,65Y&$.<5",
     "isDelivered": false
   },
@@ -737,7 +737,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "x^qbL[4bA$%l^x.>5LFR4$n*8B@=])9E",
     "amount": 198,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "t]@HP#XYQ_8<axZc#B=#r5Z4+#RWG|'u",
     "isDelivered": false
   },
@@ -751,7 +751,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "TpP]p;=Q2MXF;9;e9p:54jBQU|xW:xE6",
     "amount": 239,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "gPpn2/!^sn#UFJWX_V]*/5i'!;gsdIf<",
     "isDelivered": false
   },
@@ -765,7 +765,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": ",.}4n*Z9|V)Rs2LbS%yI...?C6,Ek*B,",
     "amount": 187,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "VnDey_;OS#{=0G(E!lV2)/<))%qgfCu4",
     "isDelivered": true
   },
@@ -779,7 +779,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "6fCz5,ToDi5m'Eg3ZW_N59(wrf[X^4\"v",
     "amount": 30,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "&1i187t'KQ48^I8s7<91&:0I>4tSg%40",
     "isDelivered": false
   },
@@ -793,7 +793,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "MuvgDE=CwYC+f.mJh_}Y4b#q/xQ7=Ad;",
     "amount": 80,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "r!Fsg}=\"[p>{3$DgI\"1I_H-7}0<w?ku_",
     "isDelivered": false
   },
@@ -807,7 +807,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "Cx3=rC[$@6%VJ}M}x;0jL,wL1%/J5Gqk",
     "amount": 211,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "{(pFevL09},aN<)ZGH*/3+os9O>W.nts",
     "isDelivered": false
   },
@@ -821,7 +821,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "cCBxV=4hV]m6KRU/+xvG^[;E)M[cE_/y",
     "amount": 220,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "kgCX#I<iE'VDu1o$tyomFa/L-/6Nx;#}",
     "isDelivered": false
   },
@@ -835,7 +835,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "}'3;kA3Xt6eyrZ&cgS,5UxTg]W:)iznN",
     "amount": 207,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "+|v{ZodcEW^nr'$gK5UnM]Ae$LUx5&|1",
     "isDelivered": true
   },
@@ -849,7 +849,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "@<N=A4#1VIy.FEV_+p07.MP3<(5r/vKv",
     "amount": 130,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "wz.@xbR(_!dhFzc,Tt*fB)])9bC--*Kx",
     "isDelivered": false
   },
@@ -863,7 +863,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "i&(o#l5Z.nP#k36p.VYpWz@A[/{$L;oC",
     "amount": 384,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "]1>d/^Z4Kkb.wbTfcn#T*$q5qnr6H!iZ",
     "isDelivered": false
   },
@@ -877,7 +877,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "v,anN31bRj;?7.fah-x'qmcue5)To8p[",
     "amount": 365,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "pZ-;p]-H5(&ker'}itVXlutt!jh[-=i<",
     "isDelivered": false
   },
@@ -891,7 +891,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "W0=wC3>grfU+\">&3nazf#:0z&Jfu/:;i",
     "amount": 354,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "KuM^uW7&t-scRSj$M,bP]0OvgA5Htfrb",
     "isDelivered": false
   },
@@ -905,7 +905,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "dcTsX?B7=-z^2_rlTNvk^-sarW9:5cg2",
     "amount": 105,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "KXC+n9!BZ9J48RQ?w+Htx9pg1EROxm$F",
     "isDelivered": false
   },
@@ -919,7 +919,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "?[rSf!jL8Oyp:(r-Qs5}l$+@'D3R,Cz>",
     "amount": 312,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "5cWiuAR!!ESy*DELT^,_rKM:OPf]1ikJ",
     "isDelivered": false
   },
@@ -933,7 +933,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "$yf*1LnhUIG;\"])]/v!g6*U4%.5]AzJ_",
     "amount": 388,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "MxOfL>GuVo#-ah0M/B>QsEDg{4F=cmRq",
     "isDelivered": false
   },
@@ -947,7 +947,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "RwwgN{+.!NXejRc&k-C-Y&7\"8K44-+VK",
     "amount": 278,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "CeOzji8upepB'r@_zu>J(S2wJ6K(@q3u",
     "isDelivered": false
   },
@@ -961,7 +961,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "X'R^CnNYJ-}r{4bE+P%%[\"[;@ZgPsmu_",
     "amount": 115,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": ">bY}AEZm>}y$P+*Am+ZH&SjeHOOnfx3J",
     "isDelivered": false
   },
@@ -975,7 +975,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "$W3M2JGSsJq0B$-at[7w;eB5=al:6!|T",
     "amount": 370,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "(NYMP|@PFDb8MrWndyTy0sm8yBoMfU1t",
     "isDelivered": true
   },
@@ -989,7 +989,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "JN&.%/m'/WRe>:?b(I\"uQbogAo^$C.p0",
     "amount": 394,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "7x+1GY^|ze2%'!rla@,FG9=MN44=Ufl/",
     "isDelivered": false
   },
@@ -1003,7 +1003,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "yzne||>G3DZb8VYH03Yb[K+MC{;2H;O?",
     "amount": 12,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "'WX!DaYHNq!AUuVh6'DLHi4ECIY,x^al",
     "isDelivered": false
   },
@@ -1017,7 +1017,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "Dxyp)S<-5OD{}$$PPToJe>kg/,'M/YaQ",
     "amount": 384,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "cwPv<f>2@Q@ZtB#66Z0&54Q,z(CmDt_6",
     "isDelivered": false
   },
@@ -1031,7 +1031,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "7n]tL$a]t4PoZM*xtAL&H$W.xeV\"xp5N",
     "amount": 327,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "EXPRESS",
     "trackingURL": "Ny0)n>wTvE9L9BR}SvHJyw9I0d?0%#UZ",
     "isDelivered": false
   },
@@ -1045,7 +1045,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "sO0=>nSpZdC9e[piaJLVd>!j5Y@kFX8d",
     "amount": 121,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "U\"+F%@OD):ik}=*cLn@)L>1>zHVu#FJy",
     "isDelivered": false
   },
@@ -1059,7 +1059,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "PhU|{Z_4DC>VPf:g08XyUNl?JJG+@$Ei",
     "amount": 396,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "1pmp7Q9_<pJPb,;2;2jPWuOnz+(3KG[V",
     "isDelivered": false
   },
@@ -1073,7 +1073,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "oR/w;O&8]o]}%.24aS_F6?0)musONu'<",
     "amount": 159,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "(y>G<Io67=)O4IB8!v*ePPauSi'AT^VB",
     "isDelivered": false
   },
@@ -1087,7 +1087,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "w]i)yJ}!Njd#vvlyUOrUhDZL[yP&)wls",
     "amount": 311,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "'5Mg^xToXFhbVeMh@H52'.nlsMyspfp#",
     "isDelivered": false
   },
@@ -1101,7 +1101,7 @@
     "paymentMethod": "CREDIT_CARD",
     "hashId": "Rff7k'xWYUbTZ>ybm)!I!-EEHZzQRgfW",
     "amount": 172,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "p/zK+.L7MtHAO7$^{pCkmLrE!g%@yQ>c",
     "isDelivered": false
   },
@@ -1115,7 +1115,7 @@
     "paymentMethod": "ONLINE_BANKING",
     "hashId": "P]JaMFCraT9;&VoT${+DJU1wQ7}t[}wd",
     "amount": 88,
-    "shipmentMethod": "DELIVERY",
+    "shipmentMethod": "STANDARD",
     "trackingURL": "S<F5W1iQ#k(@!{1BjHY'T&iLeQ@fxB>z",
     "isDelivered": false
   }

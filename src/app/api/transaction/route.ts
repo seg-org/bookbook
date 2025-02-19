@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { TransactionStatus } from "@prisma/client";
+import { PaymentMethod, ShipmentMethod, TransactionStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getUrl } from "../objects/s3";
@@ -8,13 +8,7 @@ const createTransactionRequest = z.object({
   buyerId: z.string(),
   postId: z.string(),
 
-  paymentMethod: z.enum(["CREDIT_CARD", "ONLINE_BANKING"]),
-  hashId: z.string(),
-
-  shipmentMethod: z.enum(["DELIVERY"]),
-  trackingURL: z.string(),
-
-  amount: z.number(),
+  amount: z.number().nonnegative(),
 });
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
@@ -83,7 +77,11 @@ export async function POST(req: NextRequest) {
         ...parsedData.data,
         sellerId: post.sellerId,
         status: TransactionStatus.APPROVING,
+        paymentMethod: PaymentMethod.UNDEFINED,
+        hashId: "",
         amount: parsedData.data.amount,
+        shipmentMethod: ShipmentMethod.UNDEFINED,
+        trackingURL: "",
         isDelivered: false,
       },
     });

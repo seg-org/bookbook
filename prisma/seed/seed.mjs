@@ -153,8 +153,11 @@ if (transactions.length === 0) {
       paymentMethod:
         (entry.paymentMethod == "CREDIT_CARD" && PaymentMethod.CREDIT_CARD) ||
         (entry.paymentMethod == "ONLINE_BANKING" && PaymentMethod.ONLINE_BANKING) ||
-        PaymentMethod.CREDIT_CARD,
-      shipmentMethod: (entry.shipmentMethod == "DELIVERY" && ShipmentMethod.DELIVERY) || ShipmentMethod.DELIVERY,
+        PaymentMethod.UNDEFINED,
+      shipmentMethod:
+        (entry.shipmentMethod == "STANDARD" && ShipmentMethod.STANDARD) ||
+        (entry.shipmentMethod == "EXPRESS" && ShipmentMethod.EXPRESS) ||
+        ShipmentMethod.UNDEFINED,
     })),
   });
   console.log("Transaction seeded successful");

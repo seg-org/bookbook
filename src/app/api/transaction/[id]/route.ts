@@ -10,6 +10,11 @@ const updateTransactionRequest = z
     isDelivered: z.boolean().optional(),
     trackingURL: z.string().optional(),
 
+    paymentMethod: z.enum(["CREDIT_CARD", "ONLINE_BANKING", "UNDEFINED"]).optional(),
+    hashId: z.string().optional(),
+
+    shipmentMethod: z.enum(["STANDARD", "EXPRESS", "UNDEFINED"]).optional(),
+
     // for fail status only
     evidenceURL: z
       .string()
@@ -55,6 +60,9 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
           ...(parsedData.data.status ? { status: parsedData.data.status } : {}),
           ...(parsedData.data.trackingURL ? { trackingURL: parsedData.data.trackingURL } : {}),
           ...(parsedData.data.isDelivered ? { isDelivered: parsedData.data.isDelivered } : {}),
+          ...(parsedData.data.paymentMethod ? { paymentMethod: parsedData.data.paymentMethod } : {}),
+          ...(parsedData.data.hashId ? { hashId: parsedData.data.hashId } : {}),
+          ...(parsedData.data.shipmentMethod ? { shipmentMethod: parsedData.data.shipmentMethod } : {}),
         },
       });
 
