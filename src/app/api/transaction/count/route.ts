@@ -6,7 +6,7 @@ const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
 
 const getTransactionRequest = z.object({
-  userId: z.string().default(() => ""),
+  userId: z.string().optional(),
   startDate: z
     .string()
     .optional()
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
           gte: parsedData.data.startDate,
           lte: parsedData.data.endDate,
         },
-        ...(parsedData.data.userId !== ""
+        ...(parsedData.data.userId
           ? {
               OR: [
                 parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},

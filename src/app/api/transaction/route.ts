@@ -21,7 +21,7 @@ const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
 
 const getTransactionRequest = z.object({
-  userId: z.string().default(() => ""),
+  userId: z.string().optional(),
   startDate: z
     .string()
     .optional()
@@ -43,11 +43,11 @@ const getTransactionRequest = z.object({
   skip: z
     .string()
     .optional()
-    .transform((val) => (val == undefined ? 0 : Math.max(0,parseInt(val)))),
+    .transform((val) => (val == undefined ? 0 : Math.max(0, parseInt(val)))),
   take: z
     .string()
     .optional()
-    .transform((val) => (val == undefined ? -1 : Math.max(0,parseInt(val)))),
+    .transform((val) => (val == undefined ? -1 : Math.max(0, parseInt(val)))),
 });
 
 export async function POST(req: NextRequest) {
@@ -57,15 +57,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    const buyer = await prisma.user.findUnique({
+    const buyer = await prisma.user.count({
       where: { id: parsedData.data.buyerId },
     });
-    if (!buyer) {
+    if (buyer !== 1) {
       return NextResponse.json({ error: `buyer with id ${parsedData.data.buyerId} not found` }, { status: 404 });
     }
 
     const post = await prisma.post.findUnique({
       where: { id: parsedData.data.postId },
+      select: {
+        published: true,
+        sellerId: true,
+      },
     });
     if (!post) {
       return NextResponse.json({ error: `post with id ${parsedData.data.postId} not found` }, { status: 404 });
@@ -78,7 +82,7 @@ export async function POST(req: NextRequest) {
       data: {
         ...parsedData.data,
         sellerId: post.sellerId,
-        status: TransactionStatus.PAYING,
+        status: TransactionStatus.APPROVING,
         amount: parsedData.data.amount,
         isDelivered: false,
       },
@@ -102,13 +106,13 @@ export async function GET(req: NextRequest) {
 
     const transactions = await prisma.transaction.findMany({
       skip: parsedData.data.skip,
-      ...(parsedData.data.take !== -1 ? {take: parsedData.data.take} : {}),
+      ...(parsedData.data.take !== -1 ? { take: parsedData.data.take } : {}),
       where: {
         createdAt: {
           gte: parsedData.data.startDate,
           lte: parsedData.data.endDate,
         },
-        ...(parsedData.data.userId !== ""
+        ...(parsedData.data.userId
           ? {
               OR: [
                 parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},

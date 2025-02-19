@@ -6,8 +6,9 @@ import { getUrl } from "../../objects/s3";
 
 const updateTransactionRequest = z
   .object({
-    status: z.enum(["APPROVING", "PAYING", "VERIFYING", "COMPLETE", "FAIL"]),
-    isDelivered: z.boolean(),
+    status: z.enum(["APPROVING", "PAYING", "PACKING", "DELIVERING", "COMPLETE", "HOLD", "FAIL"]).optional(),
+    isDelivered: z.boolean().optional(),
+    trackingURL: z.string().optional(),
 
     // for fail status only
     evidenceURL: z
@@ -18,7 +19,10 @@ const updateTransactionRequest = z
       .string()
       .optional()
       .transform((value) => value ?? ""),
-    failType: z.enum(["CHEAT"]).optional(),
+    failType: z
+      .enum(["UNDELIVERED", "UNQUALIFIED", "REJECT", "TERMINATION", "OTHER"])
+      .optional()
+      .transform((value) => value ?? TransactionFailType.OTHER),
   })
   .refine((data) => data.status !== "FAIL" || (data.evidenceURL && data.detail && data.failType), {
     message: "If status is fail, evidenceURL, detail, and failType must be given",
@@ -35,6 +39,9 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     const transaction = await prisma.transaction.findFirst({
       where: { id: id },
+      select: {
+        status: true,
+      },
     });
 
     if (!transaction) {
@@ -45,8 +52,9 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       const updateTransaction = await prisma.transaction.update({
         where: { id: id },
         data: {
-          status: parsedData.data.status,
-          isDelivered: parsedData.data.isDelivered,
+          ...(parsedData.data.status ? { status: parsedData.data.status } : {}),
+          ...(parsedData.data.trackingURL ? { trackingURL: parsedData.data.trackingURL } : {}),
+          ...(parsedData.data.isDelivered ? { isDelivered: parsedData.data.isDelivered } : {}),
         },
       });
 
@@ -62,7 +70,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
             transactionId: updateTransaction.id,
             evidenceURL: parsedData.data.evidenceURL,
             detail: parsedData.data.detail,
-            failType: parsedData.data.failType ?? TransactionFailType.CHEAT,
+            failType: parsedData.data.failType,
           },
         });
       }
@@ -80,7 +88,6 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
   try {
-    
     const transaction = await prisma.transaction.findFirst({
       where: { id: id },
       include: {

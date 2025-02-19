@@ -193,17 +193,23 @@ model TransactionFail {
 }
 
 enum TransactionStatus {
-  APPROVING @map("approving")
-  PAYING    @map("paying")
-  VERIFYING @map("verifying")
-  COMPLETE  @map("complete")
-  FAIL      @map("fail")
+  APPROVING  @map("approving")
+  PAYING     @map("paying")
+  PACKING    @map("packing")
+  DELIVERING @map("delivering")
+  COMPLETE   @map("complete")
+  HOLD       @map("hold")
+  FAIL       @map("fail")
 
   @@map("transaction_status_type")
 }
 
 enum TransactionFailType {
-  CHEAT @map("cheat")
+  UNDELIVERED @map("undelivered")
+  UNQUALIFIED @map("unqualified")
+  REJECT      @map("reject")
+  TERMINATION @map("termination")
+  OTHER       @map("other")
 
   @@map("transaction_fail_type")
 }
