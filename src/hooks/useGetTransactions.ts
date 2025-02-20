@@ -1,11 +1,11 @@
 "use client";
 
-import { FilterType } from "@/app/transaction-history-page/components/FilterBar";
+import { TransactionFilter, TransactionPaginator } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { getQueryTransaction, getTransaction, getTransactionCount } from "@/data/transaction";
 import { useEffect, useState } from "react";
 
-export const useGetQueryTransaction = (filter: FilterType, userId: string, skip?: number, take?: number) => {
+export const useGetQueryTransaction = (userId: string, filter: TransactionFilter, paginator: TransactionPaginator) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -14,17 +14,29 @@ export const useGetQueryTransaction = (filter: FilterType, userId: string, skip?
     (async () => {
       setLoading(true);
       setError(null);
-      if(userId !== "---") {
-        const res = await getQueryTransaction(filter, userId, skip || -1, take || -1);
+      setTransactions([]);
+
+      if (userId) {
+        const res = await getQueryTransaction({
+          userId: userId,
+          startDate: filter.startDate,
+          endDate: filter.endDate,
+          asBuyer: filter.asBuyer,
+          asSeller: filter.asSeller,
+          skip: (paginator.selectingPage - 1) * paginator.transactionPerPage,
+          take: paginator.transactionPerPage,
+        });
         if (res instanceof Error) {
+          setLoading(false);
           return setError(res);
         }
-        
+
         setTransactions(res);
       }
+
       setLoading(false);
     })();
-  }, [filter, userId, skip, take]);
+  }, [userId, filter, paginator]);
 
   return { transactions, loading, error };
 };
@@ -33,26 +45,30 @@ export const useGetTransaction = (id: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [transaction, setTransaction] = useState<Transaction>();
-  
+
   useEffect(() => {
     (async () => {
       setLoading(true);
       setError(null);
-      const res = await getTransaction(id);
+      setTransaction(undefined);
 
-      if (res instanceof Error) {
-        return setError(res);
+      if (id) {
+        const res = await getTransaction(id);
+
+        if (res instanceof Error) {
+          setLoading(false);
+          return setError(res);
+        }
+        setTransaction(res);
       }
-      
-      setTransaction(res);
       setLoading(false);
     })();
   }, [id]);
 
   return { transaction, loading, error };
-}
+};
 
-export const useGetTransactionCount = (filter: FilterType, userId: string) => {
+export const useGetTransactionCount = (userId: string, filter: TransactionFilter) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [transactionCount, setTransactionsCount] = useState(0);
@@ -61,17 +77,27 @@ export const useGetTransactionCount = (filter: FilterType, userId: string) => {
     (async () => {
       setLoading(true);
       setError(null);
-      if(userId !== "---") {
-        const res = await getTransactionCount(filter, userId);
+      setTransactionsCount(0);
+
+      if (userId) {
+        const res = await getTransactionCount({
+          userId: userId,
+          startDate: filter.startDate,
+          endDate: filter.endDate,
+          asBuyer: filter.asBuyer,
+          asSeller: filter.asSeller,
+        });
         if (res instanceof Error) {
+          setLoading(false);
           return setError(res);
         }
 
         setTransactionsCount(res);
       }
+
       setLoading(false);
     })();
-  }, [filter, userId]);
+  }, [userId, filter]);
 
   return { transactionCount, loading, error };
 };

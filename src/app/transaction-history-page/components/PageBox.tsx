@@ -1,15 +1,13 @@
-interface Props {
-  pageNumber: number;
-  selectingPage: number;
-  setSelectingPage: (selectingPage: number) => void;
-}
+import { TransactionContext } from "@/context/transactionContext";
+import { useContext } from "react";
 
-const PageBox = ({ pageNumber, setSelectingPage, selectingPage }: Props) => {
+const PageBox = ({ pageNumber }: { pageNumber: number }) => {
+  const { paginator } = useContext(TransactionContext);
   if (pageNumber == -1) {
     return (
       <div
         className="flex h-10 w-10 transform items-center justify-center rounded-lg border border-gray-300 bg-white text-black shadow transition-all duration-300 hover:scale-110"
-        onClick={() => setSelectingPage(selectingPage - 1)}
+        onClick={() => paginator.setSelectingPage(paginator.selectingPage - 1)}
       >
         {"<"}
       </div>
@@ -26,7 +24,7 @@ const PageBox = ({ pageNumber, setSelectingPage, selectingPage }: Props) => {
     return (
       <div
         className="flex h-10 w-10 transform items-center justify-center rounded-lg border border-gray-300 bg-white text-black shadow transition-all duration-300 hover:scale-110"
-        onClick={() => setSelectingPage(selectingPage + 1)}
+        onClick={() => paginator.setSelectingPage(paginator.selectingPage + 1)}
       >
         {">"}
       </div>
@@ -42,8 +40,8 @@ const PageBox = ({ pageNumber, setSelectingPage, selectingPage }: Props) => {
 
   return (
     <div
-      className={`${pageNumber === selectingPage ? "bg-blue-500" : "bg-white"} {}transform duration-300" flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-black shadow transition-all hover:scale-110`}
-      onClick={() => setSelectingPage(pageNumber)}
+      className={`${pageNumber === paginator.selectingPage ? "bg-blue-500" : "bg-white"} {}transform duration-300" flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-black shadow transition-all hover:scale-110`}
+      onClick={() => paginator.setSelectingPage(pageNumber)}
     >
       {pageNumber}
     </div>

@@ -1,19 +1,12 @@
-export interface FilterType {
-  startDate: Date | null;
-  endDate: Date | null;
-  asBuyer: boolean;
-  asSeller: boolean;
-}
+import { TransactionContext } from "@/context/transactionContext";
+import { useContext } from "react";
 
-interface setStateProps {
-  filter: FilterType;
-  setFilter: (newdata: FilterType) => void;
-  totalBuy: number;
-  totalSell: number;
-}
+const beginningOfTime = new Date("0000-01-01T00:00:00Z");
+const endOfTime = new Date("9999-12-31T23:59:59Z");
 
-// Note 2: The pop=up calendar can not be configured
-const FilterBar = ({ filter, setFilter, totalBuy, totalSell }: setStateProps) => {
+const FilterBar = () => {
+  const { filter, totalBuy, totalSell } = useContext(TransactionContext);
+
   return (
     <div className="flex flex-col items-center justify-between p-2.5 lg:flex-row">
       <div className="flex flex-row justify-start space-x-5">
@@ -22,20 +15,13 @@ const FilterBar = ({ filter, setFilter, totalBuy, totalSell }: setStateProps) =>
           <input
             className="transform rounded-lg border border-gray-300 p-1 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
             type="date"
-            onChange={(e) => setFilter({ ...filter, startDate: e.target.value ? new Date(e.target.value) : null })}
+            onChange={(e) => filter.setStartDate(e.target.value ? new Date(e.target.value) : beginningOfTime)}
           />
           <label className="font-medium text-gray-800">ถึงวันที่</label>
           <input
             className="transform rounded-lg border border-gray-300 p-1 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
             type="date"
-            onChange={(e) =>
-              setFilter({
-                ...filter,
-                endDate: e.target.value
-                  ? new Date(new Date(e.target.value).setDate(new Date(e.target.value).getDate() + 1))
-                  : null,
-              })
-            }
+            onChange={(e) => filter.setEndDate(e.target.value ? new Date(e.target.value) : endOfTime)}
           />
         </div>
         <div className="flex flex-row items-center space-x-2.5">
@@ -43,14 +29,14 @@ const FilterBar = ({ filter, setFilter, totalBuy, totalSell }: setStateProps) =>
             className="h-5 w-5 transition-transform duration-200"
             type="checkbox"
             checked={filter.asBuyer}
-            onChange={(e) => setFilter({ ...filter, asBuyer: e.target.checked })}
+            onChange={(e) => filter.setAsBuyer(e.target.checked)}
           />
           <label className="font-medium text-gray-800">ซื้อ</label>
           <input
             className="h-5 w-5 transition-transform duration-200"
             type="checkbox"
             checked={filter.asSeller}
-            onChange={(e) => setFilter({ ...filter, asSeller: e.target.checked })}
+            onChange={(e) => filter.setAsSeller(e.target.checked)}
           />
           <label className="font-medium text-gray-800">ขาย</label>
         </div>
