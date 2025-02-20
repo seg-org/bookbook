@@ -9,9 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -36,6 +36,7 @@ model User {
   posts            Post[]
   chatMessages     ChatMessage[]
   Bookmark         Bookmark[]
+  ChatReport       ChatReport[]
 
   @@map("users")
 }
@@ -125,18 +126,31 @@ model ChatMessage {
 }
 
 model ChatRoom {
-  id        String        @id @default(cuid())
-  post      Post          @relation(fields: [postId], references: [id])
-  postId    String        @map("post_id")
+  id         String        @id @default(cuid())
+  post       Post          @relation(fields: [postId], references: [id])
+  postId     String        @map("post_id")
   // TODO: add report
-  userIds   String[]      @map("user_ids")
-  createdAt DateTime      @default(now()) @map("created_at")
-  lastReadA DateTime      @default(now()) @map("last_read_a")
-  lastReadB DateTime      @default(now()) @map("last_read_b")
-  messages  ChatMessage[]
+  userIds    String[]      @map("user_ids")
+  createdAt  DateTime      @default(now()) @map("created_at")
+  lastReadA  DateTime      @default(now()) @map("last_read_a")
+  lastReadB  DateTime      @default(now()) @map("last_read_b")
+  messages   ChatMessage[]
+  ChatReport ChatReport[]
 
   @@index([postId])
   @@map("chat_rooms")
+}
+
+model ChatReport {
+  id         String   @id @default(cuid())
+  reporter   User     @relation(fields: [reporterId], references: [id])
+  reporterId String   @map("reporter_id")
+  room       ChatRoom @relation(fields: [roomId], references: [id])
+  roomId     String   @map("room_id")
+  reason     String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("chat_reports")
 }
 
 model Transaction {
