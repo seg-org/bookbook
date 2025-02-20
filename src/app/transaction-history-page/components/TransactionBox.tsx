@@ -2,10 +2,9 @@
 
 import Image from "next/image";
 
-import { TransactionContext } from "@/context/transactionContext";
+import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { TransactionStatus } from "@prisma/client";
-import { useContext } from "react";
 import BoughtIcon from "../pic/boughtIcon.png";
 import SoldIcon from "../pic/soldIcon.png";
 
@@ -15,7 +14,7 @@ const cap_overflow_string = (str: string) => {
 };
 
 const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
-  const { userId, setSelectingTransaction } = useContext(TransactionContext);
+  const { userId, setSelectingTransaction } = useTransactionContext();
 
   return (
     <div

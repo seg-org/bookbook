@@ -1,9 +1,9 @@
 "use client";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { TransactionContext } from "@/context/transactionContext";
+import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import LineSeparator from "./LineSperator";
 import TransactionBox from "./TransactionBox";
 
@@ -16,7 +16,7 @@ interface CategorizedTransactions {
 }
 
 const TransactionList = () => {
-  const { userId, transactions, transactionsLoading, transactionsError } = useContext(TransactionContext);
+  const { userId, transactions, transactionsLoading, transactionsError } = useTransactionContext();
 
   const categorizedTransactions: CategorizedTransactions = {
     Today: [],

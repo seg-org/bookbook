@@ -16,9 +16,9 @@ export interface TransactionFilter {
 }
 
 export interface TransactionPaginator {
-  selectingPage: string;
+  selectingPage: number;
   transactionPerPage: number;
-  setSelectingPage: (nextPage: string) => void;
+  setSelectingPage: (nextPage: number) => void;
 }
 
 interface TransactionContext {

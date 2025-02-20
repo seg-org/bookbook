@@ -1,11 +1,10 @@
-import { TransactionContext } from "@/context/transactionContext";
-import { useContext } from "react";
+import { useTransactionContext } from "@/context/transactionContext";
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
 
 const FilterBar = () => {
-  const { filter, totalBuy, totalSell } = useContext(TransactionContext);
+  const { filter, totalBuy, totalSell } = useTransactionContext();
 
   return (
     <div className="flex flex-col items-center justify-between p-2.5 lg:flex-row">
