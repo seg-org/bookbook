@@ -144,15 +144,20 @@ if (transactions.length === 0) {
       status:
         (entry.status == "APPROVING" && TransactionStatus.APPROVING) ||
         (entry.status == "PAYING" && TransactionStatus.PAYING) ||
-        (entry.status == "VERIFYING" && TransactionStatus.VERIFYING) ||
+        (entry.status == "PACKING" && TransactionStatus.PACKING) ||
+        (entry.status == "DELIVERING" && TransactionStatus.DELIVERING) ||
         (entry.status == "COMPLETE" && TransactionStatus.COMPLETE) ||
+        (entry.status == "HOLD" && TransactionStatus.HOLD) ||
         (entry.status == "FAIL" && TransactionStatus.FAIL) ||
         TransactionStatus.APPROVING,
       paymentMethod:
         (entry.paymentMethod == "CREDIT_CARD" && PaymentMethod.CREDIT_CARD) ||
         (entry.paymentMethod == "ONLINE_BANKING" && PaymentMethod.ONLINE_BANKING) ||
-        PaymentMethod.CREDIT_CARD,
-      shipmentMethod: (entry.shipmentMethod == "DELIVERY" && ShipmentMethod.DELIVERY) || ShipmentMethod.DELIVERY,
+        PaymentMethod.UNDEFINED,
+      shipmentMethod:
+        (entry.shipmentMethod == "STANDARD" && ShipmentMethod.STANDARD) ||
+        (entry.shipmentMethod == "EXPRESS" && ShipmentMethod.EXPRESS) ||
+        ShipmentMethod.UNDEFINED,
     })),
   });
   console.log("Transaction seeded successful");
@@ -163,7 +168,13 @@ if (transactionsFail.length === 0) {
   await prisma.transactionFail.createMany({
     data: transactionsFailData.map((entry) => ({
       ...entry,
-      failType: (entry.failType == "CHEAT" && TransactionFailType.CHEAT) || TransactionFailType.CHEAT,
+      failType:
+        (entry.failType == "UNDELIVERED" && TransactionFailType.UNDELIVERED) ||
+        (entry.failType == "UNQUALIFIED" && TransactionFailType.UNQUALIFIED) ||
+        (entry.failType == "REJECT" && TransactionFailType.REJECT) ||
+        (entry.failType == "TERMINATION" && TransactionFailType.TERMINATION) ||
+        (entry.failType == "OTHER" && TransactionFailType.OTHER) ||
+        TransactionFailType.OTHER,
     })),
   });
   console.log("TransctionFail seeded successful");
