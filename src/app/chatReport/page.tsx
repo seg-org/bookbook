@@ -4,10 +4,9 @@ import { useState } from "react";
 
 const ReportSellerPage = () => {
   const [formData, setFormData] = useState({
-    seller: "",
+    user: "",
     reason: "",
     details: "",
-    pic: "idk",
   });
   // const [successMessage, setSuccessMessage] = useState("");
 
