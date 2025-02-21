@@ -2,13 +2,37 @@
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function PhoneVerification() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const [phone, setPhone] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+
+    const fetchSession = async () => {
+      const session = await getSession();
+      if (session?.user?.email) {
+        setPhone(session.user.email);
+      } else {
+        setError("ไม่พบอีเมล กรุณาเข้าสู่ระบบอีกครั้ง");
+      }
+    };
+
+    fetchSession();
+  }, []);
+
+  useEffect(() => {
+    if (phone) {
+      resendCode();
+    }
+  }, [phone]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,6 +65,8 @@ export function PhoneVerification() {
     try {
       const response = await fetch("/api/auth/resend/phone", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone }),
       });
 
       if (!response.ok) {
@@ -50,6 +76,10 @@ export function PhoneVerification() {
       setError("Failed to resend verification code : " + { error });
     }
   };
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="mx-auto max-w-md space-y-4">

@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     }
 
     const verificationToken = await prisma.verificationToken.findUnique({
-      where: { token: code, type: "phone" }, // Ensure the token is for phone verification
+      where: { token: code, type: "phone" },
     });
 
     if (!verificationToken) {

@@ -31,24 +31,7 @@ export function EmailVerification() {
 
   useEffect(() => {
     if (email) {
-      const sendVerificationEmail = async () => {
-        try {
-          const response = await fetch("/api/auth/resend/email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email }),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Failed to send verification email");
-          }
-        } catch (error) {
-          setError(`ไม่สามารถส่งอีเมลยืนยันได้: ${error instanceof Error ? error.message : "Unknown error"}`);
-        }
-      };
-
-      sendVerificationEmail();
+      resendVerification();
     }
   }, [email]);
 

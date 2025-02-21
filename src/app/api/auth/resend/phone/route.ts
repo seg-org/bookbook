@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { sendVerificationSMS } from "@/lib/sms";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -30,8 +31,7 @@ export async function POST(req: Request) {
       create: { email: user.email, token, type: "phone", expires },
     });
 
-    // TODO : Add SMS
-    // await sendVerificationSMS(phoneNumber, token);
+    await sendVerificationSMS(phoneNumber, token);
 
     return NextResponse.json({ message: "Verification code resent" });
   } catch (error) {
