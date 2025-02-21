@@ -135,7 +135,7 @@ model ChatRoom {
   lastReadA  DateTime      @default(now()) @map("last_read_a")
   lastReadB  DateTime      @default(now()) @map("last_read_b")
   messages   ChatMessage[]
-  ChatReport ChatReport[]
+  chatReport ChatReport[]
 
   @@index([postId])
   @@map("chat_rooms")
