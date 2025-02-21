@@ -1,3 +1,4 @@
+import { sendVerificationEmail } from "@/lib/mail";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -25,8 +26,7 @@ export async function POST(req: Request) {
       create: { email, token, type: "email", expires },
     });
 
-    // TODO : Add Email
-    // await sendVerificationEmail(email, token);
+    await sendVerificationEmail(email, token);
 
     return NextResponse.json({ message: "Verification email sent" });
   } catch (error) {

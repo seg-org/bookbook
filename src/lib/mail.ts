@@ -11,14 +11,11 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendVerificationEmail(email: string, token: string) {
-  const verificationUrl = `${process.env.NEXTAUTH_URL}/verify/email?token=${token}`;
-
   const mailOptions = {
     from: process.env.EMAIL_FROM,
     to: email,
-    subject: "Verify your email address",
-    text: `Please verify your email by clicking the link below:\n\n${verificationUrl}`,
-    html: `<p>Please verify your email by clicking the link below:</p><p><a href="${verificationUrl}">Verify Email</a></p>`,
+    subject: "ยืนยันอีเมลของคุณสำหรับ Book Book",
+    text: `กรุณายืนยันอีเมลของคุณโดยใช้รหัสนี้: ${token}`,
   };
 
   await transporter.sendMail(mailOptions);
