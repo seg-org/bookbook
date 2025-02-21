@@ -30,8 +30,10 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ message: "Report submitted successfully", report });
-  } catch (error: any) {
-    console.error("Error submitting report:", error?.message || error, error?.stack);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error submitting report:", error.message || error, error.stack);
+    }
     return NextResponse.json({ error: "Failed to submit report" }, { status: 500 });
   }
 }
