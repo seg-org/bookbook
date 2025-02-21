@@ -66,11 +66,9 @@ export function RegisterForm() {
         throw new Error(loginResponse.error);
       }
 
-      router.push("/");
-
-      // TODO:
+      // router.push("/");
       // TODO : Add email verify
-      // router.push("/verify?email=" + encodeURIComponent(values.email));
+      router.push("/verify/email");
     } catch (error) {
       setErrorMessage(error as string);
     } finally {

@@ -39,7 +39,7 @@ export function PhoneVerification() {
 
   const resendCode = async () => {
     try {
-      const response = await fetch("/api/auth/resend/phone-code", {
+      const response = await fetch("/api/auth/resend/phone", {
         method: "POST",
       });
 

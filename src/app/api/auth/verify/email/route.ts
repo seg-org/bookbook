@@ -6,23 +6,19 @@ export async function POST(req: Request) {
     const { token, email } = await req.json();
 
     if (!token || !email) {
-      return NextResponse.json({ error: "Missing token or email" }, { status: 400 });
+      return NextResponse.json({ error: "ไม่มีโทเคนหรืออีเมล" }, { status: 400 });
     }
 
     const existingToken = await prisma.verificationToken.findUnique({
       where: { token, type: "email" },
     });
 
-    if (!existingToken) {
-      return NextResponse.json({ error: "Invalid or expired token" }, { status: 400 });
-    }
-
-    if (existingToken.email !== email) {
-      return NextResponse.json({ error: "Invalid token for this email" }, { status: 400 });
+    if (!existingToken || existingToken.email !== email) {
+      return NextResponse.json({ error: "โทเคนไม่ถูกต้องหรือหมดอายุ" }, { status: 400 });
     }
 
     if (new Date(existingToken.expires) < new Date()) {
-      return NextResponse.json({ error: "Token expired" }, { status: 400 });
+      return NextResponse.json({ error: "โทเคนหมดอายุ" }, { status: 400 });
     }
 
     await prisma.user.update({
@@ -34,9 +30,9 @@ export async function POST(req: Request) {
       where: { token },
     });
 
-    return NextResponse.json({ message: "Email verified successfully" });
+    return NextResponse.json({ message: "ยืนยันอีเมลสำเร็จ" });
   } catch (error) {
     console.error("Email verification error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "ข้อผิดพลาดภายในเซิร์ฟเวอร์" }, { status: 500 });
   }
 }
