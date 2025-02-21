@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { Checkbox } from "@/components/ui/CheckBox";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Dialog, { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
+import Dialog, { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
