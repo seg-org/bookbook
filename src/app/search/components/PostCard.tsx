@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { PostWithBookmark } from "@/context/postContext";
 import { createChatRoom } from "@/data/chat";
 import clsx from "clsx";
