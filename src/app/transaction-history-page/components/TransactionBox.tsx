@@ -16,6 +16,16 @@ const cap_overflow_string = (str: string) => {
 const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
   const { userId, setSelectingTransaction } = useTransactionContext();
 
+  const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
+    [TransactionStatus.APPROVING]: { label: "Approving", color: "text-gray-300" },
+    [TransactionStatus.PAYING]: { label: "Paying", color: "text-gray-300" },
+    [TransactionStatus.PACKING]: { label: "Packing", color: "text-gray-300" },
+    [TransactionStatus.DELIVERING]: { label: "Delivering", color: "text-gray-300" },
+    [TransactionStatus.COMPLETE]: { label: "Complete", color: "text-green-500" },
+    [TransactionStatus.HOLD]: { label: "Hold", color: "text-yellow-500" },
+    [TransactionStatus.FAIL]: { label: "Failed", color: "text-red-500" },
+  };
+
   return (
     <div
       className="relative flex transform flex-row items-center justify-between gap-x-5 rounded-lg border border-gray-300 bg-white p-4 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
@@ -42,13 +52,9 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
       </div>
 
       <div className="flex flex-col items-center justify-end text-xl font-bold">
-        {(transaction.status == TransactionStatus.APPROVING && <label className="text-gray-300">Approving</label>) ||
-          (transaction.status == TransactionStatus.PAYING && <label className="text-gray-300">Paying</label>) ||
-          (transaction.status == TransactionStatus.PACKING && <label className="text-gray-300">Packing</label>) ||
-          (transaction.status == TransactionStatus.DELIVERING && <label className="text-gray-300">Delivering</label>) ||
-          (transaction.status == TransactionStatus.COMPLETE && <label className="text-green-500">Complete</label>) ||
-          (transaction.status == TransactionStatus.HOLD && <label className="text-yellow-500">Hold</label>) ||
-          (transaction.status == TransactionStatus.FAIL && <label className="text-red-500">Failed</label>)}
+        <label className={`text-lg ${statusMap[transaction.status]?.color}`}>
+          {statusMap[transaction.status]?.label}
+        </label>
       </div>
 
       <div className="absolute bottom-2 right-2">

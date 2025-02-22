@@ -8,6 +8,16 @@ const TransactionDetailsPopup = () => {
   const { selectingTransaction, setSelectingTransaction } = useTransactionContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
 
+  const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
+    [TransactionStatus.APPROVING]: { label: "Approving", color: "text-gray-300" },
+    [TransactionStatus.PAYING]: { label: "Paying", color: "text-gray-300" },
+    [TransactionStatus.PACKING]: { label: "Packing", color: "text-gray-300" },
+    [TransactionStatus.DELIVERING]: { label: "Delivering", color: "text-gray-300" },
+    [TransactionStatus.COMPLETE]: { label: "Complete", color: "text-green-500" },
+    [TransactionStatus.HOLD]: { label: "Hold", color: "text-yellow-500" },
+    [TransactionStatus.FAIL]: { label: "Failed", color: "text-red-500" },
+  };
+
   if (selectingTransaction == "") {
     return <></>;
   } else if (loading) {
@@ -37,27 +47,9 @@ const TransactionDetailsPopup = () => {
               <div className="grid max-h-64 w-72 grid-cols-[auto_1fr] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
                 <p className="text-lg font-extrabold">status:</p>
                 <p>
-                  {(transaction?.status == TransactionStatus.APPROVING && (
-                    <label className="text-lg text-gray-300">Approving</label>
-                  )) ||
-                    (transaction?.status == TransactionStatus.PAYING && (
-                      <label className="text-lg text-gray-300">Paying</label>
-                    )) ||
-                    (transaction?.status == TransactionStatus.PACKING && (
-                      <label className="text-lg text-gray-300">Packing</label>
-                    )) ||
-                    (transaction?.status == TransactionStatus.DELIVERING && (
-                      <label className="text-lg text-gray-300">Delivering</label>
-                    )) ||
-                    (transaction?.status == TransactionStatus.COMPLETE && (
-                      <label className="text-lg text-green-500">Complete</label>
-                    )) ||
-                    (transaction?.status == TransactionStatus.HOLD && (
-                      <label className="text-lg text-yellow-500">Hold</label>
-                    )) ||
-                    (transaction?.status == TransactionStatus.FAIL && (
-                      <label className="text-lg text-red-500">Failed</label>
-                    ))}
+                  <label className={`text-lg ${statusMap[transaction.status]?.color}`}>
+                    {statusMap[transaction.status]?.label}
+                  </label>
                 </p>
                 <p className="font-bold">Created : </p>
                 <p>

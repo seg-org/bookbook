@@ -14,34 +14,34 @@ const createTransactionRequest = z.object({
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
 
+const parseToBoolean = (dft: boolean) => {
+  return (val: string | undefined) => (val ? val == "true" : dft);
+};
+
+const parseToPosInt = (dft: number) => {
+  return (val: string | undefined) => (val ? Math.max(parseInt(val), 0) : dft);
+};
+
+const parseToDate = (dft: Date) => {
+  return (val: string | undefined) => (val ? new Date(val) : dft);
+};
+
 const getTransactionRequest = z.object({
   userId: z.string().optional(),
   startDate: z
     .string()
     .optional()
     .refine((val) => !val || !isNaN(Date.parse(val)), { message: "Invalid date format" })
-    .transform((val) => (val == undefined ? beginningOfTime : new Date(val))),
+    .transform(parseToDate(beginningOfTime)),
   endDate: z
     .string()
     .optional()
     .refine((val) => !val || !isNaN(Date.parse(val)), { message: "Invalid date format" })
-    .transform((val) => (val == undefined ? endOfTime : new Date(val))),
-  asBuyer: z
-    .string()
-    .optional()
-    .transform((val) => (val == undefined ? true : val == "true")),
-  asSeller: z
-    .string()
-    .optional()
-    .transform((val) => (val == undefined ? true : val == "true")),
-  skip: z
-    .string()
-    .optional()
-    .transform((val) => (val == undefined ? 0 : Math.max(0, parseInt(val)))),
-  take: z
-    .string()
-    .optional()
-    .transform((val) => (val == undefined ? -1 : Math.max(0, parseInt(val)))),
+    .transform(parseToDate(endOfTime)),
+  asBuyer: z.string().optional().transform(parseToBoolean(true)),
+  asSeller: z.string().optional().transform(parseToBoolean(true)),
+  skip: z.string().optional().transform(parseToPosInt(0)),
+  take: z.string().optional().transform(parseToPosInt(-1)),
 });
 
 export async function POST(req: NextRequest) {
