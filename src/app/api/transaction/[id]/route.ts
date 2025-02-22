@@ -27,14 +27,17 @@ const updateTransactionRequest = z
       .optional()
       .transform((value) => value ?? ""),
     failType: z
-      .enum(["UNDELIVERED", "UNQUALIFIED", "REJECT", "TERMINATION", "OTHER"])
+      .enum(["UNDELIVERED", "UNQUALIFIED", "REJECT", "TERMINATION", "OTHER", "UNDEFINED"])
       .optional()
       .transform((value) => value ?? TransactionFailType.OTHER),
   })
-  .refine((data) => data.status !== "FAIL" || (data.evidenceURL && data.detail && data.failType), {
-    message: "If status is fail, evidenceURL, detail, and failType must be given",
-    path: ["status"],
-  });
+  .refine(
+    (data) => (data.status !== "FAIL" && data.status !== "HOLD") || (data.evidenceURL && data.detail && data.failType),
+    {
+      message: "If status is fail or hold, evidenceURL, detail, and failType must be given",
+      path: ["status"],
+    }
+  );
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -68,19 +71,19 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
         },
       });
 
-      if (transaction.status == "FAIL") {
+      if (transaction.status === "FAIL" || transaction.status === "HOLD") {
         await prisma.transactionFail.deleteMany({
           where: { transactionId: id },
         });
       }
 
-      if (parsedData.data.status == "FAIL") {
+      if (parsedData.data.status === "FAIL" || transaction.status === "HOLD") {
         await prisma.transactionFail.create({
           data: {
             transactionId: updateTransaction.id,
             evidenceURL: parsedData.data.evidenceURL,
             detail: parsedData.data.detail,
-            failType: parsedData.data.failType,
+            failType: transaction.status === "FAIL" ? parsedData.data.failType : "UNDEFINED",
           },
         });
       }
