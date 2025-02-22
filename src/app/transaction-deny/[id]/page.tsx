@@ -1,14 +1,21 @@
 "use client";
+import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/Input";
+import { useGetTransaction } from "@/hooks/useGetTransactions";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 
 function TransactionDenyPage() {
+  const params = useParams();
+  const id = typeof params?.id === "string" ? params.id : "";
+
   const [files, setFiles] = useState<File[]>([]);
   const [details, setDetails] = useState("");
   const [detailNotProvided, setDetailNotProvided] = useState("");
+  const { transaction, loading, error } = useGetTransaction(id);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -24,6 +31,14 @@ function TransactionDenyPage() {
     if (details === "") setDetailNotProvided("Please provide some details.");
   };
 
+  if (loading) {
+    return <LoadingAnimation />;
+  }
+
+  if (error) {
+    return console.log(error);
+  }
+
   return (
     <main className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
@@ -31,42 +46,50 @@ function TransactionDenyPage() {
           <CardTitle className="text-center">แจ้งยกเลิกการซื้อ</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col items-center">
-          <Image className="m-2.5 h-80 w-auto rounded-lg" src={""} alt="Book Cover" height={2040} width={1305}></Image>
+          <Image
+            className="m-2.5 mt-0 h-80 w-auto rounded-lg"
+            src={transaction?.post.book.coverImageUrl || ""}
+            alt="Book Cover"
+            height={2040}
+            width={1305}
+          ></Image>
           <div className="mt-2 flex w-full flex-row justify-start space-x-1">
-            <label className="font-bold">ชื่อโพสต์ : </label>
+            <label className="font-extrabold">ชื่อโพสต์ : </label>
+            <label className="flex-1 truncate">{transaction?.post.title}</label>
+          </div>
+          <div className="flex w-full flex-row justify-start space-x-1">
+            <label className="font-extrabold">ชื่อหนังสือ : </label>
+            <label className="flex-1 truncate">{transaction?.post.book.title}</label>
+          </div>
+          <div className="flex w-full flex-row justify-start space-x-1">
+            <label className="font-extrabold">ผู้ขาย : </label>
             <label className="flex-1 truncate">
-              wgoeuuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+              {transaction?.seller.firstName + " " + transaction?.seller.lastName}
             </label>
           </div>
           <div className="flex w-full flex-row justify-start space-x-1">
-            <label className="font-bold">ชื่อหนังสือ : </label>
+            <label className="font-extrabold">วันที่สร้าง : </label>
             <label className="flex-1 truncate">
-              wgoeuuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+              {transaction?.createdAt.getDay().toString() +
+                "/" +
+                transaction?.createdAt.getMonth().toString() +
+                "/" +
+                transaction?.createdAt.getFullYear().toString()}
             </label>
           </div>
           <div className="flex w-full flex-row justify-start space-x-1">
-            <label className="font-bold">ผู้ขาย : </label>
+            <label className="font-extrabold">วันที่จ่าย : </label>
             <label className="flex-1 truncate">
-              wgoeuuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+              {transaction?.paidOn.getDay().toString() +
+                "/" +
+                transaction?.paidOn.getMonth().toString() +
+                "/" +
+                transaction?.paidOn.getFullYear().toString()}
             </label>
           </div>
           <div className="flex w-full flex-row justify-start space-x-1">
-            <label className="font-bold">วันที่สร้าง : </label>
-            <label className="flex-1 truncate">
-              wgoeuuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            </label>
-          </div>
-          <div className="flex w-full flex-row justify-start space-x-1">
-            <label className="font-bold">วันที่จ่าย : </label>
-            <label className="flex-1 truncate">
-              wgoeuuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            </label>
-          </div>
-          <div className="flex w-full flex-row justify-start space-x-1">
-            <label className="font-bold">ราคา : </label>
-            <label className="flex-1 truncate">
-              wgoeuuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-            </label>
+            <label className="font-extrabold">ราคา : </label>
+            <label className="flex-1 truncate">{transaction?.amount + ".-"}</label>
           </div>
 
           <textarea
