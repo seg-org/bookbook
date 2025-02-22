@@ -53,6 +53,11 @@ export default function Home() {
               📜 ประวัติการสั่งซื้อ
             </Link>
           </li>
+          <li>
+            <Link href="/shipping-methods" className="block text-blue-600 hover:text-blue-800">
+              Shipping methods
+            </Link>
+          </li>
         </ul>
       </section>
     </main>

@@ -1,24 +1,30 @@
-import React from "react";
+"use client"
 
-interface CheckboxProps {
-  id: string;
-  checked: boolean;
-  onCheckedChange: (checked: boolean) => void;
-  className?: string;
-}
+import * as React from "react"
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+import { Check } from "lucide-react"
 
-export const Checkbox: React.FC<CheckboxProps> = ({ id, checked, onCheckedChange, className }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onCheckedChange(e.target.checked);
-  };
+import { cn } from "@/lib/utils"
 
-  return (
-    <input
-      type="checkbox"
-      id={id}
-      checked={checked}
-      onChange={handleChange}
-      className={`h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 ${className}`}
-    />
-  );
-};
+const Checkbox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <CheckboxPrimitive.Root
+    ref={ref}
+    className={cn(
+      "peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+      className
+    )}
+    {...props}
+  >
+    <CheckboxPrimitive.Indicator
+      className={cn("flex items-center justify-center text-current")}
+    >
+      <Check className="h-4 w-4" />
+    </CheckboxPrimitive.Indicator>
+  </CheckboxPrimitive.Root>
+))
+Checkbox.displayName = CheckboxPrimitive.Root.displayName
+
+export { Checkbox }
