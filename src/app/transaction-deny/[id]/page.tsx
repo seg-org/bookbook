@@ -3,6 +3,7 @@ import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/Input";
+import { updateTransaction } from "@/data/transaction";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -15,6 +16,7 @@ function TransactionDenyPage() {
   const [files, setFiles] = useState<File[]>([]);
   const [details, setDetails] = useState("");
   const [detailNotProvided, setDetailNotProvided] = useState("");
+  const [sendingRequest, setSendingRequest] = useState(false);
   const { transaction, loading, error } = useGetTransaction(id);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,12 +25,29 @@ function TransactionDenyPage() {
     event.target.value = "";
   };
 
-  const removeFile = (index: number) => {
-    setFiles(files.filter((_, i) => i !== index));
+  const validateInput = () => {
+    let inputCorrect = true;
+    if (details === "") {
+      setDetailNotProvided("Please provide some details.");
+      inputCorrect = false;
+    }
+    return inputCorrect;
   };
 
-  const validateInput = () => {
-    if (details === "") setDetailNotProvided("Please provide some details.");
+  const handleSubmitClick = async () => {
+    if (!validateInput()) return;
+    setSendingRequest(true);
+    try {
+      // const folderKey = await uploadToBucket(`report_envidence/${Date.now()}`, files);
+      await updateTransaction({ id: id, status: "HOLD", detail: details, evidenceURL: "" });
+    } catch (error) {
+      console.log(error);
+    }
+    setSendingRequest(false);
+  };
+
+  const removeFile = (index: number) => {
+    setFiles(files.filter((_, i) => i !== index));
   };
 
   if (loading) {
@@ -116,7 +135,7 @@ function TransactionDenyPage() {
                 className="mt-1 flex items-center justify-between rounded-lg border border-gray-200 px-2 py-1 shadow-sm"
               >
                 <CardContent className="flex w-full items-center space-x-4 p-1 pt-1">
-                  <span className="flex-1 truncate text-sm text-gray-700">{file.name}</span>
+                  <span className="w-full flex-1 truncate text-sm text-gray-700">{file.name}</span>
                   <Button
                     className="flex h-7 w-7 items-center justify-center rounded-lg bg-red-500 text-white hover:bg-red-600"
                     onClick={() => removeFile(index)}
@@ -129,7 +148,7 @@ function TransactionDenyPage() {
           </div>
           <Button
             onClick={() => {
-              validateInput();
+              handleSubmitClick();
             }}
             className="mt-4 w-full"
           >
@@ -137,6 +156,13 @@ function TransactionDenyPage() {
           </Button>
         </CardContent>
       </Card>
+      {sendingRequest ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <LoadingAnimation />
+        </div>
+      ) : (
+        <></>
+      )}
     </main>
   );
 }
