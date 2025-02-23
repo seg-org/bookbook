@@ -24,6 +24,22 @@ interface TransactionCount {
   asSeller?: boolean;
 }
 
+interface TransactionUpDate {
+  id: string;
+  status?: string;
+  isDelivered?: boolean;
+  trackingURL?: boolean;
+
+  paymentMethod?: string;
+  hashId?: string;
+
+  shipmentMethod?: string;
+
+  evidenceURL?: string;
+  detail?: string;
+  failType?: string;
+}
+
 export const getQueryTransaction = async (query: TransactionQuery) => {
   try {
     const params: {
@@ -92,6 +108,44 @@ export const getTransactionCount = async (query: TransactionCount) => {
     const res: AxiosResponse<number> = await apiClient.get("/transaction/count", { params });
 
     return res.data;
+  } catch (error) {
+    console.error("Failed to get transaction count", error);
+    return Error("Failed to get transaction count");
+  }
+};
+
+export const updateTransaction = async (query: TransactionUpDate) => {
+  try {
+    const id = query.id;
+
+    console.log(query);
+
+    const params: {
+      status?: string;
+      isDelivered?: boolean;
+      trackingURL?: boolean;
+      paymentMethod?: string;
+      hashId?: string;
+      shipmentMethod?: string;
+      evidenceURL?: string;
+      detail?: string;
+      failType?: string;
+    } = {
+      ...(query.status ? { status: query.status } : {}),
+      ...(query.isDelivered ? { isDelivered: query.isDelivered } : {}),
+      ...(query.trackingURL ? { trackingURL: query.trackingURL } : {}),
+      ...(query.paymentMethod ? { paymentMethod: query.paymentMethod } : {}),
+      ...(query.hashId ? { hashId: query.hashId } : {}),
+      ...(query.shipmentMethod ? { shipmentMethod: query.shipmentMethod } : {}),
+      ...(query.evidenceURL ? { evidenceURL: query.evidenceURL } : {}),
+      ...(query.detail ? { detail: query.detail } : {}),
+      ...(query.failType ? { failType: query.failType } : {}),
+    };
+
+    console.log(params);
+    await apiClient.patch(`/transaction/${id}`, params);
+
+    return;
   } catch (error) {
     console.error("Failed to get transaction count", error);
     return Error("Failed to get transaction count");
