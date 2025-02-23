@@ -2,12 +2,13 @@ import { DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
 const s3 = new S3Client({
-  endpoint: undefined,
+  endpoint: process.env.AWS_ENDPOINT,
   region: process.env.AWS_REGION ?? "us-east-1",
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
   },
+  forcePathStyle: !!process.env.AWS_ENDPOINT,
 });
 
 export const uploadToBucket = async (folder: string, file: File) => {

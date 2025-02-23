@@ -6,6 +6,8 @@ import { PaymentMethod, PrismaClient, ShipmentMethod, TransactionFailType, Trans
 import { hash } from "bcrypt";
 import fs from "fs";
 import { basename } from "path";
+import { z } from "zod";
+
 import booksData from "./books.json" with { type: "json" };
 import postsData from "./posts.json" with { type: "json" };
 import sellerProfilesData from "./sellerProfiles.json" with { type: "json" };
@@ -13,10 +15,10 @@ import transactionsData from "./transactions.json" with { type: "json" };
 import transactionsFailData from "./transactionsFail.json" with { type: "json" };
 import usersData from "./users.json" with { type: "json" };
 
-import { z } from "zod";
 const prisma = new PrismaClient();
 
 const awsEnvSchema = z.object({
+  AWS_ENDPOINT: z.string().optional(),
   AWS_ACCESS_KEY_ID: z.string(),
   AWS_SECRET_ACCESS_KEY: z.string(),
   AWS_REGION: z.string(),
@@ -26,12 +28,13 @@ const awsEnvSchema = z.object({
 const awsEnv = awsEnvSchema.parse(process.env);
 
 const s3 = new S3Client({
-  endpoint: undefined,
+  endpoint: awsEnv.AWS_ENDPOINT,
   region: awsEnv.AWS_REGION,
   credentials: {
     accessKeyId: awsEnv.AWS_ACCESS_KEY_ID,
     secretAccessKey: awsEnv.AWS_SECRET_ACCESS_KEY,
   },
+  forcePathStyle: !!awsEnv.AWS_ENDPOINT,
 });
 
 /**
