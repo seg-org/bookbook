@@ -9,8 +9,14 @@ on:
 
 jobs:
   test:
+    name: E2E Tests
     timeout-minutes: 15
     runs-on: ubuntu-latest
+
+    env:
+      NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLIC_KEY }}
+      STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
