@@ -45,8 +45,11 @@ export const getUrl = (folder: string, key: string) => {
   // });
 
   // return signedUrl;
-  // TODO Handle custom endpoint
-  return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${folder}/${key}`;
+  const endpointUrl = process.env.AWS_ENDPOINT
+    ? `${process.env.AWS_ENDPOINT}/${process.env.AWS_BUCKET_NAME}`
+    : `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com`;
+
+  return `${endpointUrl}/${folder}/${key}`;
 };
 
 export const deleteObject = async (folder: string, key: string): Promise<boolean> => {
