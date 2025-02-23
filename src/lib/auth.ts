@@ -4,12 +4,14 @@ import { compare } from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { redirect } from "next/navigation";
 
 export type SessionUser = {
   id: string;
   name?: string | null;
   email?: string | null;
   image?: string | null;
+  phoneNumber?: string | null;
   isAdmin: boolean;
 };
 
@@ -43,13 +45,13 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        // TODO : Add check email/phone verification
-        // if (!user.emailVerified) {
-        //   throw new Error("Please verify your email first");
-        // }
+        if (!user.emailVerified) {
+          redirect("/verify/email");
+        }
 
+        // TODO : Use phone verify with Twilio
         // if (!user.phoneVerified) {
-        //   throw new Error("Please verify your phone first");
+        //   redirect("/verify/phone");
         // }
 
         const isValid = await compare(credentials.password, user.password);
@@ -61,6 +63,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: user.id,
           email: user.email,
+          phoneNumber: user.phoneNumber,
           name: `${user.firstName} ${user.lastName}`,
           isAdmin: user.isAdmin,
         };
@@ -73,6 +76,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
+        session.user.phoneNumber = token.phoneNumber;
         session.user.isAdmin = token.isAdmin;
       }
       return session;
@@ -80,6 +84,10 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.phoneNumber = user.phoneNumber;
+        token.isAdmin = user.isAdmin;
       }
       return token;
     },

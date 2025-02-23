@@ -10,7 +10,7 @@ export function PhoneVerification() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -18,10 +18,10 @@ export function PhoneVerification() {
 
     const fetchSession = async () => {
       const session = await getSession();
-      if (session?.user?.email) {
-        setPhone(session.user.email);
+      if (session?.user?.phoneNumber) {
+        setPhoneNumber(session.user.phoneNumber);
       } else {
-        setError("ไม่พบอีเมล กรุณาเข้าสู่ระบบอีกครั้ง");
+        setError("ไม่พบเบอร์โทรศัพท์ กรุณาเข้าสู่ระบบอีกครั้ง");
       }
     };
 
@@ -29,10 +29,10 @@ export function PhoneVerification() {
   }, []);
 
   useEffect(() => {
-    if (phone) {
+    if (phoneNumber) {
       resendCode();
     }
-  }, [phone]);
+  }, [phoneNumber]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,12 +50,12 @@ export function PhoneVerification() {
       });
 
       if (!response.ok) {
-        throw new Error("Verification failed");
+        throw new Error("การยืนยันล้มเหลว");
       }
 
       router.push("/pdpa-consent");
     } catch (error) {
-      setError("Invalid verification code : " + { error });
+      setError("รหัสยืนยันไม่ถูกต้อง : " + { error });
     } finally {
       setIsLoading(false);
     }
@@ -66,14 +66,14 @@ export function PhoneVerification() {
       const response = await fetch("/api/auth/resend/phone", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phoneNumber }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to resend code");
+        throw new Error("ไม่สามารถส่งรหัสใหม่ได้");
       }
     } catch (error) {
-      setError("Failed to resend verification code : " + { error });
+      setError("ไม่สามารถส่งรหัสใหม่ได้ : " + { error });
     }
   };
 
@@ -83,7 +83,11 @@ export function PhoneVerification() {
 
   return (
     <div className="mx-auto max-w-md space-y-4">
-      <p className="text-center text-gray-600">เราส่งรหัส OTP ไปที่เบอร์โทรศัพท์ของคุณ</p>
+      {phoneNumber ? (
+        <p className="text-center text-gray-600">เราส่ง OTP ยืนยันให้เบอร์ {phoneNumber}</p>
+      ) : (
+        <p className="text-center text-gray-600">ไม่พบเบอร์โทรศัพท์ กรุณาเข้าสู่ระบบอีกครั้ง</p>
+      )}
       <form onSubmit={onSubmit} className="space-y-4">
         <Input name="code" type="text" placeholder="Enter 6-digit code" disabled={isLoading} />
         {error && <p className="text-sm text-red-500">{error}</p>}
