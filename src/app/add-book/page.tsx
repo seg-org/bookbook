@@ -69,7 +69,7 @@ export default function AddBookPage() {
   const handleFileUpload = async (file: File) => {
     setUploading(true);
     try {
-      const uploadedImage = await putObject(file);
+      const uploadedImage = await putObject(file, "book_images");
       if (uploadedImage instanceof Error) {
         throw new Error("Failed to upload cover image");
       }

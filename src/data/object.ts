@@ -3,11 +3,11 @@ import { AxiosResponse } from "axios";
 import { apiClient } from "./axios";
 import { GetObjectUrlResponse, PutObjectResponse } from "./dto/object.dto";
 
-export const putObject = async (file: File) => {
+export const putObject = async (file: File, folder: string) => {
   try {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("folder", "book_images");
+    formData.append("folder", folder);
 
     const res: AxiosResponse<PutObjectResponse> = await apiClient.put("/objects", formData, {
       headers: { "Content-Type": "multipart/form-data" },
