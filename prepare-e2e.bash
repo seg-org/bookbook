@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cp .env.e2e .env
+
 docker compose -f docker-compose.e2e.yaml up -d
 
 # Wait 5 Seconds
