@@ -10,7 +10,7 @@ const TransactionDetails = ({ id }: { id: string }) => {
   }
 
   if (error) {
-    return <label className="text-5xl font-extrabold text-red-600"> Error Loading Details</label>;
+    return <label className="text-5xl font-extrabold text-red-600">Error Loading Details</label>;
   }
 
   return (

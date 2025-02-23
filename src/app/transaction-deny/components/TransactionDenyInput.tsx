@@ -21,35 +21,36 @@ const TransactionDenyInput = ({ id, setSendingStatus }: Props) => {
     event.target.value = "";
   };
 
-  const validateInput = () => {
-    let inputCorrect = true;
-    if (details === "") {
+  const validateInput = (): boolean => {
+    if (!details) {
       setDetailNotProvided("Please provide some details.");
-      inputCorrect = false;
+      return false;
     }
-    return inputCorrect;
+    return true;
   };
 
   const handleSubmitClick = async () => {
     if (!validateInput()) return;
     setSendingStatus("sending");
+
     try {
-      const uploadFolder = `report_envidence`;
+      const uploadFolder = "report_envidence";
       const uploadFiles = await putObjectsAsZip(files, uploadFolder);
+
       if (uploadFiles instanceof Error) {
         throw new Error("Failed to upload files");
       }
 
-      await updateTransaction({ id: id, status: "HOLD", detail: details, evidenceURL: uploadFiles.key });
-
+      await updateTransaction({ id, status: "HOLD", detail: details, evidenceURL: uploadFiles.key });
       setSendingStatus("success");
     } catch (error) {
+      console.error(error);
       setSendingStatus("error");
     }
   };
 
   const removeFile = (index: number) => {
-    setFiles(files.filter((_, i) => i !== index));
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
   return (
