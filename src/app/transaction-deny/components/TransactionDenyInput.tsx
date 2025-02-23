@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/card";
-import { putObject } from "@/data/object";
+import { Card } from "@/components/ui/card";
+import { putObjectsAsZip } from "@/data/object";
 import { updateTransaction } from "@/data/transaction";
 import { useState } from "react";
 
@@ -34,9 +34,14 @@ const TransactionDenyInput = ({ id, setSendingStatus }: Props) => {
     if (!validateInput()) return;
     setSendingStatus("sending");
     try {
-      const uploadFolder = `report_envidence/${Date.now() + id}`;
-      await Promise.all(files.map(async (file) => putObject(file, uploadFolder)));
-      await updateTransaction({ id: id, status: "HOLD", detail: details, evidenceURL: uploadFolder });
+      const uploadFolder = `report_envidence`;
+      const uploadFiles = await putObjectsAsZip(files, uploadFolder);
+      if (uploadFiles instanceof Error) {
+        throw new Error("Failed to upload files");
+      }
+
+      await updateTransaction({ id: id, status: "HOLD", detail: details, evidenceURL: uploadFiles.key });
+
       setSendingStatus("success");
     } catch (error) {
       setSendingStatus("error");
@@ -76,7 +81,7 @@ const TransactionDenyInput = ({ id, setSendingStatus }: Props) => {
             key={index}
             className="mt-0 flex w-full items-center justify-between rounded-lg border border-gray-200 px-2 py-1 shadow-sm"
           >
-            <CardContent className="flex w-full items-center space-x-4 p-1 pt-2">
+            <div className="flex w-full items-center space-x-4 p-1 pt-2">
               <span className="w-full flex-1 truncate text-sm text-gray-700">{file.name}</span>
               <Button
                 className="flex h-7 w-7 items-center justify-center rounded-lg bg-red-500 text-white hover:bg-red-600"
@@ -84,7 +89,7 @@ const TransactionDenyInput = ({ id, setSendingStatus }: Props) => {
               >
                 -
               </Button>
-            </CardContent>
+            </div>
           </Card>
         ))}
       </div>
