@@ -43,3 +43,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      - name: Shut down Docker Compose services
+        run: docker compose -f docker-compose.e2e.yaml down
+        if: always() # Ensures this runs even if tests fail
