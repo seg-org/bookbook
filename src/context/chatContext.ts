@@ -1,5 +1,6 @@
-import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
+
+import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 
 interface ChatContext {
   currentChatRoom: ChatRoom | undefined;

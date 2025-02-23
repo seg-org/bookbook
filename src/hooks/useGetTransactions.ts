@@ -1,9 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { TransactionFilter, TransactionPaginator } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { getQueryTransaction, getTransaction, getTransactionCount } from "@/data/transaction";
-import { useEffect, useState } from "react";
 
 export const useGetQueryTransaction = (userId: string, filter: TransactionFilter, paginator: TransactionPaginator) => {
   const [loading, setLoading] = useState(true);

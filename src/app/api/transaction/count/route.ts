@@ -1,6 +1,7 @@
-import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+
+import { prisma } from "@/lib/prisma";
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");

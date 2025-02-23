@@ -1,8 +1,10 @@
 "use client";
 
-import { useGetQueryTransaction } from "@/hooks/useGetTransactions";
 import { useSession } from "next-auth/react";
 import { FC, PropsWithChildren, useMemo, useState } from "react";
+
+import { useGetQueryTransaction } from "@/hooks/useGetTransactions";
+
 import { TransactionContext } from "./transactionContext";
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");

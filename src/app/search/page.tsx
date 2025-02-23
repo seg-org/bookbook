@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 
 import SearchByDetail from "@/app/search/components/SearchByDetail";
 
-import { useState } from "react";
 import { PostList } from "./components/PostList";
 import SpecialSearch from "./components/SpecialSearch";
 

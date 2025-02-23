@@ -1,7 +1,9 @@
 "use client";
+import React, { useEffect, useState } from "react";
+
 import { useTransactionContext } from "@/context/transactionContext";
 import { useGetTransactionCount } from "@/hooks/useGetTransactions";
-import React, { useEffect, useState } from "react";
+
 import PageBox from "./PageBox";
 
 const Paginator = () => {

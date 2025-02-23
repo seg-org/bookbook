@@ -1,10 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/card";
-import { Form, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/Input";
-import { useToast } from "@/hooks/useToast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
@@ -12,6 +7,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/card";
+import { Form, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/Input";
+import { useToast } from "@/hooks/useToast";
 
 const sellerSchema = z.object({
   idCardNumber: z.string().min(13, "หมายเลขบัตรประชาชนต้องถูกต้อง"),

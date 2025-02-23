@@ -1,7 +1,8 @@
-import { getMyChatRooms } from "@/data/chat";
-import { ChatRoom } from "@/data/dto/chat.dto";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+
+import { getMyChatRooms } from "@/data/chat";
+import { ChatRoom } from "@/data/dto/chat.dto";
 
 export const useGetMyChatRooms = () => {
   const [loading, setLoading] = useState(true);

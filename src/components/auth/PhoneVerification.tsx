@@ -1,9 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 
 export function PhoneVerification() {
   const [isLoading, setIsLoading] = useState(false);

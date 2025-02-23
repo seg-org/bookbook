@@ -1,4 +1,5 @@
 import { TransactionFailType } from "@prisma/client";
+
 import { Transaction } from "./transaction.dto";
 
 export type TransactionFail = {

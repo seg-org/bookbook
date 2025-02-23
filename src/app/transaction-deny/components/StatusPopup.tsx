@@ -1,6 +1,7 @@
+import { useRouter } from "next/navigation";
+
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Card, CardContent } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
 
 interface Props {
   sendingStatus: string;

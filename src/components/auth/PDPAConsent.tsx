@@ -1,9 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { Checkbox } from "@/components/ui/CheckBox";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { Button } from "@/components/ui/Button";
+import { Checkbox } from "@/components/ui/CheckBox";
 
 export function PDPAConsent() {
   const [isLoading, setIsLoading] = useState(false);

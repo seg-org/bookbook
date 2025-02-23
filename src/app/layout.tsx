@@ -1,10 +1,12 @@
-import Header from "@/components/Header";
-import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { AppProvider } from "@/context/AppContext";
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Kanit } from "next/font/google";
 import { Suspense } from "react";
-import "./globals.css";
+
+import Header from "@/components/Header";
+import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { AppProvider } from "@/context/AppContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

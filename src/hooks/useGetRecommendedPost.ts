@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
+
 import { Post } from "@/data/dto/post.dto";
 import { getRecommendedPosts } from "@/data/post";
-import { useEffect, useState } from "react";
 
 export const useGetRecommendedPost = (userId: string | undefined) => {
   const [loading, setLoading] = useState(true);

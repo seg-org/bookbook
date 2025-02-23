@@ -1,5 +1,7 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
+
 import { CreateChatReportRequest } from "../schemas";
 
 export async function POST(req: Request) {

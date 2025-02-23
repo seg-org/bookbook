@@ -1,10 +1,12 @@
 "use client";
 
-import { useChatContext } from "@/context/chatContext";
 import * as Ably from "ably";
 import { AblyProvider, ChannelProvider } from "ably/react";
-import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+
+import { useChatContext } from "@/context/chatContext";
+
 import Chat from "./components/Chat";
 import StartChat from "./components/Chat/StartChat";
 import { ChatRoomList } from "./components/ChatRoomList";
