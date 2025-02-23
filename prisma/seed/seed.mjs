@@ -71,15 +71,15 @@ const uploadToBucket = async (folder, filePath) => {
 
 const users = await prisma.user.findMany();
 if (users.length === 0) {
-  usersData.forEach(async (user) => {
-    const hashedPassword = await hash(user.password, 10);
-    await prisma.user.create({
-      data: {
-        ...user,
-        password: hashedPassword,
-      },
-    });
+  const userInsertValues = usersData.map(async (user) => ({
+    ...user,
+    password: await hash(user.password, 10),
+  }));
+
+  await prisma.user.createMany({
+    data: await Promise.all(userInsertValues),
   });
+
   console.log("Users seeded successfully");
 }
 
