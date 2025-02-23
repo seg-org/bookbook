@@ -1,22 +1,12 @@
 import { DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
-import { z } from "zod";
-
-const awsEnvSchema = z.object({
-  AWS_ACCESS_KEY_ID: z.string(),
-  AWS_SECRET_ACCESS_KEY: z.string(),
-  AWS_REGION: z.string(),
-  AWS_BUCKET_NAME: z.string(),
-});
-
-const awsEnv = awsEnvSchema.parse(process.env);
 
 const s3 = new S3Client({
   endpoint: undefined,
-  region: awsEnv.AWS_REGION,
+  region: process.env.AWS_REGION ?? "us-east-1",
   credentials: {
-    accessKeyId: awsEnv.AWS_ACCESS_KEY_ID,
-    secretAccessKey: awsEnv.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
   },
 });
 
@@ -26,7 +16,7 @@ export const uploadToBucket = async (folder: string, file: File) => {
     const buffer = Buffer.from(arrayBuffer);
 
     const uploadParams = {
-      Bucket: awsEnv.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_BUCKET_NAME,
       Key: `${folder}/${Date.now()}-${file.name}`,
       Body: buffer,
       ContentType: file.type,
@@ -55,13 +45,13 @@ export const getUrl = (folder: string, key: string) => {
 
   // return signedUrl;
   // TODO Handle custom endpoint
-  return `https://${awsEnv.AWS_BUCKET_NAME}.s3.${awsEnv.AWS_REGION}.amazonaws.com/${folder}/${key}`;
+  return `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${folder}/${key}`;
 };
 
 export const deleteObject = async (folder: string, key: string): Promise<boolean> => {
   try {
     const params = {
-      Bucket: awsEnv.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_BUCKET_NAME,
       Key: `${folder}/${key}`,
     };
 
