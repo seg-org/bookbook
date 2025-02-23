@@ -6,6 +6,7 @@ import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { usePostContext } from "@/context/postContext";
 
 import PostCard from "./PostCard";
+
 export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
