@@ -1,6 +1,7 @@
 "use client";
 
 import { TransactionProvider } from "@/context/TransactionProvider";
+
 import FilterBar from "./components/FilterBar";
 import Paginator from "./components/Paginator";
 import TransactionDetailPopUp from "./components/TransactionDetailPopUp";

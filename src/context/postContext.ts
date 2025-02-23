@@ -1,6 +1,7 @@
+import { createContext, useContext } from "react";
+
 import { Bookmark } from "@/data/dto/bookmark.dto";
 import { Post } from "@/data/dto/post.dto";
-import { createContext, useContext } from "react";
 
 export interface PostWithBookmark extends Post {
   isBookmarked: boolean;
