@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
+
 import { getChatMessagesByRoom } from "@/data/chat";
 import { ChatMessage } from "@/data/dto/chat.dto";
-import { useEffect, useState } from "react";
 
 // TODO: get top n messages/from last n days
 export const useGetChatMessages = (roomId: string) => {

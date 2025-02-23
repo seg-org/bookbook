@@ -1,9 +1,11 @@
 "use client";
 
+import { Fragment } from "react";
+
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
-import { Fragment } from "react";
+
 import LineSeparator from "./LineSperator";
 import TransactionBox from "./TransactionBox";
 

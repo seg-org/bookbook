@@ -1,8 +1,9 @@
+import { TransactionStatus } from "@prisma/client";
+import Image from "next/image";
+
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { useTransactionContext } from "@/context/transactionContext";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
-import { TransactionStatus } from "@prisma/client";
-import Image from "next/image";
 
 const TransactionDetailsPopup = () => {
   const { selectingTransaction, setSelectingTransaction } = useTransactionContext();

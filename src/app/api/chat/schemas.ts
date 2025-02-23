@@ -1,5 +1,6 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+
 import { UserResponse } from "../auth/schemas";
 import { PostResponse } from "../posts/schemas";
 

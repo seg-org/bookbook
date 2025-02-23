@@ -1,8 +1,9 @@
-import { useChatContext } from "@/context/chatContext";
-import { ChatRoom } from "@/data/dto/chat.dto";
 import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+import { useChatContext } from "@/context/chatContext";
+import { ChatRoom } from "@/data/dto/chat.dto";
 
 type ChatRoomCardProps = {
   chatRoom: ChatRoom;

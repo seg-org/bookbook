@@ -2,6 +2,7 @@
 
 import { SessionProvider } from "next-auth/react";
 import { FC, PropsWithChildren } from "react";
+
 import { ChatProvider } from "./ChatProvider";
 import { PostProvider } from "./PostProvider";
 

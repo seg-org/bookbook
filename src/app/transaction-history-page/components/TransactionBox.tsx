@@ -1,10 +1,11 @@
 "use client";
 
+import { TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 
 import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
-import { TransactionStatus } from "@prisma/client";
+
 import BoughtIcon from "../pic/boughtIcon.png";
 import SoldIcon from "../pic/soldIcon.png";
 

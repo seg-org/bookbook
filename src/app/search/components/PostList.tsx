@@ -1,8 +1,10 @@
-import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { usePostContext } from "@/context/postContext";
 import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+
+import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { usePostContext } from "@/context/postContext";
+
 import PostCard from "./PostCard";
 export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
   const { data: session, status } = useSession();
