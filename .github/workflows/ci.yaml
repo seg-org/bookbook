@@ -10,6 +10,7 @@ on:
 
 jobs:
   lint_and_test:
+    name: Lint and Unit Test
     runs-on: ubuntu-latest
 
     env:
@@ -34,9 +35,6 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
-
-      - name: Build everything
-        run: pnpm build
 
       - name: Lint
         run: pnpm lint
