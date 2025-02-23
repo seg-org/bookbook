@@ -1,5 +1,7 @@
 "use client";
 
+import { produce } from "immer";
+import { useSession } from "next-auth/react";
 import { FC, PropsWithChildren, useMemo } from "react";
 
 import { toggleBookmark } from "@/data/bookmark";
@@ -8,8 +10,7 @@ import { Post } from "@/data/dto/post.dto";
 import { useGetAllPosts } from "@/hooks/useGetAllPosts";
 import { useGetMyBookmarks } from "@/hooks/useGetMyBookmarks";
 import { useGetRecommendedPost } from "@/hooks/useGetRecommendedPost";
-import { produce } from "immer";
-import { useSession } from "next-auth/react";
+
 import { PostContext } from "./postContext";
 
 export const PostProvider: FC<PropsWithChildren> = ({ children }) => {

@@ -1,9 +1,11 @@
+import { useChannel } from "ably/react";
+import { useEffect, useRef, useState } from "react";
+
 import { sendMessage } from "@/data/chat";
 import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
 import { SessionUser } from "@/lib/auth";
-import { useChannel } from "ably/react";
-import { useEffect, useRef, useState } from "react";
+
 import { MessageBubble } from "./MessageBubble";
 
 type ChatProps = {

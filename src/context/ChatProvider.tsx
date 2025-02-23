@@ -1,11 +1,12 @@
 "use client";
 
+import { produce } from "immer";
 import { FC, PropsWithChildren, useState } from "react";
 
 import { readMessages } from "@/data/chat";
 import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetMyChatRooms } from "@/hooks/useGetMyChatRooms";
-import { produce } from "immer";
+
 import { ChatContext } from "./chatContext";
 
 export const ChatProvider: FC<PropsWithChildren> = ({ children }) => {

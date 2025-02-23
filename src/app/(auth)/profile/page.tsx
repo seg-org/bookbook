@@ -1,7 +1,9 @@
-import { getUserProfile } from "@/data/user";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../../../lib/auth";
+import { getServerSession } from "next-auth";
+
+import { getUserProfile } from "@/data/user";
+import { authOptions } from "@/lib/auth";
+
 import { ProfileForm } from "./ProfileForm";
 
 export default async function ProfilePage() {
