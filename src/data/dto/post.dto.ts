@@ -10,3 +10,10 @@ export type Post = {
   book: Book;
   sellerId: string;
 };
+
+export type GetPostsResponse = {
+  posts: Post[];
+  total: number;
+  totalPages: number;
+  page: number;
+};

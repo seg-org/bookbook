@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { bookImageFolderName } from "@/constants/s3FolderName";
 import { getObjectUrl, putObject } from "@/data/object";
 
 const bookSchema = z.object({
@@ -69,7 +70,7 @@ export default function AddBookPage() {
   const handleFileUpload = async (file: File) => {
     setUploading(true);
     try {
-      const uploadedImage = await putObject(file);
+      const uploadedImage = await putObject(file, bookImageFolderName);
       if (uploadedImage instanceof Error) {
         throw new Error("Failed to upload cover image");
       }

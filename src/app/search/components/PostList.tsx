@@ -7,7 +7,7 @@ import { usePostContext } from "@/context/postContext";
 
 import PostCard from "./PostCard";
 
-export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
+export const PostList = () => {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
 
@@ -15,30 +15,26 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
   const [popAsc, setPopAsc] = useState(1);
   const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
 
-  const { posts, recommendedPosts, loading, error } = usePostContext();
+  const { posts, recommendedPosts, loading, error, setPostsFilters } = usePostContext();
 
   const filteredPosts = useMemo(() => {
-    let filteredPosts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
-    filteredPosts = filteredPosts.filter((post) => post.sellerId !== session?.user.id);
+    let filteredPosts = posts.filter((post) => post.sellerId !== session?.user.id);
     if (isBookmarkOnly) {
       filteredPosts = filteredPosts.filter((post) => post.isBookmarked);
     }
 
     return filteredPosts;
-  }, [posts, inputSearchValue, session?.user.id, isBookmarkOnly]);
-
-  filteredPosts.sort(function (a, b) {
-    return priceAsc * (a.price - b.price);
-  });
+  }, [posts, session?.user.id, isBookmarkOnly]);
 
   const filteredRecommendedPosts = useMemo(() => {
-    let filteredRecommendedPosts = recommendedPosts.filter((post) =>
-      post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase())
-    );
-    filteredRecommendedPosts = filteredRecommendedPosts.filter((post) => post.sellerId !== session?.user.id);
-
+    const filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);
     return filteredRecommendedPosts;
-  }, [recommendedPosts, inputSearchValue, session?.user.id]);
+  }, [recommendedPosts, session?.user.id]);
+
+  const handleSortPrice = () => {
+    setPostsFilters((prev) => ({ ...prev, sortPrice: priceAsc === 1 ? "asc" : "desc" }));
+    setPriceAsc(-1 * priceAsc);
+  };
 
   if (loading) {
     return <LoadingAnimation />;
@@ -60,10 +56,7 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
       <div className="item-center flex flex-col pt-8">
         <div className="flex flex-row items-center gap-5 self-start">
           <div className="ml-3.5 mr-auto mt-1 text-lg">เรียงโดย</div>
-          <button
-            onClick={() => setPriceAsc(-1 * priceAsc)}
-            className="rounded-lg border border-gray-300 bg-white p-2 text-lg"
-          >
+          <button onClick={handleSortPrice} className="rounded-lg border border-gray-300 bg-white p-2 text-lg">
             ราคา <span className="ml-2">{priceAsc == 1 ? "▲" : "▼"}</span>
           </button>
           <button
