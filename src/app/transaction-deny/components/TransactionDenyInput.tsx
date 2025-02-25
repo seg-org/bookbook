@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import { putObjectsAsZip } from "@/data/object";
 import { updateTransaction } from "@/data/transaction";
 
+import { reportEvidenceFolderName } from "@/constants/s3FolderName";
+
 interface Props {
   id: string;
   setSendingStatus: (val: string) => void;
@@ -35,7 +37,7 @@ const TransactionDenyInput = ({ id, setSendingStatus }: Props) => {
     setSendingStatus("sending");
 
     try {
-      const uploadFolder = "report_envidence";
+      const uploadFolder = reportEvidenceFolderName;
       const uploadFiles = await putObjectsAsZip(files, uploadFolder);
 
       if (uploadFiles instanceof Error) {
