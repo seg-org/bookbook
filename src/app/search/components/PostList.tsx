@@ -47,6 +47,14 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
     return <div>Failed to get posts</div>;
   }
 
+  if (filteredPosts.length === 0 && filteredRecommendedPosts.length === 0) {
+    return (
+      <div data-test-id="no-posts-found" className="mt-10">
+        ไม่พบโพสต์ตามที่ระบุไว้ฮะ
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="item-center flex flex-col pt-8">

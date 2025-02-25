@@ -1,7 +1,7 @@
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
@@ -50,6 +50,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
   return (
     <>
       <div
+        data-test-id="post-card"
         className={clsx(
           "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
           isRecommended && "border-4 border-amber-300"
