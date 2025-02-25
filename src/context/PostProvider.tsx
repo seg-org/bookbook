@@ -2,7 +2,7 @@
 
 import { produce } from "immer";
 import { useSession } from "next-auth/react";
-import { FC, PropsWithChildren, useMemo } from "react";
+import { FC, PropsWithChildren, useMemo, useState } from "react";
 
 import { toggleBookmark } from "@/data/bookmark";
 import { Bookmark } from "@/data/dto/bookmark.dto";
@@ -11,12 +11,14 @@ import { useGetAllPosts } from "@/hooks/useGetAllPosts";
 import { useGetMyBookmarks } from "@/hooks/useGetMyBookmarks";
 import { useGetRecommendedPost } from "@/hooks/useGetRecommendedPost";
 
+import { GetPostsFilters } from "@/data/post";
 import { PostContext } from "./postContext";
 
 export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
   const { data: session } = useSession();
+  const [postsFilters, setPostsFilters] = useState<GetPostsFilters>({ page: 1, limit: 10, sortPrice: "asc" });
 
-  const { posts, loading: loadingAll, error: errorAll } = useGetAllPosts();
+  const { posts, pagination, loading: loadingAll, error: errorAll } = useGetAllPosts(postsFilters);
   const {
     posts: recommendedPosts,
     loading: loadingRecommended,
@@ -51,11 +53,13 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
     <PostContext.Provider
       value={{
         posts: postsWithBookmarks,
+        pagination,
         recommendedPosts: recommendedPostsWithBookmarks,
         bookmarks,
         loading,
         error,
         changeBookmark,
+        setPostsFilters,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 
 import { Prisma } from "@prisma/client";
 import { getUrl } from "../objects/s3";
-import { CreatePostRequest, GetPostsSchema, PostResponse, PostsResponsePaginated } from "./schemas";
+import { CreatePostRequest, GetPostsRequest, PostResponse, PostsResponsePaginated } from "./schemas";
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const rawQueryParams = Object.fromEntries(url.searchParams.entries());
-    const validatedParams = GetPostsSchema.safeParse(rawQueryParams);
+    const validatedParams = GetPostsRequest.safeParse(rawQueryParams);
     if (!validatedParams.success) {
       return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
     }

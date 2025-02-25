@@ -5,7 +5,7 @@ import { BookResponse } from "../books/schemas";
 
 extendZodWithOpenApi(z);
 
-export const GetPostsSchema = z.object({
+export const GetPostsRequest = z.object({
   title: z.string().optional(),
   author: z.string().optional(),
   genre: z.string().optional(),
