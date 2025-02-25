@@ -195,7 +195,7 @@ if (transactionsFail.length === 0) {
         (entry.failType == "REJECT" && TransactionFailType.REJECT) ||
         (entry.failType == "TERMINATION" && TransactionFailType.TERMINATION) ||
         (entry.failType == "OTHER" && TransactionFailType.OTHER) ||
-        TransactionFailType.OTHER,
+        TransactionFailType.UNDEFINED,
     })),
   });
   console.log("TransctionFail seeded successful");
