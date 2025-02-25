@@ -1,7 +1,9 @@
 "use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import StatusPopup from "../components/StatusPopup";
 import TransactionDenyInput from "../components/TransactionDenyInput";
 import TransactionDetails from "../components/TransactionDetails";

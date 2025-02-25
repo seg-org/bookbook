@@ -1,6 +1,7 @@
+import Image from "next/image";
+
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
-import Image from "next/image";
 
 const TransactionDetails = ({ id }: { id: string }) => {
   const { transaction, loading, error } = useGetTransaction(id);
