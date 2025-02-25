@@ -7,7 +7,7 @@ import { usePostContext } from "@/context/postContext";
 
 import PostCard from "./PostCard";
 
-export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => {
+export const PostList = () => {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
 
@@ -18,27 +18,22 @@ export const PostList = ({ inputSearchValue }: { inputSearchValue: string }) => 
   const { posts, recommendedPosts, loading, error } = usePostContext();
 
   const filteredPosts = useMemo(() => {
-    let filteredPosts = posts.filter((post) => post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase()));
-    filteredPosts = filteredPosts.filter((post) => post.sellerId !== session?.user.id);
+    let filteredPosts = posts.filter((post) => post.sellerId !== session?.user.id);
     if (isBookmarkOnly) {
       filteredPosts = filteredPosts.filter((post) => post.isBookmarked);
     }
 
     return filteredPosts;
-  }, [posts, inputSearchValue, session?.user.id, isBookmarkOnly]);
+  }, [posts, session?.user.id, isBookmarkOnly]);
 
   filteredPosts.sort(function (a, b) {
     return priceAsc * (a.price - b.price);
   });
 
   const filteredRecommendedPosts = useMemo(() => {
-    let filteredRecommendedPosts = recommendedPosts.filter((post) =>
-      post.book.title.toLowerCase().includes(inputSearchValue.toLowerCase())
-    );
-    filteredRecommendedPosts = filteredRecommendedPosts.filter((post) => post.sellerId !== session?.user.id);
-
+    let filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);
     return filteredRecommendedPosts;
-  }, [recommendedPosts, inputSearchValue, session?.user.id]);
+  }, [recommendedPosts, session?.user.id]);
 
   if (loading) {
     return <LoadingAnimation />;

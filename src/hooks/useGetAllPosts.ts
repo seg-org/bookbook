@@ -26,7 +26,7 @@ export const useGetAllPosts = (params: GetPostsFilters) => {
       setPagination({ ...res });
       setLoading(false);
     })();
-  }, []);
+  }, [params]);
 
   return { posts, pagination, loading, error };
 };

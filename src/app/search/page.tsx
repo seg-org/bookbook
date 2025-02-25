@@ -1,16 +1,22 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SearchByDetail from "@/app/search/components/SearchByDetail";
 
+import { usePostContext } from "@/context/postContext";
 import { PostList } from "./components/PostList";
 import SpecialSearch from "./components/SpecialSearch";
 
 function SearchPage() {
   const [detailSearch, setDetailSearch] = useState(false);
   const [specialSearch, setSpecialSearch] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [title, setTitle] = useState("");
+
+  const { setPostsFilters } = usePostContext();
+  useEffect(() => {
+    setPostsFilters((prev) => ({ ...prev, title }));
+  }, [title]);
 
   return (
     <>
@@ -27,8 +33,8 @@ function SearchPage() {
                   className="flex-1 rounded-md border border-gray-300 p-1"
                   type="text"
                   placeholder="ชื่อหนังสือ"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
                 <button className="ml-1.5 cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white">
                   ค้นหาข้อมูล
@@ -58,7 +64,7 @@ function SearchPage() {
               {!detailSearch && specialSearch && <SpecialSearch />}
             </div>
           </div>
-          <PostList inputSearchValue={inputValue} />
+          <PostList />
         </div>
       </div>
     </>
