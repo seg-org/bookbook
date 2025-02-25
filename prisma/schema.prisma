@@ -77,9 +77,10 @@ model Book {
   publisher     String
   coverImageKey String    @map("cover_image_key")
   posts         Post[]
-  bookGenres    Genre[]
-  bookTags      BookTag[]
+  bookGenres    GenreType[]
+  bookTags      BookTagType[]
   // TODO verifiedBy Admin
+  // Also get rid of genre, already have GenreType as enum
 
   @@map("books")
 }
@@ -97,8 +98,8 @@ model Post {
   transactions       Transaction[]
   ChatRoom           ChatRoom[]
   Bookmark           Bookmark[]
-  SpecialDescription SpecialDescription[]
-  Damage             Damage[]
+  SpecialDescription SpecialDescriptionType[]
+  Damage             String[]
 
   @@map("posts")
 }
@@ -211,14 +212,14 @@ enum ShipmentMethod {
   @@map("shipment_method_type")
 }
 
-model SpecialDescription {
-  postId      String
-  specialType SpecialDescriptionType
-  post        Post                   @relation(fields: [postId], references: [id])
+// model SpecialDescription {
+//   postId      String
+//   specialType SpecialDescriptionType
+//   post        Post                   @relation(fields: [postId], references: [id])
 
-  @@id([postId, specialType])
-  @@map("special_descriptions")
-}
+//   @@id([postId, specialType])
+//   @@map("special_descriptions")
+// }
 
 enum SpecialDescriptionType {
   AUTHOR_SIGNATURE            @map("author_signature")
@@ -253,23 +254,23 @@ enum SpecialDescriptionType {
   BILINGUAL_EDITION           @map("bilingual_edition")
 }
 
-model Damage {
-  postId           String
-  damagePictureURL String @map("damage_picture_url")
-  post             Post   @relation(fields: [postId], references: [id])
+// model Damage {
+//   postId           String
+//   damagePictureURL String @map("damage_picture_url")
+//   post             Post   @relation(fields: [postId], references: [id])
 
-  @@id([postId, damagePictureURL])
-  @@map("damages")
-}
+//   @@id([postId, damagePictureURL])
+//   @@map("damages")
+// }
 
-model Genre {
-  bookId    String
-  genreType GenreType
-  book      Book      @relation(fields: [bookId], references: [id])
+// model Genre {
+//   bookId    String
+//   genreType GenreType
+//   book      Book      @relation(fields: [bookId], references: [id])
 
-  @@id([bookId, genreType])
-  @@map("book_genres")
-}
+//   @@id([bookId, genreType])
+//   @@map("book_genres")
+// }
 
 enum GenreType {
   FICTION               @map("fiction")
@@ -299,14 +300,14 @@ enum GenreType {
   RELIGIOUS_SPIRITUAL   @map("religious_spiritual")
 }
 
-model BookTag {
-  bookId  String
-  tagType BookTagType
-  book    Book        @relation(fields: [bookId], references: [id])
+// model BookTag {
+//   bookId  String
+//   tagType BookTagType
+//   book    Book        @relation(fields: [bookId], references: [id])
 
-  @@id([bookId, tagType])
-  @@map("book_tags")
-}
+//   @@id([bookId, tagType])
+//   @@map("book_tags")
+// }
 
 enum BookTagType {
   BESTSELLER           @map("bestseller")

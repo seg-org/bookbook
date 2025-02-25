@@ -10,7 +10,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    const newBook = await prisma.book.create({ data: parsedData.data });
+    const data = {
+      ...parsedData.data,
+      bookGenres: parsedData.data.bookGenres ?? [],
+      bookTags: parsedData.data.bookTags ?? [],
+    };
+
+    const newBook = await prisma.book.create({ data });
     const newBookWithImageUrl = {
       ...newBook,
       coverImageUrl: getUrl("book_images", newBook.coverImageKey),
