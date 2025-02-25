@@ -1,7 +1,7 @@
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
@@ -59,7 +59,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
         <div className="m-2.5 flex flex-row justify-between text-lg">
           <h3>{post.title}</h3>
           <div className="flex items-center space-x-4">
-            <span>{post.price} ฿</span>
+            <span data-test-id="post-price">{post.price} ฿</span>
             {isAuthenticated && <Bookmark postId={post.id} />}
           </div>
         </div>
