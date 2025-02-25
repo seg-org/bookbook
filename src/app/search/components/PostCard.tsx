@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";

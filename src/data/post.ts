@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-
 import { z } from "zod";
+
 import { GetPostsRequest } from "../app/api/posts/schemas";
 import { apiClient } from "./axios";
 import { GetPostsResponse, Post } from "./dto/post.dto";

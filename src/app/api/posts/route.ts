@@ -1,9 +1,9 @@
+import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 
-import { Prisma } from "@prisma/client";
 import { getUrl } from "../objects/s3";
 import { CreatePostRequest, GetPostsRequest, PostResponse, PostsResponsePaginated } from "./schemas";
 

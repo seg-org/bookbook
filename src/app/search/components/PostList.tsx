@@ -26,12 +26,8 @@ export const PostList = () => {
     return filteredPosts;
   }, [posts, session?.user.id, isBookmarkOnly]);
 
-  // filteredPosts.sort(function (a, b) {
-  //   return priceAsc * (a.price - b.price);
-  // });
-
   const filteredRecommendedPosts = useMemo(() => {
-    let filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);
+    const filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);
     return filteredRecommendedPosts;
   }, [recommendedPosts, session?.user.id]);
 

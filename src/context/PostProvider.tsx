@@ -7,11 +7,11 @@ import { FC, PropsWithChildren, useMemo, useState } from "react";
 import { toggleBookmark } from "@/data/bookmark";
 import { Bookmark } from "@/data/dto/bookmark.dto";
 import { Post } from "@/data/dto/post.dto";
+import { GetPostsFilters } from "@/data/post";
 import { useGetAllPosts } from "@/hooks/useGetAllPosts";
 import { useGetMyBookmarks } from "@/hooks/useGetMyBookmarks";
 import { useGetRecommendedPost } from "@/hooks/useGetRecommendedPost";
 
-import { GetPostsFilters } from "@/data/post";
 import { PostContext } from "./postContext";
 
 export const PostProvider: FC<PropsWithChildren> = ({ children }) => {

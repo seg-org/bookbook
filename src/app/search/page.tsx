@@ -3,8 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import SearchByDetail from "@/app/search/components/SearchByDetail";
-
 import { usePostContext } from "@/context/postContext";
+
 import { Pagination } from "./components/Pagination";
 import { PostList } from "./components/PostList";
 import SpecialSearch from "./components/SpecialSearch";

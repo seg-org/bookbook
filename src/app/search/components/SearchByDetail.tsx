@@ -1,5 +1,6 @@
-import { usePostContext } from "@/context/postContext";
 import { useEffect, useState } from "react";
+
+import { usePostContext } from "@/context/postContext";
 
 function SearchByDetail() {
   const [author, setAuthor] = useState<string>("");
