@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "cucumber": "cucumber-js ./tests/features --format html:./reports/cucumber-report.html --format json:./reports/cucumber-report.json"
   },
   "prisma": {
     "seed": "node prisma/seed/seed.mjs"
