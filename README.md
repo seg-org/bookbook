@@ -50,3 +50,5 @@ docker exec e2e_s3 mc anonymous set public e2e/bookbook
 Repeat the steps to run E2E tests again.
 
 You can also use `prepare-e2e.bash` which is step 1 to 4, note that it will delete `.env` file so make sure you save that in other name.
+
+ts-node ./node_modules/@cucumber/cucumber/bin/cucumber-js ./tests/features/**/\*.feature --require ./tests/features/**/\*.ts

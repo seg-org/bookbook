@@ -19,7 +19,6 @@
     "@auth/prisma-adapter": "^2.7.4",
     "@aws-sdk/client-s3": "^3.750.0",
     "@aws-sdk/lib-storage": "^3.750.0",
-    "@cucumber/cucumber": "^11.2.0",
     "@hookform/resolvers": "^3.10.0",
     "@prisma/client": "^6.4.1",
     "@stripe/react-stripe-js": "^3.1.1",
@@ -49,6 +48,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
     "@eslint/eslintrc": "^3.3.0",
     "@playwright/test": "^1.50.1",
     "@types/bcrypt": "^5.0.2",
@@ -66,6 +66,7 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "^6.4.1",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "packageManager": "pnpm@10.4.1",
