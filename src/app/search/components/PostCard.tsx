@@ -1,7 +1,7 @@
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
@@ -100,7 +100,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
             </div>
           </Button>
-          <Button onClick={() => handleChatWithSeller(post.id)}>
+          <Button onClick={() => handleChatWithSeller(post.id)} data-test-id="chat-with-seller">
             <div className="flex items-center justify-center gap-x-2">
               <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
             </div>

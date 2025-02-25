@@ -96,10 +96,12 @@ function Chat({ chatRoom, user }: ChatProps) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
+          data-test-id="chat-input"
         />
         <button
           className="ml-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           onClick={handleSendMessage}
+          data-test-id="chat-send-message"
         >
           ส่ง
         </button>
