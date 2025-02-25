@@ -4,10 +4,11 @@ import { chromium } from "@playwright/test";
 let browser;
 let page;
 
-BeforeAll(async function () {
+BeforeAll({ timeout: 10000 }, async function () {
   browser = await chromium.launch({ headless: Boolean(process.env.IS_TEST_HEADLESS) });
   page = await browser.newPage();
   await page.goto("http://localhost:3000/login");
+  await page.waitForTimeout(2000);
   await page.getByRole("textbox", { name: "Email" }).fill("Alice@gmail.com");
   await page.getByRole("textbox", { name: "Password" }).fill("V74BPPB&");
   await page.getByRole("button", { name: "Login" }).click();
