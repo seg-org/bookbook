@@ -5,6 +5,19 @@ import { BookResponse } from "../books/schemas";
 
 extendZodWithOpenApi(z);
 
+export const GetPostsSchema = z.object({
+  title: z.string().optional(),
+  author: z.string().optional(),
+  genre: z.string().optional(),
+  description: z.string().optional(),
+  isbn: z.string().optional(),
+  pages: z.preprocess((val) => (val ? Number(val) : undefined), z.number().optional()),
+  publisher: z.string().optional(),
+  page: z.preprocess((val) => (val ? Number(val) : 1), z.number().min(1).default(1)),
+  limit: z.preprocess((val) => (val ? Number(val) : 10), z.number().min(1).max(30).default(30)),
+  sortPrice: z.enum(["asc", "desc"]).default("asc"),
+});
+
 export const CreatePostRequest = z.object({
   title: z.string().openapi({ example: "Selling old copy of The Hobbit" }),
   content: z.string().openapi({ example: "Selling my old copy of The Hobbit. It's in good condition." }),
@@ -26,6 +39,13 @@ export const PostResponse = z.object({
 });
 
 export const PostsResponse = z.array(PostResponse);
+
+export const PostsResponsePaginated = z.object({
+  posts: PostsResponse,
+  total: z.number(),
+  totalPages: z.number(),
+  page: z.number(),
+});
 
 export const UpdatePostRequest = z.object({
   title: z.string().optional().openapi({ example: "Selling old copy of The Hobbit" }),
