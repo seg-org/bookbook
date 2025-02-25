@@ -1,8 +1,17 @@
-import { Given, Then, When } from "@cucumber/cucumber";
+import { AfterAll, BeforeAll, Given, Then, When } from "@cucumber/cucumber";
 import { chromium } from "@playwright/test";
 
-const browser = await chromium.launch({ headless: false });
-const page = await browser.newPage();
+let browser;
+let page;
+
+BeforeAll(async function () {
+  browser = await chromium.launch({ headless: false });
+  page = await browser.newPage();
+});
+
+AfterAll(async function () {
+  await browser.close();
+});
 
 Given("the user is on the search page", async function () {
   await page.goto("http://localhost:3000/search");
@@ -17,20 +26,22 @@ When("they enter a book title that does not exist in the database", async functi
 });
 
 Then("they should see all posts", async function () {
+  await page.waitForResponse((response) => response.url().includes("/api/posts") && response.status() === 200);
+
   const posts = await page.$$('[data-test-id="post-card"]');
   if (posts.length === 0) {
     throw new Error("No posts found");
   }
-  await browser.close();
 });
 
 Then("they should see the posts with that title", async function () {
+  await page.waitForResponse((response) => response.url().includes("/api/posts") && response.status() === 200);
+
   const posts = await page.$$('[data-test-id="post-card"]');
   const titles = await Promise.all(posts.map(async (post) => await post.innerText()));
   if (!titles.some((title) => title.includes("Quotations from Chairman Mao Tse-Tung"))) {
     throw new Error("Posts with the title were not found");
   }
-  await browser.close();
 });
 
 Then("they should see a message indicating that no posts were found", async function () {
@@ -38,5 +49,4 @@ Then("they should see a message indicating that no posts were found", async func
   if (!message) {
     throw new Error("No 'no posts found' message displayed");
   }
-  await browser.close();
 });
