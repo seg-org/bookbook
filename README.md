@@ -28,3 +28,25 @@ Download these tools before you start working on the project.
 6. Run `npx prisma generate` to generate the Prisma client
 7. Run `npx prisma db seed` to seed the database
 8. Run `pnpm dev` to start the application
+
+## Running E2E Tests
+
+Some tests may mutate the database, it's expected to run only once on a freshly seed database.
+
+1. Run `docker compose -f docker-compose.e2e.yaml up -d` to start new database for e2e test.
+2. Run the following command to configure access for minio (S3 compatible storage)
+
+```bash
+docker exec e2e_s3 mc alias set e2e http://localhost:9000 admin password
+docker exec e2e_s3 mc mb e2e/bookbook
+docker exec e2e_s3 mc anonymous set public e2e/bookbook
+```
+
+3. Run `pnpm prisma migrate deploy` to migrate database.
+4. Run `pnpm prisma db seed` to seed the database.
+5. Run `pnpm e2e` to execute the tests.
+6. Run `docker compose -f docker-compose.e2e.yaml down` to stop the database and delete all the data.
+
+Repeat the steps to run E2E tests again.
+
+You can also use `prepare-e2e.bash` which is step 1 to 4, note that it will delete `.env` file so make sure you save that in other name.
