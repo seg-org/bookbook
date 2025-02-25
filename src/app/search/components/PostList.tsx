@@ -15,7 +15,7 @@ export const PostList = () => {
   const [popAsc, setPopAsc] = useState(1);
   const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
 
-  const { posts, recommendedPosts, loading, error } = usePostContext();
+  const { posts, recommendedPosts, loading, error, setPostsFilters } = usePostContext();
 
   const filteredPosts = useMemo(() => {
     let filteredPosts = posts.filter((post) => post.sellerId !== session?.user.id);
@@ -26,14 +26,19 @@ export const PostList = () => {
     return filteredPosts;
   }, [posts, session?.user.id, isBookmarkOnly]);
 
-  filteredPosts.sort(function (a, b) {
-    return priceAsc * (a.price - b.price);
-  });
+  // filteredPosts.sort(function (a, b) {
+  //   return priceAsc * (a.price - b.price);
+  // });
 
   const filteredRecommendedPosts = useMemo(() => {
     let filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);
     return filteredRecommendedPosts;
   }, [recommendedPosts, session?.user.id]);
+
+  const handleSortPrice = () => {
+    setPostsFilters((prev) => ({ ...prev, sortPrice: priceAsc === 1 ? "asc" : "desc" }));
+    setPriceAsc(-1 * priceAsc);
+  };
 
   if (loading) {
     return <LoadingAnimation />;
@@ -47,10 +52,7 @@ export const PostList = () => {
       <div className="item-center flex flex-col pt-8">
         <div className="flex flex-row items-center gap-5 self-start">
           <div className="ml-3.5 mr-auto mt-1 text-lg">เรียงโดย</div>
-          <button
-            onClick={() => setPriceAsc(-1 * priceAsc)}
-            className="rounded-lg border border-gray-300 bg-white p-2 text-lg"
-          >
+          <button onClick={handleSortPrice} className="rounded-lg border border-gray-300 bg-white p-2 text-lg">
             ราคา <span className="ml-2">{priceAsc == 1 ? "▲" : "▼"}</span>
           </button>
           <button
