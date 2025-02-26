@@ -1,54 +1,20 @@
 import { PaymentMethod, ShipmentMethod, TransactionStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../objects/s3";
 
-const createTransactionRequest = z.object({
-  buyerId: z.string(),
-  postId: z.string(),
-
-  amount: z.number().nonnegative(),
-});
-
-const beginningOfTime = new Date("0000-01-01T00:00:00Z");
-const endOfTime = new Date("9999-12-31T23:59:59Z");
-
-const parseToBoolean = (dft: boolean) => {
-  return (val: string | undefined) => (val ? val == "true" : dft);
-};
-
-const parseToPosInt = (dft: number) => {
-  return (val: string | undefined) => (val ? Math.max(parseInt(val), 0) : dft);
-};
-
-const parseToDate = (dft: Date) => {
-  return (val: string | undefined) => (val ? new Date(val) : dft);
-};
-
-const getTransactionRequest = z.object({
-  userId: z.string().optional(),
-  startDate: z
-    .string()
-    .optional()
-    .refine((val) => !val || !isNaN(Date.parse(val)), { message: "Invalid date format" })
-    .transform(parseToDate(beginningOfTime)),
-  endDate: z
-    .string()
-    .optional()
-    .refine((val) => !val || !isNaN(Date.parse(val)), { message: "Invalid date format" })
-    .transform(parseToDate(endOfTime)),
-  asBuyer: z.string().optional().transform(parseToBoolean(true)),
-  asSeller: z.string().optional().transform(parseToBoolean(true)),
-  skip: z.string().optional().transform(parseToPosInt(0)),
-  take: z.string().optional().transform(parseToPosInt(-1)),
-});
+import {
+  CreateTransactionRequest,
+  GetTransactionRequest,
+  TransactionCreateRespone,
+  TransactionsRespone,
+} from "./schemas";
 
 export async function POST(req: NextRequest) {
   try {
-    const parsedData = createTransactionRequest.safeParse(await req.json());
+    const parsedData = CreateTransactionRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
@@ -88,7 +54,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(newTransaction, { status: 201 });
+    return NextResponse.json(TransactionCreateRespone.parse(newTransaction), { status: 201 });
   } catch (error) {
     if (error instanceof Error) console.error("Error creating a transaction", error.stack);
     return NextResponse.json({ error: "Cannot create a transaction" }, { status: 500 });
@@ -99,7 +65,7 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const queryParams = Object.fromEntries(searchParams.entries());
-    const parsedData = getTransactionRequest.safeParse(queryParams);
+    const parsedData = GetTransactionRequest.safeParse(queryParams);
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
@@ -149,7 +115,7 @@ export async function GET(req: NextRequest) {
       })
     );
 
-    return NextResponse.json(transactionsWithURL, { status: 201 });
+    return NextResponse.json(TransactionsRespone.parse(transactionsWithURL), { status: 201 });
   } catch (error) {
     if (error instanceof Error) console.error("Error getting transactions", error.stack);
     return NextResponse.json({ error: "Cannot get a transaction" }, { status: 500 });
