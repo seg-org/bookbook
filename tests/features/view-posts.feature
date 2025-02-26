@@ -18,5 +18,3 @@ Feature: Posts search functionality (US2-4)
     Given the user is on the search page
     When they enter a book title that does not exist in the database
     Then they should see a message indicating that no posts were found
-
-   

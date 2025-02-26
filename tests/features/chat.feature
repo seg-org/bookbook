@@ -9,4 +9,3 @@ Feature: Chat functionality (US3-1)
     Given the buyer is on the chat page
     When they enter a message and click send
     Then they should see the message in the chat room
-   

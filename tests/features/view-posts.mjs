@@ -1,7 +1,11 @@
+// @ts-check
+
 import { AfterAll, BeforeAll, Given, Then, When } from "@cucumber/cucumber";
 import { chromium } from "@playwright/test";
 
+/** @type {import("@playwright/test").Browser} */
 let browser;
+/** @type {import("@playwright/test").Page} */
 let page;
 
 BeforeAll(async function () {
@@ -57,7 +61,7 @@ Then("they should see the posts sorted by price in descending order", { timeout:
   const prices = await Promise.all(
     posts.map(async (post) => {
       const priceElement = await post.$('[data-test-id="post-price"]');
-      const priceText = await priceElement.innerText();
+      const priceText = (await priceElement?.innerText()) ?? "";
       return parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
     })
   );

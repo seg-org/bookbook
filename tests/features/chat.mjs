@@ -1,7 +1,11 @@
+// @ts-check
+
 import { AfterAll, BeforeAll, Given, Then, When } from "@cucumber/cucumber";
 import { chromium } from "@playwright/test";
 
+/** @type {import("@playwright/test").Browser} */
 let browser;
+/** @type {import("@playwright/test").Page} */
 let page;
 
 BeforeAll({ timeout: 10000 }, async function () {
@@ -84,7 +88,7 @@ Then("they should see the message in the chat room", { timeout: 20000 }, async f
     throw new Error("No messages found");
   }
 
-  if (!(await messages[0].textContent()).includes("hi")) {
+  if (!(await messages[0].textContent())?.includes("hi")) {
     throw new Error("Message not found");
   }
 });
