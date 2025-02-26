@@ -16,6 +16,9 @@ jobs:
     env:
       NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLIC_KEY }}
       STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      ABLY_SERVER_API_KEY: ${{ secrets.ABLY_SERVER_API_KEY }}
+      NEXT_PUBLIC_ABLY_CLIENT_API_KEY: ${{ secrets.NEXT_PUBLIC_ABLY_CLIENT_API_KEY }}
+      IS_TEST_HEADLESS: true
 
     steps:
       - name: Checkout
@@ -39,15 +42,23 @@ jobs:
       - name: Prepare Database
         run: ./prepare-e2e.bash
 
-      - name: Run Playwright tests
+      - name: Run e2e and Cucumber tests
         run: pnpm e2e
 
-      - name: Upload Test Result
+      - name: Upload e2e Report
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
           path: playwright-report/
+          retention-days: 30
+
+      - name: Upload Cucumber Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: cucumber-report
+          path: reports/
           retention-days: 30
 
       - name: Shut down Docker Compose services

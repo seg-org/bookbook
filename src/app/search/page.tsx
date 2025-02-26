@@ -32,6 +32,7 @@ function SearchPage() {
               <div className="mb-5 flex flex-row">
                 <input
                   className="flex-1 rounded-md border border-gray-300 p-1"
+                  data-test-id="search-by-book-name"
                   type="text"
                   placeholder="ชื่อหนังสือ"
                   value={title}

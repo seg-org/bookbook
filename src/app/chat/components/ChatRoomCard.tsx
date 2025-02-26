@@ -40,6 +40,7 @@ export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) 
         isActive ? "bg-gray-200" : "bg-gray-50"
       )}
       onClick={() => changeCurrentRoom(chatRoom, userId)}
+      data-test-id="chat-room"
     >
       <div className="flex h-full items-center">
         <Image

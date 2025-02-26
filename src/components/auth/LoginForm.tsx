@@ -46,7 +46,7 @@ export function LoginForm() {
     <div className="mx-auto max-w-md space-y-4">
       <form onSubmit={onSubmit} className="space-y-4">
         <div>
-          <Input name="email" type="email" placeholder="Email" disabled={isLoading} />
+          <Input name="email" type="email" placeholder="Email" disabled={isLoading} data-test-id="login-email-input" />
         </div>
         <div>
           <Input name="password" type="password" placeholder="Password" disabled={isLoading} />
