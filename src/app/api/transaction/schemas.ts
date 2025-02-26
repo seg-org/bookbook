@@ -1,7 +1,7 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
+import { TransactionFailType } from "@prisma/client";
 import { z } from "zod";
 
-import { TransactionFailType } from "@prisma/client";
 import { UserResponse } from "../auth/schemas";
 import { PostResponse } from "../posts/schemas";
 
