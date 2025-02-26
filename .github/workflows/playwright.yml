@@ -43,8 +43,8 @@ jobs:
       - name: Run Playwright tests
         run: pnpm e2e
 
-      # - name: Run Cucumber tests
-      #   run: pnpm cucumber
+      - name: Run Cucumber tests
+        run: pnpm cucumber
 
       - name: Upload e2e Report
         uses: actions/upload-artifact@v4
@@ -54,13 +54,13 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-      # - name: Upload Cucumber Report
-      #   uses: actions/upload-artifact@v4
-      #   if: ${{ !cancelled() }}
-      #   with:
-      #     name: cucumber-report
-      #     path: reports/
-      #     retention-days: 30
+      - name: Upload Cucumber Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: cucumber-report
+          path: reports/
+          retention-days: 30
 
       - name: Shut down Docker Compose services
         run: docker compose -f docker-compose.e2e.yaml down
