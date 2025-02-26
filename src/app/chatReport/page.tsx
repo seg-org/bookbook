@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation"; // Correct import for Next.js 13+
+import { useRouter, useSearchParams } from "next/navigation"; // Correct import for Next.js 13+
 import { useState } from "react";
 
 const ReportSellerPage = () => {
+  const router = useRouter(); // Initialize router for navigation
   const searchParams = useSearchParams();
   const roomId = searchParams.get("roomId"); // Get query params
   const reporterId = searchParams.get("reporterId");
@@ -20,14 +21,24 @@ const ReportSellerPage = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    // e.preventDefault();
-    // console.log(formData);
-    alert("Report submitted successfully!");
-    await fetch("api/chat/report", {
+    e.preventDefault();
+
+    const response = await fetch("api/chat/report", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
+
+    console.log(response.ok);
+
+    if (response.ok) {
+      alert("ขอขอบคุณสำหรับการรายงาน");
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } else {
+      alert("ไม่สามารถรายงานได้ กรุณาลองอีกครั้ง!");
+    }
   };
 
   return (

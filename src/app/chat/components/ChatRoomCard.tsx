@@ -60,7 +60,7 @@ export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) 
           </p>
         </div>
       </div>
-      <div className="justify-end self-end">
+      <div className="justify-end self-center">
         <ThreeDotDropdown roomId={chatRoom.id} reporterId={chatRoom.userIds[0]}></ThreeDotDropdown>
       </div>
     </div>
