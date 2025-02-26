@@ -32,6 +32,7 @@ When("they enter a book title that does not exist in the database", async functi
 Then("they should see all posts", async function () {
   await page.waitForResponse((response) => response.url().includes("/api/posts") && response.status() === 200);
 
+  await page.waitForSelector('[data-test-id="post-card"]');
   const posts = await page.$$('[data-test-id="post-card"]');
   if (posts.length === 0) {
     throw new Error("No posts found");
