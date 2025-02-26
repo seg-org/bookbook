@@ -2878,5 +2878,14 @@
     "published": true,
     "sellerId": "user_5",
     "bookId": "book_2"
+  },
+  {
+    "id": "post_321",
+    "title": "Embrace China",
+    "content": "China China China",
+    "price": 10,
+    "published": true,
+    "sellerId": "user_1",
+    "bookId": "book_11"
   }
 ]
