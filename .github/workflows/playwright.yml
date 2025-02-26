@@ -40,7 +40,16 @@ jobs:
       - name: Prepare Database
         run: ./prepare-e2e.bash
 
-      - name: Run Playwright tests
+      - name: Build Next.js app
+        run: pnpm build
+
+      - name: Start Next.js app in the background
+        run: pnpm start &
+
+      - name: Wait for app to be ready
+        run: npx wait-on http://localhost:3000
+
+      - name: Run e2e tests
         run: pnpm e2e
 
       - name: Run Cucumber tests
