@@ -16,6 +16,8 @@ jobs:
     env:
       NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLIC_KEY }}
       STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      ABLY_SERVER_API_KEY: ${{ secrets.ABLY_SERVER_API_KEY }}
+      NEXT_PUBLIC_ABLY_CLIENT_API_KEY: ${{ secrets.NEXT_PUBLIC_ABLY_CLIENT_API_KEY }}
       IS_TEST_HEADLESS: true
 
     steps:
@@ -40,20 +42,8 @@ jobs:
       - name: Prepare Database
         run: ./prepare-e2e.bash
 
-      - name: Build Next.js app
-        run: pnpm build
-
-      - name: Start Next.js app in the background
-        run: pnpm start &
-
-      - name: Wait for app to be ready
-        run: npx wait-on http://localhost:3000
-
-      - name: Run e2e tests
+      - name: Run e2e and Cucumber tests
         run: pnpm e2e
-
-      - name: Run Cucumber tests
-        run: pnpm cucumber
 
       - name: Upload e2e Report
         uses: actions/upload-artifact@v4
