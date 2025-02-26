@@ -9,6 +9,9 @@ import { basename } from "path";
 import { z } from "zod";
 
 import booksData from "./books.json" with { type: "json" };
+import chatMessagesData from "./chatMessages.json" with { type: "json" };
+import chatReportsData from "./chatReports.json" with { type: "json" };
+import chatRoomsData from "./chatRooms.json" with { type: "json" };
 import postsData from "./posts.json" with { type: "json" };
 import sellerProfilesData from "./sellerProfiles.json" with { type: "json" };
 import transactionsData from "./transactions.json" with { type: "json" };
@@ -155,6 +158,30 @@ if (posts.length === 0) {
     data: postsData,
   });
   console.log("Posts seeded successfully");
+}
+
+const chatRooms = await prisma.chatRoom.findMany();
+if (chatRooms.length === 0) {
+  await prisma.chatRoom.createMany({
+    data: chatRoomsData,
+  });
+  console.log("chatRooms seeded successfully");
+}
+
+const chatMessages = await prisma.chatMessage.findMany();
+if (chatMessages.length === 0) {
+  await prisma.chatMessage.createMany({
+    data: chatMessagesData,
+  });
+  console.log("chatMessages seeded successfully");
+}
+
+const chatReports = await prisma.chatReport.findMany();
+if (chatReports.length === 0) {
+  await prisma.chatReport.createMany({
+    data: chatReportsData,
+  });
+  console.log("chatReports seeded successfully");
 }
 
 const transactions = await prisma.transaction.findMany();

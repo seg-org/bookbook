@@ -1,0 +1,51 @@
+[
+  {
+    "id": "chat_report_1",
+    "reporterId": "user_16",
+    "roomId": "chatroom_2",
+    "reason": "Other (please specify)",
+    "createdAt": "2024-03-30T02:22:16.004Z"
+  },
+  {
+    "id": "chat_report_2",
+    "reporterId": "user_17",
+    "roomId": "chatroom_7",
+    "reason": "Child exploitation or abuse",
+    "createdAt": "2024-05-01T16:16:42.508Z"
+  },
+  {
+    "id": "chat_report_3",
+    "reporterId": "user_5",
+    "roomId": "chatroom_11",
+    "reason": "Unconsented media sharing",
+    "createdAt": "2024-10-10T00:37:35.022Z"
+  },
+  {
+    "id": "chat_report_4",
+    "reporterId": "user_8",
+    "roomId": "chatroom_16",
+    "reason": "Unconsented media sharing",
+    "createdAt": "2024-04-28T02:25:22.411Z"
+  },
+  {
+    "id": "chat_report_5",
+    "reporterId": "user_20",
+    "roomId": "chatroom_19",
+    "reason": "Hate speech or discrimination",
+    "createdAt": "2024-07-28T00:38:40.028Z"
+  },
+  {
+    "id": "chat_report_6",
+    "reporterId": "user_20",
+    "roomId": "chatroom_20",
+    "reason": "Hate speech or discrimination",
+    "createdAt": "2024-09-17T15:11:54.519Z"
+  },
+  {
+    "id": "chat_report_7",
+    "reporterId": "user_22",
+    "roomId": "chatroom_30",
+    "reason": "Misleading or false information",
+    "createdAt": "2023-11-10T09:52:47.602Z"
+  }
+]
