@@ -1,23 +1,44 @@
 "use client";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation"; // Correct import for Next.js 13+
 import { useState } from "react";
 
 const ReportSellerPage = () => {
+  const router = useRouter(); // Initialize router for navigation
+  const searchParams = useSearchParams();
+  const roomId = searchParams.get("roomId"); // Get query params
+  const reporterId = searchParams.get("reporterId");
+
   const [formData, setFormData] = useState({
-    user: "",
+    reporterId: reporterId,
+    roomId: roomId,
     reason: "",
-    details: "",
   });
   // const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+
+    const response = await fetch("api/chat/report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    console.log(response.ok);
+
+    if (response.ok) {
+      alert("ขอขอบคุณสำหรับการรายงาน");
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } else {
+      alert("ไม่สามารถรายงานได้ กรุณาลองอีกครั้ง!");
+    }
   };
 
   return (
@@ -33,33 +54,9 @@ const ReportSellerPage = () => {
 
           <form onSubmit={handleSubmit} className="m-1.5 space-y-4 md:w-[100%]">
             <div>
-              <label className="block font-semibold">ชื่อผู้ใช้:</label>
-              <input
-                type="text"
-                name="seller"
-                onChange={handleChange}
-                required
-                className="w-full rounded-lg border p-2"
-                placeholder="กรอกชื่อผู้ใช้"
-              />
-            </div>
-
-            <div>
               <label className="block font-semibold">เหตุผลในการรายงาน:</label>
-              <input
-                type="text"
-                name="reason"
-                onChange={handleChange}
-                required
-                className="w-full rounded-lg border p-2"
-                placeholder="เช่น ฉ้อโกง, คุกคาม"
-              />
-            </div>
-
-            <div>
-              <label className="block font-semibold">รายละเอียดเพิ่มเติม:</label>
               <textarea
-                name="details"
+                name="reason"
                 onChange={handleChange}
                 required
                 className="w-full rounded-lg border p-2"

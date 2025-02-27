@@ -17,7 +17,7 @@ function SearchByDetail() {
       publisher: publisher.length !== 0 ? publisher : undefined,
       isbn: isbn.length !== 0 ? isbn : undefined,
     }));
-  }, [author, genre, publisher, isbn]);
+  }, [author, genre, publisher, isbn, setPostsFilters]);
 
   return (
     <>

@@ -52,7 +52,7 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
       if (ts.sellerId == userId) newTotalSell += ts.amount;
     });
     return [newTotalBuy, newTotalSell];
-  }, [filter, userId, paginator]);
+  }, [userId, transactions]);
 
   const [selectingTransaction, setSelectingTransaction] = useState("");
 

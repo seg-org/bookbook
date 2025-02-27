@@ -17,7 +17,7 @@ function SearchPage() {
   const { setPostsFilters } = usePostContext();
   useEffect(() => {
     setPostsFilters((prev) => ({ ...prev, title }));
-  }, [title]);
+  }, [title, setPostsFilters]);
 
   return (
     <>
