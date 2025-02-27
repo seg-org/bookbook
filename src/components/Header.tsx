@@ -61,6 +61,7 @@ function Header() {
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="rounded-lg bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+              data-test-id="sign-out"
             >
               ออกจากระบบ
             </button>

@@ -18,6 +18,7 @@ export const MessageBubble = ({ username, message, isMine }: MessageBubbleProps)
             isMine ? "rounded-br-none bg-blue-500 text-white" : "rounded-bl-none bg-gray-300 text-black",
             message.length > 100 && "break-words"
           )}
+          data-test-id="chat-message"
         >
           {message}
         </div>
