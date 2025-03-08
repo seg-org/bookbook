@@ -2,8 +2,8 @@
 
 import * as Ably from "ably";
 import { AblyProvider, ChannelProvider } from "ably/react";
-import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 import { useChatContext } from "@/context/chatContext";
 

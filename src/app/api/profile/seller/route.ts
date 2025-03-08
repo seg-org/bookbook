@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 import * as z from "zod";
 
 import { authOptions } from "@/lib/auth";

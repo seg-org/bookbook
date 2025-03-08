@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write .",
     "postinstall": "prisma generate",
     "e2e": "playwright test",
     "cucumber": "cucumber-js ./tests/features --format html:./reports/cucumber-report.html --format json:./reports/cucumber-report.json"
