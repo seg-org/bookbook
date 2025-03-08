@@ -1,7 +1,7 @@
-import { sendVerificationSMS } from "@/lib/sms";
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
+import { sendVerificationSMS } from "@/lib/sms";
 
 export async function POST(req: Request) {
   try {

@@ -1,8 +1,8 @@
 "use client";
 
-import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -13,6 +13,22 @@ export function PhoneVerification() {
   const router = useRouter();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [mounted, setMounted] = useState(false);
+
+  const resendCode = useCallback(async () => {
+    try {
+      const response = await fetch("/api/auth/resend/phone", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phoneNumber }),
+      });
+
+      if (!response.ok) {
+        throw new Error("ไม่สามารถส่งรหัสใหม่ได้");
+      }
+    } catch (error) {
+      setError("ไม่สามารถส่งรหัสใหม่ได้ : " + { error });
+    }
+  }, [phoneNumber]);
 
   useEffect(() => {
     setMounted(true);
@@ -33,7 +49,7 @@ export function PhoneVerification() {
     if (phoneNumber) {
       resendCode();
     }
-  }, [phoneNumber]);
+  }, [phoneNumber, resendCode]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,22 +75,6 @@ export function PhoneVerification() {
       setError("รหัสยืนยันไม่ถูกต้อง : " + { error });
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const resendCode = async () => {
-    try {
-      const response = await fetch("/api/auth/resend/phone", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber }),
-      });
-
-      if (!response.ok) {
-        throw new Error("ไม่สามารถส่งรหัสใหม่ได้");
-      }
-    } catch (error) {
-      setError("ไม่สามารถส่งรหัสใหม่ได้ : " + { error });
     }
   };
 
