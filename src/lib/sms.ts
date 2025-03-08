@@ -4,13 +4,14 @@ const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_A
 
 export async function sendVerificationSMS(phoneNumber: string, code: string) {
   try {
+    // TODO : Use Twillio (Investigate the free tiers)
     await twilioClient.messages.create({
-      body: `Your verification code is: ${code}`,
+      body: `OTP สำหรับ Book Book ของคุณคือ ${code}`,
       from: process.env.TWILIO_PHONE_NUMBER,
       to: phoneNumber,
     });
   } catch (error) {
     console.error("Failed to send SMS:", error);
-    throw new Error("Failed to send verification code");
+    throw new Error("ส่ง OTP ผิดพลาด");
   }
 }

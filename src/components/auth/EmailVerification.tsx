@@ -1,8 +1,6 @@
-"use client";
-
 import { useRouter } from "next/navigation";
 import { getSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -14,6 +12,27 @@ export function EmailVerification() {
   const [mounted, setMounted] = useState(false);
 
   const router = useRouter();
+
+  const resendVerification = useCallback(async () => {
+    try {
+      if (!email) {
+        throw new Error("ไม่พบอีเมล");
+      }
+
+      const response = await fetch("/api/auth/resend/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "ไม่สามารถส่งอีเมลยืนยันได้");
+      }
+    } catch (error) {
+      setError(`ไม่สามารถส่งอีเมลยืนยันได้: ${error instanceof Error ? error.message : "Unknown error"}`);
+    }
+  }, [email]);
 
   useEffect(() => {
     setMounted(true);
@@ -32,26 +51,9 @@ export function EmailVerification() {
 
   useEffect(() => {
     if (email) {
-      const sendVerificationEmail = async () => {
-        try {
-          const response = await fetch("/api/auth/resend/email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email }),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Failed to send verification email");
-          }
-        } catch (error) {
-          setError(`ไม่สามารถส่งอีเมลยืนยันได้: ${error instanceof Error ? error.message : "Unknown error"}`);
-        }
-      };
-
-      sendVerificationEmail();
+      resendVerification();
     }
-  }, [email]);
+  }, [email, resendVerification]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,27 +84,6 @@ export function EmailVerification() {
       setError(`รหัสยืนยันไม่ถูกต้อง: ${error instanceof Error ? error.message : "Unknown error"}`);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const resendVerification = async () => {
-    try {
-      if (!email) {
-        throw new Error("ไม่พบอีเมล");
-      }
-
-      const response = await fetch("/api/auth/resend/email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "ไม่สามารถส่งอีเมลยืนยันได้");
-      }
-    } catch (error) {
-      setError(`ไม่สามารถส่งอีเมลยืนยันได้: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 

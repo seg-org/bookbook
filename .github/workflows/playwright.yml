@@ -18,6 +18,9 @@ jobs:
       STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
       ABLY_SERVER_API_KEY: ${{ secrets.ABLY_SERVER_API_KEY }}
       NEXT_PUBLIC_ABLY_CLIENT_API_KEY: ${{ secrets.NEXT_PUBLIC_ABLY_CLIENT_API_KEY }}
+      TWILIO_ACCOUNT_SID: $${{ secrets.TWILIO_ACCOUNT_SID }}
+      TWILIO_AUTH_TOKEN: $${{ secrets.TWILIO_AUTH_TOKEN }}
+      TWILIO_PHONE_NUMBER: $${{ secrets.TWILIO_PHONE_NUMBER }}
       IS_TEST_HEADLESS: true
 
     steps:
