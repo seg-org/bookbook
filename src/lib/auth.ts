@@ -1,9 +1,9 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { compare } from "bcrypt";
-import { redirect } from "next/navigation";
 import { NextAuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { redirect } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 
@@ -50,10 +50,9 @@ export const authOptions: NextAuthOptions = {
           redirect("/verify/email");
         }
 
-        // TODO : Use phone verify with Twilio
-        // if (!user.phoneVerified) {
-        //   redirect("/verify/phone");
-        // }
+        if (!user.phoneVerified) {
+          redirect("/verify/phone");
+        }
 
         const isValid = await compare(credentials.password, user.password);
 
