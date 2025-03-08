@@ -1,13 +1,15 @@
-import { Button } from "@/components/ui/Button";
-import { PostWithBookmark } from "@/context/postContext";
-import { createChatRoom } from "@/data/chat";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
+
+import { Button } from "@/components/ui/Button";
+import { PostWithBookmark } from "@/context/postContext";
+import { createChatRoom } from "@/data/chat";
+
 import { Bookmark } from "./Bookmark";
 
 type PostCardProps = {
@@ -48,6 +50,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
   return (
     <>
       <div
+        data-test-id="post-card"
         className={clsx(
           "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
           isRecommended && "border-4 border-amber-300"
@@ -56,7 +59,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
         <div className="m-2.5 flex flex-row justify-between text-lg">
           <h3>{post.title}</h3>
           <div className="flex items-center space-x-4">
-            <span>{post.price} ฿</span>
+            <span data-test-id="post-price">{post.price} ฿</span>
             {isAuthenticated && <Bookmark postId={post.id} />}
           </div>
         </div>
@@ -80,12 +83,12 @@ function PostCard({ post, isRecommended }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                <strong>สำนักพิมพ์ </strong>
-                {cut(post.book.publisher, 40)}
+                <strong>ประเภท </strong>
+                {cut(post.book.genre, 65)}
               </div>
               <div>
-                <strong>รายละเอียด </strong>
-                {cut(post.book.description, 65)}
+                <strong>สำนักพิมพ์ </strong>
+                {cut(post.book.publisher, 40)}
               </div>
             </div>
             {isRecommended && <h3 className="self-end dark:text-white">(RECOMMENDED)</h3>}
@@ -97,7 +100,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
             </div>
           </Button>
-          <Button onClick={() => handleChatWithSeller(post.id)}>
+          <Button onClick={() => handleChatWithSeller(post.id)} data-test-id="chat-with-seller">
             <div className="flex items-center justify-center gap-x-2">
               <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
             </div>

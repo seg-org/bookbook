@@ -1,6 +1,7 @@
-import { usePostContext } from "@/context/postContext";
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+
+import { usePostContext } from "@/context/postContext";
 
 type BookmarkProps = {
   postId: string;

@@ -1,4 +1,5 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
+
 import { BookmarkResponse, BookmarksResponse, CreateBookmarkRequest } from "./schemas";
 
 export const bookmarkRegistry = new OpenAPIRegistry();

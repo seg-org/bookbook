@@ -1,8 +1,9 @@
-import { useChatContext } from "@/context/chatContext";
-import { ChatRoom } from "@/data/dto/chat.dto";
 import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+import { useChatContext } from "@/context/chatContext";
+import { ChatRoom } from "@/data/dto/chat.dto";
 
 type ChatRoomCardProps = {
   chatRoom: ChatRoom;
@@ -39,6 +40,7 @@ export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) 
         isActive ? "bg-gray-200" : "bg-gray-50"
       )}
       onClick={() => changeCurrentRoom(chatRoom, userId)}
+      data-test-id="chat-room"
     >
       <div className="flex h-full items-center">
         <Image

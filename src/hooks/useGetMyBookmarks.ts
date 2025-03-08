@@ -1,7 +1,8 @@
-import { getMyBookmarks } from "@/data/bookmark";
-import { Bookmark } from "@/data/dto/bookmark.dto";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+
+import { getMyBookmarks } from "@/data/bookmark";
+import { Bookmark } from "@/data/dto/bookmark.dto";
 
 export const useGetMyBookmarks = () => {
   const [loading, setLoading] = useState(true);

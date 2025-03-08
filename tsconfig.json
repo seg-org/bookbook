@@ -23,6 +23,13 @@
     },
     "types": ["next-auth"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "prisma/seed/seed.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "prisma/seed/seed.mjs",
+    "tests/features/view-posts.mjs"
+  ],
   "exclude": ["node_modules"]
 }

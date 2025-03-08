@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { uploadToBucket } from "./s3";
 import { PutObjectResponse } from "./schemas";
 
@@ -16,7 +17,7 @@ export async function PUT(req: NextRequest) {
     }
 
     const data = await uploadToBucket(folder, file);
-    const key = data.Key.split("/")[1];
+    const key = data.Key?.split("/")[1] ?? "";
 
     return NextResponse.json(PutObjectResponse.parse({ folder, key }), { status: 200 });
   } catch (error) {

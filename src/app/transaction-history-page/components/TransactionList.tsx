@@ -1,122 +1,125 @@
 "use client";
 
+import { Fragment } from "react";
+
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { useGetTransaction } from "@/hooks/useGetTransactions";
-import { useEffect } from "react";
-import { FilterType } from "./FilterBar";
+import { useTransactionContext } from "@/context/transactionContext";
+import { Transaction } from "@/data/dto/transaction.dto";
+
 import LineSeparator from "./LineSperator";
 import TransactionBox from "./TransactionBox";
 
-interface TransactionListProps {
-  filter: FilterType;
-  userId: string;
-  setTotalBuy: (totalBuy: number) => void;
-  setTotalSell: (totalBuy: number) => void;
+interface CategorizedTransactions {
+  Today: Transaction[];
+  Yesterday: Transaction[];
+  "This Month": Transaction[];
+  "This Year": Transaction[];
+  "Previous Years": Record<number, Transaction[]>;
 }
 
-const TransactionList = ({ filter, userId, setTotalBuy, setTotalSell }: TransactionListProps) => {
-  const { transactions, loading, error } = useGetTransaction(filter, userId);
+const TransactionList = () => {
+  const { userId, transactions, transactionsLoading, transactionsError } = useTransactionContext();
 
-  useEffect(() => {
-    let totalBuy = 0;
-    let totalSell = 0;
-    transactions.map((ts) => {
-      if (ts.buyerId == userId) totalBuy += ts.amount;
-      if (ts.sellerId == userId) totalSell += ts.amount;
-    });
-    setTotalBuy(totalBuy);
-    setTotalSell(totalSell);
-  }, [setTotalBuy, setTotalSell, transactions, userId]);
+  const categorizedTransactions: CategorizedTransactions = {
+    Today: [],
+    Yesterday: [],
+    "This Month": [],
+    "This Year": [],
+    "Previous Years": {},
+  };
 
-  if (loading) {
-    return <LoadingAnimation />;
-  }
-  if (error) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const thisMonth = new Date(today);
+  thisMonth.setMonth(thisMonth.getMonth() - 1);
+  const thisYear = new Date(today.getFullYear(), 0, 1, 0, 0, 0, 0);
+
+  transactions.forEach((ts) => {
+    if (ts.createdAt >= today) {
+      categorizedTransactions.Today.push(ts);
+    } else if (ts.createdAt >= yesterday) {
+      categorizedTransactions.Yesterday.push(ts);
+    } else if (ts.createdAt >= thisMonth) {
+      categorizedTransactions["This Month"].push(ts);
+    } else if (ts.createdAt >= thisYear) {
+      categorizedTransactions["This Year"].push(ts);
+    } else {
+      if (!categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()]) {
+        categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()] = [];
+      }
+      categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()].push(ts);
+    }
+  });
+
+  if (userId === "") {
     return (
-      <div className="v-screen grid h-screen place-items-center text-4xl font-bold text-gray-400">
+      <div
+        key="LoginNeeded"
+        className="grid h-screen flex-1 place-items-center overflow-auto text-4xl font-bold text-gray-400"
+      >
+        Please login to see transactions
+      </div>
+    );
+  }
+  if (transactionsLoading) {
+    return <LoadingAnimation key="loading" />;
+  }
+  if (transactionsError) {
+    return (
+      <div
+        key="Fail"
+        className="grid h-screen flex-1 place-items-center overflow-auto text-4xl font-bold text-gray-400"
+      >
         Failed to get transactions
       </div>
     );
   }
   if (transactions.length == 0) {
     return (
-      <div className="v-screen grid h-screen place-items-center text-4xl font-bold text-gray-400">
+      <div
+        key="NoFound"
+        className="grid h-screen flex-1 place-items-center overflow-auto text-4xl font-bold text-gray-400"
+      >
         No transaction found
       </div>
     );
   }
 
-  const sort_transactions = transactions.sort((a, b) => -(a.createdAt.getTime() - b.createdAt.getTime()));
-
-  const first_date = new Date();
-  first_date.setHours(0, 0, 0, 0);
-  const second_date = new Date(first_date);
-  second_date.setDate(second_date.getDate() - 1);
-  const previous_month = new Date(first_date);
-  previous_month.setMonth(previous_month.getMonth() - 1);
-  const this_year = new Date(first_date.getFullYear(), 0, 1, 0, 0, 0, 0);
-
-  const child_components = [];
-  let it = 0;
-
-  if (it < sort_transactions.length && sort_transactions[it].createdAt >= first_date)
-    child_components.push(<LineSeparator key={"today_line"} text={first_date.toDateString()} />);
-  while (it < sort_transactions.length && sort_transactions[it].createdAt >= first_date) {
-    const ts = sort_transactions[it];
-    child_components.push(
-      <TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"} />
-    );
-    ++it;
-  }
-
-  if (it < sort_transactions.length && sort_transactions[it].createdAt >= second_date)
-    child_components.push(<LineSeparator key={"yesterday_line"} text="Yesterday" />);
-  while (it < sort_transactions.length && sort_transactions[it].createdAt >= second_date) {
-    const ts = sort_transactions[it];
-    child_components.push(
-      <TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"} />
-    );
-    ++it;
-  }
-
-  if (it < sort_transactions.length && sort_transactions[it].createdAt >= previous_month)
-    child_components.push(<LineSeparator key={"previous_month_line"} text="This Month" />);
-  while (it < sort_transactions.length && sort_transactions[it].createdAt >= previous_month) {
-    const ts = sort_transactions[it];
-    child_components.push(
-      <TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"} />
-    );
-    ++it;
-  }
-
-  if (it < sort_transactions.length && sort_transactions[it].createdAt >= this_year)
-    child_components.push(<LineSeparator key={"this_year_line"} text="This Year" />);
-  while (it < sort_transactions.length && sort_transactions[it].createdAt >= this_year) {
-    const ts = sort_transactions[it];
-    child_components.push(
-      <TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"} />
-    );
-    ++it;
-  }
-
-  const year = new Date(this_year);
-  while (it < sort_transactions.length) {
-    const ts = sort_transactions[it];
-    if (ts.createdAt < year) {
-      year.setFullYear(new Date(sort_transactions[it].createdAt).getFullYear());
-      child_components.push(
-        <LineSeparator key={year.getFullYear() + "year_line"} text={year.getFullYear().toString()} />
-      );
-    }
-    child_components.push(
-      <TransactionBox key={ts.id} transaction={ts} type={userId == ts.sellerId ? "sell" : "buy"} />
-    );
-    ++it;
-  }
+  const sortTransactions = (tsList: Transaction[]) =>
+    tsList.sort((a, b) => -(a.createdAt.getTime() - b.createdAt.getTime()));
+  const categories: Array<keyof CategorizedTransactions> = ["Today", "Yesterday", "This Month", "This Year"];
 
   return (
-    <div className="3xl:grid-cols_5 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-      {child_components}
+    <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
+      {categories.map((category) => {
+        const transactionsList = categorizedTransactions[category];
+
+        if (Array.isArray(transactionsList) && transactionsList.length === 0) {
+          return null;
+        } else if (Array.isArray(transactionsList)) {
+          return (
+            <Fragment key={category}>
+              <LineSeparator text={category.toString()} />
+              {sortTransactions(transactionsList).map((ts) => (
+                <TransactionBox key={ts.id} transaction={ts} />
+              ))}
+            </Fragment>
+          );
+        } else {
+          return null;
+        }
+      })}
+
+      {Object.entries(categorizedTransactions["Previous Years"]).map(([year, transactionsList]) => (
+        <Fragment key={year}>
+          <LineSeparator text={year.toString()} />
+          {sortTransactions(transactionsList).map((ts) => (
+            <TransactionBox key={ts.id} transaction={ts} />
+          ))}
+        </Fragment>
+      ))}
     </div>
   );
 };

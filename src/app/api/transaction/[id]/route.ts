@@ -1,29 +1,35 @@
-import { prisma } from "@/lib/prisma";
 import { TransactionFailType } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+
+import { prisma } from "@/lib/prisma";
+
 import { getUrl } from "../../objects/s3";
 
-const updateTransactionRequest = z
-  .object({
-    status: z.enum(["APPROVING", "PAYING", "VERIFYING", "COMPLETE", "FAIL"]),
-    isDelivered: z.boolean(),
+const updateTransactionRequest = z.object({
+  status: z.enum(["APPROVING", "PAYING", "PACKING", "DELIVERING", "COMPLETE", "HOLD", "FAIL"]).optional(),
+  isDelivered: z.boolean().optional(),
+  trackingURL: z.string().optional(),
 
-    // for fail status only
-    evidenceURL: z
-      .string()
-      .optional()
-      .transform((value) => value ?? ""),
-    detail: z
-      .string()
-      .optional()
-      .transform((value) => value ?? ""),
-    failType: z.enum(["CHEAT"]).optional(),
-  })
-  .refine((data) => data.status !== "FAIL" || (data.evidenceURL && data.detail && data.failType), {
-    message: "If status is fail, evidenceURL, detail, and failType must be given",
-    path: ["status"],
-  });
+  paymentMethod: z.enum(["CREDIT_CARD", "ONLINE_BANKING", "UNDEFINED"]).optional(),
+  hashId: z.string().optional(),
+
+  shipmentMethod: z.enum(["STANDARD", "EXPRESS", "UNDEFINED"]).optional(),
+
+  // for fail status only
+  evidenceURL: z
+    .string()
+    .optional()
+    .transform((value) => value ?? ""),
+  detail: z
+    .string()
+    .optional()
+    .transform((value) => value ?? ""),
+  failType: z
+    .enum(["UNDELIVERED", "UNQUALIFIED", "REJECT", "TERMINATION", "OTHER", "UNDEFINED"])
+    .optional()
+    .transform((value) => value ?? TransactionFailType.UNDEFINED),
+});
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -35,6 +41,9 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     const transaction = await prisma.transaction.findFirst({
       where: { id: id },
+      select: {
+        status: true,
+      },
     });
 
     if (!transaction) {
@@ -45,24 +54,28 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       const updateTransaction = await prisma.transaction.update({
         where: { id: id },
         data: {
-          status: parsedData.data.status,
-          isDelivered: parsedData.data.isDelivered,
+          ...(parsedData.data.status ? { status: parsedData.data.status } : {}),
+          ...(parsedData.data.trackingURL ? { trackingURL: parsedData.data.trackingURL } : {}),
+          ...(parsedData.data.isDelivered ? { isDelivered: parsedData.data.isDelivered } : {}),
+          ...(parsedData.data.paymentMethod ? { paymentMethod: parsedData.data.paymentMethod } : {}),
+          ...(parsedData.data.hashId ? { hashId: parsedData.data.hashId } : {}),
+          ...(parsedData.data.shipmentMethod ? { shipmentMethod: parsedData.data.shipmentMethod } : {}),
         },
       });
 
-      if (transaction.status == "FAIL") {
+      if (transaction.status === "FAIL" || transaction.status === "HOLD") {
         await prisma.transactionFail.deleteMany({
           where: { transactionId: id },
         });
       }
 
-      if (parsedData.data.status == "FAIL") {
+      if (parsedData.data.status === "FAIL" || parsedData.data.status === "HOLD") {
         await prisma.transactionFail.create({
           data: {
             transactionId: updateTransaction.id,
             evidenceURL: parsedData.data.evidenceURL,
             detail: parsedData.data.detail,
-            failType: parsedData.data.failType ?? TransactionFailType.CHEAT,
+            failType: (parsedData.data.status === "FAIL" && parsedData.data.failType) || TransactionFailType.UNDEFINED,
           },
         });
       }

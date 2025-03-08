@@ -1,9 +1,9 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 function Header() {
@@ -61,6 +61,7 @@ function Header() {
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="rounded-lg bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+              data-test-id="sign-out"
             >
               ออกจากระบบ
             </button>

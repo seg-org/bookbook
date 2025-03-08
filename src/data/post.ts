@@ -1,10 +1,16 @@
 import { AxiosResponse } from "axios";
-import { apiClient } from "./axios";
-import { Post } from "./dto/post.dto";
+import { z } from "zod";
 
-export const getAllPosts = async () => {
+import { GetPostsRequest } from "../app/api/posts/schemas";
+import { apiClient } from "./axios";
+import { GetPostsResponse, Post } from "./dto/post.dto";
+
+export type GetPostsFilters = z.infer<typeof GetPostsRequest>;
+export const getAllPosts = async (params?: GetPostsFilters) => {
   try {
-    const res: AxiosResponse<Post[]> = await apiClient.get("/posts");
+    const res: AxiosResponse<GetPostsResponse> = await apiClient.get("/posts", {
+      params,
+    });
 
     return res.data;
   } catch (error) {

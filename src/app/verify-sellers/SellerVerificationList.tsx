@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/useToast";
-import Image from "next/image";
-import { useState } from "react";
 
 type Seller = {
   id: string;

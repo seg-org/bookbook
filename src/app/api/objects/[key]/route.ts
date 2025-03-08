@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { deleteObject, getUrl } from "../s3";
 
 export async function GET(req: NextRequest, props: { params: Promise<{ key: string }> }) {

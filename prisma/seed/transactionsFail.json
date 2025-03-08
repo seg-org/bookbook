@@ -1,107 +1,149 @@
 [
-    {
-        "id": "transaction_fail_1",
-        "transactionId": "transaction_5",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_2",
-        "transactionId": "transaction_9",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_3",
-        "transactionId": "transaction_10",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_4",
-        "transactionId": "transaction_16",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_5",
-        "transactionId": "transaction_21",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_6",
-        "transactionId": "transaction_23",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_7",
-        "transactionId": "transaction_35",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_8",
-        "transactionId": "transaction_48",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_9",
-        "transactionId": "transaction_50",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_10",
-        "transactionId": "transaction_54",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_11",
-        "transactionId": "transaction_55",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_12",
-        "transactionId": "transaction_58",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_13",
-        "transactionId": "transaction_72",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_14",
-        "transactionId": "transaction_73",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    },
-    {
-        "id": "transaction_fail_15",
-        "transactionId": "transaction_76",
-        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
-    }
+  {
+    "id": "transaction_fail_1",
+    "transactionId": "transaction_2",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_2",
+    "transactionId": "transaction_11",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "REJECT"
+  },
+  {
+    "id": "transaction_fail_3",
+    "transactionId": "transaction_14",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_4",
+    "transactionId": "transaction_17",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_5",
+    "transactionId": "transaction_20",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_6",
+    "transactionId": "transaction_24",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_7",
+    "transactionId": "transaction_25",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_8",
+    "transactionId": "transaction_27",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_9",
+    "transactionId": "transaction_30",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_10",
+    "transactionId": "transaction_36",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_11",
+    "transactionId": "transaction_39",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_12",
+    "transactionId": "transaction_40",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_13",
+    "transactionId": "transaction_44",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_14",
+    "transactionId": "transaction_46",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "REJECT"
+  },
+  {
+    "id": "transaction_fail_15",
+    "transactionId": "transaction_57",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_16",
+    "transactionId": "transaction_63",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "TERMINATION"
+  },
+  {
+    "id": "transaction_fail_17",
+    "transactionId": "transaction_66",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_18",
+    "transactionId": "transaction_68",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_19",
+    "transactionId": "transaction_69",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_20",
+    "transactionId": "transaction_74",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "OTHER"
+  },
+  {
+    "id": "transaction_fail_21",
+    "transactionId": "transaction_75",
+    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "detail": "I hate him specifically",
+    "failType": "TERMINATION"
+  }
 ]
