@@ -1,7 +1,7 @@
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
 import { createChatRoom } from "@/data/chat";
 
+import Link from "next/link";
 import { Bookmark } from "./Bookmark";
 
 type PostCardProps = {
@@ -95,11 +96,13 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           </div>
         </div>
         <div className="mt-auto flex gap-2 self-end">
-          <Button variant="secondary">
-            <div className="flex items-center justify-center gap-x-2">
-              <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
-            </div>
-          </Button>
+          <Link href={`/post/${post.id}`}>
+            <Button variant="secondary">
+              <div className="flex items-center justify-center gap-x-2">
+                <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
+              </div>
+            </Button>
+          </Link>
           <Button onClick={() => handleChatWithSeller(post.id)} data-test-id="chat-with-seller">
             <div className="flex items-center justify-center gap-x-2">
               <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
