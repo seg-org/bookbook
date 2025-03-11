@@ -45,6 +45,9 @@ jobs:
       - name: Prepare Database
         run: ./prepare-e2e.bash
 
+      - name: Build App
+        run: pnpm build
+
       - name: Run e2e and Cucumber tests
         run: pnpm e2e
 
