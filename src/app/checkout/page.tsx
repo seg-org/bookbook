@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
 
 export default function CheckoutPage() {
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
     address: "",
     shipmentMethod: "",
   });
@@ -18,12 +20,12 @@ export default function CheckoutPage() {
     { id: "express", name: "Express Shipping (1-2 days)" },
   ];
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsDialogOpen(true); // Open confirmation dialog
   };
@@ -41,23 +43,41 @@ export default function CheckoutPage() {
         <div className="flex space-x-2">
           <input
             type="text"
-            name="first_name"
+            name="firstName"
             placeholder="First Name"
-            value={formData.first_name}
+            value={formData.firstName}
             onChange={handleChange}
             className="w-1/2 p-2 border rounded"
             required
           />
           <input
             type="text"
-            name="last_name"
+            name="lastName"
             placeholder="Last Name"
-            value={formData.last_name}
+            value={formData.lastName}
             onChange={handleChange}
             className="w-1/2 p-2 border rounded"
             required
           />
         </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          type="tel"
+          name="phoneNumber"
+          placeholder="Phone Number"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
         <textarea
           name="address"
           placeholder="Full Address (Street, City, State, ZIP Code)"
@@ -89,14 +109,20 @@ export default function CheckoutPage() {
         </button>
       </form>
 
-      {/* ShadCN Dialog */}
+      {/* Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Confirm Your Order</DialogTitle>
           </DialogHeader>
           <p>
-            <strong>Name:</strong> {formData.first_name} {formData.last_name}
+            <strong>Email:</strong> {formData.email}
+          </p>
+          <p>
+            <strong>Phone Number:</strong> {formData.phoneNumber}
+          </p>
+          <p>
+            <strong>Name:</strong> {formData.firstName} {formData.lastName}
           </p>
           <p>
             <strong>Address:</strong> {formData.address}
