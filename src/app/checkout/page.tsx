@@ -1,113 +1,234 @@
 "use client";
-import React, { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
+import { Input } from "@/components/ui/Input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const shipmentMethods = [
+  { id: "standard", name: "Standard Shipping (3-5 days)" },
+  { id: "express", name: "Express Shipping (1-2 days)" },
+];
+
+// Define validation schema with Zod (Book section has no validation)
+const checkoutSchema = z.object({
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
+  address: z.string().min(10, "Address must be at least 10 characters"),
+  shipmentMethod: z.string().min(1, "Please select a shipping method"),
+  // Book section (No validation)
+  title: z.string().optional(),
+  author: z.string().optional(),
+  price: z.string().optional(),
+});
+
+// Infer TypeScript type from schema
+type CheckoutFormData = z.infer<typeof checkoutSchema>;
 
 export default function CheckoutPage() {
-  const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    address: "",
-    shipmentMethod: "",
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [orderData, setOrderData] = useState<CheckoutFormData | null>(null);
+
+  const form = useForm<CheckoutFormData>({
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      shipmentMethod: "",
+      title: "",
+      author: "",
+      price: "",
+    },
   });
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const shipmentMethods = [
-    { id: "standard", name: "Standard Shipping (3-5 days)" },
-    { id: "express", name: "Express Shipping (1-2 days)" },
-  ];
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handlePlaceOrder = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = (data: CheckoutFormData) => {
+    setOrderData(data);
     setIsDialogOpen(true); // Open confirmation dialog
   };
 
-  const confirmOrder = () => {
-    console.log("Checkout Data:", formData);
-    alert("Order placed successfully!");
-    setIsDialogOpen(false);
-  };
-
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
-      <form onSubmit={handlePlaceOrder} className="space-y-4">
-        <div className="flex space-x-2">
-          <input
-            type="text"
+    <div className="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-md">
+      <h2 className="mb-4 text-2xl font-semibold">Checkout</h2>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          {/* Book Section*/}
+          <h2 className="mt-6 text-xl font-semibold">Book Details</h2>
+
+          {/* Book Title */}
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Book Title</FormLabel>
+                <FormControl>
+                  <Input placeholder="fetching... book title" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {/* Book Author */}
+          <FormField
+            control={form.control}
+            name="author"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Author</FormLabel>
+                <FormControl>
+                  <Input placeholder="fetching... author's name" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {/* Book Price */}
+          <FormField
+            control={form.control}
+            name="price"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Price</FormLabel>
+                <FormControl>
+                  <Input type="text" placeholder="fetching... price" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {/* User Section*/}
+          <h2 className="mt-6 text-xl font-semibold">User Details</h2>
+          {/* First Name */}
+          <FormField
+            control={form.control}
             name="firstName"
-            placeholder="First Name"
-            value={formData.firstName}
-            onChange={handleChange}
-            className="w-1/2 p-2 border rounded"
-            required
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="fetching... First Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-          <input
-            type="text"
+
+          {/* Last Name */}
+          <FormField
+            control={form.control}
             name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChange={handleChange}
-            className="w-1/2 p-2 border rounded"
-            required
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="fetching... Last Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <input
-          type="tel"
-          name="phoneNumber"
-          placeholder="Phone Number"
-          value={formData.phoneNumber}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <textarea
-          name="address"
-          placeholder="Full Address (Street, City, State, ZIP Code)"
-          value={formData.address}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-          rows={3}
-        />
-        <select
-          name="shipmentMethod"
-          value={formData.shipmentMethod}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        >
-          <option value="">Select a shipping method</option>
-          {shipmentMethods.map((method) => (
-            <option key={method.id} value={method.id}>
-              {method.name}
-            </option>
-          ))}
-        </select>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-        >
-          Place Order
-        </button>
-      </form>
+
+          {/* Email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="fetching... Email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Phone Number */}
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input type="tel" placeholder="fetching... Phone Number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Address */}
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Address</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Fill Address (Street, City, State, ZIP Code)" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Shipment Method */}
+          <FormField
+            control={form.control}
+            name="shipmentMethod"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Shipment Method</FormLabel>
+                <FormControl>
+                <Select onValueChange={field.onChange} value={field.value || ""}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a shipping method" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {shipmentMethods.map((method) => (
+                        <SelectItem key={method.id} value={method.id}>
+                          {method.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Payment Section*/}
+          <h2 className="mt-6 text-xl font-semibold">Payment Details</h2>
+          <Select onValueChange={(value) => console.log(value)}>
+            <SelectTrigger>
+              <SelectValue placeholder="Fill payment details" />
+            </SelectTrigger>
+            <SelectContent>
+              {/* Add your payment options here */}
+              <SelectItem value="creditCard">Credit Card</SelectItem>
+              <SelectItem value="paypal">PayPal</SelectItem>
+              <SelectItem value="bankTransfer">Bank Transfer</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Submit Button */}
+          <Button type="submit" className="w-full">
+            Place Order
+          </Button>
+        </form>
+      </Form>
 
       {/* Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -115,27 +236,40 @@ export default function CheckoutPage() {
           <DialogHeader>
             <DialogTitle>Confirm Your Order</DialogTitle>
           </DialogHeader>
-          <p>
-            <strong>Email:</strong> {formData.email}
-          </p>
-          <p>
-            <strong>Phone Number:</strong> {formData.phoneNumber}
-          </p>
-          <p>
-            <strong>Name:</strong> {formData.firstName} {formData.lastName}
-          </p>
-          <p>
-            <strong>Address:</strong> {formData.address}
-          </p>
-          <p>
-            <strong>Shipping Method:</strong>{" "}
-            {shipmentMethods.find((m) => m.id === formData.shipmentMethod)?.name || "Not selected"}
-          </p>
+          {orderData && (
+            <div>
+              <p>
+                <strong>Name:</strong> {orderData.firstName} {orderData.lastName}
+              </p>
+              <p>
+                <strong>Email:</strong> {orderData.email}
+              </p>
+              <p>
+                <strong>Phone Number:</strong> {orderData.phoneNumber}
+              </p>
+              <p>
+                <strong>Address:</strong> {orderData.address}
+              </p>
+              <p>
+                <strong>Shipping Method:</strong> {shipmentMethods.find((m) => m.id === orderData.shipmentMethod)?.name}
+              </p>
+              <h3 className="mt-4 text-lg font-semibold">Book Details</h3>
+              <p>
+                <strong>Title:</strong> {orderData.title}
+              </p>
+              <p>
+                <strong>Author:</strong> {orderData.author}
+              </p>
+              <p>
+                <strong>Price:</strong> {orderData.price}
+              </p>
+            </div>
+          )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               Cancel
             </Button>
-            <Button variant="default" onClick={confirmOrder}>
+            <Button variant="default" onClick={() => alert("Order placed successfully!")}>
               Confirm Order
             </Button>
           </DialogFooter>
