@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { ReviewStatsResponse } from "../schemas";
+import { ReviewStatsResponse } from "../../schemas";
 
 // GET /api/reviews/stats/[sellerId] - Get review stats for a seller
 export async function GET(req: NextRequest, { params }: { params: { sellerId: string } }) {
