@@ -1,7 +1,9 @@
-import { getUrl } from "@/app/api/objects/s3";
-import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+import { getUrl } from "@/app/api/objects/s3";
+import { prisma } from "@/lib/prisma";
+
 import BookmarkAction from "./BookmarkAction";
 import PostAction from "./PostAction";
 

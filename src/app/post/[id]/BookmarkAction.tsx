@@ -1,10 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 import { Button } from "@/components/ui/Button";
 import { usePostContext } from "@/context/postContext";
-import { useMemo } from "react";
 
 export default function BookmarkAction({ postId }: { postId: string }) {
   const { bookmarks, changeBookmark } = usePostContext();

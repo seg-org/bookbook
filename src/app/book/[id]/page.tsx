@@ -1,7 +1,8 @@
-import { getUrl } from "@/app/api/objects/s3";
-import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+import { getUrl } from "@/app/api/objects/s3";
+import { prisma } from "@/lib/prisma";
 
 export default async function BookDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
