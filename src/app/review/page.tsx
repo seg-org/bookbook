@@ -1,6 +1,10 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Form } from "@/components/ui/form";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/Button";
 
 interface Review {
   id: string;
@@ -13,7 +17,6 @@ interface Review {
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [transactionId, setTransactionId] = useState<string>("");
   const [rating, setRating] = useState<number>(5);
   const [comment, setComment] = useState<string>("");
 
@@ -22,19 +25,13 @@ export default function ReviewsPage() {
     axios.get("/api/reviews").then((res) => setReviews(res.data));
   }, []);
 
-  const handleSubmit = async () => {
-    if (!transactionId) {
-      alert("Transaction ID is required.");
-      return;
-    }
-
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     try {
       await axios.post("/api/reviews", {
-        transactionId,
         rating,
         comment,
       });
-      setTransactionId("");
       setRating(5);
       setComment("");
       axios.get("/api/reviews").then((res) => setReviews(res.data)); // Refresh the list
@@ -46,19 +43,11 @@ export default function ReviewsPage() {
 
   return (
     <div className="mx-auto max-w-2xl p-4">
-      <h1 className="mb-4 text-xl font-bold">Book Reviews</h1>
+      <h1 className="mb-4 text-xl font-bold">Add a Review</h1>
 
       {/* Review Form */}
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold">Add a Review</h2>
-        <input
-          type="text"
-          value={transactionId}
-          onChange={(e) => setTransactionId(e.target.value)}
-          placeholder="Transaction ID"
-          className="mt-2 w-full border p-2"
-        />
-        <input
+      <Form onSubmit={handleSubmit}>
+        <Input
           type="number"
           min="1"
           max="5"
@@ -66,16 +55,16 @@ export default function ReviewsPage() {
           onChange={(e) => setRating(Number(e.target.value))}
           className="mt-2 w-full border p-2"
         />
-        <textarea
+        <Textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           className="mt-2 w-full border p-2"
           placeholder="Write your review..."
         />
-        <button onClick={handleSubmit} className="mt-2 rounded bg-blue-500 px-4 py-2 text-white">
+        <Button variant='default' type="submit" className="mt-2 rounded bg-blue-500 px-4 py-2 text-white">
           Submit Review
-        </button>
-      </div>
+        </Button>
+      </Form>
     </div>
   );
 }
