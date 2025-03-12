@@ -1,6 +1,3 @@
-import { getServerSession } from "next-auth/next";
-
-import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { SellerVerificationList } from "./SellerVerificationList";
@@ -24,7 +21,7 @@ async function getUnverifiedSellers() {
 }
 
 export default async function AdminVerifySellersPage() {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
   // TODO : Uncomment this after adding isAdmin to the user model
   // if (!session?.user?.isAdmin) {
@@ -35,7 +32,7 @@ export default async function AdminVerifySellersPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="mb-6 text-2xl font-bold">Verify Sellers</h1>
+      <h1 className="mb-6 text-2xl font-bold">ยืนยันผู้ขาย</h1>
       <SellerVerificationList sellers={unverifiedSellers} />
     </div>
   );

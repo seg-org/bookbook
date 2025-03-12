@@ -1,10 +1,11 @@
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+
 import { sellerIdCardFolderName } from "@/constants/s3FolderName";
 import { PutObjectResponse } from "@/data/dto/object.dto";
 import { putObject } from "@/data/object";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
