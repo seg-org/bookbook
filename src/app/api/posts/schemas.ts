@@ -30,7 +30,7 @@ export const CreatePostRequest = z.object({
 export const PostResponse = z.object({
   id: z.string().openapi({ example: "post_1" }),
   title: z.string().openapi({ example: "Selling old copy of The Hobbit" }),
-  content: z.string().openapi({ example: "Selling my old copy of The Hobbit. It's in good condition." }),
+  content: z.string().nullish().openapi({ example: "Selling my old copy of The Hobbit. It's in good condition." }),
   price: z.number().openapi({ example: 10.0 }),
   published: z.boolean().openapi({ example: true }),
   bookId: z.string().openapi({ example: "book_1" }),
