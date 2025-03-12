@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/textarea";
+import { useRouter } from "next/navigation";
 
 const shipmentMethods = [
   { id: "standard", name: "Standard Shipping (3-5 days)" },
@@ -54,6 +55,18 @@ export default function CheckoutPage() {
   const onSubmit = (data: CheckoutFormData) => {
     setOrderData(data);
     setIsDialogOpen(true); // Open confirmation dialog
+  };
+
+  const router = useRouter();
+
+  const handleConfirmOrder = () => {
+    fetch("/api/transaction", { method: "POST", body: JSON.stringify({ buyerId: session?.user.id, postId: postId, amount: orderData?.price }) })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+    //alert("Order placed successfully!");
+    router.push("/transaction-history-page");
   };
 
   const { data: session } = useSession();
@@ -294,7 +307,7 @@ export default function CheckoutPage() {
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               Cancel
             </Button>
-            <Button variant="default" onClick={() => alert("Order placed successfully!")}>
+            <Button variant="default" onClick={() => handleConfirmOrder()}>
               Confirm Order
             </Button>
           </DialogFooter>
