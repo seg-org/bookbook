@@ -195,16 +195,21 @@ model TransactionFail {
 }
 
 model Review {
-  id            String   @id @default(cuid())
+  id            String      @id @default(cuid())
   transaction   Transaction @relation(fields: [transactionId], references: [id])
-  transactionId String   @unique @map("transaction_id")
-  rating        Int      @default(0) // 1-5 star rating
+  transactionId String      @unique @map("transaction_id")
+  rating        Int         @default(0) // 1-5 star rating
   comment       String?
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
 
   @@index([transactionId])
   @@map("reviews")
+}
+
+model Cart {
+  userId String @id
+  postId String
 }
 
 enum TransactionStatus {
