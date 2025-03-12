@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth/next";
 
 import { authOptions } from "@/lib/auth";
@@ -27,9 +26,10 @@ async function getUnverifiedSellers() {
 export default async function AdminVerifySellersPage() {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.isAdmin) {
-    redirect("/");
-  }
+  // TODO : Uncomment this after adding isAdmin to the user model
+  // if (!session?.user?.isAdmin) {
+  //   redirect("/");
+  // }
 
   const unverifiedSellers = await getUnverifiedSellers();
 

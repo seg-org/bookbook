@@ -39,32 +39,48 @@ export async function POST(request: Request) {
     });
 
     if (existingProfile) {
-      return NextResponse.json({ error: "Seller profile already exists" }, { status: 400 });
+      // Update existing profile
+      await prisma.sellerProfile.update({
+        where: {
+          userId: session.user.id,
+        },
+        data: {
+          idCardNumber,
+          idCardImageKey: imageKey,
+          bankAccount,
+          bankName,
+        },
+      });
+
+      return NextResponse.json({
+        message: "Seller profile updated successfully",
+      });
+    } else {
+      // Create new profile if it doesn't exist
+      await prisma.sellerProfile.create({
+        data: {
+          userId: session.user.id,
+          idCardNumber,
+          idCardImageKey: imageKey,
+          bankAccount,
+          bankName,
+        },
+      });
+
+      // Update user's seller status
+      await prisma.user.update({
+        where: {
+          id: session.user.id,
+        },
+        data: {
+          isSeller: true,
+        },
+      });
+
+      return NextResponse.json({
+        message: "Seller registration submitted successfully",
+      });
     }
-
-    await prisma.sellerProfile.create({
-      data: {
-        userId: session.user.id,
-        idCardNumber,
-        idCardImageKey: imageKey,
-        bankAccount,
-        bankName,
-      },
-    });
-
-    // Update user's seller status
-    await prisma.user.update({
-      where: {
-        id: session.user.id,
-      },
-      data: {
-        isSeller: true,
-      },
-    });
-
-    return NextResponse.json({
-      message: "Seller registration submitted successfully",
-    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

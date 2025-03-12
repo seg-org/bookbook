@@ -5,21 +5,10 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { sellerIdCardFolderName } from "@/constants/s3FolderName";
+import { Seller } from "@/data/dto/user.dto";
 import { useToast } from "@/hooks/useToast";
-
-type Seller = {
-  id: string;
-  idCardNumber: string;
-  idCardImageKey: string;
-  bankAccount: string;
-  bankName: string;
-  user: {
-    email: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string | null;
-  };
-};
+import { getUrl } from "../api/objects/s3";
 
 export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
   const [loading, setLoading] = useState<Record<string, boolean>>({});
@@ -78,7 +67,17 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
               </div>
               <div className="md:col-span-2">
                 <h3 className="mb-2 font-semibold">ID Card Image</h3>
-                <Image src={seller.idCardImageKey} alt="ID Card" className="max-w-md rounded-lg" />
+                {seller.idCardImageKey ? (
+                  <Image
+                    src={getUrl(sellerIdCardFolderName, seller.idCardImageKey)}
+                    alt="ID Card"
+                    width={500}
+                    height={300}
+                    className="max-w-md rounded-lg"
+                  />
+                ) : (
+                  <p>Loading image...</p>
+                )}
               </div>
               <div className="flex space-x-4 md:col-span-2">
                 <Button
