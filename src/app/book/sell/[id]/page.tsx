@@ -82,7 +82,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
           />
         </aside>
 
-        <div className="w-fit text-lg">
+        <section className="w-fit text-lg">
           <p className="text-xl font-bold">{book.title}</p>
 
           <br />
@@ -130,7 +130,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
 
             <Button type="submit">โพสต์ขายหนังสือ</Button>
           </form>
-        </div>
+        </section>
       </main>
     </>
   );

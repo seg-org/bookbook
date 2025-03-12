@@ -30,16 +30,11 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
           />
         </aside>
 
-        <div className="w-fit text-lg">
+        <section className="w-fit text-lg">
           <p className="text-xl font-bold">{book.title}</p>
 
           <br />
 
-          <p></p>
-          <p>
-            <span className="font-bold">ชื่อหนังสือ </span>
-            <span>{book.title}</span>
-          </p>
           <p>
             <span className="font-bold">คำอธิบาย </span>
             <span className="whitespace-pre-wrap">{book.description}</span>
@@ -56,7 +51,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
             <span className="font-bold">สำนักพิมพ์ </span>
             <span>{book.publisher}</span>
           </p>
-        </div>
+        </section>
       </main>
     </>
   );
