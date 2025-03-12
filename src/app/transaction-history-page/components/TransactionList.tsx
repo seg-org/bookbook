@@ -112,7 +112,7 @@ const TransactionList = () => {
         }
       })}
 
-      {Object.entries(categorizedTransactions["Previous Years"]).map(([year, transactionsList]) => (
+      {Object.entries(categorizedTransactions["Previous Years"]).reverse().map(([year, transactionsList]) => (
         <Fragment key={year}>
           <LineSeparator text={year.toString()} />
           {sortTransactions(transactionsList).map((ts) => (
