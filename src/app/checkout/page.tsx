@@ -1,16 +1,15 @@
 "use client";
+import { Button } from "@/components/ui/Button";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
+import { Input } from "@/components/ui/Input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import { Button } from "@/components/ui/Button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/Input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
-import { Textarea } from "@/components/ui/textarea";
 
 const shipmentMethods = [
   { id: "standard", name: "Standard Shipping (3-5 days)" },
@@ -56,7 +55,7 @@ export default function CheckoutPage() {
     setIsDialogOpen(true); // Open confirmation dialog
   };
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const userId = session?.user.id;
   const [postId, setPostId] = useState<string | null>(null);
 
@@ -78,7 +77,7 @@ export default function CheckoutPage() {
     form.setValue("name", session?.user.name || "");
     form.setValue("email", session?.user.email || "");
     form.setValue("phoneNumber", session?.user.phoneNumber || "");
-  }, [form, session?.user.email, session?.user.name, session?.user.phoneNumber, userId]); // Run effect only when userId changes
+  }, []); // Run effect only when userId changes
 
   useEffect(() => {
     if (!postId) return; // Prevent fetch if postId is still null
@@ -94,7 +93,7 @@ export default function CheckoutPage() {
       .catch((error) => {
         console.error("Error getting post", error);
       });
-  }, [postId, form]); // Run only when postId is available
+  }, [postId]); // Run only when postId is available
 
   return (
     <div className="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-md">
