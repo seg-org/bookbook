@@ -1,9 +1,10 @@
-import { put } from "@vercel/blob";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
-
+import { sellerIdCardFolderName } from "@/constants/s3FolderName";
+import { PutObjectResponse } from "@/data/dto/object.dto";
+import { putObject } from "@/data/object";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
@@ -23,10 +24,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "ID card image is required" }, { status: 400 });
     }
 
-    // Upload image to blob storage (change it to supabase s3 later)
-    const blob = await put(idCardImage.name, idCardImage, {
-      access: "public",
-    });
+    const uploadResult = await putObject(idCardImage, sellerIdCardFolderName);
+
+    if (uploadResult instanceof Error) {
+      return NextResponse.json({ error: "Failed to upload ID card image" }, { status: 500 });
+    }
+
+    const imageKey = (uploadResult as PutObjectResponse).key;
 
     const existingProfile = await prisma.sellerProfile.findUnique({
       where: {
@@ -42,7 +46,7 @@ export async function POST(request: Request) {
       data: {
         userId: session.user.id,
         idCardNumber,
-        idCardImageKey: blob.url,
+        idCardImageKey: imageKey,
         bankAccount,
         bankName,
       },
