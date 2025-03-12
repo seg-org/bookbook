@@ -1,11 +1,13 @@
-import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
+
 import { ReviewStatsResponse } from "../../schemas";
 
 // GET /api/reviews/stats/[sellerId] - Get review stats for a seller
-export async function GET(req: NextRequest, { params }: { params: { sellerId: string } }) {
+export async function GET(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
-    const sellerId = params.sellerId;
+    const sellerId = (await props.params).id;
 
     // Check if seller exists
     const sellerExists = await prisma.user.findFirst({

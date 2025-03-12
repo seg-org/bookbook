@@ -1,6 +1,8 @@
-import { prisma } from "@/lib/prisma";
 import { TransactionStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
+
 import { CreateReviewRequest, GetReviewsRequest, ReviewResponse } from "./schemas";
 
 // POST /api/reviews - Create a new review

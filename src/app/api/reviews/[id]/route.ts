@@ -1,11 +1,13 @@
-import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
+
 import { ReviewResponse, UpdateReviewRequest } from "../schemas";
 
 // GET /api/reviews/[id] - Get a specific review
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
-    const reviewId = params.id;
+    const reviewId = (await props.params).id;
 
     const review = await prisma.review.findUnique({
       where: { id: reviewId },
@@ -53,9 +55,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // PATCH /api/reviews/[id] - Update a review
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
-    const reviewId = params.id;
+    const reviewId = (await props.params).id;
     const parsedData = UpdateReviewRequest.safeParse(await req.json());
 
     if (!parsedData.success) {
@@ -91,9 +93,9 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 }
 
 // DELETE /api/reviews/[id] - Delete a review
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
-    const reviewId = params.id;
+    const reviewId = (await props.params).id;
 
     // Check if review exists
     const existingReview = await prisma.review.findUnique({
