@@ -7,6 +7,7 @@ import { CreatePostRequest, PostResponse, PostsResponse } from "./schemas";
 export async function POST(req: NextRequest) {
   try {
     const parsedData = CreatePostRequest.safeParse(await req.json());
+    console.log(parsedData);
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
@@ -25,7 +26,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `seller with id ${parsedData.data.sellerId} not found` }, { status: 404 });
     }
 
-    const newPost = await prisma.post.create({ data: parsedData.data, include: { book: true } });
+    const data = {
+      ...parsedData.data,
+      specialDescriptions: parsedData.data.specialDescriptions ?? [],
+      damageURLs: parsedData.data.damageURLs ?? [],
+    };
+
+    const newPost = await prisma.post.create({
+      data,
+      include: { book: true },
+    });
+
     const newPostWithImageUrl = {
       ...newPost,
       book: {

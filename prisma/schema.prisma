@@ -67,15 +67,15 @@ model SellerProfile {
 }
 
 model Book {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   title         String
   author        String
   genre         String
   description   String
-  isbn          String    @unique
+  isbn          String        @unique
   pages         Int
   publisher     String
-  coverImageKey String    @map("cover_image_key")
+  coverImageKey String        @map("cover_image_key")
   posts         Post[]
   bookGenres    GenreType[]
   bookTags      BookTagType[]
@@ -86,20 +86,20 @@ model Book {
 }
 
 model Post {
-  id                 String               @id @default(cuid())
-  title              String
-  content            String?
-  price              Int
-  published          Boolean              @default(false)
-  seller             User                 @relation(fields: [sellerId], references: [id])
-  sellerId           String               @map("seller_id")
-  book               Book                 @relation(fields: [bookId], references: [id])
-  bookId             String               @map("book_id")
-  transactions       Transaction[]
-  ChatRoom           ChatRoom[]
-  Bookmark           Bookmark[]
-  SpecialDescription SpecialDescriptionType[]
-  Damage             String[]
+  id                  String                   @id @default(cuid())
+  title               String
+  content             String?
+  price               Int
+  published           Boolean                  @default(false)
+  seller              User                     @relation(fields: [sellerId], references: [id])
+  sellerId            String                   @map("seller_id")
+  book                Book                     @relation(fields: [bookId], references: [id])
+  bookId              String                   @map("book_id")
+  transactions        Transaction[]
+  ChatRoom            ChatRoom[]
+  Bookmark            Bookmark[]
+  specialDescriptions SpecialDescriptionType[]
+  damageURLs          String[]
 
   @@map("posts")
 }
@@ -310,24 +310,24 @@ enum GenreType {
 // }
 
 enum BookTagType {
-  BESTSELLER           @map("bestseller")
-  NEW_RELEASE          @map("new_release")
-  CLASSIC              @map("classic")
-  AWARD_WINNING        @map("award_winning")
-  MUST_READ            @map("must_read")
-  HIGHLY_RECOMMENDED   @map("highly_recommended")
-  INSPIRATIONAL        @map("inspirational")
-  COMING_OF_AGE        @map("coming_of_age")
-  FAMILY_SAGA          @map("family_saga")
-  HISTORICAL           @map("historical")
-  DARK_FANTASY         @map("dark_fantasy")
-  DETECTIVE            @map("detective")
-  LGBTQ_PLUS           @map("lgbtq_plus")
-  YOUNG_ADULT          @map("young_adult")
-  CHILDRENS_BOOK       @map("childrens_book")
-  SHORT_STORIES        @map("short_stories")
-  MYSTERY              @map("mystery")
-  SELF_HELP            @map("self_help")
-  THRILLER             @map("thriller")
-  ROMANTIC_COMEDY      @map("romantic_comedy")
+  BESTSELLER         @map("bestseller")
+  NEW_RELEASE        @map("new_release")
+  CLASSIC            @map("classic")
+  AWARD_WINNING      @map("award_winning")
+  MUST_READ          @map("must_read")
+  HIGHLY_RECOMMENDED @map("highly_recommended")
+  INSPIRATIONAL      @map("inspirational")
+  COMING_OF_AGE      @map("coming_of_age")
+  FAMILY_SAGA        @map("family_saga")
+  HISTORICAL         @map("historical")
+  DARK_FANTASY       @map("dark_fantasy")
+  DETECTIVE          @map("detective")
+  LGBTQ_PLUS         @map("lgbtq_plus")
+  YOUNG_ADULT        @map("young_adult")
+  CHILDRENS_BOOK     @map("childrens_book")
+  SHORT_STORIES      @map("short_stories")
+  MYSTERY            @map("mystery")
+  SELF_HELP          @map("self_help")
+  THRILLER           @map("thriller")
+  ROMANTIC_COMEDY    @map("romantic_comedy")
 }
