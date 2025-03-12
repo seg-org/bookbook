@@ -1,10 +1,11 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/Button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/Button";
 
 interface Review {
   id: string;
@@ -19,6 +20,9 @@ export default function ReviewsPage() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [rating, setRating] = useState<number>(5);
   const [comment, setComment] = useState<string>("");
+  if(reviews.length === 0){
+    console.log("No reviews found");
+  }
 
   // Fetch existing reviews
   useEffect(() => {
