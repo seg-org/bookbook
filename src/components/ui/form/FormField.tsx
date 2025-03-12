@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactElement } from "react";
 import { Controller, ControllerRenderProps, FieldValues, Path, useFormContext } from "react-hook-form";
 

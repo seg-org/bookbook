@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {

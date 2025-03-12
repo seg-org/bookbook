@@ -1,7 +1,9 @@
-import { put } from "@vercel/blob";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
+import { sellerIdCardFolderName } from "@/constants/s3FolderName";
+import { PutObjectResponse } from "@/data/dto/object.dto";
+import { putObject } from "@/data/object";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -23,10 +25,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "ID card image is required" }, { status: 400 });
     }
 
-    // Upload image to blob storage (change it to supabase s3 later)
-    const blob = await put(idCardImage.name, idCardImage, {
-      access: "public",
-    });
+    const uploadResult = await putObject(idCardImage, sellerIdCardFolderName);
+
+    if (uploadResult instanceof Error) {
+      return NextResponse.json({ error: "Failed to upload ID card image" }, { status: 500 });
+    }
+
+    const imageKey = (uploadResult as PutObjectResponse).key;
 
     const existingProfile = await prisma.sellerProfile.findUnique({
       where: {
@@ -35,32 +40,48 @@ export async function POST(request: Request) {
     });
 
     if (existingProfile) {
-      return NextResponse.json({ error: "Seller profile already exists" }, { status: 400 });
+      // Update existing profile
+      await prisma.sellerProfile.update({
+        where: {
+          userId: session.user.id,
+        },
+        data: {
+          idCardNumber,
+          idCardImageKey: imageKey,
+          bankAccount,
+          bankName,
+        },
+      });
+
+      return NextResponse.json({
+        message: "Seller profile updated successfully",
+      });
+    } else {
+      // Create new profile if it doesn't exist
+      await prisma.sellerProfile.create({
+        data: {
+          userId: session.user.id,
+          idCardNumber,
+          idCardImageKey: imageKey,
+          bankAccount,
+          bankName,
+        },
+      });
+
+      // Update user's seller status
+      await prisma.user.update({
+        where: {
+          id: session.user.id,
+        },
+        data: {
+          isSeller: true,
+        },
+      });
+
+      return NextResponse.json({
+        message: "Seller registration submitted successfully",
+      });
     }
-
-    await prisma.sellerProfile.create({
-      data: {
-        userId: session.user.id,
-        idCardNumber,
-        idCardImageKey: blob.url,
-        bankAccount,
-        bankName,
-      },
-    });
-
-    // Update user's seller status
-    await prisma.user.update({
-      where: {
-        id: session.user.id,
-      },
-      data: {
-        isSeller: true,
-      },
-    });
-
-    return NextResponse.json({
-      message: "Seller registration submitted successfully",
-    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

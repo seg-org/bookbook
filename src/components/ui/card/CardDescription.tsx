@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 interface CardDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
