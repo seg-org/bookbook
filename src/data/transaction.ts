@@ -64,6 +64,8 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
 
     return res.data.map((val) => ({
       ...val,
+      createdAt: new Date(val.createdAt),
+      updatedAt: new Date(val.updatedAt),
     }));
   } catch (error) {
     console.error("Failed to get query transaction", error);
@@ -77,6 +79,8 @@ export const getTransaction = async (id: string) => {
 
     return {
       ...res.data,
+      createdAt: new Date(res.data.createdAt),
+      updatedAt: new Date(res.data.updatedAt),
     };
   } catch (error) {
     console.error(`Failed to get transaction with id ${id}`, error);
@@ -112,8 +116,6 @@ export const updateTransaction = async (query: TransactionUpDate) => {
   try {
     const id = query.id;
 
-    console.log(query);
-
     const params: {
       status?: string;
       isDelivered?: boolean;
@@ -136,7 +138,6 @@ export const updateTransaction = async (query: TransactionUpDate) => {
       ...(query.failType ? { failType: query.failType } : {}),
     };
 
-    console.log(params);
     await apiClient.patch(`/transaction/${id}`, params);
 
     return;
