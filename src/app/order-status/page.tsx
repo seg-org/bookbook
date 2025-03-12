@@ -5,10 +5,21 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
+type MockOrderType = {
+  id: string;
+  status: string;
+  amount: number;
+  paymentMethod: string;
+  trackingNumber: string | null;
+  trackingUrl: string | null;
+  bookTitle: string;
+  author: string;
+};
+
 const OrderStatusPage = () => {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState<MockOrderType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -36,7 +47,7 @@ const OrderStatusPage = () => {
             bookTitle: "To Kill a Mockingbird",
             author: "Harper Lee",
           },
-        ];
+        ] satisfies MockOrderType[];
 
         setTimeout(() => {
           setOrders(mockOrders);
@@ -88,7 +99,13 @@ const OrderStatusPage = () => {
               </p>
               <div className="mt-4 flex justify-end space-x-2">
                 {order.trackingUrl && (
-                  <Button variant='outline' onClick={() => window.open(order.trackingUrl, "_blank")}>Track Order</Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => order.trackingUrl && window.open(order.trackingUrl, "_blank")}
+                    disabled={!order.trackingUrl}
+                  >
+                    Track Order
+                  </Button>
                 )}
                 <Button onClick={() => router.push(`/review`)}>Write a Review</Button>
               </div>
