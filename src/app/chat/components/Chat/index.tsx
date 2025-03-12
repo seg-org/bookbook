@@ -1,4 +1,5 @@
 import { useChannel } from "ably/react";
+import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 
 import { sendMessage } from "@/data/chat";
@@ -6,7 +7,6 @@ import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
 import { SessionUser } from "@/lib/auth";
 
-import clsx from "clsx";
 import { MessageBubble } from "./MessageBubble";
 
 import "./rainbow.css";
