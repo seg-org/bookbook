@@ -26,7 +26,7 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
             src={getUrl("book_images", book.coverImageKey)}
             width={1000}
             height={1000}
-            alt="Post Cover"
+            alt="Book Cover"
           />
         </aside>
 

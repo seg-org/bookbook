@@ -25,9 +25,23 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const books = await prisma.book.findMany();
+    const searchParams = req.nextUrl.searchParams;
+    const title = searchParams.get("title");
+
+    const books = await prisma.book.findMany(
+      title
+        ? {
+            where: {
+              title: {
+                contains: title,
+                mode: "insensitive",
+              },
+            },
+          }
+        : undefined
+    );
     const booksWithImageUrl = books.map((book) => {
       const url = getUrl("book_images", book.coverImageKey);
       return {

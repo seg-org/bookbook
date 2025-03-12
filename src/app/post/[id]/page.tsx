@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { getServerSession } from "next-auth";
 
 import { getUrl } from "@/app/api/objects/s3";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import BookmarkAction from "./BookmarkAction";
@@ -25,6 +27,10 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
   if (post === null) {
     notFound();
   }
+
+  const session = await getServerSession(authOptions);
+  const isYourPost = post.sellerId === session?.user.id;
+
   return (
     <>
       <h1 className="my-4 text-center text-2xl font-bold">รายละเอียดโพสต์</h1>
@@ -39,7 +45,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
             alt="Post Cover"
           />
 
-          <BookmarkAction postId={post.id} />
+          {isYourPost || <BookmarkAction postId={post.id} />}
         </aside>
 
         <div className="w-fit text-lg">
@@ -77,7 +83,11 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
             <span>{post.book.publisher}</span>
           </p>
 
-          <PostAction postId={post.id} bookTitle={post.book.title} postPrice={post.price} />
+          {post.sellerId === session?.user.id ? (
+            <p className="text-end">นี่เป็นหนังสือของคุณ</p>
+          ) : (
+            <PostAction postId={post.id} bookTitle={post.book.title} postPrice={post.price} />
+          )}
         </div>
       </main>
     </>

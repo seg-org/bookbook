@@ -12,7 +12,7 @@ export default function Home() {
               ค้นหาหนังสือ
             </button>
           </Link>
-          <Link href="/sell-book">
+          <Link href="/book/sell">
             <button className="rounded-lg border border-blue-600 px-6 py-2 text-blue-600 shadow-md transition hover:bg-blue-600 hover:text-white">
               ขายหนังสือของคุณ
             </button>
