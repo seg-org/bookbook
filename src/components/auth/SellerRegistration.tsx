@@ -96,76 +96,81 @@ export function SellerRegistration() {
   return (
     <div className="mx-auto max-w-md space-y-6">
       <h2 className="text-center text-2xl font-bold">ลงทะเบียนผู้ขาย</h2>
+
       <Form form={form} onSubmit={onSubmit}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <Card className="space-y-4 p-4">
-            <h3 className="font-semibold">ข้อมูลส่วนตัว</h3>
-            <FormField
-              name="idCardNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>หมายเลขบัตรประชาชน</FormLabel>
-                  <Input {...field} disabled={isLoading} />
-                  <FormDescription>กรุณากรอกหมายเลขบัตรประชาชน 13 หลัก</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              name="idCardImage"
-              render={() => (
-                <FormItem>
-                  <FormLabel>รูปบัตรประชาชน</FormLabel>
-                  <Input type="file" accept="image/*" onChange={handleImageChange} disabled={isLoading} />
-                  <FormDescription>อัปโหลดรูปบัตรประชาชนที่ชัดเจน (ขนาดไม่เกิน 5MB)</FormDescription>
-                  {previewUrl && (
-                    <div className="mt-2">
-                      <Image src={previewUrl} alt="ตัวอย่างบัตรประชาชน" className="h-auto max-w-full rounded-lg" />
-                    </div>
-                  )}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </Card>
-
-          <Card className="space-y-4 p-4">
-            <h3 className="font-semibold">ข้อมูลธนาคาร</h3>
-            <FormField
-              name="bankAccount"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>หมายเลขบัญชีธนาคาร</FormLabel>
-                  <Input {...field} disabled={isLoading} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              name="bankName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>ชื่อธนาคาร</FormLabel>
-                  <Input {...field} disabled={isLoading} />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </Card>
-
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                กำลังส่งข้อมูล...
-              </>
-            ) : (
-              "ส่งข้อมูลการลงทะเบียน"
+        <Card className="space-y-4 p-4">
+          <h3 className="font-semibold">ข้อมูลส่วนตัว</h3>
+          <FormField
+            name="idCardNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>หมายเลขบัตรประชาชน</FormLabel>
+                <Input {...field} disabled={isLoading} />
+                <FormDescription>กรุณากรอกหมายเลขบัตรประชาชน 13 หลัก</FormDescription>
+                <FormMessage />
+              </FormItem>
             )}
-          </Button>
-        </form>
+          />
+
+          <FormField
+            name="idCardImage"
+            render={() => (
+              <FormItem>
+                <FormLabel>รูปบัตรประชาชน</FormLabel>
+                <Input type="file" accept="image/*" onChange={handleImageChange} disabled={isLoading} />
+                <FormDescription>อัปโหลดรูปบัตรประชาชนที่ชัดเจน (ขนาดไม่เกิน 5MB)</FormDescription>
+                {previewUrl && (
+                  <div className="mt-2">
+                    <Image
+                      src={previewUrl}
+                      alt="ตัวอย่างบัตรประชาชน"
+                      width={300}
+                      height={200}
+                      className="h-auto max-w-full rounded-lg"
+                    />
+                  </div>
+                )}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </Card>
+
+        <Card className="space-y-4 p-4">
+          <h3 className="font-semibold">ข้อมูลธนาคาร</h3>
+          <FormField
+            name="bankAccount"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>หมายเลขบัญชีธนาคาร</FormLabel>
+                <Input {...field} disabled={isLoading} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            name="bankName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ชื่อธนาคาร</FormLabel>
+                <Input {...field} disabled={isLoading} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </Card>
+
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              กำลังส่งข้อมูล...
+            </>
+          ) : (
+            "ส่งข้อมูลการลงทะเบียน"
+          )}
+        </Button>
       </Form>
     </div>
   );
