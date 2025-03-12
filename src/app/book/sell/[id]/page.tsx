@@ -105,6 +105,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
               <label htmlFor="post-title">ชื่อโพสต์</label>
               <input
                 id="post-title"
+                data-testid="post-title"
                 name="post-title"
                 className="w-full rounded border border-black p-2"
                 type="text"
@@ -118,6 +119,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
               </label>
               <input
                 id="book-price"
+                data-testid="book-price"
                 name="book-price"
                 className="w-full rounded border border-black p-2"
                 type="number"
