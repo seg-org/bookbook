@@ -6,7 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -17,16 +18,15 @@ const shipmentMethods = [
 
 // Define validation schema with Zod (Book section has no validation)
 const checkoutSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
   address: z.string().min(10, "Address must be at least 10 characters"),
-  shipmentMethod: z.string().min(1, "Please select a shipping method"),
+  shipmentMethod: z.string().min(0, "Please select a shipping method"),
   // Book section (No validation)
   title: z.string().optional(),
   author: z.string().optional(),
-  price: z.string().optional(),
+  price: z.number().optional(),
 });
 
 // Infer TypeScript type from schema
@@ -39,8 +39,7 @@ export default function CheckoutPage() {
   const form = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       phoneNumber: "",
       address: "",
@@ -55,6 +54,46 @@ export default function CheckoutPage() {
     setOrderData(data);
     setIsDialogOpen(true); // Open confirmation dialog
   };
+
+  const { data: session, status } = useSession();
+  const userId = session?.user.id;
+  const [postId, setPostId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!userId) return; // Prevent fetch if userId is missing
+
+    fetch(`/api/add-to-cart/${userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Cart Data:", data);
+        if (data.postId) {
+          setPostId(data.postId);
+        }
+      })
+      .catch((error) => {
+        console.error("Error getting cart", error);
+      });
+
+    form.setValue("name", session?.user.name || "");
+    form.setValue("email", session?.user.email || "");
+    form.setValue("phoneNumber", session?.user.phoneNumber || "");
+  }, []); // Run effect only when userId changes
+
+  useEffect(() => {
+    if (!postId) return; // Prevent fetch if postId is still null
+
+    fetch(`/api/posts/${postId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Post Data:", data);
+        form.setValue("title", data.book.title);
+        form.setValue("author", data.book.author);
+        form.setValue("price", data.price);
+      })
+      .catch((error) => {
+        console.error("Error getting post", error);
+      });
+  }, [postId]); // Run only when postId is available
 
   return (
     <div className="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-md">
@@ -108,30 +147,15 @@ export default function CheckoutPage() {
 
           {/* User Section*/}
           <h2 className="mt-6 text-xl font-semibold">User Details</h2>
-          {/* First Name */}
+          {/* Name */}
           <FormField
             control={form.control}
-            name="firstName"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>First Name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="fetching... First Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Last Name */}
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="fetching... Last Name" {...field} />
+                  <Input placeholder="fetching... Name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -183,7 +207,7 @@ export default function CheckoutPage() {
             )}
           />
 
-          {/* Shipment Method */}
+          {/*Shipment Method*/}
           <FormField
             control={form.control}
             name="shipmentMethod"
@@ -191,7 +215,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Shipment Method</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value || ""}>
+                  <Select onValueChange={field.onChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a shipping method" />
                     </SelectTrigger>
@@ -239,7 +263,7 @@ export default function CheckoutPage() {
           {orderData && (
             <div>
               <p>
-                <strong>Name:</strong> {orderData.firstName} {orderData.lastName}
+                <strong>Name:</strong> {orderData.name}
               </p>
               <p>
                 <strong>Email:</strong> {orderData.email}
