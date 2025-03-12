@@ -66,6 +66,7 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
       ...val,
       createdAt: new Date(val.createdAt),
       updatedAt: new Date(val.updatedAt),
+      paidOn: new Date(val.paidOn),
     }));
   } catch (error) {
     console.error("Failed to get query transaction", error);
@@ -81,6 +82,7 @@ export const getTransaction = async (id: string) => {
       ...res.data,
       createdAt: new Date(res.data.createdAt),
       updatedAt: new Date(res.data.updatedAt),
+      paidOn: new Date(res.data.paidOn),
     };
   } catch (error) {
     console.error(`Failed to get transaction with id ${id}`, error);
