@@ -1,0 +1,9 @@
+.rainbow-container {
+    background: linear-gradient(to top right, 
+    #f8b3d1, 
+    #f9d1a2,
+    #a8e0e5, 
+    #e8d0f0,
+    #d2f3f2, 
+    #f6c8db);
+}

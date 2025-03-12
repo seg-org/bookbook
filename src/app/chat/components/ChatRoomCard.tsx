@@ -23,6 +23,7 @@ const cut = (str: string, maxLength: number) => {
 export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) => {
   const { changeCurrentRoom } = useChatContext();
   const [isMounted, setIsMounted] = useState(false);
+  // const session = await getServerSession(authOptions);
 
   useEffect(() => {
     setIsMounted(true);
@@ -39,7 +40,8 @@ export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) 
     <div
       className={clsx(
         "flex h-[10%] w-full justify-between space-x-4 p-2 px-4 hover:cursor-pointer hover:bg-gray-200",
-        isActive ? "bg-gray-200" : "bg-gray-50"
+        isActive ? "bg-gray-200" : "bg-gray-50",
+        chatRoom.userB.isAdmin ? "bg-gradient-to-r from-yellow-400" : ""
       )}
       onClick={() => changeCurrentRoom(chatRoom, userId)}
       data-test-id="chat-room"
@@ -54,16 +56,28 @@ export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) 
             objectFit="cover"
             alt="Book Cover"
           />
+          {chatRoom.userB.isAdmin && (
+            <Image
+              src="/images/adminCrown.png"
+              alt="Illustration"
+              width={20}
+              height={20}
+              className="absolute ml-6 rotate-45 pb-20"
+            />
+          )}
         </div>
         <div className="flex flex-col justify-center">
           <p>{`${chatRoom.userB.firstName} ${chatRoom.userB.lastName}`}</p>
+
           <p className={clsx(haveUnreadMessages ? "font-bold text-black" : "text-gray-500")}>
-            {chatRoom.lastMessage && cut(chatRoom.lastMessage.message, 40)}
+            {chatRoom.lastMessage && cut(chatRoom.lastMessage.message, 30)}
           </p>
         </div>
       </div>
       <div className="justify-end self-center">
-        <ThreeDotDropdown roomId={chatRoom.id} reporterId={chatRoom.userIds[0]}></ThreeDotDropdown>
+        {!chatRoom.userB.isAdmin && (
+          <ThreeDotDropdown roomId={chatRoom.id} reporterId={chatRoom.userIds[0]}></ThreeDotDropdown>
+        )}
       </div>
     </div>
   );

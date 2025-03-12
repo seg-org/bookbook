@@ -6,7 +6,10 @@ import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
 import { SessionUser } from "@/lib/auth";
 
+import clsx from "clsx";
 import { MessageBubble } from "./MessageBubble";
+
+import "./rainbow.css";
 
 type ChatProps = {
   chatRoom: ChatRoom;
@@ -74,15 +77,18 @@ function Chat({ chatRoom, user }: ChatProps) {
     }
   };
 
+  const rainbow = messages.filter((m) => m.message.includes("rainbow")).length % 2 === 1;
+
   return (
     <div className="h-full w-full bg-gray-50">
-      <div className="h-[90%] overflow-scroll border-b p-4">
+      <div className={clsx("h-[90%] overflow-scroll border-b p-4", rainbow && "rainbow-container")}>
         {messages.map((m, idx) => (
           <MessageBubble
             key={idx}
             isMine={m.senderId === user.id}
             username={getUsername(m.senderId as string)}
             message={m.message}
+            isAdminMessage={m.senderId === chatRoom.userB.id && chatRoom.userB.isAdmin}
             isSent
           />
         ))}
