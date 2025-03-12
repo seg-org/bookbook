@@ -9,7 +9,7 @@ import { TransactionContext } from "./transactionContext";
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
-const transactionPerPage = 20;
+const transactionPerPage = 6;
 
 export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
   const { data: session } = useSession();
