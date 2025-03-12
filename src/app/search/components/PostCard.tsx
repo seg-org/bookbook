@@ -32,11 +32,20 @@ function PostCard({ post, isRecommended }: PostCardProps) {
   const router = useRouter();
 
   const initiate_transaction = () => {
-    const encodedPostId = encodeURIComponent(post.id);
-    const encodedBookTitle = encodeURIComponent(post.book.title);
-    const encodedPostPrice = encodeURIComponent(post.price.toString());
-    // router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
-    router.push(`/checkout?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
+    if(!isAuthenticated){
+      router.push("/login");
+      return;
+    }
+    // call POST to /api/add-to-cart
+    // with userId, postId
+
+    fetch("/api/add-to-cart", { method: "POST", body: JSON.stringify({ userId: session?.user.id, postId: post.id }) })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+      router.push("/checkout");
   };
 
   const handleChatWithSeller = async (postId: string) => {
