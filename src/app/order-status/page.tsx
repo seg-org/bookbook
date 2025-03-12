@@ -1,8 +1,9 @@
 "use client";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const OrderStatusPage = () => {
   const [orders, setOrders] = useState([]);
@@ -44,6 +45,7 @@ const OrderStatusPage = () => {
       } catch (err) {
         setError("Failed to load order status.");
         setLoading(false);
+        console.error(err);
       }
     };
 
