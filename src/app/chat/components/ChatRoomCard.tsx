@@ -41,7 +41,7 @@ export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) 
       className={clsx(
         "flex h-[10%] w-full justify-between space-x-4 p-2 px-4 hover:cursor-pointer hover:bg-gray-200",
         isActive ? "bg-gray-200" : "bg-gray-50",
-        chatRoom.userB.isAdmin ? "bg-gradient-to-r from-yellow-400" : ""
+        chatRoom.userB.isAdmin ? "bg-gradient-to-r from-blue-500" : ""
       )}
       onClick={() => changeCurrentRoom(chatRoom, userId)}
       data-test-id="chat-room"
