@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
@@ -34,7 +35,8 @@ function PostCard({ post, isRecommended }: PostCardProps) {
     const encodedPostId = encodeURIComponent(post.id);
     const encodedBookTitle = encodeURIComponent(post.book.title);
     const encodedPostPrice = encodeURIComponent(post.price.toString());
-    router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
+    // router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
+    router.push(`/checkout?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
   };
 
   const handleChatWithSeller = async (postId: string) => {
@@ -95,19 +97,21 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           </div>
         </div>
         <div className="mt-auto flex gap-2 self-end">
-          <Button variant="secondary">
-            <div className="flex items-center justify-center gap-x-2">
-              <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
-            </div>
-          </Button>
-          <Button onClick={() => handleChatWithSeller(post.id)} data-test-id="chat-with-seller">
+          <Link href={`/post/${post.id}`}>
+            <Button variant="secondary">
+              <div className="flex items-center justify-center gap-x-2">
+                <IoIosInformationCircleOutline className="h-6 w-6" /> ดูข้อมูล
+              </div>
+            </Button>
+          </Link>
+          <Button variant="outline" onClick={() => handleChatWithSeller(post.id)} data-test-id="chat-with-seller">
             <div className="flex items-center justify-center gap-x-2">
               <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
             </div>
           </Button>
-          <Button variant="success" onClick={initiate_transaction}>
+          <Button variant="default" onClick={initiate_transaction}>
             <div className="flex items-center justify-center gap-x-2">
-              <FaShoppingBasket className="h-6 w-6" /> เพิ่มใส่ตะกร้า
+               <FaShoppingBasket className="h-6 w-6" /> สั่งซื้อ {/* เพิ่มใส่ตะกร้า */}
             </div>
           </Button>
         </div>
