@@ -36,23 +36,6 @@ const TransactionList = () => {
   thisMonth.setMonth(thisMonth.getMonth() - 1);
   const thisYear = new Date(today.getFullYear(), 0, 1, 0, 0, 0, 0);
 
-  transactions.forEach((ts) => {
-    if (ts.createdAt >= today) {
-      categorizedTransactions.Today.push(ts);
-    } else if (ts.createdAt >= yesterday) {
-      categorizedTransactions.Yesterday.push(ts);
-    } else if (ts.createdAt >= thisMonth) {
-      categorizedTransactions["This Month"].push(ts);
-    } else if (ts.createdAt >= thisYear) {
-      categorizedTransactions["This Year"].push(ts);
-    } else {
-      if (!categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()]) {
-        categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()] = [];
-      }
-      categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()].push(ts);
-    }
-  });
-
   if (userId === "") {
     return (
       <div
@@ -90,6 +73,23 @@ const TransactionList = () => {
   const sortTransactions = (tsList: Transaction[]) =>
     tsList.sort((a, b) => -(a.createdAt.getTime() - b.createdAt.getTime()));
   const categories: Array<keyof CategorizedTransactions> = ["Today", "Yesterday", "This Month", "This Year"];
+
+  transactions.forEach((ts) => {
+    if (ts.createdAt >= today) {
+      categorizedTransactions.Today.push(ts);
+    } else if (ts.createdAt >= yesterday) {
+      categorizedTransactions.Yesterday.push(ts);
+    } else if (ts.createdAt >= thisMonth) {
+      categorizedTransactions["This Month"].push(ts);
+    } else if (ts.createdAt >= thisYear) {
+      categorizedTransactions["This Year"].push(ts);
+    } else {
+      if (!categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()]) {
+        categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()] = [];
+      }
+      categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()].push(ts);
+    }
+  });
 
   return (
     <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
