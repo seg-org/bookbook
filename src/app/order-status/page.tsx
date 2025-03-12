@@ -1,11 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const OrderStatusPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchMockOrderStatus = async () => {
@@ -19,8 +22,8 @@ const OrderStatusPage = () => {
             paymentMethod: "Credit Card",
             trackingNumber: "TRACK123456",
             trackingUrl: "https://track.example.com/TRACK123456",
-            title: "The Great Gatsby",
-            author: "F. Scott Fitzgerald"
+            bookTitle: "The Great Gatsby",
+            author: "F. Scott Fitzgerald",
           },
           {
             id: "67890",
@@ -29,9 +32,9 @@ const OrderStatusPage = () => {
             paymentMethod: "PayPal",
             trackingNumber: null,
             trackingUrl: null,
-            title: "To Kill a Mockingbird",
-            author: "Harper Lee"
-          }
+            bookTitle: "To Kill a Mockingbird",
+            author: "Harper Lee",
+          },
         ];
 
         setTimeout(() => {
@@ -47,11 +50,11 @@ const OrderStatusPage = () => {
     fetchMockOrderStatus();
   }, []);
 
-  if (loading) return <div className="text-center py-10">Loading order details...</div>;
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
+  if (loading) return <div className="py-10 text-center">Loading order details...</div>;
+  if (error) return <div className="py-10 text-center text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-4">
+    <div className="mx-auto max-w-2xl space-y-4 p-6">
       {orders.map((order) => (
         <Card key={order.id}>
           <CardHeader>
@@ -60,22 +63,33 @@ const OrderStatusPage = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <p><strong>Order ID:</strong> {order.id}</p>
-              <p><strong>Status:</strong> {order.status}</p>
-              <p><strong>Amount:</strong> ${order.amount}</p>
-              <p><strong>Payment Method:</strong> {order.paymentMethod}</p>
-              <p><strong>Book Title:</strong> {order.title}</p>
-              <p><strong>Author:</strong> {order.author}</p>
-              <p><strong>Tracking Number:</strong> {order.trackingNumber || "Not available"}</p>
-              {order.trackingUrl && (
-                <a
-                  href={order.trackingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mt-4 text-blue-600 underline">
-                  Track Order
-                </a>
-              )}
+              <p>
+                <strong>Order ID:</strong> {order.id}
+              </p>
+              <p>
+                <strong>Status:</strong> {order.status}
+              </p>
+              <p>
+                <strong>Amount:</strong> ${order.amount}
+              </p>
+              <p>
+                <strong>Payment Method:</strong> {order.paymentMethod}
+              </p>
+              <p>
+                <strong>Book Title:</strong> {order.bookTitle}
+              </p>
+              <p>
+                <strong>Author:</strong> {order.author}
+              </p>
+              <p>
+                <strong>Tracking Number:</strong> {order.trackingNumber || "Not available"}
+              </p>
+              <div className="mt-4 flex justify-end space-x-2">
+                {order.trackingUrl && (
+                  <Button variant='outline' onClick={() => window.open(order.trackingUrl, "_blank")}>Track Order</Button>
+                )}
+                <Button onClick={() => router.push(`/review`)}>Write a Review</Button>
+              </div>
             </div>
           </CardContent>
         </Card>
