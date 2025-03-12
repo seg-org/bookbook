@@ -191,7 +191,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Shipment Method</FormLabel>
                 <FormControl>
-                <Select onValueChange={field.onChange} value={field.value || ""}>
+                  <Select onValueChange={field.onChange} value={field.value || ""}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a shipping method" />
                     </SelectTrigger>
