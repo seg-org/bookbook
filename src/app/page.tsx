@@ -55,7 +55,12 @@ export default function Home() {
           </li>
           <li>
             <Link href="/checkout" className="block text-blue-600 hover:text-blue-800">
-              ทำการสั่งซื้อ (checkout)
+              ทำการสั่งซื้อ (Checkout)
+            </Link>
+          </li>
+          <li>
+            <Link href="/order-status" className="block text-blue-600 hover:text-blue-800">
+              การซื้อของฉัน (Order status)
             </Link>
           </li>
         </ul>
