@@ -46,7 +46,7 @@ export default function PostAction({
           <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
         </div>
       </Button>
-      <Button variant="success" onClick={initiate_transaction}>
+      <Button onClick={initiate_transaction}>
         <div className="flex items-center justify-center gap-x-2">
           <FaShoppingBasket className="h-6 w-6" /> เพิ่มใส่ตะกร้า
         </div>

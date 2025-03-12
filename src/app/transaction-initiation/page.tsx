@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/card";
-import Dialog, { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
+import Dialog, { DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/DialogOld";
 import { Input } from "@/components/ui/Input";
 
 export default function SellerInitiateTransaction() {

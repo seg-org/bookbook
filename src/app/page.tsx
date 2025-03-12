@@ -43,14 +43,24 @@ export default function Home() {
               🤝 แนะนำผู้ซื้อที่ตรงกับคุณ
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/transaction-initiation" className="block text-blue-600 hover:text-blue-800">
               💰 ใบเสนอขาย
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href="/transaction-history-page" className="block text-blue-600 hover:text-blue-800">
               📜 ประวัติการสั่งซื้อ
+            </Link>
+          </li>
+          <li>
+            <Link href="/checkout" className="block text-blue-600 hover:text-blue-800">
+              ทำการสั่งซื้อ (Checkout)
+            </Link>
+          </li>
+          <li>
+            <Link href="/order-status" className="block text-blue-600 hover:text-blue-800">
+              การซื้อของฉัน (Order status)
             </Link>
           </li>
         </ul>
