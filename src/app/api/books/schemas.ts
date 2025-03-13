@@ -1,6 +1,8 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
+import { BookTagType, GenreType } from "../books/book_enum";
+
 extendZodWithOpenApi(z);
 
 export const CreateBookRequest = z.object({
@@ -12,6 +14,14 @@ export const CreateBookRequest = z.object({
   pages: z.number().openapi({ example: 310 }),
   publisher: z.string().openapi({ example: "George Allen & Unwin" }),
   coverImageKey: z.string().openapi({ example: "the-hobbit.jpg" }),
+  bookGenres: z
+    .array(GenreType)
+    .optional()
+    .openapi({ example: ["FANTASY", "ADVENTURE"] }),
+  bookTags: z
+    .array(BookTagType)
+    .optional()
+    .openapi({ example: ["BESTSELLER"] }),
 });
 
 export const BookResponse = z.object({
@@ -25,6 +35,14 @@ export const BookResponse = z.object({
   publisher: z.string().openapi({ example: "George Allen & Unwin" }),
   coverImageKey: z.string().openapi({ example: "the-hobbit.jpg" }),
   coverImageUrl: z.string().openapi({ example: "https://example.com/the-hobbit.jpg" }),
+  bookGenres: z
+    .array(GenreType)
+    .optional()
+    .openapi({ example: ["FANTASY", "ADVENTURE"] }),
+  bookTags: z
+    .array(BookTagType)
+    .optional()
+    .openapi({ example: ["BESTSELLER"] }),
 });
 
 export const BooksResponse = z.array(BookResponse);
@@ -37,6 +55,14 @@ export const UpdateBookRequest = z.object({
   isbn: z.string().optional().openapi({ example: "9783161484100" }),
   pages: z.number().optional().openapi({ example: 310 }),
   coverImageKey: z.string().optional().openapi({ example: "the-hobbit.jpg" }),
+  bookGenres: z
+    .array(GenreType)
+    .optional()
+    .openapi({ example: ["FANTASY", "ADVENTURE"] }),
+  bookTags: z
+    .array(BookTagType)
+    .optional()
+    .openapi({ example: ["BESTSELLER"] }),
 });
 
 export const GenBookDescRequest = z.object({

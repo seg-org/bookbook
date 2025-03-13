@@ -11,7 +11,7 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("POSTGRES_URL")
-  directUrl = env("DIRECT_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -68,34 +68,39 @@ model SellerProfile {
 }
 
 model Book {
-  id            String @id @default(cuid())
+  id            String        @id @default(cuid())
   title         String
   author        String
   genre         String
   description   String
-  isbn          String @unique
+  isbn          String        @unique
   pages         Int
   publisher     String
-  coverImageKey String @map("cover_image_key")
+  coverImageKey String        @map("cover_image_key")
   posts         Post[]
+  bookGenres    GenreType[]
+  bookTags      BookTagType[]
   // TODO verifiedBy Admin
+  // Also get rid of genre, already have GenreType as enum
 
   @@map("books")
 }
 
 model Post {
-  id           String        @id @default(cuid())
-  title        String
-  content      String?
-  price        Int
-  published    Boolean       @default(false)
-  seller       User          @relation(fields: [sellerId], references: [id])
-  sellerId     String        @map("seller_id")
-  book         Book          @relation(fields: [bookId], references: [id])
-  bookId       String        @map("book_id")
-  transactions Transaction[]
-  ChatRoom     ChatRoom[]
-  Bookmark     Bookmark[]
+  id                  String                   @id @default(cuid())
+  title               String
+  content             String?
+  price               Int
+  published           Boolean                  @default(false)
+  seller              User                     @relation(fields: [sellerId], references: [id])
+  sellerId            String                   @map("seller_id")
+  book                Book                     @relation(fields: [bookId], references: [id])
+  bookId              String                   @map("book_id")
+  transactions        Transaction[]
+  ChatRoom            ChatRoom[]
+  Bookmark            Bookmark[]
+  specialDescriptions SpecialDescriptionType[]
+  damageURLs          String[]
 
   @@map("posts")
 }
@@ -249,4 +254,124 @@ enum ShipmentMethod {
   UNDEFINED @map("undefined")
 
   @@map("shipment_method_type")
+}
+
+// model SpecialDescription {
+//   postId      String
+//   specialType SpecialDescriptionType
+//   post        Post                   @relation(fields: [postId], references: [id])
+
+//   @@id([postId, specialType])
+//   @@map("special_descriptions")
+// }
+
+enum SpecialDescriptionType {
+  AUTHOR_SIGNATURE            @map("author_signature")
+  LIMITED_EDITION             @map("limited_edition")
+  FIRST_EDITION               @map("first_edition")
+  SPECIAL_COVER_ART           @map("special_cover_art")
+  ILLUSTRATED_EDITION         @map("illustrated_edition")
+  COLLECTORS_EDITION          @map("collectors_edition")
+  SLIPCASE_EDITION            @map("slipcase_edition")
+  LEATHER_BOUND               @map("leather_bound")
+  GILDED_EDGES                @map("gilded_edges")
+  DECKLE_EDGES                @map("deckle_edges")
+  POP_UP_ELEMENTS             @map("pop_up_elements")
+  FOLD_OUT_PAGES              @map("fold_out_pages")
+  HANDWRITTEN_NOTES_BY_AUTHOR @map("handwritten_notes_by_author")
+  PERSONALIZED_MESSAGE        @map("personalized_message")
+  NUMBERED_EDITION            @map("numbered_edition")
+  EXCLUSIVE_ARTWORK           @map("exclusive_artwork")
+  EMBOSSED_COVER              @map("embossed_cover")
+  GOLD_FOIL_STAMPING          @map("gold_foil_stamping")
+  BOX_SET                     @map("box_set")
+  ANNIVERSARY_EDITION         @map("anniversary_edition")
+  HARDCOVER_WITH_DUST_JACKET  @map("hardcover_with_dust_jacket")
+  TRANSPARENT_COVER           @map("transparent_cover")
+  ANNOTATED_EDITION           @map("annotated_edition")
+  SIGNED_BY_ILLUSTRATOR       @map("signed_by_illustrator")
+  MAP_INSERT                  @map("map_insert")
+  SUPPLEMENTARY_MATERIALS     @map("supplementary_materials")
+  EXCLUSIVE_CONTENT           @map("exclusive_content")
+  FAN_ART_EDITION             @map("fan_art_edition")
+  INTERACTIVE_ELEMENTS        @map("interactive_elements")
+  BILINGUAL_EDITION           @map("bilingual_edition")
+}
+
+// model Damage {
+//   postId           String
+//   damagePictureURL String @map("damage_picture_url")
+//   post             Post   @relation(fields: [postId], references: [id])
+
+//   @@id([postId, damagePictureURL])
+//   @@map("damages")
+// }
+
+// model Genre {
+//   bookId    String
+//   genreType GenreType
+//   book      Book      @relation(fields: [bookId], references: [id])
+
+//   @@id([bookId, genreType])
+//   @@map("book_genres")
+// }
+
+enum GenreType {
+  FICTION               @map("fiction")
+  NON_FICTION           @map("non_fiction")
+  MYSTERY               @map("mystery")
+  THRILLER              @map("thriller")
+  ROMANCE               @map("romance")
+  SCIENCE_FICTION       @map("science_fiction")
+  FANTASY               @map("fantasy")
+  HISTORICAL_FICTION    @map("historical_fiction")
+  HORROR                @map("horror")
+  BIOGRAPHY             @map("biography")
+  MEMOIR                @map("memoir")
+  SELF_HELP             @map("self_help")
+  HEALTH_WELLNESS       @map("health_wellness")
+  PSYCHOLOGY            @map("psychology")
+  POETRY                @map("poetry")
+  DRAMA                 @map("drama")
+  ADVENTURE             @map("adventure")
+  CHILDRENS_LITERATURE  @map("childrens_literature")
+  YOUNG_ADULT           @map("young_adult")
+  GRAPHIC_NOVELS_COMICS @map("graphic_novels_comics")
+  CRIME                 @map("crime")
+  TRUE_CRIME            @map("true_crime")
+  DYSTOPIAN             @map("dystopian")
+  CONTEMPORARY          @map("contemporary")
+  RELIGIOUS_SPIRITUAL   @map("religious_spiritual")
+}
+
+// model BookTag {
+//   bookId  String
+//   tagType BookTagType
+//   book    Book        @relation(fields: [bookId], references: [id])
+
+//   @@id([bookId, tagType])
+//   @@map("book_tags")
+// }
+
+enum BookTagType {
+  BESTSELLER         @map("bestseller")
+  NEW_RELEASE        @map("new_release")
+  CLASSIC            @map("classic")
+  AWARD_WINNING      @map("award_winning")
+  MUST_READ          @map("must_read")
+  HIGHLY_RECOMMENDED @map("highly_recommended")
+  INSPIRATIONAL      @map("inspirational")
+  COMING_OF_AGE      @map("coming_of_age")
+  FAMILY_SAGA        @map("family_saga")
+  HISTORICAL         @map("historical")
+  DARK_FANTASY       @map("dark_fantasy")
+  DETECTIVE          @map("detective")
+  LGBTQ_PLUS         @map("lgbtq_plus")
+  YOUNG_ADULT        @map("young_adult")
+  CHILDRENS_BOOK     @map("childrens_book")
+  SHORT_STORIES      @map("short_stories")
+  MYSTERY            @map("mystery")
+  SELF_HELP          @map("self_help")
+  THRILLER           @map("thriller")
+  ROMANTIC_COMEDY    @map("romantic_comedy")
 }

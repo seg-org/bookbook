@@ -43,12 +43,23 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
+    const data = {
+      ...parsedData.data,
+      bookGenres: parsedData.data.bookGenres ?? [],
+      bookTags: parsedData.data.bookTags ?? [],
+    };
+
     const updatedBook = await prisma.book.update({
       where: { id },
-      data: parsedData.data,
+      data,
     });
 
-    return NextResponse.json(updatedBook);
+    const updatedBookWithImageUrl = {
+      ...updatedBook,
+      coverImageUrl: getUrl("book_images", updatedBook.coverImageKey),
+    };
+
+    return NextResponse.json(updatedBookWithImageUrl);
   } catch (error) {
     if (error instanceof Error) console.error(`Error updating book with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot update the book" }, { status: 500 });
