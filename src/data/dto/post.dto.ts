@@ -1,5 +1,5 @@
-import { Book } from "./book.dto";
 import { SpecialDescriptionType } from "../../app/api/posts/post_enum";
+import { Book } from "./book.dto";
 
 export type Post = {
   id: string;
