@@ -22,7 +22,7 @@ export default function ThreeDotDropdown({ roomId, reporterId }: ReportChatRoomP
 
       {isOpen && (
         <div
-          className="absolute right-0 w-48 rounded-lg border border-gray-300 bg-white shadow-lg"
+          className="absolute right-0 w-40 rounded-lg border border-gray-300 bg-white shadow-lg"
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={() => setIsOpen(false)}
         >
@@ -33,7 +33,7 @@ export default function ThreeDotDropdown({ roomId, reporterId }: ReportChatRoomP
                 query: data,
               }}
             >
-              <li className="cursor-pointer px-4 hover:bg-gray-100">รายงานผู้ใช้</li>
+              <li className="cursor-pointer pl-2 hover:bg-gray-100">รายงานผู้ใช้</li>
             </Link>
           </ul>
         </div>
