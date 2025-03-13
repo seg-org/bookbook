@@ -51,13 +51,13 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       where: { id },
       data,
     });
-    
-    const bookWithImageUrl = {
-      ...book,
-      coverImageUrl: getUrl("book_images", book.coverImageKey),
+
+    const updatedBookWithImageUrl = {
+      ...updatedBook,
+      coverImageUrl: getUrl("book_images", updatedBook.coverImageKey),
     };
 
-    return NextResponse.json(BookResponse.parse(bookWithImageUrl));
+    return NextResponse.json(updatedBookWithImageUrl);
   } catch (error) {
     if (error instanceof Error) console.error(`Error updating book with id ${id}`, error.stack);
     return NextResponse.json({ error: "Cannot update the book" }, { status: 500 });
