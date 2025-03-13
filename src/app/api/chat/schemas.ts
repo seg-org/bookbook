@@ -1,5 +1,6 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+
 import { UserResponse } from "../auth/schemas";
 import { PostResponse } from "../posts/schemas";
 
@@ -52,4 +53,18 @@ export const MyRoomsResponse = z.array(
 
 export const ReadMessageRequest = z.object({
   userId: z.string(),
+});
+
+export const CreateChatReportRequest = z.object({
+  reporterId: z.string().openapi({ example: "user_1" }),
+  roomId: z.string().openapi({ example: "chatroom_1" }),
+  reason: z.string().openapi({ example: "This user is spamming the chat." }),
+});
+
+export const ChatReportResponse = z.object({
+  id: z.string().openapi({ example: "report_1" }),
+  reporterId: z.string().openapi({ example: "user_1" }),
+  roomId: z.string().openapi({ example: "chatroom_1" }),
+  reason: z.string().openapi({ example: "This user is spamming the chat." }),
+  createdAt: z.date().openapi({ example: "2021-09-30T15:00:00.000Z" }),
 });

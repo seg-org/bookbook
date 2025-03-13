@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { prisma } from "@/lib/prisma";
+import { getRecommendPrice } from "./getRecommendPrice";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -10,13 +10,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "book_id is required" }, { status: 400 });
   }
 
-  const result = await prisma.post.aggregate({
-    where: { bookId },
-    _avg: { price: true },
-  });
-
   return NextResponse.json({
-    recommendedPrice: result._avg.price,
+    recommendedPrice: await getRecommendPrice(bookId),
   } satisfies BookRecommendPriceResponse);
 }
 

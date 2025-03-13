@@ -1,5 +1,6 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
+
 import { PutObjectResponse } from "./schemas";
 
 export const objectRegistry = new OpenAPIRegistry();

@@ -1,13 +1,15 @@
 "use client";
 
-import { getObjectUrl, putObject } from "@/data/object";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { bookImageFolderName } from "@/constants/s3FolderName";
+import { getObjectUrl, putObject } from "@/data/object";
 
 const bookSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -68,7 +70,7 @@ export default function AddBookPage() {
   const handleFileUpload = async (file: File) => {
     setUploading(true);
     try {
-      const uploadedImage = await putObject(file);
+      const uploadedImage = await putObject(file, bookImageFolderName);
       if (uploadedImage instanceof Error) {
         throw new Error("Failed to upload cover image");
       }
@@ -118,7 +120,7 @@ export default function AddBookPage() {
   };
 
   return (
-    <div className="mx-auto mt-10 max-w-lg">
+    <div className="mx-auto my-10 max-w-lg">
       <h1 className="mb-4 text-center text-2xl font-bold">เพิ่มหนังสือเพื่อเตรียมขาย</h1>
       <p className="mb-4 text-center text-gray-500">
         หนังสือที่เพิ่มยังไม่ถือว่าประกาศขาย
@@ -131,7 +133,7 @@ export default function AddBookPage() {
           <input
             {...register("title")}
             placeholder="ชื่อหนังสือ"
-            className="input mt-1 block w-full"
+            className="mt-1 block w-full rounded p-2"
             onBlur={(e) => fetchDescription(e.target.value)}
           />
           {errors.title?.message && <p className="text-red-500">{String(errors.title.message)}</p>}
@@ -139,13 +141,13 @@ export default function AddBookPage() {
 
         <label>
           ผู้แต่ง:
-          <input {...register("author")} placeholder="ผู้แต่ง" className="input mt-1 block w-full" />
+          <input {...register("author")} placeholder="ผู้แต่ง" className="mt-1 block w-full rounded p-2" />
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
         <label>
           ประเภทหนังสือ:
-          <input {...register("genre")} placeholder="ประเภทหนังสือ" className="input mt-1 block w-full" />
+          <input {...register("genre")} placeholder="ประเภทหนังสือ" className="mt-1 block w-full rounded p-2" />
           {errors.genre?.message && <p className="text-red-500">{String(errors.genre.message)}</p>}
         </label>
 
@@ -154,20 +156,25 @@ export default function AddBookPage() {
           <textarea
             {...register("description")}
             placeholder="เนื้อเรื่องย่อ"
-            className="input mt-1 block w-full"
+            className="mt-1 block w-full rounded p-2"
           ></textarea>
           {loadingDescription && <p className="text-blue-500">กำลังสรุปเนื้อเรื่องย่อย...</p>}
         </label>
 
         <label>
           ISBN:
-          <input {...register("isbn")} placeholder="ISBN" className="input mt-1 block w-full" />
+          <input {...register("isbn")} placeholder="ISBN" className="mt-1 block w-full rounded p-2" />
           {errors.isbn?.message && <p className="text-red-500">{String(errors.isbn.message)}</p>}
         </label>
 
         <label>
           จำนวนหน้า:
-          <input type="number" {...register("pages")} placeholder="จำนวนหน้า" className="input mt-1 block w-full" />
+          <input
+            type="number"
+            {...register("pages")}
+            placeholder="จำนวนหน้า"
+            className="mt-1 block w-full rounded p-2"
+          />
           {errors.pages?.message && <p className="text-red-500">{String(errors.pages.message)}</p>}
         </label>
 
@@ -176,7 +183,7 @@ export default function AddBookPage() {
           <input
             type="file"
             accept="image/*"
-            className="input mt-1 block w-full"
+            className="mt-1 block w-full rounded p-2"
             onChange={(e) => {
               if (e.target.files && e.target.files[0]) {
                 handleFileUpload(e.target.files[0]);

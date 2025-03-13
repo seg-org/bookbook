@@ -1,6 +1,7 @@
-import { prisma } from "@/lib/prisma";
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
@@ -28,13 +29,10 @@ export async function POST(req: Request) {
       },
     });
 
-    // TODO : Add verify token
-    // const verificationToken = await generateVerificationToken(email);
-    // await sendVerificationEmail(email, verificationToken.token);
-
     return NextResponse.json({
       user: {
         id: user.id,
+        phoneNumber: user.phoneNumber,
         email: user.email,
       },
     });

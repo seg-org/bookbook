@@ -1,10 +1,9 @@
-"use client";
+import { useRouter } from "next/navigation";
+import { getSession } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export function EmailVerification() {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +13,27 @@ export function EmailVerification() {
 
   const router = useRouter();
 
+  const resendVerification = useCallback(async () => {
+    try {
+      if (!email) {
+        throw new Error("ไม่พบอีเมล");
+      }
+
+      const response = await fetch("/api/auth/resend/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "ไม่สามารถส่งอีเมลยืนยันได้");
+      }
+    } catch (error) {
+      setError(`ไม่สามารถส่งอีเมลยืนยันได้: ${error instanceof Error ? error.message : "Unknown error"}`);
+    }
+  }, [email]);
+
   useEffect(() => {
     setMounted(true);
 
@@ -22,12 +42,18 @@ export function EmailVerification() {
       if (session?.user?.email) {
         setEmail(session.user.email);
       } else {
-        setError("No email found in session.");
+        setError("ไม่พบอีเมล กรุณาเข้าสู่ระบบอีกครั้ง");
       }
     };
 
     fetchSession();
   }, []);
+
+  useEffect(() => {
+    if (email) {
+      resendVerification();
+    }
+  }, [email, resendVerification]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +65,7 @@ export function EmailVerification() {
       const token = formData.get("token");
 
       if (!email) {
-        throw new Error("Email not found.");
+        throw new Error("ไม่พบอีเมล");
       }
 
       const response = await fetch("/api/auth/verify/email", {
@@ -50,35 +76,14 @@ export function EmailVerification() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Verification failed");
+        throw new Error(errorData.error || "การยืนยันล้มเหลว");
       }
 
       router.push("/verify/phone");
     } catch (error) {
-      setError(`Invalid verification code: ${error instanceof Error ? error.message : "Unknown error"}`);
+      setError(`รหัสยืนยันไม่ถูกต้อง: ${error instanceof Error ? error.message : "Unknown error"}`);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const resendVerification = async () => {
-    try {
-      if (!email) {
-        throw new Error("Email not found.");
-      }
-
-      const response = await fetch("/api/auth/resend/email-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to resend verification");
-      }
-    } catch (error) {
-      setError(`Failed to resend verification email: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 
@@ -88,6 +93,7 @@ export function EmailVerification() {
 
   return (
     <div className="mx-auto max-w-md space-y-4">
+      <h2 className="text-center text-2xl font-bold">ยืนยันอีเมล</h2>
       {email ? (
         <p className="text-center text-gray-600">เราส่งอีเมลยืนยันให้ท่านที่ {email}</p>
       ) : (
@@ -97,7 +103,7 @@ export function EmailVerification() {
         <Input name="token" type="text" placeholder="กรอกรหัสยืนยัน" disabled={isLoading} />
         {error && <p className="text-sm text-red-500">{error}</p>}
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "กำลังยีนยัน..." : "ยืนยัน"}
+          {isLoading ? "กำลังยืนยัน..." : "ยืนยัน"}
         </Button>
       </form>
       {email && (

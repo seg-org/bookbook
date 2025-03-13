@@ -1,9 +1,9 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 function Header() {
@@ -41,6 +41,11 @@ function Header() {
               เกี่ยวกับเรา
             </Link>
           </li>
+          <li>
+            <Link href="/seller-registration" className="transition hover:text-yellow-300">
+              ลงทะเบียนผู้ขาย
+            </Link>
+          </li>
         </ul>
       </nav>
 
@@ -61,6 +66,7 @@ function Header() {
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="rounded-lg bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+              data-test-id="sign-out"
             >
               ออกจากระบบ
             </button>
@@ -85,18 +91,23 @@ function Header() {
         <div className="absolute right-6 top-16 w-48 rounded-lg bg-white p-4 shadow-lg md:hidden">
           <ul className="space-y-3 text-gray-900">
             <li>
-              <Link href="#" className="block rounded px-3 py-2 hover:bg-gray-100">
+              <Link href="/search" className="block rounded px-3 py-2 hover:bg-gray-100">
                 ค้นหาหนังสือ
               </Link>
             </li>
             <li>
-              <Link href="#" className="block rounded px-3 py-2 hover:bg-gray-100">
+              <Link href="/transaction-history-page" className="block rounded px-3 py-2 hover:bg-gray-100">
                 ประวัติการสั่งซื้อ
               </Link>
             </li>
             <li>
-              <Link href="#" className="block rounded px-3 py-2 hover:bg-gray-100">
-                ติดต่อเรา
+              <Link href="/about-us" className="block rounded px-3 py-2 hover:bg-gray-100">
+                เกี่ยวกับเรา
+              </Link>
+            </li>
+            <li>
+              <Link href="/seller-registration" className="block rounded px-3 py-2 hover:bg-gray-100">
+                ลงทะเบียนผู้ขาย
               </Link>
             </li>
           </ul>

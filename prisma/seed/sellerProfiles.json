@@ -1,102 +1,102 @@
 [
-    {
-        "id": "seller_profile_1",
-        "idCardNumber": "2303684062",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "4945462807",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2024-05-15T00:00:00.000Z",
-        "userId": "user_1"
-    },
-    {
-        "id": "seller_profile_2",
-        "idCardNumber": "4642199071",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "3164681286",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2024-09-01T00:00:00.000Z",
-        "userId": "user_2"
-    },
-    {
-        "id": "seller_profile_3",
-        "idCardNumber": "2001559816",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "7635700957",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2024-04-04T00:00:00.000Z",
-        "userId": "user_3"
-    },
-    {
-        "id": "seller_profile_4",
-        "idCardNumber": "3421153159",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "7892598600",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2024-09-23T00:00:00.000Z",
-        "userId": "user_4"
-    },
-    {
-        "id": "seller_profile_5",
-        "idCardNumber": "6051211088",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "4537562776",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2024-02-26T00:00:00.000Z",
-        "userId": "user_5"
-    },
-    {
-        "id": "seller_profile_6",
-        "idCardNumber": "9666374109",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "4505720894",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2024-01-28T00:00:00.000Z",
-        "userId": "user_6"
-    },
-    {
-        "id": "seller_profile_7",
-        "idCardNumber": "4474561642",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "3014054621",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2021-07-01T00:00:00.000Z",
-        "userId": "user_7"
-    },
-    {
-        "id": "seller_profile_8",
-        "idCardNumber": "6078994048",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "3432998039",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2021-07-09T00:00:00.000Z",
-        "userId": "user_8"
-    },
-    {
-        "id": "seller_profile_9",
-        "idCardNumber": "6480239334",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "7347243930",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2024-06-20T00:00:00.000Z",
-        "userId": "user_9"
-    },
-    {
-        "id": "seller_profile_10",
-        "idCardNumber": "6396166762",
-        "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
-        "bankAccount": "3806215541",
-        "bankName": "SCB",
-        "isApproved": true,
-        "approvedAt": "2021-06-28T00:00:00.000Z",
-        "userId": "user_10"
-    }
+  {
+    "id": "seller_profile_1",
+    "idCardNumber": "1238411964",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "2951488761",
+    "bankName": "Kasikorn Bank",
+    "isApproved": true,
+    "approvedAt": "2021-08-04T11:55:39.050Z",
+    "userId": "user_1"
+  },
+  {
+    "id": "seller_profile_2",
+    "idCardNumber": "4692802287",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "2549717849",
+    "bankName": "Krungthai Bank",
+    "isApproved": true,
+    "approvedAt": "2023-03-18T18:36:17.171Z",
+    "userId": "user_2"
+  },
+  {
+    "id": "seller_profile_3",
+    "idCardNumber": "1649018752",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "1270549853",
+    "bankName": "Bangkok Bank",
+    "isApproved": true,
+    "approvedAt": "2023-07-19T19:39:34.156Z",
+    "userId": "user_3"
+  },
+  {
+    "id": "seller_profile_4",
+    "idCardNumber": "9103614472",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "8071357090",
+    "bankName": "Kasikorn Bank",
+    "isApproved": true,
+    "approvedAt": "2023-08-28T11:40:27.702Z",
+    "userId": "user_4"
+  },
+  {
+    "id": "seller_profile_5",
+    "idCardNumber": "7629412580",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "3622464689",
+    "bankName": "Krungthai Bank",
+    "isApproved": true,
+    "approvedAt": "2020-06-22T10:02:12.819Z",
+    "userId": "user_5"
+  },
+  {
+    "id": "seller_profile_6",
+    "idCardNumber": "7914641849",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "7411869598",
+    "bankName": "CIMB Thai Bank",
+    "isApproved": true,
+    "approvedAt": "2020-07-12T09:33:36.794Z",
+    "userId": "user_6"
+  },
+  {
+    "id": "seller_profile_7",
+    "idCardNumber": "6559566735",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "7285658286",
+    "bankName": "Krungthai Bank",
+    "isApproved": true,
+    "approvedAt": "2022-04-20T04:15:26.957Z",
+    "userId": "user_7"
+  },
+  {
+    "id": "seller_profile_8",
+    "idCardNumber": "5195952209",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "2822186643",
+    "bankName": "Bangkok Bank",
+    "isApproved": true,
+    "approvedAt": "2023-12-06T16:57:32.124Z",
+    "userId": "user_8"
+  },
+  {
+    "id": "seller_profile_9",
+    "idCardNumber": "5718333326",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "6542467768",
+    "bankName": "Bangkok Bank",
+    "isApproved": true,
+    "approvedAt": "2022-09-15T23:57:05.407Z",
+    "userId": "user_9"
+  },
+  {
+    "id": "seller_profile_10",
+    "idCardNumber": "3300557293",
+    "idCardImage": "./prisma/seed/images/idCard/thai-national-id-card.jpg",
+    "bankAccount": "6016354574",
+    "bankName": "Bank of Ayudhya (Krungsri Bank)",
+    "isApproved": true,
+    "approvedAt": "2021-04-07T15:06:08.134Z",
+    "userId": "user_10"
+  }
 ]

@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
+
 import { Post } from "@/data/dto/post.dto";
 import { getPost } from "@/data/post";
-import { useEffect, useState } from "react";
 
 export const useGetPost = (id: string) => {
   const [loading, setLoading] = useState(true);

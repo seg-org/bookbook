@@ -36,6 +36,7 @@ model User {
   posts            Post[]
   chatMessages     ChatMessage[]
   Bookmark         Bookmark[]
+  ChatReport       ChatReport[]
 
   @@map("users")
 }
@@ -130,18 +131,31 @@ model ChatMessage {
 }
 
 model ChatRoom {
-  id        String        @id @default(cuid())
-  post      Post          @relation(fields: [postId], references: [id])
-  postId    String        @map("post_id")
+  id         String        @id @default(cuid())
+  post       Post          @relation(fields: [postId], references: [id])
+  postId     String        @map("post_id")
   // TODO: add report
-  userIds   String[]      @map("user_ids")
-  createdAt DateTime      @default(now()) @map("created_at")
-  lastReadA DateTime      @default(now()) @map("last_read_a")
-  lastReadB DateTime      @default(now()) @map("last_read_b")
-  messages  ChatMessage[]
+  userIds    String[]      @map("user_ids")
+  createdAt  DateTime      @default(now()) @map("created_at")
+  lastReadA  DateTime      @default(now()) @map("last_read_a")
+  lastReadB  DateTime      @default(now()) @map("last_read_b")
+  messages   ChatMessage[]
+  chatReport ChatReport[]
 
   @@index([postId])
   @@map("chat_rooms")
+}
+
+model ChatReport {
+  id         String   @id @default(cuid())
+  reporter   User     @relation(fields: [reporterId], references: [id])
+  reporterId String   @map("reporter_id")
+  room       ChatRoom @relation(fields: [roomId], references: [id])
+  roomId     String   @map("room_id")
+  reason     String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("chat_reports")
 }
 
 model Transaction {
@@ -166,6 +180,8 @@ model Transaction {
   shipmentMethod ShipmentMethod    @map("shipment_method")
   trackingURL    String            @map("tracking_url")
   isDelivered    Boolean           @map("is_delivered")
+  // review
+  review         Review?
 
   @@index([buyerId, createdAt])
   @@index([sellerId, createdAt])
@@ -183,18 +199,43 @@ model TransactionFail {
   @@map("transaction_fails")
 }
 
+model Review {
+  id            String      @id @default(cuid())
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  transactionId String      @unique @map("transaction_id")
+  rating        Int         @default(0) // 1-5 star rating
+  comment       String?
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  @@index([transactionId])
+  @@map("reviews")
+}
+
+model Cart {
+  userId String @id
+  postId String
+}
+
 enum TransactionStatus {
-  APPROVING @map("approving")
-  PAYING    @map("paying")
-  VERIFYING @map("verifying")
-  COMPLETE  @map("complete")
-  FAIL      @map("fail")
+  APPROVING  @map("approving")
+  PAYING     @map("paying")
+  PACKING    @map("packing")
+  DELIVERING @map("delivering")
+  COMPLETE   @map("complete")
+  HOLD       @map("hold")
+  FAIL       @map("fail")
 
   @@map("transaction_status_type")
 }
 
 enum TransactionFailType {
-  CHEAT @map("cheat")
+  UNDELIVERED @map("undelivered")
+  UNQUALIFIED @map("unqualified")
+  REJECT      @map("reject")
+  TERMINATION @map("termination")
+  OTHER       @map("other")
+  UNDEFINED   @map("undefined")
 
   @@map("transaction_fail_type")
 }
@@ -202,12 +243,15 @@ enum TransactionFailType {
 enum PaymentMethod {
   CREDIT_CARD    @map("credit_card")
   ONLINE_BANKING @map("online_banking")
+  UNDEFINED      @map("undefined")
 
   @@map("payment_method_type")
 }
 
 enum ShipmentMethod {
-  DELIVERY @map("delivery")
+  STANDARD  @map("standard")
+  EXPRESS   @map("express")
+  UNDEFINED @map("undefined")
 
   @@map("shipment_method_type")
 }

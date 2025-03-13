@@ -1,8 +1,11 @@
-import { useChatContext } from "@/context/chatContext";
-import { ChatRoom } from "@/data/dto/chat.dto";
 import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+import { useChatContext } from "@/context/chatContext";
+import { ChatRoom } from "@/data/dto/chat.dto";
+
+import ThreeDotDropdown from "./ThreedotMenu";
 
 type ChatRoomCardProps = {
   chatRoom: ChatRoom;
@@ -10,11 +13,11 @@ type ChatRoomCardProps = {
   userId: string;
 };
 
-const cut = (s: string, n: number) => {
-  if (s.length > n) {
-    return s.slice(0, n) + "...";
+const cut = (str: string, maxLength: number) => {
+  if (str.length > maxLength) {
+    return str.slice(0, maxLength) + "...";
   }
-  return s;
+  return str;
 };
 
 export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) => {
@@ -35,26 +38,32 @@ export const ChatRoomCard = ({ chatRoom, isActive, userId }: ChatRoomCardProps) 
   return (
     <div
       className={clsx(
-        "flex h-[10%] w-full space-x-4 p-2 px-4 hover:cursor-pointer hover:bg-gray-200",
+        "flex h-[10%] w-full justify-between space-x-4 p-2 px-4 hover:cursor-pointer hover:bg-gray-200",
         isActive ? "bg-gray-200" : "bg-gray-50"
       )}
       onClick={() => changeCurrentRoom(chatRoom, userId)}
+      data-test-id="chat-room"
     >
-      <div className="flex h-full items-center">
-        <Image
-          className="h-16 w-16 rounded-full object-cover"
-          src={chatRoom.post.book.coverImageUrl}
-          width={100}
-          height={100}
-          objectFit="cover"
-          alt="Book Cover"
-        />
+      <div className="flex space-x-4">
+        <div className="flex h-full items-center">
+          <Image
+            className="h-16 w-16 rounded-full object-cover"
+            src={chatRoom.post.book.coverImageUrl}
+            width={100}
+            height={100}
+            objectFit="cover"
+            alt="Book Cover"
+          />
+        </div>
+        <div className="flex flex-col justify-center">
+          <p>{`${chatRoom.userB.firstName} ${chatRoom.userB.lastName}`}</p>
+          <p className={clsx(haveUnreadMessages ? "font-bold text-black" : "text-gray-500")}>
+            {chatRoom.lastMessage && cut(chatRoom.lastMessage.message, 40)}
+          </p>
+        </div>
       </div>
-      <div className="flex flex-col justify-center">
-        <p>{`${chatRoom.userB.firstName} ${chatRoom.userB.lastName}`}</p>
-        <p className={clsx(haveUnreadMessages ? "font-bold text-black" : "text-gray-500")}>
-          {chatRoom.lastMessage && cut(chatRoom.lastMessage.message, 40)}
-        </p>
+      <div className="justify-end self-center">
+        <ThreeDotDropdown roomId={chatRoom.id} reporterId={chatRoom.userIds[0]}></ThreeDotDropdown>
       </div>
     </div>
   );

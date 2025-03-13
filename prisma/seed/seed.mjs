@@ -1,25 +1,44 @@
 // @ts-check
 
+import { S3Client } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
 import { PaymentMethod, PrismaClient, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
-import AWS from "aws-sdk";
 import { hash } from "bcrypt";
 import fs from "fs";
 import { basename } from "path";
+import { z } from "zod";
+
 import booksData from "./books.json" with { type: "json" };
+import chatMessagesData from "./chatMessages.json" with { type: "json" };
+import chatReportsData from "./chatReports.json" with { type: "json" };
+import chatRoomsData from "./chatRooms.json" with { type: "json" };
 import postsData from "./posts.json" with { type: "json" };
 import sellerProfilesData from "./sellerProfiles.json" with { type: "json" };
 import transactionsData from "./transactions.json" with { type: "json" };
 import transactionsFailData from "./transactionsFail.json" with { type: "json" };
 import usersData from "./users.json" with { type: "json" };
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
+const prisma = new PrismaClient();
+
+const awsEnvSchema = z.object({
+  AWS_ENDPOINT: z.string().optional(),
+  AWS_ACCESS_KEY_ID: z.string(),
+  AWS_SECRET_ACCESS_KEY: z.string(),
+  AWS_REGION: z.string(),
+  AWS_BUCKET_NAME: z.string(),
 });
 
-const prisma = new PrismaClient();
-const s3 = new AWS.S3();
+const awsEnv = awsEnvSchema.parse(process.env);
+
+const s3 = new S3Client({
+  endpoint: awsEnv.AWS_ENDPOINT,
+  region: awsEnv.AWS_REGION,
+  credentials: {
+    accessKeyId: awsEnv.AWS_ACCESS_KEY_ID,
+    secretAccessKey: awsEnv.AWS_SECRET_ACCESS_KEY,
+  },
+  forcePathStyle: !!awsEnv.AWS_ENDPOINT,
+});
 
 /**
  * Uploads a file to S3
@@ -33,13 +52,18 @@ const uploadToBucket = async (folder, filePath) => {
     const fileContentType = "image/jpeg";
 
     const uploadParams = {
-      Bucket: process.env.AWS_BUCKET_NAME || "",
+      Bucket: awsEnv.AWS_BUCKET_NAME,
       Key: `${folder}/${Date.now()}-${fileName}`,
       Body: buffer,
       ContentType: fileContentType,
     };
 
-    const data = await s3.upload(uploadParams).promise();
+    const upload = new Upload({
+      client: s3,
+      params: uploadParams,
+    });
+
+    const data = await upload.done();
 
     return data.Key;
   } catch (error) {
@@ -50,15 +74,15 @@ const uploadToBucket = async (folder, filePath) => {
 
 const users = await prisma.user.findMany();
 if (users.length === 0) {
-  usersData.forEach(async (user) => {
-    const hashedPassword = await hash(user.password, 10);
-    await prisma.user.create({
-      data: {
-        ...user,
-        password: hashedPassword,
-      },
-    });
+  const userInsertValues = usersData.map(async (user) => ({
+    ...user,
+    password: await hash(user.password, 10),
+  }));
+
+  await prisma.user.createMany({
+    data: await Promise.all(userInsertValues),
   });
+
   console.log("Users seeded successfully");
 }
 
@@ -67,7 +91,7 @@ if (sellerProfiles.length === 0) {
   const sellerProfileWithKey = await Promise.all(
     sellerProfilesData.map(async (sellerProfile) => {
       const keyWithFolder = await uploadToBucket("idCard_images", sellerProfile.idCardImage);
-      const key = keyWithFolder.split("/")[1];
+      const key = keyWithFolder?.split("/")[1] ?? "";
       return {
         id: sellerProfile.id,
         idCardNumber: sellerProfile.idCardNumber,
@@ -99,7 +123,7 @@ if (books.length === 0) {
         bookImageKeys.set(
           normalizedPath,
           uploadToBucket("book_images", book.coverImagePath).then((keyWithFolder) => {
-            const extractedKey = keyWithFolder.split("/")[1];
+            const extractedKey = keyWithFolder?.split("/")[1] ?? "";
             bookImageKeys.set(normalizedPath, extractedKey);
             return extractedKey;
           })
@@ -136,6 +160,30 @@ if (posts.length === 0) {
   console.log("Posts seeded successfully");
 }
 
+const chatRooms = await prisma.chatRoom.findMany();
+if (chatRooms.length === 0) {
+  await prisma.chatRoom.createMany({
+    data: chatRoomsData,
+  });
+  console.log("chatRooms seeded successfully");
+}
+
+const chatMessages = await prisma.chatMessage.findMany();
+if (chatMessages.length === 0) {
+  await prisma.chatMessage.createMany({
+    data: chatMessagesData,
+  });
+  console.log("chatMessages seeded successfully");
+}
+
+const chatReports = await prisma.chatReport.findMany();
+if (chatReports.length === 0) {
+  await prisma.chatReport.createMany({
+    data: chatReportsData,
+  });
+  console.log("chatReports seeded successfully");
+}
+
 const transactions = await prisma.transaction.findMany();
 if (transactions.length === 0) {
   await prisma.transaction.createMany({
@@ -144,15 +192,20 @@ if (transactions.length === 0) {
       status:
         (entry.status == "APPROVING" && TransactionStatus.APPROVING) ||
         (entry.status == "PAYING" && TransactionStatus.PAYING) ||
-        (entry.status == "VERIFYING" && TransactionStatus.VERIFYING) ||
+        (entry.status == "PACKING" && TransactionStatus.PACKING) ||
+        (entry.status == "DELIVERING" && TransactionStatus.DELIVERING) ||
         (entry.status == "COMPLETE" && TransactionStatus.COMPLETE) ||
+        (entry.status == "HOLD" && TransactionStatus.HOLD) ||
         (entry.status == "FAIL" && TransactionStatus.FAIL) ||
         TransactionStatus.APPROVING,
       paymentMethod:
         (entry.paymentMethod == "CREDIT_CARD" && PaymentMethod.CREDIT_CARD) ||
         (entry.paymentMethod == "ONLINE_BANKING" && PaymentMethod.ONLINE_BANKING) ||
-        PaymentMethod.CREDIT_CARD,
-      shipmentMethod: (entry.shipmentMethod == "DELIVERY" && ShipmentMethod.DELIVERY) || ShipmentMethod.DELIVERY,
+        PaymentMethod.UNDEFINED,
+      shipmentMethod:
+        (entry.shipmentMethod == "STANDARD" && ShipmentMethod.STANDARD) ||
+        (entry.shipmentMethod == "EXPRESS" && ShipmentMethod.EXPRESS) ||
+        ShipmentMethod.UNDEFINED,
     })),
   });
   console.log("Transaction seeded successful");
@@ -163,7 +216,13 @@ if (transactionsFail.length === 0) {
   await prisma.transactionFail.createMany({
     data: transactionsFailData.map((entry) => ({
       ...entry,
-      failType: (entry.failType == "CHEAT" && TransactionFailType.CHEAT) || TransactionFailType.CHEAT,
+      failType:
+        (entry.failType == "UNDELIVERED" && TransactionFailType.UNDELIVERED) ||
+        (entry.failType == "UNQUALIFIED" && TransactionFailType.UNQUALIFIED) ||
+        (entry.failType == "REJECT" && TransactionFailType.REJECT) ||
+        (entry.failType == "TERMINATION" && TransactionFailType.TERMINATION) ||
+        (entry.failType == "OTHER" && TransactionFailType.OTHER) ||
+        TransactionFailType.UNDEFINED,
     })),
   });
   console.log("TransctionFail seeded successful");

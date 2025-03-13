@@ -1,8 +1,11 @@
-import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
+
 import { getUrl } from "../objects/s3";
-import { CreatePostRequest, PostResponse, PostsResponse } from "./schemas";
+import { CreatePostRequest, GetPostsRequest, PostResponse, PostsResponsePaginated } from "./schemas";
 
 export async function POST(req: NextRequest) {
   try {
@@ -58,24 +61,60 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const url = new URL(req.url);
+    const rawQueryParams = Object.fromEntries(url.searchParams.entries());
+    const validatedParams = GetPostsRequest.safeParse(rawQueryParams);
+    if (!validatedParams.success) {
+      return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
+    }
+
+    const { page, limit, sortPrice, ...filters } = validatedParams.data;
+    const orderBy = sortPrice ? { price: sortPrice } : {};
+    const skip = (page - 1) * limit;
+
+    const bookFilter: Prisma.BookWhereInput = {
+      title: filters.title ? { contains: filters.title, mode: "insensitive" } : undefined,
+      author: filters.author ? { contains: filters.author, mode: "insensitive" } : undefined,
+      genre: filters.genre ? { contains: filters.genre, mode: "insensitive" } : undefined,
+      description: filters.description ? { contains: filters.description, mode: "insensitive" } : undefined,
+      isbn: filters.isbn ? { contains: filters.isbn, mode: "insensitive" } : undefined,
+      publisher: filters.publisher ? { contains: filters.publisher, mode: "insensitive" } : undefined,
+    };
+
     const posts = await prisma.post.findMany({
+      where: {
+        book: bookFilter,
+        published: true,
+      },
       include: { book: true },
+      skip,
+      take: limit,
+      orderBy,
     });
 
+    const totalPosts = await prisma.post.count({
+      where: {
+        book: bookFilter,
+        published: true,
+      },
+    });
+    const totalPages = Math.ceil(totalPosts / limit);
+
     const postsWithImageUrl = posts.map((post) => {
-      const url = getUrl("book_images", post.book.coverImageKey);
       return {
         ...post,
         book: {
           ...post.book,
-          coverImageUrl: url,
+          coverImageUrl: getUrl("book_images", post.book.coverImageKey),
         },
       };
     });
 
-    return NextResponse.json(PostsResponse.parse(postsWithImageUrl));
+    return NextResponse.json(
+      PostsResponsePaginated.parse({ posts: postsWithImageUrl, total: totalPosts, totalPages, page })
+    );
   } catch (error) {
     if (error instanceof Error) console.error("Error getting posts", error.stack);
     return NextResponse.json({ error: "Cannot get posts" }, { status: 500 });

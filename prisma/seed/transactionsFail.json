@@ -1,107 +1,226 @@
 [
     {
         "id": "transaction_fail_1",
-        "transactionId": "transaction_5",
+        "transactionId": "transaction_1",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Expired payment method",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_2",
-        "transactionId": "transaction_9",
+        "transactionId": "transaction_2",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Duplicate order detected",
+        "failType": "OTHER"
     },
     {
         "id": "transaction_fail_3",
-        "transactionId": "transaction_10",
+        "transactionId": "transaction_5",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Technical issue during payment",
+        "failType": "TERMINATION"
     },
     {
         "id": "transaction_fail_4",
-        "transactionId": "transaction_16",
+        "transactionId": "transaction_14",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "System error during checkout",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_5",
-        "transactionId": "transaction_21",
+        "transactionId": "transaction_22",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Payment declined by bank",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_6",
-        "transactionId": "transaction_23",
+        "transactionId": "transaction_25",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Shipping address invalid",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_7",
-        "transactionId": "transaction_35",
+        "transactionId": "transaction_26",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Out of stock",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_8",
-        "transactionId": "transaction_48",
+        "transactionId": "transaction_30",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Expired payment method",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_9",
-        "transactionId": "transaction_50",
+        "transactionId": "transaction_34",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "System error during checkout",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_10",
-        "transactionId": "transaction_54",
+        "transactionId": "transaction_35",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Invalid payment information",
+        "failType": "OTHER"
     },
     {
         "id": "transaction_fail_11",
-        "transactionId": "transaction_55",
+        "transactionId": "transaction_38",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Discount code invalid",
+        "failType": "REJECT"
     },
     {
         "id": "transaction_fail_12",
-        "transactionId": "transaction_58",
+        "transactionId": "transaction_40",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Technical issue during payment",
+        "failType": "UNDEFINED"
     },
     {
         "id": "transaction_fail_13",
-        "transactionId": "transaction_72",
+        "transactionId": "transaction_47",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "System error during checkout",
+        "failType": "UNQUALIFIED"
     },
     {
         "id": "transaction_fail_14",
-        "transactionId": "transaction_73",
+        "transactionId": "transaction_56",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Technical issue during payment",
+        "failType": "UNQUALIFIED"
     },
     {
         "id": "transaction_fail_15",
-        "transactionId": "transaction_76",
+        "transactionId": "transaction_57",
         "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "detail": "He has a skin color I don't like",
-        "failType": "CHEAT"
+        "detail": "Discount code invalid",
+        "failType": "UNDEFINED"
+    },
+    {
+        "id": "transaction_fail_16",
+        "transactionId": "transaction_60",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Transaction timeout",
+        "failType": "UNDEFINED"
+    },
+    {
+        "id": "transaction_fail_17",
+        "transactionId": "transaction_62",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "System error during checkout",
+        "failType": "REJECT"
+    },
+    {
+        "id": "transaction_fail_18",
+        "transactionId": "transaction_63",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Technical issue during payment",
+        "failType": "UNDELIVERED"
+    },
+    {
+        "id": "transaction_fail_19",
+        "transactionId": "transaction_66",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Customer canceled the order",
+        "failType": "OTHER"
+    },
+    {
+        "id": "transaction_fail_20",
+        "transactionId": "transaction_71",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "System error during checkout",
+        "failType": "OTHER"
+    },
+    {
+        "id": "transaction_fail_21",
+        "transactionId": "transaction_75",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Invalid payment information",
+        "failType": "UNDEFINED"
+    },
+    {
+        "id": "transaction_fail_22",
+        "transactionId": "transaction_86",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Buyer did not complete payment",
+        "failType": "UNDELIVERED"
+    },
+    {
+        "id": "transaction_fail_23",
+        "transactionId": "transaction_88",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Technical issue during payment",
+        "failType": "TERMINATION"
+    },
+    {
+        "id": "transaction_fail_24",
+        "transactionId": "transaction_91",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Invalid payment information",
+        "failType": "OTHER"
+    },
+    {
+        "id": "transaction_fail_25",
+        "transactionId": "transaction_94",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Fraud detection triggered",
+        "failType": "UNDEFINED"
+    },
+    {
+        "id": "transaction_fail_26",
+        "transactionId": "transaction_96",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Seller canceled the order",
+        "failType": "REJECT"
+    },
+    {
+        "id": "transaction_fail_27",
+        "transactionId": "transaction_101",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Transaction timeout",
+        "failType": "UNQUALIFIED"
+    },
+    {
+        "id": "transaction_fail_28",
+        "transactionId": "transaction_103",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Discount code invalid",
+        "failType": "UNDEFINED"
+    },
+    {
+        "id": "transaction_fail_29",
+        "transactionId": "transaction_106",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Delivery service unavailable",
+        "failType": "UNDEFINED"
+    },
+    {
+        "id": "transaction_fail_30",
+        "transactionId": "transaction_112",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Payment declined by bank",
+        "failType": "TERMINATION"
+    },
+    {
+        "id": "transaction_fail_31",
+        "transactionId": "transaction_114",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "System error during checkout",
+        "failType": "UNDELIVERED"
+    },
+    {
+        "id": "transaction_fail_32",
+        "transactionId": "transaction_117",
+        "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "detail": "Discount code invalid",
+        "failType": "UNDEFINED"
     }
 ]
