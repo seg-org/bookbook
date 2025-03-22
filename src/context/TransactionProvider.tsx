@@ -19,18 +19,30 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
   const [endDate, setEndDate] = useState<Date>(endOfTime);
   const [asBuyer, setAsBuyer] = useState(true);
   const [asSeller, setAsSeller] = useState(true);
+  const [isDelivering, setIsDelivering] = useState(true);
+  const [isHold, setIsHold] = useState(true);
+  const [isCompleted, setIsCompleted] = useState(true);
+  const [isFailed, setIsFailed] = useState(true);
   const filter = useMemo(
     () => ({
       startDate,
       endDate,
       asBuyer,
       asSeller,
+      isDelivering,
+      isHold,
+      isCompleted,
+      isFailed,
       setStartDate,
       setEndDate,
       setAsBuyer,
       setAsSeller,
+      setIsDelivering,
+      setIsHold,
+      setIsCompleted,
+      setIsFailed,
     }),
-    [startDate, endDate, asBuyer, asSeller]
+    [startDate, endDate, asBuyer, asSeller, isDelivering, isHold, isCompleted, isFailed]
   );
 
   const [selectingPage, setSelectingPage] = useState(1);

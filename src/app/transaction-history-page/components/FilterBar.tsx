@@ -11,7 +11,7 @@ const FilterBar = () => {
   const { filter, totalBuy, totalSell } = useTransactionContext();
 
   return (
-    <div className="flex flex-col items-center justify-between space-y-2.5 bg-blue-400 p-2.5 shadow-xl 2xl:flex-row 2xl:space-y-0">
+    <div className="flex flex-col items-center justify-between space-y-2.5 bg-blue-400 p-2.5 pl-6 pr-6 shadow-xl 2xl:flex-row 2xl:space-y-0">
       <div className="flex flex-col justify-start space-x-0 space-y-2.5 xl:flex-row xl:space-x-2.5 xl:space-y-0">
         <div className="flex flex-row items-center justify-start space-x-2.5 pl-12 xl:justify-center xl:space-x-2.5 xl:pl-0">
           <label className="font-medium text-white">ตั้งแต่วันที่</label>
