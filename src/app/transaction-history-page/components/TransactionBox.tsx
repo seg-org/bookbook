@@ -40,7 +40,7 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
         width={90}
       ></Image>
       <div className="flex h-full w-full flex-col p-3">
-        <div className="flex h-full flex-row justify-between">
+        <div className="flex h-full flex-row justify-between space-x-2.5">
           <div className="flex h-full flex-col justify-between">
             <div className="flex flex-col">
               <label className="text-xl font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>
