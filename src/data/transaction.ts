@@ -24,6 +24,15 @@ interface TransactionCount {
   asSeller?: boolean;
 }
 
+interface TransactionAmount {
+  userId?: string;
+
+  startDate?: Date;
+  endDate?: Date;
+  asBuyer?: boolean;
+  asSeller?: boolean;
+}
+
 interface TransactionUpDate {
   id: string;
   status?: string;
@@ -51,12 +60,12 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
       skip?: number;
       take?: number;
     } = {
-      ...(query.userId ? { userId: query.userId } : {}),
-      ...(query.startDate ? { startDate: query.startDate } : {}),
-      ...(query.endDate ? { endDate: query.endDate } : {}),
-      ...(query.asBuyer ? { asBuyer: query.asBuyer } : {}),
-      ...(query.asSeller ? { asSeller: query.asSeller } : {}),
-      ...(query.skip ? { skip: query.skip } : {}),
+      ...(query.userId !== undefined ? { userId: query.userId } : {}),
+      ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
+      ...(query.endDate !== undefined ? { endDate: query.endDate } : {}),
+      ...(query.asBuyer !== undefined ? { asBuyer: query.asBuyer } : {}),
+      ...(query.asSeller !== undefined ? { asSeller: query.asSeller } : {}),
+      ...(query.skip !== undefined ? { skip: query.skip } : {}),
       ...(query.take && query.take >= 0 ? { take: query.take } : {}),
     };
 
@@ -90,6 +99,30 @@ export const getTransaction = async (id: string) => {
   }
 };
 
+export const getTransactionAmount = async (query: TransactionAmount) => {
+  try {
+    const params: {
+      userId?: string;
+      startDate?: Date;
+      endDate?: Date;
+      asBuyer?: boolean;
+      asSeller?: boolean;
+    } = {
+      ...(query.userId !== undefined ? { userId: query.userId } : {}),
+      ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
+      ...(query.endDate !== undefined ? { endDate: query.endDate } : {}),
+      ...(query.asBuyer !== undefined ? { asBuyer: query.asBuyer } : {}),
+      ...(query.asSeller !== undefined ? { asSeller: query.asSeller } : {}),
+    };
+    const res: AxiosResponse<number> = await apiClient.get("/transaction/amount", { params });
+
+    return res.data;
+  } catch (error) {
+    console.error("Failed to get transaction amount", error);
+    return Error("Failed to get transaction amount");
+  }
+};
+
 export const getTransactionCount = async (query: TransactionCount) => {
   try {
     const params: {
@@ -99,11 +132,11 @@ export const getTransactionCount = async (query: TransactionCount) => {
       asBuyer?: boolean;
       asSeller?: boolean;
     } = {
-      ...(query.userId ? { userId: query.userId } : {}),
-      ...(query.startDate ? { startDate: query.startDate } : {}),
-      ...(query.endDate ? { endDate: query.endDate } : {}),
-      ...(query.asBuyer ? { asBuyer: query.asBuyer } : {}),
-      ...(query.asSeller ? { asSeller: query.asSeller } : {}),
+      ...(query.userId !== undefined ? { userId: query.userId } : {}),
+      ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
+      ...(query.endDate !== undefined ? { endDate: query.endDate } : {}),
+      ...(query.asBuyer !== undefined ? { asBuyer: query.asBuyer } : {}),
+      ...(query.asSeller !== undefined ? { asSeller: query.asSeller } : {}),
     };
     const res: AxiosResponse<number> = await apiClient.get("/transaction/count", { params });
 
@@ -129,15 +162,15 @@ export const updateTransaction = async (query: TransactionUpDate) => {
       detail?: string;
       failType?: string;
     } = {
-      ...(query.status ? { status: query.status } : {}),
-      ...(query.isDelivered ? { isDelivered: query.isDelivered } : {}),
-      ...(query.trackingURL ? { trackingURL: query.trackingURL } : {}),
-      ...(query.paymentMethod ? { paymentMethod: query.paymentMethod } : {}),
-      ...(query.hashId ? { hashId: query.hashId } : {}),
-      ...(query.shipmentMethod ? { shipmentMethod: query.shipmentMethod } : {}),
-      ...(query.evidenceURL ? { evidenceURL: query.evidenceURL } : {}),
-      ...(query.detail ? { detail: query.detail } : {}),
-      ...(query.failType ? { failType: query.failType } : {}),
+      ...(query.status !== undefined ? { status: query.status } : {}),
+      ...(query.isDelivered !== undefined ? { isDelivered: query.isDelivered } : {}),
+      ...(query.trackingURL !== undefined ? { trackingURL: query.trackingURL } : {}),
+      ...(query.paymentMethod !== undefined ? { paymentMethod: query.paymentMethod } : {}),
+      ...(query.hashId !== undefined ? { hashId: query.hashId } : {}),
+      ...(query.shipmentMethod !== undefined ? { shipmentMethod: query.shipmentMethod } : {}),
+      ...(query.evidenceURL !== undefined ? { evidenceURL: query.evidenceURL } : {}),
+      ...(query.detail !== undefined ? { detail: query.detail } : {}),
+      ...(query.failType !== undefined ? { failType: query.failType } : {}),
     };
 
     await apiClient.patch(`/transaction/${id}`, params);

@@ -39,6 +39,11 @@ interface TransactionContext {
   transactions: Transaction[];
   transactionsLoading: boolean;
   transactionsError: Error | null;
+  transactionCount: number;
+  transactionCountLoading: boolean;
+  transactionCountError: Error | null;
+  transactionAmountLoading: boolean;
+  transactionAmountError: Error | null;
   selectingTransaction: string;
   setSelectingTransaction: (val: string) => void;
 }
@@ -73,6 +78,11 @@ export const TransactionContext = createContext<TransactionContext>({
   transactions: [],
   transactionsLoading: false,
   transactionsError: null,
+  transactionCount: 0,
+  transactionCountLoading: false,
+  transactionCountError: null,
+  transactionAmountLoading: false,
+  transactionAmountError: null,
   selectingTransaction: "",
   setSelectingTransaction: () => {},
 });

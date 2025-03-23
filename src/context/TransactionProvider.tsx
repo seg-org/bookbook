@@ -3,7 +3,12 @@
 import { useSession } from "next-auth/react";
 import { FC, PropsWithChildren, useMemo, useState } from "react";
 
-import { useGetQueryTransaction } from "@/hooks/useGetTransactions";
+import {
+  useGetQueryTransaction,
+  useGetTransactionBuyAmount,
+  useGetTransactionCount,
+  useGetTransactionSellAmount,
+} from "@/hooks/useGetTransactions";
 
 import { TransactionContext } from "./transactionContext";
 
@@ -55,16 +60,26 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
     [selectingPage]
   );
 
-  const { transactions, loading, error } = useGetQueryTransaction(userId, filter, paginator);
-  const [totalBuy, totalSell] = useMemo(() => {
-    let newTotalBuy = 0;
-    let newTotalSell = 0;
-    transactions.map((ts) => {
-      if (ts.buyerId == userId) newTotalBuy += ts.amount;
-      if (ts.sellerId == userId) newTotalSell += ts.amount;
-    });
-    return [newTotalBuy, newTotalSell];
-  }, [userId, transactions]);
+  const {
+    transactions,
+    loading: transactionLoading,
+    error: transactionError,
+  } = useGetQueryTransaction(userId, filter, paginator);
+  const {
+    transactionCount,
+    loading: transactionCountLoading,
+    error: transactionCountError,
+  } = useGetTransactionCount(userId, filter);
+  const {
+    transactionBuyAmount,
+    loading: transactionAmountBuyLoading,
+    error: transactionAmountBuyError,
+  } = useGetTransactionBuyAmount(userId, filter);
+  const {
+    transactionSellAmount,
+    loading: transactionAmountSellLoading,
+    error: transactionAmountSellError,
+  } = useGetTransactionSellAmount(userId, filter);
 
   const [selectingTransaction, setSelectingTransaction] = useState("");
 
@@ -74,11 +89,16 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
         userId,
         filter,
         paginator,
-        totalBuy,
-        totalSell,
+        totalBuy: transactionBuyAmount,
+        totalSell: transactionSellAmount,
         transactions,
-        transactionsLoading: loading,
-        transactionsError: error,
+        transactionsLoading: transactionLoading,
+        transactionsError: transactionError,
+        transactionCount: transactionCount,
+        transactionCountLoading: transactionCountLoading,
+        transactionCountError: transactionCountError,
+        transactionAmountLoading: transactionAmountBuyLoading || transactionAmountSellLoading,
+        transactionAmountError: transactionAmountBuyError || transactionAmountSellError,
         selectingTransaction,
         setSelectingTransaction,
       }}

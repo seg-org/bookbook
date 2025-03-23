@@ -27,6 +27,24 @@ const parseToDate = (dft: Date) => {
   return (val: string | undefined) => (val ? new Date(val) : dft);
 };
 
+export const GetTransactionAmountRequest = z.object({
+  userId: z.string().optional().openapi({ example: "user_1" }),
+  startDate: z
+    .string()
+    .optional()
+    .refine((val) => !val || !isNaN(Date.parse(val)), { message: "Invalid date format" })
+    .transform(parseToDate(beginningOfTime))
+    .openapi({ example: "2021-09-01T00:00:00.000Z" }),
+  endDate: z
+    .string()
+    .optional()
+    .refine((val) => !val || !isNaN(Date.parse(val)), { message: "Invalid date format" })
+    .transform((val) => (val == undefined ? endOfTime : new Date(val)))
+    .openapi({ example: "2021-09-01T00:00:00.000Z" }),
+  asBuyer: z.string().optional().transform(parseToBoolean(true)).openapi({ example: "true" }),
+  asSeller: z.string().optional().transform(parseToBoolean(true)).openapi({ example: "true" }),
+});
+
 export const GetTransactionCountRequest = z.object({
   userId: z.string().optional().openapi({ example: "user_1" }),
   startDate: z
@@ -114,6 +132,8 @@ export const TransactionCreateRespone = TransactionPureRespone;
 export const TransactionUpdateRespone = TransactionPureRespone;
 
 export const TransactionsRespone = z.array(TransactionRespone);
+
+export const TransactionAmountRespone = z.number().openapi({ example: 20 });
 
 export const TransactionCountRespone = z.number().openapi({ example: 20 });
 
