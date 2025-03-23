@@ -190,14 +190,12 @@ if (transactions.length === 0) {
     data: transactionsData.map((entry) => ({
       ...entry,
       status:
-        (entry.status == "APPROVING" && TransactionStatus.APPROVING) ||
-        (entry.status == "PAYING" && TransactionStatus.PAYING) ||
         (entry.status == "PACKING" && TransactionStatus.PACKING) ||
         (entry.status == "DELIVERING" && TransactionStatus.DELIVERING) ||
         (entry.status == "COMPLETE" && TransactionStatus.COMPLETE) ||
         (entry.status == "HOLD" && TransactionStatus.HOLD) ||
         (entry.status == "FAIL" && TransactionStatus.FAIL) ||
-        TransactionStatus.APPROVING,
+        TransactionStatus.PACKING,
       paymentMethod:
         (entry.paymentMethod == "CREDIT_CARD" && PaymentMethod.CREDIT_CARD) ||
         (entry.paymentMethod == "ONLINE_BANKING" && PaymentMethod.ONLINE_BANKING) ||
