@@ -24,6 +24,7 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
   const [endDate, setEndDate] = useState<Date>(endOfTime);
   const [asBuyer, setAsBuyer] = useState(true);
   const [asSeller, setAsSeller] = useState(true);
+  const [isPacking, setIsPacking] = useState(true);
   const [isDelivering, setIsDelivering] = useState(true);
   const [isHold, setIsHold] = useState(true);
   const [isCompleted, setIsCompleted] = useState(true);
@@ -34,6 +35,7 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
       endDate,
       asBuyer,
       asSeller,
+      isPacking,
       isDelivering,
       isHold,
       isCompleted,
@@ -42,6 +44,7 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
       setEndDate,
       setAsBuyer,
       setAsSeller,
+      setIsPacking,
       setIsDelivering,
       setIsHold,
       setIsCompleted,

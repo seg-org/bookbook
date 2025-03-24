@@ -29,12 +29,15 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       const updateTransaction = await prisma.transaction.update({
         where: { id: id },
         data: {
-          ...(parsedData.data.status ? { status: parsedData.data.status } : {}),
-          ...(parsedData.data.trackingURL ? { trackingURL: parsedData.data.trackingURL } : {}),
-          ...(parsedData.data.isDelivered ? { isDelivered: parsedData.data.isDelivered } : {}),
-          ...(parsedData.data.paymentMethod ? { paymentMethod: parsedData.data.paymentMethod } : {}),
-          ...(parsedData.data.hashId ? { hashId: parsedData.data.hashId } : {}),
-          ...(parsedData.data.shipmentMethod ? { shipmentMethod: parsedData.data.shipmentMethod } : {}),
+          ...(parsedData.data.status !== undefined ? { status: parsedData.data.status } : {}),
+          ...(parsedData.data.paymentMethod !== undefined ? { paymentMethod: parsedData.data.paymentMethod } : {}),
+          ...(parsedData.data.hashId !== undefined ? { hashId: parsedData.data.hashId } : {}),
+          ...(parsedData.data.amount !== undefined ? { amount: parsedData.data.amount } : {}),
+          ...(parsedData.data.shipmentMethod !== undefined ? { shipmentMethod: parsedData.data.shipmentMethod } : {}),
+          ...(parsedData.data.address !== undefined ? { address: parsedData.data.address } : {}),
+          ...(parsedData.data.trackingURL !== undefined ? { trackingURL: parsedData.data.trackingURL } : {}),
+          ...(parsedData.data.trackingNumber !== undefined ? { trackingNumber: parsedData.data.trackingNumber } : {}),
+          ...(parsedData.data.isDelivered !== undefined ? { isDelivered: parsedData.data.isDelivered } : {}),
         },
       });
 
@@ -42,7 +45,9 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
         await prisma.transactionFail.deleteMany({
           where: { transactionId: id },
         });
+      }
 
+      if (updateTransaction.status === "FAIL" || updateTransaction.status === "HOLD") {
         const updateTransactionFail = await prisma.transactionFail.create({
           data: {
             transactionId: updateTransaction.id,
@@ -81,6 +86,7 @@ export async function GET(_: NextRequest, props: { params: Promise<{ id: string 
           },
         },
         failData: true,
+        review: true,
       },
     });
 

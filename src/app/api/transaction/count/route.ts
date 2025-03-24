@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-
 import { prisma } from "@/lib/prisma";
+import { TransactionStatus } from "@prisma/client";
+
+import { NextRequest, NextResponse } from "next/server";
 
 import { GetTransactionCountRequest, TransactionCountRespone } from "../schemas";
 
@@ -13,22 +14,39 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    console.log(searchParams);
+    console.log(parsedData);
 
     const transactionCount = await prisma.transaction.count({
       where: {
-        createdAt: {
-          gte: parsedData.data.startDate,
-          lte: parsedData.data.endDate,
-        },
-        ...(parsedData.data.userId
-          ? {
-              OR: [
-                parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},
-                parsedData.data.asSeller ? { sellerId: parsedData.data.userId } : {},
-              ].filter(Boolean),
-            }
-          : {}),
+        AND: [
+          {
+            createdAt: {
+              gte: parsedData.data.startDate,
+              lte: parsedData.data.endDate,
+            },
+          },
+          {
+            ...(parsedData.data.userId !== undefined
+              ? {
+                  OR: [
+                    parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},
+                    parsedData.data.asSeller ? { sellerId: parsedData.data.userId } : {},
+                    { id: "" },
+                  ].filter(Boolean),
+                }
+              : {}),
+          },
+          {
+            OR: [
+              parsedData.data.IsPacking ? { status: TransactionStatus.PACKING } : {},
+              parsedData.data.IsDelivering ? { status: TransactionStatus.DELIVERING } : {},
+              parsedData.data.IsHold ? { status: TransactionStatus.HOLD } : {},
+              parsedData.data.IsComplete ? { status: TransactionStatus.COMPLETE } : {},
+              parsedData.data.IsFail ? { status: TransactionStatus.FAIL } : {},
+              { id: "" },
+            ].filter(Boolean),
+          },
+        ],
       },
     });
 

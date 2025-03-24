@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 
+import { TransactionStatus } from "@prisma/client";
 import { apiClient } from "./axios";
 import { Transaction } from "./dto/transaction.dto";
 
@@ -59,6 +60,7 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
       asSeller?: boolean;
       skip?: number;
       take?: number;
+      Thing?: TransactionStatus[];
     } = {
       ...(query.userId !== undefined ? { userId: query.userId } : {}),
       ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
@@ -67,6 +69,7 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
       ...(query.asSeller !== undefined ? { asSeller: query.asSeller } : {}),
       ...(query.skip !== undefined ? { skip: query.skip } : {}),
       ...(query.take && query.take >= 0 ? { take: query.take } : {}),
+      Thing: [TransactionStatus.DELIVERING, TransactionStatus.COMPLETE],
     };
 
     const res: AxiosResponse<Transaction[]> = await apiClient.get("/transaction", { params });

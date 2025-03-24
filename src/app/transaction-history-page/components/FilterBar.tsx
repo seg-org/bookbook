@@ -46,10 +46,16 @@ const FilterBar = () => {
           <div className="h-auto border-l-2 border-blue-300"></div>
           <div className="flex flex-row items-center space-x-2.5">
             <button
+              className={`h-10 w-28 rounded-lg ${filter.isPacking ? "bg-indigo-500 text-white" : "bg-blue-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
+              onClick={() => filter.setIsPacking(!filter.isPacking)}
+            >
+              กำลังเตรียม
+            </button>
+            <button
               className={`h-10 w-20 rounded-lg ${filter.isDelivering ? "bg-indigo-500 text-white" : "bg-blue-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
               onClick={() => filter.setIsDelivering(!filter.isDelivering)}
             >
-              ดำเนินการ
+              จัดส่ง
             </button>
             <button
               className={`h-10 w-20 rounded-lg ${filter.isHold ? "bg-indigo-500 text-white" : "bg-blue-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}

@@ -10,6 +10,7 @@ export interface TransactionFilter {
   endDate: Date;
   asBuyer: boolean;
   asSeller: boolean;
+  isPacking: boolean;
   isDelivering: boolean;
   isHold: boolean;
   isCompleted: boolean;
@@ -18,6 +19,7 @@ export interface TransactionFilter {
   setEndDate: (newDate: Date) => void;
   setAsBuyer: (val: boolean) => void;
   setAsSeller: (val: boolean) => void;
+  setIsPacking: (val: boolean) => void;
   setIsDelivering: (val: boolean) => void;
   setIsHold: (val: boolean) => void;
   setIsCompleted: (val: boolean) => void;
@@ -55,6 +57,7 @@ export const TransactionContext = createContext<TransactionContext>({
     endDate: endOfTime,
     asBuyer: true,
     asSeller: true,
+    isPacking: true,
     isDelivering: true,
     isHold: true,
     isCompleted: true,
@@ -63,6 +66,7 @@ export const TransactionContext = createContext<TransactionContext>({
     setEndDate: () => {},
     setAsBuyer: () => {},
     setAsSeller: () => {},
+    setIsPacking: () => {},
     setIsDelivering: () => {},
     setIsHold: () => {},
     setIsCompleted: () => {},

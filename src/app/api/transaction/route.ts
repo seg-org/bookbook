@@ -1,4 +1,4 @@
-import { PaymentMethod, ShipmentMethod, TransactionStatus } from "@prisma/client";
+import { ShipmentMethod, TransactionStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
       select: {
         published: true,
         sellerId: true,
+        price: true,
       },
     });
     if (!post) {
@@ -43,12 +44,12 @@ export async function POST(req: NextRequest) {
       data: {
         ...parsedData.data,
         sellerId: post.sellerId,
-        status: TransactionStatus.APPROVING,
-        paymentMethod: PaymentMethod.UNDEFINED,
-        hashId: "",
-        amount: parsedData.data.amount,
+        status: TransactionStatus.PACKING,
+        amount: post.price,
+
         shipmentMethod: ShipmentMethod.UNDEFINED,
         trackingURL: "",
+        trackingNumber: "",
         isDelivered: false,
       },
     });
@@ -73,18 +74,35 @@ export async function GET(req: NextRequest) {
       skip: parsedData.data.skip,
       ...(parsedData.data.take !== -1 ? { take: parsedData.data.take } : {}),
       where: {
-        createdAt: {
-          gte: parsedData.data.startDate,
-          lte: parsedData.data.endDate,
-        },
-        ...(parsedData.data.userId
-          ? {
-              OR: [
-                parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},
-                parsedData.data.asSeller ? { sellerId: parsedData.data.userId } : {},
-              ].filter(Boolean),
-            }
-          : {}),
+        AND: [
+          {
+            createdAt: {
+              gte: parsedData.data.startDate,
+              lte: parsedData.data.endDate,
+            },
+          },
+          {
+            ...(parsedData.data.userId !== undefined
+              ? {
+                  OR: [
+                    parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},
+                    parsedData.data.asSeller ? { sellerId: parsedData.data.userId } : {},
+                    { id: "" },
+                  ].filter(Boolean),
+                }
+              : {}),
+          },
+          {
+            OR: [
+              parsedData.data.IsPacking ? { status: TransactionStatus.PACKING } : {},
+              parsedData.data.IsDelivering ? { status: TransactionStatus.DELIVERING } : {},
+              parsedData.data.IsHold ? { status: TransactionStatus.HOLD } : {},
+              parsedData.data.IsComplete ? { status: TransactionStatus.COMPLETE } : {},
+              parsedData.data.IsFail ? { status: TransactionStatus.FAIL } : {},
+              { id: "" },
+            ].filter(Boolean),
+          },
+        ],
       },
       include: {
         post: {
@@ -95,6 +113,10 @@ export async function GET(req: NextRequest) {
         buyer: true,
         seller: true,
         failData: true,
+        review: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
 

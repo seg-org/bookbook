@@ -173,6 +173,7 @@ model Transaction {
   amount         Int
   // shipment data
   shipmentMethod ShipmentMethod    @map("shipment_method")
+  address        String            @map("address")
   trackingURL    String            @map("tracking_url")
   trackingNumber String            @map("tracking_number")
   isDelivered    Boolean           @map("is_delivered")
