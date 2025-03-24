@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
 import { TransactionStatus } from "@prisma/client";
-
 import { NextRequest, NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
 
 import { GetTransactionCountRequest, TransactionCountRespone } from "../schemas";
 

@@ -1,4 +1,5 @@
 "use client";
+import { TransactionStatus } from "@prisma/client";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
@@ -7,7 +8,6 @@ import { reportEvidenceFolderName } from "@/constants/s3FolderName";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { putObjectsAsZip } from "@/data/object";
 import { updateTransaction } from "@/data/transaction";
-import { TransactionStatus } from "@prisma/client";
 
 interface Props {
   transaction: Transaction | undefined;
@@ -55,8 +55,8 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
       }
 
       if (transaction.status === TransactionStatus.HOLD) {
-        let oldDetail = transaction.failData?.detail;
-        let oldEvidenceURL = transaction.failData?.evidenceURL;
+        const oldDetail = transaction.failData?.detail;
+        const oldEvidenceURL = transaction.failData?.evidenceURL;
         await updateTransaction({
           id: transaction.id,
           status: "HOLD",

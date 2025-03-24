@@ -1,5 +1,6 @@
-import { useTransactionContext } from "@/context/transactionContext";
 import Image from "next/image";
+
+import { useTransactionContext } from "@/context/transactionContext";
 
 import BoughtIcon from "../pic/boughtIcon.png";
 import SoldIcon from "../pic/soldIcon.png";

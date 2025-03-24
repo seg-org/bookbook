@@ -1,6 +1,5 @@
-import { PaymentMethod, ShipmentMethod, TransactionFail, TransactionStatus } from "@prisma/client";
+import { PaymentMethod, Review,ShipmentMethod, TransactionFail, TransactionStatus  } from "@prisma/client";
 
-import { Review } from "@prisma/client";
 import { Post } from "./post.dto";
 import { User } from "./user.dto";
 

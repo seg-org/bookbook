@@ -1,7 +1,6 @@
 import { TransactionFailType, TransactionStatus } from "@prisma/client";
-import { useRouter } from "next/navigation";
-
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { useTransactionContext } from "@/context/transactionContext";

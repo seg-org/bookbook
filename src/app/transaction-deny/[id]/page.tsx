@@ -2,10 +2,10 @@
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
+
 import StatusPopup from "../components/StatusPopup";
 import TransactionDenyInput from "../components/TransactionDenyInput";
 import TransactionDetails from "../components/TransactionDetails";

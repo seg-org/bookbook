@@ -1,7 +1,7 @@
+import { TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 
 import { Transaction } from "@/data/dto/transaction.dto";
-import { TransactionFailType, TransactionStatus } from "@prisma/client";
 
 const TransactionDetails = ({ transaction }: { transaction: Transaction | undefined }) => {
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
