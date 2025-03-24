@@ -22,9 +22,9 @@ interface TransactionQuery extends TransactionBaseQuery {
   take?: number;
 }
 
-interface TransactionCount extends TransactionBaseQuery {}
+type TransactionCount = TransactionBaseQuery;
 
-interface TransactionAmount extends TransactionBaseQuery {}
+type TransactionAmount = TransactionBaseQuery;
 
 interface TransactionUpdate {
   id: string;
