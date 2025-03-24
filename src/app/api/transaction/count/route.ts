@@ -14,8 +14,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    console.log(parsedData);
-
     const transactionCount = await prisma.transaction.count({
       where: {
         AND: [

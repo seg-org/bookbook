@@ -58,7 +58,7 @@ const TransactionDetailsPopup = () => {
               width={220}
             />
             <div>
-              <div className="grid max-h-64 w-72 grid-cols-[auto_1fr] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
+              <div className="grid max-h-64 w-80 grid-cols-[auto_1fr] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
                 <p className="text-lg font-extrabold underline">สถานะ :</p>
                 <p>
                   <label className={`text-lg ${statusMap[transaction.status]?.color} font-extrabold`}>
@@ -175,8 +175,8 @@ const TransactionDetailsPopup = () => {
                       </button>
                     )}
                   {transaction?.status == TransactionStatus.DELIVERING &&
-                    transaction?.updatedAt >= oneWeekAgo &&
-                    transaction?.buyerId === userId && (
+                    transaction?.buyerId === userId &&
+                    transaction?.updatedAt < oneWeekAgo && (
                       <button
                         className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
                         onClick={() => {

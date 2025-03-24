@@ -23,9 +23,9 @@ const StatusPopup = ({ sendingStatus, setSendingStatus }: Props) => {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
         <Card>
-          <CardContent className="flex flex-col justify-center">
-            <p className="w-full justify-center text-center text-3xl text-red-600">เกิดปัญหาขณะส่งใบแจ้ง</p>
-            <p className="w-full justify-center text-center text-xl text-gray-600">กรุณาลองใหม่อีกรอบ</p>
+          <CardContent className="flex flex-col justify-center space-y-2 p-4">
+            <p className="w-full justify-center text-center text-3xl font-bold text-red-600">เกิดปัญหาขณะส่งใบแจ้ง</p>
+            <p className="text-md w-full justify-center text-center font-bold text-gray-400">กรุณาลองใหม่อีกรอบ</p>
             <button
               className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
               onClick={() => {
@@ -44,15 +44,18 @@ const StatusPopup = ({ sendingStatus, setSendingStatus }: Props) => {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
         <Card>
-          <CardContent className="flex flex-col justify-center">
-            <p className="w-full justify-center text-center text-3xl text-green-600">แจ้งสำเร็จ</p>
+          <CardContent className="flex flex-col justify-center space-y-2 p-4">
+            <p className="w-full justify-center text-center text-3xl font-bold text-green-600">แจ้งสำเร็จ</p>
+            <p className="text-md w-full justify-center text-center font-bold text-gray-400">
+              ข้อมูลของคุณได้ถูกส่งไปให้แอดมินเรียบร้อย ขอบคุณสำหรับการายงาน
+            </p>
             <button
               className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
               onClick={() => {
-                router.replace("/");
+                router.replace("/transaction-history-page");
               }}
             >
-              ปิด
+              กลับ
             </button>
           </CardContent>
         </Card>
