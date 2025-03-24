@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -60,11 +60,14 @@ export default function CheckoutPage() {
   const router = useRouter();
 
   const handleConfirmOrder = () => {
-    fetch("/api/transaction", { method: "POST", body: JSON.stringify({ buyerId: session?.user.id, postId: postId, amount: orderData?.price }) })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
+    // ---------------------------------
+    // fix this please
+    // --------------------------------
+    // fetch("/api/transaction", { method: "POST", body: JSON.stringify({ buyerId: session?.user.id, postId: postId, amount: orderData?.price }) })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
     //alert("Order placed successfully!");
     router.push("/transaction-history-page");
   };
