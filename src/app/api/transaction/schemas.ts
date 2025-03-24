@@ -44,11 +44,11 @@ const GetTransactionBase = z.object({
     .openapi({ example: "2021-09-01T00:00:00.000Z" }),
   asBuyer: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
   asSeller: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
-  IsPacking: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
-  IsDelivering: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
-  IsComplete: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
-  IsHold: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
-  IsFail: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
+  isPacking: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
+  isDelivering: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
+  isComplete: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
+  isHold: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
+  isFail: z.string().optional().transform(parseToBoolean(false)).openapi({ example: "true" }),
 });
 
 export const GetTransactionAmountRequest = GetTransactionBase;

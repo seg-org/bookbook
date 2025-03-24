@@ -1,49 +1,44 @@
 import { AxiosResponse } from "axios";
 
-import { TransactionStatus } from "@prisma/client";
 import { apiClient } from "./axios";
 import { Transaction } from "./dto/transaction.dto";
 
-interface TransactionQuery {
+interface TransactionBaseQuery {
   userId?: string;
 
   startDate?: Date;
   endDate?: Date;
   asBuyer?: boolean;
   asSeller?: boolean;
+  isPacking?: boolean;
+  isDelivering?: boolean;
+  isHold?: boolean;
+  isComplete?: boolean;
+  isFail?: boolean;
+}
 
+interface TransactionQuery extends TransactionBaseQuery {
   skip?: number;
   take?: number;
 }
 
-interface TransactionCount {
-  userId?: string;
+interface TransactionCount extends TransactionBaseQuery {}
 
-  startDate?: Date;
-  endDate?: Date;
-  asBuyer?: boolean;
-  asSeller?: boolean;
-}
+interface TransactionAmount extends TransactionBaseQuery {}
 
-interface TransactionAmount {
-  userId?: string;
-
-  startDate?: Date;
-  endDate?: Date;
-  asBuyer?: boolean;
-  asSeller?: boolean;
-}
-
-interface TransactionUpDate {
+interface TransactionUpdate {
   id: string;
   status?: string;
-  isDelivered?: boolean;
-  trackingURL?: boolean;
 
   paymentMethod?: string;
   hashId?: string;
+  amount?: number;
 
   shipmentMethod?: string;
+  address?: string;
+  trackingURL?: boolean;
+  trackingNumber?: string;
+  isDelivered?: boolean;
 
   evidenceURL?: string;
   detail?: string;
@@ -58,18 +53,26 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
       endDate?: Date;
       asBuyer?: boolean;
       asSeller?: boolean;
+      isPacking?: boolean;
+      isDelivering?: boolean;
+      isHold?: boolean;
+      isComplete?: boolean;
+      isFail?: boolean;
       skip?: number;
       take?: number;
-      Thing?: TransactionStatus[];
     } = {
       ...(query.userId !== undefined ? { userId: query.userId } : {}),
       ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
       ...(query.endDate !== undefined ? { endDate: query.endDate } : {}),
       ...(query.asBuyer !== undefined ? { asBuyer: query.asBuyer } : {}),
       ...(query.asSeller !== undefined ? { asSeller: query.asSeller } : {}),
+      ...(query.isPacking !== undefined ? { isPacking: query.isPacking } : {}),
+      ...(query.isDelivering !== undefined ? { isDelivering: query.isDelivering } : {}),
+      ...(query.isHold !== undefined ? { isHold: query.isHold } : {}),
+      ...(query.isComplete !== undefined ? { isComplete: query.isComplete } : {}),
+      ...(query.isFail !== undefined ? { isFail: query.isFail } : {}),
       ...(query.skip !== undefined ? { skip: query.skip } : {}),
       ...(query.take && query.take >= 0 ? { take: query.take } : {}),
-      Thing: [TransactionStatus.DELIVERING, TransactionStatus.COMPLETE],
     };
 
     const res: AxiosResponse<Transaction[]> = await apiClient.get("/transaction", { params });
@@ -110,13 +113,24 @@ export const getTransactionAmount = async (query: TransactionAmount) => {
       endDate?: Date;
       asBuyer?: boolean;
       asSeller?: boolean;
+      isPacking?: boolean;
+      isDelivering?: boolean;
+      isHold?: boolean;
+      isComplete?: boolean;
+      isFail?: boolean;
     } = {
       ...(query.userId !== undefined ? { userId: query.userId } : {}),
       ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
       ...(query.endDate !== undefined ? { endDate: query.endDate } : {}),
       ...(query.asBuyer !== undefined ? { asBuyer: query.asBuyer } : {}),
       ...(query.asSeller !== undefined ? { asSeller: query.asSeller } : {}),
+      ...(query.isPacking !== undefined ? { isPacking: query.isPacking } : {}),
+      ...(query.isDelivering !== undefined ? { isDelivering: query.isDelivering } : {}),
+      ...(query.isHold !== undefined ? { isHold: query.isHold } : {}),
+      ...(query.isComplete !== undefined ? { isComplete: query.isComplete } : {}),
+      ...(query.isFail !== undefined ? { isFail: query.isFail } : {}),
     };
+
     const res: AxiosResponse<number> = await apiClient.get("/transaction/amount", { params });
 
     return res.data;
@@ -134,13 +148,24 @@ export const getTransactionCount = async (query: TransactionCount) => {
       endDate?: Date;
       asBuyer?: boolean;
       asSeller?: boolean;
+      isPacking?: boolean;
+      isDelivering?: boolean;
+      isHold?: boolean;
+      isComplete?: boolean;
+      isFail?: boolean;
     } = {
       ...(query.userId !== undefined ? { userId: query.userId } : {}),
       ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
       ...(query.endDate !== undefined ? { endDate: query.endDate } : {}),
       ...(query.asBuyer !== undefined ? { asBuyer: query.asBuyer } : {}),
       ...(query.asSeller !== undefined ? { asSeller: query.asSeller } : {}),
+      ...(query.isPacking !== undefined ? { isPacking: query.isPacking } : {}),
+      ...(query.isDelivering !== undefined ? { isDelivering: query.isDelivering } : {}),
+      ...(query.isHold !== undefined ? { isHold: query.isHold } : {}),
+      ...(query.isComplete !== undefined ? { isComplete: query.isComplete } : {}),
+      ...(query.isFail !== undefined ? { isFail: query.isFail } : {}),
     };
+
     const res: AxiosResponse<number> = await apiClient.get("/transaction/count", { params });
 
     return res.data;
@@ -150,27 +175,33 @@ export const getTransactionCount = async (query: TransactionCount) => {
   }
 };
 
-export const updateTransaction = async (query: TransactionUpDate) => {
+export const updateTransaction = async (query: TransactionUpdate) => {
   try {
     const id = query.id;
 
     const params: {
       status?: string;
-      isDelivered?: boolean;
-      trackingURL?: boolean;
       paymentMethod?: string;
       hashId?: string;
+      amount?: number;
       shipmentMethod?: string;
+      address?: string;
+      trackingURL?: boolean;
+      trackingNumber?: string;
+      isDelivered?: boolean;
       evidenceURL?: string;
       detail?: string;
       failType?: string;
     } = {
       ...(query.status !== undefined ? { status: query.status } : {}),
-      ...(query.isDelivered !== undefined ? { isDelivered: query.isDelivered } : {}),
-      ...(query.trackingURL !== undefined ? { trackingURL: query.trackingURL } : {}),
       ...(query.paymentMethod !== undefined ? { paymentMethod: query.paymentMethod } : {}),
       ...(query.hashId !== undefined ? { hashId: query.hashId } : {}),
+      ...(query.amount !== undefined ? { amount: query.amount } : {}),
       ...(query.shipmentMethod !== undefined ? { shipmentMethod: query.shipmentMethod } : {}),
+      ...(query.address !== undefined ? { address: query.address } : {}),
+      ...(query.trackingURL !== undefined ? { trackingURL: query.trackingURL } : {}),
+      ...(query.trackingNumber !== undefined ? { trackingNumber: query.trackingNumber } : {}),
+      ...(query.isDelivered !== undefined ? { isDelivered: query.isDelivered } : {}),
       ...(query.evidenceURL !== undefined ? { evidenceURL: query.evidenceURL } : {}),
       ...(query.detail !== undefined ? { detail: query.detail } : {}),
       ...(query.failType !== undefined ? { failType: query.failType } : {}),

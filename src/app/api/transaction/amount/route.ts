@@ -39,11 +39,11 @@ export async function GET(req: NextRequest) {
           },
           {
             OR: [
-              parsedData.data.IsPacking ? { status: TransactionStatus.PACKING } : {},
-              parsedData.data.IsDelivering ? { status: TransactionStatus.DELIVERING } : {},
-              parsedData.data.IsHold ? { status: TransactionStatus.HOLD } : {},
-              parsedData.data.IsComplete ? { status: TransactionStatus.COMPLETE } : {},
-              parsedData.data.IsFail ? { status: TransactionStatus.FAIL } : {},
+              parsedData.data.isPacking ? { status: TransactionStatus.PACKING } : {},
+              parsedData.data.isDelivering ? { status: TransactionStatus.DELIVERING } : {},
+              parsedData.data.isHold ? { status: TransactionStatus.HOLD } : {},
+              parsedData.data.isComplete ? { status: TransactionStatus.COMPLETE } : {},
+              parsedData.data.isFail ? { status: TransactionStatus.FAIL } : {},
               { id: "" },
             ].filter(Boolean),
           },

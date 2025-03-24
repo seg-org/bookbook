@@ -64,14 +64,14 @@ const FilterBar = () => {
               ตรวจสอบ
             </button>
             <button
-              className={`h-10 w-20 rounded-lg ${filter.isCompleted ? "bg-indigo-500 text-white" : "bg-blue-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setIsCompleted(!filter.isCompleted)}
+              className={`h-10 w-20 rounded-lg ${filter.isComplete ? "bg-indigo-500 text-white" : "bg-blue-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
+              onClick={() => filter.setIsComplete(!filter.isComplete)}
             >
               สำเร็จ
             </button>
             <button
-              className={`h-10 w-20 rounded-lg ${filter.isFailed ? "bg-indigo-500 text-white" : "bg-blue-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setIsFailed(!filter.isFailed)}
+              className={`h-10 w-20 rounded-lg ${filter.isFail ? "bg-indigo-500 text-white" : "bg-blue-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
+              onClick={() => filter.setIsFail(!filter.isFail)}
             >
               ยกเลิก
             </button>

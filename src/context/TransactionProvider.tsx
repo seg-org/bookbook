@@ -14,7 +14,7 @@ import { TransactionContext } from "./transactionContext";
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
-const transactionPerPage = 6;
+const transactionPerPage = 20;
 
 export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
   const { data: session } = useSession();
@@ -27,8 +27,8 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
   const [isPacking, setIsPacking] = useState(true);
   const [isDelivering, setIsDelivering] = useState(true);
   const [isHold, setIsHold] = useState(true);
-  const [isCompleted, setIsCompleted] = useState(true);
-  const [isFailed, setIsFailed] = useState(true);
+  const [isComplete, setIsComplete] = useState(true);
+  const [isFail, setIsFail] = useState(true);
   const filter = useMemo(
     () => ({
       startDate,
@@ -38,8 +38,8 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
       isPacking,
       isDelivering,
       isHold,
-      isCompleted,
-      isFailed,
+      isComplete,
+      isFail,
       setStartDate,
       setEndDate,
       setAsBuyer,
@@ -47,10 +47,10 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
       setIsPacking,
       setIsDelivering,
       setIsHold,
-      setIsCompleted,
-      setIsFailed,
+      setIsComplete,
+      setIsFail,
     }),
-    [startDate, endDate, asBuyer, asSeller, isDelivering, isHold, isCompleted, isFailed]
+    [startDate, endDate, asBuyer, asSeller, isPacking, isDelivering, isHold, isComplete, isFail]
   );
 
   const [selectingPage, setSelectingPage] = useState(1);

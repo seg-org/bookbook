@@ -13,8 +13,8 @@ export interface TransactionFilter {
   isPacking: boolean;
   isDelivering: boolean;
   isHold: boolean;
-  isCompleted: boolean;
-  isFailed: boolean;
+  isComplete: boolean;
+  isFail: boolean;
   setStartDate: (newDate: Date) => void;
   setEndDate: (newDate: Date) => void;
   setAsBuyer: (val: boolean) => void;
@@ -22,8 +22,8 @@ export interface TransactionFilter {
   setIsPacking: (val: boolean) => void;
   setIsDelivering: (val: boolean) => void;
   setIsHold: (val: boolean) => void;
-  setIsCompleted: (val: boolean) => void;
-  setIsFailed: (val: boolean) => void;
+  setIsComplete: (val: boolean) => void;
+  setIsFail: (val: boolean) => void;
 }
 
 export interface TransactionPaginator {
@@ -60,8 +60,8 @@ export const TransactionContext = createContext<TransactionContext>({
     isPacking: true,
     isDelivering: true,
     isHold: true,
-    isCompleted: true,
-    isFailed: true,
+    isComplete: true,
+    isFail: true,
     setStartDate: () => {},
     setEndDate: () => {},
     setAsBuyer: () => {},
@@ -69,8 +69,8 @@ export const TransactionContext = createContext<TransactionContext>({
     setIsPacking: () => {},
     setIsDelivering: () => {},
     setIsHold: () => {},
-    setIsCompleted: () => {},
-    setIsFailed: () => {},
+    setIsComplete: () => {},
+    setIsFail: () => {},
   },
   paginator: {
     selectingPage: 1,

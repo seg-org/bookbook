@@ -24,6 +24,11 @@ export const useGetQueryTransaction = (userId: string, filter: TransactionFilter
           endDate: filter.endDate,
           asBuyer: filter.asBuyer,
           asSeller: filter.asSeller,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
           skip: (paginator.selectingPage - 1) * paginator.transactionPerPage,
           take: paginator.transactionPerPage,
         });
@@ -87,6 +92,11 @@ export const useGetTransactionBuyAmount = (userId: string, filter: TransactionFi
           endDate: filter.endDate,
           asBuyer: filter.asBuyer,
           asSeller: false,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
         });
         if (res instanceof Error) {
           setLoading(false);
@@ -121,6 +131,11 @@ export const useGetTransactionSellAmount = (userId: string, filter: TransactionF
           endDate: filter.endDate,
           asBuyer: false,
           asSeller: filter.asSeller,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
         });
         if (res instanceof Error) {
           setLoading(false);
@@ -155,6 +170,11 @@ export const useGetTransactionCount = (userId: string, filter: TransactionFilter
           endDate: filter.endDate,
           asBuyer: filter.asBuyer,
           asSeller: filter.asSeller,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
         });
         if (res instanceof Error) {
           setLoading(false);
