@@ -3,8 +3,10 @@ import { z } from "zod";
 
 import {
   CreateTransactionRequest,
+  GetTransactionAmountRequest,
   GetTransactionCountRequest,
   GetTransactionRequest,
+  TransactionAmountRespone,
   TransactionCountRespone,
   TransactionCreateRespone,
   TransactionRespone,
@@ -132,7 +134,25 @@ transactionRegistry.registerPath({
     },
   },
 });
-
+transactionRegistry.registerPath({
+  tags: ["Transaction"],
+  method: "get",
+  path: "/transaction/amount",
+  summary: "Transaction Amount Sum",
+  request: {
+    query: GetTransactionAmountRequest,
+  },
+  responses: {
+    200: {
+      description: "Get Transaction amount successfully",
+      content: {
+        "application/json": {
+          schema: TransactionAmountRespone,
+        },
+      },
+    },
+  },
+});
 transactionRegistry.registerPath({
   tags: ["Transaction"],
   method: "get",
@@ -143,7 +163,7 @@ transactionRegistry.registerPath({
   },
   responses: {
     200: {
-      description: "Posts recommended successfully.",
+      description: "Get transaction count successfully",
       content: {
         "application/json": {
           schema: TransactionCountRespone,
