@@ -173,7 +173,9 @@ model Transaction {
   amount         Int
   // shipment data
   shipmentMethod ShipmentMethod    @map("shipment_method")
+  address        String            @map("address")
   trackingURL    String            @map("tracking_url")
+  trackingNumber String            @map("tracking_number")
   isDelivered    Boolean           @map("is_delivered")
   // review
   review         Review?
@@ -213,8 +215,6 @@ model Cart {
 }
 
 enum TransactionStatus {
-  APPROVING  @map("approving")
-  PAYING     @map("paying")
   PACKING    @map("packing")
   DELIVERING @map("delivering")
   COMPLETE   @map("complete")

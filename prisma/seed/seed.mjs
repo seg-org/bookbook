@@ -13,6 +13,7 @@ import chatMessagesData from "./chatMessages.json" with { type: "json" };
 import chatReportsData from "./chatReports.json" with { type: "json" };
 import chatRoomsData from "./chatRooms.json" with { type: "json" };
 import postsData from "./posts.json" with { type: "json" };
+import reviewsData from "./reviews.json" with { type: "json" };
 import sellerProfilesData from "./sellerProfiles.json" with { type: "json" };
 import transactionsData from "./transactions.json" with { type: "json" };
 import transactionsFailData from "./transactionsFail.json" with { type: "json" };
@@ -190,14 +191,12 @@ if (transactions.length === 0) {
     data: transactionsData.map((entry) => ({
       ...entry,
       status:
-        (entry.status == "APPROVING" && TransactionStatus.APPROVING) ||
-        (entry.status == "PAYING" && TransactionStatus.PAYING) ||
         (entry.status == "PACKING" && TransactionStatus.PACKING) ||
         (entry.status == "DELIVERING" && TransactionStatus.DELIVERING) ||
         (entry.status == "COMPLETE" && TransactionStatus.COMPLETE) ||
         (entry.status == "HOLD" && TransactionStatus.HOLD) ||
         (entry.status == "FAIL" && TransactionStatus.FAIL) ||
-        TransactionStatus.APPROVING,
+        TransactionStatus.PACKING,
       paymentMethod:
         (entry.paymentMethod == "CREDIT_CARD" && PaymentMethod.CREDIT_CARD) ||
         (entry.paymentMethod == "ONLINE_BANKING" && PaymentMethod.ONLINE_BANKING) ||
@@ -209,6 +208,16 @@ if (transactions.length === 0) {
     })),
   });
   console.log("Transaction seeded successful");
+}
+
+const reviews = await prisma.review.findMany();
+if (reviews.length === 0) {
+  await prisma.review.createMany({
+    data: reviewsData.map((entry) => ({
+      ...entry,
+    })),
+  });
+  console.log("Review seeded successful");
 }
 
 const transactionsFail = await prisma.transactionFail.findMany();

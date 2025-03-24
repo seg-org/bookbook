@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { TransactionFilter, TransactionPaginator } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
-import { getQueryTransaction, getTransaction, getTransactionCount } from "@/data/transaction";
+import { getQueryTransaction, getTransaction, getTransactionAmount, getTransactionCount } from "@/data/transaction";
 
 export const useGetQueryTransaction = (userId: string, filter: TransactionFilter, paginator: TransactionPaginator) => {
   const [loading, setLoading] = useState(true);
@@ -24,6 +24,11 @@ export const useGetQueryTransaction = (userId: string, filter: TransactionFilter
           endDate: filter.endDate,
           asBuyer: filter.asBuyer,
           asSeller: filter.asSeller,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
           skip: (paginator.selectingPage - 1) * paginator.transactionPerPage,
           take: paginator.transactionPerPage,
         });
@@ -69,6 +74,84 @@ export const useGetTransaction = (id: string) => {
   return { transaction, loading, error };
 };
 
+export const useGetTransactionBuyAmount = (userId: string, filter: TransactionFilter) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [transactionBuyAmount, setTransactionsAmount] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      setError(null);
+      setTransactionsAmount(0);
+
+      if (userId) {
+        const res = await getTransactionAmount({
+          userId: userId,
+          startDate: filter.startDate,
+          endDate: filter.endDate,
+          asBuyer: filter.asBuyer,
+          asSeller: false,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
+        });
+        if (res instanceof Error) {
+          setLoading(false);
+          return setError(res);
+        }
+
+        setTransactionsAmount(res);
+      }
+
+      setLoading(false);
+    })();
+  }, [userId, filter]);
+
+  return { transactionBuyAmount, loading, error };
+};
+
+export const useGetTransactionSellAmount = (userId: string, filter: TransactionFilter) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [transactionSellAmount, setTransactionsAmount] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      setError(null);
+      setTransactionsAmount(0);
+
+      if (userId) {
+        const res = await getTransactionAmount({
+          userId: userId,
+          startDate: filter.startDate,
+          endDate: filter.endDate,
+          asBuyer: false,
+          asSeller: filter.asSeller,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
+        });
+        if (res instanceof Error) {
+          setLoading(false);
+          return setError(res);
+        }
+
+        setTransactionsAmount(res);
+      }
+
+      setLoading(false);
+    })();
+  }, [userId, filter]);
+
+  return { transactionSellAmount, loading, error };
+};
+
 export const useGetTransactionCount = (userId: string, filter: TransactionFilter) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -87,6 +170,11 @@ export const useGetTransactionCount = (userId: string, filter: TransactionFilter
           endDate: filter.endDate,
           asBuyer: filter.asBuyer,
           asSeller: filter.asSeller,
+          isPacking: filter.isPacking,
+          isDelivering: filter.isDelivering,
+          isHold: filter.isHold,
+          isComplete: filter.isComplete,
+          isFail: filter.isFail,
         });
         if (res instanceof Error) {
           setLoading(false);

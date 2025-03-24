@@ -42,7 +42,7 @@ const TransactionList = () => {
         key="LoginNeeded"
         className="grid h-screen flex-1 place-items-center overflow-auto text-4xl font-bold text-gray-400"
       >
-        Please login to see transactions
+        กรุณาเข้าสู่ระบบ
       </div>
     );
   }
@@ -55,7 +55,7 @@ const TransactionList = () => {
         key="Fail"
         className="grid h-screen flex-1 place-items-center overflow-auto text-4xl font-bold text-gray-400"
       >
-        Failed to get transactions
+        เกิดข้อผิดพลาด
       </div>
     );
   }
@@ -112,14 +112,16 @@ const TransactionList = () => {
         }
       })}
 
-      {Object.entries(categorizedTransactions["Previous Years"]).reverse().map(([year, transactionsList]) => (
-        <Fragment key={year}>
-          <LineSeparator text={year.toString()} />
-          {sortTransactions(transactionsList).map((ts) => (
-            <TransactionBox key={ts.id} transaction={ts} />
-          ))}
-        </Fragment>
-      ))}
+      {Object.entries(categorizedTransactions["Previous Years"])
+        .reverse()
+        .map(([year, transactionsList]) => (
+          <Fragment key={year}>
+            <LineSeparator text={year.toString()} />
+            {sortTransactions(transactionsList).map((ts) => (
+              <TransactionBox key={ts.id} transaction={ts} />
+            ))}
+          </Fragment>
+        ))}
     </div>
   );
 };

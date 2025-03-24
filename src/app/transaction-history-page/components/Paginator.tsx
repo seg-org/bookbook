@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 
 import { useTransactionContext } from "@/context/transactionContext";
-import { useGetTransactionCount } from "@/hooks/useGetTransactions";
 
 import PageBox from "./PageBox";
 
@@ -12,13 +11,15 @@ const Paginator = () => {
     filter,
     paginator,
     paginator: { selectingPage },
+    transactionCount,
+    transactionCountLoading,
+    transactionCountError,
   } = useTransactionContext();
 
-  const { transactionCount, loading, error } = useGetTransactionCount(userId, filter);
   const [childComponents, setChildCompoent] = useState<React.JSX.Element[]>([]);
 
   useEffect(() => {
-    if (loading || error) {
+    if (transactionCountLoading || transactionCountError) {
       setChildCompoent([]);
       return;
     }
@@ -37,7 +38,7 @@ const Paginator = () => {
     }
 
     setChildCompoent(newChildComponents);
-  }, [transactionCount, paginator, error, loading, userId, filter, selectingPage]);
+  }, [transactionCount, paginator, transactionCountLoading, transactionCountError, userId, filter, selectingPage]);
 
   return <div className="mb-4 flex w-full items-center justify-center gap-2">{childComponents}</div>;
 };
