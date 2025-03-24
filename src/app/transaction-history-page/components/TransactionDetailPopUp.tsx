@@ -113,6 +113,19 @@ const TransactionDetailsPopup = () => {
                     <p className="text-red-400">{transaction?.failData?.detail}</p>
                   </>
                 )}
+                {transaction?.review && (
+                  <>
+                    <p className="col-span-2 text-lg font-extrabold underline">การตอบกลับ</p>
+                    <p className="font-bold text-slate-500">คะแนน : </p>
+                    <p
+                      className={` ${transaction?.review.rating === 1 ? "text-red-500" : ""} ${transaction?.review.rating === 2 ? "text-orange-500" : ""} ${transaction?.review.rating === 3 ? "text-yellow-500" : ""} ${transaction?.review.rating === 4 ? "text-green-500" : ""} ${transaction?.review.rating === 5 ? "text-green-700" : ""} `}
+                    >
+                      {transaction?.review.rating}
+                    </p>
+                    <p className="font-bold text-slate-500">ความคิดเห็น : </p>
+                    <p className="text-slate-500">{transaction?.review.comment}</p>
+                  </>
+                )}
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-xl font-bold">{transaction?.post?.price}.-</p>
