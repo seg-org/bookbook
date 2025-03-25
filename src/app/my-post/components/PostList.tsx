@@ -11,7 +11,7 @@ export const PostList = () => {
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
 
-  const { posts, recommendedPosts, loading, error, setPostsFilters } = usePostContext();
+  const { posts, loading, error, setPostsFilters } = usePostContext();
 
 
   const handleSortPrice = () => {
