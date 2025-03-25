@@ -1,33 +1,93 @@
-import React, { createContext, useContext, useState } from "react";
+import { useState, useEffect } from "react";
+import { usePostContext } from "@/context/postContext";
+import { SpecialDescriptionType, GenreType, BookTagType } from "@/app/api/books/book_enum";
 
-interface PostFilters {
-  author?: string;
-  genre?: string;
-  publisher?: string;
-  isbn?: string;
-}
+export default function SpecialSearch() {
+  const { setPostsFilters } = usePostContext();
 
-interface PostContextType {
-  filters: PostFilters;
-  setPostsFilters: React.Dispatch<React.SetStateAction<PostFilters>>;
-}
+  // State for special descriptions
+  const [selectedSpecialDescriptions, setSelectedSpecialDescriptions] = useState<SpecialDescriptionType[]>([]);
+  // State for book genres
+  const [selectedBookGenres, setSelectedBookGenres] = useState<GenreType[]>([]);
+  // State for book tags
+  const [selectedBookTags, setSelectedBookTags] = useState<BookTagType[]>([]);
 
-const PostContext = createContext<PostContextType | undefined>(undefined);
+  // Update filters in context whenever the state changes
+  useEffect(() => {
+    setPostsFilters((prev) => ({
+      ...prev,
+      specialDescriptions: selectedSpecialDescriptions.length > 0 ? selectedSpecialDescriptions : undefined,
+      bookGenres: selectedBookGenres.length > 0 ? selectedBookGenres : undefined,
+      bookTags: selectedBookTags.length > 0 ? selectedBookTags : undefined,
+    }));
+  }, [selectedSpecialDescriptions, selectedBookGenres, selectedBookTags, setPostsFilters]);
 
-export const PostProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [filters, setPostsFilters] = useState<PostFilters>({});
+  // Toggle selection for checkboxes
+  const toggleSelection = <T,>(item: T, selectedItems: T[], setSelectedItems: (items: T[]) => void) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(selectedItems.filter((i) => i !== item));
+    } else {
+      setSelectedItems([...selectedItems, item]);
+    }
+  };
 
   return (
-    <PostContext.Provider value={{ filters, setPostsFilters }}>
-      {children}
-    </PostContext.Provider>
-  );
-};
+    <>
+      <p className="mb-2 font-semibold">ค้นหาหนังสือด้วยเงื่อนไขพิเศษ</p>
+      <div className="flex flex-col gap-4">
+        {/* Special Descriptions */}
+        <div>
+          <p className="font-semibold">คุณสมบัติพิเศษของโพสต์</p>
+          <div className="flex flex-wrap gap-3">
+            {Object.values(SpecialDescriptionType).map((description) => (
+              <label key={description} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={selectedSpecialDescriptions.includes(description)}
+                  onChange={() =>
+                    toggleSelection(description, selectedSpecialDescriptions, setSelectedSpecialDescriptions)
+                  }
+                />
+                {description}
+              </label>
+            ))}
+          </div>
+        </div>
 
-export const usePostContext = (): PostContextType => {
-  const context = useContext(PostContext);
-  if (!context) {
-    throw new Error("usePostContext must be used within a PostProvider");
-  }
-  return context;
-};
+        {/* Book Genres */}
+        <div>
+          <p className="font-semibold">ประเภทของหนังสือ</p>
+          <div className="flex flex-wrap gap-3">
+            {Object.values(GenreType).map((genre) => (
+              <label key={genre} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBookGenres.includes(genre)}
+                  onChange={() => toggleSelection(genre, selectedBookGenres, setSelectedBookGenres)}
+                />
+                {genre}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Book Tags */}
+        <div>
+          <p className="font-semibold">แท็กของหนังสือ</p>
+          <div className="flex flex-wrap gap-3">
+            {Object.values(BookTagType).map((tag) => (
+              <label key={tag} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={selectedBookTags.includes(tag)}
+                  onChange={() => toggleSelection(tag, selectedBookTags, setSelectedBookTags)}
+                />
+                {tag}
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
