@@ -1,9 +1,9 @@
 "use client";
 
 import { Menu } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 function Header() {
@@ -31,21 +31,21 @@ function Header() {
               แชท
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/transaction-history-page" className="transition hover:text-yellow-300">
               ประวัติการสั่งซื้อ
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href="/about-us" className="transition hover:text-yellow-300">
               เกี่ยวกับเรา
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/seller-registration" className="transition hover:text-yellow-300">
               ลงทะเบียนผู้ขาย
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
 
@@ -95,19 +95,24 @@ function Header() {
                 ค้นหาหนังสือ
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/transaction-history-page" className="block rounded px-3 py-2 hover:bg-gray-100">
                 ประวัติการสั่งซื้อ
               </Link>
+            </li> */}
+            <li>
+              <Link href="/chat" className="block rounded px-3 py-2 hover:bg-gray-100">
+                แชท
+              </Link>
             </li>
+            {/* <li>
+              <Link href="/seller-registration" className="block rounded px-3 py-2 hover:bg-gray-100">
+                ลงทะเบียนผู้ขาย
+              </Link>
+            </li> */}
             <li>
               <Link href="/about-us" className="block rounded px-3 py-2 hover:bg-gray-100">
                 เกี่ยวกับเรา
-              </Link>
-            </li>
-            <li>
-              <Link href="/seller-registration" className="block rounded px-3 py-2 hover:bg-gray-100">
-                ลงทะเบียนผู้ขาย
               </Link>
             </li>
           </ul>

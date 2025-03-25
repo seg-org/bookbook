@@ -1,14 +1,4 @@
-import {
-  BookMarked,
-  BookOpen,
-  ChevronRight,
-  FileText,
-  Handshake,
-  Package,
-  PlusCircle,
-  Search,
-  ShoppingCart,
-} from "lucide-react";
+import { BookMarked, BookOpen, ChevronRight, FileText, PlusCircle, Search, UserPlus } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -21,20 +11,20 @@ export default function Home() {
     <main className="min-h-screen text-gray-900 transition-colors duration-300">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
-        <div className="container mx-auto px-6 pb-16 pt-4 sm:pb-20 sm:pt-6">
+        <div className="container mx-auto px-6 pb-12 pt-6 sm:pb-16 sm:pt-8 md:pb-20 md:pt-10">
           <div className="flex flex-col items-center justify-center text-center">
             <div className="mb-6 inline-block rounded-full bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700 backdrop-blur-md transition-all duration-300">
               ร้านหนังสือออนไลน์
             </div>
 
-            <h1 className="mb-8 text-5xl font-bold tracking-tight text-gray-900 transition-colors duration-300 sm:text-6xl md:text-7xl">
+            <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 transition-colors duration-300 sm:text-5xl md:text-6xl lg:text-7xl">
               <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Book Book
               </span>
               <span className="ml-2 inline-block">📚</span>
             </h1>
 
-            <p className="mb-10 max-w-2xl text-lg text-gray-600 transition-colors duration-300 sm:text-xl">
+            <p className="mb-8 max-w-2xl text-base text-gray-600 transition-colors duration-300 sm:text-lg md:text-xl">
               ซื้อ-ขาย และค้นพบหนังสือเล่มโปรดเล่มต่อไปของคุณ!
             </p>
 
@@ -67,26 +57,27 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <div className="container mx-auto px-6 pb-32">
+      <div className="container mx-auto px-6 pb-24 sm:pb-28 md:pb-32">
         <div className="mx-auto max-w-5xl">
-          <div className="relative rounded-3xl bg-white/80 p-8 shadow-xl backdrop-blur-xl transition-colors duration-300">
-            <div className="absolute -top-12 left-1/2 -translate-x-1/2 transform rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white shadow-lg">
+          <div className="relative rounded-3xl bg-white/80 p-6 shadow-xl backdrop-blur-xl transition-colors duration-300 sm:p-8">
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 transform rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white shadow-lg">
               <BookMarked className="h-6 w-6" />
             </div>
 
-            <h2 className="mb-10 pt-4 text-center text-2xl font-bold text-gray-800 transition-colors duration-300">
+            <h2 className="mb-8 pt-6 text-center text-xl font-bold text-gray-800 transition-colors duration-300 sm:text-2xl">
               สำรวจหน้าต่างๆ ของเรา
             </h2>
 
-            <div className="xs:grid-cols-1 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                { href: "/search", icon: <Search />, text: "🔍 ค้นหาหนังสือ" },
+                // { href: "/search", icon: <Search />, text: "🔍 ค้นหาหนังสือ" },
                 { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
                 { href: "/my-books", icon: <BookMarked />, text: "📚 รายการหนังสือของฉัน" },
-                { href: "/potential-matches", icon: <Handshake />, text: "🤝 แนะนำผู้ซื้อที่ตรงกับคุณ" },
+                // { href: "/potential-matches", icon: <Handshake />, text: "🤝 แนะนำผู้ซื้อที่ตรงกับคุณ" },
                 { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
-                { href: "/checkout", icon: <ShoppingCart />, text: "ทำการสั่งซื้อ (Checkout)" },
-                { href: "/order-status", icon: <Package />, text: "การซื้อของฉัน (Order status)" },
+                // { href: "/checkout", icon: <ShoppingCart />, text: "ทำการสั่งซื้อ (Checkout)" },
+                // { href: "/order-status", icon: <Package />, text: "การซื้อของฉัน (Order status)" },
+                { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
               ].map((item, index) => (
                 <Link
                   key={index}
