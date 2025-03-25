@@ -195,16 +195,29 @@ const TransactionDetailsPopup = () => {
                       รายงานเพิ่มเติม
                     </button>
                   )}
-                  {transaction?.status == TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
+                  {transaction?.status === TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
                     <button
                       className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
-                      onClick={() => {
-                        router.push(`/review/${transaction.id}`);
+                      onClick={async () => {
+                        try {
+                          // Update transaction status to COMPLETE
+                          await fetch(`/api/transaction/${transaction.id}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ status: "COMPLETE" }),
+                          });
+
+                          router.push(`/review/${transaction.id}`);
+                        } catch (err) {
+                          alert("เกิดข้อผิดพลาดขณะอัปเดตรายการ");
+                          console.error(err);
+                        }
                       }}
                     >
                       รับสำเร็จ
                     </button>
                   )}
+
                   <button
                     className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
                     onClick={() => {
