@@ -252,6 +252,7 @@ export default function SellerReviewsPage() {
   // ... UI rendering from original code (not repeated here for brevity)
   return (
     <div className="container mx-auto px-4 py-8">
+      <h1 className="mb-6 text-3xl font-bold">รีวิวผู้ขาย</h1>
       {/* Seller Profile */}
       <Card className="mb-8">
         <div className="flex flex-col items-start gap-6 p-4 md:flex-row md:items-center">
