@@ -31,16 +31,21 @@ function Header() {
               แชท
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/transaction-history-page" className="transition hover:text-yellow-300">
               ประวัติการสั่งซื้อ
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href="/about-us" className="transition hover:text-yellow-300">
               เกี่ยวกับเรา
             </Link>
           </li>
+          {/* <li>
+            <Link href="/seller-registration" className="transition hover:text-yellow-300">
+              ลงทะเบียนผู้ขาย
+            </Link>
+          </li> */}
         </ul>
       </nav>
 
@@ -86,18 +91,28 @@ function Header() {
         <div className="absolute right-6 top-16 w-48 rounded-lg bg-white p-4 shadow-lg md:hidden">
           <ul className="space-y-3 text-gray-900">
             <li>
-              <Link href="#" className="block rounded px-3 py-2 hover:bg-gray-100">
+              <Link href="/search" className="block rounded px-3 py-2 hover:bg-gray-100">
                 ค้นหาหนังสือ
               </Link>
             </li>
-            <li>
-              <Link href="#" className="block rounded px-3 py-2 hover:bg-gray-100">
+            {/* <li>
+              <Link href="/transaction-history-page" className="block rounded px-3 py-2 hover:bg-gray-100">
                 ประวัติการสั่งซื้อ
               </Link>
-            </li>
+            </li> */}
             <li>
-              <Link href="#" className="block rounded px-3 py-2 hover:bg-gray-100">
-                ติดต่อเรา
+              <Link href="/chat" className="block rounded px-3 py-2 hover:bg-gray-100">
+                แชท
+              </Link>
+            </li>
+            {/* <li>
+              <Link href="/seller-registration" className="block rounded px-3 py-2 hover:bg-gray-100">
+                ลงทะเบียนผู้ขาย
+              </Link>
+            </li> */}
+            <li>
+              <Link href="/about-us" className="block rounded px-3 py-2 hover:bg-gray-100">
+                เกี่ยวกับเรา
               </Link>
             </li>
           </ul>

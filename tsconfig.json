@@ -29,7 +29,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "prisma/seed/seed.mjs",
-    "tests/features/view-posts.mjs"
+    "tests/features/*.steps.js"
   ],
   "exclude": ["node_modules"]
 }

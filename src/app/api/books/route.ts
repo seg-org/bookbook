@@ -12,7 +12,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    const newBook = await prisma.book.create({ data: parsedData.data });
+    const data = {
+      ...parsedData.data,
+      bookGenres: parsedData.data.bookGenres ?? [],
+      bookTags: parsedData.data.bookTags ?? [],
+    };
+
+    const newBook = await prisma.book.create({ data });
     const newBookWithImageUrl = {
       ...newBook,
       coverImageUrl: getUrl("book_images", newBook.coverImageKey),
@@ -25,9 +31,23 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const books = await prisma.book.findMany();
+    const searchParams = req.nextUrl.searchParams;
+    const title = searchParams.get("title");
+
+    const books = await prisma.book.findMany(
+      title
+        ? {
+            where: {
+              title: {
+                contains: title,
+                mode: "insensitive",
+              },
+            },
+          }
+        : undefined
+    );
     const booksWithImageUrl = books.map((book) => {
       const url = getUrl("book_images", book.coverImageKey);
       return {

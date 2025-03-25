@@ -1,3 +1,4 @@
+import { TransactionStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
@@ -13,26 +14,43 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    const transaction_count = await prisma.transaction.count({
+    const transactionCount = await prisma.transaction.count({
       where: {
-        createdAt: {
-          gte: parsedData.data.startDate,
-          lte: parsedData.data.endDate,
-        },
-        ...(parsedData.data.userId
-          ? {
-              OR: [
-                parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},
-                parsedData.data.asSeller ? { sellerId: parsedData.data.userId } : {},
-              ].filter(Boolean),
-            }
-          : {}),
+        AND: [
+          {
+            createdAt: {
+              gte: parsedData.data.startDate,
+              lte: parsedData.data.endDate,
+            },
+          },
+          {
+            ...(parsedData.data.userId !== undefined
+              ? {
+                  OR: [
+                    parsedData.data.asBuyer ? { buyerId: parsedData.data.userId } : {},
+                    parsedData.data.asSeller ? { sellerId: parsedData.data.userId } : {},
+                    { id: "" },
+                  ].filter(Boolean),
+                }
+              : {}),
+          },
+          {
+            OR: [
+              parsedData.data.isPacking ? { status: TransactionStatus.PACKING } : {},
+              parsedData.data.isDelivering ? { status: TransactionStatus.DELIVERING } : {},
+              parsedData.data.isHold ? { status: TransactionStatus.HOLD } : {},
+              parsedData.data.isComplete ? { status: TransactionStatus.COMPLETE } : {},
+              parsedData.data.isFail ? { status: TransactionStatus.FAIL } : {},
+              { id: "" },
+            ].filter(Boolean),
+          },
+        ],
       },
     });
 
-    return NextResponse.json(TransactionCountRespone.parse(transaction_count), { status: 201 });
+    return NextResponse.json(TransactionCountRespone.parse(transactionCount), { status: 201 });
   } catch (error) {
-    if (error instanceof Error) console.error("Error getting transactions", error.stack);
-    return NextResponse.json({ error: "Cannot get a transaction" }, { status: 500 });
+    if (error instanceof Error) console.error("Error getting transaction count", error.stack);
+    return NextResponse.json({ error: "Cannot get a transaction count" }, { status: 500 });
   }
 }

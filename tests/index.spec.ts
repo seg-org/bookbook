@@ -1,8 +1,9 @@
-import { expect, test } from "@playwright/test";
+import { expect, Page, test } from "@playwright/test";
 
 test("Bookbook Home Page", async ({ page }) => {
   await page.goto("http://localhost:3000/");
-  await expect(page.getByRole("heading", { name: "ยินดีต้อนรับสู่ Book Book 📚" })).toBeInViewport();
+  await expect(page.getByText("ร้านหนังสือออนไลน์")).toBeInViewport();
+  await expect(page.getByRole("heading", { name: "Book Book 📚" })).toBeInViewport();
 });
 
 test("Search Page", async ({ page }) => {
@@ -37,7 +38,7 @@ test("Login Failure", async ({ page }) => {
   await expect(page.getByText("Invalid credentials")).toBeVisible();
 });
 
-test("Login Success", async ({ page }) => {
+async function login(page: Page) {
   await page.goto("http://localhost:3000/");
 
   // Go to Login Page
@@ -55,6 +56,10 @@ test("Login Success", async ({ page }) => {
 
   // Expect Success
   await expect(page).toHaveURL("http://localhost:3000/");
+}
+
+test("Login Success", async ({ page }) => {
+  await login(page);
 
   // Go to Profile Page
   await page.getByRole("link", { name: "Profile" }).click();
@@ -63,4 +68,27 @@ test("Login Success", async ({ page }) => {
   // Check Profile
   await expect(page.locator('input[name="email"]')).toHaveValue("Alice@gmail.com");
   await expect(page.locator('input[name="firstName"]')).toHaveValue("Alice");
+});
+
+test("Post Sell Book", async ({ page }) => {
+  await login(page);
+  await page.goto("http://localhost:3000/");
+
+  await page.getByRole("button", { name: "ขายหนังสือของคุณ" }).click();
+  await page
+    .getByRole("listitem")
+    .filter({ hasText: "人妻教師が教え子の女子高生にドはまりする話2" })
+    .getByRole("button")
+    .click();
+
+  await page.getByTestId("post-title").fill("ช่วยซื้อหนังสือเกผมหน่อย");
+  await page.getByTestId("book-price").fill("69");
+  await page.getByRole("button", { name: "โพสต์ขายหนังสือ" }).click();
+
+  await expect(page.getByText("ช่วยซื้อหนังสือเกผมหน่อย")).toBeVisible();
+
+  await expect(page.getByText("Alice Adams")).toBeVisible();
+  await expect(page.getByText("69")).toBeVisible();
+  await expect(page.getByText("人妻教師が教え子の女子高生にドはまりする話2")).toBeVisible();
+  await expect(page.getByText("นี่เป็นหนังสือของคุณ")).toBeVisible();
 });

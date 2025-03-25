@@ -36,30 +36,13 @@ const TransactionList = () => {
   thisMonth.setMonth(thisMonth.getMonth() - 1);
   const thisYear = new Date(today.getFullYear(), 0, 1, 0, 0, 0, 0);
 
-  transactions.forEach((ts) => {
-    if (ts.createdAt >= today) {
-      categorizedTransactions.Today.push(ts);
-    } else if (ts.createdAt >= yesterday) {
-      categorizedTransactions.Yesterday.push(ts);
-    } else if (ts.createdAt >= thisMonth) {
-      categorizedTransactions["This Month"].push(ts);
-    } else if (ts.createdAt >= thisYear) {
-      categorizedTransactions["This Year"].push(ts);
-    } else {
-      if (!categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()]) {
-        categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()] = [];
-      }
-      categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()].push(ts);
-    }
-  });
-
   if (userId === "") {
     return (
       <div
         key="LoginNeeded"
         className="grid h-screen flex-1 place-items-center overflow-auto text-4xl font-bold text-gray-400"
       >
-        Please login to see transactions
+        กรุณาเข้าสู่ระบบ
       </div>
     );
   }
@@ -72,7 +55,7 @@ const TransactionList = () => {
         key="Fail"
         className="grid h-screen flex-1 place-items-center overflow-auto text-4xl font-bold text-gray-400"
       >
-        Failed to get transactions
+        เกิดข้อผิดพลาด
       </div>
     );
   }
@@ -90,6 +73,23 @@ const TransactionList = () => {
   const sortTransactions = (tsList: Transaction[]) =>
     tsList.sort((a, b) => -(a.createdAt.getTime() - b.createdAt.getTime()));
   const categories: Array<keyof CategorizedTransactions> = ["Today", "Yesterday", "This Month", "This Year"];
+
+  transactions.forEach((ts) => {
+    if (ts.createdAt >= today) {
+      categorizedTransactions.Today.push(ts);
+    } else if (ts.createdAt >= yesterday) {
+      categorizedTransactions.Yesterday.push(ts);
+    } else if (ts.createdAt >= thisMonth) {
+      categorizedTransactions["This Month"].push(ts);
+    } else if (ts.createdAt >= thisYear) {
+      categorizedTransactions["This Year"].push(ts);
+    } else {
+      if (!categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()]) {
+        categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()] = [];
+      }
+      categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()].push(ts);
+    }
+  });
 
   return (
     <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
@@ -112,14 +112,16 @@ const TransactionList = () => {
         }
       })}
 
-      {Object.entries(categorizedTransactions["Previous Years"]).map(([year, transactionsList]) => (
-        <Fragment key={year}>
-          <LineSeparator text={year.toString()} />
-          {sortTransactions(transactionsList).map((ts) => (
-            <TransactionBox key={ts.id} transaction={ts} />
-          ))}
-        </Fragment>
-      ))}
+      {Object.entries(categorizedTransactions["Previous Years"])
+        .reverse()
+        .map(([year, transactionsList]) => (
+          <Fragment key={year}>
+            <LineSeparator text={year.toString()} />
+            {sortTransactions(transactionsList).map((ts) => (
+              <TransactionBox key={ts.id} transaction={ts} />
+            ))}
+          </Fragment>
+        ))}
     </div>
   );
 };

@@ -26,3 +26,17 @@ export type User = {
     userId: string;
   };
 };
+
+export type Seller = {
+  id: string;
+  idCardNumber: string;
+  idCardImageKey: string;
+  bankAccount: string;
+  bankName: string;
+  user: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string | null;
+  };
+};

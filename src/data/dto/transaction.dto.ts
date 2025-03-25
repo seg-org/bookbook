@@ -1,4 +1,4 @@
-import { PaymentMethod, ShipmentMethod, TransactionStatus } from "@prisma/client";
+import { PaymentMethod, Review,ShipmentMethod, TransactionFail, TransactionStatus  } from "@prisma/client";
 
 import { Post } from "./post.dto";
 import { User } from "./user.dto";
@@ -22,5 +22,10 @@ export type Transaction = {
 
   shipmentMethod: ShipmentMethod;
   trackingURL: string;
+  trackingNumber: string;
   isDelivered: boolean;
+
+  failData?: TransactionFail;
+
+  review?: Review;
 };

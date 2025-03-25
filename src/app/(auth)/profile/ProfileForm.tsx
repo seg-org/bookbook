@@ -8,7 +8,7 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form-nac";
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/useToast";
 
