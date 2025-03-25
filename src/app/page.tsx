@@ -1,4 +1,4 @@
-import { BookMarked, BookOpen, ChevronRight, FileText, PlusCircle, Search, Star, UserPlus } from "lucide-react";
+import { BookMarked, BookOpen, ChevronRight, FileText, PlusCircle, Search, UserPlus } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -78,7 +78,6 @@ export default function Home() {
                 // { href: "/checkout", icon: <ShoppingCart />, text: "ทำการสั่งซื้อ (Checkout)" },
                 // { href: "/order-status", icon: <Package />, text: "การซื้อของฉัน (Order status)" },
                 { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
-                { href: "/seller-reviews-list", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
               ].map((item, index) => (
                 <Link
                   key={index}

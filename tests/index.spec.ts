@@ -2,7 +2,8 @@ import { expect, Page, test } from "@playwright/test";
 
 test("Bookbook Home Page", async ({ page }) => {
   await page.goto("http://localhost:3000/");
-  await expect(page.getByRole("heading", { name: "ยินดีต้อนรับสู่ Book Book 📚" })).toBeInViewport();
+  await expect(page.getByText("ร้านหนังสือออนไลน์")).toBeInViewport();
+  await expect(page.getByRole("heading", { name: "Book Book 📚" })).toBeInViewport();
 });
 
 test("Search Page", async ({ page }) => {
