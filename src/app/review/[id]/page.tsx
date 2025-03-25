@@ -2,6 +2,7 @@
 
 import { Star } from "lucide-react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import type React from "react";
 import { useState } from "react";
 
@@ -9,7 +10,7 @@ import { Button } from "@/components/ui/Button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/Input";
 
-// Temporary mock transaction (simulate being passed from "Rate" button)
+// Temporary mock transaction (replace this with real data fetching in the future)
 const mockTransactions = [
   {
     id: "t123",
@@ -39,15 +40,16 @@ interface Review {
 }
 
 export default function ReviewsPage() {
+  const { id } = useParams(); // ✅ Move inside component
+  const selectedTransactionId = id as string;
+  const transaction = mockTransactions.find((t) => t.id === selectedTransactionId);
+
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [reviews, setReviews] = useState<Review[]>([]);
-
-  const selectedTransactionId = "t123"; // Will be passed in the future
-  const transaction = mockTransactions.find((t) => t.id === selectedTransactionId);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -95,7 +97,6 @@ export default function ReviewsPage() {
       <h1 className="mb-6 text-2xl font-bold">รีวิวการซื้อขาย</h1>
 
       <div className="grid gap-8 md:grid-cols-2">
-        {/* Review Form */}
         <div className="rounded-lg bg-white p-6 shadow-md">
           <h2 className="mb-4 text-xl font-semibold">เขียนรีวิวใหม่</h2>
 

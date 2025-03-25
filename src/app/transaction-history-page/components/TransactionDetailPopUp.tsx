@@ -198,7 +198,9 @@ const TransactionDetailsPopup = () => {
                   {transaction?.status == TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
                     <button
                       className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
-                      onClick={() => {}}
+                      onClick={() => {
+                        router.push(`/review/${transaction.id}`);
+                      }}
                     >
                       รับสำเร็จ
                     </button>
