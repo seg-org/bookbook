@@ -55,9 +55,16 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
     }
 
+    const data = {
+      ...parsedData.data,
+      specialDescriptions: parsedData.data.specialDescriptions ?? [],
+      damageURLs: parsedData.data.damageURLs ?? [],
+    };
+
     const updatedPost = await prisma.post.update({
       where: { id },
-      data: parsedData.data,
+      data,
+      include: { book: true },
     });
 
     const updatedPostWithImageUrl = {
