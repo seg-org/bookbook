@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
-import { GetPostsRequest, PostsResponsePaginated } from "../schemas";
+
 import { getUrl } from "../../objects/s3";
+import { GetPostsRequest, PostsResponsePaginated } from "../schemas";
 
 export async function GET(req: NextRequest) {
   try {
@@ -15,6 +17,7 @@ export async function GET(req: NextRequest) {
 
     const { title, author, genre, description, isbn, pages, publisher, page, limit, sortPrice } = parsedParams.data;
 
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     const filters: any = {};
     if (title) filters.title = { contains: title, mode: "insensitive" };
     if (author) filters.author = { contains: author, mode: "insensitive" };
@@ -35,6 +38,7 @@ export async function GET(req: NextRequest) {
       take: limit,
     });
 
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     const postsWithImageUrl = posts.map((post: any) => ({
       ...post,
       book: {
@@ -43,12 +47,14 @@ export async function GET(req: NextRequest) {
       },
     }));
 
-    return NextResponse.json(PostsResponsePaginated.parse({
-      posts: postsWithImageUrl,
-      total,
-      totalPages,
-      page,
-    }));
+    return NextResponse.json(
+      PostsResponsePaginated.parse({
+        posts: postsWithImageUrl,
+        total,
+        totalPages,
+        page,
+      })
+    );
   } catch (error) {
     if (error instanceof Error) console.error("Error fetching posts", error.stack);
     return NextResponse.json({ error: "Cannot fetch posts" }, { status: 500 });
