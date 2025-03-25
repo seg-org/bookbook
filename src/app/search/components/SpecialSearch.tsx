@@ -1,22 +1,25 @@
 import { useState, useEffect } from "react";
 import { usePostContext } from "@/context/postContext";
-import { SpecialDescriptionType, GenreType, BookTagType } from "@/app/api/books/book_enum";
+import { SpecialDescriptionType } from "@/app/api/posts/post_enum";
+import { GenreType, BookTagType } from "@/app/api/books/book_enum";
 
 export default function SpecialSearch() {
   const { setPostsFilters } = usePostContext();
 
-  // State for special descriptions
+  // State for special descriptions (from posts)
   const [selectedSpecialDescriptions, setSelectedSpecialDescriptions] = useState<SpecialDescriptionType[]>([]);
-  // State for book genres
+  // State for book genres (from books)
   const [selectedBookGenres, setSelectedBookGenres] = useState<GenreType[]>([]);
-  // State for book tags
+  // State for book tags (from books)
   const [selectedBookTags, setSelectedBookTags] = useState<BookTagType[]>([]);
 
   // Update filters in context whenever the state changes
   useEffect(() => {
     setPostsFilters((prev) => ({
       ...prev,
+      // Filters for posts
       specialDescriptions: selectedSpecialDescriptions.length > 0 ? selectedSpecialDescriptions : undefined,
+      // Filters for books
       bookGenres: selectedBookGenres.length > 0 ? selectedBookGenres : undefined,
       bookTags: selectedBookTags.length > 0 ? selectedBookTags : undefined,
     }));
@@ -35,7 +38,7 @@ export default function SpecialSearch() {
     <>
       <p className="mb-2 font-semibold">ค้นหาหนังสือด้วยเงื่อนไขพิเศษ</p>
       <div className="flex flex-col gap-4">
-        {/* Special Descriptions */}
+        {/* Special Descriptions (from posts) */}
         <div>
           <p className="font-semibold">คุณสมบัติพิเศษของโพสต์</p>
           <div className="flex flex-wrap gap-3">
@@ -54,7 +57,7 @@ export default function SpecialSearch() {
           </div>
         </div>
 
-        {/* Book Genres */}
+        {/* Book Genres (from books) */}
         <div>
           <p className="font-semibold">ประเภทของหนังสือ</p>
           <div className="flex flex-wrap gap-3">
@@ -71,7 +74,7 @@ export default function SpecialSearch() {
           </div>
         </div>
 
-        {/* Book Tags */}
+        {/* Book Tags (from books) */}
         <div>
           <p className="font-semibold">แท็กของหนังสือ</p>
           <div className="flex flex-wrap gap-3">
