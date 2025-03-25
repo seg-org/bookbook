@@ -5,27 +5,19 @@ import { GenreType, BookTagType } from "@/app/api/books/book_enum";
 
 export default function SpecialSearch() {
   const { setPostsFilters } = usePostContext();
-
-  // State for special descriptions (from posts)
   const [selectedSpecialDescriptions, setSelectedSpecialDescriptions] = useState<SpecialDescriptionType[]>([]);
-  // State for book genres (from books)
   const [selectedBookGenres, setSelectedBookGenres] = useState<GenreType[]>([]);
-  // State for book tags (from books)
   const [selectedBookTags, setSelectedBookTags] = useState<BookTagType[]>([]);
 
-  // Update filters in context whenever the state changes
   useEffect(() => {
     setPostsFilters((prev) => ({
       ...prev,
-      // Filters for posts
       specialDescriptions: selectedSpecialDescriptions.length > 0 ? selectedSpecialDescriptions : undefined,
-      // Filters for books
       bookGenres: selectedBookGenres.length > 0 ? selectedBookGenres : undefined,
       bookTags: selectedBookTags.length > 0 ? selectedBookTags : undefined,
     }));
   }, [selectedSpecialDescriptions, selectedBookGenres, selectedBookTags, setPostsFilters]);
 
-  // Toggle selection for checkboxes
   const toggleSelection = <T,>(item: T, selectedItems: T[], setSelectedItems: (items: T[]) => void) => {
     if (selectedItems.includes(item)) {
       setSelectedItems(selectedItems.filter((i) => i !== item));
