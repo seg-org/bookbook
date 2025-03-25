@@ -1,6 +1,5 @@
 "use client";
 
-import { useGetTransaction } from "@/hooks/useGetTransactions";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -9,12 +8,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/Input";
+import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 export default function ReviewsPage() {
   const { id } = useParams();
   const selectedTransactionId = id as string;
 
-  const { transaction, loading, error: transactionError } = useGetTransaction(selectedTransactionId);
+  const { transaction, error: transactionError, loading } = useGetTransaction(selectedTransactionId);
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -55,39 +55,38 @@ export default function ReviewsPage() {
     }
   };
 
-  if (loading) return <div className="p-4">กำลังโหลด...</div>;
-  if (!transaction || transactionError) return <div className="p-4 text-red-500">ไม่พบข้อมูลการซื้อขาย</div>;
+  if (loading) return null;
+  if (transactionError) return <div>ไม่พบข้อมูลการซื้อขาย</div>;
+  if (!transaction) return null;
 
   return (
     <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-blue-50 p-4">
-      <div className="w-full max-w-2xl rounded-lg p-6">
+      <div className="w-full max-w-3xl rounded-lg p-6">
         <h1 className="mb-6 text-center text-2xl font-bold">รีวิวการซื้อขาย</h1>
 
         <div className="grid gap-8">
           <div className="rounded-lg bg-white p-6 shadow-md">
-            <h2 className="mb-4 text-xl font-semibold">เขียนรีวิวใหม่</h2>
-
-            <div className="mb-6 flex items-start gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            <div className="mb-8 flex gap-6 rounded-xl border border-gray-200 bg-white p-6">
               <Image
                 src={transaction?.post?.book?.coverImageUrl || "/placeholder.svg"}
                 alt={transaction.post?.book?.title || "Book"}
-                width={80}
-                height={120}
-                className="rounded-md object-cover shadow"
+                width={120}
+                height={180}
+                className="rounded-lg object-cover shadow-md"
               />
 
-              <div className="flex flex-col justify-between space-y-1">
-                <h3 className="text-lg font-semibold text-gray-800">
+              <div className="flex flex-col justify-center space-y-2">
+                <h3 className="text-xl font-bold text-gray-900">
                   {transaction.post?.book?.title || "ไม่มีชื่อหนังสือ"}
                 </h3>
-                <p className="text-sm text-gray-600">
-                  <span className="font-medium">ผู้เขียน:</span> {transaction.post?.book?.author}
+                <p className="text-base text-gray-700">
+                  <span className="font-semibold">ผู้เขียน:</span> {transaction.post?.book?.author}
                 </p>
-                <p className="text-sm text-gray-600">
-                  <span className="font-medium">ผู้ขาย:</span> {transaction.seller?.firstName}{" "}
+                <p className="text-base text-gray-700">
+                  <span className="font-semibold">ผู้ขาย:</span> {transaction.seller?.firstName}{" "}
                   {transaction.seller?.lastName}
                 </p>
-                <p className="mt-1 text-xs text-gray-400">รหัสรายการ: {transaction.id}</p>
+                <p className="pt-1 text-sm text-gray-400">รหัสรายการ: {transaction.id}</p>
               </div>
             </div>
 
@@ -98,11 +97,11 @@ export default function ReviewsPage() {
                 <label htmlFor="rating" className="mb-1 block text-sm font-medium">
                   คะแนน
                 </label>
-                <div className="mb-2 flex items-center space-x-1">
+                <div className="mb-4 flex items-center space-x-2">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button key={star} type="button" onClick={() => setRating(star)} className="focus:outline-none">
                       <Star
-                        className={`h-8 w-8 ${star <= rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+                        className={`h-10 w-10 ${star <= rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
                       />
                     </button>
                   ))}
@@ -118,7 +117,7 @@ export default function ReviewsPage() {
                   id="comment"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
-                  className="min-h-[100px] w-full rounded-md border p-2"
+                  className="min-h-[160px] w-full rounded-md border p-3 text-base"
                   placeholder="แสดงความคิดเห็นของคุณเกี่ยวกับการซื้อขายนี้..."
                 />
               </div>
