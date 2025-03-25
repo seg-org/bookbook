@@ -2,7 +2,7 @@
 
 import { Star } from "lucide-react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/Input";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 export default function ReviewsPage() {
+  const router = useRouter();
   const { id } = useParams();
   const selectedTransactionId = id as string;
 
@@ -122,22 +123,40 @@ export default function ReviewsPage() {
                 />
               </div>
 
-              <Button variant="default" type="submit" className="w-full" disabled={isSubmitting}>
+              <Button variant="default" type="submit" className="w-full" disabled={isSubmitting || rating < 1}>
                 {isSubmitting ? "กำลังส่ง..." : "ส่งรีวิว"}
               </Button>
-            </form>
 
-            <Dialog open={showDialog} onOpenChange={setShowDialog}>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>ส่งรีวิวสำเร็จ</DialogTitle>
-                </DialogHeader>
-                <div className="py-2">ขอบคุณสำหรับความคิดเห็นของคุณ!</div>
-                <DialogFooter>
-                  <Button onClick={() => setShowDialog(false)}>ปิด</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+              <Dialog open={showDialog} onOpenChange={setShowDialog}>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>ส่งรีวิวสำเร็จ</DialogTitle>
+                  </DialogHeader>
+                  <div className="py-2">ขอบคุณสำหรับความคิดเห็นของคุณ!</div>
+                  <DialogFooter>
+                    <Button
+                      onClick={() => {
+                        setShowDialog(false);
+                        router.push("/transaction-history-page");
+                      }}
+                    >
+                      ปิด
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
+              <div className="mt-4 text-center">
+                <Button
+                  variant="ghost"
+                  className="text-sm text-gray-500 hover:underline"
+                  onClick={() => router.push("/transaction-history-page")}
+                  disabled={isSubmitting}
+                >
+                  ปิด
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
