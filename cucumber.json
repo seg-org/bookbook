@@ -1,0 +1,6 @@
+{
+  "default": {
+    "format": ["progress-bar", ["json", "./reports/cucumber-report.json"], ["html", "./reports/cucumber-report.html"]],
+    "paths": ["./tests/features"]
+  }
+}
