@@ -1,6 +1,4 @@
-import { useSession } from "next-auth/react";
-import { useMemo, useState } from "react";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import {  useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { usePostContext } from "@/context/postContext";
@@ -8,6 +6,8 @@ import { usePostContext } from "@/context/postContext";
 import PostCard from "./PostCard";
 
 export const PostList = () => {
+
+
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
 
