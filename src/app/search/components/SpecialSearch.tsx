@@ -1,23 +1,33 @@
-export default function SpecialSearch() {
-  return (
-    <>
-      <p className="mb-2 font-semibold">ค้นหาหนังสือด้วยเงื่อนไขพิเศษ</p>
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-row gap-3">
-          <label className="flex items-center gap-3">
-            <input type="checkbox" />
-            หนังสือพร้อมลายมือชื่อ
-          </label>
-          <label className="flex items-center gap-3">
-            <input type="checkbox" />
-            ปกทำจากหนังเท่านั้น
-          </label>
-        </div>
-        <label className="flex items-center gap-3">
-          <input type="checkbox" />
-          ไร้รอยเขียน
-        </label>
-      </div>
-    </>
-  );
+import React, { createContext, useContext, useState } from "react";
+
+interface PostFilters {
+  author?: string;
+  genre?: string;
+  publisher?: string;
+  isbn?: string;
 }
+
+interface PostContextType {
+  filters: PostFilters;
+  setPostsFilters: React.Dispatch<React.SetStateAction<PostFilters>>;
+}
+
+const PostContext = createContext<PostContextType | undefined>(undefined);
+
+export const PostProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [filters, setPostsFilters] = useState<PostFilters>({});
+
+  return (
+    <PostContext.Provider value={{ filters, setPostsFilters }}>
+      {children}
+    </PostContext.Provider>
+  );
+};
+
+export const usePostContext = (): PostContextType => {
+  const context = useContext(PostContext);
+  if (!context) {
+    throw new Error("usePostContext must be used within a PostProvider");
+  }
+  return context;
+};
