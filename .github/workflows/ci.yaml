@@ -34,7 +34,7 @@ jobs:
         run: pnpm dlx crlf-phobia *
 
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: pnpm lint
