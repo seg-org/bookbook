@@ -2,8 +2,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,6 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { createTransaction } from "@/data/transaction";
 
+import { LoadingAnimation } from "@/components/LoadingAnimation";
 import CheckoutPageCard from "./components/CheckoutPageCard";
 
 const shipmentMethods = [
@@ -34,6 +35,9 @@ const checkoutSchema = z.object({
   title: z.string().optional(),
   author: z.string().optional(),
   price: z.number().optional(),
+
+  shippingFee: z.number().optional(),
+  subtotal: z.number().optional(),
 });
 
 // Infer TypeScript type from schema
@@ -55,7 +59,7 @@ export default function CheckoutPage() {
       email: "",
       phoneNumber: "",
       address: "",
-      shipmentMethod: "",
+      shipmentMethod: "STANDARD",
       title: "",
       author: "",
       price: 0,
@@ -71,6 +75,8 @@ export default function CheckoutPage() {
   const isAuthenticated = status === "authenticated";
   const userId = session?.user.id;
   const [postId, setPostId] = useState<string | null>(null);
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId) return; // Prevent fetch if userId is missing
@@ -90,6 +96,7 @@ export default function CheckoutPage() {
     form.setValue("email", session?.user.email || "");
     form.setValue("phoneNumber", session?.user.phoneNumber || "");
     form.setValue("shipmentMethod", "STANDARD");
+    setLoading(false);
   }, [form, session?.user.email, session?.user.name, session?.user.phoneNumber, userId]);
 
   useEffect(() => {
@@ -107,13 +114,25 @@ export default function CheckoutPage() {
       });
   }, [postId, form]);
 
+  useEffect(() => {
+    if (!form.watch("shipmentMethod")) return;
+    if (!form.watch("price")) return;
+    if (form.watch("shipmentMethod") === "STANDARD") {
+      form.setValue("shippingFee", 20);
+      form.setValue("subtotal", (form.watch("price") || 0) + 20);
+    } else if (form.watch("shipmentMethod") === "EXPRESS") {
+      form.setValue("shippingFee", 50);
+      form.setValue("subtotal", (form.watch("price") || 0) + 50);
+    }
+  }, [form.watch("shipmentMethod"), form.watch("price")]);
+
   const router = useRouter();
   const handleConfirmOrder = async () => {
     if (!isAuthenticated || !session?.user) {
       router.push("/login");
       return;
     }
-    if (!postId || !orderData || !orderData.shipmentMethod || !orderData.address) {
+    if (!postId || !orderData || !orderData.shipmentMethod || !orderData.address || !orderData.subtotal) {
       return;
     }
     if (
@@ -130,9 +149,14 @@ export default function CheckoutPage() {
       hashId: "", // fix this please
       shipmentMethod: orderData.shipmentMethod,
       address: orderData.address,
+      amount: orderData.subtotal,
     });
     router.push("/transaction-history-page");
   };
+
+  if (loading) {
+    return <LoadingAnimation />;
+  }
 
   return (
     <div className="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-md">
@@ -150,7 +174,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Book Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="fetching... book title" {...field} />
+                  <Input readOnly placeholder="fetching... book title" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -164,7 +188,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Author</FormLabel>
                 <FormControl>
-                  <Input placeholder="fetching... author's name" {...field} />
+                  <Input readOnly placeholder="fetching... author's name" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -178,7 +202,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Price</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="fetching... price" {...field} />
+                  <Input readOnly type="text" placeholder="fetching... price" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -194,7 +218,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="fetching... Name" {...field} />
+                  <Input readOnly placeholder="fetching... Name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -209,7 +233,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="fetching... Email" {...field} />
+                  <Input readOnly type="email" placeholder="fetching... Email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -224,7 +248,7 @@ export default function CheckoutPage() {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input type="tel" placeholder="fetching... Phone Number" {...field} />
+                  <Input readOnly type="tel" placeholder="fetching... Phone Number" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -268,6 +292,34 @@ export default function CheckoutPage() {
                   </Select>
                 </FormControl>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Shipping Fee */}
+          <FormField
+            control={form.control}
+            name="shippingFee"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Shipping Fee</FormLabel>
+                <FormControl>
+                  <Input readOnly type="text" placeholder="fetching... price" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          {/* Subtotal */}
+          <FormField
+            control={form.control}
+            name="subtotal"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subtotal</FormLabel>
+                <FormControl>
+                  <Input readOnly type="text" placeholder="fetching... price" {...field} />
+                </FormControl>
               </FormItem>
             )}
           />
@@ -326,20 +378,26 @@ export default function CheckoutPage() {
               <p>
                 <strong>Price:</strong> {orderData.price}
               </p>
+              <p>
+                <strong>Shipping Fee:</strong> {orderData.shippingFee}
+              </p>
+              <p>
+                <strong>Subtotal:</strong> {orderData.subtotal}
+              </p>
             </div>
           )}
-          {form.watch("price") ? (
+          {form.watch("subtotal") ? (
             <Elements
               stripe={stripePromise}
               options={{
                 mode: "payment",
-                amount: Math.round((form.watch("price") || 0) * 100),
+                amount: Math.round((form.watch("subtotal") || 0) * 100),
                 currency: "thb",
                 payment_method_types: ["card"],
               }}
             >
               <CheckoutPageCard
-                amount={form.watch("price") || 0}
+                amount={form.watch("subtotal") || 0}
                 isDialogOpen={isDialogOpen}
                 setIsDialogOpen={setIsDialogOpen}
                 handleConfirmOrder={handleConfirmOrder}
