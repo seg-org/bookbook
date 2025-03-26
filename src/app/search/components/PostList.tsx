@@ -31,15 +31,14 @@ export const PostList = () => {
     return filteredRecommendedPosts;
   }, [recommendedPosts, session?.user.id]);
 
-  // Function to generate a mocked popularity score using a hash of the post's id
   const getPopularityScore = (post: PostWithBookmark) => {
-    const idStr = String(post.id); // Ensure id is a string, works for numbers or strings
+    const idStr = String(post.id);
     let hash = 0;
     for (let char of idStr) {
       hash = (hash << 5) - hash + char.charCodeAt(0);
-      hash |= 0; // Convert to 32-bit integer
+      hash |= 0;
     }
-    return Math.abs(hash); // Return a positive number as the popularity score
+    return Math.abs(hash);
   };
 
   const handleSortPrice = () => {
