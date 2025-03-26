@@ -1,12 +1,13 @@
-import { ShippingDetailsDialog } from "@/app/transaction-history-page/components/ShippingDetailsDialog";
-import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { useTransactionContext } from "@/context/transactionContext";
-import { useGetTransaction } from "@/hooks/useGetTransactions";
 import { TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { ShippingDetailsDialog } from "@/app/transaction-history-page/components/ShippingDetailsDialog";
+import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
+import { useTransactionContext } from "@/context/transactionContext";
+import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
