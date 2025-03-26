@@ -1,9 +1,17 @@
 "use client";
 
+import { Button } from "@/components/ui/Button";
+import { DialogFooter } from "@/components/ui/Dialog";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useRef, useState } from "react";
 
-const CheckoutPageCard = ({ amount }: { amount: number }) => {
+const CheckoutPageCard = ({
+  amount,
+  setIsDialogOpen,
+}: {
+  amount: number;
+  setIsDialogOpen: (isOpen: boolean) => void;
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -102,17 +110,19 @@ const CheckoutPageCard = ({ amount }: { amount: number }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-md bg-white p-2">
+    <form onSubmit={handleSubmit} className="rounded-md bg-white">
       {clientSecret && <PaymentElement />}
 
       {errorMessage && <div>{errorMessage}</div>}
 
-      <button
-        disabled={!stripe || loading}
-        className="mt-2 w-full rounded-md bg-black p-5 font-bold text-white disabled:animate-pulse disabled:opacity-50"
-      >
-        {!loading ? `Pay ฿${amount}` : "Processing..."}
-      </button>
+      <DialogFooter className="pt-8">
+        <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+          Cancel
+        </Button>
+        <Button variant="default" disabled={!stripe || loading}>
+          {!loading ? `Pay ฿${amount}` : "Processing..."}
+        </Button>
+      </DialogFooter>
     </form>
   );
 };

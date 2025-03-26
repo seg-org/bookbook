@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/Button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
@@ -273,22 +273,6 @@ export default function CheckoutPage() {
             </SelectContent>
           </Select>
 
-          {form.watch("price") ? (
-            <Elements
-              stripe={stripePromise}
-              options={{
-                mode: "payment",
-                amount: Math.round((form.watch("price") || 0) * 100),
-                currency: "thb",
-                payment_method_types: ["card"],
-              }}
-            >
-              <CheckoutPageCard amount={form.watch("price") || 0} />
-            </Elements>
-          ) : (
-            <p>Loading payment details...</p>
-          )}
-
           {/* Submit Button */}
           <Button type="submit" className="w-full">
             Place Order
@@ -331,14 +315,21 @@ export default function CheckoutPage() {
               </p>
             </div>
           )}
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button variant="default" onClick={() => handleConfirmOrder()}>
-              Confirm Order
-            </Button>
-          </DialogFooter>
+          {form.watch("price") ? (
+            <Elements
+              stripe={stripePromise}
+              options={{
+                mode: "payment",
+                amount: Math.round((form.watch("price") || 0) * 100),
+                currency: "thb",
+                payment_method_types: ["card"],
+              }}
+            >
+              <CheckoutPageCard amount={form.watch("price") || 0} setIsDialogOpen={setIsDialogOpen} />
+            </Elements>
+          ) : (
+            <p>Loading payment details...</p>
+          )}
         </DialogContent>
       </Dialog>
     </div>
