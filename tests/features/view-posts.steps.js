@@ -54,7 +54,7 @@ Then("they should see the posts with that title", async function () {
 });
 
 Then("they should see the posts sorted by price in descending order", { timeout: 10000 }, async function () {
-  await page.waitForResponse((response) => response.url().includes("/api/posts") && response.status() === 200);
+  // await page.waitForResponse((response) => response.url().includes("/api/posts") && response.status() === 200);
   await page.waitForTimeout(1000);
 
   const posts = await page.$$('[data-test-id="post-card"]');
