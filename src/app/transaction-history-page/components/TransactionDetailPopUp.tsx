@@ -134,34 +134,34 @@ const TransactionDetailsPopup = () => {
                   {transaction?.status == TransactionStatus.PACKING &&
                     transaction?.buyerId === userId &&
                     transaction?.createdAt < oneWeekAgo && (
-                      <button
+                      <Button
                         className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
                         onClick={() => {
                           router.push(`/transaction-deny/${transaction.id}`);
                         }}
                       >
                         รายงาน
-                      </button>
+                      </Button>
                     )}
                   {transaction?.status == TransactionStatus.PACKING &&
                     transaction?.buyerId === userId &&
                     transaction?.createdAt >= oneWeekAgo && (
-                      <button
+                      <Button
                         className="mt-4 rounded bg-gray-400 px-4 py-2 text-white focus:outline-none"
                         onClick={() => {
                           alert("การขอยกเลิกสามารถขอได้หลังส่งซื้ออย่างน้อย 1 สัปดาห์");
                         }}
                       >
                         รายงาน
-                      </button>
+                      </Button>
                     )}
                   {transaction?.status == TransactionStatus.PACKING && transaction?.sellerId === userId && (
-                    <button
+                    <Button
                       className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
                       onClick={() => setShippingDialogOpen(true)}
                     >
                       ใส่รายละเอียดจัดส่ง
-                    </button>
+                    </Button>
                   )}
                   <ShippingDetailsDialog
                     open={shippingDialogOpen}
@@ -182,39 +182,39 @@ const TransactionDetailsPopup = () => {
                   {transaction?.status == TransactionStatus.DELIVERING &&
                     transaction?.buyerId === userId &&
                     transaction?.updatedAt >= oneWeekAgo && (
-                      <button
+                      <Button
                         className="mt-4 rounded bg-gray-400 px-4 py-2 text-white focus:outline-none"
                         onClick={() => {
                           alert("การขอยกเลิกสามารถขอได้หลังเริ่มจัดส่งอย่างน้อย 1 สัปดาห์");
                         }}
                       >
                         รายงาน
-                      </button>
+                      </Button>
                     )}
                   {transaction?.status == TransactionStatus.DELIVERING &&
                     transaction?.buyerId === userId &&
                     transaction?.updatedAt < oneWeekAgo && (
-                      <button
+                      <Button
                         className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
                         onClick={() => {
                           router.push(`/transaction-deny/${transaction.id}`);
                         }}
                       >
                         รายงาน
-                      </button>
+                      </Button>
                     )}
                   {transaction?.status == TransactionStatus.HOLD && transaction?.buyerId === userId && (
-                    <button
+                    <Button
                       className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
                       onClick={() => {
                         router.push(`/transaction-deny/${transaction.id}`);
                       }}
                     >
                       รายงานเพิ่มเติม
-                    </button>
+                    </Button>
                   )}
                   {transaction?.status === TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
-                    <button
+                    <Button
                       className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
                       onClick={async () => {
                         try {
@@ -233,17 +233,17 @@ const TransactionDetailsPopup = () => {
                       }}
                     >
                       รับสำเร็จ
-                    </button>
+                    </Button>
                   )}
 
-                  <button
+                  <Button
                     className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
                     onClick={() => {
                       setSelectingTransaction("");
                     }}
                   >
                     ปิด
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
