@@ -44,7 +44,13 @@ export async function GET(req: NextRequest, props: { params: Promise<{ id: strin
       createdAt: review.createdAt,
       updatedAt: review.updatedAt,
       buyer: review.transaction.buyer,
-      book: review.transaction.post.book,
+      book: {
+        id: review.transaction.post.book.id,
+        title: review.transaction.post.book.title,
+        cover: review.transaction.post.book.coverImageKey
+          ? `https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/book_covers/${review.transaction.post.book.coverImageKey}`
+          : null,
+      },
     };
 
     return NextResponse.json(formattedReview, { status: 200 });
