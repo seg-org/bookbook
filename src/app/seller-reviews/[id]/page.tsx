@@ -1,6 +1,6 @@
 "use client";
 
-import { Book,Star, StarHalf, User } from "lucide-react";
+import { Star, StarHalf, User } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -33,7 +33,7 @@ interface Review {
     post: {
       book: {
         title: string;
-        coverImageKey?: string;
+        coverImageUrl?: string;
       };
     };
   };
@@ -269,18 +269,13 @@ export default function SellerReviewsPage() {
                 <div className="mb-4 flex items-center gap-3 rounded-md bg-gray-50 p-3">
                   <div className="h-15 relative w-10 overflow-hidden">
                     {/* TODO: fix image not showing */}
-                    {/* <Image
-                      src={
-                        review.transaction?.post?.book?.coverImageKey
-                          ? `https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/book_covers/${review.transaction.post.book.coverImageKey}`
-                          : "/placeholder.svg"
-                      }
+                    <Image
+                      src={review.transaction?.post?.book?.coverImageUrl || "/placeholder.svg"}
                       alt={review.transaction?.post?.book?.title || "Book cover"}
                       width={40}
                       height={60}
                       className="object-cover"
-                    /> */}
-                    <Book /> {/* use Book icon from lucide-react instead */}
+                    />
                   </div>
                   <div className="font-medium">{review.transaction.post.book.title}</div>
                 </div>

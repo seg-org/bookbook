@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { getUrl } from "@/app/api/objects/s3";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -53,7 +54,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
         post: {
           book: {
             title: r.transaction.post.book.title,
-            coverImageKey: r.transaction.post.book.coverImageKey,
+            coverImageUrl: getUrl("book_images", r.transaction.post.book.coverImageKey),
           },
         },
       },

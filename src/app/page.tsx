@@ -72,7 +72,7 @@ export default function Home() {
               {[
                 // { href: "/search", icon: <Search />, text: "🔍 ค้นหาหนังสือ" },
                 { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
-                { href: "/my-books", icon: <BookMarked />, text: "📚 รายการหนังสือของฉัน" },
+                // { href: "/my-books", icon: <BookMarked />, text: "📚 รายการหนังสือของฉัน" },
                 // { href: "/potential-matches", icon: <Handshake />, text: "🤝 แนะนำผู้ซื้อที่ตรงกับคุณ" },
                 { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
                 // { href: "/checkout", icon: <ShoppingCart />, text: "ทำการสั่งซื้อ (Checkout)" },
