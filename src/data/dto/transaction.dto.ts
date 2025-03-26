@@ -1,4 +1,4 @@
-import { PaymentMethod, Review,ShipmentMethod, TransactionFail, TransactionStatus  } from "@prisma/client";
+import { PaymentMethod, Review, ShipmentMethod, TransactionFail, TransactionStatus } from "@prisma/client";
 
 import { Post } from "./post.dto";
 import { User } from "./user.dto";
@@ -28,4 +28,15 @@ export type Transaction = {
   failData?: TransactionFail;
 
   review?: Review;
+};
+
+export type CreateTransactionDto = {
+  buyerId: string;
+  postId: string;
+
+  paymentMethod: "CREDIT_CARD" | "ONLINE_BANKING" | "UNDEFINED";
+  hashId: string;
+
+  shipmentMethod: "STANDARD" | "EXPRESS" | "UNDEFINED";
+  address: string;
 };
