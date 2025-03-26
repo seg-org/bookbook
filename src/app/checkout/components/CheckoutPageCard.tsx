@@ -1,9 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { DialogFooter } from "@/components/ui/Dialog";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useRef, useState } from "react";
+
+import { Button } from "@/components/ui/Button";
+import { DialogFooter } from "@/components/ui/Dialog";
 
 const CheckoutPageCard = ({
   amount,

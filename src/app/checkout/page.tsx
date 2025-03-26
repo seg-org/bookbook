@@ -1,7 +1,8 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,8 +14,6 @@ import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/textarea";
 
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import CheckoutPageCard from "./components/CheckoutPageCard";
 
 const shipmentMethods = [
@@ -64,21 +63,6 @@ export default function CheckoutPage() {
   const onSubmit = (data: CheckoutFormData) => {
     setOrderData(data);
     setIsDialogOpen(true); // Open confirmation dialog
-  };
-
-  const router = useRouter();
-
-  const handleConfirmOrder = () => {
-    // ---------------------------------
-    // fix this please
-    // --------------------------------
-    // fetch("/api/transaction", { method: "POST", body: JSON.stringify({ buyerId: session?.user.id, postId: postId, amount: orderData?.price }) })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
-    //alert("Order placed successfully!");
-    router.push("/transaction-history-page");
   };
 
   const { data: session } = useSession();
