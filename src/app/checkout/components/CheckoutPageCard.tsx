@@ -39,7 +39,7 @@ const CheckoutPageCard = ({
       .then((data) => {
         setClientSecret(data.clientSecret);
       });
-  }, [isDialogOpen]);
+  }, [isDialogOpen, amount]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
