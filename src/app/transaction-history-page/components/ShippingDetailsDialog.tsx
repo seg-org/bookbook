@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/Button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
@@ -13,12 +14,15 @@ interface Props {
 }
 
 export const ShippingDetailsDialog = ({ open, onClose, onConfirm }: Props) => {
+  const router = useRouter();
+
   const [trackingNumber, setTrackingNumber] = useState("");
   const [trackingURL, setTrackingURL] = useState("");
 
   const handleConfirm = () => {
     onConfirm(trackingNumber, trackingURL);
     onClose();
+    router.refresh();
   };
 
   return (

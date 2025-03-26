@@ -104,27 +104,32 @@ const TransactionDetailsPopup = () => {
                 <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
                 <p className="font-bold text-slate-500">อีเมล : </p>
                 <p className="text-slate-500">{transaction?.seller?.email}</p>
-                {transaction?.trackingNumber && (
+                {transaction?.status !== "PACKING" && (transaction?.trackingNumber || transaction?.trackingURL) && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold underline">รายละเอียดการจัดส่ง</p>
-                    <p className="font-bold text-slate-500">หมายเลขพัสดุ : </p>
-                    <p className="break-all text-slate-500">{transaction.trackingNumber}</p>
-                  </>
-                )}
 
-                {transaction?.trackingURL && (
-                  <>
-                    <p className="font-bold text-slate-500">ลิงก์ติดตาม : </p>
-                    <p className="break-all text-slate-500">
-                      <a
-                        href={transaction.trackingURL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 underline"
-                      >
-                        {transaction.trackingURL}
-                      </a>
-                    </p>
+                    {transaction?.trackingNumber && (
+                      <>
+                        <p className="font-bold text-slate-500">หมายเลขพัสดุ : </p>
+                        <p className="break-all text-slate-500">{transaction.trackingNumber}</p>
+                      </>
+                    )}
+
+                    {transaction?.trackingURL && (
+                      <>
+                        <p className="font-bold text-slate-500">ลิงก์ติดตาม : </p>
+                        <p className="break-all text-slate-500">
+                          <a
+                            href={transaction.trackingURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline"
+                          >
+                            {transaction.trackingURL}
+                          </a>
+                        </p>
+                      </>
+                    )}
                   </>
                 )}
 
