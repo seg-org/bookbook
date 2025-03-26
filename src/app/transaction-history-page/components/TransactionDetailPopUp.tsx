@@ -132,11 +132,21 @@ const TransactionDetailsPopup = () => {
               <div className="flex items-center justify-between">
                 <p className="text-xl font-bold">{transaction?.post?.price}.-</p>
                 <div className="flex flex-row justify-end space-x-2">
+                <Button
+                    className="mt-4 px-6 py-3"
+                    variant="secondary"
+                    onClick={() => {
+                      setSelectingTransaction("");
+                    }}
+                  >
+                    ปิด
+                  </Button>
                   {transaction?.status == TransactionStatus.PACKING &&
                     transaction?.buyerId === userId &&
                     transaction?.createdAt < oneWeekAgo && (
                       <Button
-                        className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
+                        className="mt-4 px-4 py-2"
+                        variant="destructive"
                         onClick={() => {
                           router.push(`/transaction-deny/${transaction.id}`);
                         }}
@@ -148,7 +158,8 @@ const TransactionDetailsPopup = () => {
                     transaction?.buyerId === userId &&
                     transaction?.createdAt >= oneWeekAgo && (
                       <Button
-                        className="mt-4 rounded bg-gray-400 px-4 py-2 text-white focus:outline-none"
+                        className="mt-4 px-6 py-3"
+                        variant="destructive"
                         onClick={() => {
                           alert("การขอยกเลิกสามารถขอได้หลังส่งซื้ออย่างน้อย 1 สัปดาห์");
                         }}
@@ -157,10 +168,7 @@ const TransactionDetailsPopup = () => {
                       </Button>
                     )}
                   {transaction?.status == TransactionStatus.PACKING && transaction?.sellerId === userId && (
-                    <Button
-                      className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-                      onClick={() => setShippingDialogOpen(true)}
-                    >
+                    <Button className="mt-4 px-4 py-2" variant="default" onClick={() => setShippingDialogOpen(true)}>
                       ใส่รายละเอียดจัดส่ง
                     </Button>
                   )}
@@ -184,7 +192,8 @@ const TransactionDetailsPopup = () => {
                     transaction?.buyerId === userId &&
                     transaction?.updatedAt >= oneWeekAgo && (
                       <Button
-                        className="mt-4 rounded bg-gray-400 px-4 py-2 text-white focus:outline-none"
+                        className="mt-4 px-4 py-2"
+                        variant="destructive"
                         onClick={() => {
                           alert("การขอยกเลิกสามารถขอได้หลังเริ่มจัดส่งอย่างน้อย 1 สัปดาห์");
                         }}
@@ -196,7 +205,8 @@ const TransactionDetailsPopup = () => {
                     transaction?.buyerId === userId &&
                     transaction?.updatedAt < oneWeekAgo && (
                       <Button
-                        className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
+                        className="mt-4 px-4 py-2"
+                        variant="destructive"
                         onClick={() => {
                           router.push(`/transaction-deny/${transaction.id}`);
                         }}
@@ -206,7 +216,8 @@ const TransactionDetailsPopup = () => {
                     )}
                   {transaction?.status == TransactionStatus.HOLD && transaction?.buyerId === userId && (
                     <Button
-                      className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
+                      className="mt-4 px-4 py-2"
+                      variant="destructive"
                       onClick={() => {
                         router.push(`/transaction-deny/${transaction.id}`);
                       }}
@@ -236,15 +247,6 @@ const TransactionDetailsPopup = () => {
                       รับสำเร็จ
                     </Button>
                   )}
-
-                  <Button
-                    className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-                    onClick={() => {
-                      setSelectingTransaction("");
-                    }}
-                  >
-                    ปิด
-                  </Button>
                 </div>
               </div>
             </div>
