@@ -78,7 +78,7 @@ export default function Home() {
                 // { href: "/checkout", icon: <ShoppingCart />, text: "ทำการสั่งซื้อ (Checkout)" },
                 // { href: "/order-status", icon: <Package />, text: "การซื้อของฉัน (Order status)" },
                 { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
-                { href: "/seller-reviews-list", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
+                { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
               ].map((item, index) => (
                 <Link
                   key={index}
