@@ -2,14 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 
-type Context = {
-  params: {
-    id: string;
-  };
-};
-
-export async function GET(_: NextRequest, context: Context) {
-  const { id: sellerId } = context.params;
+export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
+  const { id: sellerId } = params;
 
   try {
     const reviews = await prisma.review.findMany({
