@@ -1,7 +1,6 @@
 "use client";
 
-import clsx from "clsx";
-import { ChangeEventHandler, useMemo, useState } from "react";
+import { ChangeEventHandler, Fragment, useMemo, useState } from "react";
 
 import { usePostContext } from "@/context/postContext";
 
@@ -41,28 +40,24 @@ export default function Search({ title, onChange, onSelect }: SearchProps) {
         onBlur={() => setTimeout(() => setFocused(false), 100)}
       />
 
-      <div
-        className={clsx(
-          "absolute mt-12 w-96 rounded-lg bg-white p-4 transition-opacity",
-          !shouldShowSuggestedBooks && "pointer-events-none hidden opacity-0"
-        )}
-        data-testid="autocomplete-suggested-books"
-      >
-        {suggestedBooks.map((book, index) => (
-          <>
-            <button
-              key={book}
-              className="w-full cursor-pointer rounded-lg p-2 text-left transition-colors hover:bg-gray-100"
-              onClick={() => onSelect(book)}
-            >
-              {book}
-            </button>
-            {index !== suggestedBooks.length - 1 && <hr className="my-2" />}
-          </>
-        ))}
+      {shouldShowSuggestedBooks && (
+        <div className="absolute mt-12 w-96 rounded-lg bg-white p-4" data-testid="autocomplete-suggested-books">
+          {suggestedBooks.map((bookTitle, index) => (
+            <Fragment key={bookTitle}>
+              <button
+                key={bookTitle}
+                className="w-full cursor-pointer rounded-lg p-2 text-left transition-colors hover:bg-gray-100"
+                onClick={() => onSelect(bookTitle)}
+              >
+                {bookTitle}
+              </button>
+              {index !== suggestedBooks.length - 1 && <hr className="my-2" />}
+            </Fragment>
+          ))}
 
-        {suggestedBooks.length === 0 && <p className="text-gray-400">ไม่พบข้อมูล</p>}
-      </div>
+          {suggestedBooks.length === 0 && <p className="text-gray-400">ไม่พบข้อมูล</p>}
+        </div>
+      )}
     </>
   );
 }

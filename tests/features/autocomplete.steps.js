@@ -47,7 +47,6 @@ Then("they should see suggestions for book titles that match {string}", { timeou
   await Promise.all(
     allSuggestions.map(async (suggestion) => {
       await expect(suggestion).toBeVisible();
-      await expect(suggestion).toHaveCSS("opacity", "1");
       expect(await suggestion.textContent()).toContain(titleInitial);
     })
   );
@@ -60,7 +59,6 @@ When("they click on a suggestion {string}", { timeout: 10000 }, async (titleSele
 
   const suggestionBtn = suggestions.first();
   await expect(suggestionBtn).toBeVisible();
-  await expect(suggestionBtn).toHaveCSS("opacity", "1");
   await suggestionBtn.click();
 });
 
@@ -70,13 +68,12 @@ Then(
   async (titleSelected) => {
     const searchField = page.getByTestId("search-by-book-name");
     await expect(searchField).toBeVisible();
-    await expect(searchField).toHaveCSS("opacity", "1");
     expect(await searchField.inputValue()).toBe(titleSelected);
   }
 );
 
 Then("the suggestion box should disappear", { timeout: 10000 }, async () => {
-  await expect(page.getByTestId("autocomplete-suggested-books")).toHaveCSS("opacity", "0");
+  await expect(page.getByTestId("autocomplete-suggested-books")).toBeHidden();
 });
 
 Then("they should see suggestions showing {string}", { timeout: 10000 }, async (message) => {
