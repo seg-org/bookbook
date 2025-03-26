@@ -1,7 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -12,6 +12,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/textarea";
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutPageCard from "./components/CheckoutPageCard";
 
 const shipmentMethods = [
   { id: "standard", name: "Standard Shipping (3-5 days)" },
@@ -33,6 +37,11 @@ const checkoutSchema = z.object({
 
 // Infer TypeScript type from schema
 type CheckoutFormData = z.infer<typeof checkoutSchema>;
+
+if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
+  throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");
+}
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 export default function CheckoutPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -263,6 +272,22 @@ export default function CheckoutPage() {
               <SelectItem value="bankTransfer">Bank Transfer</SelectItem>
             </SelectContent>
           </Select>
+
+          {form.watch("price") ? (
+            <Elements
+              stripe={stripePromise}
+              options={{
+                mode: "payment",
+                amount: Math.round((form.watch("price") || 0) * 100),
+                currency: "thb",
+                payment_method_types: ["card"],
+              }}
+            >
+              <CheckoutPageCard amount={form.watch("price") || 0} />
+            </Elements>
+          ) : (
+            <p>Loading payment details...</p>
+          )}
 
           {/* Submit Button */}
           <Button type="submit" className="w-full">
