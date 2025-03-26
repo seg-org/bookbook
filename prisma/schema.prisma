@@ -37,7 +37,7 @@ model User {
   chatMessages     ChatMessage[]
   Bookmark         Bookmark[]
   ChatReport       ChatReport[]
-  Notification Notification[]
+  Notification     Notification[]
 
   @@map("users")
 }
@@ -186,7 +186,7 @@ model Transaction {
   // review
   review         Review?
   // notification
-  Notification Notification[]
+  Notification   Notification[]
 
   @@index([buyerId, createdAt])
   @@index([sellerId, createdAt])
@@ -380,13 +380,13 @@ enum BookTagType {
 }
 
 model Notification {
-  id          String   @id @default(cuid())
-  userId      String   // The user to be notified
+  id            String   @id @default(cuid())
+  userId        String // The user to be notified
   transactionId String // The related transaction
-  message     String
-  isRead      Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  message       String
+  isRead        Boolean  @default(false)
+  createdAt     DateTime @default(now())
 
-  user        User     @relation(fields: [userId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
   transaction Transaction @relation(fields: [transactionId], references: [id])
 }
