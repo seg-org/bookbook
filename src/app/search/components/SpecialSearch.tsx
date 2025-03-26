@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { GenreType, BookTagType } from "@/app/api/books/book_enum";
+
+import { BookTagType, GenreType } from "@/app/api/books/book_enum";
 import { SpecialDescriptionType } from "@/app/api/posts/post_enum";
 import { usePostContext } from "@/context/postContext";
 
