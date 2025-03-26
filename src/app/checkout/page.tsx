@@ -2,12 +2,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/Dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -16,7 +17,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { createTransaction } from "@/data/transaction";
 
-import { LoadingAnimation } from "@/components/LoadingAnimation";
 import CheckoutPageCard from "./components/CheckoutPageCard";
 
 const shipmentMethods = [
@@ -114,17 +114,21 @@ export default function CheckoutPage() {
       });
   }, [postId, form]);
 
+  const formPrice = form.watch("price");
+  const formShipmentMethod = form.watch("shipmentMethod");
+
   useEffect(() => {
-    if (!form.watch("shipmentMethod")) return;
-    if (!form.watch("price")) return;
-    if (form.watch("shipmentMethod") === "STANDARD") {
+    if (!formPrice) return;
+    if (!formShipmentMethod) return;
+
+    if (formShipmentMethod === "STANDARD") {
       form.setValue("shippingFee", 20);
-      form.setValue("subtotal", (form.watch("price") || 0) + 20);
-    } else if (form.watch("shipmentMethod") === "EXPRESS") {
+      form.setValue("subtotal", formPrice + 20);
+    } else if (formShipmentMethod === "EXPRESS") {
       form.setValue("shippingFee", 50);
-      form.setValue("subtotal", (form.watch("price") || 0) + 50);
+      form.setValue("subtotal", formPrice + 50);
     }
-  }, [form.watch("shipmentMethod"), form.watch("price")]);
+  }, [form, formPrice, formShipmentMethod]);
 
   const router = useRouter();
   const handleConfirmOrder = async () => {
