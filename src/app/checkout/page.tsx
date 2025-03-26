@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,12 +14,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/textarea";
+import { createTransaction } from "@/data/transaction";
 
 import CheckoutPageCard from "./components/CheckoutPageCard";
 
 const shipmentMethods = [
-  { id: "standard", name: "Standard Shipping (3-5 days)" },
-  { id: "express", name: "Express Shipping (1-2 days)" },
+  { id: "STANDARD", name: "Standard Shipping (3-5 days)" },
+  { id: "EXPRESS", name: "Express Shipping (1-2 days)" },
 ];
 
 // Define validation schema with Zod (Book section has no validation)
@@ -65,7 +67,8 @@ export default function CheckoutPage() {
     setIsDialogOpen(true); // Open confirmation dialog
   };
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
   const userId = session?.user.id;
   const [postId, setPostId] = useState<string | null>(null);
 
@@ -75,7 +78,6 @@ export default function CheckoutPage() {
     fetch(`/api/add-to-cart/${userId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Cart Data:", data);
         if (data.postId) {
           setPostId(data.postId);
         }
@@ -87,6 +89,7 @@ export default function CheckoutPage() {
     form.setValue("name", session?.user.name || "");
     form.setValue("email", session?.user.email || "");
     form.setValue("phoneNumber", session?.user.phoneNumber || "");
+    form.setValue("shipmentMethod", "STANDARD");
   }, [form, session?.user.email, session?.user.name, session?.user.phoneNumber, userId]);
 
   useEffect(() => {
@@ -95,7 +98,6 @@ export default function CheckoutPage() {
     fetch(`/api/posts/${postId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Post Data:", data);
         form.setValue("title", data.book.title);
         form.setValue("author", data.book.author);
         form.setValue("price", data.price);
@@ -104,6 +106,33 @@ export default function CheckoutPage() {
         console.error("Error getting post", error);
       });
   }, [postId, form]);
+
+  const router = useRouter();
+  const handleConfirmOrder = async () => {
+    if (!isAuthenticated || !session?.user) {
+      router.push("/login");
+      return;
+    }
+    if (!postId || !orderData || !orderData.shipmentMethod || !orderData.address) {
+      return;
+    }
+    if (
+      orderData.shipmentMethod !== "STANDARD" &&
+      orderData.shipmentMethod !== "EXPRESS" &&
+      orderData.shipmentMethod !== "UNDEFINED"
+    ) {
+      return;
+    }
+    await createTransaction({
+      buyerId: session.user.id,
+      postId: postId,
+      paymentMethod: "CREDIT_CARD",
+      hashId: "", // fix this please
+      shipmentMethod: orderData.shipmentMethod,
+      address: orderData.address,
+    });
+    router.push("/transaction-history-page");
+  };
 
   return (
     <div className="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-md">
@@ -309,7 +338,12 @@ export default function CheckoutPage() {
                 payment_method_types: ["card"],
               }}
             >
-              <CheckoutPageCard amount={form.watch("price") || 0} setIsDialogOpen={setIsDialogOpen} />
+              <CheckoutPageCard
+                amount={form.watch("price") || 0}
+                isDialogOpen={isDialogOpen}
+                setIsDialogOpen={setIsDialogOpen}
+                handleConfirmOrder={handleConfirmOrder}
+              />
             </Elements>
           ) : (
             <p>Loading payment details...</p>

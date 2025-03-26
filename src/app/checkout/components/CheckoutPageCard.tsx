@@ -8,10 +8,14 @@ import { DialogFooter } from "@/components/ui/Dialog";
 
 const CheckoutPageCard = ({
   amount,
+  isDialogOpen,
   setIsDialogOpen,
+  handleConfirmOrder,
 }: {
   amount: number;
+  isDialogOpen: boolean;
   setIsDialogOpen: (isOpen: boolean) => void;
+  handleConfirmOrder: () => void;
 }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -34,25 +38,8 @@ const CheckoutPageCard = ({
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
-        if (data.clientSecret) {
-          fetch("/api/transaction", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              buyerId: "user_3",
-              status: "PAYING",
-              paymentMethod: "CREDIT_CARD",
-              hashId: "aEc!K/NGQ'9?6.UGaPr\"^!&Gyj8.2j?}",
-              shipmentMethod: "DELIVERY",
-              trackingURL: "_.V59O4-Q}KkUr^U!zL-2o8PpVQgb]N!",
-              amount: amount,
-            }),
-          });
-        }
       });
-  }, [amount]);
+  }, [isDialogOpen]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,8 +57,6 @@ const CheckoutPageCard = ({
       return;
     }
 
-    // console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/transaction-history-page`);
-
     if (process.env.NEXT_PUBLIC_BASE_URL === undefined) {
       console.log("NEXT_PUBLIC_BASE_URL is undefined");
     }
@@ -81,6 +66,7 @@ const CheckoutPageCard = ({
       confirmParams: {
         return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/transaction-history-page`,
       },
+      redirect: "if_required",
     });
 
     if (error) {
@@ -93,6 +79,8 @@ const CheckoutPageCard = ({
     }
 
     setLoading(false);
+
+    handleConfirmOrder();
   };
 
   if (!clientSecret || !stripe || !elements) {
@@ -120,7 +108,7 @@ const CheckoutPageCard = ({
         <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
           Cancel
         </Button>
-        <Button variant="default" disabled={!stripe || loading}>
+        <Button variant="default" disabled={!stripe || loading} type="submit">
           {!loading ? `Pay ฿${amount}` : "Processing..."}
         </Button>
       </DialogFooter>
