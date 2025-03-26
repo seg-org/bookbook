@@ -9,15 +9,15 @@ import { Input } from "@/components/ui/Input";
 interface Props {
   open: boolean;
   onClose: () => void;
-  onConfirm: (trackingNumber: string, trackingUrl: string) => void;
+  onConfirm: (trackingNumber: string, trackingURL: string) => void;
 }
 
 export const ShippingDetailsDialog = ({ open, onClose, onConfirm }: Props) => {
   const [trackingNumber, setTrackingNumber] = useState("");
-  const [trackingUrl, setTrackingUrl] = useState("");
+  const [trackingURL, setTrackingURL] = useState("");
 
   const handleConfirm = () => {
-    onConfirm(trackingNumber, trackingUrl);
+    onConfirm(trackingNumber, trackingURL);
     onClose();
   };
 
@@ -33,7 +33,7 @@ export const ShippingDetailsDialog = ({ open, onClose, onConfirm }: Props) => {
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
           />
-          <Input placeholder="ลิงก์ติดตามพัสดุ" value={trackingUrl} onChange={(e) => setTrackingUrl(e.target.value)} />
+          <Input placeholder="ลิงก์ติดตามพัสดุ" value={trackingURL} onChange={(e) => setTrackingURL(e.target.value)} />
         </div>
         <DialogFooter className="space-x-2 pt-4">
           <Button variant="secondary" onClick={onClose}>

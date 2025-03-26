@@ -104,6 +104,30 @@ const TransactionDetailsPopup = () => {
                 <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
                 <p className="font-bold text-slate-500">อีเมล : </p>
                 <p className="text-slate-500">{transaction?.seller?.email}</p>
+                {transaction?.trackingNumber && (
+                  <>
+                    <p className="col-span-2 text-lg font-extrabold underline">รายละเอียดการจัดส่ง</p>
+                    <p className="font-bold text-slate-500">หมายเลขพัสดุ : </p>
+                    <p className="break-all text-slate-500">{transaction.trackingNumber}</p>
+                  </>
+                )}
+
+                {transaction?.trackingURL && (
+                  <>
+                    <p className="font-bold text-slate-500">ลิงก์ติดตาม : </p>
+                    <p className="break-all text-slate-500">
+                      <a
+                        href={transaction.trackingURL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline"
+                      >
+                        {transaction.trackingURL}
+                      </a>
+                    </p>
+                  </>
+                )}
+
                 {transaction?.status == TransactionStatus.FAIL && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold text-red-600 underline">สาเหตุการยกเลิก</p>
@@ -132,7 +156,7 @@ const TransactionDetailsPopup = () => {
               <div className="flex items-center justify-between">
                 <p className="text-xl font-bold">{transaction?.post?.price}.-</p>
                 <div className="flex flex-row justify-end space-x-2">
-                <Button
+                  <Button
                     className="mt-4 px-6 py-3"
                     variant="secondary"
                     onClick={() => {
@@ -175,12 +199,12 @@ const TransactionDetailsPopup = () => {
                   <ShippingDetailsDialog
                     open={shippingDialogOpen}
                     onClose={() => setShippingDialogOpen(false)}
-                    onConfirm={async (trackingNumber, trackingUrl) => {
+                    onConfirm={async (trackingNumber, trackingURL) => {
                       try {
                         await fetch(`/api/transaction/${transaction.id}`, {
                           method: "PATCH",
                           headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ trackingNumber, trackingUrl, status: "DELIVERING" }),
+                          body: JSON.stringify({ trackingNumber, trackingURL, status: "DELIVERING" }),
                         });
                         router.refresh(); // or router.push(...) if needed
                       } catch (e) {
