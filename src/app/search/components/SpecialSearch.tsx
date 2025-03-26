@@ -35,7 +35,7 @@ export default function SpecialSearch() {
         <div>
           <p className="font-semibold">คุณสมบัติพิเศษของโพสต์</p>
           <div className="flex flex-wrap gap-3">
-            {Object.values(SpecialDescriptionType).map((description, index) => (
+            {SpecialDescriptionType.options.map((description, index) => (
               <label key={`${description}-${index}`} className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -54,7 +54,7 @@ export default function SpecialSearch() {
         <div>
           <p className="font-semibold">ประเภทของหนังสือ</p>
           <div className="flex flex-wrap gap-3">
-            {Object.values(GenreType).map((genre, index) => (
+            {GenreType.options.map((genre, index) => (
               <label key={`${genre}-${index}`} className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -71,7 +71,7 @@ export default function SpecialSearch() {
         <div>
           <p className="font-semibold">แท็กของหนังสือ</p>
           <div className="flex flex-wrap gap-3">
-            {Object.values(BookTagType).map((tag, index) => (
+            {BookTagType.options.map((tag, index) => (
               <label key={`${tag}-${index}`} className="flex items-center gap-2">
                 <input
                   type="checkbox"
