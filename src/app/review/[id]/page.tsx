@@ -148,6 +148,7 @@ export default function ReviewsPage() {
 
               <div className="mt-4 text-center">
                 <Button
+                  type="button"
                   variant="ghost"
                   className="text-sm text-gray-500 hover:underline"
                   onClick={() => router.push("/transaction-history-page")}
