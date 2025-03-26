@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, StarHalf, User } from "lucide-react";
+import { Book,Star, StarHalf, User } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -23,16 +23,19 @@ interface Review {
   rating: number;
   comment: string;
   createdAt: string;
-  buyer: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    avatar?: string;
-  };
-  book: {
-    id: string;
-    title: string;
-    cover?: string;
+  transaction: {
+    buyer: {
+      id: string;
+      firstName: string;
+      lastName: string;
+      avatar?: string;
+    };
+    post: {
+      book: {
+        title: string;
+        coverImageKey?: string;
+      };
+    };
   };
 }
 
@@ -195,7 +198,6 @@ export default function SellerReviewsPage() {
           <div className="flex-1">
             <h1 className="text-2xl font-bold">{seller.name}</h1>
             <p className="mt-1 text-gray-600">สมาชิกตั้งแต่ {formatDate(seller.joinDate)}</p>
-            <p className="text-gray-600">ขายแล้ว {seller.totalSales} รายการ</p>
             <p className="mt-2">{seller.bio}</p>
           </div>
           <div className="flex flex-col items-center rounded-lg bg-gray-50 p-4">
@@ -253,23 +255,12 @@ export default function SellerReviewsPage() {
                 <div className="mb-4 flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gray-100">
-                      {review.buyer.avatar ? (
-                        <Image
-                          src={review.buyer.avatar || "/placeholder.svg"}
-                          alt={review.buyer.firstName}
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center">
-                          <User className="h-6 w-6 text-gray-400" />
-                        </div>
-                      )}
+                      <div className="flex h-full w-full items-center justify-center">
+                        <User className="h-6 w-6 text-gray-400" />
+                      </div>
                     </div>
                     <div>
-                      <div className="font-medium">
-                        {review.buyer.firstName} {review.buyer.lastName}
-                      </div>
+                      {review.transaction?.buyer?.firstName} {review.transaction?.buyer?.lastName}
                       <div className="text-sm text-gray-500">{formatDate(review.createdAt)}</div>
                     </div>
                   </div>
@@ -277,15 +268,21 @@ export default function SellerReviewsPage() {
                 </div>
                 <div className="mb-4 flex items-center gap-3 rounded-md bg-gray-50 p-3">
                   <div className="h-15 relative w-10 overflow-hidden">
-                    <Image
-                      src={review.book.cover || "/placeholder.svg"}
-                      alt={review.book.title}
+                    {/* TODO: fix image not showing */}
+                    {/* <Image
+                      src={
+                        review.transaction?.post?.book?.coverImageKey
+                          ? `https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/book_covers/${review.transaction.post.book.coverImageKey}`
+                          : "/placeholder.svg"
+                      }
+                      alt={review.transaction?.post?.book?.title || "Book cover"}
                       width={40}
                       height={60}
                       className="object-cover"
-                    />
+                    /> */}
+                    <Book /> {/* use Book icon from lucide-react instead */}
                   </div>
-                  <div className="font-medium">{review.book.title}</div>
+                  <div className="font-medium">{review.transaction.post.book.title}</div>
                 </div>
                 <div className="text-gray-700">{review.comment}</div>
               </div>

@@ -1,5 +1,5 @@
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 import * as z from "zod";
 
 import { authOptions } from "@/lib/auth";
@@ -70,7 +70,7 @@ export async function GET() {
         return {
           id: s.id,
           name: `${s.firstName} ${s.lastName}`,
-          avatar: null, // or use s.image if you have it
+          avatar: null, //s.sellerProfile?.idCardImageKey ? getUrl("idCard_images", s.sellerProfile.idCardImageKey) : null,
           joinDate: s.createdAt.toISOString(),
           totalSales,
           averageRating,

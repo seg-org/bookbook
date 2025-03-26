@@ -1,8 +1,9 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+import { prisma } from "@/lib/prisma";
+
 export async function GET(_: Request, context: { params: { id: string } }) {
-  const { id: sellerId } = context.params;
+  const { id: sellerId } = await context.params;
 
   try {
     const reviews = await prisma.review.findMany({
@@ -43,13 +44,18 @@ export async function GET(_: Request, context: { params: { id: string } }) {
       rating: r.rating,
       comment: r.comment ?? "",
       createdAt: r.createdAt.toISOString(),
-      buyer: r.transaction.buyer,
-      book: {
-        id: r.transaction.post.book.id,
-        title: r.transaction.post.book.title,
-        cover: r.transaction.post.book.coverImageKey
-          ? `https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/book_covers/${r.transaction.post.book.coverImageKey}`
-          : null,
+      transaction: {
+        buyer: {
+          id: r.transaction.buyer.id,
+          firstName: r.transaction.buyer.firstName,
+          lastName: r.transaction.buyer.lastName,
+        },
+        post: {
+          book: {
+            title: r.transaction.post.book.title,
+            coverImageKey: r.transaction.post.book.coverImageKey,
+          },
+        },
       },
     }));
 
