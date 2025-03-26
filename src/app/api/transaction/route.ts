@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         ...parsedData.data,
         sellerId: post.sellerId,
         status: TransactionStatus.PACKING,
-        amount: post.price,
+        amount: parsedData.data.amount,
 
         shipmentMethod: ShipmentMethod.UNDEFINED,
         trackingURL: "",
