@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { usePostContext } from "@/context/postContext";
-import { SpecialDescriptionType } from "@/app/api/posts/post_enum";
 import { GenreType, BookTagType } from "@/app/api/books/book_enum";
+import { SpecialDescriptionType } from "@/app/api/posts/post_enum";
+import { usePostContext } from "@/context/postContext";
 
 export default function SpecialSearch() {
   const { setPostsFilters } = usePostContext();
