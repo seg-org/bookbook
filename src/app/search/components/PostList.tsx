@@ -34,7 +34,7 @@ export const PostList = () => {
   const getPopularityScore = (post: PostWithBookmark) => {
     const idStr = String(post.id);
     let hash = 0;
-    for (let char of idStr) {
+    for (const char of idStr) {
       hash = (hash << 5) - hash + char.charCodeAt(0);
       hash |= 0;
     }
