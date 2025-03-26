@@ -32,7 +32,7 @@ export default function Search({ title, onChange, onSelect }: SearchProps) {
     <>
       <input
         className="flex-1 rounded-md border border-gray-300 p-1"
-        data-test-id="search-by-book-name"
+        data-testid="search-by-book-name"
         type="text"
         placeholder="ชื่อหนังสือ"
         value={title}
@@ -44,23 +44,24 @@ export default function Search({ title, onChange, onSelect }: SearchProps) {
       <div
         className={clsx(
           "absolute mt-12 w-96 rounded-lg bg-white p-4 transition-opacity",
-          !shouldShowSuggestedBooks && "pointer-events-none opacity-0"
+          !shouldShowSuggestedBooks && "pointer-events-none hidden opacity-0"
         )}
+        data-testid="autocomplete-suggested-books"
       >
         {suggestedBooks.map((book, index) => (
           <>
-            <div
+            <button
               key={book}
-              className="cursor-pointer rounded-lg p-2 transition-colors hover:bg-gray-100"
+              className="w-full cursor-pointer rounded-lg p-2 text-left transition-colors hover:bg-gray-100"
               onClick={() => onSelect(book)}
             >
               {book}
-            </div>
+            </button>
             {index !== suggestedBooks.length - 1 && <hr className="my-2" />}
           </>
         ))}
 
-        {suggestedBooks.length === 0 && <div className="text-gray-400">ไม่พบข้อมูล</div>}
+        {suggestedBooks.length === 0 && <p className="text-gray-400">ไม่พบข้อมูล</p>}
       </div>
     </>
   );
