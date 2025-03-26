@@ -1,16 +1,18 @@
-import { TransactionFailType, TransactionStatus } from "@prisma/client";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-
+import { ShippingDetailsDialog } from "@/app/transaction-history-page/components/ShippingDetailsDialog";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { useTransactionContext } from "@/context/transactionContext";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
+import { TransactionFailType, TransactionStatus } from "@prisma/client";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
   const { selectingTransaction, setSelectingTransaction, userId } = useTransactionContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
-
+  const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },
     [TransactionStatus.DELIVERING]: { label: "จัดส่ง", color: "text-gray-300" },
@@ -156,11 +158,27 @@ const TransactionDetailsPopup = () => {
                   {transaction?.status == TransactionStatus.PACKING && transaction?.sellerId === userId && (
                     <button
                       className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-                      onClick={() => {}}
+                      onClick={() => setShippingDialogOpen(true)}
                     >
                       ใส่รายละเอียดจัดส่ง
                     </button>
                   )}
+                  <ShippingDetailsDialog
+                    open={shippingDialogOpen}
+                    onClose={() => setShippingDialogOpen(false)}
+                    onConfirm={async (trackingNumber, trackingUrl) => {
+                      try {
+                        await fetch(`/api/transaction/${transaction.id}`, {
+                          method: "PATCH",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ trackingNumber, trackingUrl, status: "DELIVERING" }),
+                        });
+                        router.refresh(); // or router.push(...) if needed
+                      } catch (e) {
+                        console.error("Update failed", e);
+                      }
+                    }}
+                  />
                   {transaction?.status == TransactionStatus.DELIVERING &&
                     transaction?.buyerId === userId &&
                     transaction?.updatedAt >= oneWeekAgo && (
