@@ -185,7 +185,6 @@ model Transaction {
   isDelivered    Boolean           @map("is_delivered")
   // review
   review         Review?
-  // notification
   Notification   Notification[]
 
   @@index([buyerId, createdAt])
@@ -380,13 +379,14 @@ enum BookTagType {
 }
 
 model Notification {
-  id            String   @id @default(cuid())
-  userId        String // The user to be notified
-  transactionId String // The related transaction
+  id            String       @id @default(cuid())
+  userId        String       @map("user_id")
+  user          User         @relation(fields: [userId], references: [id])
   message       String
-  isRead        Boolean  @default(false)
-  createdAt     DateTime @default(now())
+  isRead        Boolean      @default(false)
+  createdAt     DateTime     @default(now()) @map("created_at")
+  transactionId String?      @map("transaction_id")
+  transaction   Transaction? @relation(fields: [transactionId], references: [id])
 
-  user        User        @relation(fields: [userId], references: [id])
-  transaction Transaction @relation(fields: [transactionId], references: [id])
+  @@map("notification")
 }
