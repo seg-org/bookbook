@@ -50,7 +50,8 @@ ARG NEXT_PUBLIC_ABLY_CLIENT_API_KEY
 ENV NEXT_PUBLIC_ABLY_CLIENT_API_KEY=${NEXT_PUBLIC_ABLY_CLIENT_API_KEY}
 
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+# ignore postinstall (prisma)
+RUN pnpm install --frozen-lockfile  --ignore-scripts
 
 COPY . .
 
