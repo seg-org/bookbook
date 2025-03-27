@@ -65,17 +65,6 @@ jobs:
           cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache,mode=max
           build-args: |
             APP_ENV=development
-            POSTGRES_URL=${{ secrets.POSTGRES_URL }}
-            DIRECT_URL=${{ secrets.DIRECT_URL }}
-            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_REGION=${{ secrets.AWS_REGION }}
-            AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }}
-            NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
-            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
-            HF_API_KEY=${{ secrets.HF_API_KEY }}
             NEXT_PUBLIC_STRIPE_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLIC_KEY }}
-            STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
             NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
-            ABLY_SERVER_API_KEY=${{ secrets.ABLY_SERVER_API_KEY }}
             NEXT_PUBLIC_ABLY_CLIENT_API_KEY=${{ secrets.NEXT_PUBLIC_ABLY_CLIENT_API_KEY }}
