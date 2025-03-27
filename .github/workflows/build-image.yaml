@@ -6,8 +6,8 @@ on:
       - main
   workflow_dispatch:
   pull_request:
-    types:
-      - closed
+    # types:
+    #   - closed
     branches:
       - main
       - dev
@@ -22,7 +22,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     environment: prod
-    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    # if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
 
     permissions:
       contents: write
@@ -68,3 +68,4 @@ jobs:
             NEXT_PUBLIC_STRIPE_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLIC_KEY }}
             NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
             NEXT_PUBLIC_ABLY_CLIENT_API_KEY=${{ secrets.NEXT_PUBLIC_ABLY_CLIENT_API_KEY }}
+            STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
