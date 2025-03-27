@@ -1,0 +1,80 @@
+name: Build Image
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  pull_request:
+    # types:
+    #   - closed
+    branches:
+      - main
+      - dev
+
+env:
+  SERVICE_NAME: rpkm67-frontend
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
+  IMAGE_TAG: <WILL_BE_SET>
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    # if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: "0"
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          RELEASE_BRANCHES: dev
+          DEFAULT_BUMP: patch
+        id: tag_action
+
+      - name: Set IMAGE_TAG
+        run: |
+          echo "IMAGE_TAG=${{ steps.tag_action.outputs.new_tag }}" >> $GITHUB_ENV
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to the Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }},${{ env.IMAGE_NAME }}:latest
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache,mode=max
+          build-args: |
+            APP_ENV=development
+            POSTGRES_URL=${{ secrets.POSTGRES_URL }}
+            DIRECT_URL=${{ secrets.DIRECT_URL }}
+            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }}
+            NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
+            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}
+            HF_API_KEY=${{ secrets.HF_API_KEY }}
+            NEXT_PUBLIC_STRIPE_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_STRIPE_PUBLIC_KEY }}
+            STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
+            NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
+            ABLY_SERVER_API_KEY=${{ secrets.ABLY_SERVER_API_KEY }}
+            NEXT_PUBLIC_ABLY_CLIENT_API_KEY=${{ secrets.NEXT_PUBLIC_ABLY_CLIENT_API_KEY }}
