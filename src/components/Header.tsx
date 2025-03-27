@@ -1,15 +1,38 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { Menu, Bell } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+interface Transaction {
+  id: string;
+  status: "PACKING" | "DELIVERING" | "COMPLETE" | "HOLD" | "FAIL";
+  postTitle: string;
+  coverImageUrl: string;
+}
 
 function Header() {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    async function fetchTransactions() {
+      if (!session?.user?.id) return;
+
+      const response = await fetch(
+        `/api/transaction?forNotifications=true&userId=${session.user.id}&asBuyer=true`
+      );
+      const data: Transaction[] = await response.json();
+      setTransactions(data);
+    }
+
+    fetchTransactions();
+  }, [session]);
 
   return (
     <header className="relative flex w-full items-center justify-between bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-4 text-white shadow-md">
@@ -51,6 +74,66 @@ function Header() {
 
       {/* Authentication & Mobile Menu */}
       <div className="flex items-center gap-4">
+        {/* Notifications */}
+        {isAuthenticated && (
+          <div className="relative">
+            <button
+              className="relative flex items-center"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <Bell className="h-6 w-6 text-white" />
+              {transactions.length > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                  {transactions.length}
+                </span>
+              )}
+            </button>
+
+            {/* Notifications Dropdown */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-64 rounded-lg bg-white p-4 shadow-lg">
+                <h3 className="mb-2 text-sm font-semibold text-gray-700">
+                  Notifications
+                </h3>
+                <ul className="space-y-2">
+                  {transactions.length > 0 ? (
+                    transactions.map((transaction) => (
+                      <li
+                        key={transaction.id}
+                        className="flex items-center gap-2 rounded-md p-2 bg-gray-100 text-gray-600"
+                      >
+                        <img
+                          src={transaction.coverImageUrl}
+                          alt={transaction.postTitle}
+                          className="h-10 w-10 rounded object-cover"
+                        />
+                        <div>
+                          <div className="font-medium">{transaction.postTitle}</div>
+                          <div className="text-sm">
+                            Status:{" "}
+                            {transaction.status === "COMPLETE"
+                              ? "Completed"
+                              : transaction.status === "FAIL"
+                              ? "Failed"
+                              : transaction.status === "PACKING"
+                              ? "Packing"
+                              : transaction.status === "DELIVERING"
+                              ? "Delivering"
+                              : "On Hold"}
+                          </div>
+                        </div>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="text-sm text-gray-500">No notifications</li>
+                  )}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Authentication */}
         {isAuthenticated ? (
           <div className="flex items-center gap-4">
             <Link href="/profile">
