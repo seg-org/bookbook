@@ -7,23 +7,19 @@ import { PostWithBookmark, usePostContext } from "@/context/postContext";
 import PostCard from "./PostCard";
 
 export const PostList = () => {
-  const { data: session, status } = useSession();
-  const isAuthenticated = status === "authenticated";
+  const { data: session } = useSession();
 
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
-  const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
   const [sortBy, setSortBy] = useState<{ field: string; order: string } | null>(null); // e.g., { field: "price", order: "asc" }
 
   const { posts, recommendedPosts, loading, error } = usePostContext();
 
   const filteredPosts = useMemo(() => {
-    let filteredPosts = posts.filter((post) => post.sellerId !== session?.user.id);
-    if (isBookmarkOnly) {
-      filteredPosts = filteredPosts.filter((post) => post.isBookmarked);
-    }
+    const filteredPosts = posts.filter((post) => post.sellerId !== session?.user.id);
+
     return filteredPosts;
-  }, [posts, session?.user.id, isBookmarkOnly]);
+  }, [posts, session?.user.id]);
 
   const filteredRecommendedPosts = useMemo(() => {
     const filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);

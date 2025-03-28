@@ -1,9 +1,9 @@
+import { Wrench } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
-import { Wrench } from "lucide-react";
-import { useState } from "react";
 
 type PostCardProps = {
   post: PostWithBookmark;
@@ -98,14 +98,7 @@ function PostCard({ post }: PostCardProps) {
         <div className="mt-auto flex gap-2 self-end">
           {editMode && (
             <>
-              <Button
-                variant="default"
-                className="bg-white text-red-500 hover:bg-red-500 hover:text-white"
-                onClick={() => {
-                  setEditedPost(oldPost);
-                  setEditMode(false);
-                }}
-              >
+              <Button variant="default" className="bg-white text-red-500 hover:bg-red-500 hover:text-white" onClick={()=>{setEditedPost(oldPost);setEditMode(false);}}>
                 <div className="flex items-center justify-center gap-x-2">ยกเลิกการแก้ไข</div>
               </Button>
               <Button variant="default" className="text-green-500 hover:bg-green-500 hover:text-white">
