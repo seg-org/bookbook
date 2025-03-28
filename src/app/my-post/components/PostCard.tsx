@@ -1,12 +1,9 @@
-import clsx from "clsx";
-import { Wrench } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
-
-
-
+import { Wrench } from "lucide-react";
+import { useState } from "react";
 
 type PostCardProps = {
   post: PostWithBookmark;
@@ -20,21 +17,52 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
-function PostCard({ post, isRecommended }: PostCardProps) {
+function PostCard({ post }: PostCardProps) {
+  const [editMode, setEditMode] = useState(false);
+
+  const [editedPost, setEditedPost] = useState({
+    title: post.title,
+    price: post.price,
+  });
+
+  const oldPost = {
+    title: post.title,
+    price: post.price,
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditedPost((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <>
-    
       <div
         data-test-id="post-card"
-        className={clsx(
-          "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
-          isRecommended && "border-4 border-amber-300"
-        )}
+        className={"flex w-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2"}
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
-          <h3>{post.title}</h3>
+          {editMode ? (
+            <input
+              name="title"
+              value={editedPost.title}
+              onChange={handleChange}
+              className="rounded border border-gray-300 p-1"
+            />
+          ) : (
+            <h3>{post.title}</h3>
+          )}
           <div className="flex items-center space-x-4">
-            <span data-test-id="post-price">{post.price} ฿</span>
+            {editMode ? (
+              <input
+                name="price"
+                value={editedPost.price}
+                onChange={handleChange}
+                className="w-20 rounded border border-gray-300 p-1"
+              />
+            ) : (
+              <span data-test-id="post-price">{post.price} ฿</span>
+            )}
           </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">
@@ -65,15 +93,33 @@ function PostCard({ post, isRecommended }: PostCardProps) {
                 {cut(post.book.publisher, 40)}
               </div>
             </div>
-            {isRecommended && <h3 className="self-end dark:text-white">(RECOMMENDED)</h3>}
           </div>
         </div>
         <div className="mt-auto flex gap-2 self-end">
-          <Button variant="default">
-            <div className="flex items-center justify-center gap-x-2">
-               <Wrench className="h-6 w-6" /> แก้ไขข้อมูลโพสต์
-            </div>
-          </Button>
+          {editMode && (
+            <>
+              <Button
+                variant="default"
+                className="bg-white text-red-500 hover:bg-red-500 hover:text-white"
+                onClick={() => {
+                  setEditedPost(oldPost);
+                  setEditMode(false);
+                }}
+              >
+                <div className="flex items-center justify-center gap-x-2">ยกเลิกการแก้ไข</div>
+              </Button>
+              <Button variant="default" className="text-green-500 hover:bg-green-500 hover:text-white">
+                <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>
+              </Button>
+            </>
+          )}
+          {!editMode && (
+            <Button variant="default">
+              <div className="flex items-center justify-center gap-x-2" onClick={() => setEditMode(true)}>
+                <Wrench className="h-6 w-6" /> แก้ไขข้อมูลโพสต์
+              </div>
+            </Button>
+          )}
         </div>
       </div>
     </>
