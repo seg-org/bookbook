@@ -1,10 +1,10 @@
-import { useTransactionContext } from "@/context/transactionContext";
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 
 const PageBox = ({ pageNumber }: { pageNumber: number }) => {
   const {
     paginator,
     paginator: { selectingPage },
-  } = useTransactionContext();
+  } = useTransactionAdminContext();
   if (pageNumber == -1) {
     return (
       <div

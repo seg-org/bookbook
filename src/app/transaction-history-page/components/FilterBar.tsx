@@ -9,7 +9,7 @@ const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
 
 const FilterBar = () => {
-  const { filter, totalBuy, totalSell } = useTransactionContext();
+  const { filter, paginator, totalBuy, totalSell } = useTransactionContext();
 
   return (
     <div className="flex flex-col items-center justify-between space-y-2.5 bg-blue-400 p-2.5 pl-6 pr-6 shadow-xl 2xl:flex-row 2xl:space-y-0">
@@ -33,13 +33,19 @@ const FilterBar = () => {
           <div className="flex flex-row items-center space-x-2.5">
             <button
               className={`h-10 w-20 rounded-lg ${filter.asBuyer ? "bg-indigo-500 text-white" : "bg-gray-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setAsBuyer(!filter.asBuyer)}
+              onClick={() => {
+                filter.setAsBuyer(!filter.asBuyer);
+                paginator.setSelectingPage(1);
+              }}
             >
               ซื้อ
             </button>
             <button
               className={`h-10 w-20 rounded-lg ${filter.asSeller ? "bg-indigo-500 text-white" : "bg-gray-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setAsSeller(!filter.asSeller)}
+              onClick={() => {
+                filter.setAsSeller(!filter.asSeller);
+                paginator.setSelectingPage(1);
+              }}
             >
               ขาย
             </button>
@@ -48,31 +54,46 @@ const FilterBar = () => {
           <div className="flex flex-row items-center space-x-2.5">
             <button
               className={`h-10 w-28 rounded-lg ${filter.isPacking ? "bg-indigo-500 text-white" : "bg-gray-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setIsPacking(!filter.isPacking)}
+              onClick={() => {
+                filter.setIsPacking(!filter.isPacking);
+                paginator.setSelectingPage(1);
+              }}
             >
               กำลังเตรียม
             </button>
             <button
               className={`h-10 w-20 rounded-lg ${filter.isDelivering ? "bg-indigo-500 text-white" : "bg-gray-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setIsDelivering(!filter.isDelivering)}
+              onClick={() => {
+                filter.setIsDelivering(!filter.isDelivering);
+                paginator.setSelectingPage(1);
+              }}
             >
               จัดส่ง
             </button>
             <button
               className={`h-10 w-20 rounded-lg ${filter.isHold ? "bg-indigo-500 text-white" : "bg-gray-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setIsHold(!filter.isHold)}
+              onClick={() => {
+                filter.setIsHold(!filter.isHold);
+                paginator.setSelectingPage(1);
+              }}
             >
               ตรวจสอบ
             </button>
             <button
               className={`h-10 w-20 rounded-lg ${filter.isComplete ? "bg-indigo-500 text-white" : "bg-gray-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setIsComplete(!filter.isComplete)}
+              onClick={() => {
+                filter.setIsComplete(!filter.isComplete);
+                paginator.setSelectingPage(1);
+              }}
             >
               สำเร็จ
             </button>
             <button
               className={`h-10 w-20 rounded-lg ${filter.isFail ? "bg-indigo-500 text-white" : "bg-gray-200 text-sky-950"} transition-transform duration-200 hover:scale-105 hover:shadow-lg`}
-              onClick={() => filter.setIsFail(!filter.isFail)}
+              onClick={() => {
+                filter.setIsFail(!filter.isFail);
+                paginator.setSelectingPage(1);
+              }}
             >
               ยกเลิก
             </button>
