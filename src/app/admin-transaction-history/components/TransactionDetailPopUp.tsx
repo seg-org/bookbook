@@ -3,15 +3,14 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { ShippingDetailsDialog } from "@/app/transaction-history-page/components/ShippingDetailsDialog";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
-import { useTransactionContext } from "@/context/transactionContext";
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
-  const { selectingTransaction, setSelectingTransaction, userId } = useTransactionContext();
+  const { selectingTransaction, setSelectingTransaction, userId } = useTransactionAdminContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
   const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
@@ -201,22 +200,6 @@ const TransactionDetailsPopup = () => {
                       ใส่รายละเอียดจัดส่ง
                     </Button>
                   )}
-                  <ShippingDetailsDialog
-                    open={shippingDialogOpen}
-                    onClose={() => setShippingDialogOpen(false)}
-                    onConfirm={async (trackingNumber, trackingURL) => {
-                      try {
-                        await fetch(`/api/transaction/${transaction.id}`, {
-                          method: "PATCH",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ trackingNumber, trackingURL, status: "DELIVERING" }),
-                        });
-                        router.refresh(); // or router.push(...) if needed
-                      } catch (e) {
-                        console.error("Update failed", e);
-                      }
-                    }}
-                  />
                   {transaction?.status == TransactionStatus.DELIVERING &&
                     transaction?.buyerId === userId &&
                     transaction?.updatedAt >= oneWeekAgo && (

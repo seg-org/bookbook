@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { useTransactionContext } from "@/context/transactionContext";
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 
 import PageBox from "./PageBox";
 
@@ -14,7 +14,7 @@ const Paginator = () => {
     transactionCount,
     transactionCountLoading,
     transactionCountError,
-  } = useTransactionContext();
+  } = useTransactionAdminContext();
 
   const [childComponents, setChildCompoent] = useState<React.JSX.Element[]>([]);
 

@@ -3,9 +3,9 @@
 import { Fragment } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import LineSeparator from "./LineSperator";
 import TransactionBox from "./TransactionBox";
 
@@ -18,7 +18,7 @@ interface CategorizedTransactions {
 }
 
 const TransactionList = () => {
-  const { userId, transactions, transactionsLoading, transactionsError } = useTransactionContext();
+  const { userId, filter, transactions, transactionsLoading, transactionsError } = useTransactionAdminContext();
 
   const categorizedTransactions: CategorizedTransactions = {
     Today: [],
@@ -70,8 +70,10 @@ const TransactionList = () => {
     );
   }
 
-  const sortTransactions = (tsList: Transaction[]) =>
+  const sortTransactionsDesc = (tsList: Transaction[]) =>
     tsList.sort((a, b) => -(a.createdAt.getTime() - b.createdAt.getTime()));
+  const sortTransactionsAsc = (tsList: Transaction[]) =>
+    tsList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
   const categories: Array<keyof CategorizedTransactions> = ["Today", "Yesterday", "This Month", "This Year"];
 
   transactions.forEach((ts) => {
@@ -91,39 +93,74 @@ const TransactionList = () => {
     }
   });
 
-  return (
-    <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
-      {categories.map((category) => {
-        const transactionsList = categorizedTransactions[category];
+  if (!filter.isHold) {
+    return (
+      <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
+        {categories.map((category) => {
+          const transactionsList = categorizedTransactions[category];
 
-        if (Array.isArray(transactionsList) && transactionsList.length === 0) {
-          return null;
-        } else if (Array.isArray(transactionsList)) {
-          return (
-            <Fragment key={category}>
-              <LineSeparator text={category.toString()} />
-              {sortTransactions(transactionsList).map((ts) => (
+          if (Array.isArray(transactionsList) && transactionsList.length === 0) {
+            return null;
+          } else if (Array.isArray(transactionsList)) {
+            return (
+              <Fragment key={category}>
+                <LineSeparator text={category.toString()} />
+                {sortTransactionsDesc(transactionsList).map((ts) => (
+                  <TransactionBox key={ts.id} transaction={ts} />
+                ))}
+              </Fragment>
+            );
+          } else {
+            return null;
+          }
+        })}
+
+        {Object.entries(categorizedTransactions["Previous Years"])
+          .reverse()
+          .map(([year, transactionsList]) => (
+            <Fragment key={year}>
+              <LineSeparator text={year.toString()} />
+              {sortTransactionsDesc(transactionsList).map((ts) => (
                 <TransactionBox key={ts.id} transaction={ts} />
               ))}
             </Fragment>
-          );
-        } else {
-          return null;
-        }
-      })}
+          ))}
+      </div>
+    );
+  } else {
+    return (
+      <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
+        {Object.entries(categorizedTransactions["Previous Years"])
+          .reverse()
+          .map(([year, transactionsList]) => (
+            <Fragment key={year}>
+              <LineSeparator text={year.toString()} />
+              {sortTransactionsAsc(transactionsList).map((ts) => (
+                <TransactionBox key={ts.id} transaction={ts} />
+              ))}
+            </Fragment>
+          ))}
+        {categories.reverse().map((category) => {
+          const transactionsList = categorizedTransactions[category];
 
-      {Object.entries(categorizedTransactions["Previous Years"])
-        .reverse()
-        .map(([year, transactionsList]) => (
-          <Fragment key={year}>
-            <LineSeparator text={year.toString()} />
-            {sortTransactions(transactionsList).map((ts) => (
-              <TransactionBox key={ts.id} transaction={ts} />
-            ))}
-          </Fragment>
-        ))}
-    </div>
-  );
+          if (Array.isArray(transactionsList) && transactionsList.length === 0) {
+            return null;
+          } else if (Array.isArray(transactionsList)) {
+            return (
+              <Fragment key={category}>
+                <LineSeparator text={category.toString()} />
+                {sortTransactionsAsc(transactionsList).map((ts) => (
+                  <TransactionBox key={ts.id} transaction={ts} />
+                ))}
+              </Fragment>
+            );
+          } else {
+            return null;
+          }
+        })}
+      </div>
+    );
+  }
 };
 
 export default TransactionList;

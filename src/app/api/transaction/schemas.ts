@@ -28,6 +28,10 @@ const parseToDate = (dft: Date) => {
   return (val: string | undefined) => (val ? new Date(val) : dft);
 };
 
+const parseToString = (dft: string) => {
+  return (val: string | undefined) => (val ? val : dft);
+};
+
 const GetTransactionBase = z.object({
   userId: z.string().optional().openapi({ example: "user_1" }),
   startDate: z
@@ -59,6 +63,7 @@ export const GetTransactionRequest = GetTransactionBase.merge(
   z.object({
     skip: z.string().optional().transform(parseToPosInt(0)).openapi({ example: "3" }),
     take: z.string().optional().transform(parseToPosInt(-1)).openapi({ example: "10" }),
+    sortBy: z.string().optional().transform(parseToString("createdAt")).openapi({ example: "createdAt" }),
   }),
 );
 
