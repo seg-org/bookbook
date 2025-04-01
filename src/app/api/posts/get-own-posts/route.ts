@@ -1,5 +1,7 @@
-import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
+
 import { getUrl } from "../../objects/s3";
 import { GetPostsRequest, PostsResponsePaginated } from "../schemas";
 
