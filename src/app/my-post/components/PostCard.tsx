@@ -56,6 +56,7 @@ function PostCard({ post }: PostCardProps) {
             {editMode ? (
               <input
                 name="price"
+                type="number"
                 value={editedPost.price}
                 onChange={handleChange}
                 className="w-20 rounded border border-gray-300 p-1"
@@ -98,7 +99,14 @@ function PostCard({ post }: PostCardProps) {
         <div className="mt-auto flex gap-2 self-end">
           {editMode && (
             <>
-              <Button variant="default" className="bg-white text-red-500 hover:bg-red-500 hover:text-white" onClick={()=>{setEditedPost(oldPost);setEditMode(false);}}>
+              <Button
+                variant="default"
+                className="bg-white text-red-500 hover:bg-red-500 hover:text-white"
+                onClick={() => {
+                  setEditedPost(oldPost);
+                  setEditMode(false);
+                }}
+              >
                 <div className="flex items-center justify-center gap-x-2">ยกเลิกการแก้ไข</div>
               </Button>
               <Button variant="default" className="text-green-500 hover:bg-green-500 hover:text-white">
