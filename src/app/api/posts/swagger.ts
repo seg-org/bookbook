@@ -150,9 +150,9 @@ postRegistry.registerPath({
 postRegistry.registerPath({
   tags: ["Posts"],
   method: "get",
-  path: "/posts/get-all-posts",
+  path: "/posts/get-own-posts",
   summary: "Get all posts",
-  description: "Fetch all posts with optional filters such as title, author, genre, and pagination.",
+  description: "Fetch all own posts",
   request: {
     query: GetPostsRequest,
   },
