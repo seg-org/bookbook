@@ -71,6 +71,8 @@ export const CreateTransactionRequest = z.object({
 
   shipmentMethod: ShipmentMethodEnum.openapi({ example: "EXPRESS" }),
   address: z.string().openapi({ example: "Chulalongkorn Pattumwan BKK 10110" }),
+
+  amount: z.number().openapi({ example: 420 }),
 });
 
 const TransactionFailData = z.object({

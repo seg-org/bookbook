@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import { apiClient } from "./axios";
-import { Transaction } from "./dto/transaction.dto";
+import { CreateTransactionDto,Transaction  } from "./dto/transaction.dto";
 
 interface TransactionBaseQuery {
   userId?: string;
@@ -172,6 +172,17 @@ export const getTransactionCount = async (query: TransactionCount) => {
   } catch (error) {
     console.error("Failed to get transaction count", error);
     return Error("Failed to get transaction count");
+  }
+};
+
+export const createTransaction = async (dto: CreateTransactionDto) => {
+  try {
+    const res: AxiosResponse<Transaction> = await apiClient.post(`/transaction`, dto);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to create transaction with dto ${dto}`, error);
+    return Error(`Failed to create transaction with dto ${dto}`);
   }
 };
 

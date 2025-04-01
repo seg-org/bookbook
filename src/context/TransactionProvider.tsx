@@ -24,11 +24,11 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
   const [endDate, setEndDate] = useState<Date>(endOfTime);
   const [asBuyer, setAsBuyer] = useState(true);
   const [asSeller, setAsSeller] = useState(true);
-  const [isPacking, setIsPacking] = useState(true);
-  const [isDelivering, setIsDelivering] = useState(true);
-  const [isHold, setIsHold] = useState(true);
-  const [isComplete, setIsComplete] = useState(true);
-  const [isFail, setIsFail] = useState(true);
+  const [isPacking, setIsPacking] = useState(false);
+  const [isDelivering, setIsDelivering] = useState(false);
+  const [isHold, setIsHold] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+  const [isFail, setIsFail] = useState(false);
   const filter = useMemo(
     () => ({
       startDate,

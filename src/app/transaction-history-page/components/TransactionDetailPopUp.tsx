@@ -1,8 +1,11 @@
 import { TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
+import { ShippingDetailsDialog } from "@/app/transaction-history-page/components/ShippingDetailsDialog";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { Button } from "@/components/ui/Button";
 import { useTransactionContext } from "@/context/transactionContext";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 
@@ -10,7 +13,7 @@ const TransactionDetailsPopup = () => {
   const router = useRouter();
   const { selectingTransaction, setSelectingTransaction, userId } = useTransactionContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
-
+  const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },
     [TransactionStatus.DELIVERING]: { label: "จัดส่ง", color: "text-gray-300" },
@@ -101,6 +104,35 @@ const TransactionDetailsPopup = () => {
                 <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
                 <p className="font-bold text-slate-500">อีเมล : </p>
                 <p className="text-slate-500">{transaction?.seller?.email}</p>
+                {transaction?.status !== "PACKING" && (transaction?.trackingNumber || transaction?.trackingURL) && (
+                  <>
+                    <p className="col-span-2 text-lg font-extrabold underline">รายละเอียดการจัดส่ง</p>
+
+                    {transaction?.trackingNumber && (
+                      <>
+                        <p className="font-bold text-slate-500">หมายเลขพัสดุ : </p>
+                        <p className="break-all text-slate-500">{transaction.trackingNumber}</p>
+                      </>
+                    )}
+
+                    {transaction?.trackingURL && (
+                      <>
+                        <p className="font-bold text-slate-500">ลิงก์ติดตาม : </p>
+                        <p className="break-all text-slate-500">
+                          <a
+                            href={transaction.trackingURL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline"
+                          >
+                            {transaction.trackingURL}
+                          </a>
+                        </p>
+                      </>
+                    )}
+                  </>
+                )}
+
                 {transaction?.status == TransactionStatus.FAIL && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold text-red-600 underline">สาเหตุการยกเลิก</p>
@@ -127,90 +159,123 @@ const TransactionDetailsPopup = () => {
                 )}
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-xl font-bold">{transaction?.post?.price}.-</p>
+                <p className="text-xl font-bold">{transaction?.amount}.-</p>
                 <div className="flex flex-row justify-end space-x-2">
-                  {transaction?.status == TransactionStatus.PACKING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.createdAt < oneWeekAgo && (
-                      <button
-                        className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
-                        onClick={() => {
-                          router.push(`/transaction-deny/${transaction.id}`);
-                        }}
-                      >
-                        รายงาน
-                      </button>
-                    )}
-                  {transaction?.status == TransactionStatus.PACKING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.createdAt >= oneWeekAgo && (
-                      <button
-                        className="mt-4 rounded bg-gray-400 px-4 py-2 text-white focus:outline-none"
-                        onClick={() => {
-                          alert("การขอยกเลิกสามารถขอได้หลังส่งซื้ออย่างน้อย 1 สัปดาห์");
-                        }}
-                      >
-                        รายงาน
-                      </button>
-                    )}
-                  {transaction?.status == TransactionStatus.PACKING && transaction?.sellerId === userId && (
-                    <button
-                      className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-                      onClick={() => {}}
-                    >
-                      ใส่รายละเอียดจัดส่ง
-                    </button>
-                  )}
-                  {transaction?.status == TransactionStatus.DELIVERING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.updatedAt >= oneWeekAgo && (
-                      <button
-                        className="mt-4 rounded bg-gray-400 px-4 py-2 text-white focus:outline-none"
-                        onClick={() => {
-                          alert("การขอยกเลิกสามารถขอได้หลังเริ่มจัดส่งอย่างน้อย 1 สัปดาห์");
-                        }}
-                      >
-                        รายงาน
-                      </button>
-                    )}
-                  {transaction?.status == TransactionStatus.DELIVERING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.updatedAt < oneWeekAgo && (
-                      <button
-                        className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
-                        onClick={() => {
-                          router.push(`/transaction-deny/${transaction.id}`);
-                        }}
-                      >
-                        รายงาน
-                      </button>
-                    )}
-                  {transaction?.status == TransactionStatus.HOLD && transaction?.buyerId === userId && (
-                    <button
-                      className="mt-4 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none"
-                      onClick={() => {
-                        router.push(`/transaction-deny/${transaction.id}`);
-                      }}
-                    >
-                      รายงานเพิ่มเติม
-                    </button>
-                  )}
-                  {transaction?.status == TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
-                    <button
-                      className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
-                      onClick={() => {}}
-                    >
-                      รับสำเร็จ
-                    </button>
-                  )}
-                  <button
-                    className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
+                  <Button
+                    className="mt-4 px-6 py-3"
+                    variant="secondary"
                     onClick={() => {
                       setSelectingTransaction("");
                     }}
                   >
                     ปิด
-                  </button>
+                  </Button>
+                  {transaction?.status == TransactionStatus.PACKING &&
+                    transaction?.buyerId === userId &&
+                    transaction?.createdAt < oneWeekAgo && (
+                      <Button
+                        className="mt-4 px-4 py-2"
+                        variant="destructive"
+                        onClick={() => {
+                          router.push(`/transaction-deny/${transaction.id}`);
+                        }}
+                      >
+                        รายงาน
+                      </Button>
+                    )}
+                  {transaction?.status == TransactionStatus.PACKING &&
+                    transaction?.buyerId === userId &&
+                    transaction?.createdAt >= oneWeekAgo && (
+                      <Button
+                        className="mt-4 px-6 py-3"
+                        variant="destructive"
+                        onClick={() => {
+                          alert("การขอยกเลิกสามารถขอได้หลังส่งซื้ออย่างน้อย 1 สัปดาห์");
+                        }}
+                      >
+                        รายงาน
+                      </Button>
+                    )}
+                  {transaction?.status == TransactionStatus.PACKING && transaction?.sellerId === userId && (
+                    <Button className="mt-4 px-4 py-2" variant="default" onClick={() => setShippingDialogOpen(true)}>
+                      ใส่รายละเอียดจัดส่ง
+                    </Button>
+                  )}
+                  <ShippingDetailsDialog
+                    open={shippingDialogOpen}
+                    onClose={() => setShippingDialogOpen(false)}
+                    onConfirm={async (trackingNumber, trackingURL) => {
+                      try {
+                        await fetch(`/api/transaction/${transaction.id}`, {
+                          method: "PATCH",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ trackingNumber, trackingURL, status: "DELIVERING" }),
+                        });
+                        router.refresh(); // or router.push(...) if needed
+                      } catch (e) {
+                        console.error("Update failed", e);
+                      }
+                    }}
+                  />
+                  {transaction?.status == TransactionStatus.DELIVERING &&
+                    transaction?.buyerId === userId &&
+                    transaction?.updatedAt >= oneWeekAgo && (
+                      <Button
+                        className="mt-4 px-4 py-2"
+                        variant="destructive"
+                        onClick={() => {
+                          alert("การขอยกเลิกสามารถขอได้หลังเริ่มจัดส่งอย่างน้อย 1 สัปดาห์");
+                        }}
+                      >
+                        รายงาน
+                      </Button>
+                    )}
+                  {transaction?.status == TransactionStatus.DELIVERING &&
+                    transaction?.buyerId === userId &&
+                    transaction?.updatedAt < oneWeekAgo && (
+                      <Button
+                        className="mt-4 px-4 py-2"
+                        variant="destructive"
+                        onClick={() => {
+                          router.push(`/transaction-deny/${transaction.id}`);
+                        }}
+                      >
+                        รายงาน
+                      </Button>
+                    )}
+                  {transaction?.status == TransactionStatus.HOLD && transaction?.buyerId === userId && (
+                    <Button
+                      className="mt-4 px-4 py-2"
+                      variant="destructive"
+                      onClick={() => {
+                        router.push(`/transaction-deny/${transaction.id}`);
+                      }}
+                    >
+                      รายงานเพิ่มเติม
+                    </Button>
+                  )}
+                  {transaction?.status === TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
+                    <Button
+                      className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
+                      onClick={async () => {
+                        try {
+                          // Update transaction status to COMPLETE
+                          await fetch(`/api/transaction/${transaction.id}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ status: "COMPLETE" }),
+                          });
+
+                          router.push(`/review/${transaction.id}`);
+                        } catch (err) {
+                          alert("เกิดข้อผิดพลาดขณะอัปเดตรายการ");
+                          console.error(err);
+                        }
+                      }}
+                    >
+                      รับสำเร็จ
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { useChannel } from "ably/react";
+import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 
 import { sendMessage } from "@/data/chat";
@@ -74,15 +75,24 @@ function Chat({ chatRoom, user }: ChatProps) {
     }
   };
 
+  const rainbow = messages.filter((m) => m.message.includes("rainbow")).length % 2 === 1;
+
   return (
     <div className="h-full w-full bg-gray-50">
-      <div className="h-[90%] overflow-scroll border-b p-4">
+      <div
+        className={clsx(
+          "h-[90%] overflow-scroll border-b p-4",
+          rainbow &&
+            "w-full bg-gradient-to-tr from-[#f8b3d1] via-[#a8e0e5] via-[#d2f3f2] via-[#e8d0f0] via-[#f9d1a2] to-[#f6c8db]"
+        )}
+      >
         {messages.map((m, idx) => (
           <MessageBubble
             key={idx}
             isMine={m.senderId === user.id}
             username={getUsername(m.senderId as string)}
             message={m.message}
+            isAdminMessage={m.senderId === chatRoom.userB.id && chatRoom.userB.isAdmin}
             isSent
           />
         ))}
