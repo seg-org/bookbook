@@ -5,6 +5,13 @@ import { useSession } from "next-auth/react";
 import { Pagination } from "./components/Pagination";
 import { PostList } from "./components/PostList";
 
+/**
+ * Renders the authenticated user's post page.
+ *
+ * This component checks the current session status. If the user is not authenticated,
+ * it redirects them to the login page. When authenticated, it displays the user's post list
+ * along with pagination controls.
+ */
 function MyPostPage() {
   const { status } = useSession();
   const isAuthenticated = status === "authenticated";

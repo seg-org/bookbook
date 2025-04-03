@@ -17,6 +17,15 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
+/**
+ * Renders a post card UI displaying the details of a book-related post.
+ *
+ * In its default mode, the component displays the post's title, price, book cover, and additional book details
+ * (book title, author, genre, publisher). When edit mode is activated, the title and price fields become editable,
+ * allowing users to modify these values. Canceling an edit reverts the changes to the original post information.
+ *
+ * @param post - An object containing the post details, including the title, price, and associated book information.
+ */
 function PostCard({ post }: PostCardProps) {
   const [editMode, setEditMode] = useState(false);
 
