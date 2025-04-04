@@ -118,6 +118,8 @@ const TransactionDetailsPopup = () => {
                 <p className="text-slate-500">{transaction?.post?.title}</p>
                 <p className="font-bold text-slate-500">เนื้อหา : </p>
                 <p className="text-slate-500">{transaction?.post?.content}</p>
+                <p className="font-bold text-slate-500">ความพิเศษ : </p>
+                <p className="text-slate-500">{transaction?.post?.specialDescriptions}</p>
                 {transaction.buyerId == userId && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
