@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
-import { deleteBook, editBook, GetBookQuery } from "@/data/book";
+import { deleteBook, GetBookQuery } from "@/data/book";
 import { useGetBooks } from "@/hooks/useGetAllBooks";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -17,14 +17,6 @@ export default function BookList({ query }: BookListProps) {
   const { books, loading, error } = useGetBooks(query);
   const { data: session } = useSession();
   const router = useRouter();
-
-  const handleEditBook = async (id: string) => {
-    const res = await editBook(id);
-    if (res instanceof Error) {
-      console.error(res);
-      alert("ไม่สามารถแก้ไขหนังสือได้");
-    }
-  };
 
   const handleDeleteBook = async (id: string) => {
     const confirmed = confirm(
@@ -64,18 +56,18 @@ export default function BookList({ query }: BookListProps) {
             <Link href={`/book/sell/${book.id}`}>
               <Button className="w-32">ขายเล่มนี้</Button>
             </Link>
-            {/* {session?.user.isAdmin && ( */}
-            <>
-              <Link href={`/book/edit/${book.id}`}>
-                <Button variant="outline" className="w-32">
-                  แก้ไขข้อมูล
+            {session?.user.isAdmin && (
+              <>
+                <Link href={`/book/${book.id}/edit`}>
+                  <Button variant="outline" className="w-32">
+                    แก้ไขข้อมูล
+                  </Button>
+                </Link>
+                <Button variant="destructive" className="w-32" onClick={() => handleDeleteBook(book.id)}>
+                  ลบหนังสือ
                 </Button>
-              </Link>
-              <Button variant="destructive" className="w-32" onClick={() => handleDeleteBook(book.id)}>
-                ลบหนังสือ
-              </Button>
-            </>
-            {/* )} */}
+              </>
+            )}
           </div>
         </li>
       ))}
