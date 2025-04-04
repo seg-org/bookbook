@@ -23,7 +23,7 @@ export const PostList = () => {
     return <div>Failed to get posts</div>;
   }
 
-  if (posts.length === 0 && posts.length === 0) {
+  if (posts.length === 0) {
     return (
       <div data-test-id="no-posts-found" className="mt-10">
         ไม่พบโพสต์ตามที่ระบุไว้ฮะ
