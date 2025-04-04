@@ -67,7 +67,6 @@
     "eslint": "^9.21.0",
     "eslint-config-next": "15.2.4",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "postcss": "^8.5.3",
     "prettier": "^3.5.2",
     "prettier-plugin-organize-imports": "^4.1.0",
