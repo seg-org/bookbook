@@ -1,6 +1,6 @@
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -20,7 +20,7 @@ export default async function SellBookPage() {
     },
   });
 
-  if (!seller) {
+  if (!seller && !session.user.isAdmin) {
     return <h1 className="my-4 text-center text-2xl font-bold">กรุณาลงทะเบียนผู้ขายก่อนใช้งาน</h1>;
   }
 
