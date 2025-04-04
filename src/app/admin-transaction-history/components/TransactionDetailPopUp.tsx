@@ -1,4 +1,4 @@
-import { TransactionFailType, TransactionStatus } from "@prisma/client";
+import { PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -21,6 +21,18 @@ const TransactionDetailsPopup = () => {
     [TransactionStatus.FAIL]: { label: "ยกเลิก", color: "text-red-500" },
   };
 
+  const paymentMethodMap: Record<PaymentMethod, { label: string; color: string }> = {
+    [PaymentMethod.CREDIT_CARD]: { label: "เครดิตการ์ด", color: "text-slate-500" },
+    [PaymentMethod.ONLINE_BANKING]: { label: "โอนจ่าย", color: "text-slate-500" },
+    [PaymentMethod.UNDEFINED]: { label: "ไม่ระบุ", color: "text-slate-500" },
+  };
+
+  const shipmentMethodMap: Record<ShipmentMethod, { label: string; color: string }> = {
+    [ShipmentMethod.STANDARD]: { label: "ปกติ", color: "text-slate-500" },
+    [ShipmentMethod.EXPRESS]: { label: "เร่งด่วน", color: "text-slate-500" },
+    [ShipmentMethod.UNDEFINED]: { label: "ไม่ระบุ", color: "text-slate-500" },
+  };
+
   const FailTypeMap: Record<TransactionFailType, { label: string }> = {
     [TransactionFailType.UNDELIVERED]: { label: "ไม่จัดส่ง" },
     [TransactionFailType.UNQUALIFIED]: { label: "ของขาดคุณภาพ" },
@@ -28,6 +40,16 @@ const TransactionDetailsPopup = () => {
     [TransactionFailType.TERMINATION]: { label: "บังคับยกเลิก" },
     [TransactionFailType.OTHER]: { label: "อื่น" },
     [TransactionFailType.UNDEFINED]: { label: "ไม่ระบุ" },
+  };
+
+  const dateString = (date: Date | undefined) => {
+    if (date === undefined) return "";
+    return date.toLocaleDateString("en-GB").replace(/\//g, "/");
+  };
+
+  const displayLink = (URLs: string | undefined) => {
+    if (URLs === undefined) return "";
+    return URLs.replace(/,/g, "\n");
   };
 
   const oneWeekAgo = new Date();
@@ -69,38 +91,34 @@ const TransactionDetailsPopup = () => {
                 <p className="font-bold text-slate-500">รหัร : </p>
                 <p className="text-slate-500">{transaction?.id}</p>
                 <p className="font-bold text-slate-500">สร้าง : </p>
-                <p className="text-slate-500">
-                  {transaction?.createdAt.getDay().toString() +
-                    "/" +
-                    transaction?.createdAt.getMonth().toString() +
-                    "/" +
-                    transaction?.createdAt.getFullYear().toString()}
-                </p>
+                <p className="text-slate-500">{dateString(transaction?.createdAt)}</p>
                 <p className="font-bold text-slate-500">แก้ไขล่าสุด : </p>
-                <p className="text-slate-500">
-                  {transaction?.updatedAt.getDay().toString() +
-                    "/" +
-                    transaction?.updatedAt.getMonth().toString() +
-                    "/" +
-                    transaction?.updatedAt.getFullYear().toString()}
-                </p>
+                <p className="text-slate-500">{dateString(transaction?.updatedAt)}</p>
+                <p className="font-bold text-slate-500">การจ่าย : </p>
+                <p className="text-slate-500">{paymentMethodMap[transaction.paymentMethod]?.label}</p>
+                <p className="font-bold text-slate-500">การส่ง : </p>
+                <p className="text-slate-500">{shipmentMethodMap[transaction.shipmentMethod]?.label}</p>
+                <p className="font-bold text-slate-500">ที่อยู่ : </p>
+                <p className="text-slate-500">{transaction?.address}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
                 <p className="font-bold text-slate-500">รหัร : </p>
                 <p className="text-slate-500">{transaction?.post.book.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.title}</p>
+                <p className="font-bold text-slate-500">รหัร isbn : </p>
+                <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">ผู้เขียน : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.author}</p>
                 <p className="font-bold text-slate-500">ผู้ตีพิมพ์ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.publisher}</p>
                 <p className="font-bold text-slate-500">คำอธิบาย : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.description}</p>
-                <p className="font-bold text-slate-500">รหัร isbn : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">จำนวนหน้า : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.pages}</p>
                 <p className="font-bold text-slate-500">หมวดหมู่ : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.genre}</p>
+                <p className="text-slate-500">{transaction?.post?.book?.bookGenres}</p>
+                <p className="font-bold text-slate-500">แท็ก : </p>
+                <p className="text-slate-500">{transaction?.post?.book?.bookTags}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
                 <p className="font-bold text-slate-500">รหัร : </p>
                 <p className="text-slate-500">{transaction?.post.id}</p>
@@ -109,10 +127,23 @@ const TransactionDetailsPopup = () => {
                 <p className="font-bold text-slate-500">เนื้อหา : </p>
                 <p className="text-slate-500">{transaction?.post?.content}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.seller.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
                 <p className="font-bold text-slate-500">อีเมล : </p>
                 <p className="text-slate-500">{transaction?.seller?.email}</p>
+                <p className="font-bold text-slate-500">เบอร์โทร : </p>
+                <p className="text-slate-500">{transaction?.seller?.phoneNumber}</p>
+                <p className="col-span-2 text-lg font-extrabold underline">ผู้ซื้อ</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.buyer.id}</p>
+                <p className="font-bold text-slate-500">ชื่อ : </p>
+                <p className="text-slate-500">{transaction?.buyer?.firstName + " " + transaction?.seller?.lastName}</p>
+                <p className="font-bold text-slate-500">อีเมล : </p>
+                <p className="text-slate-500">{transaction?.buyer?.email}</p>
+                <p className="font-bold text-slate-500">เบอร์โทร : </p>
+                <p className="text-slate-500">{transaction?.buyer?.phoneNumber}</p>
                 {transaction?.status !== "PACKING" && (transaction?.trackingNumber || transaction?.trackingURL) && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold underline">รายละเอียดการจัดส่ง</p>
@@ -139,6 +170,15 @@ const TransactionDetailsPopup = () => {
                         </p>
                       </>
                     )}
+                  </>
+                )}
+                {transaction?.status == TransactionStatus.HOLD && (
+                  <>
+                    <p className="col-span-2 text-lg font-extrabold text-yellow-700 underline">การรายงาน</p>
+                    <p className="font-bold text-yellow-500">รายละเอียด : </p>
+                    <p className="text-yellow-500">{transaction?.failData?.detail}</p>
+                    <p className="font-bold text-yellow-500">หลักฐาน : </p>
+                    <p className="text-yellow-500">{displayLink(transaction?.failData?.evidenceURL)}</p>
                   </>
                 )}
 

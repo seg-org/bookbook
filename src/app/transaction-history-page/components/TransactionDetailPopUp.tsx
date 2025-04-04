@@ -101,6 +101,8 @@ const TransactionDetailsPopup = () => {
                 <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">ผู้เขียน : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.author}</p>
+                <p className="font-bold text-slate-500">ผู้ตีพิมพ์ : </p>
+                <p className="text-slate-500">{transaction?.post?.book?.publisher}</p>
                 <p className="font-bold text-slate-500">คำอธิบาย : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.description}</p>
                 <p className="font-bold text-slate-500">จำนวนหน้า : </p>
