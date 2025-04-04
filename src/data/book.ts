@@ -32,3 +32,25 @@ export const getBooks = async (query?: GetBookQuery) => {
     return Error("Failed to get all books");
   }
 };
+
+export const editBook = async (id: string) => {
+  try {
+    const res: AxiosResponse<Book[]> = await apiClient.patch(`/books/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to patch book with id ${id}`, error);
+    return Error(`Failed to patch book with id ${id}`);
+  }
+};
+
+export const deleteBook = async (id: string) => {
+  try {
+    const res: AxiosResponse<Book[]> = await apiClient.delete(`/books/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to delete book with id ${id}`, error);
+    return Error(`Failed to delete book with id ${id}`);
+  }
+};
