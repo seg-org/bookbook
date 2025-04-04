@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,6 +17,7 @@ const bookSchema = z.object({
   genre: z.string().min(1, "Genre is required"),
   description: z.string(),
   isbn: z.string().min(10, "ISBN must be at least 10 characters"),
+  publisher: z.string().min(1, "Publisher is required"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
 });
@@ -165,6 +166,12 @@ export default function AddBookPage() {
           ISBN:
           <input {...register("isbn")} placeholder="ISBN" className="mt-1 block w-full rounded p-2" />
           {errors.isbn?.message && <p className="text-red-500">{String(errors.isbn.message)}</p>}
+        </label>
+
+        <label>
+          สำนักพิมพ์:
+          <input {...register("publisher")} placeholder="สำนักพิมพ์" className="mt-1 block w-full rounded p-2" />
+          {errors.publisher?.message && <p className="text-red-500">{String(errors.publisher.message)}</p>}
         </label>
 
         <label>
