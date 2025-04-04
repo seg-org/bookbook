@@ -66,6 +66,8 @@ const TransactionDetailsPopup = () => {
                     {statusMap[transaction.status]?.label}
                   </label>
                 </p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.id}</p>
                 <p className="font-bold text-slate-500">สร้าง : </p>
                 <p className="text-slate-500">
                   {transaction?.createdAt.getDay().toString() +
@@ -83,17 +85,25 @@ const TransactionDetailsPopup = () => {
                     transaction?.updatedAt.getFullYear().toString()}
                 </p>
                 <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.post.book.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.title}</p>
                 <p className="font-bold text-slate-500">ผู้เขียน : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.author}</p>
+                <p className="font-bold text-slate-500">ผู้ตีพิมพ์ : </p>
+                <p className="text-slate-500">{transaction?.post?.book?.publisher}</p>
                 <p className="font-bold text-slate-500">คำอธิบาย : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.description}</p>
+                <p className="font-bold text-slate-500">รหัร isbn : </p>
+                <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">จำนวนหน้า : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.pages}</p>
                 <p className="font-bold text-slate-500">หมวดหมู่ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.genre}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.post.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.title}</p>
                 <p className="font-bold text-slate-500">เนื้อหา : </p>
@@ -169,63 +179,28 @@ const TransactionDetailsPopup = () => {
                   >
                     ปิด
                   </Button>
-                  {transaction?.status == TransactionStatus.PACKING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.createdAt < oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-4 py-2"
-                        variant="destructive"
-                        onClick={() => {
-                          router.push(`/transaction-deny/${transaction.id}`);
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
-                  {transaction?.status == TransactionStatus.PACKING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.createdAt >= oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-6 py-3"
-                        variant="destructive"
-                        onClick={() => {
-                          alert("การขอยกเลิกสามารถขอได้หลังส่งซื้ออย่างน้อย 1 สัปดาห์");
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
-                  {transaction?.status == TransactionStatus.PACKING && transaction?.sellerId === userId && (
-                    <Button className="mt-4 px-4 py-2" variant="default" onClick={() => setShippingDialogOpen(true)}>
-                      ใส่รายละเอียดจัดส่ง
+                  {transaction?.status == TransactionStatus.PACKING && transaction?.buyerId === userId && (
+                    <Button
+                      className="mt-4 px-4 py-2"
+                      variant="destructive"
+                      onClick={() => {
+                        router.push(`/transaction-deny/${transaction.id}`);
+                      }}
+                    >
+                      รายงาน
                     </Button>
                   )}
-                  {transaction?.status == TransactionStatus.DELIVERING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.updatedAt >= oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-4 py-2"
-                        variant="destructive"
-                        onClick={() => {
-                          alert("การขอยกเลิกสามารถขอได้หลังเริ่มจัดส่งอย่างน้อย 1 สัปดาห์");
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
-                  {transaction?.status == TransactionStatus.DELIVERING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.updatedAt < oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-4 py-2"
-                        variant="destructive"
-                        onClick={() => {
-                          router.push(`/transaction-deny/${transaction.id}`);
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
+                  {transaction?.status == TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
+                    <Button
+                      className="mt-4 px-4 py-2"
+                      variant="destructive"
+                      onClick={() => {
+                        router.push(`/transaction-deny/${transaction.id}`);
+                      }}
+                    >
+                      รายงาน
+                    </Button>
+                  )}
                   {transaction?.status == TransactionStatus.HOLD && transaction?.buyerId === userId && (
                     <Button
                       className="mt-4 px-4 py-2"
@@ -235,28 +210,6 @@ const TransactionDetailsPopup = () => {
                       }}
                     >
                       รายงานเพิ่มเติม
-                    </Button>
-                  )}
-                  {transaction?.status === TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
-                    <Button
-                      className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
-                      onClick={async () => {
-                        try {
-                          // Update transaction status to COMPLETE
-                          await fetch(`/api/transaction/${transaction.id}`, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ status: "COMPLETE" }),
-                          });
-
-                          router.push(`/review/${transaction.id}`);
-                        } catch (err) {
-                          alert("เกิดข้อผิดพลาดขณะอัปเดตรายการ");
-                          console.error(err);
-                        }
-                      }}
-                    >
-                      รับสำเร็จ
                     </Button>
                   )}
                 </div>
