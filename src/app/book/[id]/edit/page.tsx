@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
-import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { redirect, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,8 +25,9 @@ const bookSchema = z.object({
 });
 export type EditBookFormData = z.infer<typeof bookSchema>;
 
-export default function EditBookPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default function EditBookPage() {
+  const { id: bookId } = useParams();
+  const id = bookId as string;
 
   const {
     register,
