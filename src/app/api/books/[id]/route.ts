@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import { getUrl } from "../../objects/s3";
 import { BookResponse, UpdateBookRequest } from "../schemas";
 
@@ -28,6 +30,14 @@ export async function GET(_: NextRequest, props: { params: Promise<{ id: string 
 }
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+  if (!session.user.isAdmin) {
+    return new NextResponse("Forbidden", { status: 403 });
+  }
+
   const { id } = await props.params;
   try {
     const book = await prisma.book.findUnique({
@@ -67,21 +77,16 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 }
 
 export async function DELETE(_: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+  if (!session.user.isAdmin) {
+    return new NextResponse("Forbidden", { status: 403 });
+  }
+
   const params = await props.params;
   try {
-    const book = await prisma.book.findUnique({ where: { id: params.id } });
-    if (!book) {
-      return NextResponse.json({ error: `Book with id ${params.id} not found` }, { status: 404 });
-    }
-
-    const posts = await prisma.post.findMany({ where: { bookId: params.id } });
-    if (posts.length > 0) {
-      return NextResponse.json(
-        { error: `Cannot delete book with id ${params.id} because it has posts` },
-        { status: 400 }
-      );
-    }
-
     await prisma.book.delete({ where: { id: params.id } });
 
     return NextResponse.json({ message: `Book with id ${params.id} deleted successfully` }, { status: 200 });
