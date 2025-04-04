@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 
+import { EditBookFormData } from "@/app/book/[id]/edit/page";
 import { apiClient } from "./axios";
 import { Book } from "./dto/book.dto";
 
@@ -33,9 +34,20 @@ export const getBooks = async (query?: GetBookQuery) => {
   }
 };
 
-export const editBook = async (id: string) => {
+export const getBook = async (id: string) => {
   try {
-    const res: AxiosResponse<Book[]> = await apiClient.patch(`/books/${id}`);
+    const res: AxiosResponse<Book> = await apiClient.get(`/books/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to get book with id ${id}`, error);
+    return Error(`Failed to get book with id ${id}`);
+  }
+};
+
+export const editBook = async (data: EditBookFormData, id: string) => {
+  try {
+    const res: AxiosResponse<Book> = await apiClient.patch(`/books/${id}`, data);
 
     return res.data;
   } catch (error) {
@@ -46,7 +58,7 @@ export const editBook = async (id: string) => {
 
 export const deleteBook = async (id: string) => {
   try {
-    const res: AxiosResponse<Book[]> = await apiClient.delete(`/books/${id}`);
+    const res: AxiosResponse = await apiClient.delete(`/books/${id}`);
 
     return res.data;
   } catch (error) {

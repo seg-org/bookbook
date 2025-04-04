@@ -4,12 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { bookImageFolderName } from "@/constants/s3FolderName";
+import { editBook } from "@/data/book";
 import { getObjectUrl, putObject } from "@/data/object";
+import { useGetBook } from "@/hooks/useGetBook";
 
 const bookSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -21,50 +23,70 @@ const bookSchema = z.object({
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
 });
-type CreateBookFormData = z.infer<typeof bookSchema>;
+export type EditBookFormData = z.infer<typeof bookSchema>;
 
-export default function AddBookPage() {
+export default function EditBookPage({ params }: { params: { id: string } }) {
+  const { id } = params;
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<CreateBookFormData>({
+  } = useForm<EditBookFormData>({
     resolver: zodResolver(bookSchema),
   });
 
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const isAuthenticated = status === "authenticated";
 
   if (!isAuthenticated) {
     redirect("/login");
   }
+  if (!session?.user?.isAdmin) {
+    redirect("/");
+  }
 
+  const { book, loading: bookLoading, error: bookError } = useGetBook(id);
   const [message, setMessage] = useState("");
-  const [loadingDescription, setLoadingDescription] = useState(false);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  useEffect(() => {
+    if (book) {
+      setValue("title", book.title);
+      setValue("author", book.author);
+      setValue("genre", book.genre);
+      setValue("description", book.description);
+      setValue("isbn", book.isbn);
+      setValue("publisher", book.publisher);
+      setValue("pages", book.pages);
+      setImageUrl(book.coverImageUrl);
+    }
+  }, [book, setValue]);
 
-  const fetchDescription = async (title: string) => {
-    if (!title) return;
-    setLoadingDescription(true);
+  if (bookLoading) {
+    return <p>Loading...</p>;
+  }
+  if (bookError || !book) {
+    console.error(bookError);
+    return <p>Error loading book: {String(bookError)}</p>;
+  }
 
+  const onSubmit = async (data: EditBookFormData) => {
+    setLoading(true);
     try {
-      const response = await fetch("/api/books/gen-description", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title }),
-      });
-
-      const data = await response.json();
-      if (response.ok && data.description) {
-        setValue("description", data.description);
+      const res = await editBook(data, id);
+      if (res instanceof Error) {
+        console.error(res);
+        setMessage(`Error: ${res.message}`);
       }
+      setMessage("Book updated successfully!");
     } catch (error) {
-      console.error("Error fetching description:", error);
+      console.error("Error posting book:", error);
+      setMessage("Failed to post book.");
     } finally {
-      setLoadingDescription(false);
+      setLoading(false);
     }
   };
 
@@ -90,53 +112,13 @@ export default function AddBookPage() {
     }
   };
 
-  const onSubmit = async (data: CreateBookFormData) => {
-    setLoading(true);
-    try {
-      if (!data.coverImageKey) {
-        throw new Error("Cover image upload is required.");
-      }
-
-      const response = await fetch("/api/books", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setMessage("Book posted successfully!");
-      } else {
-        setMessage(`Error: ${result.error}`);
-      }
-    } catch (error) {
-      console.error("Error posting book:", error);
-      setMessage("Failed to post book.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="mx-auto my-10 max-w-lg">
-      <h1 className="mb-4 text-center text-2xl font-bold">เพิ่มหนังสือเพื่อเตรียมขาย</h1>
-      <p className="mb-4 text-center text-gray-500">
-        หนังสือที่เพิ่มยังไม่ถือว่าประกาศขาย
-        ผู้ใช้จะต้องสร้างโพสต์ขายหนังสือที่แนบหนังสือที่สร้างแล้วเพื่อให้สามารถประกาศขายได้
-      </p>
-
+      <h1 className="mb-4 text-center text-2xl font-bold">แก้ไขหนังสือเพื่อเตรียมขาย</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <label>
           ชื่อหนังสือ:
-          <input
-            {...register("title")}
-            placeholder="ชื่อหนังสือ"
-            className="mt-1 block w-full rounded p-2"
-            onBlur={(e) => fetchDescription(e.target.value)}
-          />
+          <input {...register("title")} placeholder="ชื่อหนังสือ" className="mt-1 block w-full rounded p-2" />
           {errors.title?.message && <p className="text-red-500">{String(errors.title.message)}</p>}
         </label>
 
@@ -159,7 +141,6 @@ export default function AddBookPage() {
             placeholder="เนื้อเรื่องย่อ"
             className="mt-1 block w-full rounded p-2"
           ></textarea>
-          {loadingDescription && <p className="text-blue-500">กำลังสรุปเนื้อเรื่องย่อย...</p>}
         </label>
 
         <label>
@@ -207,7 +188,7 @@ export default function AddBookPage() {
           className="w-full rounded-lg bg-blue-500 py-2 text-white hover:bg-blue-700"
           disabled={loading || uploading}
         >
-          {loading ? "กำลังสร้างหนังสือ..." : "สร้างหนังสือ"}
+          {loading ? "กำลังแก้ไขหนังสือ..." : "แก้ไขหนังสือ"}
         </button>
       </form>
 
