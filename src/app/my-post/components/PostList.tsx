@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { usePostContext } from "@/context/postContext";
@@ -6,13 +6,10 @@ import { usePostContext } from "@/context/postContext";
 import PostCard from "./PostCard";
 
 export const PostList = () => {
-
-
   const [priceAsc, setPriceAsc] = useState(1);
   const [popAsc, setPopAsc] = useState(1);
 
   const { posts, loading, error, setPostsFilters } = usePostContext();
-
 
   const handleSortPrice = () => {
     setPostsFilters((prev) => ({ ...prev, sortPrice: priceAsc === 1 ? "desc" : "asc" }));

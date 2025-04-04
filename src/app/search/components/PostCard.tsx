@@ -64,7 +64,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
         data-test-id="post-card"
         className={clsx(
           "flex w-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2",
-          isRecommended && "border-4 border-amber-300"
+          isRecommended && "border-4 border-amber-300",
         )}
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">

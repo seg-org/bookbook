@@ -38,7 +38,7 @@ export async function GET() {
         userB,
         lastMessage,
       };
-    })
+    }),
   );
 
   return NextResponse.json(chatRoomsWithInfo);

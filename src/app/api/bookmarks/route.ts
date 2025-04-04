@@ -51,7 +51,7 @@ export async function PUT(req: NextRequest) {
     if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
       return NextResponse.json(
         { error: "Duplicate key violation (there is already a bookmark with this post id)" },
-        { status: 409 }
+        { status: 409 },
       );
     }
     if (error instanceof Error) console.error("Error creating bookmark", error.stack);

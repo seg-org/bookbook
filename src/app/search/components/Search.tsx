@@ -16,7 +16,7 @@ export default function Search({ title, onChange, onSelect }: SearchProps) {
   const bookList = useMemo(() => [...new Set(posts.map((post) => post.book.title))], [posts]);
   const matchedBooks = useMemo(
     () => bookList.filter((book) => book.toLowerCase().includes(title.toLowerCase())),
-    [bookList, title]
+    [bookList, title],
   );
   const suggestedBooks = useMemo(() => matchedBooks.slice(0, 5), [matchedBooks]);
 
@@ -24,7 +24,7 @@ export default function Search({ title, onChange, onSelect }: SearchProps) {
 
   const shouldShowSuggestedBooks = useMemo(
     () => title.length > 0 && focused && suggestedBooks.every((book) => book !== title),
-    [title, focused, suggestedBooks]
+    [title, focused, suggestedBooks],
   );
 
   return (

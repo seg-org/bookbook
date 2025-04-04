@@ -78,7 +78,7 @@ export async function DELETE(_: NextRequest, props: { params: Promise<{ id: stri
     if (posts.length > 0) {
       return NextResponse.json(
         { error: `Cannot delete book with id ${params.id} because it has posts` },
-        { status: 400 }
+        { status: 400 },
       );
     }
 

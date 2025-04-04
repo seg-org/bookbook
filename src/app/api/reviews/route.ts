@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     if (!transaction) {
       return NextResponse.json(
         { error: `Transaction with id ${parsedData.data.transactionId} not found` },
-        { status: 404 }
+        { status: 404 },
       );
     }
 

@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
 import eslintPluginReact from "eslint-plugin-react";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { dirname } from "path";
@@ -60,5 +61,6 @@ const eslintConfig = [
       "import/no-duplicates": "error",
     },
   },
+  eslintPluginPrettier,
 ];
 export default eslintConfig;

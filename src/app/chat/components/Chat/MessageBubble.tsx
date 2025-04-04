@@ -20,7 +20,7 @@ export const MessageBubble = ({ username, message, isMine, isAdminMessage }: Mes
               ? "bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 font-bold text-[#1A1A40]"
               : "",
             isMine ? "rounded-br-none bg-blue-500 text-white" : "rounded-bl-none bg-gray-300 text-black",
-            message.length > 100 && "break-words"
+            message.length > 100 && "break-words",
           )}
           data-test-id="chat-message"
         >
