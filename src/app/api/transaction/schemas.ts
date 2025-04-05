@@ -78,8 +78,10 @@ export const CreateTransactionRequest = z.object({
 const TransactionFailData = z.object({
   id: z.string().openapi({ example: "transaction_fail_1" }),
   transactionId: z.string().openapi({ example: "transaction_1" }),
-  evidenceURL: z.string().openapi({ example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }),
-  detail: z.string().openapi({ example: "The product wasn't delivered" }),
+  evidenceURL: z.array(z.string()).openapi({
+    example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+  }),
+  detail: z.array(z.string()).openapi({ example: ["The product wasn't delivered", "I hate you"] }),
   failType: TransactionFailTypeEnum.openapi({ example: "UNDELIVERED" }),
 });
 

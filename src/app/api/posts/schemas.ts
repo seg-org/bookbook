@@ -6,6 +6,8 @@ import { SpecialDescriptionType } from "../posts/post_enum";
 
 extendZodWithOpenApi(z);
 
+const DamageEnumType = z.enum(["NO_DAMAGED", "SLIGHTLY_DAMAGED", "DAMAGED"]);
+
 export const GetPostsRequest = z.object({
   title: z.string().optional(),
   author: z.string().optional(),
@@ -34,6 +36,7 @@ export const CreatePostRequest = z.object({
     .array(z.string())
     .optional()
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
+  damage: DamageEnumType.openapi({ example: "SLIGHTLY_DAMAGED" }),
 });
 
 export const PostResponse = z.object({
@@ -53,6 +56,7 @@ export const PostResponse = z.object({
     .array(z.string())
     .optional()
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
+  damage: DamageEnumType.openapi({ example: "NO_DAMAGED" }),
 });
 
 export const PostsResponse = z.array(PostResponse);
@@ -78,4 +82,5 @@ export const UpdatePostRequest = z.object({
     .array(z.string())
     .optional()
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
+  damage: DamageEnumType.optional().openapi({ example: "DAMAGED" }),
 });
