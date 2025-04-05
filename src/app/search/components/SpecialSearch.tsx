@@ -41,7 +41,7 @@ export default function SpecialSearch() {
         {/* Book Genres (from books) */}
         <div>
           <p className="font-semibold">ประเภทของหนังสือ</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
             {GenreType.options.map((genre) => (
               <label key={genre} className="flex items-center gap-2">
                 <input
@@ -58,7 +58,7 @@ export default function SpecialSearch() {
         {/* Book Tags (from books) */}
         <div>
           <p className="font-semibold">แท็กของหนังสือ</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
             {BookTagType.options.map((tag) => (
               <label key={tag} className="flex items-center gap-2">
                 <input
@@ -74,7 +74,7 @@ export default function SpecialSearch() {
         {/* Special Descriptions (from posts) */}
         <div>
           <p className="font-semibold">คุณสมบัติพิเศษของหนังสือ</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
             {SpecialDescriptionType.options.map((description) => (
               <label key={description} className="flex items-center gap-2">
                 <input

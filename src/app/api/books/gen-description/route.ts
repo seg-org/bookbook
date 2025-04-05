@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     const description = data[0].generated_text.split("\n\n").slice(1).join("\n\n");
 
     return NextResponse.json(
-      GenBookDescResponse.parse({ title, description: description || "No description generated." })
+      GenBookDescResponse.parse({ title, description: description || "No description generated." }),
     );
   } catch (error) {
     console.error(error);

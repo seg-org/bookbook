@@ -47,6 +47,6 @@ export const ReviewStatsResponse = z.object({
     z.object({
       rating: z.number().openapi({ example: 5 }),
       count: z.number().openapi({ example: 15 }),
-    })
+    }),
   ),
 });

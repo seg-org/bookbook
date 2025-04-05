@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import { apiClient } from "./axios";
-import { CreateTransactionDto,Transaction  } from "./dto/transaction.dto";
+import { CreateTransactionDto, Transaction } from "./dto/transaction.dto";
 
 interface TransactionBaseQuery {
   userId?: string;

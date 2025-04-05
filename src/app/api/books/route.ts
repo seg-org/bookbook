@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
               },
             },
           }
-        : undefined
+        : undefined,
     );
     const booksWithImageUrl = books.map((book) => {
       const url = getUrl("book_images", book.coverImageKey);

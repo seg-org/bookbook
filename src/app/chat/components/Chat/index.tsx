@@ -83,7 +83,7 @@ function Chat({ chatRoom, user }: ChatProps) {
         className={clsx(
           "h-[90%] overflow-scroll border-b p-4",
           rainbow &&
-            "w-full bg-gradient-to-tr from-[#f8b3d1] via-[#a8e0e5] via-[#d2f3f2] via-[#e8d0f0] via-[#f9d1a2] to-[#f6c8db]"
+            "w-full bg-gradient-to-tr from-[#f8b3d1] via-[#a8e0e5] via-[#d2f3f2] via-[#e8d0f0] via-[#f9d1a2] to-[#f6c8db]",
         )}
       >
         {messages.map((m, idx) => (

@@ -133,7 +133,7 @@ export async function GET(req: NextRequest) {
             },
           },
         };
-      })
+      }),
     );
 
     return NextResponse.json(TransactionsRespone.parse(transactionsWithURL), { status: 201 });
