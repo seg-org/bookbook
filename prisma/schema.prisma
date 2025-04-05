@@ -71,7 +71,6 @@ model Book {
   id            String        @id @default(cuid())
   title         String
   author        String
-  genre         String
   description   String
   isbn          String        @unique
   pages         Int
@@ -81,7 +80,6 @@ model Book {
   bookGenres    GenreType[]
   bookTags      BookTagType[]
   // TODO verifiedBy Admin
-  // Also get rid of genre, already have GenreType as enum
 
   @@map("books")
 }
@@ -100,7 +98,8 @@ model Post {
   ChatRoom            ChatRoom[]
   Bookmark            Bookmark[]
   specialDescriptions SpecialDescriptionType[]
-  damageURLs          String[]
+  damageURLs          String[]                 @map("damage_urls")
+  damage              DamageType               @map("damage")
 
   @@map("posts")
 }
@@ -194,8 +193,8 @@ model TransactionFail {
   id            String              @id @default(cuid())
   transaction   Transaction         @relation(fields: [transactionId], references: [id], onDelete: Cascade)
   transactionId String              @unique @map("transaction_id")
-  evidenceURL   String              @map("evidence_url")
-  detail        String
+  evidenceURL   String[]            @map("evidence_url")
+  detail        String[]
   failType      TransactionFailType @map("fail_type")
 
   @@map("transaction_fails")
@@ -256,15 +255,6 @@ enum ShipmentMethod {
   @@map("shipment_method_type")
 }
 
-// model SpecialDescription {
-//   postId      String
-//   specialType SpecialDescriptionType
-//   post        Post                   @relation(fields: [postId], references: [id])
-
-//   @@id([postId, specialType])
-//   @@map("special_descriptions")
-// }
-
 enum SpecialDescriptionType {
   AUTHOR_SIGNATURE            @map("author_signature")
   LIMITED_EDITION             @map("limited_edition")
@@ -298,23 +288,11 @@ enum SpecialDescriptionType {
   BILINGUAL_EDITION           @map("bilingual_edition")
 }
 
-// model Damage {
-//   postId           String
-//   damagePictureURL String @map("damage_picture_url")
-//   post             Post   @relation(fields: [postId], references: [id])
-
-//   @@id([postId, damagePictureURL])
-//   @@map("damages")
-// }
-
-// model Genre {
-//   bookId    String
-//   genreType GenreType
-//   book      Book      @relation(fields: [bookId], references: [id])
-
-//   @@id([bookId, genreType])
-//   @@map("book_genres")
-// }
+enum DamageType {
+  NO_DAMAGED       @map("no_damaged")
+  SLIGHTLY_DAMAGED @map("slightly_damaged")
+  DAMAGED          @map("damaged")
+}
 
 enum GenreType {
   FICTION               @map("fiction")
@@ -343,15 +321,6 @@ enum GenreType {
   CONTEMPORARY          @map("contemporary")
   RELIGIOUS_SPIRITUAL   @map("religious_spiritual")
 }
-
-// model BookTag {
-//   bookId  String
-//   tagType BookTagType
-//   book    Book        @relation(fields: [bookId], references: [id])
-
-//   @@id([bookId, tagType])
-//   @@map("book_tags")
-// }
 
 enum BookTagType {
   BESTSELLER         @map("bestseller")

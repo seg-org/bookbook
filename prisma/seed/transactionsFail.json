@@ -1,597 +1,2112 @@
 [
   {
     "id": "transaction_fail_1",
-    "transactionId": "transaction_4",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Delivery service unavailable",
-    "failType": "REJECT"
-  },
-  {
-    "id": "transaction_fail_2",
-    "transactionId": "transaction_6",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Fraud detection triggered",
-    "failType": "UNDEFINED"
-  },
-  {
-    "id": "transaction_fail_3",
-    "transactionId": "transaction_8",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Invalid payment information",
-    "failType": "UNDEFINED"
-  },
-  {
-    "id": "transaction_fail_4",
-    "transactionId": "transaction_9",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Duplicate order detected",
+    "transactionId": "transaction_3",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Shipping address invalid"],
     "failType": "OTHER"
   },
   {
+    "id": "transaction_fail_2",
+    "transactionId": "transaction_8",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Technical issue during payment"],
+    "failType": "REJECT"
+  },
+  {
+    "id": "transaction_fail_3",
+    "transactionId": "transaction_11",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Discount code invalid"],
+    "failType": "REJECT"
+  },
+  {
+    "id": "transaction_fail_4",
+    "transactionId": "transaction_14",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Delivery service unavailable"],
+    "failType": "REJECT"
+  },
+  {
     "id": "transaction_fail_5",
-    "transactionId": "transaction_13",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Out of stock",
-    "failType": "TERMINATION"
+    "transactionId": "transaction_17",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Expired payment method",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_6",
-    "transactionId": "transaction_14",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Discount code invalid",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_18",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Seller canceled the order"],
+    "failType": "OTHER"
   },
   {
     "id": "transaction_fail_7",
     "transactionId": "transaction_19",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Price discrepancy",
-    "failType": "UNDEFINED"
-  },
-  {
-    "id": "transaction_fail_8",
-    "transactionId": "transaction_20",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
-    "failType": "UNDELIVERED"
-  },
-  {
-    "id": "transaction_fail_9",
-    "transactionId": "transaction_25",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Out of stock"],
     "failType": "OTHER"
   },
   {
-    "id": "transaction_fail_10",
-    "transactionId": "transaction_28",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Seller canceled the order",
+    "id": "transaction_fail_8",
+    "transactionId": "transaction_22",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Seller canceled the order",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_9",
+    "transactionId": "transaction_30",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Order exceeds purchase limit"],
+    "failType": "UNQUALIFIED"
+  },
+  {
+    "id": "transaction_fail_10",
+    "transactionId": "transaction_31",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Customer canceled the order"],
+    "failType": "REJECT"
   },
   {
     "id": "transaction_fail_11",
-    "transactionId": "transaction_29",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Out of stock",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_33",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Buyer did not complete payment"],
+    "failType": "UNDELIVERED"
   },
   {
     "id": "transaction_fail_12",
-    "transactionId": "transaction_33",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Invalid payment information",
+    "transactionId": "transaction_35",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Price discrepancy"],
     "failType": "OTHER"
   },
   {
     "id": "transaction_fail_13",
     "transactionId": "transaction_37",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "System error during checkout",
-    "failType": "TERMINATION"
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Order exceeds purchase limit",
+      "Seller canceled the order",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_14",
-    "transactionId": "transaction_41",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Item restricted in buyer's region",
-    "failType": "OTHER"
+    "transactionId": "transaction_38",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_15",
-    "transactionId": "transaction_42",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Shipping address invalid",
-    "failType": "REJECT"
+    "transactionId": "transaction_39",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Payment gateway error",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Seller canceled the order",
+      "Price discrepancy"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_16",
-    "transactionId": "transaction_44",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Technical issue during payment",
+    "transactionId": "transaction_42",
+    "evidenceURL": [
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "System error during checkout",
+      "Order exceeds purchase limit",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_17",
-    "transactionId": "transaction_45",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Customer canceled the order",
-    "failType": "REJECT"
+    "transactionId": "transaction_44",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Price discrepancy"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_18",
-    "transactionId": "transaction_50",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
+    "transactionId": "transaction_48",
+    "evidenceURL": [
+      "Invalid payment information",
+      "Payment gateway error",
+      "Fraud detection triggered",
+      "Shipping address invalid",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_19",
-    "transactionId": "transaction_52",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Item restricted in buyer's region",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_49",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Item restricted in buyer's region"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_20",
-    "transactionId": "transaction_57",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Technical issue during payment",
-    "failType": "REJECT"
+    "transactionId": "transaction_50",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Discount code invalid"],
+    "failType": "TERMINATION"
   },
   {
     "id": "transaction_fail_21",
-    "transactionId": "transaction_58",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Invalid payment information",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_52",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Discount code invalid"],
+    "failType": "REJECT"
   },
   {
     "id": "transaction_fail_22",
-    "transactionId": "transaction_59",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Insufficient funds",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_53",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Order exceeds purchase limit"],
+    "failType": "UNDELIVERED"
   },
   {
     "id": "transaction_fail_23",
-    "transactionId": "transaction_60",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "System error during checkout",
+    "transactionId": "transaction_54",
+    "evidenceURL": [
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Delivery service unavailable",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Seller canceled the order"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_24",
-    "transactionId": "transaction_64",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Price discrepancy",
+    "transactionId": "transaction_55",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Order exceeds purchase limit"],
     "failType": "UNDELIVERED"
   },
   {
     "id": "transaction_fail_25",
-    "transactionId": "transaction_65",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Duplicate order detected",
+    "transactionId": "transaction_58",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Insufficient funds",
+      "Payment gateway error",
+      "Transaction timeout",
+      "Out of stock",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_26",
-    "transactionId": "transaction_69",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment gateway error",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_59",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Discount code invalid"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_27",
-    "transactionId": "transaction_70",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Order exceeds purchase limit",
-    "failType": "REJECT"
+    "transactionId": "transaction_61",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Seller canceled the order",
+      "Price discrepancy"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_28",
-    "transactionId": "transaction_77",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Fraud detection triggered",
+    "transactionId": "transaction_63",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Insufficient funds",
+      "Payment gateway error",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Seller canceled the order",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_29",
-    "transactionId": "transaction_79",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Transaction timeout",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_64",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Expired payment method"],
+    "failType": "TERMINATION"
   },
   {
     "id": "transaction_fail_30",
-    "transactionId": "transaction_80",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Duplicate order detected",
+    "transactionId": "transaction_66",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_31",
-    "transactionId": "transaction_81",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Customer canceled the order",
+    "transactionId": "transaction_69",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Seller canceled the order"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_32",
-    "transactionId": "transaction_83",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Customer canceled the order",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_70",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Item restricted in buyer's region"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_33",
-    "transactionId": "transaction_85",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Buyer did not complete payment",
+    "transactionId": "transaction_76",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Delivery service unavailable"],
     "failType": "TERMINATION"
   },
   {
     "id": "transaction_fail_34",
-    "transactionId": "transaction_89",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Item restricted in buyer's region",
-    "failType": "UNDELIVERED"
+    "transactionId": "transaction_78",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Buyer did not complete payment"],
+    "failType": "TERMINATION"
   },
   {
     "id": "transaction_fail_35",
-    "transactionId": "transaction_90",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
+    "transactionId": "transaction_83",
+    "evidenceURL": [
+      "Payment gateway error",
+      "Expired payment method",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Price discrepancy"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_36",
-    "transactionId": "transaction_91",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Duplicate order detected",
-    "failType": "REJECT"
+    "transactionId": "transaction_84",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Transaction timeout",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "Discount code invalid",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_37",
-    "transactionId": "transaction_93",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Out of stock",
-    "failType": "OTHER"
+    "transactionId": "transaction_86",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Duplicate order detected"],
+    "failType": "REJECT"
   },
   {
     "id": "transaction_fail_38",
-    "transactionId": "transaction_95",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Invalid payment information",
+    "transactionId": "transaction_87",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Payment declined by bank"],
     "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_39",
-    "transactionId": "transaction_100",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
-    "failType": "REJECT"
-  },
-  {
-    "id": "transaction_fail_40",
-    "transactionId": "transaction_102",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Discount code invalid",
+    "transactionId": "transaction_89",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Customer canceled the order",
+      "Out of stock",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Discount code invalid"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
+    "id": "transaction_fail_40",
+    "transactionId": "transaction_92",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Fraud detection triggered"],
+    "failType": "UNQUALIFIED"
+  },
+  {
     "id": "transaction_fail_41",
-    "transactionId": "transaction_103",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "System error during checkout",
+    "transactionId": "transaction_93",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Transaction timeout",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Order exceeds purchase limit"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_42",
-    "transactionId": "transaction_105",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Out of stock",
+    "transactionId": "transaction_99",
+    "evidenceURL": [
+      "Invalid payment information",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_43",
-    "transactionId": "transaction_106",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Customer canceled the order",
-    "failType": "UNQUALIFIED"
+    "transactionId": "transaction_100",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Customer canceled the order"],
+    "failType": "UNDELIVERED"
   },
   {
     "id": "transaction_fail_44",
-    "transactionId": "transaction_107",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Technical issue during payment",
+    "transactionId": "transaction_103",
+    "evidenceURL": [
+      "Invalid payment information",
+      "Expired payment method",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Price discrepancy"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_45",
-    "transactionId": "transaction_113",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Seller canceled the order",
+    "transactionId": "transaction_106",
+    "evidenceURL": [
+      "Expired payment method",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Delivery service unavailable",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_46",
-    "transactionId": "transaction_115",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Invalid payment information",
-    "failType": "TERMINATION"
+    "transactionId": "transaction_110",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Technical issue during payment"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_47",
-    "transactionId": "transaction_116",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Out of stock",
+    "transactionId": "transaction_111",
+    "evidenceURL": [
+      "Payment gateway error",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "Discount code invalid",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_48",
-    "transactionId": "transaction_118",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Duplicate order detected",
-    "failType": "REJECT"
-  },
-  {
-    "id": "transaction_fail_49",
-    "transactionId": "transaction_121",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Technical issue during payment",
-    "failType": "UNQUALIFIED"
-  },
-  {
-    "id": "transaction_fail_50",
-    "transactionId": "transaction_123",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Insufficient funds",
+    "transactionId": "transaction_113",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Price discrepancy"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
+    "id": "transaction_fail_49",
+    "transactionId": "transaction_115",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Discount code invalid",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_50",
+    "transactionId": "transaction_126",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Payment gateway error"],
+    "failType": "TERMINATION"
+  },
+  {
     "id": "transaction_fail_51",
-    "transactionId": "transaction_125",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
+    "transactionId": "transaction_129",
+    "evidenceURL": [
+      "Invalid payment information",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Seller canceled the order",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_52",
-    "transactionId": "transaction_126",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Seller canceled the order",
-    "failType": "UNDELIVERED"
+    "transactionId": "transaction_131",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Buyer did not complete payment"],
+    "failType": "REJECT"
   },
   {
     "id": "transaction_fail_53",
-    "transactionId": "transaction_127",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Seller canceled the order",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_133",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Delivery service unavailable"],
+    "failType": "UNDELIVERED"
   },
   {
     "id": "transaction_fail_54",
-    "transactionId": "transaction_130",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Price discrepancy",
+    "transactionId": "transaction_134",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Delivery service unavailable",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_55",
-    "transactionId": "transaction_131",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment gateway error",
-    "failType": "UNQUALIFIED"
-  },
-  {
-    "id": "transaction_fail_56",
-    "transactionId": "transaction_133",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Shipping address invalid",
-    "failType": "UNDEFINED"
-  },
-  {
-    "id": "transaction_fail_57",
-    "transactionId": "transaction_134",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
+    "transactionId": "transaction_135",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Payment declined by bank"],
     "failType": "TERMINATION"
   },
   {
+    "id": "transaction_fail_56",
+    "transactionId": "transaction_136",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Invalid payment information"],
+    "failType": "UNQUALIFIED"
+  },
+  {
+    "id": "transaction_fail_57",
+    "transactionId": "transaction_138",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
     "id": "transaction_fail_58",
-    "transactionId": "transaction_137",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Transaction timeout",
+    "transactionId": "transaction_140",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Customer canceled the order",
+      "Out of stock",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_59",
-    "transactionId": "transaction_145",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Order exceeds purchase limit",
-    "failType": "UNQUALIFIED"
+    "transactionId": "transaction_144",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Payment gateway error",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_60",
-    "transactionId": "transaction_146",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Transaction timeout",
-    "failType": "UNQUALIFIED"
+    "transactionId": "transaction_148",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Insufficient funds",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Customer canceled the order",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_61",
-    "transactionId": "transaction_149",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Price discrepancy",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_151",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Item restricted in buyer's region"],
+    "failType": "TERMINATION"
   },
   {
     "id": "transaction_fail_62",
-    "transactionId": "transaction_150",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Technical issue during payment",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_153",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["System error during checkout"],
+    "failType": "TERMINATION"
   },
   {
     "id": "transaction_fail_63",
-    "transactionId": "transaction_154",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Insufficient funds",
+    "transactionId": "transaction_156",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Payment gateway error",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_64",
-    "transactionId": "transaction_155",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Delivery service unavailable",
+    "transactionId": "transaction_159",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Payment declined by bank"],
     "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_65",
-    "transactionId": "transaction_157",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Fraud detection triggered",
-    "failType": "UNQUALIFIED"
-  },
-  {
-    "id": "transaction_fail_66",
-    "transactionId": "transaction_160",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Customer canceled the order",
+    "transactionId": "transaction_162",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "System error during checkout",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
-    "id": "transaction_fail_67",
-    "transactionId": "transaction_163",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Expired payment method",
+    "id": "transaction_fail_66",
+    "transactionId": "transaction_164",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Transaction timeout"],
     "failType": "TERMINATION"
   },
   {
+    "id": "transaction_fail_67",
+    "transactionId": "transaction_166",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Order exceeds purchase limit"],
+    "failType": "OTHER"
+  },
+  {
     "id": "transaction_fail_68",
-    "transactionId": "transaction_164",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Shipping address invalid",
+    "transactionId": "transaction_168",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Order exceeds purchase limit",
+      "Price discrepancy",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_69",
-    "transactionId": "transaction_166",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Insufficient funds",
-    "failType": "UNDEFINED"
-  },
-  {
-    "id": "transaction_fail_70",
-    "transactionId": "transaction_167",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Out of stock",
+    "transactionId": "transaction_169",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Payment declined by bank"],
     "failType": "TERMINATION"
   },
   {
-    "id": "transaction_fail_71",
+    "id": "transaction_fail_70",
     "transactionId": "transaction_170",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Invalid payment information",
-    "failType": "OTHER"
+    "evidenceURL": [
+      "Payment gateway error",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Out of stock",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_71",
+    "transactionId": "transaction_171",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Customer canceled the order",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Seller canceled the order",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_72",
     "transactionId": "transaction_172",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Technical issue during payment",
-    "failType": "UNDEFINED"
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Invalid payment information"],
+    "failType": "OTHER"
   },
   {
     "id": "transaction_fail_73",
     "transactionId": "transaction_173",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Shipping address invalid",
-    "failType": "UNDEFINED"
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Fraud detection triggered"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_74",
-    "transactionId": "transaction_177",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Delivery service unavailable",
-    "failType": "REJECT"
+    "transactionId": "transaction_176",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Payment gateway error",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Shipping address invalid",
+      "Order exceeds purchase limit",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_75",
-    "transactionId": "transaction_178",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Item restricted in buyer's region",
+    "transactionId": "transaction_182",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Expired payment method",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_76",
-    "transactionId": "transaction_179",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Fraud detection triggered",
-    "failType": "OTHER"
+    "transactionId": "transaction_184",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Expired payment method"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_77",
-    "transactionId": "transaction_183",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Expired payment method",
-    "failType": "UNDELIVERED"
-  },
-  {
-    "id": "transaction_fail_78",
-    "transactionId": "transaction_188",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Customer canceled the order",
+    "transactionId": "transaction_185",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Payment gateway error",
+      "Fraud detection triggered",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Seller canceled the order",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
+    "id": "transaction_fail_78",
+    "transactionId": "transaction_190",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Buyer did not complete payment"],
+    "failType": "OTHER"
+  },
+  {
     "id": "transaction_fail_79",
-    "transactionId": "transaction_189",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Out of stock",
+    "transactionId": "transaction_192",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Out of stock",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_80",
-    "transactionId": "transaction_190",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment gateway error",
+    "transactionId": "transaction_195",
+    "evidenceURL": [
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_81",
-    "transactionId": "transaction_193",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Shipping address invalid",
-    "failType": "UNDEFINED"
+    "transactionId": "transaction_196",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Order exceeds purchase limit"],
+    "failType": "UNQUALIFIED"
   },
   {
     "id": "transaction_fail_82",
-    "transactionId": "transaction_194",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Payment declined by bank",
+    "transactionId": "transaction_199",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_83",
-    "transactionId": "transaction_196",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Delivery service unavailable",
-    "failType": "OTHER"
+    "transactionId": "transaction_201",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Out of stock",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_84",
-    "transactionId": "transaction_197",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Technical issue during payment",
-    "failType": "OTHER"
+    "transactionId": "transaction_203",
+    "evidenceURL": [
+      "Invalid payment information",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
   },
   {
     "id": "transaction_fail_85",
-    "transactionId": "transaction_198",
-    "evidenceURL": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "detail": "Buyer did not complete payment",
+    "transactionId": "transaction_204",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Price discrepancy"],
+    "failType": "TERMINATION"
+  },
+  {
+    "id": "transaction_fail_86",
+    "transactionId": "transaction_205",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Expired payment method",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "Duplicate order detected",
+      "Order exceeds purchase limit"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_87",
+    "transactionId": "transaction_219",
+    "evidenceURL": [
+      "Expired payment method",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_88",
+    "transactionId": "transaction_220",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Out of stock"],
+    "failType": "OTHER"
+  },
+  {
+    "id": "transaction_fail_89",
+    "transactionId": "transaction_224",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Technical issue during payment"],
+    "failType": "TERMINATION"
+  },
+  {
+    "id": "transaction_fail_90",
+    "transactionId": "transaction_228",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Item restricted in buyer's region"],
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_91",
+    "transactionId": "transaction_229",
+    "evidenceURL": [
+      "Payment gateway error",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Discount code invalid"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_92",
+    "transactionId": "transaction_231",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Buyer did not complete payment"],
+    "failType": "UNQUALIFIED"
+  },
+  {
+    "id": "transaction_fail_93",
+    "transactionId": "transaction_236",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Expired payment method",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_94",
+    "transactionId": "transaction_238",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Discount code invalid"],
+    "failType": "TERMINATION"
+  },
+  {
+    "id": "transaction_fail_95",
+    "transactionId": "transaction_241",
+    "evidenceURL": [
+      "Payment gateway error",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Price discrepancy"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_96",
+    "transactionId": "transaction_244",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Order exceeds purchase limit"],
+    "failType": "REJECT"
+  },
+  {
+    "id": "transaction_fail_97",
+    "transactionId": "transaction_247",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Payment declined by bank"],
+    "failType": "OTHER"
+  },
+  {
+    "id": "transaction_fail_98",
+    "transactionId": "transaction_249",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Item restricted in buyer's region"],
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_99",
+    "transactionId": "transaction_250",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Duplicate order detected"],
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_100",
+    "transactionId": "transaction_254",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Insufficient funds"],
+    "failType": "UNQUALIFIED"
+  },
+  {
+    "id": "transaction_fail_101",
+    "transactionId": "transaction_256",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Expired payment method",
+      "Customer canceled the order",
+      "Shipping address invalid",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Price discrepancy"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_102",
+    "transactionId": "transaction_259",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_103",
+    "transactionId": "transaction_262",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Out of stock",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_104",
+    "transactionId": "transaction_263",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Insufficient funds",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Expired payment method",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_105",
+    "transactionId": "transaction_264",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Buyer did not complete payment"],
+    "failType": "UNQUALIFIED"
+  },
+  {
+    "id": "transaction_fail_106",
+    "transactionId": "transaction_265",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Invalid payment information"],
+    "failType": "TERMINATION"
+  },
+  {
+    "id": "transaction_fail_107",
+    "transactionId": "transaction_269",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Payment gateway error",
+      "Expired payment method",
+      "Customer canceled the order",
+      "System error during checkout",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Seller canceled the order"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_108",
+    "transactionId": "transaction_271",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Discount code invalid"],
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_109",
+    "transactionId": "transaction_273",
+    "evidenceURL": [
+      "Invalid payment information",
+      "Payment gateway error",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "Order exceeds purchase limit",
+      "Seller canceled the order",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_110",
+    "transactionId": "transaction_275",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Invalid payment information",
+      "Payment gateway error",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Shipping address invalid",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Order exceeds purchase limit",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Price discrepancy",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_111",
+    "transactionId": "transaction_277",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Buyer did not complete payment"],
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_112",
+    "transactionId": "transaction_278",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Discount code invalid"],
+    "failType": "TERMINATION"
+  },
+  {
+    "id": "transaction_fail_113",
+    "transactionId": "transaction_287",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Duplicate order detected"],
+    "failType": "OTHER"
+  },
+  {
+    "id": "transaction_fail_114",
+    "transactionId": "transaction_290",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Payment declined by bank"],
+    "failType": "UNQUALIFIED"
+  },
+  {
+    "id": "transaction_fail_115",
+    "transactionId": "transaction_291",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Insufficient funds",
+      "Expired payment method",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Out of stock",
+      "Shipping address invalid",
+      "Order exceeds purchase limit",
+      "Discount code invalid"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_116",
+    "transactionId": "transaction_292",
+    "evidenceURL": [
+      "Payment declined by bank",
+      "Insufficient funds",
+      "Payment gateway error",
+      "Expired payment method",
+      "Fraud detection triggered",
+      "Out of stock",
+      "Delivery service unavailable",
+      "System error during checkout",
+      "Duplicate order detected",
+      "Order exceeds purchase limit",
+      "Price discrepancy",
+      "Technical issue during payment",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_117",
+    "transactionId": "transaction_293",
+    "evidenceURL": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "detail": ["Order exceeds purchase limit"],
+    "failType": "UNDELIVERED"
+  },
+  {
+    "id": "transaction_fail_118",
+    "transactionId": "transaction_294",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Expired payment method",
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "System error during checkout",
+      "Item restricted in buyer's region",
+      "Discount code invalid",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_119",
+    "transactionId": "transaction_295",
+    "evidenceURL": [
+      "Transaction timeout",
+      "Fraud detection triggered",
+      "Customer canceled the order",
+      "Delivery service unavailable",
+      "Duplicate order detected",
+      "Price discrepancy",
+      "Technical issue during payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "failType": "UNDEFINED"
+  },
+  {
+    "id": "transaction_fail_120",
+    "transactionId": "transaction_300",
+    "evidenceURL": [
+      "Insufficient funds",
+      "Expired payment method",
+      "Shipping address invalid",
+      "System error during checkout",
+      "Discount code invalid",
+      "Seller canceled the order",
+      "Buyer did not complete payment"
+    ],
+    "detail": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "failType": "UNDEFINED"
   }
 ]
