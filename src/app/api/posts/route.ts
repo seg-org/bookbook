@@ -31,8 +31,6 @@ export async function POST(req: NextRequest) {
 
     const data = {
       ...parsedData.data,
-      specialDescriptions: parsedData.data.specialDescriptions ?? [],
-      damageURLs: parsedData.data.damageURLs ?? [],
     };
 
     const newPost = await prisma.post.create({
@@ -77,7 +75,6 @@ export async function GET(req: NextRequest) {
     const bookFilter: Prisma.BookWhereInput = {
       title: filters.title ? { contains: filters.title, mode: "insensitive" } : undefined,
       author: filters.author ? { contains: filters.author, mode: "insensitive" } : undefined,
-      genre: filters.genre ? { contains: filters.genre, mode: "insensitive" } : undefined,
       description: filters.description ? { contains: filters.description, mode: "insensitive" } : undefined,
       isbn: filters.isbn ? { contains: filters.isbn, mode: "insensitive" } : undefined,
       publisher: filters.publisher ? { contains: filters.publisher, mode: "insensitive" } : undefined,

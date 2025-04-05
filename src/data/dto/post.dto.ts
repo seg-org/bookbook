@@ -1,3 +1,4 @@
+import { DamageType } from "@prisma/client";
 import { SpecialDescriptionType } from "../../app/api/posts/post_enum";
 import { Book } from "./book.dto";
 
@@ -11,7 +12,8 @@ export type Post = {
   book: Book;
   sellerId: string;
   specialDescriptions?: SpecialDescriptionType[];
-  damageURLs?: string[];
+  damageURLs: string[];
+  damage: DamageType;
 };
 
 export type GetPostsResponse = {

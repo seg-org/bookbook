@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -55,8 +55,6 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     const data = {
       ...parsedData.data,
-      bookGenres: parsedData.data.bookGenres ?? [],
-      bookTags: parsedData.data.bookTags ?? [],
     };
 
     const updatedBook = await prisma.book.update({
