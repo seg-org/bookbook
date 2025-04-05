@@ -30,11 +30,11 @@ export const CreatePostRequest = z.object({
   sellerId: z.string().openapi({ example: "user_1" }),
   specialDescriptions: z
     .array(SpecialDescriptionType)
-    .optional()
+    .transform((val) => (val ? [] : val))
     .openapi({ example: ["AUTHOR_SIGNATURE"] }),
   damageURLs: z
     .array(z.string())
-    .optional()
+    .transform((val) => (val ? [] : val))
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.openapi({ example: "SLIGHTLY_DAMAGED" }),
 });
@@ -48,13 +48,9 @@ export const PostResponse = z.object({
   bookId: z.string().openapi({ example: "book_1" }),
   sellerId: z.string().openapi({ example: "user_1" }),
   book: BookResponse,
-  specialDescriptions: z
-    .array(SpecialDescriptionType)
-    .optional()
-    .openapi({ example: ["AUTHOR_SIGNATURE"] }),
+  specialDescriptions: z.array(SpecialDescriptionType).openapi({ example: ["AUTHOR_SIGNATURE"] }),
   damageURLs: z
     .array(z.string())
-    .optional()
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.openapi({ example: "NO_DAMAGED" }),
 });

@@ -57,8 +57,6 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     const data = {
       ...parsedData.data,
-      specialDescriptions: parsedData.data.specialDescriptions ?? [],
-      damageURLs: parsedData.data.damageURLs ?? [],
     };
 
     const updatedPost = await prisma.post.update({

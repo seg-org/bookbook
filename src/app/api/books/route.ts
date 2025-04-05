@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -31,8 +31,6 @@ export async function POST(req: NextRequest) {
 
     const data = {
       ...parsedData.data,
-      bookGenres: parsedData.data.bookGenres ?? [],
-      bookTags: parsedData.data.bookTags ?? [],
     };
 
     const newBook = await prisma.book.create({ data });

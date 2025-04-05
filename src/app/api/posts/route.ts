@@ -31,8 +31,6 @@ export async function POST(req: NextRequest) {
 
     const data = {
       ...parsedData.data,
-      specialDescriptions: parsedData.data.specialDescriptions ?? [],
-      damageURLs: parsedData.data.damageURLs ?? [],
     };
 
     const newPost = await prisma.post.create({

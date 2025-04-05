@@ -1,8 +1,8 @@
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoLogoWechat } from "react-icons/io5";
@@ -95,7 +95,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {cut(post.book.bookGenres?.join(" , ").toLowerCase().replace(/_/g, " "), 65)}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>
