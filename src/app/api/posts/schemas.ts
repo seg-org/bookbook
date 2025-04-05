@@ -30,11 +30,11 @@ export const CreatePostRequest = z.object({
   sellerId: z.string().openapi({ example: "user_1" }),
   specialDescriptions: z
     .array(SpecialDescriptionType)
-    .transform((val) => (val ? [] : val))
+    .transform((val) => (val ? val : []))
     .openapi({ example: ["AUTHOR_SIGNATURE"] }),
   damageURLs: z
     .array(z.string())
-    .transform((val) => (val ? [] : val))
+    .transform((val) => (val ? val : []))
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.openapi({ example: "SLIGHTLY_DAMAGED" }),
 });

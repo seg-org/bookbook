@@ -15,11 +15,11 @@ export const CreateBookRequest = z.object({
   coverImageKey: z.string().openapi({ example: "the-hobbit.jpg" }),
   bookGenres: z
     .array(GenreType)
-    .transform((val) => (val ? [] : val))
+    .transform((val) => (val ? val : []))
     .openapi({ example: ["FANTASY", "ADVENTURE"] }),
   bookTags: z
     .array(BookTagType)
-    .transform((val) => (val ? [] : val))
+    .transform((val) => (val ? val : []))
     .openapi({ example: ["BESTSELLER"] }),
 });
 
