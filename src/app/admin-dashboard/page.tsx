@@ -1,7 +1,8 @@
 // src/app/admin-dashboard/page.tsx
 "use client";
 
-import { Activity, BarChart3, BookOpen, DollarSign, UserPlus, Users } from "lucide-react"; // Lucide icons
+import { Activity, BarChart3, BookOpen, DollarSign, UserPlus, Users } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,61 +18,96 @@ interface Metrics {
 
 export default function AdminDashboard() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
+  const [unauthorized, setUnauthorized] = useState(false);
+  const { data: session, status } = useSession();
+
+  const isAdmin = session?.user?.isAdmin === true;
 
   useEffect(() => {
+    if (status !== "loading" && session && !isAdmin) {
+      setUnauthorized(true);
+    }
+  }, [session, status, isAdmin]);
+
+  useEffect(() => {
+    if (!session || !isAdmin) return;
+
     fetch("/api/admin/dashboard-metrics")
       .then((res) => res.json())
       .then(setMetrics);
-  }, []);
+  }, [session, isAdmin]);
 
-  if (!metrics) return <p className="p-4 text-sm text-muted-foreground">Loading metrics...</p>;
+  if (status === "loading") {
+    return <p className="p-4 text-sm text-muted-foreground">Checking access...</p>;
+  }
 
-  const metricCards = [
-    {
-      title: "Total Sales",
-      value: `${metrics.totalSales.toLocaleString()} ฿`,
-      icon: DollarSign,
-    },
-    {
-      title: "Transactions",
-      value: metrics.transactionCount.toLocaleString(),
-      icon: BarChart3,
-    },
-    {
-      title: "Active Users",
-      value: metrics.activeUsers.toLocaleString(),
-      icon: Users,
-    },
-    {
-      title: "New Users (7d)",
-      value: metrics.newUsersThisWeek.toLocaleString(),
-      icon: UserPlus,
-    },
-    {
-      title: "Avg. Order Value",
-      value: `${metrics.averageOrderValue.toFixed(2)} ฿`,
-      icon: Activity,
-    },
-    {
-      title: "Total Books",
-      value: metrics.bookCount.toLocaleString(),
-      icon: BookOpen,
-    },
-  ];
+  if (unauthorized) {
+    return (
+      <section className="p-6">
+        <h1 className="mb-2 text-2xl font-bold text-red-500">Access Denied</h1>
+        <p className="text-sm text-muted-foreground">You do not have permission to view this page.</p>
+      </section>
+    );
+  }
+
+  const metricCards = metrics
+    ? [
+        {
+          title: "Total Sales",
+          value: `${metrics.totalSales.toLocaleString()} ฿`,
+          icon: DollarSign,
+        },
+        {
+          title: "Transactions",
+          value: metrics.transactionCount.toLocaleString(),
+          icon: BarChart3,
+        },
+        {
+          title: "Active Users",
+          value: metrics.activeUsers.toLocaleString(),
+          icon: Users,
+        },
+        {
+          title: "New Users (7d)",
+          value: metrics.newUsersThisWeek.toLocaleString(),
+          icon: UserPlus,
+        },
+        {
+          title: "Avg. Order Value",
+          value: `${metrics.averageOrderValue.toFixed(2)} ฿`,
+          icon: Activity,
+        },
+        {
+          title: "Total Books",
+          value: metrics.bookCount.toLocaleString(),
+          icon: BookOpen,
+        },
+      ]
+    : Array(6).fill({ title: "", value: "", icon: null });
 
   return (
     <section className="space-y-6 p-6">
       <h1 className="text-2xl font-bold tracking-tight">Admin Overview</h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {metricCards.map(({ title, value, icon: Icon }) => (
-          <Card key={title} className="shadow-sm transition hover:shadow-md">
+        {metricCards.map(({ title, value, icon: Icon }, index) => (
+          <Card key={index} className="shadow-sm transition hover:shadow-md">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
-              <Icon className="h-4 w-4 text-muted-foreground" />
+              {metrics ? (
+                <>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+                  {Icon && <Icon className="h-4 w-4 text-muted-foreground" />}
+                </>
+              ) : (
+                <div className="h-4 w-full animate-pulse rounded bg-muted" />
+              )}
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-semibold">{value}</div>
+              {metrics ? (
+                <div className="text-2xl font-semibold">{value}</div>
+              ) : (
+                <div className="h-8 animate-pulse rounded bg-muted" />
+              )}
             </CardContent>
           </Card>
         ))}
