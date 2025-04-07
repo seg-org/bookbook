@@ -38,14 +38,14 @@ export default function AdminDashboard() {
   }, [session, isAdmin]);
 
   if (status === "loading") {
-    return <p className="p-4 text-sm text-muted-foreground">Checking access...</p>;
+    return <p className="p-4 text-sm text-muted-foreground">กำลังตรวจสอบสิทธิ์...</p>;
   }
 
   if (unauthorized) {
     return (
       <section className="p-6">
-        <h1 className="mb-2 text-2xl font-bold text-red-500">Access Denied</h1>
-        <p className="text-sm text-muted-foreground">You do not have permission to view this page.</p>
+        <h1 className="mb-2 text-2xl font-bold text-red-500">ไม่มีสิทธิ์เข้าถึง</h1>
+        <p className="text-sm text-muted-foreground">คุณไม่มีสิทธิ์ในการเข้าถึงหน้านี้</p>
       </section>
     );
   }
@@ -53,32 +53,32 @@ export default function AdminDashboard() {
   const metricCards = metrics
     ? [
         {
-          title: "Total Sales",
+          title: "ยอดขายทั้งหมด",
           value: `${metrics.totalSales.toLocaleString()} ฿`,
           icon: DollarSign,
         },
         {
-          title: "Transactions",
+          title: "จำนวนรายการ",
           value: metrics.transactionCount.toLocaleString(),
           icon: BarChart3,
         },
         {
-          title: "Active Users",
+          title: "ผู้ใช้ที่ใช้งานอยู่",
           value: metrics.activeUsers.toLocaleString(),
           icon: Users,
         },
         {
-          title: "New Users (7d)",
+          title: "ผู้ใช้ใหม่ (7 วัน)",
           value: metrics.newUsersThisWeek.toLocaleString(),
           icon: UserPlus,
         },
         {
-          title: "Avg. Order Value",
+          title: "มูลค่าการสั่งซื้อเฉลี่ย",
           value: `${metrics.averageOrderValue.toFixed(2)} ฿`,
           icon: Activity,
         },
         {
-          title: "Total Books",
+          title: "จำนวนหนังสือทั้งหมด",
           value: metrics.bookCount.toLocaleString(),
           icon: BookOpen,
         },
@@ -87,7 +87,7 @@ export default function AdminDashboard() {
 
   return (
     <section className="space-y-6 p-6">
-      <h1 className="text-2xl font-bold tracking-tight">Admin Overview</h1>
+      <h1 className="text-2xl font-bold tracking-tight">แดชบอร์ดผู้ดูแลระบบ</h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {metricCards.map(({ title, value, icon: Icon }, index) => (
