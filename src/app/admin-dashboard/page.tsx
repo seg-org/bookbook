@@ -1,9 +1,8 @@
 // src/app/admin-dashboard/page.tsx
 "use client";
 
-import { Activity, BarChart3, DollarSign, UserPlus, Users } from "lucide-react"; // Lucide icons
+import { Activity, BarChart3, BookOpen, DollarSign, UserPlus, Users } from "lucide-react"; // Lucide icons
 import { useEffect, useState } from "react";
-import { BookOpen, UserX, FileX } from "lucide-react"; // ⬅️ Add with your icons
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -14,10 +13,7 @@ interface Metrics {
   newUsersThisWeek: number;
   averageOrderValue: number;
   bookCount: number;
-  userWithNoTx: number;
-  booksWithNoTx: number;
 }
-
 
 export default function AdminDashboard() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -61,17 +57,6 @@ export default function AdminDashboard() {
       value: metrics.bookCount.toLocaleString(),
       icon: BookOpen,
     },
-    {
-      title: "Users w/o Transactions",
-      value: metrics.userWithNoTx.toLocaleString(),
-      icon: UserX,
-    },
-    {
-      title: "Books w/o Transactions",
-      value: metrics.booksWithNoTx.toLocaleString(),
-      icon: FileX,
-    },
-
   ];
 
   return (
