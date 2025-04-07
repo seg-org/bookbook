@@ -52,9 +52,6 @@ export async function GET() {
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching dashboard metrics:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch dashboard metrics" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch dashboard metrics" }, { status: 500 });
   }
 }
