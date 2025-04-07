@@ -7,14 +7,7 @@ import { useEffect, useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-interface Metrics {
-  totalSales: number;
-  transactionCount: number;
-  activeUsers: number;
-  newUsersThisWeek: number;
-  averageOrderValue: number;
-  bookCount: number;
-}
+import type { Metrics } from "@/app/api/admin/dashboard-metrics/route";
 
 export default function AdminDashboard() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);

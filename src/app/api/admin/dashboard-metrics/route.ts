@@ -2,6 +2,14 @@
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
+export interface Metrics {
+  totalSales: number;
+  transactionCount: number;
+  activeUsers: number;
+  newUsersThisWeek: number;
+  averageOrderValue: number;
+  bookCount: number;
+}
 
 export async function GET() {
   const [totalSalesAgg, transactionCount, activeUsers, newUsersThisWeek] = await Promise.all([
@@ -30,12 +38,14 @@ export async function GET() {
 
   const bookCount = await prisma.book.count();
 
-  return NextResponse.json({
+  const data = {
     totalSales,
     transactionCount,
     activeUsers,
     newUsersThisWeek,
     averageOrderValue: Math.round(averageOrderValue),
     bookCount,
-  });
+  } satisfies Metrics;
+
+  return NextResponse.json(data);
 }
