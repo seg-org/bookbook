@@ -34,7 +34,11 @@ export default function AdminDashboard() {
 
     fetch("/api/admin/dashboard-metrics")
       .then((res) => res.json())
-      .then(setMetrics);
+      .then(setMetrics)
+      .catch((error) => {
+        console.error("Error fetching metrics:", error);
+        // Consider adding an error state and UI feedback
+      });
   }, [session, isAdmin]);
 
   if (status === "loading") {
