@@ -5,9 +5,8 @@ import { Activity, BarChart3, BookOpen, DollarSign, UserPlus, Users } from "luci
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 import type { Metrics } from "@/app/api/admin/dashboard-metrics/route";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function AdminDashboard() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);

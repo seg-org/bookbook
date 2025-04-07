@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
+
 export interface Metrics {
   totalSales: number;
   transactionCount: number;
