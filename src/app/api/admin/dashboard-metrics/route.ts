@@ -1,6 +1,5 @@
 // src/app/api/admin/dashboard-metrics/route.ts
 import { NextResponse } from "next/server";
-
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
@@ -19,20 +18,47 @@ export async function GET() {
     prisma.user.count({
       where: {
         createdAt: {
-          gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // past 7 days
+          gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
         },
       },
     }),
   ]);
 
   const totalSales = totalSalesAgg._sum?.amount ?? 0;
-  const avgOrderValue = transactionCount > 0 ? totalSales / transactionCount : 0;
+  const averageOrderValue = transactionCount > 0 ? totalSales / transactionCount : 0;
+
+  // 🆕 Additional metrics
+  const [bookCount, userWithNoTx, booksWithNoTx] = await Promise.all([
+    prisma.book.count(),
+    prisma.user.count({
+      where: {
+        buyTransactions: {
+          none: {},
+        },
+      },
+    }),
+    prisma.book.count({
+      where: {
+        posts: {
+          every: {
+            transactions: {
+              none: {},
+            },
+          },
+        },
+      },
+    }),
+  ]);
+
 
   return NextResponse.json({
     totalSales,
     transactionCount,
     activeUsers,
     newUsersThisWeek,
-    averageOrderValue: Math.round(avgOrderValue),
+    averageOrderValue: Math.round(averageOrderValue),
+    bookCount,
+    userWithNoTx,
+    booksWithNoTx,
   });
 }

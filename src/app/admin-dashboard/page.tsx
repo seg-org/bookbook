@@ -3,6 +3,7 @@
 
 import { Activity, BarChart3, DollarSign, UserPlus, Users } from "lucide-react"; // Lucide icons
 import { useEffect, useState } from "react";
+import { BookOpen, UserX, FileX } from "lucide-react"; // ⬅️ Add with your icons
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -12,7 +13,11 @@ interface Metrics {
   activeUsers: number;
   newUsersThisWeek: number;
   averageOrderValue: number;
+  bookCount: number;
+  userWithNoTx: number;
+  booksWithNoTx: number;
 }
+
 
 export default function AdminDashboard() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -51,13 +56,29 @@ export default function AdminDashboard() {
       value: `${metrics.averageOrderValue.toFixed(2)} ฿`,
       icon: Activity,
     },
+    {
+      title: "Total Books",
+      value: metrics.bookCount.toLocaleString(),
+      icon: BookOpen,
+    },
+    {
+      title: "Users w/o Transactions",
+      value: metrics.userWithNoTx.toLocaleString(),
+      icon: UserX,
+    },
+    {
+      title: "Books w/o Transactions",
+      value: metrics.booksWithNoTx.toLocaleString(),
+      icon: FileX,
+    },
+
   ];
 
   return (
     <section className="space-y-6 p-6">
       <h1 className="text-2xl font-bold tracking-tight">Admin Overview</h1>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {metricCards.map(({ title, value, icon: Icon }) => (
           <Card key={title} className="shadow-sm transition hover:shadow-md">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
