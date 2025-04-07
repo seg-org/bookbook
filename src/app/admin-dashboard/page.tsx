@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Activity, DollarSign, Users, UserPlus, BarChart3 } from "lucide-react"; // Lucide icons
 
 interface Metrics {
   totalSales: number;
@@ -21,43 +22,53 @@ export default function AdminDashboard() {
       .then(setMetrics);
   }, []);
 
-  if (!metrics) return <p className="p-4">Loading...</p>;
+  if (!metrics) return <p className="p-4 text-sm text-muted-foreground">Loading metrics...</p>;
+
+  const metricCards = [
+    {
+      title: "Total Sales",
+      value: `${metrics.totalSales.toLocaleString()} ฿`,
+      icon: DollarSign,
+    },
+    {
+      title: "Transactions",
+      value: metrics.transactionCount.toLocaleString(),
+      icon: BarChart3,
+    },
+    {
+      title: "Active Users",
+      value: metrics.activeUsers.toLocaleString(),
+      icon: Users,
+    },
+    {
+      title: "New Users (7d)",
+      value: metrics.newUsersThisWeek.toLocaleString(),
+      icon: UserPlus,
+    },
+    {
+      title: "Avg. Order Value",
+      value: `${metrics.averageOrderValue.toFixed(2)} ฿`,
+      icon: Activity,
+    },
+  ];
 
   return (
-    <div className="space-y-6 p-6">
-      {/* Metrics cards */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Sales</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.totalSales} ฿</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Transactions</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.transactionCount}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Active Users</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.activeUsers}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>New Users (7d)</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.newUsersThisWeek}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Avg. Order Value</CardTitle>
-          </CardHeader>
-          <CardContent>{metrics.averageOrderValue.toFixed(2)} ฿</CardContent>
-        </Card>
+    <section className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold tracking-tight">Admin Overview</h1>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+        {metricCards.map(({ title, value, icon: Icon }) => (
+          <Card key={title} className="shadow-sm hover:shadow-md transition">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+              <Icon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-semibold">{value}</div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
-    </div>
+    </section>
   );
 }
