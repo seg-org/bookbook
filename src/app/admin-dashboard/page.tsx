@@ -1,9 +1,10 @@
 // src/app/admin-dashboard/page.tsx
 "use client";
 
+import { Activity, BarChart3, DollarSign, UserPlus, Users } from "lucide-react"; // Lucide icons
 import { useEffect, useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Activity, DollarSign, Users, UserPlus, BarChart3 } from "lucide-react"; // Lucide icons
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Metrics {
   totalSales: number;
@@ -53,12 +54,12 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <section className="p-6 space-y-6">
+    <section className="space-y-6 p-6">
       <h1 className="text-2xl font-bold tracking-tight">Admin Overview</h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {metricCards.map(({ title, value, icon: Icon }) => (
-          <Card key={title} className="shadow-sm hover:shadow-md transition">
+          <Card key={title} className="shadow-sm transition hover:shadow-md">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
               <Icon className="h-4 w-4 text-muted-foreground" />

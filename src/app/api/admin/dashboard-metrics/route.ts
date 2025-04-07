@@ -1,6 +1,7 @@
 // src/app/api/admin/dashboard-metrics/route.ts
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   const [totalSalesAgg, transactionCount, activeUsers, newUsersThisWeek] = await Promise.all([
