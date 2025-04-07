@@ -1,3 +1,4 @@
+// src/app/page.tsx
 import { BookMarked, BookOpen, ChevronRight, FileText, PlusCircle, Search, Star, Store, UserPlus } from "lucide-react";
 import Link from "next/link";
 
@@ -70,13 +71,8 @@ export default function Home() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                // { href: "/search", icon: <Search />, text: "🔍 ค้นหาหนังสือ" },
                 { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
-                // { href: "/my-books", icon: <BookMarked />, text: "📚 รายการหนังสือของฉัน" },
-                // { href: "/potential-matches", icon: <Handshake />, text: "🤝 แนะนำผู้ซื้อที่ตรงกับคุณ" },
                 { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
-                // { href: "/checkout", icon: <ShoppingCart />, text: "ทำการสั่งซื้อ (Checkout)" },
-                // { href: "/order-status", icon: <Package />, text: "การซื้อของฉัน (Order status)" },
                 { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
                 { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
                 { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
