@@ -37,6 +37,7 @@ model User {
   chatMessages     ChatMessage[]
   Bookmark         Bookmark[]
   ChatReport       ChatReport[]
+  Notification Notification[]
 
   @@map("users")
 }
@@ -374,4 +375,17 @@ enum BookTagType {
   SELF_HELP          @map("self_help")
   THRILLER           @map("thriller")
   ROMANTIC_COMEDY    @map("romantic_comedy")
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @map("user_id")
+  message     String   
+  link        String?  
+  isRead      Boolean  @default(false) @map("is_read")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([userId, isRead])
+  @@map("notifications")
 }

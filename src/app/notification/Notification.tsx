@@ -1,62 +1,73 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
-interface Transaction {
+interface Notification {
   id: string;
-  status: "PACKING" | "DELIVERING" | "COMPLETE" | "HOLD" | "FAIL";
-  postTitle: string;
-  coverImageUrl: string; // Include cover image URL for notifications
+  message: string;
+  link?: string;
+  isRead: boolean;
+  createdAt: string;
 }
 
 export default function Notifications() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const { data: session } = useSession(); // Get the session from NextAuth
+  const { data: session } = useSession();
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
-    async function fetchTransactions() {
-      if (!session?.user?.id) return; // Ensure the user is logged in
+    async function fetchNotifications() {
+      if (!session?.user?.id) return;
 
-      const response = await fetch(
-        `/api/transaction?forNotifications=true&userId=${session.user.id}&asBuyer=true`
-      ); // Only fetch transactions where the user is a buyer
-      const data: Transaction[] = await response.json();
-      setTransactions(data);
+      const response = await fetch(`/api/notifications?userId=${session.user.id}`);
+      const data: Notification[] = await response.json();
+      setNotifications(data);
     }
 
-    fetchTransactions();
+    fetchNotifications();
   }, [session]);
 
+  async function markAsRead(notificationId: string) {
+    await fetch(`/api/notifications`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: notificationId }),
+    });
+
+    setNotifications((prev) =>
+      prev.map((notification) =>
+        notification.id === notificationId ? { ...notification, isRead: true } : notification
+      )
+    );
+  }
+
   return (
-    <div>
-      <h2>Transactions</h2>
-      <ul>
-        {transactions.length > 0 ? (
-          transactions.map((transaction) => (
-            <li key={transaction.id} className="mb-4 flex items-center">
-              <img
-                src={transaction.coverImageUrl}
-                alt={transaction.postTitle}
-                className="mr-4 h-12 w-12 rounded object-cover"
-              />
-              <div>
-                <div className="font-medium">{transaction.postTitle}</div>
-                <div className="text-sm text-gray-600">
-                  Status:{" "}
-                  {transaction.status === "COMPLETE"
-                    ? "Completed"
-                    : transaction.status === "FAIL"
-                    ? "Failed"
-                    : transaction.status === "PACKING"
-                    ? "Packing"
-                    : transaction.status === "DELIVERING"
-                    ? "Delivering"
-                    : "On Hold"}
-                </div>
+    <div className="relative">
+      <h2 className="text-lg font-bold">Notifications</h2>
+      <ul className="mt-4 space-y-2">
+        {notifications.length > 0 ? (
+          notifications.map((notification) => (
+            <li
+              key={notification.id}
+              className={`p-4 rounded-lg ${
+                notification.isRead ? "bg-gray-100" : "bg-blue-100"
+              }`}
+              onClick={() => markAsRead(notification.id)}
+            >
+              <div className="flex justify-between">
+                <p>{notification.message}</p>
+                {notification.link && (
+                  <Link href={notification.link}>
+                    <a className="text-blue-500 underline">View</a>
+                  </Link>
+                )}
               </div>
+              <span className="text-xs text-gray-500">
+                {new Date(notification.createdAt).toLocaleString()}
+              </span>
             </li>
           ))
         ) : (
-          <li className="text-sm text-gray-500">No transactions found</li>
+          <li className="text-gray-500">No notifications</li>
         )}
       </ul>
     </div>

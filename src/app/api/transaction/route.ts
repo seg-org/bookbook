@@ -73,6 +73,7 @@ export async function GET(req: NextRequest) {
     const forNotifications = searchParams.get("forNotifications") === "true";
     const userId = searchParams.get("userId");
     const asBuyer = searchParams.get("asBuyer") === "true";
+    const asSeller = searchParams.get("asSeller") === "true"
 
     const transactions = await prisma.transaction.findMany({
       skip: parsedData.data.skip,
@@ -132,6 +133,8 @@ export async function GET(req: NextRequest) {
         coverImageUrl: transaction.post?.book
           ? getUrl("book_images", transaction.post.book.coverImageKey)
           : "",
+        isBuyer: transaction.buyerId === userId,
+        isSeller: transaction.sellerId === userId,
       }));
 
       return NextResponse.json(simplifiedTransactions, { status: 200 });
