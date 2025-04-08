@@ -38,9 +38,7 @@ export default function NotificationBell() {
       const updatedNotification = await markNotificationAsRead(notification.id);
 
       if (!(updatedNotification instanceof Error)) {
-        setNotifications((prev) =>
-          prev.map((n) => (n.id === notification.id ? { ...n, isRead: true } : n))
-        );
+        setNotifications((prev) => prev.map((n) => (n.id === notification.id ? { ...n, isRead: true } : n)));
       }
     }
 
@@ -100,16 +98,12 @@ export default function NotificationBell() {
                   onClick={() => handleNotificationClick(notification)}
                 >
                   <span>{notification.message}</span>
-                  <div className="mt-1 text-xs text-gray-400">
-                    {new Date(notification.createdAt).toLocaleString()}
-                  </div>
+                  <div className="mt-1 text-xs text-gray-400">{new Date(notification.createdAt).toLocaleString()}</div>
                 </li>
               ))
             )}
           </ul>
-          {notifications.length > 3 && (
-            <div className="p-4 text-center text-sm text-gray-500">Scroll for more...</div>
-          )}
+          {notifications.length > 3 && (<div className="p-4 text-center text-sm text-gray-500">Scroll for more...</div>)}
         </div>
       )}
     </div>
