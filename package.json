@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
+    "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint ./src --fix",
     "format": "eslint src *.mjs *.ts --fix",
