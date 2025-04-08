@@ -20,6 +20,7 @@ interface TransactionBaseQuery {
 interface TransactionQuery extends TransactionBaseQuery {
   skip?: number;
   take?: number;
+  sortBy?: string;
 }
 
 type TransactionCount = TransactionBaseQuery;
@@ -60,6 +61,7 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
       isFail?: boolean;
       skip?: number;
       take?: number;
+      sortBy?: string;
     } = {
       ...(query.userId !== undefined ? { userId: query.userId } : {}),
       ...(query.startDate !== undefined ? { startDate: query.startDate } : {}),
@@ -73,6 +75,7 @@ export const getQueryTransaction = async (query: TransactionQuery) => {
       ...(query.isFail !== undefined ? { isFail: query.isFail } : {}),
       ...(query.skip !== undefined ? { skip: query.skip } : {}),
       ...(query.take && query.take >= 0 ? { take: query.take } : {}),
+      ...(query.sortBy !== undefined ? { sortBy: query.sortBy } : {}),
     };
 
     const res: AxiosResponse<Transaction[]> = await apiClient.get("/transaction", { params });
