@@ -62,6 +62,7 @@ export default function EditBookPage() {
       setValue("isbn", book.isbn);
       setValue("publisher", book.publisher);
       setValue("pages", book.pages);
+      setValue("coverImageKey", book.coverImageKey);
       setImageUrl(book.coverImageUrl);
     }
   }, [book, setValue]);
