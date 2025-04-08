@@ -72,8 +72,6 @@ export async function GET(req: NextRequest) {
 
     const forNotifications = searchParams.get("forNotifications") === "true";
     const userId = searchParams.get("userId");
-    const asBuyer = searchParams.get("asBuyer") === "true";
-    const asSeller = searchParams.get("asSeller") === "true"
 
     const transactions = await prisma.transaction.findMany({
       skip: parsedData.data.skip,

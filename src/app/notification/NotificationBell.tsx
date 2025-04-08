@@ -74,6 +74,10 @@ export default function NotificationBell() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={(e) => e.key === "Enter" && setIsOpen(!isOpen)}
+        aria-label="Notifications"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
         className="relative p-2 rounded-full bg-gray-200 hover:bg-gray-300"
       >
         {/* Use the Bell icon */}
@@ -87,19 +91,26 @@ export default function NotificationBell() {
         <div className="notification-dropdown absolute right-0 mt-2 w-80 max-h-96 overflow-y-auto rounded-lg bg-white shadow-lg z-50">
           <div className="p-4 font-bold text-gray-700">Notifications</div>
           <ul className="divide-y divide-gray-200">
-            {notifications.slice(0, 3).map((notification) => (
-              <li
-                key={notification.id}
-                className={`p-4 cursor-pointer ${
-                  notification.isRead
-                    ? "bg-gray-100 text-gray-500"
-                    : "bg-white text-gray-800"
-                } hover:bg-gray-200`}
-                onClick={() => handleNotificationClick(notification)}
-              >
-                <span>{notification.message}</span>
-              </li>
-            ))}
+            {notifications.length === 0 ? (
+              <li className="p-4 text-center text-gray-500">No notifications</li>
+            ) : (
+              notifications.slice(0, 3).map((notification) => (
+                <li
+                  key={notification.id}
+                  className={`p-4 cursor-pointer ${
+                    notification.isRead
+                      ? "bg-gray-100 text-gray-500"
+                      : "bg-white text-gray-800"
+                  } hover:bg-gray-200`}
+                  onClick={() => handleNotificationClick(notification)}
+                >
+                  <span>{notification.message}</span>
+                  <div className="text-xs text-gray-400 mt-1">
+                    {new Date(notification.createdAt).toLocaleString()}
+                  </div>
+                </li>
+              ))
+            )}
           </ul>
           {notifications.length > 3 && (
             <div className="p-4 text-center text-sm text-gray-500">

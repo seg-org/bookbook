@@ -4,7 +4,7 @@ import { z } from "zod";
 extendZodWithOpenApi(z);
 
 export const CreateNotificationRequest = z.object({
-  userId: z.string().openapi({ example: "user_123"}),
+  userId: z.string().openapi({ example: "user_123" }),
   message: z.string().openapi({ example: "Your post has been purchased." }),
   link: z.string().url().optional().openapi({ example: "/posts/123" }),
 });
