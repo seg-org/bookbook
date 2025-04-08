@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
-import { apiClient } from "./axios";
+
 import { Notification } from "./dto/notification.dto";
+import { apiClient } from "./axios";
 
 export const getNotifications = async (userId: string): Promise<Notification[] | Error> => {
   try {
@@ -35,14 +36,14 @@ export const createNotification = async (
 };
 
 export const markNotificationAsRead = async (id: string): Promise<Notification | Error> => {
-    try {
-      const res: AxiosResponse<Notification> = await apiClient.patch("/notifications", {
-        id,
-      });
-  
-      return res.data;
-    } catch (error) {
-      console.error(`Failed to mark notification ${id} as read`, error);
-      return new Error(`Failed to mark notification ${id} as read`);
-    }
+  try {
+    const res: AxiosResponse<Notification> = await apiClient.patch("/notifications", {
+      id,
+    });
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to mark notification ${id} as read`, error);
+    return new Error(`Failed to mark notification ${id} as read`);
+  }
 };
