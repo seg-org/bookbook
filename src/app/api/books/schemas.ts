@@ -13,14 +13,8 @@ export const CreateBookRequest = z.object({
   pages: z.number().openapi({ example: 310 }),
   publisher: z.string().openapi({ example: "George Allen & Unwin" }),
   coverImageKey: z.string().openapi({ example: "the-hobbit.jpg" }),
-  bookGenres: z
-    .array(GenreType)
-    .transform((val) => (val ? val : []))
-    .openapi({ example: ["FANTASY", "ADVENTURE"] }),
-  bookTags: z
-    .array(BookTagType)
-    .transform((val) => (val ? val : []))
-    .openapi({ example: ["BESTSELLER"] }),
+  bookGenres: z.array(GenreType).openapi({ example: ["FANTASY", "ADVENTURE"] }),
+  bookTags: z.array(BookTagType).openapi({ example: ["BESTSELLER"] }),
 });
 
 export const BookResponse = z.object({
