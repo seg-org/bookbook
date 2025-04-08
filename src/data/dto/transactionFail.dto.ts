@@ -6,7 +6,7 @@ export type TransactionFail = {
   id: string;
   transaction: Transaction;
   transactionId: string;
-  evidenceURL: string;
-  detail: string;
+  evidenceURL: string[];
+  detail: string[];
   failType: TransactionFailType;
 };
