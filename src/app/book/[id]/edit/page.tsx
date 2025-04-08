@@ -62,6 +62,7 @@ export default function EditBookPage() {
       setValue("isbn", book.isbn);
       setValue("publisher", book.publisher);
       setValue("pages", book.pages);
+      setValue("coverImageKey", book.coverImageKey);
       setImageUrl(book.coverImageUrl);
     }
   }, [book, setValue]);
@@ -168,7 +169,7 @@ export default function EditBookPage() {
         </label>
 
         <label>
-          รูปหน้าปก:
+          รูปหน้าปก (เลือกอัปโหลดใหม่หรือใช้รูปเดิม):
           <input
             type="file"
             accept="image/*"
