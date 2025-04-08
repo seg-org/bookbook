@@ -4,6 +4,18 @@ import { EditBookFormData } from "@/app/book/[id]/edit/page";
 
 import { apiClient } from "./axios";
 import { Book } from "./dto/book.dto";
+import { BookTagType, GenreType } from "@/app/api/books/book_enum";
+
+interface CreateBook {
+  title: string;
+  author: string;
+  description?: string;
+  pages: number;
+  publisher: string;
+  coverImageKey: string;
+  bookGenres: GenreType[];
+  bookTags: BookTagType[];
+}
 
 export const getAllBooks = async () => {
   try {
@@ -43,6 +55,17 @@ export const getBook = async (id: string) => {
   } catch (error) {
     console.error(`Failed to get book with id ${id}`, error);
     return Error(`Failed to get book with id ${id}`);
+  }
+};
+
+export const createBook = async (dto: CreateBook) => {
+  try {
+    const res: AxiosResponse<Book> = await apiClient.post(`/books`, dto);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to create book with dto ${dto}`, error);
+    return Error(`Failed to create book with dto ${dto}`);
   }
 };
 

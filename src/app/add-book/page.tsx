@@ -10,6 +10,8 @@ import { z } from "zod";
 
 import { bookImageFolderName } from "@/constants/s3FolderName";
 import { getObjectUrl, putObject } from "@/data/object";
+import { createBook } from "@/data/book";
+import { BookTagType, GenreType } from "../api/books/book_enum";
 
 const bookSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -20,6 +22,8 @@ const bookSchema = z.object({
   publisher: z.string().min(1, "Publisher is required"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
+  bookGenres: z.array(GenreType),
+  bookTags: z.array(BookTagType),
 });
 type CreateBookFormData = z.infer<typeof bookSchema>;
 
@@ -90,34 +94,34 @@ export default function AddBookPage() {
     }
   };
 
+  // ------------------------------------------
+  // fix this to support genres and book tags plesase
+  // --------------------------------------------
   const onSubmit = async (data: CreateBookFormData) => {
-    setLoading(true);
-    try {
-      if (!data.coverImageKey) {
-        throw new Error("Cover image upload is required.");
-      }
-
-      const response = await fetch("/api/books", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setMessage("Book posted successfully!");
-      } else {
-        setMessage(`Error: ${result.error}`);
-      }
-    } catch (error) {
-      console.error("Error posting book:", error);
-      setMessage("Failed to post book.");
-    } finally {
-      setLoading(false);
-    }
+    // setLoading(true);
+    // try {
+    //   if (!data.coverImageKey) {
+    //     throw new Error("Cover image upload is required.");
+    //   }
+    //   const response = await fetch("/api/books", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       ...data,
+    //     }),
+    //   });
+    //   const result = await response.json();
+    //   if (response.ok) {
+    //     setMessage("Book posted successfully!");
+    //   } else {
+    //     setMessage(`Error: ${result.error}`);
+    //   }
+    // } catch (error) {
+    //   console.error("Error posting book:", error);
+    //   setMessage("Failed to post book.");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
@@ -146,11 +150,15 @@ export default function AddBookPage() {
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
+        {/* ------------------------------------------
+         need genres input
+         -----------------------------------------
+        
         <label>
           ประเภทหนังสือ:
           <input {...register("genre")} placeholder="ประเภทหนังสือ" className="mt-1 block w-full rounded p-2" />
           {errors.genre?.message && <p className="text-red-500">{String(errors.genre.message)}</p>}
-        </label>
+        </label> */}
 
         <label>
           เนื้อเรื่องย่อ:
