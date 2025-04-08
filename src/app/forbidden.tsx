@@ -6,7 +6,7 @@ export default function Forbidden() {
       <h1 className="mb-2 text-3xl font-bold text-red-500">ไม่มีสิทธิ์เข้าถึง</h1>
       <p className="text-xl text-muted-foreground">คุณไม่มีสิทธิ์ในการเข้าถึงหน้านี้</p>
       <Link href="/" className="mt-4 text-blue-500 hover:underline">
-        + กลับไปยังหน้าหลัก +{" "}
+        กลับไปยังหน้าหลัก
       </Link>
     </main>
   );
