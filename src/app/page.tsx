@@ -1,4 +1,6 @@
+import { authOptions } from "@/lib/auth";
 import { BookMarked, BookOpen, ChevronRight, FileText, PlusCircle, Search, Star, Store, UserPlus } from "lucide-react";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 export const metadata = {
@@ -6,7 +8,9 @@ export const metadata = {
   description: "ซื้อ-ขาย และค้นพบหนังสือเล่มโปรดเล่มต่อไปของคุณ!",
 };
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
   return (
     <main className="min-h-screen text-gray-900 transition-colors duration-300">
       {/* Hero Section */}
@@ -79,7 +83,6 @@ export default function Home() {
                 // { href: "/order-status", icon: <Package />, text: "การซื้อของฉัน (Order status)" },
                 { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
                 { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
-                { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
               ].map((item, index) => (
                 <Link
                   key={index}
@@ -94,6 +97,17 @@ export default function Home() {
                   </span>
                 </Link>
               ))}
+              <Link
+                href={session?.user.isAdmin ? "/admin-view-post" : "/my-post"}
+                className="group flex items-center rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
+              >
+                <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                  <Store />
+                </div>
+                <span className="font-medium text-gray-700 transition-colors duration-300 group-hover:text-blue-600">
+                  {session?.user.isAdmin ? "ดูโพสต์ทั้งหมด" : "โพสต์ของฉัน"}
+                </span>
+              </Link>
             </div>
           </div>
         </div>
