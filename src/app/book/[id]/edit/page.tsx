@@ -169,7 +169,7 @@ export default function EditBookPage() {
         </label>
 
         <label>
-          รูปหน้าปก:
+          รูปหน้าปก (เลือกอัปโหลดใหม่หรือใช้รูปเดิม):
           <input
             type="file"
             accept="image/*"
