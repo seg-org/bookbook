@@ -17,8 +17,8 @@ function SearchByDetail() {
       genre: genre.length !== 0 ? genre : undefined,
       publisher: publisher.length !== 0 ? publisher : undefined,
       isbn: isbn.length !== 0 ? isbn : undefined,
-      minPages: minPages.length !== 0 ? parseInt(minPages, 10) : undefined,
-      maxPages: maxPages.length !== 0 ? parseInt(maxPages, 10) : undefined,
+      minPages: minPages.length !== 0 && !isNaN(parseInt(minPages, 10)) ? parseInt(minPages, 10) : undefined,
+      maxPages: maxPages.length !== 0 && !isNaN(parseInt(maxPages, 10)) ? parseInt(maxPages, 10) : undefined,
     }));
   }, [author, genre, publisher, isbn, minPages, maxPages, setPostsFilters]);
 
