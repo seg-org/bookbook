@@ -3,7 +3,7 @@ import { getNotifications, markNotificationAsRead } from "../../data/notificatio
 import { Notification } from "../../data/dto/notification.dto";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Bell } from "lucide-react"; // Import the Bell icon from lucide-react
+import { Bell } from "lucide-react";
 
 export default function NotificationBell() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -19,7 +19,7 @@ export default function NotificationBell() {
           return;
         }
 
-        const userId = session.user.id; // Get userId from session
+        const userId = session.user.id;
         const result = await getNotifications(userId);
 
         if (!(result instanceof Error)) {
