@@ -1,9 +1,13 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { Wrench } from "lucide-react";
+import { Wrench, Delete } from "lucide-react";
+import { IoLogoWechat } from "react-icons/io5";
 
-import { Button } from "@/components/ui/Button";
+import { createChatRoom } from "@/data/chat";
 import { PostWithBookmark } from "@/context/postContext";
+import { Button } from "@/components/ui/Button";
 
 type PostCardProps = {
   post: PostWithBookmark;
@@ -17,8 +21,10 @@ const cut = (str: string, maxLength: number) => {
 };
 
 function PostCard({ post }: PostCardProps) {
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
   const [editMode, setEditMode] = useState(false);
-
+  const router = useRouter();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     price: post.price,
@@ -32,6 +38,16 @@ function PostCard({ post }: PostCardProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEditedPost((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleChatWithSeller = async (postId: string) => {
+    if (!isAuthenticated || !session?.user) {
+      router.push("/login");
+      return;
+    }
+
+    await createChatRoom({ subject: "post", subjectId: postId });
+    router.push(`/chat`);
   };
 
   return (
@@ -96,6 +112,11 @@ function PostCard({ post }: PostCardProps) {
           </div>
         </div>
         <div className="mt-auto flex gap-2 self-end">
+          <Button variant="outline" onClick={() => handleChatWithSeller(post.id)} data-test-id="chat-with-seller">
+            <div className="flex items-center justify-center gap-x-2">
+              <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
+            </div>
+          </Button>
           {editMode && (
             <>
               <Button
@@ -114,11 +135,20 @@ function PostCard({ post }: PostCardProps) {
             </>
           )}
           {!editMode && (
-            <Button variant="default" onClick={() => setEditMode(true)} className="bg-yellow-500 hover:bg-yellow-700">
-              <div className="flex items-center justify-center gap-x-2" onClick={() => setEditMode(true)}>
-                <Wrench className="h-6 w-6" /> แก้ไขข้อมูลโพสต์
-              </div>
-            </Button>
+            <>
+              <Button variant="default" className="bg-red-500 hover:bg-red-700">
+                <div className="flex items-center justify-center gap-x-2">
+                  ลบโพสต์นี้
+                  <Delete className="h-6 w-6" />
+                </div>
+              </Button>
+              <Button variant="default" onClick={() => setEditMode(true)} className="bg-yellow-500 hover:bg-yellow-700">
+                <div className="flex items-center justify-center gap-x-2">
+                  <Wrench className="h-6 w-6" />
+                  แก้ไขข้อมูลโพสต์
+                </div>
+              </Button>
+            </>
           )}
         </div>
       </div>
