@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
       return NextResponse.json(
         { error: "Duplicate key violation (there is already a post with this book id)" },
-        { status: 409 }
+        { status: 409 },
       );
     }
     if (error instanceof Error) console.error("Error creating post", error.stack);
@@ -113,7 +113,7 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json(
-      PostsResponsePaginated.parse({ posts: postsWithImageUrl, total: totalPosts, totalPages, page })
+      PostsResponsePaginated.parse({ posts: postsWithImageUrl, total: totalPosts, totalPages, page }),
     );
   } catch (error) {
     if (error instanceof Error) console.error("Error getting posts", error.stack);

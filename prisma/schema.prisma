@@ -95,7 +95,7 @@ model Post {
   published           Boolean                  @default(false)
   seller              User                     @relation(fields: [sellerId], references: [id])
   sellerId            String                   @map("seller_id")
-  book                Book                     @relation(fields: [bookId], references: [id])
+  book                Book                     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId              String                   @map("book_id")
   transactions        Transaction[]
   ChatRoom            ChatRoom[]
@@ -109,7 +109,7 @@ model Post {
 model Bookmark {
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @map("user_id")
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String   @map("post_id")
   createdAt DateTime @default(now()) @map("created_at")
 
@@ -122,7 +122,7 @@ model ChatMessage {
   id        String   @id @default(cuid())
   sender    User     @relation(fields: [senderId], references: [id])
   senderId  String   @map("sender_id")
-  room      ChatRoom @relation(fields: [roomId], references: [id])
+  room      ChatRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId    String   @map("room_id")
   message   String
   createdAt DateTime @default(now()) @map("created_at")
@@ -133,7 +133,7 @@ model ChatMessage {
 
 model ChatRoom {
   id         String        @id @default(cuid())
-  post       Post          @relation(fields: [postId], references: [id])
+  post       Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId     String        @map("post_id")
   // TODO: add report
   userIds    String[]      @map("user_ids")
@@ -151,7 +151,7 @@ model ChatReport {
   id         String   @id @default(cuid())
   reporter   User     @relation(fields: [reporterId], references: [id])
   reporterId String   @map("reporter_id")
-  room       ChatRoom @relation(fields: [roomId], references: [id])
+  room       ChatRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId     String   @map("room_id")
   reason     String
   createdAt  DateTime @default(now()) @map("created_at")
@@ -166,7 +166,7 @@ model Transaction {
   buyerId        String            @map("buyer_id")
   seller         User              @relation("SellerTransaction", fields: [sellerId], references: [id])
   sellerId       String            @map("seller_id")
-  post           Post              @relation(fields: [postId], references: [id])
+  post           Post              @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId         String            @map("post_id")
   createdAt      DateTime          @default(now()) @map("create_on")
   updatedAt      DateTime          @updatedAt() @map("update_on")
@@ -193,7 +193,7 @@ model Transaction {
 
 model TransactionFail {
   id            String              @id @default(cuid())
-  transaction   Transaction         @relation(fields: [transactionId], references: [id])
+  transaction   Transaction         @relation(fields: [transactionId], references: [id], onDelete: Cascade)
   transactionId String              @unique @map("transaction_id")
   evidenceURL   String              @map("evidence_url")
   detail        String
@@ -204,7 +204,7 @@ model TransactionFail {
 
 model Review {
   id            String      @id @default(cuid())
-  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
   transactionId String      @unique @map("transaction_id")
   rating        Int         @default(0) // 1-5 star rating
   comment       String?

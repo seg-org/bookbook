@@ -50,7 +50,7 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
       setIsComplete,
       setIsFail,
     }),
-    [startDate, endDate, asBuyer, asSeller, isPacking, isDelivering, isHold, isComplete, isFail]
+    [startDate, endDate, asBuyer, asSeller, isPacking, isDelivering, isHold, isComplete, isFail],
   );
 
   const [selectingPage, setSelectingPage] = useState(1);
@@ -60,7 +60,7 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
       transactionPerPage,
       setSelectingPage,
     }),
-    [selectingPage]
+    [selectingPage],
   );
 
   const {

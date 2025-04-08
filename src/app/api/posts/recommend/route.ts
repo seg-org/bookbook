@@ -36,7 +36,7 @@ export async function GET(request: Request) {
             coverImageUrl: url,
           },
         };
-      })
+      }),
     );
 
     if (postsWithImageUrl.length === 0) {

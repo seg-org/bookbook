@@ -39,4 +39,6 @@ export type CreateTransactionDto = {
 
   shipmentMethod: "STANDARD" | "EXPRESS" | "UNDEFINED";
   address: string;
+
+  amount: number;
 };

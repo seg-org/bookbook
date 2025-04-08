@@ -24,7 +24,7 @@ const sellerSchema = z.object({
     .refine((files) => files?.[0]?.size <= 5000000, "ขนาดไฟล์ต้องไม่เกิน 5MB")
     .refine(
       (files) => ["image/jpeg", "image/png", "image/jpg"].includes(files?.[0]?.type),
-      "รองรับเฉพาะไฟล์ .jpg, .jpeg และ .png"
+      "รองรับเฉพาะไฟล์ .jpg, .jpeg และ .png",
     ),
 });
 

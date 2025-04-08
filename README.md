@@ -52,3 +52,5 @@ Repeat the steps to run E2E tests again.
 You can also use `prepare-e2e.bash` which is step 1 to 4, note that it will delete `.env` file so make sure you save that in other name.
 
 ts-node ./node_modules/@cucumber/cucumber/bin/cucumber-js ./tests/features/**/\*.feature --require ./tests/features/**/\*.ts
+
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/seg-org/bookbook?utm_source=oss&utm_medium=github&utm_campaign=seg-org%2Fbookbook&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)

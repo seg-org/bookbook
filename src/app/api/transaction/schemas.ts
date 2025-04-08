@@ -59,7 +59,7 @@ export const GetTransactionRequest = GetTransactionBase.merge(
   z.object({
     skip: z.string().optional().transform(parseToPosInt(0)).openapi({ example: "3" }),
     take: z.string().optional().transform(parseToPosInt(-1)).openapi({ example: "10" }),
-  })
+  }),
 );
 
 export const CreateTransactionRequest = z.object({
@@ -71,6 +71,8 @@ export const CreateTransactionRequest = z.object({
 
   shipmentMethod: ShipmentMethodEnum.openapi({ example: "EXPRESS" }),
   address: z.string().openapi({ example: "Chulalongkorn Pattumwan BKK 10110" }),
+
+  amount: z.number().openapi({ example: 420 }),
 });
 
 const TransactionFailData = z.object({
@@ -111,7 +113,7 @@ export const TransactionRespone = TransactionPureRespone.merge(
     failData: TransactionFailData.nullable(),
 
     review: ReviewResponse.nullable(),
-  })
+  }),
 );
 
 export const TransactionCreateRespone = TransactionPureRespone;

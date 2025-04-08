@@ -9,7 +9,7 @@ interface CardDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const CardDescription: React.FC<CardDescriptionProps> = ({ children, className, ...props }) => {
   return (
-    <div className={`text-muted-foreground text-sm ${className}`} {...props}>
+    <div className={`text-sm text-muted-foreground ${className}`} {...props}>
       {children}
     </div>
   );

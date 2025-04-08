@@ -45,8 +45,8 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
             <div className="flex flex-col">
               <label className="text-xl font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>
               <label className="text-md text-gray-400">
-                {transaction.createdAt.toDateString()} {transaction.createdAt.getHours()}:
-                {transaction.createdAt.getMinutes()}
+                {transaction.createdAt.toDateString()} {String(transaction.createdAt.getHours()).padStart(2, "0")}:
+                {String(transaction.createdAt.getMinutes()).padStart(2, "0")}
               </label>
             </div>
           </div>

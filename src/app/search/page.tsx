@@ -7,6 +7,7 @@ import { usePostContext } from "@/context/postContext";
 
 import { Pagination } from "./components/Pagination";
 import { PostList } from "./components/PostList";
+import Search from "./components/Search";
 import SpecialSearch from "./components/SpecialSearch";
 
 function SearchPage() {
@@ -30,14 +31,7 @@ function SearchPage() {
             <div className="w-[100%]">
               <h2 className="mb-2.5 text-3xl max-sm:text-2xl">ค้นหาหนังสือ</h2>
               <div className="mb-5 flex flex-row">
-                <input
-                  className="flex-1 rounded-md border border-gray-300 p-1"
-                  data-test-id="search-by-book-name"
-                  type="text"
-                  placeholder="ชื่อหนังสือ"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
+                <Search title={title} onChange={(e) => setTitle(e.target.value)} onSelect={(book) => setTitle(book)} />
                 <button className="ml-1.5 cursor-pointer rounded-md border-none bg-[#9dc4de] p-2.5 text-white">
                   ค้นหาข้อมูล
                 </button>
