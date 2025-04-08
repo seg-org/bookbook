@@ -1,6 +1,5 @@
-import { TransactionFailType } from "@prisma/client";
-
 import { Transaction } from "./transaction.dto";
+import { TransactionFailTypeType } from "@/app/api/transaction/transaction_enum";
 
 export type TransactionFail = {
   id: string;
@@ -8,5 +7,5 @@ export type TransactionFail = {
   transactionId: string;
   evidenceURL: string[];
   detail: string[];
-  failType: TransactionFailType;
+  failType: TransactionFailTypeType;
 };

@@ -41,8 +41,8 @@ interface TransactionUpdate {
   trackingNumber?: string;
   isDelivered?: boolean;
 
-  evidenceURL?: string;
-  detail?: string;
+  evidenceURL?: string[];
+  detail?: string[];
   failType?: string;
 }
 
@@ -203,8 +203,8 @@ export const updateTransaction = async (query: TransactionUpdate) => {
       trackingURL?: boolean;
       trackingNumber?: string;
       isDelivered?: boolean;
-      evidenceURL?: string;
-      detail?: string;
+      evidenceURL?: string[];
+      detail?: string[];
       failType?: string;
     } = {
       ...(query.status !== undefined ? { status: query.status } : {}),

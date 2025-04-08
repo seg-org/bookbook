@@ -1,9 +1,10 @@
 import {
   PaymentMethodType,
   ShipmentMethodType,
-  TransactionFailTypeType,
   TransactionStatusType,
 } from "../../app/api/transaction/transaction_enum";
+
+import { TransactionFail } from "./transactionFail.dto";
 
 import { Review } from "./review.dto";
 
@@ -32,7 +33,7 @@ export type Transaction = {
   trackingNumber: string;
   isDelivered: boolean;
 
-  failData?: TransactionFailTypeType;
+  failData?: TransactionFail;
 
   review?: Review;
 };
