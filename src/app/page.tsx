@@ -30,7 +30,7 @@ export default async function Home() {
 
   if (isAdmin) {
     links.push({
-      href: "/admin-dashboard",
+      href: "/admin/dashboard",
       icon: <LayoutDashboard />,
       text: "แดชบอร์ดผู้ดูแลระบบ",
     });
@@ -99,7 +99,7 @@ export default async function Home() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {links.map((item, index) => {
-                const isAdminLink = item.href === "/admin-dashboard";
+                const isAdminLink = item.href === "/admin/dashboard";
 
                 return (
                   <Link
