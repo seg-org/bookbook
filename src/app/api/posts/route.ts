@@ -81,6 +81,10 @@ export async function GET(req: NextRequest) {
       description: filters.description ? { contains: filters.description, mode: "insensitive" } : undefined,
       isbn: filters.isbn ? { contains: filters.isbn, mode: "insensitive" } : undefined,
       publisher: filters.publisher ? { contains: filters.publisher, mode: "insensitive" } : undefined,
+      pages: {
+        gte: filters.minPages ? filters.minPages : undefined,
+        lte: filters.maxPages ? filters.maxPages : undefined,
+      },
     };
 
     const posts = await prisma.post.findMany({

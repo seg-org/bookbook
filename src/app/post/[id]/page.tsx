@@ -83,6 +83,10 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
               <span className="font-bold">สำนักพิมพ์ </span>
               <span>{post.book.publisher}</span>
             </p>
+            <p>
+              <span className="font-bold">จำนวนหน้า </span>
+              <span>{post.book.pages}</span>
+            </p>
           </div>
 
           {post.sellerId === session?.user.id ? (
