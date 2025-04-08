@@ -16,11 +16,15 @@ export default async function AdminManageUsersPage() {
       <hr className="my-4" />
 
       <ul className="flex flex-col gap-4">
-        {users.map((user) => (
-          <li key={user.id}>
-            <UserCard user={user} />
-          </li>
-        ))}
+        {users.length === 0 ? (
+          <li className="flex justify-center p-8 text-muted-foreground">ไม่พบข้อมูลผู้ใช้</li>
+        ) : (
+          users.map((user) => (
+            <li key={user.id}>
+              <UserCard user={user} />
+            </li>
+          ))
+        )}
       </ul>
     </main>
   );
