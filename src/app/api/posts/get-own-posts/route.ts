@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
     }));
 
     return NextResponse.json(
-      PostsResponsePaginated.parse({ posts: postsWithImageUrl, total: totalPosts, totalPages, page })
+      PostsResponsePaginated.parse({ posts: postsWithImageUrl, total: totalPosts, totalPages, page }),
     );
   } catch (error) {
     if (error instanceof Error) console.error("Error fetching seller posts", error.stack);
