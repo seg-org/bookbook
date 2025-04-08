@@ -48,7 +48,7 @@ export const MyRoomsResponse = z.array(
     post: PostResponse,
     userB: UserResponse,
     lastMessage: ChatMessageResponse,
-  })
+  }),
 );
 
 export const ReadMessageRequest = z.object({

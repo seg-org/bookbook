@@ -20,7 +20,7 @@ export default async function SellBookPage() {
     },
   });
 
-  if (!seller) {
+  if (!seller && !session.user.isAdmin) {
     return <h1 className="my-4 text-center text-2xl font-bold">กรุณาลงทะเบียนผู้ขายก่อนใช้งาน</h1>;
   }
 

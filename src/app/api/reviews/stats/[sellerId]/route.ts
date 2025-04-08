@@ -49,7 +49,7 @@ export async function GET(req: NextRequest, props: { params: Promise<{ id: strin
             { rating: 5, count: 0 },
           ],
         },
-        { status: 200 }
+        { status: 200 },
       );
     }
 

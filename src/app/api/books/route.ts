@@ -1,14 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../objects/s3";
 import { BookResponse, BooksResponse, CreateBookRequest } from "./schemas";
 
 export async function POST(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  const seller = await prisma.sellerProfile.findUnique({
+    where: {
+      userId: session.user.id,
+    },
+  });
+  if (!seller && !session.user.isAdmin) {
+    return new NextResponse("Forbidden", { status: 403 });
+  }
+
   try {
     const parsedData = CreateBookRequest.safeParse(await req.json());
     if (!parsedData.success) {
+      console.error("Error parsing book data", parsedData.error);
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
@@ -46,7 +63,7 @@ export async function GET(req: NextRequest) {
               },
             },
           }
-        : undefined
+        : undefined,
     );
     const booksWithImageUrl = books.map((book) => {
       const url = getUrl("book_images", book.coverImageKey);

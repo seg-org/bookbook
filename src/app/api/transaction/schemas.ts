@@ -59,7 +59,7 @@ export const GetTransactionRequest = GetTransactionBase.merge(
   z.object({
     skip: z.string().optional().transform(parseToPosInt(0)).openapi({ example: "3" }),
     take: z.string().optional().transform(parseToPosInt(-1)).openapi({ example: "10" }),
-  })
+  }),
 );
 
 export const CreateTransactionRequest = z.object({
@@ -113,7 +113,7 @@ export const TransactionRespone = TransactionPureRespone.merge(
     failData: TransactionFailData.nullable(),
 
     review: ReviewResponse.nullable(),
-  })
+  }),
 );
 
 export const TransactionCreateRespone = TransactionPureRespone;

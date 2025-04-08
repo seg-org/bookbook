@@ -35,7 +35,7 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
         } else {
           draft.push({ postId, userId: session?.user.id ?? "" });
         }
-      })
+      }),
     );
     await toggleBookmark(postId);
   };
@@ -43,7 +43,7 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
   const postsWithBookmarks = useMemo(() => matchBookmarksToPosts(posts, bookmarks), [posts, bookmarks]);
   const recommendedPostsWithBookmarks = useMemo(
     () => matchBookmarksToPosts(recommendedPosts, bookmarks),
-    [recommendedPosts, bookmarks]
+    [recommendedPosts, bookmarks],
   );
 
   const loading = loadingAll || loadingRecommended || loadingBookmark;

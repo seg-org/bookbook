@@ -25,7 +25,7 @@ export const ChatProvider: FC<PropsWithChildren> = ({ children }) => {
             [lastRead]: new Date(),
           };
         }
-      })
+      }),
     );
 
     setCurrentChatRoom(chatRoom);
@@ -48,7 +48,7 @@ export const ChatProvider: FC<PropsWithChildren> = ({ children }) => {
           },
           [lastRead]: new Date(),
         };
-      })
+      }),
     );
   };
 
