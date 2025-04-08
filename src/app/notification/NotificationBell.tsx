@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Bell } from "lucide-react";
+
 import { getNotifications, markNotificationAsRead } from "../../data/notification";
 import { Notification } from "../../data/dto/notification.dto";
 
@@ -103,7 +104,7 @@ export default function NotificationBell() {
               ))
             )}
           </ul>
-          {notifications.length > 3 && (<div className="p-4 text-center text-sm text-gray-500">Scroll for more...</div>)}
+          {notifications.length > 3 && <div className="p-4 text-center text-sm text-gray-500">Scroll for more...</div>}
         </div>
       )}
     </div>
