@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { CreateNotificationRequest, NotificationResponse, NotificationsResponse } from "../schemas";
+import { CreateNotificationRequest, NotificationResponse, NotificationsResponse, MarkAsReadRequest } from "../schemas";
 
 export async function GET(req: NextRequest) {
   try {
@@ -56,5 +56,29 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Error creating notification:", error);
     return NextResponse.json({ error: "Failed to create notification" }, { status: 500 });
+  }
+}
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const body = await req.json();
+
+    const parsedResult = MarkAsReadRequest.safeParse(body);
+
+    if (!parsedResult.success) {
+      return NextResponse.json({ error: parsedResult.error.errors }, { status: 400 });
+    }
+
+    const { id } = parsedResult.data;
+
+    const updatedNotification = await prisma.notification.update({
+      where: { id },
+      data: { isRead: true },
+    });
+
+    return NextResponse.json(updatedNotification, { status: 200 });
+  } catch (error) {
+    console.error("Error marking notification as read:", error);
+    return NextResponse.json({ error: "Failed to mark notification as read" }, { status: 500 });
   }
 }
