@@ -28,6 +28,10 @@ const parseToDate = (dft: Date) => {
   return (val: string | undefined) => (val ? new Date(val) : dft);
 };
 
+const parseToString = (dft: string) => {
+  return (val: string | undefined) => (val ? val : dft);
+};
+
 const GetTransactionBase = z.object({
   userId: z.string().optional().openapi({ example: "user_1" }),
   startDate: z
@@ -59,6 +63,7 @@ export const GetTransactionRequest = GetTransactionBase.merge(
   z.object({
     skip: z.string().optional().transform(parseToPosInt(0)).openapi({ example: "3" }),
     take: z.string().optional().transform(parseToPosInt(-1)).openapi({ example: "10" }),
+    sortBy: z.string().optional().transform(parseToString("createdAt")).openapi({ example: "createdAt" }),
   }),
 );
 
@@ -78,10 +83,8 @@ export const CreateTransactionRequest = z.object({
 const TransactionFailData = z.object({
   id: z.string().openapi({ example: "transaction_fail_1" }),
   transactionId: z.string().openapi({ example: "transaction_1" }),
-  evidenceURL: z.array(z.string()).openapi({
-    example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
-  }),
-  detail: z.array(z.string()).openapi({ example: ["The product wasn't delivered", "I hate you"] }),
+  evidenceURL: z.array(z.string()).openapi({ example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"] }),
+  detail: z.array(z.string()).openapi({ example: ["The product wasn't delivered"] }),
   failType: TransactionFailTypeEnum.openapi({ example: "UNDELIVERED" }),
 });
 
@@ -143,15 +146,17 @@ export const UpdateTransactionRequest = z.object({
 
   // for fail and hold status only
   evidenceURL: z
-    .string()
+    .array(z.string())
     .optional()
-    .transform((value) => value ?? "")
-    .openapi({ example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }),
+    .transform((value) => value ?? [])
+    .openapi({
+      example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    }),
   detail: z
-    .string()
+    .array(z.string())
     .optional()
-    .transform((value) => value ?? "")
-    .openapi({ example: "The product wasn't delivered" }),
+    .transform((value) => value ?? [])
+    .openapi({ example: ["The product wasn't delivered", "I hate him"] }),
   failType: TransactionFailTypeEnum.optional()
     .transform((value) => value ?? TransactionFailType.UNDEFINED)
     .openapi({ example: "UNDELIVERED" }),

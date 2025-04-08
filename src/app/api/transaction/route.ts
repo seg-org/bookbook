@@ -116,7 +116,12 @@ export async function GET(req: NextRequest) {
         review: true,
       },
       orderBy: {
-        createdAt: "desc",
+        ...(parsedData.data.sortBy
+          ? {
+              ...(parsedData.data.sortBy == "createdAt" ? { createdAt: "desc" } : {}),
+              ...(parsedData.data.sortBy == "updatedAt" ? { createdAt: "asc" } : {}),
+            }
+          : { createdAt: "desc" }),
       },
     });
 
