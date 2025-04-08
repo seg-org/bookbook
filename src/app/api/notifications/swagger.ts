@@ -1,12 +1,7 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-import {
-  CreateNotificationRequest,
-  MarkAsReadRequest,
-  NotificationResponse,
-  NotificationsResponse,
-} from "./schemas";
+import { CreateNotificationRequest, MarkAsReadRequest, NotificationResponse, NotificationsResponse } from "./schemas";
 
 export const notificationRegistry = new OpenAPIRegistry();
 

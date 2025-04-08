@@ -1,7 +1,6 @@
 import { AxiosResponse } from "axios";
-
-import { Notification } from "./dto/notification.dto";
 import { apiClient } from "./axios";
+import { Notification } from "./dto/notification.dto";
 
 export const getNotifications = async (userId: string): Promise<Notification[] | Error> => {
   try {
@@ -19,7 +18,7 @@ export const getNotifications = async (userId: string): Promise<Notification[] |
 export const createNotification = async (
   userId: string,
   message: string,
-  link?: string
+  link?: string,
 ): Promise<Notification | Error> => {
   try {
     const res: AxiosResponse<Notification> = await apiClient.post("/notifications", {
