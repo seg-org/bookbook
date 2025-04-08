@@ -14,6 +14,7 @@ export type Post = {
   specialDescriptions?: SpecialDescriptionType[];
   damageURLs: string[];
   damage: DamageType;
+  createdAt: Date;
 };
 
 export type GetPostsResponse = {

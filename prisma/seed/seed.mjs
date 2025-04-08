@@ -258,6 +258,7 @@ if (posts.length === 0) {
         (entry.damage == "SLIGHTLY_DAMAGED" && DamageType.SLIGHTLY_DAMAGED) ||
         (entry.damage == "DAMAGED" && DamageType.DAMAGED) ||
         DamageType.NO_DAMAGED,
+      createdAt: entry.createdAt ? new Date(entry.createdAt) : new Date(),
     })),
   });
   console.log("Posts seeded successfully");

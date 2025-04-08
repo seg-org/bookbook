@@ -100,6 +100,7 @@ model Post {
   specialDescriptions SpecialDescriptionType[]
   damageURLs          String[]                 @map("damage_urls")
   damage              DamageType               @map("damage")
+  createdAt           DateTime                 @default(now())
 
   @@map("posts")
 }

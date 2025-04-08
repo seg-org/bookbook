@@ -12,6 +12,10 @@ export const getAllPosts = async (params?: GetPostsFilters) => {
       params,
     });
 
+    res.data.posts.forEach((post) => {
+      post.createdAt = new Date(post.createdAt); // Convert createdAt to Date
+    });
+
     return res.data;
   } catch (error) {
     console.error("Failed to get all posts", error);
@@ -22,6 +26,8 @@ export const getAllPosts = async (params?: GetPostsFilters) => {
 export const getPost = async (id: string) => {
   try {
     const res: AxiosResponse<Post> = await apiClient.get(`/posts/${id}`);
+
+    res.data.createdAt = new Date(res.data.createdAt); // Convert createdAt to Date
 
     return res.data;
   } catch (error) {
@@ -34,6 +40,10 @@ export const getRecommendedPosts = async (userId: string) => {
   try {
     const res: AxiosResponse<Post[]> = await apiClient.get("/posts/recommend", {
       params: { user_id: userId },
+    });
+
+    res.data.forEach((post) => {
+      post.createdAt = new Date(post.createdAt); // Convert createdAt to Date
     });
 
     return res.data;

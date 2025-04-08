@@ -37,6 +37,10 @@ export const CreatePostRequest = z.object({
     .transform((val) => (val ? val : []))
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.openapi({ example: "SLIGHTLY_DAMAGED" }),
+  createdAt: z
+    .preprocess((arg) => (typeof arg === "string" ? new Date(arg) : arg), z.date())
+    .optional()
+    .openapi({ example: "2025-04-01T10:00:00Z" }),
 });
 
 export const PostResponse = z.object({
@@ -53,6 +57,7 @@ export const PostResponse = z.object({
     .array(z.string())
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.openapi({ example: "NO_DAMAGED" }),
+  createdAt: z.date(),
 });
 
 export const PostsResponse = z.array(PostResponse);
@@ -79,4 +84,8 @@ export const UpdatePostRequest = z.object({
     .optional()
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.optional().openapi({ example: "DAMAGED" }),
+  createdAt: z
+    .preprocess((arg) => (typeof arg === "string" ? new Date(arg) : arg), z.date())
+    .optional()
+    .openapi({ example: "2025-04-01T10:00:00Z" }),
 });
