@@ -1,6 +1,4 @@
 // src/app/page.tsx
-"use client";
-
 import {
   BookMarked,
   BookOpen,
@@ -14,10 +12,11 @@ import {
   UserPlus,
 } from "lucide-react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-export default function Home() {
-  const { data: session } = useSession();
+export default async function Home() {
+  const session = await getServerSession(authOptions);
   const isAdmin = session?.user?.isAdmin;
 
   const links = [
