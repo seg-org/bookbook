@@ -10,6 +10,7 @@ export type Book = {
   pages: number;
   publisher: string;
   coverImageUrl: string;
+  coverImageKey: string;
   bookGenres?: GenreType[];
   bookTags?: BookTagType[];
 };
