@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+
 import { apiClient } from "./axios";
 import { Notification } from "./dto/notification.dto";
 

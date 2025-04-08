@@ -78,7 +78,6 @@ export default function NotificationBell() {
         aria-haspopup="true"
         className="rounded-full bg-gray-200 p-2 hover:bg-gray-300"
       >
-        {/* Use the Bell icon */}
         <Bell className="text-gray-700" size={24} />
         {notifications.some((n) => !n.isRead) && (
           <span className="absolute right-0 top-0 h-3 w-3 rounded-full bg-red-500"></span>
@@ -96,9 +95,7 @@ export default function NotificationBell() {
                 <li
                   key={notification.id}
                   className={`cursor-pointer p-4 ${
-                    notification.isRead
-                      ? "bg-gray-100 text-gray-500"
-                      : "bg-white text-gray-800"
+                    notification.isRead ? "bg-gray-100 text-gray-500" : "bg-white text-gray-800"
                   } hover:bg-gray-200`}
                   onClick={() => handleNotificationClick(notification)}
                 >

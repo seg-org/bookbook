@@ -122,15 +122,13 @@ export async function GET(req: NextRequest) {
         createdAt: "desc",
       },
     });
-    
+
     if (forNotifications) {
       const simplifiedTransactions = transactions.map((transaction) => ({
         id: transaction.id,
         status: transaction.status,
         postTitle: transaction.post?.title || "Unknown Title",
-        coverImageUrl: transaction.post?.book
-          ? getUrl("book_images", transaction.post.book.coverImageKey)
-          : "",
+        coverImageUrl: transaction.post?.book ? getUrl("book_images", transaction.post.book.coverImageKey) : "",
         isBuyer: transaction.buyerId === userId,
         isSeller: transaction.sellerId === userId,
       }));
