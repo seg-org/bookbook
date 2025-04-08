@@ -48,22 +48,22 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    const book = await prisma.book.findUnique({
-      where: { id: parsedData.data.bookId },
-    });
-    if (!book) {
-      return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
-    }
-
     const data = {
       ...parsedData.data,
     };
 
     const updatedPost = await prisma.post.update({
-      where: { id },
-      data,
+      where: { id: id },
+      data: data,
       include: { book: true },
     });
+
+    const book = await prisma.book.findUnique({
+      where: { id: updatedPost.bookId },
+    });
+    if (!book) {
+      return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
+    }
 
     const updatedPostWithImageUrl = {
       ...updatedPost,

@@ -113,7 +113,7 @@ if (sellerProfiles.length === 0) {
         approvedAt: sellerProfile.approvedAt,
         userId: sellerProfile.userId,
       };
-    })
+    }),
   );
 
   await prisma.sellerProfile.createMany({
@@ -137,7 +137,7 @@ if (books.length === 0) {
             const extractedKey = keyWithFolder?.split("/")[1] ?? "";
             bookImageKeys.set(normalizedPath, extractedKey);
             return extractedKey;
-          })
+          }),
         );
       }
 
@@ -178,7 +178,7 @@ if (books.length === 0) {
             (genre == "TRUE_CRIME" && GenreType.TRUE_CRIME) ||
             (genre == "CONTEMPORARY" && GenreType.CONTEMPORARY) ||
             (genre == "RELIGIOUS_SPIRITUAL" && GenreType.RELIGIOUS_SPIRITUAL) ||
-            GenreType.NON_FICTION
+            GenreType.NON_FICTION,
         ),
         bookTags: book.bookTags.map(
           (tag) =>
@@ -202,10 +202,10 @@ if (books.length === 0) {
             (tag == "SELF_HELP" && BookTagType.SELF_HELP) ||
             (tag == "THRILLER" && BookTagType.THRILLER) ||
             (tag == "ROMANTIC_COMEDY" && BookTagType.ROMANTIC_COMEDY) ||
-            BookTagType.BESTSELLER
+            BookTagType.BESTSELLER,
         ),
       };
-    })
+    }),
   );
 
   await prisma.book.createMany({
@@ -251,7 +251,7 @@ if (posts.length === 0) {
           (desc == "FAN_ART_EDITION" && SpecialDescriptionType.FAN_ART_EDITION) ||
           (desc == "INTERACTIVE_ELEMENTS" && SpecialDescriptionType.INTERACTIVE_ELEMENTS) ||
           (desc == "BILINGUAL_EDITION" && SpecialDescriptionType.BILINGUAL_EDITION) ||
-          SpecialDescriptionType.BILINGUAL_EDITION
+          SpecialDescriptionType.BILINGUAL_EDITION,
       ),
       damage:
         (entry.damage == "NO_DAMAGED" && DamageType.NO_DAMAGED) ||
@@ -259,6 +259,7 @@ if (posts.length === 0) {
         (entry.damage == "DAMAGED" && DamageType.DAMAGED) ||
         DamageType.NO_DAMAGED,
       createdAt: entry.createdAt ? new Date(entry.createdAt) : new Date(),
+      updatedAt: entry.updatedAt ? new Date(entry.updatedAt) : new Date(),
     })),
   });
   console.log("Posts seeded successfully");

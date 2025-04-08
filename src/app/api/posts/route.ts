@@ -29,10 +29,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: `seller with id ${parsedData.data.sellerId} not found` }, { status: 404 });
     }
 
-    const { createdAt, ...rest } = parsedData.data;
     const data = {
-      ...rest,
-      createdAt: createdAt ? new Date(createdAt) : undefined,
+      ...parsedData.data,
     };
 
     const newPost = await prisma.post.create({

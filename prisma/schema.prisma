@@ -95,12 +95,13 @@ model Post {
   book                Book                     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId              String                   @map("book_id")
   transactions        Transaction[]
-  ChatRoom            ChatRoom[]
+  chatRoom            ChatRoom[]
   Bookmark            Bookmark[]
   specialDescriptions SpecialDescriptionType[]
   damageURLs          String[]                 @map("damage_urls")
   damage              DamageType               @map("damage")
   createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt() @map("updated_at")
 
   @@map("posts")
 }
@@ -167,8 +168,8 @@ model Transaction {
   sellerId       String            @map("seller_id")
   post           Post              @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId         String            @map("post_id")
-  createdAt      DateTime          @default(now()) @map("create_on")
-  updatedAt      DateTime          @updatedAt() @map("update_on")
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime          @updatedAt() @map("updated_at")
   status         TransactionStatus
   failData       TransactionFail?
   // payment data
