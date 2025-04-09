@@ -5,7 +5,6 @@ import { z } from "zod";
 import { UserResponse } from "../auth/schemas";
 import { PostResponse } from "../posts/schemas";
 import { ReviewResponse } from "../reviews/schemas";
-
 import {
   PaymentMethodType,
   ShipmentMethodType,

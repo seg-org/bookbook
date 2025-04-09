@@ -3,12 +3,9 @@ import {
   ShipmentMethodType,
   TransactionStatusType,
 } from "../../app/api/transaction/transaction_enum";
-
-import { TransactionFail } from "./transactionFail.dto";
-
-import { Review } from "./review.dto";
-
 import { Post } from "./post.dto";
+import { Review } from "./review.dto";
+import { TransactionFail } from "./transactionFail.dto";
 import { User } from "./user.dto";
 
 export type Transaction = {

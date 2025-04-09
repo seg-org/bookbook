@@ -1,5 +1,6 @@
-import { Transaction } from "./transaction.dto";
 import { TransactionFailTypeType } from "@/app/api/transaction/transaction_enum";
+
+import { Transaction } from "./transaction.dto";
 
 export type TransactionFail = {
   id: string;

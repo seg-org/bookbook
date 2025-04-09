@@ -1,10 +1,10 @@
 import { AxiosResponse } from "axios";
 
+import { BookTagType, GenreType } from "@/app/api/books/book_enum";
 import { EditBookFormData } from "@/app/book/[id]/edit/page";
 
 import { apiClient } from "./axios";
 import { Book } from "./dto/book.dto";
-import { BookTagType, GenreType } from "@/app/api/books/book_enum";
 
 interface CreateBook {
   title: string;
