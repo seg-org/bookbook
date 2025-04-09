@@ -54,16 +54,16 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
       throw new Error("Price is required");
     }
 
-    //// WTF why prisma in front end
-    // const { id } = await prisma.post.create({
-    //   data: {
-    //     title: postTitle,
-    //     price: Math.round(+price),
-    //     published: true,
-    //     sellerId: session.user.id,
-    //     bookId: book.id,
-    //   },
-    // });
+    const { id } = await prisma.post.create({
+      data: {
+        title: postTitle,
+        price: Math.round(+price),
+        published: true,
+        sellerId: session.user.id,
+        bookId: book.id,
+        damage: "NO_DAMAGED",
+      },
+    });
 
     redirect(`/post/${id}`);
   }
