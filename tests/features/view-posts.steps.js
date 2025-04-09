@@ -63,7 +63,7 @@ Then("they should see the posts sorted by price in descending order", { timeout:
       const priceElement = await post.$('[data-test-id="post-price"]');
       const priceText = (await priceElement?.innerText()) ?? "";
       return parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
-    })
+    }),
   );
 
   for (let i = 0; i < prices.length - 1; i++) {
