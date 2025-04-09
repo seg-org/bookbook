@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { bookImageFolderName } from "@/constants/s3FolderName";
-import { createBook } from "@/data/book";
 import { getObjectUrl, putObject } from "@/data/object";
 
 import { BookTagType, GenreType } from "../api/books/book_enum";
@@ -99,7 +98,8 @@ export default function AddBookPage() {
   // fix this to support genres and book tags plesase
   // --------------------------------------------
   const onSubmit = async (data: CreateBookFormData) => {
-    // setLoading(true);
+    setLoading(true);
+    if (data !== undefined) console.log("recieve");
     // try {
     //   if (!data.coverImageKey) {
     //     throw new Error("Cover image upload is required.");
@@ -121,7 +121,7 @@ export default function AddBookPage() {
     //   console.error("Error posting book:", error);
     //   setMessage("Failed to post book.");
     // } finally {
-    //   setLoading(false);
+    setLoading(false);
     // }
   };
 
