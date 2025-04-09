@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { getUrl } from "@/app/api/objects/s3";
 import { prisma } from "@/lib/prisma";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 export default async function BookDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -45,8 +46,11 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
           </p>
           <p>
             <span className="font-bold">ประเภท </span>
-            {/* fix this to handle genres 
-            <span>{book.genre}</span> */}
+            <span>{book.bookGenres.map((key) => genreInThai[key]).join(", ")}</span>
+          </p>
+          <p>
+            <span className="font-bold">แท็ก </span>
+            <span>{book.bookTags.map((key) => bookTagInThai[key]).join(", ")}</span>
           </p>
           <p>
             <span className="font-bold">สำนักพิมพ์ </span>

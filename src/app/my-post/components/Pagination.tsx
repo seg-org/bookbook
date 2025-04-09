@@ -1,3 +1,5 @@
+"use client";
+
 import { usePostContext } from "@/context/postContext";
 
 export const Pagination = () => {

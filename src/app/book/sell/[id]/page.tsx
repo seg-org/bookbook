@@ -7,6 +7,7 @@ import { getUrl } from "@/app/api/objects/s3";
 import { Button } from "@/components/ui/Button";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 export default async function SellBookConfirmPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -94,7 +95,11 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
           </p>
           <p>
             <span className="font-bold">ประเภท </span>
-            {/* FIX this please  <span>{book.genre}</span> */}
+            <span>{book.bookGenres.map((key) => genreInThai[key]).join(", ")}</span>
+          </p>
+          <p>
+            <span className="font-bold">แท็ก </span>
+            <span>{book.bookTags.map((key) => bookTagInThai[key]).join(", ")}</span>
           </p>
           <p>
             <span className="font-bold">สำนักพิมพ์ </span>
