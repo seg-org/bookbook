@@ -61,6 +61,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
         published: true,
         sellerId: session.user.id,
         bookId: book.id,
+        damage: "NO_DAMAGED",
       },
     });
 
@@ -93,7 +94,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
           </p>
           <p>
             <span className="font-bold">ประเภท </span>
-            <span>{book.genre}</span>
+            {/* FIX this please  <span>{book.genre}</span> */}
           </p>
           <p>
             <span className="font-bold">สำนักพิมพ์ </span>

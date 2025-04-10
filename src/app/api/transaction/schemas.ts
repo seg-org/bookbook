@@ -5,16 +5,17 @@ import { z } from "zod";
 import { UserResponse } from "../auth/schemas";
 import { PostResponse } from "../posts/schemas";
 import { ReviewResponse } from "../reviews/schemas";
+import {
+  PaymentMethodType,
+  ShipmentMethodType,
+  TransactionFailTypeType,
+  TransactionStatusType,
+} from "../transaction/transaction_enum";
 
 extendZodWithOpenApi(z);
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
 const endOfTime = new Date("9999-12-31T23:59:59Z");
-
-const TransactionStatusEnum = z.enum(["PACKING", "DELIVERING", "COMPLETE", "HOLD", "FAIL"]);
-const PaymentMethodEnum = z.enum(["CREDIT_CARD", "ONLINE_BANKING", "UNDEFINED"]);
-const ShipmentMethodEnum = z.enum(["STANDARD", "EXPRESS", "UNDEFINED"]);
-const TransactionFailTypeEnum = z.enum(["UNDELIVERED", "UNQUALIFIED", "REJECT", "TERMINATION", "OTHER", "UNDEFINED"]);
 
 const parseToBoolean = (dft: boolean) => {
   return (val: string | undefined) => (val ? val == "true" : dft);
@@ -26,6 +27,10 @@ const parseToPosInt = (dft: number) => {
 
 const parseToDate = (dft: Date) => {
   return (val: string | undefined) => (val ? new Date(val) : dft);
+};
+
+const parseToString = (dft: string) => {
+  return (val: string | undefined) => (val ? val : dft);
 };
 
 const GetTransactionBase = z.object({
@@ -59,6 +64,7 @@ export const GetTransactionRequest = GetTransactionBase.merge(
   z.object({
     skip: z.string().optional().transform(parseToPosInt(0)).openapi({ example: "3" }),
     take: z.string().optional().transform(parseToPosInt(-1)).openapi({ example: "10" }),
+    sortBy: z.string().optional().transform(parseToString("createdAt")).openapi({ example: "createdAt" }),
   }),
 );
 
@@ -66,10 +72,10 @@ export const CreateTransactionRequest = z.object({
   buyerId: z.string().openapi({ example: "user_1" }),
   postId: z.string().openapi({ example: "post_1" }),
 
-  paymentMethod: PaymentMethodEnum.openapi({ example: "CREDIT_CARD" }),
+  paymentMethod: PaymentMethodType.openapi({ example: "CREDIT_CARD" }),
   hashId: z.string().openapi({ example: "ABCDEFGHIJKLMAO" }),
 
-  shipmentMethod: ShipmentMethodEnum.openapi({ example: "EXPRESS" }),
+  shipmentMethod: ShipmentMethodType.openapi({ example: "EXPRESS" }),
   address: z.string().openapi({ example: "Chulalongkorn Pattumwan BKK 10110" }),
 
   amount: z.number().openapi({ example: 420 }),
@@ -78,9 +84,9 @@ export const CreateTransactionRequest = z.object({
 const TransactionFailData = z.object({
   id: z.string().openapi({ example: "transaction_fail_1" }),
   transactionId: z.string().openapi({ example: "transaction_1" }),
-  evidenceURL: z.string().openapi({ example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }),
-  detail: z.string().openapi({ example: "The product wasn't delivered" }),
-  failType: TransactionFailTypeEnum.openapi({ example: "UNDELIVERED" }),
+  evidenceURL: z.array(z.string()).openapi({ example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"] }),
+  detail: z.array(z.string()).openapi({ example: ["The product wasn't delivered"] }),
+  failType: TransactionFailTypeType.openapi({ example: "UNDELIVERED" }),
 });
 
 const TransactionPureRespone = z.object({
@@ -91,14 +97,14 @@ const TransactionPureRespone = z.object({
   postId: z.string().openapi({ example: "post_3" }),
   createdAt: z.date().openapi({ example: "2021-09-01T00:00:00.000Z" }),
   updatedAt: z.date().openapi({ example: "2021-09-01T00:00:00.000Z" }),
-  status: TransactionStatusEnum.openapi({ example: "PACKING" }),
+  status: TransactionStatusType.openapi({ example: "PACKING" }),
   // payment
-  paymentMethod: PaymentMethodEnum.openapi({ example: "CREDIT_CARD" }),
+  paymentMethod: PaymentMethodType.openapi({ example: "CREDIT_CARD" }),
   hashId: z.string().openapi({ example: "ABCDEFGHIJKLMAO" }),
   paidOn: z.date().openapi({ example: "2021-09-01T00:00:00.000Z" }),
   amount: z.number().openapi({ example: 420.0 }),
   // shipment
-  shipmentMethod: ShipmentMethodEnum.openapi({ example: "EXPRESS" }),
+  shipmentMethod: ShipmentMethodType.openapi({ example: "EXPRESS" }),
   address: z.string().openapi({ example: "Chulalongkorn Pattumwan BKK 10110" }),
   trackingURL: z.string().openapi({ example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }),
   trackingNumber: z.string().openapi({ example: "489464684321351354" }),
@@ -127,13 +133,13 @@ export const TransactionAmountRespone = z.number().openapi({ example: 20 });
 export const TransactionCountRespone = z.number().openapi({ example: 20 });
 
 export const UpdateTransactionRequest = z.object({
-  status: TransactionStatusEnum.optional().openapi({ example: "HOLD" }),
+  status: TransactionStatusType.optional().openapi({ example: "HOLD" }),
 
-  paymentMethod: PaymentMethodEnum.optional().openapi({ example: "CREDIT_CARD" }),
+  paymentMethod: PaymentMethodType.optional().openapi({ example: "CREDIT_CARD" }),
   hashId: z.string().optional().openapi({ example: "ABCDEFGHIJKLMAO" }),
   amount: z.number().optional().openapi({ example: 546 }),
 
-  shipmentMethod: ShipmentMethodEnum.optional().openapi({ example: "EXPRESS" }),
+  shipmentMethod: ShipmentMethodType.optional().openapi({ example: "EXPRESS" }),
   address: z.string().optional().openapi({ example: "Chulalongkorn Pattumwan BKK 10110" }),
   trackingURL: z.string().optional().openapi({ example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }),
   trackingNumber: z.string().optional().openapi({ example: "9986484684684548" }),
@@ -141,16 +147,18 @@ export const UpdateTransactionRequest = z.object({
 
   // for fail and hold status only
   evidenceURL: z
-    .string()
+    .array(z.string())
     .optional()
-    .transform((value) => value ?? "")
-    .openapi({ example: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }),
+    .transform((value) => value ?? [])
+    .openapi({
+      example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    }),
   detail: z
-    .string()
+    .array(z.string())
     .optional()
-    .transform((value) => value ?? "")
-    .openapi({ example: "The product wasn't delivered" }),
-  failType: TransactionFailTypeEnum.optional()
+    .transform((value) => value ?? [])
+    .openapi({ example: ["The product wasn't delivered", "I hate him"] }),
+  failType: TransactionFailTypeType.optional()
     .transform((value) => value ?? TransactionFailType.UNDEFINED)
     .openapi({ example: "UNDELIVERED" }),
 });

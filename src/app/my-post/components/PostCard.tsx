@@ -53,8 +53,8 @@ function PostCard({ post, isRecommended }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {/* <strong>ประเภท </strong>
+                {cut(post.book.genre, 65)} */}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>

@@ -31,8 +31,6 @@ export async function POST(req: NextRequest) {
 
     const data = {
       ...parsedData.data,
-      bookGenres: parsedData.data.bookGenres ?? [],
-      bookTags: parsedData.data.bookTags ?? [],
     };
 
     const newBook = await prisma.book.create({ data });

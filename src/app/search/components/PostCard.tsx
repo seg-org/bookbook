@@ -95,7 +95,8 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {/* fix this */}
+                {/* {cut(post.book.bookGenres?.join(" , ").toLowerCase().replace(/_/g, " "), 65)} */}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>

@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-  // TODO : Uncomment this after adding isAdmin to the user model
-  // if (!session?.user?.isAdmin) {
-  //   return new NextResponse("Unauthorized", { status: 401 });
-  // }
+  if (!session?.user?.isAdmin) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
 
   try {
     const { sellerId, approved } = await req.json();
