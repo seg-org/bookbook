@@ -1,5 +1,3 @@
-"use client";
-
 import { TransactionAdminProvider } from "@/context/transactionAdminProvider";
 
 import FilterBar from "./components/FilterBar";
