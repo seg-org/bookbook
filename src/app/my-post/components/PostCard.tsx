@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 type PostCardProps = {
   post: PostWithBookmark;
@@ -54,7 +55,11 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
+              </div>
+              <div>
+                <strong>แท็ก </strong>
+                {cut(post.book.bookTags?.map((key) => bookTagInThai[key]).join(", ") || "", 65)}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>

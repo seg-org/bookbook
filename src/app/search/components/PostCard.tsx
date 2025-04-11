@@ -10,6 +10,7 @@ import { IoLogoWechat } from "react-icons/io5";
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
 import { createChatRoom } from "@/data/chat";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 import { Bookmark } from "./Bookmark";
 
@@ -95,7 +96,11 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
+              </div>
+              <div>
+                <strong className="font-bold">แท็ก </strong>
+                <span>{cut(post.book.bookTags?.map((key) => bookTagInThai[key]).join(", ") || "", 65)}</span>
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>

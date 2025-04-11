@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import type { MiddlewareConfig, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
@@ -27,5 +27,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/seller-registration/:path*", "/login", "/register", "/verify/:path*", "/pdpa-consent"],
-};
+  matcher: ["/seller-registration/:path*", "/login", "/register", "/verify/:path*", "/pdpa-consent", "/admin/:path*"],
+} satisfies MiddlewareConfig;

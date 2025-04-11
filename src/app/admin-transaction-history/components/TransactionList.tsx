@@ -3,9 +3,9 @@
 import { Fragment } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 
-import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import LineSeparator from "./LineSperator";
 import TransactionBox from "./TransactionBox";
 

@@ -1,7 +1,6 @@
 import { PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
@@ -12,7 +11,7 @@ const TransactionDetailsPopup = () => {
   const router = useRouter();
   const { selectingTransaction, setSelectingTransaction, userId } = useTransactionAdminContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
-  const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
+  // const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },
     [TransactionStatus.DELIVERING]: { label: "จัดส่ง", color: "text-gray-300" },
@@ -47,9 +46,9 @@ const TransactionDetailsPopup = () => {
     return date.toLocaleDateString("en-GB").replace(/\//g, "/");
   };
 
-  const displayLink = (URLs: string | undefined) => {
+  const displayLink = (URLs: string[] | undefined) => {
     if (URLs === undefined) return "";
-    return URLs.replace(/,/g, "\n");
+    return URLs.join("\n");
   };
 
   const oneWeekAgo = new Date();

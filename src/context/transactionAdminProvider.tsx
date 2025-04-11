@@ -8,6 +8,7 @@ import {
   useGetTransactionAmount,
   useGetTransactionCount,
 } from "@/hooks/useGetTransactionsAdmin";
+
 import { TransactionAdminContext } from "./transactionAdminContext";
 
 const beginningOfTime = new Date("0000-01-01T00:00:00Z");
@@ -42,7 +43,7 @@ export const TransactionAdminProvider: FC<PropsWithChildren> = ({ children }) =>
       setIsComplete,
       setIsFail,
     }),
-    [startDate, endDate, isPacking, isDelivering, isHold, isComplete, isFail]
+    [startDate, endDate, isPacking, isDelivering, isHold, isComplete, isFail],
   );
 
   const [selectingPage, setSelectingPage] = useState(1);
@@ -52,7 +53,7 @@ export const TransactionAdminProvider: FC<PropsWithChildren> = ({ children }) =>
       transactionPerPage,
       setSelectingPage,
     }),
-    [selectingPage]
+    [selectingPage],
   );
 
   const {

@@ -55,8 +55,6 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     const data = {
       ...parsedData.data,
-      bookGenres: parsedData.data.bookGenres ?? [],
-      bookTags: parsedData.data.bookTags ?? [],
     };
 
     const updatedBook = await prisma.book.update({

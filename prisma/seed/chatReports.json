@@ -3,35 +3,49 @@
     "id": "chat_report_1",
     "reporterId": "user_16",
     "roomId": "chatroom_1",
-    "reason": "Violation of community guidelines",
-    "createdAt": "2024-09-07T15:18:59.266Z"
+    "reason": "Privacy violation",
+    "createdAt": "2024-06-17T01:19:20.491Z"
   },
   {
     "id": "chat_report_2",
-    "reporterId": "user_16",
-    "roomId": "chatroom_2",
+    "reporterId": "user_17",
+    "roomId": "chatroom_5",
     "reason": "Unsolicited promotions or ads",
-    "createdAt": "2024-05-16T08:54:00.231Z"
+    "createdAt": "2024-07-25T23:00:34.901Z"
   },
   {
     "id": "chat_report_3",
-    "reporterId": "user_22",
-    "roomId": "chatroom_22",
-    "reason": "Threats or violence",
-    "createdAt": "2024-05-06T05:03:16.348Z"
+    "reporterId": "user_18",
+    "roomId": "chatroom_8",
+    "reason": "Self-harm or suicide threats",
+    "createdAt": "2024-04-14T08:45:03.980Z"
   },
   {
     "id": "chat_report_4",
-    "reporterId": "user_10",
-    "roomId": "chatroom_23",
-    "reason": "Inappropriate language",
-    "createdAt": "2024-11-23T21:57:31.621Z"
+    "reporterId": "user_20",
+    "roomId": "chatroom_18",
+    "reason": "Privacy violation",
+    "createdAt": "2024-02-04T00:54:29.233Z"
   },
   {
     "id": "chat_report_5",
-    "reporterId": "user_22",
-    "roomId": "chatroom_24",
-    "reason": "Offensive or disturbing content",
-    "createdAt": "2024-02-22T13:11:45.668Z"
+    "reporterId": "user_4",
+    "roomId": "chatroom_26",
+    "reason": "Repeated unwanted contact",
+    "createdAt": "2024-01-25T04:30:50.334Z"
+  },
+  {
+    "id": "chat_report_6",
+    "reporterId": "user_6",
+    "roomId": "chatroom_27",
+    "reason": "Sexual content or explicit material",
+    "createdAt": "2023-10-06T08:04:28.498Z"
+  },
+  {
+    "id": "chat_report_7",
+    "reporterId": "user_6",
+    "roomId": "chatroom_29",
+    "reason": "Repeated unwanted contact",
+    "createdAt": "2024-07-21T15:09:00.194Z"
   }
 ]

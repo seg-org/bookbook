@@ -1,0 +1,28 @@
+.userManageForm {
+  @apply flex w-full flex-col gap-4 p-4;
+
+  & > div:has(> div) {
+    @apply flex justify-between gap-4;
+
+    & > div {
+      @apply flex-1;
+    }
+  }
+
+  div:has(> label) {
+    @apply flex flex-col;
+
+    & > label {
+      @apply text-sm font-medium text-gray-700;
+    }
+
+    & > input,
+    & > textarea {
+      @apply rounded-md border border-gray-300 p-1 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500;
+    }
+  }
+
+  & > button[type="submit"] {
+    @apply self-end rounded-xl bg-blue-500 px-4 py-2 text-white hover:bg-blue-600;
+  }
+}
