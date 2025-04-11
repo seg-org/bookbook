@@ -1,19 +1,19 @@
+"use client";
+
 import { PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-import { ShippingDetailsDialog } from "@/app/transaction-history-page/components/ShippingDetailsDialog";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
-import { useTransactionContext } from "@/context/transactionContext";
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
-  const { selectingTransaction, setSelectingTransaction, userId } = useTransactionContext();
+  const { selectingTransaction, setSelectingTransaction, userId } = useTransactionAdminContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
-  const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
+  // const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },
     [TransactionStatus.DELIVERING]: { label: "จัดส่ง", color: "text-gray-300" },
@@ -46,6 +46,11 @@ const TransactionDetailsPopup = () => {
   const dateString = (date: Date | undefined) => {
     if (date === undefined) return "";
     return date.toLocaleDateString("en-GB").replace(/\//g, "/");
+  };
+
+  const displayLink = (URLs: string[] | undefined) => {
+    if (URLs === undefined) return "";
+    return URLs.join("\n");
   };
 
   const oneWeekAgo = new Date();
@@ -84,6 +89,8 @@ const TransactionDetailsPopup = () => {
                     {statusMap[transaction.status]?.label}
                   </label>
                 </p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.id}</p>
                 <p className="font-bold text-slate-500">สร้าง : </p>
                 <p className="text-slate-500">{dateString(transaction?.createdAt)}</p>
                 <p className="font-bold text-slate-500">แก้ไขล่าสุด : </p>
@@ -95,6 +102,8 @@ const TransactionDetailsPopup = () => {
                 <p className="font-bold text-slate-500">ที่อยู่ : </p>
                 <p className="text-slate-500">{transaction?.address}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.post.book.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.title}</p>
                 <p className="font-bold text-slate-500">รหัร isbn : </p>
@@ -112,34 +121,30 @@ const TransactionDetailsPopup = () => {
                 <p className="font-bold text-slate-500">แท็ก : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.bookTags}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.post.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.title}</p>
                 <p className="font-bold text-slate-500">เนื้อหา : </p>
                 <p className="text-slate-500">{transaction?.post?.content}</p>
-                <p className="font-bold text-slate-500">ความพิเศษ : </p>
-                <p className="text-slate-500">{transaction?.post?.specialDescriptions}</p>
-                {transaction.buyerId == userId && (
-                  <>
-                    <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
-                    <p className="font-bold text-slate-500">ชื่อ : </p>
-                    <p className="text-slate-500">
-                      {transaction?.seller?.firstName + " " + transaction?.seller?.lastName}
-                    </p>
-                    <p className="font-bold text-slate-500">อีเมล : </p>
-                    <p className="text-slate-500">{transaction?.seller?.email}</p>
-                  </>
-                )}
-                {transaction.sellerId == userId && (
-                  <>
-                    <p className="col-span-2 text-lg font-extrabold underline">ผู้ซื้อ</p>
-                    <p className="font-bold text-slate-500">ชื่อ : </p>
-                    <p className="text-slate-500">
-                      {transaction?.buyer?.firstName + " " + transaction?.buyer?.lastName}
-                    </p>
-                    <p className="font-bold text-slate-500">อีเมล : </p>
-                    <p className="text-slate-500">{transaction?.buyer?.email}</p>
-                  </>
-                )}
+                <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.seller.id}</p>
+                <p className="font-bold text-slate-500">ชื่อ : </p>
+                <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
+                <p className="font-bold text-slate-500">อีเมล : </p>
+                <p className="text-slate-500">{transaction?.seller?.email}</p>
+                <p className="font-bold text-slate-500">เบอร์โทร : </p>
+                <p className="text-slate-500">{transaction?.seller?.phoneNumber}</p>
+                <p className="col-span-2 text-lg font-extrabold underline">ผู้ซื้อ</p>
+                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="text-slate-500">{transaction?.buyer.id}</p>
+                <p className="font-bold text-slate-500">ชื่อ : </p>
+                <p className="text-slate-500">{transaction?.buyer?.firstName + " " + transaction?.seller?.lastName}</p>
+                <p className="font-bold text-slate-500">อีเมล : </p>
+                <p className="text-slate-500">{transaction?.buyer?.email}</p>
+                <p className="font-bold text-slate-500">เบอร์โทร : </p>
+                <p className="text-slate-500">{transaction?.buyer?.phoneNumber}</p>
                 {transaction?.status !== "PACKING" && (transaction?.trackingNumber || transaction?.trackingURL) && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold underline">รายละเอียดการจัดส่ง</p>
@@ -166,6 +171,15 @@ const TransactionDetailsPopup = () => {
                         </p>
                       </>
                     )}
+                  </>
+                )}
+                {transaction?.status == TransactionStatus.HOLD && (
+                  <>
+                    <p className="col-span-2 text-lg font-extrabold text-yellow-700 underline">การรายงาน</p>
+                    <p className="font-bold text-yellow-500">รายละเอียด : </p>
+                    <p className="text-yellow-500">{transaction?.failData?.detail}</p>
+                    <p className="font-bold text-yellow-500">หลักฐาน : </p>
+                    <p className="text-yellow-500">{displayLink(transaction?.failData?.evidenceURL)}</p>
                   </>
                 )}
 
@@ -206,79 +220,28 @@ const TransactionDetailsPopup = () => {
                   >
                     ปิด
                   </Button>
-                  {transaction?.status == TransactionStatus.PACKING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.createdAt < oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-4 py-2"
-                        variant="destructive"
-                        onClick={() => {
-                          router.push(`/transaction-deny/${transaction.id}`);
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
-                  {transaction?.status == TransactionStatus.PACKING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.createdAt >= oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-6 py-3"
-                        variant="destructive"
-                        onClick={() => {
-                          alert("การขอยกเลิกสามารถขอได้หลังส่งซื้ออย่างน้อย 1 สัปดาห์");
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
-                  {transaction?.status == TransactionStatus.PACKING && transaction?.sellerId === userId && (
-                    <Button className="mt-4 px-4 py-2" variant="default" onClick={() => setShippingDialogOpen(true)}>
-                      ใส่รายละเอียดจัดส่ง
+                  {transaction?.status == TransactionStatus.PACKING && transaction?.buyerId === userId && (
+                    <Button
+                      className="mt-4 px-4 py-2"
+                      variant="destructive"
+                      onClick={() => {
+                        router.push(`/transaction-deny/${transaction.id}`);
+                      }}
+                    >
+                      รายงาน
                     </Button>
                   )}
-                  <ShippingDetailsDialog
-                    open={shippingDialogOpen}
-                    onClose={() => setShippingDialogOpen(false)}
-                    onConfirm={async (trackingNumber, trackingURL) => {
-                      try {
-                        await fetch(`/api/transaction/${transaction.id}`, {
-                          method: "PATCH",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ trackingNumber, trackingURL, status: "DELIVERING" }),
-                        });
-                        router.refresh(); // or router.push(...) if needed
-                      } catch (e) {
-                        console.error("Update failed", e);
-                      }
-                    }}
-                  />
-                  {transaction?.status == TransactionStatus.DELIVERING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.updatedAt >= oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-4 py-2"
-                        variant="destructive"
-                        onClick={() => {
-                          alert("การขอยกเลิกสามารถขอได้หลังเริ่มจัดส่งอย่างน้อย 1 สัปดาห์");
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
-                  {transaction?.status == TransactionStatus.DELIVERING &&
-                    transaction?.buyerId === userId &&
-                    transaction?.updatedAt < oneWeekAgo && (
-                      <Button
-                        className="mt-4 px-4 py-2"
-                        variant="destructive"
-                        onClick={() => {
-                          router.push(`/transaction-deny/${transaction.id}`);
-                        }}
-                      >
-                        รายงาน
-                      </Button>
-                    )}
+                  {transaction?.status == TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
+                    <Button
+                      className="mt-4 px-4 py-2"
+                      variant="destructive"
+                      onClick={() => {
+                        router.push(`/transaction-deny/${transaction.id}`);
+                      }}
+                    >
+                      รายงาน
+                    </Button>
+                  )}
                   {transaction?.status == TransactionStatus.HOLD && transaction?.buyerId === userId && (
                     <Button
                       className="mt-4 px-4 py-2"
@@ -288,28 +251,6 @@ const TransactionDetailsPopup = () => {
                       }}
                     >
                       รายงานเพิ่มเติม
-                    </Button>
-                  )}
-                  {transaction?.status === TransactionStatus.DELIVERING && transaction?.buyerId === userId && (
-                    <Button
-                      className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
-                      onClick={async () => {
-                        try {
-                          // Update transaction status to COMPLETE
-                          await fetch(`/api/transaction/${transaction.id}`, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ status: "COMPLETE" }),
-                          });
-
-                          router.push(`/review/${transaction.id}`);
-                        } catch (err) {
-                          alert("เกิดข้อผิดพลาดขณะอัปเดตรายการ");
-                          console.error(err);
-                        }
-                      }}
-                    >
-                      รับสำเร็จ
                     </Button>
                   )}
                 </div>
