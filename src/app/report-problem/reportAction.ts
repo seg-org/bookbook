@@ -15,7 +15,7 @@ export async function submitGeneralReport(_: unknown, formData: FormData) {
   const problem = formData.get("problem") as string;
   const userId = session.user.id;
 
-  if (!problem) {
+  if (!problem || problem.length < 10) {
     return { success: false, message: "กรุณากรอกข้อมูลให้ครบถ้วน" };
   }
 

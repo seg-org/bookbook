@@ -18,6 +18,10 @@ export default function GeneralReportForm() {
           id="problem"
           placeholder="อธิบายปัญหาการใช้งานที่พบ"
           rows={5}
+          required
+          minLength={10}
+          aria-label="ปัญหาการใช้งาน"
+          aria-required="true"
           className="w-full rounded-lg border border-black p-4 shadow"
         />
 

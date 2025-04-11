@@ -45,9 +45,9 @@ export async function submitPostReport(_: unknown, formData: FormData) {
       },
     });
 
-    return { success: true, message: "ส่งรายงานปัญหาสำเร็จ ขอบคุณที่ใช้บริการ" };
+    return { success: true, message: "ส่งรายงานปัญหาสำเร็จ ทางทีมงานจะตรวจสอบโดยเร็วที่สุด" };
   } catch (error) {
-    console.error("Error submitting general report:", error);
+    console.error("Error submitting post report:", error);
     return { success: false, message: "ส่งรายงานปัญหาล้มเหลว กรุณาลองใหม่อีกครั้ง" };
   }
 }
