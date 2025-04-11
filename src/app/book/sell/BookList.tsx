@@ -48,8 +48,7 @@ export default function BookList({ query }: BookListProps) {
             <p>โดย {book.author}</p>
             <p>สำนักพิมพ์ {book.publisher}</p>
             <p>
-              {/* fix genre */}
-              {/* {book.genre} | {book.pages} หน้า | ISBN {book.isbn} */}
+              {book.pages} หน้า | ISBN {book.isbn}
             </p>
           </div>
 
