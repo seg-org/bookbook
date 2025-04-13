@@ -1,4 +1,4 @@
-import { PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
+import { DamageType, PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -42,6 +42,12 @@ const TransactionDetailsPopup = () => {
     [TransactionFailType.UNDEFINED]: { label: "ไม่ระบุ" },
   };
 
+  const DamageTypeMap: Record<DamageType, { label: string }> = {
+    [DamageType.NO_DAMAGED]: { label: "สมบูรณ์" },
+    [DamageType.SLIGHTLY_DAMAGED]: { label: "เกือบสมบูรณ์" },
+    [DamageType.DAMAGED]: { label: "ได้รับความเสียหาย" },
+  };
+
   const dateString = (date: Date | undefined) => {
     if (date === undefined) return "";
     return date.toLocaleDateString("en-GB").replace(/\//g, "/");
@@ -81,7 +87,7 @@ const TransactionDetailsPopup = () => {
               width={220}
             />
             <div>
-              <div className="grid max-h-64 w-80 grid-cols-[auto_1fr] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
+              <div className="grid max-h-64 w-80 grid-cols-[100px_220px] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
                 <p className="text-lg font-extrabold underline">สถานะ :</p>
                 <p>
                   <label className={`text-lg ${statusMap[transaction.status]?.color} font-extrabold`}>
@@ -116,9 +122,33 @@ const TransactionDetailsPopup = () => {
                 <p className="font-bold text-slate-500">จำนวนหน้า : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.pages}</p>
                 <p className="font-bold text-slate-500">หมวดหมู่ : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.bookGenres}</p>
+                <p className="text-slate-500">
+                  {transaction?.post?.book?.bookGenres
+                    ? transaction?.post?.book?.bookGenres
+                        .map((str) =>
+                          str
+                            .toLowerCase()
+                            .split("_")
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(" "),
+                        )
+                        .join(",")
+                    : ""}
+                </p>
                 <p className="font-bold text-slate-500">แท็ก : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.bookTags}</p>
+                <p className="text-slate-500">
+                  {transaction?.post?.book?.bookTags
+                    ? transaction?.post?.book?.bookTags
+                        .map((str) =>
+                          str
+                            .toLowerCase()
+                            .split("_")
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(" "),
+                        )
+                        .join(" ,")
+                    : ""}
+                </p>
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
                 <p className="font-bold text-slate-500">รหัร : </p>
                 <p className="text-slate-500">{transaction?.post.id}</p>
@@ -126,6 +156,30 @@ const TransactionDetailsPopup = () => {
                 <p className="text-slate-500">{transaction?.post?.title}</p>
                 <p className="font-bold text-slate-500">เนื้อหา : </p>
                 <p className="text-slate-500">{transaction?.post?.content}</p>
+                <p className="font-bold text-slate-500">ความพิเศษ : </p>
+                <p className="text-slate-500">
+                  {transaction?.post?.specialDescriptions
+                    ? transaction?.post?.specialDescriptions
+                        .map((str) =>
+                          str
+                            .toLowerCase()
+                            .split("_")
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(" "),
+                        )
+                        .join(" ,")
+                    : ""}
+                </p>
+                <p className="font-bold text-slate-500">ความสมบูรณ์ : </p>
+                <p className="text-slate-500">
+                  {DamageTypeMap[transaction?.post.damage]?.label}
+                  {"\n\n"}
+                  {transaction?.post.damageURLs.map((url) => {
+                    {
+                      return displayLink(url);
+                    }
+                  })}
+                </p>
                 <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
                 <p className="font-bold text-slate-500">รหัร : </p>
                 <p className="text-slate-500">{transaction?.seller.id}</p>
@@ -176,9 +230,13 @@ const TransactionDetailsPopup = () => {
                   <>
                     <p className="col-span-2 text-lg font-extrabold text-yellow-700 underline">การรายงาน</p>
                     <p className="font-bold text-yellow-500">รายละเอียด : </p>
-                    <p className="text-yellow-500">{transaction?.failData?.detail}</p>
+                    <p className="text-yellow-500">{transaction?.failData?.detail.join(" ,")}</p>
                     <p className="font-bold text-yellow-500">หลักฐาน : </p>
-                    <p className="text-yellow-500">{displayLink(transaction?.failData?.evidenceURL)}</p>
+                    <p className="text-yellow-500">
+                      {transaction?.failData?.evidenceURL.map((str) => {
+                        return displayLink(str);
+                      })}
+                    </p>
                   </>
                 )}
 

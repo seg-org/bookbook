@@ -25,7 +25,7 @@ export type Transaction = {
   paidOn: Date;
   amount: number;
 
-  shipmentMethod: ShipmentMethod;
+  shipmentMethod: ShipmentMethodType;
   address: String;
   trackingURL: string;
   trackingNumber: string;
