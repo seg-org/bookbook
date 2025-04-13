@@ -1,13 +1,22 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Wrench } from "lucide-react";
-
+import { PostContext } from "@/context/postContext";
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
+import { z } from "zod";
+import { editPost } from "@/data/post";
 
 type PostCardProps = {
   post: PostWithBookmark;
 };
+
+const postSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  price: z.number().min(10, "Price must be more than 0"),
+  bookId: z.string(),
+});
+export type EditPostFormData = z.infer<typeof postSchema>;
 
 const cut = (str: string, maxLength: number) => {
   if (str.length > maxLength) {
@@ -18,20 +27,39 @@ const cut = (str: string, maxLength: number) => {
 
 function PostCard({ post }: PostCardProps) {
   const [editMode, setEditMode] = useState(false);
-
+  const { refetchPosts } = useContext(PostContext);
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     price: post.price,
+    bookId: post.bookId,
   });
 
   const oldPost = {
     title: post.title,
     price: post.price,
+    bookId: post.bookId,
+  };
+
+  const onSubmit = async (id: string) => {
+    try {
+      const res = await editPost(editedPost, id);
+      if (res instanceof Error) {
+        console.error(res);
+      }
+    } catch (error) {
+      console.error("Error posting book:", error);
+    }
+    setEditMode(false);
+    refetchPosts?.();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedPost((prev) => ({ ...prev, [name]: value }));
+    if (name === "price") {
+      setEditedPost((prev) => ({ ...prev, [name]: Number(value) }));
+    } else {
+      setEditedPost((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   return (
@@ -108,7 +136,11 @@ function PostCard({ post }: PostCardProps) {
               >
                 <div className="flex items-center justify-center gap-x-2">ยกเลิกการแก้ไข</div>
               </Button>
-              <Button variant="default" className="text-green-500 hover:bg-green-500 hover:text-white">
+              <Button
+                variant="default"
+                className="text-green-500 hover:bg-green-500 hover:text-white"
+                onClick={() => onSubmit(post.id)}
+              >
                 <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>
               </Button>
             </>

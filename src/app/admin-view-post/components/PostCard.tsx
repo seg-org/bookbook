@@ -1,17 +1,26 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Wrench, Delete } from "lucide-react";
 import { IoLogoWechat } from "react-icons/io5";
 
 import { createChatRoom } from "@/data/chat";
-import { PostWithBookmark } from "@/context/postContext";
+import { PostContext, PostWithBookmark } from "@/context/postContext";
 import { Button } from "@/components/ui/Button";
+import { editPost } from "@/data/post";
+import { z } from "zod";
 
 type PostCardProps = {
   post: PostWithBookmark;
 };
+
+const postSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  price: z.number().min(10, "Price must be more than 0"),
+  bookId: z.string(),
+});
+export type EditPostFormData = z.infer<typeof postSchema>;
 
 const cut = (str: string, maxLength: number) => {
   if (str.length > maxLength) {
@@ -22,22 +31,29 @@ const cut = (str: string, maxLength: number) => {
 
 function PostCard({ post }: PostCardProps) {
   const { data: session, status } = useSession();
+  const { refetchPosts } = useContext(PostContext);
   const isAuthenticated = status === "authenticated";
   const [editMode, setEditMode] = useState(false);
   const router = useRouter();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     price: post.price,
+    bookId: post.bookId,
   });
 
   const oldPost = {
     title: post.title,
     price: post.price,
+    bookId: post.bookId,
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedPost((prev) => ({ ...prev, [name]: value }));
+    if (name === "price") {
+      setEditedPost((prev) => ({ ...prev, [name]: Number(value) }));
+    } else {
+      setEditedPost((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleChatWithSeller = async (postId: string) => {
@@ -48,6 +64,19 @@ function PostCard({ post }: PostCardProps) {
 
     await createChatRoom({ subject: "post", subjectId: postId });
     router.push(`/chat`);
+  };
+
+  const onSubmit = async (id: string) => {
+    try {
+      const res = await editPost(editedPost, id);
+      if (res instanceof Error) {
+        console.error(res);
+      }
+    } catch (error) {
+      console.error("Error posting book:", error);
+    }
+    setEditMode(false);
+    refetchPosts?.();
   };
 
   return (
@@ -129,8 +158,16 @@ function PostCard({ post }: PostCardProps) {
               >
                 <div className="flex items-center justify-center gap-x-2">ยกเลิกการแก้ไข</div>
               </Button>
-              <Button variant="default" className="text-green-500 hover:bg-green-500 hover:text-white">
-                <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>
+              <Button
+                variant="default"
+                className="text-green-500 hover:bg-green-500 hover:text-white"
+                onClick={() => {
+                  onSubmit(post.id);
+                }}
+              >
+                <div className="flex items-center justify-center gap-x-2" onClick={() => onSubmit(post.id)}>
+                  บันทึกการแก้ไข
+                </div>
               </Button>
             </>
           )}
