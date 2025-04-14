@@ -1,4 +1,5 @@
 {
   "cucumber.features": ["tests/features/*.feature"],
-  "cucumber.glue": ["tests/features/*.steps.js"]
+  "cucumber.glue": ["tests/features/*.steps.js"],
+  "scss.lint.unknownAtRules": "ignore"
 }
