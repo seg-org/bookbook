@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../../objects/s3";
 import { GetPostsRequest, PostsResponsePaginated } from "../schemas";
-
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
@@ -14,12 +13,20 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
     }
 
-    const { page, limit, sortPrice, author } = validatedParams.data;
+    const { page, limit, sortBy, sortOrder, author } = validatedParams.data;
+
     if (!author) {
       return NextResponse.json({ error: "sellerId is required" }, { status: 400 });
     }
 
-    const orderBy = sortPrice ? { price: sortPrice } : {};
+    const orderBy: any[] = [];
+
+    if (sortBy && sortOrder) {
+      orderBy.push({ [sortBy]: sortOrder });
+    } else {
+      orderBy.push({ createdAt: "desc" }); // default sort
+    }
+
     const skip = (page - 1) * limit;
 
     const posts = await prisma.post.findMany({
@@ -27,7 +34,7 @@ export async function GET(req: NextRequest) {
       include: { book: true },
       skip,
       take: limit,
-      orderBy,
+      orderBy: orderBy.length > 0 ? orderBy : undefined,
     });
 
     const totalPosts = await prisma.post.count({
