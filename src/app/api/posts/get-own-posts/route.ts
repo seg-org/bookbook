@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../../objects/s3";
 import { GetPostsRequest, PostsResponsePaginated } from "../schemas";
+
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
@@ -19,7 +20,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "sellerId is required" }, { status: 400 });
     }
 
-    const orderBy: any[] = [];
+    const orderBy: { [key: string]: "asc" | "desc" }[] = [];
 
     if (sortBy && sortOrder) {
       orderBy.push({ [sortBy]: sortOrder });
