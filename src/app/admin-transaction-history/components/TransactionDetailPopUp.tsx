@@ -310,6 +310,18 @@ const TransactionDetailsPopup = () => {
                       รายงานเพิ่มเติม
                     </Button>
                   )}
+                  {transaction?.status != TransactionStatus.FAIL &&
+                    transaction?.status != TransactionStatus.COMPLETE && (
+                      <Button
+                        className="mt-4 px-4 py-2"
+                        variant="destructive"
+                        onClick={() => {
+                          router.push(`/admin-transaction-deny/${transaction.id}`);
+                        }}
+                      >
+                        ยกเลิก
+                      </Button>
+                    )}
                 </div>
               </div>
             </div>
