@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { FC, PropsWithChildren, useMemo, useState } from "react";
 
+import { beginningOfTime, endOfTime } from "@/constants/date";
 import {
   useGetQueryTransaction,
   useGetTransactionBuyAmount,
@@ -11,7 +12,6 @@ import {
 } from "@/hooks/useGetTransactions";
 
 import { TransactionContext } from "./transactionContext";
-import { beginningOfTime, endOfTime } from "@/constants/date";
 
 const transactionPerPage = 20;
 

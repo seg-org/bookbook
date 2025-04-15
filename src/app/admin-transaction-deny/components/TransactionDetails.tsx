@@ -1,4 +1,4 @@
-import { TransactionFailType, TransactionStatus, PaymentMethod, ShipmentMethod, DamageType } from "@prisma/client";
+import { DamageType, PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 
 import { Transaction } from "@/data/dto/transaction.dto";
