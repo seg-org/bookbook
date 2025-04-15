@@ -48,7 +48,10 @@ export const UpdateBookRequest = z.object({
     .array(BookTagType)
     .optional()
     .openapi({ example: ["BESTSELLER"] }),
-  recommendPrice: z.number().optional(),
+  recommendPrice: z.number().min(0).optional().openapi({ 
+    example: 299.99,
+    description: "Admin-recommended selling price for this book"
+  }),
 });
 
 export const GenBookDescRequest = z.object({
