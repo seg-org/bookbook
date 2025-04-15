@@ -38,7 +38,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
     const post = await prisma.post.findUnique({
       where: { id },
     });
-    
+
     if (!post) {
       return NextResponse.json({ error: `Post with id ${id} not found` }, { status: 404 });
     }

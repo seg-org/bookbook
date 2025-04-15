@@ -1,13 +1,18 @@
 import { AxiosResponse } from "axios";
 import { z } from "zod";
 
-import { EditPostFormData } from "@/app/my-post/components/PostCard";
 
 import { GetPostsRequest } from "../app/api/posts/schemas";
 import { apiClient } from "./axios";
 import { GetPostsResponse, Post } from "./dto/post.dto";
 
 export type GetPostsFilters = z.infer<typeof GetPostsRequest>;
+const postSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  price: z.number().min(10, "Price must be more than 0"),
+  bookId: z.string(),
+});
+export type EditPostFormData = z.infer<typeof postSchema>;
 export const getAllPosts = async (params?: GetPostsFilters) => {
   try {
     const res: AxiosResponse<GetPostsResponse> = await apiClient.get("/posts", {

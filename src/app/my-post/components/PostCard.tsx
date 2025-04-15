@@ -1,23 +1,16 @@
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { Wrench } from "lucide-react";
-import { PostContext } from "@/context/postContext";
-import { Button } from "@/components/ui/Button";
-import { PostWithBookmark } from "@/context/postContext";
-import { bookTagInThai, genreInThai } from "@/lib/translation";
 import { z } from "zod";
+
+import { Button } from "@/components/ui/Button";
 import { editPost } from "@/data/post";
+import { PostContext, PostWithBookmark } from "@/context/postContext";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 type PostCardProps = {
   post: PostWithBookmark;
 };
-
-const postSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  price: z.number().min(10, "Price must be more than 0"),
-  bookId: z.string(),
-});
-export type EditPostFormData = z.infer<typeof postSchema>;
 
 const cut = (str: string, maxLength: number) => {
   if (str.length > maxLength) {
