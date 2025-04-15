@@ -15,28 +15,32 @@ datasource db {
 }
 
 model User {
-  id               String         @id @default(cuid())
-  email            String         @unique
-  firstName        String         @map("first_name")
-  lastName         String         @map("last_name")
-  password         String
-  phoneNumber      String?        @unique @map("phone_number")
-  address          String?
-  isAdmin          Boolean        @default(false) @map("is_admin")
-  isSeller         Boolean        @default(false) @map("is_seller")
-  isVerified       Boolean        @default(false) @map("is_verified")
-  emailVerified    DateTime?      @map("email_verified")
-  phoneVerified    DateTime?      @map("phone_verified")
-  pdpaConsent      Boolean        @default(false) @map("pdpa_consent")
-  buyTransactions  Transaction[]  @relation("BuyerTransaction")
-  sellTransactions Transaction[]  @relation("SellerTransaction")
-  createdAt        DateTime       @default(now()) @map("created_at")
-  updatedAt        DateTime       @updatedAt @map("updated_at")
-  sellerProfile    SellerProfile?
-  posts            Post[]
-  chatMessages     ChatMessage[]
-  Bookmark         Bookmark[]
-  ChatReport       ChatReport[]
+  id                     String          @id @default(cuid())
+  email                  String          @unique
+  firstName              String          @map("first_name")
+  lastName               String          @map("last_name")
+  password               String
+  phoneNumber            String?         @unique @map("phone_number")
+  address                String?
+  isAdmin                Boolean         @default(false) @map("is_admin")
+  isSeller               Boolean         @default(false) @map("is_seller")
+  isVerified             Boolean         @default(false) @map("is_verified")
+  emailVerified          DateTime?       @map("email_verified")
+  phoneVerified          DateTime?       @map("phone_verified")
+  pdpaConsent            Boolean         @default(false) @map("pdpa_consent")
+  buyTransactions        Transaction[]   @relation("BuyerTransaction")
+  sellTransactions       Transaction[]   @relation("SellerTransaction")
+  createdAt              DateTime        @default(now()) @map("created_at")
+  updatedAt              DateTime        @updatedAt @map("updated_at")
+  sellerProfile          SellerProfile?
+  posts                  Post[]
+  chatMessages           ChatMessage[]
+  Bookmark               Bookmark[]
+  ChatReport             ChatReport[]
+  reportedPosts          PostReport[]    @relation(name: "UserReport")
+  resolvedPostReports    PostReport[]    @relation(name: "AdminResolve")
+  reportedGeneral        GeneralReport[] @relation(name: "UserReport")
+  resolvedGeneralReports GeneralReport[] @relation(name: "AdminResolve")
 
   @@map("users")
 }
@@ -71,7 +75,6 @@ model Book {
   id            String        @id @default(cuid())
   title         String
   author        String
-  genre         String
   description   String
   isbn          String        @unique
   pages         Int
@@ -81,7 +84,6 @@ model Book {
   bookGenres    GenreType[]
   bookTags      BookTagType[]
   // TODO verifiedBy Admin
-  // Also get rid of genre, already have GenreType as enum
 
   @@map("books")
 }
@@ -97,10 +99,14 @@ model Post {
   book                Book                     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   bookId              String                   @map("book_id")
   transactions        Transaction[]
-  ChatRoom            ChatRoom[]
+  chatRoom            ChatRoom[]
   Bookmark            Bookmark[]
   specialDescriptions SpecialDescriptionType[]
-  damageURLs          String[]
+  damageURLs          String[]                 @map("damage_urls")
+  damage              DamageType               @map("damage")
+  createdAt           DateTime                 @default(now())
+  updatedAt           DateTime                 @updatedAt() @map("updated_at")
+  reports             PostReport[]
 
   @@map("posts")
 }
@@ -158,6 +164,40 @@ model ChatReport {
   @@map("chat_reports")
 }
 
+model GeneralReport {
+  id         String @id @default(cuid())
+  reporterId String @map("reporter_id")
+  reporter   User   @relation(name: "UserReport", fields: [reporterId], references: [id])
+
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  resolvedById String? @map("resolved_by_id")
+  resolvedBy   User?   @relation(name: "AdminResolve", fields: [resolvedById], references: [id])
+  resolvedNote String? @map("resolved_note")
+
+  @@map("general_reports")
+}
+
+model PostReport {
+  id String @id @default(cuid())
+
+  reporterId String @map("reporter_id")
+  reporter   User   @relation(name: "UserReport", fields: [reporterId], references: [id])
+
+  postId String @map("post_id")
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  resolvedById String? @map("resolved_by_id")
+  resolvedBy   User?   @relation(name: "AdminResolve", fields: [resolvedById], references: [id])
+  resolvedNote String? @map("resolved_note")
+
+  @@map("post_reports")
+}
+
 model Transaction {
   id             String            @id @default(cuid())
   // transaction data
@@ -167,8 +207,8 @@ model Transaction {
   sellerId       String            @map("seller_id")
   post           Post              @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId         String            @map("post_id")
-  createdAt      DateTime          @default(now()) @map("create_on")
-  updatedAt      DateTime          @updatedAt() @map("update_on")
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime          @updatedAt() @map("updated_at")
   status         TransactionStatus
   failData       TransactionFail?
   // payment data
@@ -194,8 +234,8 @@ model TransactionFail {
   id            String              @id @default(cuid())
   transaction   Transaction         @relation(fields: [transactionId], references: [id], onDelete: Cascade)
   transactionId String              @unique @map("transaction_id")
-  evidenceURL   String              @map("evidence_url")
-  detail        String
+  evidenceURL   String[]            @map("evidence_url")
+  detail        String[]
   failType      TransactionFailType @map("fail_type")
 
   @@map("transaction_fails")
@@ -256,15 +296,6 @@ enum ShipmentMethod {
   @@map("shipment_method_type")
 }
 
-// model SpecialDescription {
-//   postId      String
-//   specialType SpecialDescriptionType
-//   post        Post                   @relation(fields: [postId], references: [id])
-
-//   @@id([postId, specialType])
-//   @@map("special_descriptions")
-// }
-
 enum SpecialDescriptionType {
   AUTHOR_SIGNATURE            @map("author_signature")
   LIMITED_EDITION             @map("limited_edition")
@@ -298,23 +329,11 @@ enum SpecialDescriptionType {
   BILINGUAL_EDITION           @map("bilingual_edition")
 }
 
-// model Damage {
-//   postId           String
-//   damagePictureURL String @map("damage_picture_url")
-//   post             Post   @relation(fields: [postId], references: [id])
-
-//   @@id([postId, damagePictureURL])
-//   @@map("damages")
-// }
-
-// model Genre {
-//   bookId    String
-//   genreType GenreType
-//   book      Book      @relation(fields: [bookId], references: [id])
-
-//   @@id([bookId, genreType])
-//   @@map("book_genres")
-// }
+enum DamageType {
+  NO_DAMAGED       @map("no_damaged")
+  SLIGHTLY_DAMAGED @map("slightly_damaged")
+  DAMAGED          @map("damaged")
+}
 
 enum GenreType {
   FICTION               @map("fiction")
@@ -343,15 +362,6 @@ enum GenreType {
   CONTEMPORARY          @map("contemporary")
   RELIGIOUS_SPIRITUAL   @map("religious_spiritual")
 }
-
-// model BookTag {
-//   bookId  String
-//   tagType BookTagType
-//   book    Book        @relation(fields: [bookId], references: [id])
-
-//   @@id([bookId, tagType])
-//   @@map("book_tags")
-// }
 
 enum BookTagType {
   BESTSELLER         @map("bestseller")

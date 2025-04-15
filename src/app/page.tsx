@@ -1,16 +1,40 @@
-import { getServerSession } from "next-auth";
+// src/app/page.tsx
+import {
+  BookMarked,
+  BookOpen,
+  ChevronRight,
+  FileText,
+  LayoutDashboard,
+  PlusCircle,
+  Search,
+  Star,
+  Store,
+  UserPlus,
+} from "lucide-react";
 import Link from "next/link";
-import { BookMarked, BookOpen, ChevronRight, FileText, PlusCircle, Search, Star, Store, UserPlus } from "lucide-react";
+import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
 
-export const metadata = {
-  title: "Book Book",
-  description: "ซื้อ-ขาย และค้นพบหนังสือเล่มโปรดเล่มต่อไปของคุณ!",
-};
-
 export default async function Home() {
   const session = await getServerSession(authOptions);
+  const isAdmin = session?.user?.isAdmin;
+
+  const links = [
+    { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
+    { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
+    { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
+    { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
+    { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
+  ];
+
+  if (isAdmin) {
+    links.push({
+      href: "/admin/dashboard",
+      icon: <LayoutDashboard />,
+      text: "แดชบอร์ดผู้ดูแลระบบ",
+    });
+  }
 
   return (
     <main className="min-h-screen text-gray-900 transition-colors duration-300">
@@ -109,6 +133,32 @@ export default async function Home() {
                   {session?.user.isAdmin ? "ดูโพสต์ทั้งหมด" : "โพสต์ของฉัน"}
                 </span>
               </Link>
+              {links.map((item, index) => {
+                const isAdminLink = item.href === "/admin/dashboard";
+
+                return (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className="group flex items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
+                  >
+                    <div className="flex items-center">
+                      <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                        {item.icon}
+                      </div>
+                      <span className="font-medium text-gray-700 transition-colors duration-300 group-hover:text-blue-600">
+                        {item.text}
+                      </span>
+                    </div>
+
+                    {isAdminLink && (
+                      <span className="ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-yellow-900 shadow-sm">
+                        ADMIN
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

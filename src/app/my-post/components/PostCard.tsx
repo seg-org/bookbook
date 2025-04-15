@@ -4,6 +4,7 @@ import { Wrench } from "lucide-react";
 import { PostContext } from "@/context/postContext";
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 import { z } from "zod";
 import { editPost } from "@/data/post";
 
@@ -114,7 +115,11 @@ function PostCard({ post }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
+              </div>
+              <div>
+                <strong>แท็ก </strong>
+                {cut(post.book.bookTags?.map((key) => bookTagInThai[key]).join(", ") || "", 65)}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>

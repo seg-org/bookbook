@@ -1,6 +1,11 @@
-import { PaymentMethod, Review, ShipmentMethod, TransactionFail, TransactionStatus } from "@prisma/client";
-
+import {
+  PaymentMethodType,
+  ShipmentMethodType,
+  TransactionStatusType,
+} from "../../app/api/transaction/transaction_enum";
 import { Post } from "./post.dto";
+import { Review } from "./review.dto";
+import { TransactionFail } from "./transactionFail.dto";
 import { User } from "./user.dto";
 
 export type Transaction = {
@@ -13,14 +18,14 @@ export type Transaction = {
   postId: string;
   createdAt: Date;
   updatedAt: Date;
-  status: TransactionStatus;
+  status: TransactionStatusType;
 
-  paymentMethod: PaymentMethod;
+  paymentMethod: PaymentMethodType;
   hasId: string;
   paidOn: Date;
   amount: number;
 
-  shipmentMethod: ShipmentMethod;
+  shipmentMethod: ShipmentMethodType;
   trackingURL: string;
   trackingNumber: string;
   isDelivered: boolean;
