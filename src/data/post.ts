@@ -11,7 +11,7 @@ type EditPostFormData = {
   title: string;
   price: number;
   bookId: string;
-}
+};
 export const getAllPosts = async (params?: GetPostsFilters) => {
   try {
     const res: AxiosResponse<GetPostsResponse> = await apiClient.get("/posts", {
