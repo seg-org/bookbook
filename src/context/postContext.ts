@@ -31,7 +31,7 @@ export const PostContext = createContext<PostContext>({
   error: null,
   changeBookmark: () => Promise.resolve(),
   setPostsFilters: () => {},
-  refetchPosts:() => {},
+  refetchPosts: () => {},
 });
 
 export const usePostContext = () => {
