@@ -141,10 +141,10 @@ function PostCard({ post }: PostCardProps) {
                 <strong>ผู้เขียน </strong>
                 {cut(post.book.author, 40)}
               </div>
-              <div>
+              {/* <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
-              </div>
+                {cut(post.book.bookGenres?, 65)}
+              </div> */}
               <div>
                 <strong>สำนักพิมพ์ </strong>
                 {cut(post.book.publisher, 40)}

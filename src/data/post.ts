@@ -1,6 +1,8 @@
 import { AxiosResponse } from "axios";
 import { z } from "zod";
+
 import { EditPostFormData } from "@/app/my-post/components/PostCard";
+
 import { GetPostsRequest } from "../app/api/posts/schemas";
 import { apiClient } from "./axios";
 import { GetPostsResponse, Post } from "./dto/post.dto";
@@ -76,5 +78,4 @@ export const deletePost = async (id: string) => {
     console.error(`Failed to delete post with id ${id}`, error);
     return Error(`Failed to delete post with id ${id}`);
   }
-}
-
+};
