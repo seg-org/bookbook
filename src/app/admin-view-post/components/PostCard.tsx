@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { useContext, useState } from "react";
 import { Wrench, Delete } from "lucide-react";
 import { IoLogoWechat } from "react-icons/io5";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/Button";
 import { createChatRoom } from "@/data/chat";
@@ -14,13 +13,6 @@ import { PostContext, PostWithBookmark } from "@/context/postContext";
 type PostCardProps = {
   post: PostWithBookmark;
 };
-
-const postSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  price: z.number().min(10, "Price must be more than 0"),
-  bookId: z.string(),
-});
-export type EditPostFormData = z.infer<typeof postSchema>;
 
 const cut = (str: string, maxLength: number) => {
   if (str.length > maxLength) {

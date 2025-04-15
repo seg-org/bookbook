@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { Wrench } from "lucide-react";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/Button";
 import { editPost } from "@/data/post";
