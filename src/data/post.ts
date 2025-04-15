@@ -1,10 +1,11 @@
 import { AxiosResponse } from "axios";
 import { z } from "zod";
 
+import { MypostParam } from "@/hooks/useGetAllPosts";
+
 import { GetPostsRequest } from "../app/api/posts/schemas";
 import { apiClient } from "./axios";
 import { GetPostsResponse, Post } from "./dto/post.dto";
-import { MypostParam } from "@/hooks/useGetAllPosts";
 
 export type GetPostsFilters = z.infer<typeof GetPostsRequest>;
 export const getAllPosts = async (params?: GetPostsFilters) => {

@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { Post } from "@/data/dto/post.dto";
 import { MypostParam, useGetMyPost } from "@/hooks/useGetAllPosts";
 
 import { Pagination } from "./Pagination";
