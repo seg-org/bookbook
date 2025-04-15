@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
 
-import { Pagination } from "./components/Pagination";
 import { PostList } from "./components/PostList";
 
 export default async function MyPostPage() {

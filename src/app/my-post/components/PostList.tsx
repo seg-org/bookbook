@@ -1,13 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
-import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { useMemo, useState } from "react";
 
-import PostCard from "./PostCard";
-import { useGetMyPost } from "@/hooks/useGetAllPosts";
+import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Post } from "@/data/dto/post.dto";
+import { MypostParam, useGetMyPost } from "@/hooks/useGetAllPosts";
+
 import { Pagination } from "./Pagination";
+import PostCard from "./PostCard";
 
 export const PostList = () => {
   const { data: session } = useSession();
@@ -15,12 +16,12 @@ export const PostList = () => {
   let popasc = 1;
   const [state, setState] = useState("createdAt");
 
-  const [params, setParams] = useState({
+  const [params, setParams] = useState<MypostParam>({
     page: 1,
     limit: 25,
     sortBy: "createdAt",
     sortOrder: "desc",
-    author: userId,
+    author: userId ?? "",
   });
 
   const setPage = (page: number) => {
@@ -66,15 +67,12 @@ export const PostList = () => {
 
     const order = params.sortOrder;
     const sorted = [...posts].sort((a, b) => {
-      let valA, valB;
-      valA = getPopularityScore(a);
-      valB = getPopularityScore(b);
       if (popasc) return order === "asc" ? -1 : 1;
       // if (valA > valB) return order === "asc" ? 1 : -1;
       return 0;
     });
     return sorted;
-  }, [posts, params.sortBy]);
+  }, [posts, params.sortBy, popasc, params.sortOrder]);
 
   if (loading) {
     return <LoadingAnimation />;

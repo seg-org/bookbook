@@ -3,8 +3,8 @@ import { Wrench } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
-import { bookTagInThai, genreInThai } from "@/lib/translation";
 import { Post } from "@/data/dto/post.dto";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 type PostCardProps = {
   post: Post;
