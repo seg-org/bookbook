@@ -7,9 +7,6 @@ import { useGetAllBooks } from "@/hooks/useGetAllBooks";
 const VerifyBooksPage = () => {
   const { books, loading, error } = useGetAllBooks();
 
-  // Example URL generator – adjust to your actual image hosting setup
-  const getCoverImageUrl = (key: string) => `https://your-cdn-or-s3.com/book-covers/${key}`;
-
   return (
     <div className="p-6">
       <h1 className="mb-4 text-2xl font-bold">Verify New Books</h1>
