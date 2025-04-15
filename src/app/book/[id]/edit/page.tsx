@@ -21,7 +21,7 @@ const bookSchema = z.object({
   isbn: z.string().min(10, "ISBN must be at least 10 characters"),
   publisher: z.string().min(1, "Publisher is required"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
-  coverImageKey: z.string(),
+  coverImageKey: z.string().optional(),
 });
 export type EditBookFormData = z.infer<typeof bookSchema>;
 
