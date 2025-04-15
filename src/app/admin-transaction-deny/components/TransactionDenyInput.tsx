@@ -1,5 +1,5 @@
 "use client";
-import { TransactionFailType, TransactionStatus } from "@prisma/client";
+import { TransactionFailType } from "@prisma/client";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";

@@ -12,7 +12,7 @@ const FilterBar = () => {
     return <div>Error: Transaction context not available</div>;
   }
 
-  const { filter, paginator, totalAmount } = useTransactionAdminContext();
+  const { filter, paginator, totalAmount } = context;
 
   return (
     <div className="flex flex-col items-center justify-between space-y-2.5 bg-blue-400 p-2.5 pl-6 pr-6 shadow-xl 2xl:flex-row 2xl:space-y-0">

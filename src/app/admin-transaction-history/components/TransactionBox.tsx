@@ -12,7 +12,7 @@ const cap_overflow_string = (str: string) => {
 };
 
 const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
-  const { userId, setSelectingTransaction } = useTransactionAdminContext();
+  const { setSelectingTransaction } = useTransactionAdminContext();
 
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },

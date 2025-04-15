@@ -12,7 +12,6 @@ const TransactionDetailsPopup = () => {
   const router = useRouter();
   const { selectingTransaction, setSelectingTransaction, userId } = useTransactionAdminContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
-  const [shippingDialogOpen, setShippingDialogOpen] = useState(false);
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },
     [TransactionStatus.DELIVERING]: { label: "จัดส่ง", color: "text-gray-300" },
