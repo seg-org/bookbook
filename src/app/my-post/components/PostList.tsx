@@ -66,9 +66,8 @@ export const PostList = () => {
     if (params.sortBy !== "popularity") return posts;
 
     const order = params.sortOrder;
-    const sorted = [...posts].sort((a, b) => {
+    const sorted = [...posts].sort(() => {
       if (popasc) return order === "asc" ? -1 : 1;
-      // if (valA > valB) return order === "asc" ? 1 : -1;
       return 0;
     });
     return sorted;
