@@ -19,7 +19,6 @@ export default async function MyPostPage() {
       <div className="m-0 box-border p-0">
         <div className="mt-8 p-3 text-4xl font-bold"> หน้าร้านของคุณ</div>
         <PostList />
-        <Pagination />
       </div>
     </>
   );

@@ -55,3 +55,15 @@ export const getRecommendedPosts = async (userId: string) => {
     return Error("Failed to get all posts");
   }
 };
+
+export const getMyPosts = async (params: any) => {
+  try {
+    const res: AxiosResponse<GetPostsResponse> = await apiClient.get(
+      `/posts/get-own-posts?page=${params.page}&limit=${params.limit}&sortBy=${params.sortBy}&sortOrder=${params.sortOrder}&author=${params.author}`,
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to get all posts", error);
+    return Error("Failed to get all posts");
+  }
+};
