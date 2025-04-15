@@ -5,6 +5,7 @@ import {
   ChevronRight,
   FileText,
   LayoutDashboard,
+  ListCheck,
   PlusCircle,
   Search,
   Star,
@@ -34,6 +35,7 @@ export default async function Home() {
       icon: <LayoutDashboard />,
       text: "แดชบอร์ดผู้ดูแลระบบ",
     });
+    links.push({ href: "/verify-new-book", icon: <ListCheck />, text: "ตรวจสอบหนังสือใหม่" });
   }
 
   return (
