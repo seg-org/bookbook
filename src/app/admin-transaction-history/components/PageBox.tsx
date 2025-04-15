@@ -42,7 +42,7 @@ const PageBox = ({ pageNumber }: { pageNumber: number }) => {
 
   return (
     <div
-      className={`${pageNumber === selectingPage ? "bg-indigo-500" : "bg-white"} {}transform duration-300" flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-blue-950 shadow transition-all hover:scale-110`}
+      className={`${pageNumber === selectingPage ? "bg-indigo-500" : "bg-white"} duration-300" flex h-10 w-10 transform items-center justify-center rounded-lg border border-gray-300 text-blue-950 shadow transition-all hover:scale-110`}
       onClick={() => paginator.setSelectingPage(pageNumber)}
     >
       {pageNumber}

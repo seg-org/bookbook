@@ -19,12 +19,14 @@ const FilterBar = () => {
           <input
             className="transform rounded-lg border border-gray-300 p-1 text-blue-950 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
             type="date"
+            aria-label="Start date filter"
             onChange={(e) => filter.setStartDate(e.target.value ? new Date(e.target.value) : beginningOfTime)}
           />
           <label className="font-medium text-white">ถึงวันที่</label>
           <input
             className="transform rounded-lg border border-gray-300 p-1 text-blue-950 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
             type="date"
+            aria-label="End date filter"
             onChange={(e) => filter.setEndDate(e.target.value ? new Date(e.target.value) : endOfTime)}
           />
         </div>

@@ -71,7 +71,17 @@ const TransactionDetailsPopup = () => {
     );
   } else if (error) {
     console.log(error);
-    return <></>;
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
+        <div className="rounded-lg bg-white p-6 shadow-lg">
+          <h2 className="mb-4 text-2xl font-semibold text-red-600">เกิดข้อผิดพลาด</h2>
+          <p className="text-gray-600">ไม่สามารถโหลดข้อมูลธุรกรรมได้ กรุณาลองใหม่อีกครั้ง</p>
+          <Button className="mt-4 px-6 py-3" variant="secondary" onClick={() => setSelectingTransaction("")}>
+            ปิด
+          </Button>
+        </div>
+      </div>
+    );
   } else if (transaction) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
@@ -81,7 +91,7 @@ const TransactionDetailsPopup = () => {
           <div className="flex items-center gap-4">
             <Image
               className="rounded-lg object-cover"
-              src={transaction?.post?.book?.coverImageUrl || "f"}
+              src={transaction?.post?.book?.coverImageUrl || "../pic/defaultBook.png"}
               alt="Book Cover"
               height={312}
               width={220}
@@ -94,7 +104,7 @@ const TransactionDetailsPopup = () => {
                     {statusMap[transaction.status]?.label}
                   </label>
                 </p>
-                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="font-bold text-slate-500">รหัส : </p>
                 <p className="text-slate-500">{transaction?.id}</p>
                 <p className="font-bold text-slate-500">สร้าง : </p>
                 <p className="text-slate-500">{dateString(transaction?.createdAt)}</p>
@@ -107,11 +117,11 @@ const TransactionDetailsPopup = () => {
                 <p className="font-bold text-slate-500">ที่อยู่ : </p>
                 <p className="text-slate-500">{transaction?.address}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
-                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="font-bold text-slate-500">รหัส : </p>
                 <p className="text-slate-500">{transaction?.post.book.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.title}</p>
-                <p className="font-bold text-slate-500">รหัร isbn : </p>
+                <p className="font-bold text-slate-500">รหัส isbn : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">ผู้เขียน : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.author}</p>
@@ -150,7 +160,7 @@ const TransactionDetailsPopup = () => {
                     : ""}
                 </p>
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
-                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="font-bold text-slate-500">รหัส : </p>
                 <p className="text-slate-500">{transaction?.post.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.title}</p>
@@ -181,7 +191,7 @@ const TransactionDetailsPopup = () => {
                   })}
                 </p>
                 <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
-                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="font-bold text-slate-500">รหัส : </p>
                 <p className="text-slate-500">{transaction?.seller.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
@@ -190,10 +200,10 @@ const TransactionDetailsPopup = () => {
                 <p className="font-bold text-slate-500">เบอร์โทร : </p>
                 <p className="text-slate-500">{transaction?.seller?.phoneNumber}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">ผู้ซื้อ</p>
-                <p className="font-bold text-slate-500">รหัร : </p>
+                <p className="font-bold text-slate-500">รหัส : </p>
                 <p className="text-slate-500">{transaction?.buyer.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
-                <p className="text-slate-500">{transaction?.buyer?.firstName + " " + transaction?.seller?.lastName}</p>
+                <p className="text-slate-500">{transaction?.buyer?.firstName + " " + transaction?.buyer?.lastName}</p>
                 <p className="font-bold text-slate-500">อีเมล : </p>
                 <p className="text-slate-500">{transaction?.buyer?.email}</p>
                 <p className="font-bold text-slate-500">เบอร์โทร : </p>

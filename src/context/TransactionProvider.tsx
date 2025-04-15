@@ -11,9 +11,8 @@ import {
 } from "@/hooks/useGetTransactions";
 
 import { TransactionContext } from "./transactionContext";
+import { beginningOfTime, endOfTime } from "@/constants/date";
 
-const beginningOfTime = new Date("0000-01-01T00:00:00Z");
-const endOfTime = new Date("9999-12-31T23:59:59Z");
 const transactionPerPage = 20;
 
 export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {

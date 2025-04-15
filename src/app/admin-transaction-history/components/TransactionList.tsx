@@ -6,7 +6,7 @@ import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Transaction } from "@/data/dto/transaction.dto";
 
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
-import LineSeparator from "./LineSperator";
+import LineSeparator from "./LineSeperator";
 import TransactionBox from "./TransactionBox";
 
 interface CategorizedTransactions {
@@ -32,8 +32,7 @@ const TransactionList = () => {
   today.setHours(0, 0, 0, 0);
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
-  const thisMonth = new Date(today);
-  thisMonth.setMonth(thisMonth.getMonth() - 1);
+  const thisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
   const thisYear = new Date(today.getFullYear(), 0, 1, 0, 0, 0, 0);
 
   if (userId === "") {
@@ -70,33 +69,33 @@ const TransactionList = () => {
     );
   }
 
-  const sortTransactionsDesc = (tsList: Transaction[]) =>
+  const sortTransactionsCreateDesc = (tsList: Transaction[]) =>
     tsList.sort((a, b) => -(a.createdAt.getTime() - b.createdAt.getTime()));
-  const sortTransactionsAsc = (tsList: Transaction[]) =>
-    tsList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+  const sortTransactionsUpdateAsc = (tsList: Transaction[]) =>
+    tsList.sort((a, b) => a.updatedAt.getTime() - b.updatedAt.getTime());
   const categories: Array<keyof CategorizedTransactions> = ["Today", "Yesterday", "This Month", "This Year"];
 
-  transactions.forEach((ts) => {
-    if (ts.createdAt >= today) {
-      categorizedTransactions.Today.push(ts);
-    } else if (ts.createdAt >= yesterday) {
-      categorizedTransactions.Yesterday.push(ts);
-    } else if (ts.createdAt >= thisMonth) {
-      categorizedTransactions["This Month"].push(ts);
-    } else if (ts.createdAt >= thisYear) {
-      categorizedTransactions["This Year"].push(ts);
-    } else {
-      if (!categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()]) {
-        categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()] = [];
-      }
-      categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()].push(ts);
-    }
-  });
-
   if (!filter.isHold) {
+    transactions.forEach((ts) => {
+      if (ts.createdAt >= today) {
+        categorizedTransactions.Today.push(ts);
+      } else if (ts.createdAt >= yesterday) {
+        categorizedTransactions.Yesterday.push(ts);
+      } else if (ts.createdAt >= thisMonth) {
+        categorizedTransactions["This Month"].push(ts);
+      } else if (ts.createdAt >= thisYear) {
+        categorizedTransactions["This Year"].push(ts);
+      } else {
+        if (!categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()]) {
+          categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()] = [];
+        }
+        categorizedTransactions["Previous Years"][ts.createdAt.getFullYear()].push(ts);
+      }
+    });
+
     return (
       <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
-        {categories.map((category) => {
+        {[...categories].reverse().map((category) => {
           const transactionsList = categorizedTransactions[category];
 
           if (Array.isArray(transactionsList) && transactionsList.length === 0) {
@@ -105,7 +104,7 @@ const TransactionList = () => {
             return (
               <Fragment key={category}>
                 <LineSeparator text={category.toString()} />
-                {sortTransactionsDesc(transactionsList).map((ts) => (
+                {sortTransactionsCreateDesc(transactionsList).map((ts) => (
                   <TransactionBox key={ts.id} transaction={ts} />
                 ))}
               </Fragment>
@@ -120,7 +119,7 @@ const TransactionList = () => {
           .map(([year, transactionsList]) => (
             <Fragment key={year}>
               <LineSeparator text={year.toString()} />
-              {sortTransactionsDesc(transactionsList).map((ts) => (
+              {sortTransactionsCreateDesc(transactionsList).map((ts) => (
                 <TransactionBox key={ts.id} transaction={ts} />
               ))}
             </Fragment>
@@ -128,19 +127,34 @@ const TransactionList = () => {
       </div>
     );
   } else {
+    transactions.forEach((ts) => {
+      if (ts.updatedAt >= today) {
+        categorizedTransactions.Today.push(ts);
+      } else if (ts.updatedAt >= yesterday) {
+        categorizedTransactions.Yesterday.push(ts);
+      } else if (ts.updatedAt >= thisMonth) {
+        categorizedTransactions["This Month"].push(ts);
+      } else if (ts.updatedAt >= thisYear) {
+        categorizedTransactions["This Year"].push(ts);
+      } else {
+        if (!categorizedTransactions["Previous Years"][ts.updatedAt.getFullYear()]) {
+          categorizedTransactions["Previous Years"][ts.updatedAt.getFullYear()] = [];
+        }
+        categorizedTransactions["Previous Years"][ts.updatedAt.getFullYear()].push(ts);
+      }
+    });
+
     return (
       <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
-        {Object.entries(categorizedTransactions["Previous Years"])
-          .reverse()
-          .map(([year, transactionsList]) => (
-            <Fragment key={year}>
-              <LineSeparator text={year.toString()} />
-              {sortTransactionsAsc(transactionsList).map((ts) => (
-                <TransactionBox key={ts.id} transaction={ts} />
-              ))}
-            </Fragment>
-          ))}
-        {categories.reverse().map((category) => {
+        {Object.entries(categorizedTransactions["Previous Years"]).map(([year, transactionsList]) => (
+          <Fragment key={year}>
+            <LineSeparator text={year.toString()} />
+            {sortTransactionsUpdateAsc(transactionsList).map((ts) => (
+              <TransactionBox key={ts.id} transaction={ts} />
+            ))}
+          </Fragment>
+        ))}
+        {[...categories].reverse().map((category) => {
           const transactionsList = categorizedTransactions[category];
 
           if (Array.isArray(transactionsList) && transactionsList.length === 0) {
@@ -149,7 +163,7 @@ const TransactionList = () => {
             return (
               <Fragment key={category}>
                 <LineSeparator text={category.toString()} />
-                {sortTransactionsAsc(transactionsList).map((ts) => (
+                {sortTransactionsUpdateAsc(transactionsList).map((ts) => (
                   <TransactionBox key={ts.id} transaction={ts} />
                 ))}
               </Fragment>

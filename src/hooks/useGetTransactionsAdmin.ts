@@ -29,6 +29,7 @@ export const useGetQueryTransaction = (filter: TransactionAdminFilter, paginator
         take: paginator.transactionPerPage,
         ...(filter.isHold ? { sortBy: "updatedAt" } : {}),
       });
+
       if (res instanceof Error) {
         setLoading(false);
         return setError(res);

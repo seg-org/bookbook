@@ -81,7 +81,7 @@ const TransactionDetailsPopup = () => {
           <div className="flex items-center gap-4">
             <Image
               className="rounded-lg object-cover"
-              src={transaction?.post?.book?.coverImageUrl || "f"}
+              src={transaction?.post?.book?.coverImageUrl || "../pic/defaultBook.png"}
               alt="Book Cover"
               height={312}
               width={220}
@@ -107,7 +107,7 @@ const TransactionDetailsPopup = () => {
                 <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.title}</p>
-                <p className="font-bold text-slate-500">รหัร isbn : </p>
+                <p className="font-bold text-slate-500">รหัส isbn : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">ผู้เขียน : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.author}</p>

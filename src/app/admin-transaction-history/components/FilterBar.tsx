@@ -3,10 +3,15 @@ import Image from "next/image";
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import SoldIcon from "../pic/soldIcon.png";
 
-const beginningOfTime = new Date("0000-01-01T00:00:00Z");
-const endOfTime = new Date("9999-12-31T23:59:59Z");
+import { beginningOfTime, endOfTime } from "@/constants/date";
 
 const FilterBar = () => {
+  const context = useTransactionAdminContext();
+
+  if (!context) {
+    return <div>Error: Transaction context not available</div>;
+  }
+
   const { filter, paginator, totalAmount } = useTransactionAdminContext();
 
   return (
@@ -17,12 +22,14 @@ const FilterBar = () => {
           <input
             className="transform rounded-lg border border-gray-300 p-1 text-blue-950 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
             type="date"
+            aria-label="Start date filter"
             onChange={(e) => filter.setStartDate(e.target.value ? new Date(e.target.value) : beginningOfTime)}
           />
           <label className="font-medium text-white">ถึงวันที่</label>
           <input
             className="transform rounded-lg border border-gray-300 p-1 text-blue-950 transition-transform duration-200 hover:scale-105 hover:shadow-xl"
             type="date"
+            aria-label="End date filter"
             onChange={(e) => filter.setEndDate(e.target.value ? new Date(e.target.value) : endOfTime)}
           />
         </div>

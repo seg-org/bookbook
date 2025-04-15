@@ -9,9 +9,8 @@ import {
   useGetTransactionCount,
 } from "@/hooks/useGetTransactionsAdmin";
 import { TransactionAdminContext } from "./transactionAdminContext";
+import { beginningOfTime, endOfTime } from "@/constants/date";
 
-const beginningOfTime = new Date("0000-01-01T00:00:00Z");
-const endOfTime = new Date("9999-12-31T23:59:59Z");
 const transactionPerPage = 20;
 
 export const TransactionAdminProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -42,7 +41,7 @@ export const TransactionAdminProvider: FC<PropsWithChildren> = ({ children }) =>
       setIsComplete,
       setIsFail,
     }),
-    [startDate, endDate, isPacking, isDelivering, isHold, isComplete, isFail]
+    [startDate, endDate, isPacking, isDelivering, isHold, isComplete, isFail],
   );
 
   const [selectingPage, setSelectingPage] = useState(1);
@@ -52,13 +51,13 @@ export const TransactionAdminProvider: FC<PropsWithChildren> = ({ children }) =>
       transactionPerPage,
       setSelectingPage,
     }),
-    [selectingPage]
+    [selectingPage],
   );
 
   const {
     transactions,
-    loading: transactionLoading,
-    error: transactionError,
+    loading: transactionsLoading,
+    error: transactionsError,
   } = useGetQueryTransaction(filter, paginator);
   const {
     transactionCount,
@@ -66,9 +65,9 @@ export const TransactionAdminProvider: FC<PropsWithChildren> = ({ children }) =>
     error: transactionCountError,
   } = useGetTransactionCount(filter);
   const {
-    transactionAmount,
-    loading: transactionAmountBuyLoading,
-    error: transactionAmountBuyError,
+    transactionAmount: totalAmount,
+    loading: transactionAmountLoading,
+    error: transactionAmountError,
   } = useGetTransactionAmount(filter);
 
   const [selectingTransaction, setSelectingTransaction] = useState("");
@@ -79,15 +78,15 @@ export const TransactionAdminProvider: FC<PropsWithChildren> = ({ children }) =>
         userId,
         filter,
         paginator,
-        totalAmount: transactionAmount,
+        totalAmount,
         transactions,
-        transactionsLoading: transactionLoading,
-        transactionsError: transactionError,
-        transactionCount: transactionCount,
-        transactionCountLoading: transactionCountLoading,
-        transactionCountError: transactionCountError,
-        transactionAmountLoading: transactionAmountBuyLoading,
-        transactionAmountError: transactionAmountBuyError,
+        transactionsLoading,
+        transactionsError,
+        transactionCount,
+        transactionCountLoading,
+        transactionCountError,
+        transactionAmountLoading,
+        transactionAmountError,
         selectingTransaction,
         setSelectingTransaction,
       }}

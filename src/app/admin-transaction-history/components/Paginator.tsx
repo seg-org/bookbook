@@ -16,11 +16,11 @@ const Paginator = () => {
     transactionCountError,
   } = useTransactionAdminContext();
 
-  const [childComponents, setChildCompoent] = useState<React.JSX.Element[]>([]);
+  const [childComponents, setChildComponents] = useState<React.JSX.Element[]>([]);
 
   useEffect(() => {
     if (transactionCountLoading || transactionCountError) {
-      setChildCompoent([]);
+      setChildComponents([]);
       return;
     }
 
@@ -37,7 +37,7 @@ const Paginator = () => {
       newChildComponents.push(<PageBox key={-2} pageNumber={rightPageNumber != selectingPage ? -3 : -4} />);
     }
 
-    setChildCompoent(newChildComponents);
+    setChildComponents(newChildComponents);
   }, [transactionCount, paginator, transactionCountLoading, transactionCountError, userId, filter, selectingPage]);
 
   return <div className="mb-4 flex w-full items-center justify-center gap-2">{childComponents}</div>;
