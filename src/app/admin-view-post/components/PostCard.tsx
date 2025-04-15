@@ -8,7 +8,7 @@ import { IoLogoWechat } from "react-icons/io5";
 import { createChatRoom } from "@/data/chat";
 import { PostContext, PostWithBookmark } from "@/context/postContext";
 import { Button } from "@/components/ui/Button";
-import { editPost } from "@/data/post";
+import { deletePost, editPost } from "@/data/post";
 import { z } from "zod";
 
 type PostCardProps = {
@@ -76,6 +76,18 @@ function PostCard({ post }: PostCardProps) {
       console.error("Error posting book:", error);
     }
     setEditMode(false);
+    refetchPosts?.();
+  };
+
+  const onDelete = async (id: string) => {
+    try {
+      const res = await deletePost(id);
+      if (res instanceof Error) {
+        console.error(res);
+      }
+    } catch (error) {
+      console.error("Error posting book:", error);
+    }
     refetchPosts?.();
   };
 
@@ -173,7 +185,7 @@ function PostCard({ post }: PostCardProps) {
           )}
           {!editMode && (
             <>
-              <Button variant="default" className="bg-red-500 hover:bg-red-700">
+              <Button variant="default" className="bg-red-500 hover:bg-red-700" onClick={() => onDelete(post.id)}>
                 <div className="flex items-center justify-center gap-x-2">
                   ลบโพสต์นี้
                   <Delete className="h-6 w-6" />

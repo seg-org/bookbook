@@ -49,7 +49,19 @@ export const editPost = async (data: EditPostFormData, id: string) => {
 
     return res.data;
   } catch (error) {
-    console.error(`Failed to patch book with id ${id}`, error);
-    return Error(`Failed to patch book with id ${id}`);
+    console.error(`Failed to patch post with id ${id}`, error);
+    return Error(`Failed to patch post with id ${id}`);
   }
 };
+
+export const deletePost = async (id: string) => {
+  try {
+    const res: AxiosResponse = await apiClient.delete(`/posts/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to delete post with id ${id}`, error);
+    return Error(`Failed to delete post with id ${id}`);
+  }
+}
+
