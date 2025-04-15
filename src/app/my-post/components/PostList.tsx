@@ -52,16 +52,6 @@ export const PostList = () => {
 
   const { posts, totalPages, loading, error } = useGetMyPost(params);
 
-  const getPopularityScore = (post: Post) => {
-    const idStr = String(post.id);
-    let hash = 0;
-    for (const char of idStr) {
-      hash = (hash << 5) - hash + char.charCodeAt(0);
-      hash |= 0;
-    }
-    return Math.abs(hash);
-  };
-
   const sortedPosts = useMemo(() => {
     if (params.sortBy !== "popularity") return posts;
 

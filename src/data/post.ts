@@ -4,6 +4,7 @@ import { z } from "zod";
 import { GetPostsRequest } from "../app/api/posts/schemas";
 import { apiClient } from "./axios";
 import { GetPostsResponse, Post } from "./dto/post.dto";
+import { MypostParam } from "@/hooks/useGetAllPosts";
 
 export type GetPostsFilters = z.infer<typeof GetPostsRequest>;
 export const getAllPosts = async (params?: GetPostsFilters) => {
@@ -56,7 +57,7 @@ export const getRecommendedPosts = async (userId: string) => {
   }
 };
 
-export const getMyPosts = async (params: any) => {
+export const getMyPosts = async (params: MypostParam) => {
   try {
     const res: AxiosResponse<GetPostsResponse> = await apiClient.get(
       `/posts/get-own-posts?page=${params.page}&limit=${params.limit}&sortBy=${params.sortBy}&sortOrder=${params.sortOrder}&author=${params.author}`,
