@@ -187,13 +187,12 @@ export default function EditBookPage() {
         </label>
         {imageUrl && <Image src={imageUrl} alt="Cover Image" width={200} height={200} />}
 
-        {/* TODO: fix here */}
         <label>
           ราคาขายแนะนำ:
           <input
             type="number"
             {...register("recommendPrice")}
-            placeholder="(เฉพาะแอดมิน)"
+            placeholder="(ราคาขายแนะนำ)"
             className="mt-1 block w-full rounded p-2"
           />
           {errors.recommendPrice?.message && <p className="text-red-500">{String(errors.recommendPrice.message)}</p>}
