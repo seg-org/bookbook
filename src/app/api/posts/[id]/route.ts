@@ -46,7 +46,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
-    
+
     const book = await prisma.book.findUnique({
       where: { id: parsedData.data.bookId },
     });
