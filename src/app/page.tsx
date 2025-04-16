@@ -35,7 +35,7 @@ export default async function Home() {
       icon: <LayoutDashboard />,
       text: "แดชบอร์ดผู้ดูแลระบบ",
     });
-    links.push({ href: "/verify-new-book", icon: <ListCheck />, text: "ตรวจสอบหนังสือใหม่" });
+    links.push({ href: "/admin/verify-new-book", icon: <ListCheck />, text: "ตรวจสอบหนังสือใหม่" });
   }
 
   return (
@@ -101,7 +101,7 @@ export default async function Home() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {links.map((item, index) => {
-                const isAdminLink = item.href === "/admin/dashboard";
+                const isAdminLink = item.href === "/admin/dashboard" || item.href === "/admin/verify-new-book";
 
                 return (
                   <Link
