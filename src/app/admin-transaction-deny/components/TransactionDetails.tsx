@@ -67,7 +67,7 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction | undefi
                 {statusMap[transaction.status]?.label}
               </label>
             </p>
-            <p className="font-bold text-slate-500">รหัร : </p>
+            <p className="font-bold text-slate-500">รหัส : </p>
             <p className="text-slate-500">{transaction?.id}</p>
             <p className="font-bold text-slate-500">สร้าง : </p>
             <p className="text-slate-500">{dateString(transaction?.createdAt)}</p>
@@ -80,11 +80,11 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction | undefi
             <p className="font-bold text-slate-500">ที่อยู่ : </p>
             <p className="text-slate-500">{transaction?.address}</p>
             <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
-            <p className="font-bold text-slate-500">รหัร : </p>
+            <p className="font-bold text-slate-500">รหัส : </p>
             <p className="text-slate-500">{transaction?.post.book.id}</p>
             <p className="font-bold text-slate-500">ชื่อ : </p>
             <p className="text-slate-500">{transaction?.post?.book?.title}</p>
-            <p className="font-bold text-slate-500">รหัร isbn : </p>
+            <p className="font-bold text-slate-500">รหัส isbn : </p>
             <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
             <p className="font-bold text-slate-500">ผู้เขียน : </p>
             <p className="text-slate-500">{transaction?.post?.book?.author}</p>
@@ -123,7 +123,7 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction | undefi
                 : ""}
             </p>
             <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
-            <p className="font-bold text-slate-500">รหัร : </p>
+            <p className="font-bold text-slate-500">รหัส : </p>
             <p className="text-slate-500">{transaction?.post.id}</p>
             <p className="font-bold text-slate-500">ชื่อ : </p>
             <p className="text-slate-500">{transaction?.post?.title}</p>
@@ -154,7 +154,7 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction | undefi
               })}
             </p>
             <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
-            <p className="font-bold text-slate-500">รหัร : </p>
+            <p className="font-bold text-slate-500">รหัส : </p>
             <p className="text-slate-500">{transaction?.seller.id}</p>
             <p className="font-bold text-slate-500">ชื่อ : </p>
             <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
@@ -163,7 +163,7 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction | undefi
             <p className="font-bold text-slate-500">เบอร์โทร : </p>
             <p className="text-slate-500">{transaction?.seller?.phoneNumber}</p>
             <p className="col-span-2 text-lg font-extrabold underline">ผู้ซื้อ</p>
-            <p className="font-bold text-slate-500">รหัร : </p>
+            <p className="font-bold text-slate-500">รหัส : </p>
             <p className="text-slate-500">{transaction?.buyer.id}</p>
             <p className="font-bold text-slate-500">ชื่อ : </p>
             <p className="text-slate-500">{transaction?.buyer?.firstName + " " + transaction?.seller?.lastName}</p>
