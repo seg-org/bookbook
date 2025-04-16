@@ -123,7 +123,7 @@ export default async function Home() {
                 </Link>
               ))}
               <Link
-                href={session?.user.isAdmin ? "/admin-view-post" : "/my-post"}
+                href={session?.user.isAdmin ? "/admin/admin-view-post" : "/my-post"}
                 className="group flex items-center rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
               >
                 <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
