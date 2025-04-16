@@ -1,8 +1,7 @@
 "use client";
 
-import { use } from "react";
-
 import Image from "next/image";
+import { use } from "react";
 
 import { useGetBook } from "@/hooks/useGetBook";
 
