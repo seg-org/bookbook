@@ -1,8 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/Button";
+
 import Image from "next/image";
+
+import { Button } from "@/components/ui/Button";
+
 import { Book } from "@/data/dto/book.dto";
 
 const BookCard = ({ book }: { book: Book }) => {
@@ -44,24 +47,8 @@ const BookCard = ({ book }: { book: Book }) => {
           </p>
         </div>
         <div className="mt-4 space-x-2">
-          <Button
-            className="bg-green-500 text-white hover:bg-green-600"
-            onClick={(e) => {
-              e.stopPropagation();
-              // Handle Approve
-            }}
-          >
-            Approve
-          </Button>
-          <Button
-            className="bg-red-500 text-white hover:bg-red-600"
-            onClick={(e) => {
-              e.stopPropagation();
-              // Handle Reject
-            }}
-          >
-            Reject
-          </Button>
+          <Button className="bg-green-500 text-white hover:bg-green-600">Approve</Button>
+          <Button className="bg-red-500 text-white hover:bg-red-600">Reject</Button>
         </div>
       </div>
     </div>

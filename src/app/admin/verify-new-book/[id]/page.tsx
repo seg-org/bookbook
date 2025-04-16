@@ -1,8 +1,9 @@
 "use client";
 
 import { use } from "react";
-import { notFound } from "next/navigation";
+
 import Image from "next/image";
+
 import { useGetBook } from "@/hooks/useGetBook";
 
 export default function VerifyBookDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -19,16 +20,13 @@ export default function VerifyBookDetailPage({ params }: { params: Promise<{ id:
             <p className="text-center text-lg">No books to verify.</p>
           ) : (
             <div className="mx-auto max-w-4xl overflow-hidden rounded-lg bg-white shadow-lg">
-              {/* Book Cover Image */}
               <div className="relative h-96 w-full">
                 <Image src={book.coverImageUrl} alt={book.title} fill className="rounded-t-lg object-cover" />
               </div>
 
-              {/* Book Details */}
               <div className="space-y-4 p-6">
                 <h1 className="text-center text-4xl font-bold text-gray-800">{book.title}</h1>
 
-                {/* Author */}
                 <p className="text-xl text-gray-600">
                   <strong>Author:</strong> {book.author}
                 </p>
@@ -43,22 +41,18 @@ export default function VerifyBookDetailPage({ params }: { params: Promise<{ id:
                     <strong>Tags:</strong> {book.bookTags.join(", ")}
                   </p>
                 )}
-                {/* ISBN */}
                 <p className="text-xl text-gray-600">
                   <strong>ISBN:</strong> {book.isbn}
                 </p>
 
-                {/* Publisher */}
                 <p className="text-xl text-gray-600">
                   <strong>Publisher:</strong> {book.publisher}
                 </p>
 
-                {/* Description */}
                 <p className="text-xl text-gray-600">
                   <strong>Description:</strong> {book.description}
                 </p>
 
-                {/* Pages */}
                 <p className="text-xl text-gray-600">
                   <strong>Pages:</strong> {book.pages}
                 </p>
