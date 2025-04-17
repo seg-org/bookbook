@@ -1,61 +1,94 @@
-import { NextResponse } from "next/server";
-
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { TransactionStatus } from "@prisma/client";
 
-import { getUrl } from "../../objects/s3";
-import { PostsResponse } from "../schemas";
-
-// Function to generate a seeded random number
-function seededRandom(seed: number) {
-  const x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-}
-
-export async function GET(request: Request) {
+export async function GET(req: NextRequest) {
   try {
-    // Parse the URL parameters
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("user_id");
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("userId");
 
     if (!userId) {
-      return NextResponse.json({ error: "user_id is required" }, { status: 400 });
+      return NextResponse.json({ error: "Missing userId" }, { status: 400 });
     }
 
-    // Get all posts from the database
-    const posts = await prisma.post.findMany({
-      include: { book: true },
+    // Step 1: Fetch completed transactions by this buyer
+    const transactions = await prisma.transaction.findMany({
+      where: {
+        buyerId: userId,
+        status: TransactionStatus.COMPLETE,
+      },
+      include: {
+        post: {
+          include: {
+            book: true,
+          },
+        },
+      },
     });
 
-    let postsWithImageUrl = await Promise.all(
-      posts.map((post) => {
-        const url = getUrl("book_images", post.book.coverImageKey);
-        return {
-          ...post,
-          book: {
-            ...post.book,
-            coverImageUrl: url,
-          },
-        };
-      }),
-    );
+    const boughtBookIds = new Set(transactions.map((tx) => tx.post.book.id));
 
-    if (postsWithImageUrl.length === 0) {
-      return NextResponse.json({ error: "No posts available" }, { status: 404 });
+    // Step 2: Extract genres and tags from bought books
+    const preferredGenres = new Set<string>();
+    const preferredTags = new Set<string>();
+
+    transactions.forEach((tx) => {
+      tx.post.book.bookGenres.forEach((genre) => preferredGenres.add(genre));
+      tx.post.book.bookTags.forEach((tag) => preferredTags.add(tag));
+    });
+
+    // Step 3: Fetch posts
+    const allPosts = await prisma.post.findMany({
+      include: {
+        book: true,
+        seller: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
+    });
+
+    // Step 4: Filter posts in JS
+    const recommendedPosts = allPosts.filter((post) => {
+      const book = post.book;
+      if (boughtBookIds.has(book.id)) return false;
+
+      const genreMatch = book.bookGenres.some((genre: string) => preferredGenres.has(genre));
+      const tagMatch = book.bookTags.some((tag: string) => preferredTags.has(tag));
+
+      return genreMatch || tagMatch;
+    });
+
+    // Limit results
+    const limitedPosts = recommendedPosts.slice(0, 1);
+    if (limitedPosts.length === 0) {
+      // If no posts are found, return a random post
+      const randomPost = await prisma.post.findFirst({
+        include: {
+          book: true,
+          seller: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+            },
+          },
+        },
+        where: {
+          sellerId: { not: userId }, // Exclude posts from the current user
+        },
+      });
+      if (randomPost) {
+        limitedPosts.push(randomPost);
+      }
     }
 
-    // Convert user ID to a number for seeding
-    const seed = parseInt(userId, 10) || 0;
-    const randomIndex = Math.floor(seededRandom(seed) * postsWithImageUrl.length);
-
-    const recommendedPost = postsWithImageUrl[randomIndex];
-
-    postsWithImageUrl = postsWithImageUrl.filter((post) => post.id != recommendedPost.id);
-
-    postsWithImageUrl = [recommendedPost, ...postsWithImageUrl];
-
-    return NextResponse.json(PostsResponse.parse(postsWithImageUrl));
+    return NextResponse.json(limitedPosts, { status: 200 });
   } catch (error) {
-    console.error("Error fetching recommended post:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    if (error instanceof Error) console.error("Error in recommendations", error.stack);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
