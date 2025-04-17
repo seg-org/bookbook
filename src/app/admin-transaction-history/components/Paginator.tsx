@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { useTransactionContext } from "@/context/transactionContext";
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 
 import PageBox from "./PageBox";
 
@@ -14,13 +14,13 @@ const Paginator = () => {
     transactionCount,
     transactionCountLoading,
     transactionCountError,
-  } = useTransactionContext();
+  } = useTransactionAdminContext();
 
-  const [childComponents, setChildComponent] = useState<React.JSX.Element[]>([]);
+  const [childComponents, setChildComponents] = useState<React.JSX.Element[]>([]);
 
   useEffect(() => {
     if (transactionCountLoading || transactionCountError) {
-      setChildComponent([]);
+      setChildComponents([]);
       return;
     }
 
@@ -37,7 +37,7 @@ const Paginator = () => {
       newChildComponents.push(<PageBox key={-2} pageNumber={rightPageNumber != selectingPage ? -3 : -4} />);
     }
 
-    setChildComponent(newChildComponents);
+    setChildComponents(newChildComponents);
   }, [transactionCount, paginator, transactionCountLoading, transactionCountError, userId, filter, selectingPage]);
 
   return <div className="mb-4 flex w-full items-center justify-center gap-2">{childComponents}</div>;

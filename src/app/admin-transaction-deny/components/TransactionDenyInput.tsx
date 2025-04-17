@@ -1,5 +1,5 @@
 "use client";
-import { TransactionStatus } from "@prisma/client";
+import { TransactionFailType } from "@prisma/client";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
@@ -22,7 +22,9 @@ const cap_overflow_string = (str: string, cap: number) => {
 const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
   const [details, setDetails] = useState("");
+  const [failType, setFailType] = useState("");
   const [detailNotProvided, setDetailNotProvided] = useState("");
+  const [failTypeNotProvided, setFailTypeNotProvided] = useState("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -31,11 +33,16 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
   };
 
   const validateInput = (): boolean => {
+    let valid = true;
     if (!details) {
       setDetailNotProvided("กรุณาใส่รายละเอียด");
-      return false;
+      valid = false;
     }
-    return true;
+    if (!failType) {
+      setFailTypeNotProvided("กรุณาใส่ประเภทของการยกเลิก");
+      valid = false;
+    }
+    return valid;
   };
 
   const handleSubmitClick = async () => {
@@ -58,27 +65,13 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
       if (transaction === undefined) {
         throw new Error("Failed to upload files");
       }
-
-      if (transaction.status === TransactionStatus.HOLD) {
-        let oldDetail = transaction.failData?.detail;
-        let oldEvidenceURL = transaction.failData?.evidenceURL;
-
-        if (!oldDetail) oldDetail = [];
-        if (!oldEvidenceURL) oldEvidenceURL = [];
-        await updateTransaction({
-          id: transaction.id,
-          status: "HOLD",
-          detail: oldDetail?.concat([details]),
-          evidenceURL: oldEvidenceURL.concat([uploadFiles.key]),
-        });
-      } else {
-        await updateTransaction({
-          id: transaction.id,
-          status: "HOLD",
-          detail: [details],
-          evidenceURL: [uploadFiles.key],
-        });
-      }
+      await updateTransaction({
+        id: transaction.id,
+        status: "FAIL",
+        detail: [details],
+        evidenceURL: [uploadFiles.key],
+        failType: failType.toUpperCase(),
+      });
       setSendingStatus("success");
     } catch (error) {
       console.error(error);
@@ -106,13 +99,38 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
           <p className="w-full text-sm text-red-500">{detailNotProvided}</p>
         </div>
       )}
-      <input
-        id="file"
-        type="file"
-        multiple
-        onChange={handleFileChange}
-        className="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-blue-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-600"
-      />
+      <div className="flex w-full flex-row justify-between">
+        <input
+          id="file"
+          type="file"
+          multiple
+          onChange={handleFileChange}
+          className="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-blue-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-600"
+        />
+        <select
+          className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm transition focus:outline-none focus:ring-2 focus:ring-blue-400"
+          onChange={(e) => {
+            if (e.target.value == "[Fail Type]") {
+              setFailType("");
+            } else {
+              setFailType(e.target.value);
+            }
+            setFailTypeNotProvided("");
+          }}
+        >
+          <option>[Fail Type]</option>
+          {Object.values(TransactionFailType).map((type) => (
+            <option key={type} value={type}>
+              {type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}
+            </option>
+          ))}
+        </select>
+      </div>
+      {failTypeNotProvided && (
+        <div className="w-full justify-start">
+          <p className="w-full text-sm text-red-500">{failTypeNotProvided}</p>
+        </div>
+      )}
       {files.length > 0 && (
         <div className="mt-2 w-full space-y-2">
           {files.map((file, index) => (
@@ -141,7 +159,7 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
         }}
         className="mt-4 w-full bg-red-500 hover:bg-red-600"
       >
-        {transaction?.status != TransactionStatus.HOLD ? "ส่ง" : "ส่งเพิ่มเติม"}
+        ยกเลิกการซื้อ
       </Button>
     </>
   );

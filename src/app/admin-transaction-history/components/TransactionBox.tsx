@@ -3,11 +3,8 @@
 import { TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 
-import { useTransactionContext } from "@/context/transactionContext";
+import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import { Transaction } from "@/data/dto/transaction.dto";
-
-import BoughtIcon from "../pic/boughtIcon.png";
-import SoldIcon from "../pic/soldIcon.png";
 
 const cap_overflow_string = (str: string) => {
   if (str.length >= 30) return str.substring(0, 30) + "...";
@@ -15,7 +12,7 @@ const cap_overflow_string = (str: string) => {
 };
 
 const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
-  const { userId, setSelectingTransaction } = useTransactionContext();
+  const { setSelectingTransaction } = useTransactionAdminContext();
 
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },
@@ -53,6 +50,16 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
             <div className="flex flex-col">
               <label className="text-xl font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>
               <label className="text-md text-gray-400">
+                {"แก้ไขล่าสุด : "}
+                {transaction.updatedAt.toLocaleDateString("th-TH", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}{" "}
+                {transaction.updatedAt.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
+              </label>
+              <label className="text-md text-gray-400">
+                {"สร้าง : "}
                 {transaction.createdAt.toLocaleDateString("th-TH", {
                   day: "2-digit",
                   month: "2-digit",
@@ -70,10 +77,6 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
         </div>
         <div className="flex flex-row justify-start">
           <label className="text-xl">{transaction.amount}.-</label>
-        </div>
-        <div className="absolute bottom-2.5 right-2.5 flex flex-row justify-end space-x-2.5">
-          {(userId == transaction.buyerId && <Image src={BoughtIcon} alt="" width={25} height={25}></Image>) ||
-            (userId == transaction.sellerId && <Image src={SoldIcon} alt="" width={25} height={25}></Image>)}
         </div>
       </div>
     </div>
