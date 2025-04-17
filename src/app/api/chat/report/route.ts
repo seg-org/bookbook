@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
+
 import { CreateChatReportRequest } from "../schemas";
 
 export async function POST(req: Request) {
@@ -20,7 +22,7 @@ export async function POST(req: Request) {
     if (duplicateReport) {
       return NextResponse.json(
         { error: "You have already reported this chat within the last 24 hours." },
-        { status: 429 }
+        { status: 429 },
       );
     }
 

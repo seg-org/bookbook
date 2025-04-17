@@ -1,16 +1,17 @@
 "use client";
 
-import { getAllReport } from "@/data/report";
 import { useEffect, useState } from "react";
+
+import { getAllReport } from "@/data/report";
 
 type ReportType = {
   id: string;
   createdAt: Date;
   reason: string;
-  reporter: { 
-    firstName: string; 
-    lastName: string; 
-    email: string 
+  reporter: {
+    firstName: string;
+    lastName: string;
+    email: string;
   };
   room: {
     postId: string;

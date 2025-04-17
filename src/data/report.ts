@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-import { apiClient } from "./axios";
 
+import { apiClient } from "./axios";
 
 export const getAllReport = async () => {
   try {
