@@ -1,23 +1,26 @@
-"use client";
+import { useState } from "react";
 
-import { usePostContext } from "@/context/postContext";
+type PaginationProps = {
+  totalPages: number;
+  setPage: (page: number) => void;
+};
 
-export const Pagination = () => {
-  const { pagination, setPostsFilters } = usePostContext();
-  if (!pagination) return null;
-
-  const { page, totalPages } = pagination;
+export const Pagination = ({ totalPages, setPage }: PaginationProps) => {
+  const [currentPage, setCurrentpage] = useState(1);
 
   const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setPostsFilters((prev) => ({ ...prev, page }));
-    }
+    setCurrentpage(page);
+    setPage(page);
   };
 
   return (
     <div className="mt-4 flex items-center justify-center space-x-2">
-      {page > 1 && (
-        <button className="p-2 text-blue-500" onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+      {currentPage > 1 && (
+        <button
+          className="p-2 text-blue-500"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
           Previous
         </button>
       )}
@@ -25,15 +28,19 @@ export const Pagination = () => {
       {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
         <button
           key={pageNumber}
-          className={`p-2 ${page === pageNumber ? "bg-blue-500 text-white" : "text-blue-500"}`}
+          className={`p-2 ${currentPage === pageNumber ? "bg-blue-500 text-white" : "text-blue-500"}`}
           onClick={() => handlePageChange(pageNumber)}
         >
           {pageNumber}
         </button>
       ))}
 
-      {page < totalPages && (
-        <button className="p-2 text-blue-500" onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+      {currentPage < totalPages && (
+        <button
+          className="p-2 text-blue-500"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
           Next
         </button>
       )}

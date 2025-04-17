@@ -1,7 +1,14 @@
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
-import { CreatePostRequest, PostResponse, PostsResponse, UpdatePostRequest } from "./schemas";
+import {
+  CreatePostRequest,
+  GetPostsRequest,
+  PostResponse,
+  PostsResponse,
+  PostsResponsePaginated,
+  UpdatePostRequest,
+} from "./schemas";
 
 export const postRegistry = new OpenAPIRegistry();
 
@@ -134,6 +141,27 @@ postRegistry.registerPath({
       content: {
         "application/json": {
           schema: PostsResponse,
+        },
+      },
+    },
+  },
+});
+
+postRegistry.registerPath({
+  tags: ["Posts"],
+  method: "get",
+  path: "/posts/get-own-posts",
+  summary: "Get all posts",
+  description: "Fetch all own posts",
+  request: {
+    query: GetPostsRequest,
+  },
+  responses: {
+    200: {
+      description: "Successfully retrieved posts.",
+      content: {
+        "application/json": {
+          schema: PostsResponsePaginated,
         },
       },
     },
