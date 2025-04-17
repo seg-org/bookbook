@@ -60,9 +60,10 @@ export async function GET(_: NextRequest, props: { params: Promise<{ roomId: str
     if (!room) {
       return NextResponse.json({ error: `Room with id ${roomId} not found` }, { status: 404 });
     }
-    if (!room.userIds.includes(session.user.id)) {
-      return NextResponse.json({ error: "You are not a member of this room" }, { status: 403 });
-    }
+    
+    // if (!room.userIds.includes(session.user.id)) {
+    //   return NextResponse.json({ error: "You are not a member of this room" }, { status: 403 });
+    // }
 
     const chatMessages = await prisma.chatMessage.findMany({
       where: { roomId },

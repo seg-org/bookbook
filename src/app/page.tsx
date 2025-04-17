@@ -34,6 +34,12 @@ export default async function Home() {
       icon: <LayoutDashboard />,
       text: "แดชบอร์ดผู้ดูแลระบบ",
     });
+
+    links.push({
+      href: "/admin/view-chat-report",
+      icon: <LayoutDashboard />,
+      text: "การรายงาน",
+    });
   }
 
   return (
@@ -99,7 +105,7 @@ export default async function Home() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {links.map((item, index) => {
-                const isAdminLink = item.href === "/admin/dashboard";
+                const isAdminLink = item.href === "/admin/dashboard" || item.href === "/admin/view-chat-report";
 
                 return (
                   <Link
