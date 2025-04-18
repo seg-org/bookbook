@@ -78,7 +78,7 @@ export const PostList = () => {
   }
   return (
     <>
-      <div className="item-center flex w-[99.5%] flex-col pt-8">
+      <div className="item-center flex flex-col pt-8">
         <div className="flex flex-row items-center gap-5 self-start">
           <div className="ml-3.5 mr-auto mt-1 text-lg">เรียงโดย</div>
           <button
@@ -104,7 +104,7 @@ export const PostList = () => {
         </div>
       </div>
       <div>
-        <Pagination totalPages={totalPages} setPage={setPage} page={params.page} />
+        <Pagination totalPages={totalPages} setPage={setPage} />
       </div>
     </>
   );

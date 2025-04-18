@@ -3,11 +3,10 @@ import { useState } from "react";
 type PaginationProps = {
   totalPages: number;
   setPage: (page: number) => void;
-  page: number;
 };
 
-export const Pagination = ({ totalPages, setPage, page }: PaginationProps) => {
-  const [currentPage, setCurrentpage] = useState(page);
+export const Pagination = ({ totalPages, setPage }: PaginationProps) => {
+  const [currentPage, setCurrentpage] = useState(1);
 
   const handlePageChange = (page: number) => {
     setCurrentpage(page);
