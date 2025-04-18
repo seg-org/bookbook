@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { PostWithBookmark, usePostContext } from "@/context/postContext";
+import { usePostContext } from "@/context/postContext";
 
 import PostCard from "./PostCard";
 
@@ -12,9 +12,7 @@ export const PostList = () => {
   const isAuthenticated = status === "authenticated";
 
   const [priceAsc, setPriceAsc] = useState(1);
-  const [popAsc, setPopAsc] = useState(1);
   const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
-  const [sortBy, setSortBy] = useState<{ field: string; order: string } | null>(null); // e.g., { field: "price", order: "asc" }
 
   const { posts, recommendedPosts, loading, error, setPostsFilters } = usePostContext();
 
@@ -53,30 +51,6 @@ export const PostList = () => {
   //   setSortBy({ field: "popularity", order: newOrder });
   //   setPopAsc(-1 * popAsc);
   // };
-
-  const sortedPosts = useMemo(() => {
-    if (!sortBy) return filteredPosts;
-
-    const { field, order } = sortBy;
-    const sorted = [...filteredPosts].sort((a, b) => {
-      let valA, valB;
-      if (field === "price") {
-        valA = a.price;
-        valB = b.price;
-      }
-      // else if (field === "popularity") {
-      //   valA = getPopularityScore(a);
-      //   valB = getPopularityScore(b);
-      // }
-      else {
-        return 0;
-      }
-      if (valA < valB) return order === "asc" ? -1 : 1;
-      if (valA > valB) return order === "asc" ? 1 : -1;
-      return 0;
-    });
-    return sorted;
-  }, [filteredPosts, sortBy]);
 
   if (loading) {
     return <LoadingAnimation />;
@@ -123,7 +97,7 @@ export const PostList = () => {
               enableBookmark={false}
             />
           )}
-          {sortedPosts.map((post) => (
+          {filteredPosts.map((post) => (
             <PostCard post={post} key={post.id} enableBookmark />
           ))}
         </div>
