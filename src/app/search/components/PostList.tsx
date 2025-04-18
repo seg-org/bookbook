@@ -113,10 +113,15 @@ export const PostList = () => {
         </div>
         <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
           {!isBookmarkOnly && filteredRecommendedPosts.length > 0 && (
-            <PostCard post={filteredRecommendedPosts[0]} key={filteredRecommendedPosts[0].id} isRecommended />
+            <PostCard
+              post={filteredRecommendedPosts[0]}
+              key={filteredRecommendedPosts[0].id}
+              isRecommended
+              enableBookmark={false}
+            />
           )}
           {sortedPosts.map((post) => (
-            <PostCard post={post} key={post.id} />
+            <PostCard post={post} key={post.id} enableBookmark />
           ))}
         </div>
       </div>
