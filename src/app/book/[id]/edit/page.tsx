@@ -147,6 +147,7 @@ export default function EditBookPage() {
             placeholder="เนื้อเรื่องย่อ"
             className="mt-1 block w-full rounded p-2"
           ></textarea>
+          {errors.description?.message && <p className="text-red-500">{String(errors.description.message)}</p>}
         </label>
 
         <label>
