@@ -48,7 +48,7 @@ Then("they should see suggestions for book titles that match {string}", { timeou
     allSuggestions.map(async (suggestion) => {
       await expect(suggestion).toBeVisible();
       expect(await suggestion.textContent()).toContain(titleInitial);
-    })
+    }),
   );
 });
 
@@ -69,7 +69,7 @@ Then(
     const searchField = page.getByTestId("search-by-book-name");
     await expect(searchField).toBeVisible();
     expect(await searchField.inputValue()).toBe(titleSelected);
-  }
+  },
 );
 
 Then("the suggestion box should disappear", { timeout: 10000 }, async () => {

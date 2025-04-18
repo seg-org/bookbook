@@ -142,13 +142,13 @@ export function RegisterForm() {
       <FormField
         name="acceptTerms"
         render={({ field }) => (
-          <FormItem className="flex items-baseline space-x-2 py-2">
+          <FormItem className="flex items-baseline gap-2 py-2">
             <Input
               type="checkbox"
               checked={field.value}
               onChange={field.onChange}
               disabled={isLoading}
-              className="h-2 w-2"
+              className="h-3 w-3"
             />
             <FormLabel>ฉันยอมรับเงื่อนไขและข้อตกลง</FormLabel>
             <FormMessage />

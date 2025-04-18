@@ -34,3 +34,7 @@ export const SpecialDescriptionType = z.enum([
 ]);
 
 export type SpecialDescriptionType = z.infer<typeof SpecialDescriptionType>;
+
+export const DamageType = z.enum(["NO_DAMAGED", "SLIGHTLY_DAMAGED", "DAMAGED"]);
+
+export type DamageType = z.infer<typeof DamageType>;

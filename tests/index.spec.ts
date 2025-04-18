@@ -14,8 +14,8 @@ test("Search Page", async ({ page }) => {
 
   await expect(page).toHaveURL("http://localhost:3000/search");
 
-  // expect to find text Mao Tse-Tung
-  await expect(page.getByText("Mao Tse-Tung").first()).toBeVisible();
+  // expect to find text ภาษาพาที
+  await expect(page.getByText("ภาษาพาที").first()).toBeVisible();
 });
 
 test("Login Failure", async ({ page }) => {

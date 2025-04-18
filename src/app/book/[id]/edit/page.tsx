@@ -57,7 +57,7 @@ export default function EditBookPage() {
     if (book) {
       setValue("title", book.title);
       setValue("author", book.author);
-      setValue("genre", book.genre);
+      setValue("genre", /*book.genre*/ "oo");
       setValue("description", book.description);
       setValue("isbn", book.isbn);
       setValue("publisher", book.publisher);

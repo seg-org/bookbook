@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { FC, PropsWithChildren, useMemo, useState } from "react";
 
+import { beginningOfTime, endOfTime } from "@/constants/date";
 import {
   useGetQueryTransaction,
   useGetTransactionBuyAmount,
@@ -12,8 +13,6 @@ import {
 
 import { TransactionContext } from "./transactionContext";
 
-const beginningOfTime = new Date("0000-01-01T00:00:00Z");
-const endOfTime = new Date("9999-12-31T23:59:59Z");
 const transactionPerPage = 20;
 
 export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -24,7 +23,7 @@ export const TransactionProvider: FC<PropsWithChildren> = ({ children }) => {
   const [endDate, setEndDate] = useState<Date>(endOfTime);
   const [asBuyer, setAsBuyer] = useState(true);
   const [asSeller, setAsSeller] = useState(true);
-  const [isPacking, setIsPacking] = useState(false);
+  const [isPacking, setIsPacking] = useState(true);
   const [isDelivering, setIsDelivering] = useState(false);
   const [isHold, setIsHold] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
