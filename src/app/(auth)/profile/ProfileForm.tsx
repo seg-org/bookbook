@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -11,8 +12,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form-nac";
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/useToast";
-
-import { useRouter } from "next/navigation";
 
 const userFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -125,6 +124,7 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
   }
 
   const [balance, setBalance] = useState(123);
+  setBalance(123);
 
   return (
     <div className="space-y-6">

@@ -1,17 +1,12 @@
 "use client";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useState } from "react";
-import { Input } from "@/components/ui/Input";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/Button";
-
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
-
-import type { InputHTMLAttributes } from "react";
-import { z } from "zod";
 import { Form } from "@/components/ui/form";
+import { Input } from "@/components/ui/Input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
 
 type UserProfile = {
   id: string;
