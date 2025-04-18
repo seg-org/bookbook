@@ -21,7 +21,8 @@ const bookSchema = z.object({
   isbn: z.string().min(10, "ISBN must be at least 10 characters"),
   publisher: z.string().min(1, "Publisher is required"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
-  coverImageKey: z.string(),
+  coverImageKey: z.string().optional(),
+  recommendPrice: z.coerce.number().min(0, "Recommend price must be greater than or equal to 0").optional(),
 });
 export type EditBookFormData = z.infer<typeof bookSchema>;
 
@@ -63,6 +64,7 @@ export default function EditBookPage() {
       setValue("publisher", book.publisher);
       setValue("pages", book.pages);
       setValue("coverImageKey", book.coverImageKey);
+      setValue("recommendPrice", book.recommendPrice ?? undefined);
       setImageUrl(book.coverImageUrl);
     }
   }, [book, setValue]);
@@ -184,6 +186,17 @@ export default function EditBookPage() {
           {errors.coverImageKey?.message && <p className="text-red-500">{String(errors.coverImageKey.message)}</p>}
         </label>
         {imageUrl && <Image src={imageUrl} alt="Cover Image" width={200} height={200} />}
+
+        <label>
+          ราคาขายแนะนำ:
+          <input
+            type="number"
+            {...register("recommendPrice")}
+            placeholder="(ราคาขายแนะนำ)"
+            className="mt-1 block w-full rounded p-2"
+          />
+          {errors.recommendPrice?.message && <p className="text-red-500">{String(errors.recommendPrice.message)}</p>}
+        </label>
 
         <button
           type="submit"
