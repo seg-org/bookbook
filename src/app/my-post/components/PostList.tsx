@@ -17,7 +17,7 @@ export const PostList = () => {
 
   const [params, setParams] = useState<MypostParam>({
     page: 1,
-    limit: 25,
+    limit: 24,
     sortBy: "createdAt",
     sortOrder: "desc",
     author: userId ?? "",
@@ -78,7 +78,7 @@ export const PostList = () => {
   }
   return (
     <>
-      <div className="item-center flex flex-col pt-8">
+      <div className="item-center flex w-[99.5%] flex-col pt-8">
         <div className="flex flex-row items-center gap-5 self-start">
           <div className="ml-3.5 mr-auto mt-1 text-lg">เรียงโดย</div>
           <button
@@ -104,7 +104,7 @@ export const PostList = () => {
         </div>
       </div>
       <div>
-        <Pagination totalPages={totalPages} setPage={setPage} />
+        <Pagination totalPages={totalPages} setPage={setPage} page={params.page} />
       </div>
     </>
   );

@@ -3,10 +3,11 @@ import { useState } from "react";
 type PaginationProps = {
   totalPages: number;
   setPage: (page: number) => void;
+  page: number;
 };
 
-export const Pagination = ({ totalPages, setPage }: PaginationProps) => {
-  const [currentPage, setCurrentpage] = useState(1);
+export const Pagination = ({ totalPages, setPage, page }: PaginationProps) => {
+  const [currentPage, setCurrentpage] = useState(page);
 
   const handlePageChange = (page: number) => {
     setCurrentpage(page);
@@ -14,7 +15,7 @@ export const Pagination = ({ totalPages, setPage }: PaginationProps) => {
   };
 
   return (
-    <div className="mt-4 flex items-center justify-center space-x-2">
+    <div className="mt-4 flex items-center justify-center space-x-2 pb-2">
       {currentPage > 1 && (
         <button
           className="p-2 text-blue-500"
