@@ -112,6 +112,7 @@ if (sellerProfiles.length === 0) {
         isApproved: sellerProfile.isApproved,
         approvedAt: sellerProfile.approvedAt,
         userId: sellerProfile.userId,
+        balance: sellerProfile.balance,
       };
     }),
   );

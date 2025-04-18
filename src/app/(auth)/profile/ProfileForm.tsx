@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -41,6 +42,7 @@ type UserProfile = {
         idCardImageKey: string;
         idCardImageUrl: string;
         isApproved: boolean;
+        balance: number;
       }
     | null
     | undefined;
@@ -49,6 +51,7 @@ type UserProfile = {
 export function ProfileForm({ initialData }: { initialData: UserProfile }) {
   const [isEditing, setIsEditing] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(userFormSchema),
@@ -191,62 +194,93 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
       </Card>
 
       {initialData.isSeller && (
-        <Card>
-          <CardHeader>
-            <CardTitle>ข้อมูลผู้ขาย</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Form form={sellerForm} onSubmit={onSellerSubmit}>
-              <FormField
-                name="bankAccount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>บัญชีธนาคาร</FormLabel>
-                    <Input {...field} disabled={!isEditing} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+        <>
+          <Card>
+            <CardHeader>
+              <CardTitle>ข้อมูลผู้ขาย</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Form form={sellerForm} onSubmit={onSellerSubmit}>
+                <FormField
+                  name="bankAccount"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>บัญชีธนาคาร</FormLabel>
+                      <Input {...field} disabled={!isEditing} />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                name="bankName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>ชื่อธนาคาร</FormLabel>
-                    <Input {...field} disabled={!isEditing} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  name="bankName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>ชื่อธนาคาร</FormLabel>
+                      <Input {...field} disabled={!isEditing} />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                name="idCardNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>เลขบัตรประชาชน</FormLabel>
-                    <Input {...field} disabled={!isEditing} />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  name="idCardNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>เลขบัตรประชาชน</FormLabel>
+                      <Input {...field} disabled={!isEditing} />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              {initialData.sellerProfile?.idCardImageKey && (
-                <div>
-                  <FormLabel>รูปถ่ายบัตรประชาชน</FormLabel>
-                  <Image
-                    src={initialData.sellerProfile.idCardImageUrl}
-                    width={300}
-                    height={200}
-                    alt="ID Card"
-                    className="mt-2 max-w-md rounded-lg"
-                  />
+                {initialData.sellerProfile?.idCardImageKey && (
+                  <div>
+                    <FormLabel>รูปถ่ายบัตรประชาชน</FormLabel>
+                    <Image
+                      src={initialData.sellerProfile.idCardImageUrl}
+                      width={300}
+                      height={200}
+                      alt="ID Card"
+                      className="mt-2 max-w-md rounded-lg"
+                    />
+                  </div>
+                )}
+
+                {isEditing && <Button type="submit">บันทึกข้อมูลผู้ขาย</Button>}
+              </Form>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>ถอนเงิน</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {/* Make icon big at the left column and other information at right column */}
+              <div className="block text-sm font-medium">ยอดเงินในบัญชี</div>
+              <div className="flex flex-col items-center justify-center">
+                <div className="flex items-center gap-4">
+                  <div>
+                    <p className="text-6xl text-orange-500"> ฿ {initialData.sellerProfile?.balance}</p>
+                  </div>
                 </div>
-              )}
-
-              {isEditing && <Button type="submit">บันทึกข้อมูลผู้ขาย</Button>}
-            </Form>
-          </CardContent>
-        </Card>
+                {/*If balance >= 100 show ถอนเงิน else ขั้นต่ำ*/}
+                <div className="mt-4">
+                  {initialData.sellerProfile?.balance && initialData.sellerProfile.balance >= 100 ? (
+                    <Button
+                      onClick={() => router.push("/profile/cashout")}
+                      className="h-10 w-60 bg-green-500 hover:bg-green-600"
+                    >
+                      ถอนเงิน
+                    </Button>
+                  ) : (
+                    <Button className="h-10 w-60 bg-red-500 hover:bg-red-600">ยอดเงินขั้นต่ำในการถอนคือ 100 บาท</Button>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </>
       )}
     </div>
   );

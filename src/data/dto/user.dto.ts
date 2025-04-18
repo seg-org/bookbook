@@ -24,6 +24,7 @@ export type User = {
     isApproved: boolean;
     approvedAt: Date;
     userId: string;
+    balance: number;
   };
 };
 

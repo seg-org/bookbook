@@ -68,6 +68,8 @@ model SellerProfile {
   user           User      @relation(fields: [userId], references: [id])
   userId         String    @unique @map("user_id")
 
+  balance Int @default(0)
+
   @@map("seller_profiles")
 }
 
