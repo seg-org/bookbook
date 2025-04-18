@@ -123,9 +123,6 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
     }
   }
 
-  const [balance, setBalance] = useState(123);
-  setBalance(123);
-
   return (
     <div className="space-y-6">
       <Card>
@@ -264,12 +261,12 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
               <div className="flex flex-col items-center justify-center">
                 <div className="flex items-center gap-4">
                   <div>
-                    <p className="text-6xl text-orange-500"> ฿ {balance}</p>
+                    <p className="text-6xl text-orange-500"> ฿ {initialData.sellerProfile?.balance}</p>
                   </div>
                 </div>
                 {/*If balance >= 100 show ถอนเงิน else ขั้นต่ำ*/}
                 <div className="mt-4">
-                  {balance >= 100 ? (
+                  {initialData.sellerProfile?.balance && initialData.sellerProfile.balance >= 100 ? (
                     <Button
                       onClick={() => router.push("/profile/cashout")}
                       className="h-10 w-60 bg-green-500 hover:bg-green-600"
