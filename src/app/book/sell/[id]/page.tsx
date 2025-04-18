@@ -1,8 +1,8 @@
+// src/app/book/sell/[id]/page.tsx
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import { getRecommendPrice } from "@/app/api/books/recommend-price/getRecommendPrice";
 import { getUrl } from "@/app/api/objects/s3";
 import { Button } from "@/components/ui/Button";
 import { authOptions } from "@/lib/auth";
@@ -36,7 +36,26 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
     notFound();
   }
 
-  const recommendPrice = await getRecommendPrice(id);
+  async function fetchManualOrAverageRecommendPrice(bookId: string) {
+    // Try manual price first
+    const manualRes = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/books/recommend-price?book_id=${bookId}&mode=manual`,
+    );
+    const manualData = await manualRes.json();
+
+    if (manualData.recommendPrice !== null && manualData.recommendPrice !== undefined) {
+      return manualData.recommendPrice;
+    }
+
+    // Fallback to average
+    const avgRes = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/books/recommend-price?book_id=${bookId}&mode=average`,
+    );
+    const avgData = await avgRes.json();
+    return avgData.recommendedPrice ?? null;
+  }
+
+  const recommendPrice = await fetchManualOrAverageRecommendPrice(id);
 
   async function createPost(formData: FormData) {
     "use server";
