@@ -45,7 +45,8 @@ export default async function BookDetailPage({ params }: { params: Promise<{ id:
           </p>
           <p>
             <span className="font-bold">ประเภท </span>
-            <span>{book.genre}</span>
+            {/* fix this to handle genres 
+            <span>{book.genre}</span> */}
           </p>
           <p>
             <span className="font-bold">สำนักพิมพ์ </span>

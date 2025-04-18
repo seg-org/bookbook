@@ -77,7 +77,8 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
             </p>
             <p>
               <span className="font-bold">ประเภท </span>
-              <span>{post.book.genre}</span>
+              {/* fix this*/}
+              {/* <span>{post.book.genre}</span> */}
             </p>
             <p>
               <span className="font-bold">สำนักพิมพ์ </span>

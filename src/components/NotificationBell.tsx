@@ -1,10 +1,10 @@
 import { Bell } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-import { Notification } from "../../data/dto/notification.dto";
-import { getNotifications, markNotificationAsRead } from "../../data/notification";
+import { Notification } from "../data/dto/notification.dto";
+import { getNotifications, markNotificationAsRead } from "../data/notification";
 
 export default function NotificationBell() {
   const [notifications, setNotifications] = useState<Notification[]>([]);

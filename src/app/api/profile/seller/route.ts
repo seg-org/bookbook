@@ -76,7 +76,7 @@ export async function GET() {
           averageRating,
           totalReviews,
         };
-      })
+      }),
     );
 
     return NextResponse.json(formatted);

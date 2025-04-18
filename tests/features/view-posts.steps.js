@@ -22,7 +22,7 @@ Given("the user is on the search page", async function () {
 });
 
 When("they enter a book title", async function () {
-  await page.fill('[data-test-id="search-by-book-name"]', "Quotations from Chairman Mao Tse-Tung");
+  await page.fill('[data-testid="search-by-book-name"]', "Quotations from Chairman Mao Tse-Tung");
 });
 
 When("they click the sort by price button", async function () {
@@ -30,7 +30,7 @@ When("they click the sort by price button", async function () {
 });
 
 When("they enter a book title that does not exist in the database", async function () {
-  await page.fill('[data-test-id="search-by-book-name"]', "Nonexistent Book Title");
+  await page.fill('[data-testid="search-by-book-name"]', "Nonexistent Book Title");
 });
 
 Then("they should see all posts", async function () {
@@ -63,7 +63,7 @@ Then("they should see the posts sorted by price in descending order", { timeout:
       const priceElement = await post.$('[data-test-id="post-price"]');
       const priceText = (await priceElement?.innerText()) ?? "";
       return parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
-    })
+    }),
   );
 
   for (let i = 0; i < prices.length - 1; i++) {

@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
         ...parsedData.data,
         sellerId: post.sellerId,
         status: TransactionStatus.PACKING,
-        amount: post.price,
+        amount: parsedData.data.amount,
 
         shipmentMethod: ShipmentMethod.UNDEFINED,
         trackingURL: "",
@@ -119,7 +119,12 @@ export async function GET(req: NextRequest) {
         review: true,
       },
       orderBy: {
-        createdAt: "desc",
+        ...(parsedData.data.sortBy
+          ? {
+              ...(parsedData.data.sortBy == "createdAt" ? { createdAt: "desc" } : {}),
+              ...(parsedData.data.sortBy == "updatedAt" ? { createdAt: "asc" } : {}),
+            }
+          : { createdAt: "desc" }),
       },
     });
 
@@ -149,7 +154,7 @@ export async function GET(req: NextRequest) {
             },
           },
         };
-      })
+      }),
     );
 
     return NextResponse.json(TransactionsRespone.parse(transactionsWithURL), { status: 201 });

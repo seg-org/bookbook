@@ -32,7 +32,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
   const router = useRouter();
 
   const initiate_transaction = () => {
-    if(!isAuthenticated){
+    if (!isAuthenticated) {
       router.push("/login");
       return;
     }
@@ -45,7 +45,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
         console.log(data);
       });
 
-      router.push("/checkout");
+    router.push("/checkout");
   };
 
   const handleChatWithSeller = async (postId: string) => {
@@ -63,8 +63,8 @@ function PostCard({ post, isRecommended }: PostCardProps) {
       <div
         data-test-id="post-card"
         className={clsx(
-          "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
-          isRecommended && "border-4 border-amber-300"
+          "flex w-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2",
+          isRecommended && "border-4 border-amber-300",
         )}
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
@@ -95,7 +95,8 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {/* fix this */}
+                {/* {cut(post.book.bookGenres?.join(" , ").toLowerCase().replace(/_/g, " "), 65)} */}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>
@@ -120,7 +121,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           </Button>
           <Button variant="default" onClick={initiate_transaction}>
             <div className="flex items-center justify-center gap-x-2">
-               <FaShoppingBasket className="h-6 w-6" /> สั่งซื้อ {/* เพิ่มใส่ตะกร้า */}
+              <FaShoppingBasket className="h-6 w-6" /> สั่งซื้อ {/* เพิ่มใส่ตะกร้า */}
             </div>
           </Button>
         </div>

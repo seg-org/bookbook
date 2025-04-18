@@ -5,9 +5,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
 
-
-
-
 type PostCardProps = {
   post: PostWithBookmark;
   isRecommended?: boolean;
@@ -23,12 +20,11 @@ const cut = (str: string, maxLength: number) => {
 function PostCard({ post, isRecommended }: PostCardProps) {
   return (
     <>
-    
       <div
         data-test-id="post-card"
         className={clsx(
           "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
-          isRecommended && "border-4 border-amber-300"
+          isRecommended && "border-4 border-amber-300",
         )}
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
@@ -57,8 +53,8 @@ function PostCard({ post, isRecommended }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {/* <strong>ประเภท </strong>
+                {cut(post.book.genre, 65)} */}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>
@@ -71,7 +67,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
         <div className="mt-auto flex gap-2 self-end">
           <Button variant="default">
             <div className="flex items-center justify-center gap-x-2">
-               <Wrench className="h-6 w-6" /> แก้ไขข้อมูลโพสต์
+              <Wrench className="h-6 w-6" /> แก้ไขข้อมูลโพสต์
             </div>
           </Button>
         </div>

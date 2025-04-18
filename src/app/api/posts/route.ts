@@ -31,8 +31,6 @@ export async function POST(req: NextRequest) {
 
     const data = {
       ...parsedData.data,
-      specialDescriptions: parsedData.data.specialDescriptions ?? [],
-      damageURLs: parsedData.data.damageURLs ?? [],
     };
 
     const newPost = await prisma.post.create({
@@ -53,7 +51,7 @@ export async function POST(req: NextRequest) {
     if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
       return NextResponse.json(
         { error: "Duplicate key violation (there is already a post with this book id)" },
-        { status: 409 }
+        { status: 409 },
       );
     }
     if (error instanceof Error) console.error("Error creating post", error.stack);
@@ -77,7 +75,6 @@ export async function GET(req: NextRequest) {
     const bookFilter: Prisma.BookWhereInput = {
       title: filters.title ? { contains: filters.title, mode: "insensitive" } : undefined,
       author: filters.author ? { contains: filters.author, mode: "insensitive" } : undefined,
-      genre: filters.genre ? { contains: filters.genre, mode: "insensitive" } : undefined,
       description: filters.description ? { contains: filters.description, mode: "insensitive" } : undefined,
       isbn: filters.isbn ? { contains: filters.isbn, mode: "insensitive" } : undefined,
       publisher: filters.publisher ? { contains: filters.publisher, mode: "insensitive" } : undefined,
@@ -113,7 +110,7 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json(
-      PostsResponsePaginated.parse({ posts: postsWithImageUrl, total: totalPosts, totalPages, page })
+      PostsResponsePaginated.parse({ posts: postsWithImageUrl, total: totalPosts, totalPages, page }),
     );
   } catch (error) {
     if (error instanceof Error) console.error("Error getting posts", error.stack);

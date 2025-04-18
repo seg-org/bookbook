@@ -6,7 +6,7 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
-import NotificationBell from "@/app/notification/NotificationBell";
+import NotificationBell from "@/components/NotificationBell";
 
 function Header() {
   const { data: session, status } = useSession();

@@ -92,8 +92,16 @@ const TransactionDetailsPopup = () => {
                 <p className="text-slate-500">{transaction?.post?.book?.description}</p>
                 <p className="font-bold text-slate-500">จำนวนหน้า : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.pages}</p>
+                {/* ------------------------------------------------------------
+                    temporary hard fix
+                    ------------------------------------------------------------
+                
                 <p className="font-bold text-slate-500">หมวดหมู่ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.genre}</p>
+                
+                
+                  ---------------------------------------------------------------
+                */}
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.title}</p>
@@ -159,7 +167,7 @@ const TransactionDetailsPopup = () => {
                 )}
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-xl font-bold">{transaction?.post?.price}.-</p>
+                <p className="text-xl font-bold">{transaction?.amount}.-</p>
                 <div className="flex flex-row justify-end space-x-2">
                   <Button
                     className="mt-4 px-6 py-3"
