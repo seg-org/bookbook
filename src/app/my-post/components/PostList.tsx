@@ -3,10 +3,10 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-
-import PostCard from "./PostCard";
 import { useGetMyPost } from "@/hooks/useGetAllPosts";
+
 import { Pagination } from "./Pagination";
+import PostCard from "./PostCard";
 
 export const PostList = () => {
   const { data: session } = useSession();

@@ -3,9 +3,9 @@ import Image from "next/image";
 import { useContext, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
-import { PostContext, PostWithBookmark } from "@/context/postContext";
-import { deletePost, editPost } from "@/data/post";
+import { PostContext } from "@/context/postContext";
 import { Post } from "@/data/dto/post.dto";
+import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
   post: Post;
