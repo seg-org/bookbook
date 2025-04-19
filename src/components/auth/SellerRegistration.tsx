@@ -10,7 +10,7 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/card";
-import { Form, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form-nac";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"; // Correct import
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/useToast";
 
@@ -24,7 +24,7 @@ const sellerSchema = z.object({
     .refine((files) => files?.[0]?.size <= 5000000, "ขนาดไฟล์ต้องไม่เกิน 5MB")
     .refine(
       (files) => ["image/jpeg", "image/png", "image/jpg"].includes(files?.[0]?.type),
-      "รองรับเฉพาะไฟล์ .jpg, .jpeg และ .png",
+      "รองรับเฉพาะไฟล์ .jpg, .jpeg และ .png"
     ),
 });
 
@@ -97,27 +97,34 @@ export function SellerRegistration() {
     <div className="mx-auto max-w-md space-y-6">
       <h2 className="text-center text-2xl font-bold">ลงทะเบียนผู้ขาย</h2>
 
-      <Form form={form} onSubmit={onSubmit}>
+      <Form {...form} > 
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <Card className="space-y-4 p-4">
           <h3 className="font-semibold">ข้อมูลส่วนตัว</h3>
           <FormField
+            control={form.control}
             name="idCardNumber"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>หมายเลขบัตรประชาชน</FormLabel>
-                <Input {...field} disabled={isLoading} />
+                <FormControl>
+                  <Input {...field} disabled={isLoading} />
+                </FormControl>
                 <FormDescription>กรุณากรอกหมายเลขบัตรประชาชน 13 หลัก</FormDescription>
-                <FormMessage />
+                <FormMessage /> 
               </FormItem>
             )}
           />
 
           <FormField
+            control={form.control}
             name="idCardImage"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>รูปบัตรประชาชน</FormLabel>
-                <Input type="file" accept="image/*" onChange={handleImageChange} disabled={isLoading} />
+                <FormControl>
+                  <Input type="file" accept="image/*" onChange={handleImageChange} disabled={isLoading} />
+                </FormControl>
                 <FormDescription>อัปโหลดรูปบัตรประชาชนที่ชัดเจน (ขนาดไม่เกิน 5MB)</FormDescription>
                 {previewUrl && (
                   <div className="mt-2">
@@ -139,22 +146,28 @@ export function SellerRegistration() {
         <Card className="space-y-4 p-4">
           <h3 className="font-semibold">ข้อมูลธนาคาร</h3>
           <FormField
+            control={form.control}
             name="bankAccount"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>หมายเลขบัญชีธนาคาร</FormLabel>
-                <Input {...field} disabled={isLoading} />
-                <FormMessage />
+                <FormControl>
+                  <Input {...field} disabled={isLoading} />
+                </FormControl>
+                <FormMessage /> 
               </FormItem>
             )}
           />
 
           <FormField
+            control={form.control}
             name="bankName"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>ชื่อธนาคาร</FormLabel>
-                <Input {...field} disabled={isLoading} />
+                <FormControl>
+                  <Input {...field} disabled={isLoading} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -171,6 +184,7 @@ export function SellerRegistration() {
             "ส่งข้อมูลการลงทะเบียน"
           )}
         </Button>
+        </form>
       </Form>
     </div>
   );
