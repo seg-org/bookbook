@@ -97,7 +97,7 @@ export function SellerRegistration() {
     <div className="mx-auto max-w-md space-y-6">
       <h2 className="text-center text-2xl font-bold">ลงทะเบียนผู้ขาย</h2>
 
-      <Form {...form} > 
+      <Form {...form} >
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <Card className="space-y-4 p-4">
           <h3 className="font-semibold">ข้อมูลส่วนตัว</h3>
@@ -111,7 +111,7 @@ export function SellerRegistration() {
                   <Input {...field} disabled={isLoading} />
                 </FormControl>
                 <FormDescription>กรุณากรอกหมายเลขบัตรประชาชน 13 หลัก</FormDescription>
-                <FormMessage /> 
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -154,7 +154,7 @@ export function SellerRegistration() {
                 <FormControl>
                   <Input {...field} disabled={isLoading} />
                 </FormControl>
-                <FormMessage /> 
+                <FormMessage />
               </FormItem>
             )}
           />
