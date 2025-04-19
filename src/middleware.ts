@@ -1,6 +1,7 @@
 import type { MiddlewareConfig, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+
 import { SessionUser } from "@/lib/auth"; // Import the SessionUser type
 
 export async function middleware(request: NextRequest) {

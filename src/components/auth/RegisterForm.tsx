@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+
 import { Button } from "@/components/ui/Button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/Input";
@@ -65,8 +66,10 @@ export function RegisterForm() {
       if (loginResponse?.error) {
         throw new Error(loginResponse.error);
       }
-    } catch (error: any) {
-      setErrorMessage(error.message || "เกิดข้อผิดพลาด");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
     } finally {
       setIsLoading(false);
     }
