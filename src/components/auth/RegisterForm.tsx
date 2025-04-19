@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,7 +24,6 @@ const registerSchema = z.object({
 export function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -53,7 +51,8 @@ export function RegisterForm() {
 
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error || "การลงทะเบียนล้มเหลว");
+        setErrorMessage(data?.error || "การลงทะเบียนล้มเหลว");
+        return;
       }
 
       const loginResponse = await signIn("credentials", {
@@ -76,8 +75,6 @@ export function RegisterForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {errorMessage && <p className="mb-2 text-sm text-red-500">{errorMessage}</p>}
-
         <FormField
           control={form.control}
           name="firstName"
@@ -175,6 +172,7 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
+        {errorMessage && <p className="mb-2 text-sm text-red-500">{errorMessage}</p>}
         <Button type="submit" disabled={isLoading} className="w-full">
           {isLoading ? "กำลังลงทะเบียน..." : "ลงทะเบียน"}
         </Button>
