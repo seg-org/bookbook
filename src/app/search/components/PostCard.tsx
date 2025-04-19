@@ -17,6 +17,7 @@ import { Bookmark } from "./Bookmark";
 type PostCardProps = {
   post: PostWithBookmark;
   isRecommended?: boolean;
+  enableBookmark: boolean;
 };
 
 const cut = (s: string, n: number) => {
@@ -26,7 +27,7 @@ const cut = (s: string, n: number) => {
   return s;
 };
 
-function PostCard({ post, isRecommended }: PostCardProps) {
+function PostCard({ post, isRecommended, enableBookmark }: PostCardProps) {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
 
@@ -72,7 +73,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           <h3>{post.title}</h3>
           <div className="flex items-center space-x-4">
             <span data-test-id="post-price">{post.price} ฿</span>
-            {isAuthenticated && <Bookmark postId={post.id} />}
+            {isAuthenticated && enableBookmark && <Bookmark postId={post.id} />}
           </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">

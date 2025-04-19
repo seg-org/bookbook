@@ -4,6 +4,9 @@ declare module "next-auth" {
   interface User {
     phoneNumber?: string | null;
     isAdmin: boolean;
+    emailVerified: boolean;
+    phoneVerified: boolean;
+    pdpaConsent: boolean;
   }
 
   interface Session {
@@ -14,6 +17,9 @@ declare module "next-auth" {
       image?: string | null;
       phoneNumber?: string | null;
       isAdmin: boolean;
+      emailVerified: boolean;
+      phoneVerified: boolean;
+      pdpaConsent: boolean;
     };
   }
 }
@@ -23,5 +29,7 @@ declare module "next-auth/jwt" {
     id: string;
     phoneNumber: string | null | undefined;
     isAdmin: boolean;
+    emailVerified: boolean;
+    phoneVerified: boolean;
   }
 }
