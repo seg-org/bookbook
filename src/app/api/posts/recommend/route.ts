@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
+    const userId = searchParams.get("user_id");
 
     if (!userId) {
       return NextResponse.json({ error: "Missing userId" }, { status: 400 });
