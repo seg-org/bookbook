@@ -59,14 +59,13 @@ export function RegisterForm() {
       const loginResponse = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        redirect: false,
+        redirect: true,
+        callbackUrl: "/verify/email",
       });
 
       if (loginResponse?.error) {
         throw new Error(loginResponse.error);
       }
-
-      router.push("/verify/email");
     } catch (error: any) {
       setErrorMessage(error.message || "เกิดข้อผิดพลาด");
     } finally {
