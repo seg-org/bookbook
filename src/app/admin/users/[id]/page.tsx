@@ -1,10 +1,12 @@
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { verifyAdmin } from "@/lib/authorization";
 import { prisma } from "@/lib/prisma";
 
 import styles from "./styles.module.scss";
+import UserBan from "./UserBan";
 
 export default async function ManageUserPage({ params }: { params: Promise<{ id: string }> }) {
   await verifyAdmin();
@@ -21,6 +23,23 @@ export default async function ManageUserPage({ params }: { params: Promise<{ id:
   if (!user) {
     notFound();
   }
+
+  const userPosts = await prisma.post.findMany({
+    where: {
+      sellerId: id,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  const userPostsId = userPosts.map((post) => post.id);
+
+  const reports = await prisma.postReport.findMany({
+    where: {
+      postId: { in: userPostsId },
+    },
+  });
 
   async function updateUser(formData: FormData) {
     "use server";
@@ -166,8 +185,28 @@ export default async function ManageUserPage({ params }: { params: Promise<{ id:
 
             <button type="submit">บันทึกข้อมูล</button>
           </form>
+
+          {reports.length > 0 && (
+            <>
+              <h2 className="text-xl font-bold">ประวัติการถูกรายงานโพสต์</h2>
+
+              <div className="mt-2 flex w-full flex-col gap-2 px-4">
+                {reports.map((report) => (
+                  <div key={report.id} className="rounded-lg border border-black p-2">
+                    <Link href={`/post/${report.postId}`} className="text-blue-500">
+                      ดูรายละเอียดโพสต์
+                    </Link>
+                    <p>เหตุผล: {report.reason}</p>
+                    <p>เวลาที่รายงาน: {report.createdAt.toLocaleString("th-TH")}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </>
       )}
+
+      <UserBan user={user} />
     </main>
   );
 }
