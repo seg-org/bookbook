@@ -9,13 +9,12 @@ export async function POST(req: Request) {
     const body = await req.json();
     const parsedData = CreateChatReportRequest.parse(body);
 
-    // Check for duplicate reports within the past 24 hours
     const duplicateReport = await prisma.chatReport.findFirst({
       where: {
         reporterId: parsedData.reporterId,
         roomId: parsedData.roomId,
         createdAt: {
-          gte: new Date(Date.now() - 1000 * 60 * 60 * 24), // Check past 24 hours
+          gte: new Date(Date.now() - 1000 * 60 * 60 * 24),
         },
       },
     });
@@ -37,5 +36,26 @@ export async function POST(req: Request) {
       console.error("Error submitting report:", error.message || error, error.stack);
     }
     return NextResponse.json({ error: "Failed to submit report" }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    const reports = await prisma.chatReport.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        reporter: true,
+        room: true,
+      },
+    });
+
+    return NextResponse.json(reports);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Error fetching reports:", error.message || error, error.stack);
+    }
+    return NextResponse.json({ error: "Failed to fetch reports" }, { status: 500 });
   }
 }
