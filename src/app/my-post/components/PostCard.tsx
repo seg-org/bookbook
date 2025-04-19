@@ -1,7 +1,5 @@
 import { Delete, Wrench } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
