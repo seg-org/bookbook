@@ -1,37 +1,38 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { z } from "zod";
 
-import { sellerIdCardFolderName } from "@/constants/s3FolderName";
-import { PutObjectResponse } from "@/data/dto/object.dto";
-import { putObject } from "@/data/object";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(request: Request) {
+const SellerRegistrationRequestSchema = z.object({
+  idCardNumber: z.string().min(13),
+  bankAccount: z.string().min(10),
+  bankName: z.string().min(2),
+  idCardImageKey: z.string().min(1, "ID card image key is required"),
+});
+
+export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
 
-    if (!session) {
+    if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const formData = await request.formData();
-    const idCardNumber = formData.get("idCardNumber") as string;
-    const bankAccount = formData.get("bankAccount") as string;
-    const bankName = formData.get("bankName") as string;
-    const idCardImage = formData.get("idCardImage") as File;
+    const body = await request.json();
 
-    if (!idCardImage) {
-      return NextResponse.json({ error: "ID card image is required" }, { status: 400 });
+    const parsedData = SellerRegistrationRequestSchema.safeParse(body);
+
+    if (!parsedData.success) {
+      console.error("Validation Error:", parsedData.error.flatten().fieldErrors);
+      return NextResponse.json(
+        { error: "Invalid input data.", details: parsedData.error.flatten().fieldErrors },
+        { status: 400 },
+      );
     }
 
-    const uploadResult = await putObject(idCardImage, sellerIdCardFolderName);
-
-    if (uploadResult instanceof Error) {
-      return NextResponse.json({ error: "Failed to upload ID card image" }, { status: 500 });
-    }
-
-    const imageKey = (uploadResult as PutObjectResponse).key;
+    const { idCardNumber, bankAccount, bankName, idCardImageKey } = parsedData.data;
 
     const existingProfile = await prisma.sellerProfile.findUnique({
       where: {
@@ -40,35 +41,34 @@ export async function POST(request: Request) {
     });
 
     if (existingProfile) {
-      // Update existing profile
       await prisma.sellerProfile.update({
         where: {
           userId: session.user.id,
         },
         data: {
           idCardNumber,
-          idCardImageKey: imageKey,
+          idCardImageKey: idCardImageKey,
           bankAccount,
           bankName,
+          isApproved: false,
         },
       });
 
       return NextResponse.json({
-        message: "Seller profile updated successfully",
+        message: "Seller profile updated successfully. Re-approval may be required.",
       });
     } else {
-      // Create new profile if it doesn't exist
       await prisma.sellerProfile.create({
         data: {
           userId: session.user.id,
           idCardNumber,
-          idCardImageKey: imageKey,
+          idCardImageKey: idCardImageKey,
           bankAccount,
           bankName,
+          isApproved: false,
         },
       });
 
-      // Update user's seller status
       await prisma.user.update({
         where: {
           id: session.user.id,
@@ -79,11 +79,11 @@ export async function POST(request: Request) {
       });
 
       return NextResponse.json({
-        message: "Seller registration submitted successfully",
+        message: "Seller registration submitted successfully. Awaiting approval.",
       });
     }
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    console.error("Seller Registration Error:", error);
+    return NextResponse.json({ error: "Internal server error during registration." }, { status: 500 });
   }
 }

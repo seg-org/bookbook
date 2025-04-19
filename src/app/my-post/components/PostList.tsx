@@ -1,22 +1,66 @@
 "use client";
 
-import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useMemo, useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { usePostContext } from "@/context/postContext";
+import { MypostParam, useGetMyPost } from "@/hooks/useGetAllPosts";
 
+import { Pagination } from "./Pagination";
 import PostCard from "./PostCard";
 
 export const PostList = () => {
-  const [priceAsc, setPriceAsc] = useState(1);
-  const [popAsc, setPopAsc] = useState(1);
+  const { data: session } = useSession();
+  const userId = session?.user.id;
+  let popasc = 1;
+  const [state, setState] = useState("createdAt");
 
-  const { posts, loading, error, setPostsFilters } = usePostContext();
+  const [params, setParams] = useState<MypostParam>({
+    page: 1,
+    limit: 25,
+    sortBy: "createdAt",
+    sortOrder: "desc",
+    author: userId ?? "",
+  });
 
-  const handleSortPrice = () => {
-    setPostsFilters((prev) => ({ ...prev, sortPrice: priceAsc === 1 ? "desc" : "asc" }));
-    setPriceAsc((prev) => -1 * prev);
+  const setPage = (page: number) => {
+    setParams((prev) => ({
+      ...prev,
+      page: page,
+    }));
   };
+
+  const toggleSortBy = (field: "price" | "popularity") => {
+    if (field === "popularity") {
+      setState("popularity");
+      popasc = 1 - popasc;
+      setParams((prev) => ({
+        ...prev,
+        sortBy: field,
+        sortOrder: popasc !== 1 && prev.sortOrder === "asc" ? "desc" : "asc",
+      }));
+    } else {
+      setState("price");
+      setParams((prev) => ({
+        ...prev,
+        sortBy: field,
+        sortOrder: prev.sortBy === field && prev.sortOrder === "asc" ? "desc" : "asc",
+      }));
+    }
+  };
+
+  const { posts, totalPages, loading, error } = useGetMyPost(params);
+
+  const sortedPosts = useMemo(() => {
+    if (params.sortBy !== "popularity") return posts;
+
+    const order = params.sortOrder;
+    const sorted = [...posts].sort(() => {
+      if (popasc) return order === "asc" ? -1 : 1;
+      return 0;
+    });
+    return sorted;
+  }, [posts, params.sortBy, popasc, params.sortOrder]);
 
   if (loading) {
     return <LoadingAnimation />;
@@ -32,31 +76,35 @@ export const PostList = () => {
       </div>
     );
   }
-
   return (
     <>
       <div className="item-center flex flex-col pt-8">
         <div className="flex flex-row items-center gap-5 self-start">
           <div className="ml-3.5 mr-auto mt-1 text-lg">เรียงโดย</div>
           <button
-            onClick={handleSortPrice}
             className="rounded-lg border border-gray-300 bg-white p-2 text-lg"
             data-test-id="sort-by-price"
+            onClick={() => toggleSortBy("price")}
           >
-            ราคา <span className="ml-2">{priceAsc == 1 ? "▲" : "▼"}</span>
+            ราคา{" "}
+            <span className="ml-2">{params.sortBy === "price" ? (params.sortOrder === "asc" ? "▲" : "▼") : "–"}</span>
           </button>
           <button
-            onClick={() => setPopAsc(-1 * popAsc)}
+            onClick={() => toggleSortBy("popularity")}
             className="rounded-lg border border-gray-300 bg-white p-2 text-lg"
           >
-            ความนิยม <span className="ml-2">{popAsc == 1 ? "▲" : "▼"}</span>
+            ความนิยม{" "}
+            <span className="ml-2">{state === "popularity" ? (params.sortOrder === "asc" ? "▲" : "▼") : "–"}</span>
           </button>
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">
-          {posts.map((post) => (
+          {sortedPosts.map((post) => (
             <PostCard post={post} key={post.id} />
           ))}
         </div>
+      </div>
+      <div>
+        <Pagination totalPages={totalPages} setPage={setPage} />
       </div>
     </>
   );

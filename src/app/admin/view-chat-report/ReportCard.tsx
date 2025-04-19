@@ -23,6 +23,8 @@ type ReportCardProps = {
   handleShowChat: (roomId: string) => void;
 };
 
+const banUser = (id: string) => {};
+
 const ReportCard = ({ report, handleShowChat }: ReportCardProps) => {
   return (
     <div key={report.id} className="rounded-lg border border-gray-300 p-4 shadow-sm transition hover:shadow-md">
@@ -39,7 +41,12 @@ const ReportCard = ({ report, handleShowChat }: ReportCardProps) => {
         <p>Post ID: {report.room.postId}</p>
         <p>Reported on: {format(new Date(report.createdAt), "PPPpp")}</p>
       </div>
-      <Button onClick={() => handleShowChat(report.room.id)}>Show Chat</Button>
+      <div>
+        <Button className="mx-1" onClick={() => handleShowChat(report.room.id)}>
+          แสดงแชท
+        </Button>
+        <Button className="mx-1 bg-red-500 hover:bg-red-600">แบนผู้ใช้</Button>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,7 @@
+import { forbidden } from "next/navigation";
+import { getServerSession } from "next-auth";
+
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { SellerVerificationList } from "./SellerVerificationList";
@@ -21,12 +25,12 @@ async function getUnverifiedSellers() {
 }
 
 export default async function AdminVerifySellersPage() {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
+  const isAdmin = session?.user?.isAdmin === true;
 
-  // TODO : Uncomment this after adding isAdmin to the user model
-  // if (!session?.user?.isAdmin) {
-  //   redirect("/");
-  // }
+  if (!isAdmin) {
+    forbidden();
+  }
 
   const unverifiedSellers = await getUnverifiedSellers();
 
