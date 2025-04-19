@@ -95,8 +95,6 @@ export function SellerRegistration() {
 
   return (
     <div className="mx-auto max-w-md space-y-6">
-      <h2 className="text-center text-2xl font-bold">ลงทะเบียนผู้ขาย</h2>
-
       <Form {...form} >
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <Card className="space-y-4 p-4">
