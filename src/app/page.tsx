@@ -28,17 +28,11 @@ export default async function Home() {
     { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
   ];
 
+  const adminLinks = [];
+
   if (isAdmin) {
-    links.push({
-      href: "/admin/dashboard",
-      icon: <LayoutDashboard />,
-      text: "แดชบอร์ดผู้ดูแลระบบ",
-    });
-    links.push({
-      href: "/admin/verify-sellers",
-      icon: <BookMarked />,
-      text: "ยืนยันผู้ขาย",
-    });
+    adminLinks.push({ href: "/admin/dashboard", icon: <LayoutDashboard />, text: "แดชบอร์ดผู้ดูแลระบบ" });
+    adminLinks.push({ href: "/admin/view-post", icon: <Store />, text: "ดูโพสต์ทั้งหมด" });
   }
 
   return (
@@ -103,10 +97,23 @@ export default async function Home() {
             </h2>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {links.map((item, index) => {
-                const isAdminLink = item.href === "/admin/dashboard" || item.href === "/admin/verify-sellers";
+              {links.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="group flex items-center rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
+                >
+                  <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                    {item.icon}
+                  </div>
+                  <span className="font-medium text-gray-700 transition-colors duration-300 group-hover:text-blue-600">
+                    {item.text}
+                  </span>
+                </Link>
+              ))}
 
-                return (
+              {isAdmin &&
+                adminLinks.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
@@ -120,15 +127,11 @@ export default async function Home() {
                         {item.text}
                       </span>
                     </div>
-
-                    {isAdminLink && (
-                      <span className="ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-yellow-900 shadow-sm">
-                        ADMIN
-                      </span>
-                    )}
+                    <span className="ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-yellow-900 shadow-sm">
+                      ADMIN
+                    </span>
                   </Link>
-                );
-              })}
+                ))}
             </div>
           </div>
         </div>

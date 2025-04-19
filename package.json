@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "eslint ./src --fix",
+
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "eslint src *.mjs *.ts --fix",
     "postinstall": "prisma generate",
     "e2e": "playwright test",

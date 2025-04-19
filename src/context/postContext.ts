@@ -19,6 +19,7 @@ interface PostContext {
   error: Error | null;
   changeBookmark: (postId: string) => Promise<void>;
   setPostsFilters: Dispatch<SetStateAction<GetPostsFilters>>;
+  refetchPosts: () => void;
 }
 
 export const PostContext = createContext<PostContext>({
@@ -30,6 +31,7 @@ export const PostContext = createContext<PostContext>({
   error: null,
   changeBookmark: () => Promise.resolve(),
   setPostsFilters: () => {},
+  refetchPosts: () => {},
 });
 
 export const usePostContext = () => {

@@ -1,49 +1,24 @@
-"use client";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { useGetMyPost } from "@/hooks/useGetAllPosts";
+import { usePostContext } from "@/context/postContext";
 
-import { Pagination } from "./Pagination";
 import PostCard from "./PostCard";
 
 export const PostList = () => {
-  const { data: session } = useSession();
-  const [refresh, setRefresh] = useState(0); // used to trigger refetch
+  const { status } = useSession();
+  const isAuthenticated = status === "authenticated";
+
   const [priceAsc, setPriceAsc] = useState(1);
-  const [sortBy, setSortBy] = useState<{ field: string; order: string } | null>(null); // e.g., { field: "price", order: "asc" }
+  const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
 
-  const [params, setParams] = useState({
-    page: 1,
-    limit: 27,
-    sortBy: "price",
-    sortOrder: "asc",
-    author: session?.user.id || "",
-  });
-
-  const setpage = (page: number) => {
-    setParams((prev) => ({
-      ...prev,
-      page: page,
-    }));
-  };
-
-  useEffect(() => {
-    if (sortBy) {
-      setParams((prev) => ({
-        ...prev,
-        sortBy: sortBy.field,
-        sortOrder: sortBy.order,
-      }));
-    }
-  }, [sortBy, refresh]);
-
-  const { posts, totalPages, loading, error } = useGetMyPost(params);
+  const { posts, loading, error, setPostsFilters } = usePostContext();
 
   const handleSortPrice = () => {
     const newOrder = priceAsc === 1 ? "desc" : "asc";
-    setSortBy({ field: "price", order: newOrder });
+    setPostsFilters((prev) => ({ ...prev, sortBy: "price", sortOrder: newOrder }));
     setPriceAsc(-1 * priceAsc);
   };
 
@@ -54,10 +29,10 @@ export const PostList = () => {
     return <div>Failed to get posts</div>;
   }
 
-  if (posts.length === 0) {
+  if (posts.length === 0 && posts.length === 0) {
     return (
       <div data-test-id="no-posts-found" className="mt-10">
-        ไม่พบโพสต์ของคุณ
+        ไม่พบโพสต์ตามที่ระบุไว้ฮะ
       </div>
     );
   }
@@ -74,14 +49,18 @@ export const PostList = () => {
           >
             ราคา <span className="ml-2">{priceAsc === 1 ? "▲" : "▼"}</span>
           </button>
+          {isAuthenticated && (
+            <div className="hover:cursor-pointer" onClick={() => setIsBookmarkOnly((prev) => !prev)}>
+              {isBookmarkOnly ? <FaBookmark className="h-6 w-6" /> : <FaRegBookmark className="h-6 w-6" />}
+            </div>
+          )}
         </div>
         <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
           {posts.map((post) => (
-            <PostCard post={post} key={post.id} onPostChange={() => setRefresh((prev) => prev + 1)} />
+            <PostCard post={post} key={post.id} />
           ))}
         </div>
       </div>
-      <Pagination totalPages={totalPages} setPage={setpage} cur_page={params.page} />
     </>
   );
 };
