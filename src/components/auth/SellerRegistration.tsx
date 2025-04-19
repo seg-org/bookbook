@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/Input";
-import { sellerIdCardFolderName } from "@/constants/s3FolderName"; 
+import { sellerIdCardFolderName } from "@/constants/s3FolderName";
 import { getObjectUrl, putObject } from "@/data/object";
 import { useToast } from "@/hooks/useToast";
 
@@ -26,9 +26,9 @@ const sellerSchema = z.object({
 type SellerFormData = z.infer<typeof sellerSchema>;
 
 export function SellerRegistration() {
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string | null>(null); 
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const router = useRouter();
   const { toast } = useToast();
@@ -46,20 +46,20 @@ export function SellerRegistration() {
   const handleIdCardUpload = async (file: File) => {
     if (file.size > 5000000) {
       setUploadError("ขนาดไฟล์ต้องไม่เกิน 5MB");
-      form.resetField("idCardImageKey"); 
+      form.resetField("idCardImageKey");
       setImageUrl(null);
       return;
     }
     if (!["image/jpeg", "image/png", "image/jpg"].includes(file.type)) {
       setUploadError("รองรับเฉพาะไฟล์ .jpg, .jpeg และ .png");
-      form.resetField("idCardImageKey"); 
+      form.resetField("idCardImageKey");
       setImageUrl(null);
       return;
     }
 
     setIsUploading(true);
-    setUploadError(null); 
-    setImageUrl(null); 
+    setUploadError(null);
+    setImageUrl(null);
 
     try {
       const uploadedImage = await putObject(file, sellerIdCardFolderName);
@@ -75,15 +75,14 @@ export function SellerRegistration() {
         throw new Error("Failed to get image URL after upload");
       }
 
-      form.setValue("idCardImageKey", uploadedImage.key, { shouldValidate: true }); 
-      setImageUrl(getObjectRes.signedUrl); 
-
+      form.setValue("idCardImageKey", uploadedImage.key, { shouldValidate: true });
+      setImageUrl(getObjectRes.signedUrl);
     } catch (error) {
       console.error("Error uploading ID card:", error);
       const message = error instanceof Error ? error.message : "An unknown error occurred during upload.";
       setUploadError(message);
-      form.setValue("idCardImageKey", ""); 
-      form.trigger("idCardImageKey"); 
+      form.setValue("idCardImageKey", "");
+      form.trigger("idCardImageKey");
     } finally {
       setIsUploading(false);
     }
@@ -91,12 +90,12 @@ export function SellerRegistration() {
 
   async function onSubmit(values: SellerFormData) {
     if (!values.idCardImageKey || isUploading) {
-       toast({
-         title: "ข้อผิดพลาด",
-         description: "กรุณารอการอัปโหลดรูปภาพให้เสร็จสิ้น หรือ อัปโหลดรูปภาพก่อน",
-         variant: "destructive",
-       });
-      return; 
+      toast({
+        title: "ข้อผิดพลาด",
+        description: "กรุณารอการอัปโหลดรูปภาพให้เสร็จสิ้น หรือ อัปโหลดรูปภาพก่อน",
+        variant: "destructive",
+      });
+      return;
     }
 
     setIsLoading(true);
@@ -104,12 +103,12 @@ export function SellerRegistration() {
       const response = await fetch("/api/auth/seller-registration", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(values), 
+        body: JSON.stringify(values),
       });
 
-      const result = await response.json(); 
+      const result = await response.json();
 
       if (!response.ok) {
         throw new Error(result.error || "การลงทะเบียนล้มเหลว");
@@ -134,7 +133,7 @@ export function SellerRegistration() {
 
   return (
     <div className="mx-auto max-w-md space-y-6">
-      <Form {...form} >
+      <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Card className="space-y-4 p-4">
             <h3 className="font-semibold">ข้อมูลส่วนตัว</h3>
@@ -154,46 +153,46 @@ export function SellerRegistration() {
             />
 
             <FormItem>
-               <FormLabel>รูปบัตรประชาชน</FormLabel>
-               <FormControl>
-                 <Input
-                   type="file"
-                   accept="image/jpeg, image/png, image/jpg"
-                   disabled={isLoading || isUploading}
-                   onChange={(e) => {
-                     if (e.target.files && e.target.files[0]) {
-                       handleIdCardUpload(e.target.files[0]); 
-                     } else {
-                       form.setValue("idCardImageKey", "");
-                       setImageUrl(null);
-                       setUploadError(null);
-                     }
-                   }}
-                 />
-               </FormControl>
-               <FormDescription>
+              <FormLabel>รูปบัตรประชาชน</FormLabel>
+              <FormControl>
+                <Input
+                  type="file"
+                  accept="image/jpeg, image/png, image/jpg"
+                  disabled={isLoading || isUploading}
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      handleIdCardUpload(e.target.files[0]);
+                    } else {
+                      form.setValue("idCardImageKey", "");
+                      setImageUrl(null);
+                      setUploadError(null);
+                    }
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
                 อัปโหลดรูปบัตรประชาชนที่ชัดเจน (ขนาดไม่เกิน 5MB, เฉพาะ .jpg, .jpeg, .png)
-               </FormDescription>
-               {isUploading && (
-                  <div className="mt-2 flex items-center text-sm text-blue-600">
-                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                     กำลังอัปโหลด...
-                   </div>
-               )}
-               {uploadError && <p className="mt-1 text-sm text-red-600">{uploadError}</p>}
-               <FormMessage>{form.formState.errors.idCardImageKey?.message}</FormMessage>
-               {imageUrl && !isUploading && !uploadError && (
-                 <div className="mt-2">
-                   <Image
-                     src={imageUrl}
-                     alt="ตัวอย่างบัตรประชาชน"
-                     width={300}
-                     height={200}
-                     className="h-auto max-w-full rounded-lg border"
-                   />
-                 </div>
-               )}
-             </FormItem>
+              </FormDescription>
+              {isUploading && (
+                <div className="mt-2 flex items-center text-sm text-blue-600">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  กำลังอัปโหลด...
+                </div>
+              )}
+              {uploadError && <p className="mt-1 text-sm text-red-600">{uploadError}</p>}
+              <FormMessage>{form.formState.errors.idCardImageKey?.message}</FormMessage>
+              {imageUrl && !isUploading && !uploadError && (
+                <div className="mt-2">
+                  <Image
+                    src={imageUrl}
+                    alt="ตัวอย่างบัตรประชาชน"
+                    width={300}
+                    height={200}
+                    className="h-auto max-w-full rounded-lg border"
+                  />
+                </div>
+              )}
+            </FormItem>
           </Card>
 
           <Card className="space-y-4 p-4">

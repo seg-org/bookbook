@@ -105,7 +105,7 @@ export default async function Home() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {links.map((item, index) => {
                 const isAdminLink = item.href === "/admin/dashboard" || item.href === "/admin/verify-sellers";
-                
+
                 return (
                   <Link
                     key={index}
@@ -125,7 +125,7 @@ export default async function Home() {
                       <span className="ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-yellow-900 shadow-sm">
                         ADMIN
                       </span>
-                    )}                    
+                    )}
                   </Link>
                 );
               })}

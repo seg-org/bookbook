@@ -1,9 +1,10 @@
+import { forbidden } from "next/navigation";
+import { getServerSession } from "next-auth";
+
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { SellerVerificationList } from "./SellerVerificationList";
-import { getServerSession } from "next-auth";
-import { forbidden } from "next/navigation";
-import { authOptions } from "@/lib/auth";
 
 async function getUnverifiedSellers() {
   return await prisma.sellerProfile.findMany({

@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server"; 
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { z } from "zod"; 
+import { z } from "zod";
 
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -9,9 +9,8 @@ const SellerRegistrationRequestSchema = z.object({
   idCardNumber: z.string().min(13),
   bankAccount: z.string().min(10),
   bankName: z.string().min(2),
-  idCardImageKey: z.string().min(1, "ID card image key is required"), 
+  idCardImageKey: z.string().min(1, "ID card image key is required"),
 });
-
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,8 +25,11 @@ export async function POST(request: NextRequest) {
     const parsedData = SellerRegistrationRequestSchema.safeParse(body);
 
     if (!parsedData.success) {
-       console.error("Validation Error:", parsedData.error.flatten().fieldErrors);
-       return NextResponse.json({ error: "Invalid input data.", details: parsedData.error.flatten().fieldErrors }, { status: 400 });
+      console.error("Validation Error:", parsedData.error.flatten().fieldErrors);
+      return NextResponse.json(
+        { error: "Invalid input data.", details: parsedData.error.flatten().fieldErrors },
+        { status: 400 },
+      );
     }
 
     const { idCardNumber, bankAccount, bankName, idCardImageKey } = parsedData.data;
@@ -45,10 +47,10 @@ export async function POST(request: NextRequest) {
         },
         data: {
           idCardNumber,
-          idCardImageKey: idCardImageKey, 
+          idCardImageKey: idCardImageKey,
           bankAccount,
           bankName,
-          isApproved: false, 
+          isApproved: false,
         },
       });
 
@@ -60,7 +62,7 @@ export async function POST(request: NextRequest) {
         data: {
           userId: session.user.id,
           idCardNumber,
-          idCardImageKey: idCardImageKey, 
+          idCardImageKey: idCardImageKey,
           bankAccount,
           bankName,
           isApproved: false,
