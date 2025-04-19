@@ -30,23 +30,13 @@ export const PostList = () => {
     }));
   };
 
-  const toggleSortBy = (field: "price" | "popularity") => {
-    if (field === "popularity") {
-      setState("popularity");
-      popasc = 1 - popasc;
-      setParams((prev) => ({
-        ...prev,
-        sortBy: field,
-        sortOrder: popasc !== 1 && prev.sortOrder === "asc" ? "desc" : "asc",
-      }));
-    } else {
-      setState("price");
-      setParams((prev) => ({
-        ...prev,
-        sortBy: field,
-        sortOrder: prev.sortBy === field && prev.sortOrder === "asc" ? "desc" : "asc",
-      }));
-    }
+  const toggleSortBy = (field: "price") => {
+    setState("price");
+    setParams((prev) => ({
+      ...prev,
+      sortBy: field,
+      sortOrder: prev.sortBy === field && prev.sortOrder === "asc" ? "desc" : "asc",
+    }));
   };
 
   const { posts, totalPages, loading, error } = useGetMyPost(params);
@@ -88,13 +78,6 @@ export const PostList = () => {
           >
             ราคา{" "}
             <span className="ml-2">{params.sortBy === "price" ? (params.sortOrder === "asc" ? "▲" : "▼") : "–"}</span>
-          </button>
-          <button
-            onClick={() => toggleSortBy("popularity")}
-            className="rounded-lg border border-gray-300 bg-white p-2 text-lg"
-          >
-            ความนิยม{" "}
-            <span className="ml-2">{state === "popularity" ? (params.sortOrder === "asc" ? "▲" : "▼") : "–"}</span>
           </button>
         </div>
         <div className="m-2 ml-1.5 flex w-full flex-wrap gap-5 p-2 pt-8 text-lg">

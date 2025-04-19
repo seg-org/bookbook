@@ -53,7 +53,7 @@ function PostCard({ post }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
+                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 50)}
               </div>
               <div>
                 <strong>แท็ก </strong>
