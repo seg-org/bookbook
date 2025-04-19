@@ -2,7 +2,7 @@ import type { MiddlewareConfig, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-import { SessionUser } from "@/lib/auth"; // Import the SessionUser type
+import { SessionUser } from "@/lib/auth";
 
 export async function middleware(request: NextRequest) {
   const token = (await getToken({ req: request })) as SessionUser | null;

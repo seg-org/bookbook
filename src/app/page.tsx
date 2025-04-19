@@ -21,10 +21,10 @@ export default async function Home() {
   const isAdmin = session?.user?.isAdmin;
 
   const links = [
-    { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
     { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
-    { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
     { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
+    { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
+    { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
     { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
   ];
 
