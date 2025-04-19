@@ -35,7 +35,7 @@ test("Login Failure", async ({ page }) => {
 
   // Expect Failure
   await expect(page).toHaveURL("http://localhost:3000/login?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
-  await expect(page.getByText("Invalid credentials")).toBeVisible();
+  await expect(page.getByText("Wrong username or password")).toBeVisible();
 });
 
 async function login(page: Page) {
