@@ -28,7 +28,7 @@ export default async function Home() {
     { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
   ];
 
-  let adminLinks = [];
+  const adminLinks = [];
 
   if (isAdmin) {
     adminLinks.push({ href: "/admin/dashboard", icon: <LayoutDashboard />, text: "แดชบอร์ดผู้ดูแลระบบ" });
