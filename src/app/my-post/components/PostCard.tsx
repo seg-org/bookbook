@@ -1,14 +1,16 @@
 import { Delete, Wrench } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useContext, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
-import { PostContext } from "@/context/postContext";
-import { Post } from "@/data/dto/post.dto";
 import { deletePost, editPost } from "@/data/post";
+import { Post } from "@/data/dto/post.dto";
 
 type PostCardProps = {
   post: Post;
+  onPostChange: () => void;
 };
 
 const cut = (str: string, maxLength: number) => {
@@ -18,9 +20,11 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
-function PostCard({ post }: PostCardProps) {
-  const { refetchPosts } = useContext(PostContext);
+function PostCard({ post, onPostChange }: PostCardProps) {
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
   const [editMode, setEditMode] = useState(false);
+  const router = useRouter();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     price: post.price,
@@ -52,7 +56,7 @@ function PostCard({ post }: PostCardProps) {
       console.error("Error editing post:", error);
     }
     setEditMode(false);
-    refetchPosts?.();
+    await onPostChange();
   };
 
   const onDelete = async (id: string) => {
@@ -67,7 +71,7 @@ function PostCard({ post }: PostCardProps) {
     } catch (error) {
       console.error("Error posting book:", error);
     }
-    refetchPosts?.();
+    await onPostChange();
   };
 
   return (

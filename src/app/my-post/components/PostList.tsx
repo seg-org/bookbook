@@ -10,7 +10,7 @@ import PostCard from "./PostCard";
 
 export const PostList = () => {
   const { data: session } = useSession();
-
+  const [refresh, setRefresh] = useState(0); // used to trigger refetch
   const [priceAsc, setPriceAsc] = useState(1);
   const [sortBy, setSortBy] = useState<{ field: string; order: string } | null>(null); // e.g., { field: "price", order: "asc" }
 
@@ -37,7 +37,7 @@ export const PostList = () => {
         sortOrder: sortBy.order,
       }));
     }
-  }, [sortBy]);
+  }, [sortBy, refresh]);
 
   const { posts, totalPages, loading, error } = useGetMyPost(params);
 
@@ -77,7 +77,7 @@ export const PostList = () => {
         </div>
         <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
           {posts.map((post) => (
-            <PostCard post={post} key={post.id} />
+            <PostCard post={post} key={post.id} onPostChange={() => setRefresh((prev) => prev + 1)} />
           ))}
         </div>
       </div>
