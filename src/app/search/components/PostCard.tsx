@@ -10,12 +10,14 @@ import { IoLogoWechat } from "react-icons/io5";
 import { Button } from "@/components/ui/Button";
 import { PostWithBookmark } from "@/context/postContext";
 import { createChatRoom } from "@/data/chat";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 import { Bookmark } from "./Bookmark";
 
 type PostCardProps = {
   post: PostWithBookmark;
   isRecommended?: boolean;
+  enableBookmark: boolean;
 };
 
 const cut = (s: string, n: number) => {
@@ -25,7 +27,7 @@ const cut = (s: string, n: number) => {
   return s;
 };
 
-function PostCard({ post, isRecommended }: PostCardProps) {
+function PostCard({ post, isRecommended, enableBookmark }: PostCardProps) {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
 
@@ -71,7 +73,7 @@ function PostCard({ post, isRecommended }: PostCardProps) {
           <h3>{post.title}</h3>
           <div className="flex items-center space-x-4">
             <span data-test-id="post-price">{post.price} ฿</span>
-            {isAuthenticated && <Bookmark postId={post.id} />}
+            {isAuthenticated && enableBookmark && <Bookmark postId={post.id} />}
           </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">
@@ -95,7 +97,11 @@ function PostCard({ post, isRecommended }: PostCardProps) {
               </div>
               <div>
                 <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)}
+                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
+              </div>
+              <div>
+                <strong className="font-bold">แท็ก </strong>
+                <span>{cut(post.book.bookTags?.map((key) => bookTagInThai[key]).join(", ") || "", 65)}</span>
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>

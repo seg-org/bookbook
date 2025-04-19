@@ -31,8 +31,6 @@ export async function POST(req: NextRequest) {
 
     const data = {
       ...parsedData.data,
-      specialDescriptions: parsedData.data.specialDescriptions ?? [],
-      damageURLs: parsedData.data.damageURLs ?? [],
     };
 
     const newPost = await prisma.post.create({
@@ -70,17 +68,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
     }
 
-    const { page, limit, sortPrice, ...filters } = validatedParams.data;
-    const orderBy = sortPrice ? { price: sortPrice } : {};
+    const { page, limit, sortBy, sortOrder, ...filters } = validatedParams.data;
+    const orderBy: { [key: string]: "asc" | "desc" }[] = [];
+
+    if (sortBy && sortOrder) {
+      orderBy.push({ [sortBy]: sortOrder });
+    } else {
+      orderBy.push({ createdAt: "desc" }); // default sort
+    }
+
     const skip = (page - 1) * limit;
 
     const bookFilter: Prisma.BookWhereInput = {
       title: filters.title ? { contains: filters.title, mode: "insensitive" } : undefined,
       author: filters.author ? { contains: filters.author, mode: "insensitive" } : undefined,
-      genre: filters.genre ? { contains: filters.genre, mode: "insensitive" } : undefined,
       description: filters.description ? { contains: filters.description, mode: "insensitive" } : undefined,
       isbn: filters.isbn ? { contains: filters.isbn, mode: "insensitive" } : undefined,
       publisher: filters.publisher ? { contains: filters.publisher, mode: "insensitive" } : undefined,
+      pages: {
+        gte: filters.minPages ? filters.minPages : undefined,
+        lte: filters.maxPages ? filters.maxPages : undefined,
+      },
     };
 
     const posts = await prisma.post.findMany({

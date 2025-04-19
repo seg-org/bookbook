@@ -40,6 +40,11 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
 
   const handleSubmitClick = async () => {
     if (!validateInput()) return;
+
+    if (!window.confirm("คุณต้องการยกเลิกการซื้อนี้ใช่หรือไม่? การดำเนินการนี้ไม่สามารถย้อนกลับได้")) {
+      return;
+    }
+
     setSendingStatus("sending");
 
     try {
@@ -55,16 +60,24 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
       }
 
       if (transaction.status === TransactionStatus.HOLD) {
-        const oldDetail = transaction.failData?.detail;
-        const oldEvidenceURL = transaction.failData?.evidenceURL;
+        let oldDetail = transaction.failData?.detail;
+        let oldEvidenceURL = transaction.failData?.evidenceURL;
+
+        if (!oldDetail) oldDetail = [];
+        if (!oldEvidenceURL) oldEvidenceURL = [];
         await updateTransaction({
           id: transaction.id,
           status: "HOLD",
-          detail: oldDetail + "," + details,
-          evidenceURL: oldEvidenceURL + "," + uploadFiles.key,
+          detail: oldDetail?.concat([details]),
+          evidenceURL: oldEvidenceURL.concat([uploadFiles.key]),
         });
       } else {
-        await updateTransaction({ id: transaction.id, status: "HOLD", detail: details, evidenceURL: uploadFiles.key });
+        await updateTransaction({
+          id: transaction.id,
+          status: "HOLD",
+          detail: [details],
+          evidenceURL: [uploadFiles.key],
+        });
       }
       setSendingStatus("success");
     } catch (error) {
