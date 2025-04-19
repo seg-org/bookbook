@@ -28,10 +28,12 @@ export default async function Home() {
     { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
   ];
 
-  const adminLinks = [
-    { href: "/admin/dashboard", icon: <LayoutDashboard />, text: "แดชบอร์ดผู้ดูแลระบบ" },
-    { href: "/admin/view-post", icon: <Store />, text: "ดูโพสต์ทั้งหมด" },
-  ];
+  let adminLinks = [];
+
+  if (isAdmin) {
+    adminLinks.push({ href: "/admin/dashboard", icon: <LayoutDashboard />, text: "แดชบอร์ดผู้ดูแลระบบ" });
+    adminLinks.push({ href: "/admin/view-post", icon: <Store />, text: "ดูโพสต์ทั้งหมด" });
+  }
 
   return (
     <main className="min-h-screen text-gray-900 transition-colors duration-300">

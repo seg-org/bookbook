@@ -55,6 +55,9 @@ function PostCard({ post }: PostCardProps) {
   };
 
   const onDelete = async (id: string) => {
+    const confirmed = window.confirm("คุณแน่ใจหรือไม่ว่าต้องการลบโพสต์นี้?");
+    if (!confirmed) return;
+
     try {
       const res = await deletePost(id);
       if (res instanceof Error) {
