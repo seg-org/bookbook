@@ -3,11 +3,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useContext, useState } from "react";
-import { IoLogoWechat } from "react-icons/io5";
 
 import { Button } from "@/components/ui/Button";
 import { PostContext, PostWithBookmark } from "@/context/postContext";
-import { createChatRoom } from "@/data/chat";
 import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
@@ -22,11 +20,8 @@ const cut = (str: string, maxLength: number) => {
 };
 
 function PostCard({ post }: PostCardProps) {
-  const { data: session, status } = useSession();
   const { refetchPosts } = useContext(PostContext);
-  const isAuthenticated = status === "authenticated";
   const [editMode, setEditMode] = useState(false);
-  const router = useRouter();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     price: post.price,

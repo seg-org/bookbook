@@ -84,7 +84,7 @@ export const deletePost = async (id: string) => {
     console.error(`Failed to delete post with id ${id}`, error);
     return Error(`Failed to delete post with id ${id}`);
   }
-}
+};
 
 export const getMyPosts = async (params: MypostParam) => {
   try {

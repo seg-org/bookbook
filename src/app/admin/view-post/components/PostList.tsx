@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useMemo, useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { PostWithBookmark, usePostContext } from "@/context/postContext";
+import { usePostContext } from "@/context/postContext";
 
 import PostCard from "./PostCard";
 
