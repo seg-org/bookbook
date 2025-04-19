@@ -9,7 +9,7 @@ import { sellerIdCardFolderName } from "@/constants/s3FolderName";
 import { Seller } from "@/data/dto/user.dto";
 import { useToast } from "@/hooks/useToast";
 
-import { getUrl } from "../api/objects/s3";
+import { getUrl } from "@/app/api/objects/s3";
 
 export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
   const [loading, setLoading] = useState<Record<string, boolean>>({});
