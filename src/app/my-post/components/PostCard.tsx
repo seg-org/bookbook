@@ -5,9 +5,10 @@ import { useContext, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { PostContext, PostWithBookmark } from "@/context/postContext";
 import { deletePost, editPost } from "@/data/post";
+import { Post } from "@/data/dto/post.dto";
 
 type PostCardProps = {
-  post: PostWithBookmark;
+  post: Post;
 };
 
 const cut = (str: string, maxLength: number) => {

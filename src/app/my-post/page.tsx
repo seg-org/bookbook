@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
 import { PostList } from "./components/PostList";
+import { Pagination } from "./components/Pagination";
 
 export default async function MyPostPage() {
   const session = await getServerSession(authOptions);
