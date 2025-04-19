@@ -12,4 +12,5 @@ export type Book = {
   coverImageKey: string;
   bookGenres?: GenreType[];
   bookTags?: BookTagType[];
+  recommendPrice?: number;
 };

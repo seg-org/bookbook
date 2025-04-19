@@ -65,7 +65,7 @@ function PostCard({ post }: PostCardProps) {
         console.error(res);
       }
     } catch (error) {
-      console.error("Error posting book:", error);
+      console.error("Error editing post:", error);
     }
     setEditMode(false);
     refetchPosts?.();
@@ -133,10 +133,6 @@ function PostCard({ post }: PostCardProps) {
                 <strong>ผู้เขียน </strong>
                 {cut(post.book.author, 40)}
               </div>
-              {/* <div>
-                <strong>ประเภท </strong>
-                {cut(post.book.bookGenres?, 65)}
-              </div> */}
               <div>
                 <strong>สำนักพิมพ์ </strong>
                 {cut(post.book.publisher, 40)}
@@ -169,9 +165,7 @@ function PostCard({ post }: PostCardProps) {
                   onSubmit(post.id);
                 }}
               >
-                <div className="flex items-center justify-center gap-x-2" onClick={() => onSubmit(post.id)}>
-                  บันทึกการแก้ไข
-                </div>
+                <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>
               </Button>
             </>
           )}

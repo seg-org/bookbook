@@ -10,7 +10,6 @@ export const PostList = () => {
   const { data: session } = useSession();
 
   const [priceAsc, setPriceAsc] = useState(1);
-  const [popAsc, setPopAsc] = useState(1);
   const [sortBy, setSortBy] = useState<{ field: string; order: string } | null>(null); // e.g., { field: "price", order: "asc" }
 
   const { posts, recommendedPosts, loading, error } = usePostContext();
@@ -26,26 +25,10 @@ export const PostList = () => {
     return filteredRecommendedPosts;
   }, [recommendedPosts, session?.user.id]);
 
-  const getPopularityScore = (post: PostWithBookmark) => {
-    const idStr = String(post.id);
-    let hash = 0;
-    for (const char of idStr) {
-      hash = (hash << 5) - hash + char.charCodeAt(0);
-      hash |= 0;
-    }
-    return Math.abs(hash);
-  };
-
   const handleSortPrice = () => {
     const newOrder = priceAsc === 1 ? "desc" : "asc";
     setSortBy({ field: "price", order: newOrder });
     setPriceAsc(-1 * priceAsc);
-  };
-
-  const handleSortPopularity = () => {
-    const newOrder = popAsc === 1 ? "desc" : "asc";
-    setSortBy({ field: "popularity", order: newOrder });
-    setPopAsc(-1 * popAsc);
   };
 
   const sortedPosts = useMemo(() => {
@@ -57,9 +40,6 @@ export const PostList = () => {
       if (field === "price") {
         valA = a.price;
         valB = b.price;
-      } else if (field === "popularity") {
-        valA = getPopularityScore(a);
-        valB = getPopularityScore(b);
       } else {
         return 0;
       }
@@ -96,9 +76,6 @@ export const PostList = () => {
             data-test-id="sort-by-price"
           >
             ราคา <span className="ml-2">{priceAsc === 1 ? "▲" : "▼"}</span>
-          </button>
-          <button onClick={handleSortPopularity} className="rounded-lg border border-gray-300 bg-white p-2 text-lg">
-            ความนิยม <span className="ml-2">{popAsc === 1 ? "▲" : "▼"}</span>
           </button>
         </div>
         <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">

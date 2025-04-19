@@ -2,6 +2,8 @@ import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { TransactionFailType } from "@prisma/client";
 import { z } from "zod";
 
+import { beginningOfTime, endOfTime } from "@/constants/date";
+
 import { UserResponse } from "../auth/schemas";
 import { PostResponse } from "../posts/schemas";
 import { ReviewResponse } from "../reviews/schemas";
@@ -13,9 +15,6 @@ import {
 } from "../transaction/transaction_enum";
 
 extendZodWithOpenApi(z);
-
-const beginningOfTime = new Date("0000-01-01T00:00:00Z");
-const endOfTime = new Date("9999-12-31T23:59:59Z");
 
 const parseToBoolean = (dft: boolean) => {
   return (val: string | undefined) => (val ? val == "true" : dft);

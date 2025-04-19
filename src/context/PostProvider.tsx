@@ -16,7 +16,12 @@ import { PostContext } from "./postContext";
 
 export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
   const { data: session } = useSession();
-  const [postsFilters, setPostsFilters] = useState<GetPostsFilters>({ page: 1, limit: 10, sortPrice: "asc" });
+  const [postsFilters, setPostsFilters] = useState<GetPostsFilters>({
+    page: 1,
+    limit: 10,
+    sortBy: "createdAt", // default to sort by most recent
+    sortOrder: "desc",
+  });
 
   const {
     posts,

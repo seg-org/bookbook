@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-
 import { authOptions } from "@/lib/auth";
 
 export default async function Home() {
@@ -28,13 +27,10 @@ export default async function Home() {
     { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
   ];
 
-  if (isAdmin) {
-    links.push({
-      href: "/admin/dashboard",
-      icon: <LayoutDashboard />,
-      text: "แดชบอร์ดผู้ดูแลระบบ",
-    });
-  }
+  const adminLinks = [
+    { href: "/admin/dashboard", icon: <LayoutDashboard />, text: "แดชบอร์ดผู้ดูแลระบบ" },
+    { href: "/admin/view-post", icon: <Store />, text: "ดูโพสต์ทั้งหมด" },
+  ];
 
   return (
     <main className="min-h-screen text-gray-900 transition-colors duration-300">
@@ -98,17 +94,7 @@ export default async function Home() {
             </h2>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                // { href: "/search", icon: <Search />, text: "🔍 ค้นหาหนังสือ" },
-                { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
-                // { href: "/my-books", icon: <BookMarked />, text: "📚 รายการหนังสือของฉัน" },
-                // { href: "/potential-matches", icon: <Handshake />, text: "🤝 แนะนำผู้ซื้อที่ตรงกับคุณ" },
-                { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
-                // { href: "/checkout", icon: <ShoppingCart />, text: "ทำการสั่งซื้อ (Checkout)" },
-                // { href: "/order-status", icon: <Package />, text: "การซื้อของฉัน (Order status)" },
-                { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
-                { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
-              ].map((item, index) => (
+              {links.map((item, index) => (
                 <Link
                   key={index}
                   href={item.href}
@@ -123,22 +109,8 @@ export default async function Home() {
                 </Link>
               ))}
 
-              <Link
-                href={session?.user.isAdmin ? "/admin/view-post" : "/my-post"}
-                className="group flex items-center rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
-              >
-                <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                  <Store />
-                </div>
-                <span className="font-medium text-gray-700 transition-colors duration-300 group-hover:text-blue-600">
-                  {session?.user.isAdmin ? "ดูโพสต์ทั้งหมด" : "โพสต์ของฉัน"}
-                </span>
-              </Link>
-
-              {links.map((item, index) => {
-                const isAdminLink = item.href === "/admin/dashboard";
-
-                return (
+              {isAdmin &&
+                adminLinks.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
@@ -152,15 +124,11 @@ export default async function Home() {
                         {item.text}
                       </span>
                     </div>
-
-                    {isAdminLink && (
-                      <span className="ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-yellow-900 shadow-sm">
-                        ADMIN
-                      </span>
-                    )}
+                    <span className="ml-2 rounded-full bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-yellow-900 shadow-sm">
+                      ADMIN
+                    </span>
                   </Link>
-                );
-              })}
+                ))}
             </div>
           </div>
         </div>

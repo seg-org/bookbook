@@ -83,6 +83,7 @@ model Book {
   posts         Post[]
   bookGenres    GenreType[]
   bookTags      BookTagType[]
+  recommendPrice  Float?
   // TODO verifiedBy Admin
 
   @@map("books")

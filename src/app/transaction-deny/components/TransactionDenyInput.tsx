@@ -40,6 +40,11 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
 
   const handleSubmitClick = async () => {
     if (!validateInput()) return;
+
+    if (!window.confirm("คุณต้องการยกเลิกการซื้อนี้ใช่หรือไม่? การดำเนินการนี้ไม่สามารถย้อนกลับได้")) {
+      return;
+    }
+
     setSendingStatus("sending");
 
     try {

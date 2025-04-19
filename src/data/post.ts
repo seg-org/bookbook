@@ -1,6 +1,8 @@
 import { AxiosResponse } from "axios";
 import { z } from "zod";
 
+import { MypostParam } from "@/hooks/useGetAllPosts";
+
 import { GetPostsRequest } from "../app/api/posts/schemas";
 import { apiClient } from "./axios";
 import { GetPostsResponse, Post } from "./dto/post.dto";
@@ -81,5 +83,17 @@ export const deletePost = async (id: string) => {
   } catch (error) {
     console.error(`Failed to delete post with id ${id}`, error);
     return Error(`Failed to delete post with id ${id}`);
+  }
+}
+
+export const getMyPosts = async (params: MypostParam) => {
+  try {
+    const res: AxiosResponse<GetPostsResponse> = await apiClient.get(
+      `/posts/get-own-posts?page=${params.page}&limit=${params.limit}&sortBy=${params.sortBy}&sortOrder=${params.sortOrder}&author=${params.author}`,
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to get all posts", error);
+    return Error("Failed to get all posts");
   }
 };

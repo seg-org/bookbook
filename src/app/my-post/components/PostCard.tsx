@@ -1,11 +1,14 @@
-import { Wrench } from "lucide-react";
+import { Delete, Wrench } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useContext, useState } from "react";
+import { IoLogoWechat } from "react-icons/io5";
 
 import { Button } from "@/components/ui/Button";
 import { PostContext, PostWithBookmark } from "@/context/postContext";
-import { editPost } from "@/data/post";
-import { bookTagInThai, genreInThai } from "@/lib/translation";
+import { createChatRoom } from "@/data/chat";
+import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
   post: PostWithBookmark;
@@ -19,8 +22,11 @@ const cut = (str: string, maxLength: number) => {
 };
 
 function PostCard({ post }: PostCardProps) {
-  const [editMode, setEditMode] = useState(false);
+  const { data: session, status } = useSession();
   const { refetchPosts } = useContext(PostContext);
+  const isAuthenticated = status === "authenticated";
+  const [editMode, setEditMode] = useState(false);
+  const router = useRouter();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     price: post.price,
@@ -33,19 +39,6 @@ function PostCard({ post }: PostCardProps) {
     bookId: post.bookId,
   };
 
-  const onSubmit = async (id: string) => {
-    try {
-      const res = await editPost(editedPost, id);
-      if (res instanceof Error) {
-        console.error(res);
-      }
-    } catch (error) {
-      console.error("Error posting book:", error);
-    }
-    setEditMode(false);
-    refetchPosts?.();
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === "price") {
@@ -53,6 +46,31 @@ function PostCard({ post }: PostCardProps) {
     } else {
       setEditedPost((prev) => ({ ...prev, [name]: value }));
     }
+  };
+
+  const onSubmit = async (id: string) => {
+    try {
+      const res = await editPost(editedPost, id);
+      if (res instanceof Error) {
+        console.error(res);
+      }
+    } catch (error) {
+      console.error("Error editing post:", error);
+    }
+    setEditMode(false);
+    refetchPosts?.();
+  };
+
+  const onDelete = async (id: string) => {
+    try {
+      const res = await deletePost(id);
+      if (res instanceof Error) {
+        console.error(res);
+      }
+    } catch (error) {
+      console.error("Error posting book:", error);
+    }
+    refetchPosts?.();
   };
 
   return (
@@ -106,14 +124,6 @@ function PostCard({ post }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                <strong>ประเภท </strong>
-                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
-              </div>
-              <div>
-                <strong>แท็ก </strong>
-                {cut(post.book.bookTags?.map((key) => bookTagInThai[key]).join(", ") || "", 65)}
-              </div>
-              <div>
                 <strong>สำนักพิมพ์ </strong>
                 {cut(post.book.publisher, 40)}
               </div>
@@ -136,18 +146,29 @@ function PostCard({ post }: PostCardProps) {
               <Button
                 variant="default"
                 className="text-green-500 hover:bg-green-500 hover:text-white"
-                onClick={() => onSubmit(post.id)}
+                onClick={() => {
+                  onSubmit(post.id);
+                }}
               >
                 <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>
               </Button>
             </>
           )}
           {!editMode && (
-            <Button variant="default" onClick={() => setEditMode(true)} className="bg-yellow-500 hover:bg-yellow-700">
-              <div className="flex items-center justify-center gap-x-2" onClick={() => setEditMode(true)}>
-                <Wrench className="h-6 w-6" /> แก้ไขข้อมูลโพสต์
-              </div>
-            </Button>
+            <>
+              <Button variant="default" className="bg-red-500 hover:bg-red-700" onClick={() => onDelete(post.id)}>
+                <div className="flex items-center justify-center gap-x-2">
+                  ลบโพสต์นี้
+                  <Delete className="h-6 w-6" />
+                </div>
+              </Button>
+              <Button variant="default" onClick={() => setEditMode(true)} className="bg-yellow-500 hover:bg-yellow-700">
+                <div className="flex items-center justify-center gap-x-2">
+                  <Wrench className="h-6 w-6" />
+                  แก้ไขข้อมูลโพสต์
+                </div>
+              </Button>
+            </>
           )}
         </div>
       </div>

@@ -119,7 +119,7 @@ export async function GET(req: NextRequest) {
         ...(parsedData.data.sortBy
           ? {
               ...(parsedData.data.sortBy == "createdAt" ? { createdAt: "desc" } : {}),
-              ...(parsedData.data.sortBy == "updatedAt" ? { createdAt: "asc" } : {}),
+              ...(parsedData.data.sortBy == "updatedAt" ? { updatedAt: "asc" } : {}),
             }
           : { createdAt: "desc" }),
       },

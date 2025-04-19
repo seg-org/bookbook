@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
 
-import { Pagination } from "./components/Pagination";
 import { PostList } from "./components/PostList";
 
 export default async function MyPostPage() {
@@ -20,7 +19,6 @@ export default async function MyPostPage() {
         <div className="mt-8 p-3 text-4xl font-bold"> หน้าร้านของคุณ</div>
         <div className="m-1 flex flex-col items-center p-2">
           <PostList />
-          <Pagination />
         </div>
       </div>
     </>
