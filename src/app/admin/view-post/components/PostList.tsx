@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
@@ -8,13 +8,13 @@ import { usePostContext } from "@/context/postContext";
 import PostCard from "./PostCard";
 
 export const PostList = () => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const isAuthenticated = status === "authenticated";
 
   const [priceAsc, setPriceAsc] = useState(1);
   const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
 
-  const { posts, recommendedPosts, loading, error, setPostsFilters } = usePostContext();
+  const { posts, loading, error, setPostsFilters } = usePostContext();
 
   const handleSortPrice = () => {
     const newOrder = priceAsc === 1 ? "desc" : "asc";
