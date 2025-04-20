@@ -55,13 +55,21 @@ export async function sendVerificationSMS(phoneNumber: string, code: string): Pr
     webhookPayload.status = "sent";
     webhookPayload.messageId = message.sid;
     webhookPayload.timestamp = new Date().toISOString();
-  } catch (error: Error) {
-    console.error("Failed to send SMS:", (error as any).code, error.message);
+  } catch (error: unknown) {
+    const errorCode = "unknown";
+    let errorMessage = "Unknown error";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    console.error("Failed to send SMS:", errorMessage);
+
     // Update webhook payload with error details
     webhookPayload.status = "failed";
     webhookPayload.error = {
-      code: (error as any).code || "unknown",
-      message: error.message || "Unknown error",
+      code: errorCode,
+      message: errorMessage,
     };
     // Don't throw error for unregistered numbers
   }
