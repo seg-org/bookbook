@@ -1,4 +1,5 @@
 import nodemailer, { Transporter } from "nodemailer";
+
 import { sendWebhook, WebhookPayload } from "./webhook";
 
 const transporter: Transporter = nodemailer.createTransport({
