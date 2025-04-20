@@ -40,7 +40,7 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     return NextResponse.json(updatedSellerProfile);
   } catch (error) {
-    console.error("Error updating seller profile:", error);
+    console.error("Error updating seller profile: ", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
