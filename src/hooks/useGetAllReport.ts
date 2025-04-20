@@ -6,6 +6,7 @@ import { getAllReport } from "@/data/report";
 
 type ReportType = {
   id: string;
+  reporterId:string;
   createdAt: Date;
   reason: string;
   reporter: {

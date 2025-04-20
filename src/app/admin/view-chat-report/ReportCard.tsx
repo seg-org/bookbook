@@ -1,11 +1,16 @@
+import { useRouter } from "next/navigation"; // for App Router
+
 import { format } from "date-fns";
 
 import { Button } from "@/components/ui/Button";
+import { useGetChatMessages } from "@/hooks/useGetChatMessages";
+import { ChatMessage } from "@prisma/client";
 
 type ReportType = {
   id: string;
   createdAt: Date;
   reason: string;
+  reporterId: string;
   reporter: {
     firstName: string;
     lastName: string;
@@ -23,9 +28,23 @@ type ReportCardProps = {
   handleShowChat: (roomId: string) => void;
 };
 
-const banUser = (id: string) => {};
-
 const ReportCard = ({ report, handleShowChat }: ReportCardProps) => {
+  const router = useRouter();
+  const { chatMessages, loading: chatLoading } = useGetChatMessages(report.roomId || "");
+  let reportedUserId = "";
+
+  for (const msg of chatMessages) {
+    if (msg.senderId !== report.reporterId) {
+      reportedUserId = msg.senderId;
+      break;
+    }
+  }
+  console.log(reportedUserId, 55555);
+
+  const banUser = (id: string) => {
+    router.push(`/admin/users/${reportedUserId}`);
+  };
+
   return (
     <div key={report.id} className="rounded-lg border border-gray-300 p-4 shadow-sm transition hover:shadow-md">
       <div className="mb-2">
@@ -45,7 +64,9 @@ const ReportCard = ({ report, handleShowChat }: ReportCardProps) => {
         <Button className="mx-1" onClick={() => handleShowChat(report.room.id)}>
           แสดงแชท
         </Button>
-        <Button className="mx-1 bg-red-500 hover:bg-red-600">แบนผู้ใช้</Button>
+        <Button className="mx-1 bg-red-500 hover:bg-red-600" onClick={() => banUser(report.reporter.email)}>
+          แบนผู้ใช้
+        </Button>
       </div>
     </div>
   );

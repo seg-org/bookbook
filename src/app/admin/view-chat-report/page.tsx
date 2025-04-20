@@ -16,6 +16,7 @@ export default function ChatReportsPage() {
 
   const { chatMessages, loading: chatLoading } = useGetChatMessages(selectedRoomId || "");
   const selectedUser = chatMessages.at(0)?.senderId;
+
   const handleShowChat = (roomId: string) => {
     setClickedChat(true);
     setSelectedRoomId(roomId);

@@ -46,11 +46,7 @@ importers:
         version: 0.27.3
       ably:
         specifier: ^2.6.3
-<<<<<<< HEAD
-        version: 2.6.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-=======
-        version: 2.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
->>>>>>> main
+        version: 2.7.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       axios:
         specifier: ^1.8.3
         version: 1.8.4
@@ -68,11 +64,7 @@ importers:
         version: 4.1.0
       framer-motion:
         specifier: ^12.4.7
-<<<<<<< HEAD
-        version: 12.6.2(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-=======
-        version: 12.7.4(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
->>>>>>> main
+        version: 12.7.4(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       immer:
         specifier: ^10.1.1
         version: 10.1.1
@@ -84,23 +76,13 @@ importers:
         version: 0.483.0(react@19.0.0)
       next:
         specifier: 15.2.4
-<<<<<<< HEAD
-        version: 15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3)
+        version: 15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3)
       next-auth:
         specifier: ^4.24.11
-        version: 4.24.11(next@15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(nodemailer@6.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 4.24.11(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(nodemailer@6.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-swagger-doc:
         specifier: ^0.4.1
-        version: 0.4.1(next@15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(openapi-types@12.1.3)
-=======
-        version: 15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3)
-      next-auth:
-        specifier: ^4.24.11
-        version: 4.24.11(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(nodemailer@6.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      next-swagger-doc:
-        specifier: ^0.4.1
-        version: 0.4.1(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(openapi-types@12.1.3)
->>>>>>> main
+        version: 0.4.1(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(openapi-types@12.1.3)
       nodemailer:
         specifier: ^6.10.0
         version: 6.10.0
@@ -497,19 +479,11 @@ packages:
   '@cucumber/tag-expressions@6.1.1':
     resolution: {integrity: sha512-0oj5KTzf2DsR3DhL3hYeI9fP3nyKzs7TQdpl54uJelJ3W3Hlyyet2Hib+8LK7kNnqJsXENnJg9zahRYyrtvNEg==}
 
-<<<<<<< HEAD
-  '@emnapi/core@1.3.1':
-    resolution: {integrity: sha512-pVGjBIt1Y6gg3EJN8jTcfpP/+uuRksIo055oE/OBkDNcjZqVbfkWCksG1Jp4yZnj3iKWyWX8fdG/j6UDYPbFog==}
-
-  '@emnapi/runtime@1.3.1':
-    resolution: {integrity: sha512-kEBmG8KyqtxJZv+ygbEim+KCGtIq1fC22Ms3S4ziXmYKm8uyoLX0MHONVKwp+9opg390VaKRNt4a7A9NwmpNhw==}
-=======
   '@emnapi/core@1.4.3':
     resolution: {integrity: sha512-4m62DuCE07lw01soJwPiBGC0nAww0Q+RY70VZ+n49yDIO13yyinhbWCeNnaob0lakDtWQzSdtNWzJeOJt2ma+g==}
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
->>>>>>> main
 
   '@emnapi/wasi-threads@1.0.2':
     resolution: {integrity: sha512-5n3nTJblwRi8LlXkJ9eBzu+kZR8Yxcc7ubakyQTFzPMtIhFpUBRbsnc2Dv88IZDIbCDlBiWrknhB4Lsz7mg6BA==}
@@ -673,13 +647,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-<<<<<<< HEAD
-  '@eslint-community/eslint-utils@4.5.1':
-    resolution: {integrity: sha512-soEIOALTfTK6EjmKMMoLugwaP0rzkad90iIWd1hMO9ARkSAyjfMfkRRhLvD5qH7vvM0Cg72pieUfR6yh6XxC4w==}
-=======
   '@eslint-community/eslint-utils@4.6.1':
     resolution: {integrity: sha512-KTsJMmobmbrFLe3LDh0PC2FXpcSYJt/MLjlkh/9LEnmKYLSYmT/0EW9JWANjeoemiuZrmogti0tW5Ch+qNUYDw==}
->>>>>>> main
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
@@ -885,13 +854,8 @@ packages:
     resolution: {integrity: sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==}
     hasBin: true
 
-<<<<<<< HEAD
-  '@napi-rs/wasm-runtime@0.2.7':
-    resolution: {integrity: sha512-5yximcFK5FNompXfJFoWanu5l8v1hNGqNHh9du1xETp9HWk/B/PzvchX55WYOPaIeNglG8++68AAiauBAtbnzw==}
-=======
   '@napi-rs/wasm-runtime@0.2.9':
     resolution: {integrity: sha512-OKRBiajrrxB9ATokgEQoG87Z25c67pCpYcCwmXYX8PBftC9pBfN18gnm/fh1wurSLEKIAt+QRFLFCQISrb66Jg==}
->>>>>>> main
 
   '@next/env@15.2.4':
     resolution: {integrity: sha512-+SFtMgoiYP3WoSswuNmxJOCwi06TdWE733D+WPjpXIe4LXGULwEaofiiAy6kbS0+XjM5xF5n3lKuBwN2SnqD9g==}
@@ -1052,13 +1016,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-<<<<<<< HEAD
-  '@pkgr/core@0.2.0':
-    resolution: {integrity: sha512-vsJDAkYR6qCPu+ioGScGiMYR7LvZYIXh/dlQeviqoTWNCVfKTLYD/LkNWH4Mxsv2a5vpIRc77FN5DnmK1eBggQ==}
-=======
   '@pkgr/core@0.2.4':
     resolution: {integrity: sha512-ROFF39F6ZrnzSUEmQQZUar0Jt4xVoP9WnDRdWwF4NNcXs3xBTLgBUDoOwW141y1jP+S8nahIbdxbFC7IShw9Iw==}
->>>>>>> main
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
   '@playwright/test@1.52.0':
@@ -1964,13 +1923,8 @@ packages:
   camelize@1.0.1:
     resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
 
-<<<<<<< HEAD
-  caniuse-lite@1.0.30001707:
-    resolution: {integrity: sha512-3qtRjw/HQSMlDWf+X79N206fepf4SOOU6SQLMaq/0KkZLmSjPxAkBOQQ+FxbHKfHmYLZFfdWsO3KA90ceHPSnw==}
-=======
   caniuse-lite@1.0.30001714:
     resolution: {integrity: sha512-mtgapdwDLSSBnCI3JokHM7oEQBLxiJKVRtg10AxM1AyeiKcM96f0Mkbqeq+1AbiCtvMcHRulAAEMu693JrSWqg==}
->>>>>>> main
 
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
@@ -2531,13 +2485,8 @@ packages:
     resolution: {integrity: sha512-hGfm/slu0ZabnNt4oaRZ6uREyfCj6P4fT/n6A1rGV+Z0VdGXjfOhVUpkn6qVQONHGIFwmveGXyDs75+nr6FM8w==}
     engines: {node: '>= 6'}
 
-<<<<<<< HEAD
-  framer-motion@12.6.2:
-    resolution: {integrity: sha512-7LgPRlPs5aG8UxeZiMCMZz8firC53+2+9TnWV22tuSi38D3IFRxHRUqOREKckAkt6ztX+Dn6weLcatQilJTMcg==}
-=======
   framer-motion@12.7.4:
     resolution: {integrity: sha512-jX0bPsTmU0oPZTYz/dVyD0dmOyEOEJvdn0TaZBE5I8g2GvVnnQnW9f65cJnoVfUkY3WZWNXGXnPbVA9YnaIfVA==}
->>>>>>> main
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -3189,16 +3138,11 @@ packages:
   mobx@6.13.7:
     resolution: {integrity: sha512-aChaVU/DO5aRPmk1GX8L+whocagUUpBQqoPtJk+cm7UOXUk87J4PeWCh6nNmTTIfEhiR9DI/+FnA8dln/hTK7g==}
 
-<<<<<<< HEAD
-  motion-dom@12.6.1:
-    resolution: {integrity: sha512-8XVsriTUEVOepoIDgE/LDGdg7qaKXWdt+wQA/8z0p8YzJDLYL8gbimZ3YkCLlj7bB2i/4UBD/g+VO7y9ZY0zHQ==}
-=======
   motion-dom@12.7.4:
     resolution: {integrity: sha512-1ZUHAoSUMMxP6jPqyxlk9XUfb6NxMsnWPnH2YGhrOhTURLcXWbETi6eemoKb60Pe32NVJYduL4B62VQSO5Jq8Q==}
->>>>>>> main
 
-  motion-utils@12.5.0:
-    resolution: {integrity: sha512-+hFFzvimn0sBMP9iPxBa9OtRX35ZQ3py0UHnb8U29VD+d8lQ8zH3dTygJWqK7av2v6yhg7scj9iZuvTS0f4+SA==}
+  motion-utils@12.7.2:
+    resolution: {integrity: sha512-XhZwqctxyJs89oX00zn3OGCuIIpVevbTa+u82usWBC6pSHUd2AoNWiYa7Du8tJxJy9TFbZ82pcn5t7NOm1PHAw==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -4265,13 +4209,8 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
 
-<<<<<<< HEAD
-  type-fest@4.38.0:
-    resolution: {integrity: sha512-2dBz5D5ycHIoliLYLi0Q2V7KRaDlH0uWIvmk7TYlAg5slqwiPv1ezJdZm1QEM0xgk29oYWMCbIG7E6gHpvChlg==}
-=======
   type-fest@4.40.0:
     resolution: {integrity: sha512-ABHZ2/tS2JkvH1PEjxFDTUWC8dB5OsIGZP4IFLhR293GqT5Y5qB1WwL2kMPYhQW9DVgVD8Hd7I8gjwPIf5GFkw==}
->>>>>>> main
     engines: {node: '>=16'}
 
   type-flag@3.0.0:
@@ -5093,11 +5032,7 @@ snapshots:
       string-argv: 0.3.1
       supports-color: 8.1.1
       tmp: 0.2.3
-<<<<<<< HEAD
-      type-fest: 4.38.0
-=======
       type-fest: 4.40.0
->>>>>>> main
       util-arity: 1.1.0
       yaml: 2.7.0
       yup: 1.2.0
@@ -5170,21 +5105,13 @@ snapshots:
 
   '@cucumber/tag-expressions@6.1.1': {}
 
-<<<<<<< HEAD
-  '@emnapi/core@1.3.1':
-=======
   '@emnapi/core@1.4.3':
->>>>>>> main
     dependencies:
       '@emnapi/wasi-threads': 1.0.2
       tslib: 2.8.1
     optional: true
 
-<<<<<<< HEAD
-  '@emnapi/runtime@1.3.1':
-=======
   '@emnapi/runtime@1.4.3':
->>>>>>> main
     dependencies:
       tslib: 2.8.1
     optional: true
@@ -5277,11 +5204,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.1':
     optional: true
 
-<<<<<<< HEAD
-  '@eslint-community/eslint-utils@4.5.1(eslint@9.23.0(jiti@1.21.7))':
-=======
-  '@eslint-community/eslint-utils@4.6.1(eslint@9.24.0(jiti@1.21.7))':
->>>>>>> main
+  '@eslint-community/eslint-utils@4.6.1(eslint@9.23.0(jiti@1.21.7))':
     dependencies:
       eslint: 9.23.0(jiti@1.21.7)
       eslint-visitor-keys: 3.4.3
@@ -5412,11 +5335,7 @@ snapshots:
 
   '@img/sharp-wasm32@0.33.5':
     dependencies:
-<<<<<<< HEAD
-      '@emnapi/runtime': 1.3.1
-=======
       '@emnapi/runtime': 1.4.3
->>>>>>> main
     optional: true
 
   '@img/sharp-win32-ia32@0.33.5':
@@ -5473,17 +5392,10 @@ snapshots:
       - encoding
       - supports-color
 
-<<<<<<< HEAD
-  '@napi-rs/wasm-runtime@0.2.7':
-    dependencies:
-      '@emnapi/core': 1.3.1
-      '@emnapi/runtime': 1.3.1
-=======
   '@napi-rs/wasm-runtime@0.2.9':
     dependencies:
       '@emnapi/core': 1.4.3
       '@emnapi/runtime': 1.4.3
->>>>>>> main
       '@tybys/wasm-util': 0.9.0
     optional: true
 
@@ -5597,11 +5509,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-<<<<<<< HEAD
-  '@pkgr/core@0.2.0': {}
-=======
   '@pkgr/core@0.2.4': {}
->>>>>>> main
 
   '@playwright/test@1.52.0':
     dependencies:
@@ -6297,21 +6205,12 @@ snapshots:
 
   '@typescript-eslint/utils@8.28.0(eslint@9.23.0(jiti@1.21.7))(typescript@5.8.2)':
     dependencies:
-<<<<<<< HEAD
-      '@eslint-community/eslint-utils': 4.5.1(eslint@9.23.0(jiti@1.21.7))
+      '@eslint-community/eslint-utils': 4.6.1(eslint@9.23.0(jiti@1.21.7))
       '@typescript-eslint/scope-manager': 8.28.0
       '@typescript-eslint/types': 8.28.0
       '@typescript-eslint/typescript-estree': 8.28.0(typescript@5.8.2)
       eslint: 9.23.0(jiti@1.21.7)
       typescript: 5.8.2
-=======
-      '@eslint-community/eslint-utils': 4.6.1(eslint@9.24.0(jiti@1.21.7))
-      '@typescript-eslint/scope-manager': 8.30.1
-      '@typescript-eslint/types': 8.30.1
-      '@typescript-eslint/typescript-estree': 8.30.1(typescript@5.8.3)
-      eslint: 9.24.0(jiti@1.21.7)
-      typescript: 5.8.3
->>>>>>> main
     transitivePeerDependencies:
       - supports-color
 
@@ -6355,11 +6254,7 @@ snapshots:
 
   '@unrs/resolver-binding-wasm32-wasi@1.3.2':
     dependencies:
-<<<<<<< HEAD
-      '@napi-rs/wasm-runtime': 0.2.7
-=======
       '@napi-rs/wasm-runtime': 0.2.9
->>>>>>> main
     optional: true
 
   '@unrs/resolver-binding-win32-arm64-msvc@1.3.2':
@@ -6383,11 +6278,7 @@ snapshots:
 
   abbrev@1.1.1: {}
 
-<<<<<<< HEAD
-  ably@2.6.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
-=======
-  ably@2.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
->>>>>>> main
+  ably@2.7.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@ably/msgpack-js': 0.4.0
       fastestsmallesttextencoderdecoder: 1.0.22
@@ -6647,11 +6538,7 @@ snapshots:
 
   camelize@1.0.1: {}
 
-<<<<<<< HEAD
-  caniuse-lite@1.0.30001707: {}
-=======
   caniuse-lite@1.0.30001714: {}
->>>>>>> main
 
   capital-case@1.0.4:
     dependencies:
@@ -7190,11 +7077,7 @@ snapshots:
 
   eslint@9.23.0(jiti@1.21.7):
     dependencies:
-<<<<<<< HEAD
-      '@eslint-community/eslint-utils': 4.5.1(eslint@9.23.0(jiti@1.21.7))
-=======
-      '@eslint-community/eslint-utils': 4.6.1(eslint@9.24.0(jiti@1.21.7))
->>>>>>> main
+      '@eslint-community/eslint-utils': 4.6.1(eslint@9.23.0(jiti@1.21.7))
       '@eslint-community/regexpp': 4.12.1
       '@eslint/config-array': 0.19.2
       '@eslint/config-helpers': 0.2.0
@@ -7346,17 +7229,10 @@ snapshots:
       es-set-tostringtag: 2.1.0
       mime-types: 2.1.35
 
-<<<<<<< HEAD
-  framer-motion@12.6.2(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
-    dependencies:
-      motion-dom: 12.6.1
-      motion-utils: 12.5.0
-=======
-  framer-motion@12.7.4(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  framer-motion@12.7.4(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       motion-dom: 12.7.4
       motion-utils: 12.7.2
->>>>>>> main
       tslib: 2.8.1
     optionalDependencies:
       '@emotion/is-prop-valid': 1.2.2
@@ -7985,15 +7861,11 @@ snapshots:
 
   mobx@6.13.7: {}
 
-<<<<<<< HEAD
-  motion-dom@12.6.1:
-=======
   motion-dom@12.7.4:
->>>>>>> main
     dependencies:
-      motion-utils: 12.5.0
+      motion-utils: 12.7.2
 
-  motion-utils@12.5.0: {}
+  motion-utils@12.7.2: {}
 
   ms@2.1.3: {}
 
@@ -8007,21 +7879,13 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-<<<<<<< HEAD
-  next-auth@4.24.11(next@15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(nodemailer@6.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
-=======
-  next-auth@4.24.11(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(nodemailer@6.10.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
->>>>>>> main
+  next-auth@4.24.11(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(nodemailer@6.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@babel/runtime': 7.27.0
       '@panva/hkdf': 1.2.1
       cookie: 0.7.2
       jose: 4.15.9
-<<<<<<< HEAD
-      next: 15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3)
-=======
-      next: 15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3)
->>>>>>> main
+      next: 15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3)
       oauth: 0.9.15
       openid-client: 5.7.1
       preact: 10.26.4
@@ -8032,39 +7896,23 @@ snapshots:
     optionalDependencies:
       nodemailer: 6.10.0
 
-<<<<<<< HEAD
-  next-swagger-doc@0.4.1(next@15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(openapi-types@12.1.3):
-=======
-  next-swagger-doc@0.4.1(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(openapi-types@12.1.3):
->>>>>>> main
+  next-swagger-doc@0.4.1(next@15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))(openapi-types@12.1.3):
     dependencies:
       '@types/swagger-jsdoc': 6.0.4
       cleye: 1.3.2
       isarray: 2.0.5
-<<<<<<< HEAD
-      next: 15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3)
-=======
-      next: 15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3)
->>>>>>> main
+      next: 15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3)
       swagger-jsdoc: 6.2.8(openapi-types@12.1.3)
     transitivePeerDependencies:
       - openapi-types
 
-<<<<<<< HEAD
-  next@15.2.4(@playwright/test@1.51.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3):
-=======
-  next@15.2.4(@playwright/test@1.52.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3):
->>>>>>> main
+  next@15.2.4(@playwright/test@1.52.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3):
     dependencies:
       '@next/env': 15.2.4
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
-<<<<<<< HEAD
-      caniuse-lite: 1.0.30001707
-=======
       caniuse-lite: 1.0.30001714
->>>>>>> main
       postcss: 8.4.31
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
@@ -8278,13 +8126,8 @@ snapshots:
   parse-json@8.2.0:
     dependencies:
       '@babel/code-frame': 7.26.2
-<<<<<<< HEAD
       index-to-position: 1.0.0
-      type-fest: 4.38.0
-=======
-      index-to-position: 1.1.0
       type-fest: 4.40.0
->>>>>>> main
 
   path-browserify@1.0.1: {}
 
@@ -8524,23 +8367,14 @@ snapshots:
     dependencies:
       find-up-simple: 1.0.1
       read-pkg: 9.0.1
-<<<<<<< HEAD
-      type-fest: 4.38.0
-=======
       type-fest: 4.40.0
->>>>>>> main
 
   read-pkg@9.0.1:
     dependencies:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
-<<<<<<< HEAD
       parse-json: 8.2.0
-      type-fest: 4.38.0
-=======
-      parse-json: 8.3.0
       type-fest: 4.40.0
->>>>>>> main
       unicorn-magic: 0.1.0
 
   readable-stream@2.3.8:
@@ -9052,11 +8886,7 @@ snapshots:
 
   synckit@0.11.1:
     dependencies:
-<<<<<<< HEAD
-      '@pkgr/core': 0.2.0
-=======
       '@pkgr/core': 0.2.4
->>>>>>> main
       tslib: 2.8.1
 
   tailwind-merge@3.0.2: {}
@@ -9186,11 +9016,7 @@ snapshots:
 
   type-fest@2.19.0: {}
 
-<<<<<<< HEAD
-  type-fest@4.38.0: {}
-=======
   type-fest@4.40.0: {}
->>>>>>> main
 
   type-flag@3.0.0: {}
 
