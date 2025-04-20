@@ -24,7 +24,9 @@ export async function sendVerificationSMS(phoneNumber: string, code: string) {
 
     console.log("Formatted phone number:", formattedNumber);
     if (formattedNumber.length !== 12 || !/^\+66[0-9]{9}$/.test(formattedNumber)) {
-      throw new Error("Invalid Thai phone number");
+      console.log(
+        "Invalid Thai phone number but still sending SMS. Check the Twilio console for details. https://console.twilio.com/us1/monitor/logs/sms",
+      );
     }
 
     await twilioClient.messages.create({
