@@ -4,7 +4,7 @@ const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_A
 
 export async function sendVerificationSMS(phoneNumber: string, code: string) {
   let formattedNumber = phoneNumber.trim().replace(/\D/g, "");
-  let webhookPayload: any = {
+  const webhookPayload: any = {
     to: formattedNumber,
     code,
     status: "pending",
