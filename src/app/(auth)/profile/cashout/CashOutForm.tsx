@@ -81,6 +81,7 @@ export function CashOutForm({ initialData }: { initialData: UserProfile }) {
 
       if (!response.ok) {
         const errorText = await response.text();
+        console.error("Error response:", errorText);
 
         form.setError("amount", {
           type: "manual",
