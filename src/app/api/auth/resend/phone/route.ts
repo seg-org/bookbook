@@ -18,9 +18,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    if (user.phoneVerified) {
-      return NextResponse.json({ error: "Phone number already verified" }, { status: 400 });
-    }
+    // Ignore : To be able to verify the phone number even if it's already verified
+    // if (user.phoneVerified) {
+    //   return NextResponse.json({ error: "Phone number already verified" }, { status: 400 });
+    // }
 
     // Generate a new 6-digit verification code
     const token = Math.floor(100000 + Math.random() * 900000).toString();
