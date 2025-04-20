@@ -1,10 +1,8 @@
-import { useRouter } from "next/navigation"; // for App Router
-
 import { format } from "date-fns";
+import { useRouter } from "next/navigation"; // for App Router
 
 import { Button } from "@/components/ui/Button";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
-import { ChatMessage } from "@prisma/client";
 
 type ReportType = {
   id: string;
@@ -30,7 +28,7 @@ type ReportCardProps = {
 
 const ReportCard = ({ report, handleShowChat }: ReportCardProps) => {
   const router = useRouter();
-  const { chatMessages, loading: chatLoading } = useGetChatMessages(report.roomId || "");
+  const { chatMessages } = useGetChatMessages(report.roomId || "");
   let reportedUserId = "";
 
   for (const msg of chatMessages) {
@@ -64,7 +62,7 @@ const ReportCard = ({ report, handleShowChat }: ReportCardProps) => {
         <Button className="mx-1" onClick={() => handleShowChat(report.room.id)}>
           แสดงแชท
         </Button>
-        <Button className="mx-1 bg-red-500 hover:bg-red-600" onClick={() => banUser(report.reporter.email)}>
+        <Button className="mx-1 bg-red-500 hover:bg-red-600" onClick={() => banUser(reportedUserId)}>
           แบนผู้ใช้
         </Button>
       </div>
