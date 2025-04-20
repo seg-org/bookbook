@@ -1,5 +1,6 @@
-import { format } from "date-fns";
 import { useRouter } from "next/navigation"; // for App Router
+
+import { format } from "date-fns";
 
 import { Button } from "@/components/ui/Button";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
@@ -37,10 +38,9 @@ const ReportCard = ({ report, handleShowChat }: ReportCardProps) => {
       break;
     }
   }
-  console.log(reportedUserId, 55555);
 
   const banUser = (id: string) => {
-    router.push(`/admin/users/${reportedUserId}`);
+    router.push(`/admin/users/${id}`);
   };
 
   return (
