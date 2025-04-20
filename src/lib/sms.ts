@@ -1,10 +1,12 @@
-import twilio from "twilio";
+import twilio, { Twilio } from "twilio";
+import { sendWebhook, WebhookPayload } from "./webhook";
 
-const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const twilioClient: Twilio = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
-export async function sendVerificationSMS(phoneNumber: string, code: string) {
+export async function sendVerificationSMS(phoneNumber: string, code: string): Promise<{ success: boolean }> {
   let formattedNumber = phoneNumber.trim().replace(/\D/g, "");
-  const webhookPayload: any = {
+  const webhookPayload: WebhookPayload = {
+    type: "sms",
     to: formattedNumber,
     code,
     status: "pending",
@@ -51,39 +53,21 @@ export async function sendVerificationSMS(phoneNumber: string, code: string) {
 
     // Update webhook payload on success
     webhookPayload.status = "sent";
-    webhookPayload.message = message;
+    webhookPayload.messageId = message.sid;
     webhookPayload.timestamp = new Date().toISOString();
-  } catch (error: any) {
-    console.error("Failed to send SMS:", error.code, error.message);
+  } catch (error: Error) {
+    console.error("Failed to send SMS:", (error as any).code, error.message);
     // Update webhook payload with error details
     webhookPayload.status = "failed";
     webhookPayload.error = {
-      code: error.code || "unknown",
+      code: (error as any).code || "unknown",
       message: error.message || "Unknown error",
     };
     // Don't throw error for unregistered numbers
   }
 
-  // Send webhook notification (non-blocking)
-  if (process.env.SMS_WEBHOOK_URL) {
-    console.log(`For public SMS view, See ${process.env.SMS_WEBHOOK_URL}`);
-    try {
-      const response = await fetch(process.env.SMS_WEBHOOK_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Webhook-Secret": process.env.SMS_WEBHOOK_SECRET || "",
-        },
-        body: JSON.stringify(webhookPayload),
-      });
-      if (!response.ok) {
-        throw new Error(`Webhook request failed with status ${response.status}`);
-      }
-    } catch (webhookError: any) {
-      console.error("Failed to send webhook:", webhookError.message);
-      // Do not throw; webhook failure should not affect SMS flow
-    }
-  }
+  // Send webhook notification
+  await sendWebhook(webhookPayload);
 
   // Return success to avoid breaking the API route
   return { success: webhookPayload.status === "sent" };
