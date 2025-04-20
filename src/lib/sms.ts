@@ -1,4 +1,5 @@
 import twilio, { Twilio } from "twilio";
+
 import { sendWebhook, WebhookPayload } from "./webhook";
 
 const twilioClient: Twilio = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
