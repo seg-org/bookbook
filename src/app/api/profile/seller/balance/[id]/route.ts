@@ -19,8 +19,6 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
-    console.log("Parsed data:", parsedData.data);
-
     const sellerProfile = await prisma.sellerProfile.findUnique({
       where: { userId: userId },
     });
@@ -32,8 +30,6 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
     const currentBalance = sellerProfile.balance || 0;
 
     const newBalance = currentBalance + (parsedData.data.diff || 0);
-
-    console.log("New balance:", newBalance);
 
     const updatedSellerProfile = await prisma.sellerProfile.update({
       where: { userId: userId },

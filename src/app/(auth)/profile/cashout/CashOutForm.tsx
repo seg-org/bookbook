@@ -60,8 +60,6 @@ export function CashOutForm({ initialData }: { initialData: UserProfile }) {
   async function onSubmit(data: CashOutFormData, initialData: UserProfile, form: UseFormReturn<CashOutFormData>) {
     const balance = initialData.sellerProfile?.balance ?? 0;
 
-    console.log("HAHA1");
-
     if (data.amount > balance) {
       form.setError("amount", {
         type: "manual",
@@ -69,11 +67,6 @@ export function CashOutForm({ initialData }: { initialData: UserProfile }) {
       });
       return;
     }
-
-    console.log(data.bankAccount);
-    console.log(data.bankName);
-    console.log(data.amount);
-    console.log(initialData.sellerProfile?.idCardNumber);
 
     try {
       const response = await fetch(`/api/profile/seller/balance/${initialData.id}`, {
@@ -88,7 +81,6 @@ export function CashOutForm({ initialData }: { initialData: UserProfile }) {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("API error:", response.status, errorText);
 
         form.setError("amount", {
           type: "manual",
