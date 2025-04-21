@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/Button";
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import { updateTransaction } from "@/data/transaction";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
+import { createNotification } from "@/data/notification";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
@@ -467,6 +468,15 @@ const TransactionDetailsPopup = () => {
                                 status: "PACKING",
                               });
                             }
+
+                            createNotification(
+                              transaction.sellerId,
+                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
+                            );
+                            createNotification(
+                              transaction.buyerId,
+                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
+                            );
                           } catch (error) {
                             if (!window.confirm("เกิดข้อผิดพลาด")) {
                               console.log(error);

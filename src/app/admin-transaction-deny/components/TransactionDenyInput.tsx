@@ -8,6 +8,7 @@ import { reportEvidenceFolderName } from "@/constants/s3FolderName";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { putObjectsAsZip } from "@/data/object";
 import { updateTransaction } from "@/data/transaction";
+import { createNotification } from "@/data/notification";
 
 interface Props {
   transaction: Transaction | undefined;
@@ -75,6 +76,9 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
       if (res instanceof Error) {
         throw Error("error");
       }
+
+      createNotification(transaction.sellerId, "การซื้อหนังสือ " + transaction.post.book.title + " ถูกยกเลิก");
+      createNotification(transaction.buyerId, "การซื้อหนังสือ " + transaction.post.book.title + " ถูกยกเลิก");
       setSendingStatus("success");
     } catch (error) {
       console.error(error);

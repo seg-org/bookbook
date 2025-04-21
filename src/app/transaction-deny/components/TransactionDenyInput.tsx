@@ -8,6 +8,7 @@ import { reportEvidenceFolderName } from "@/constants/s3FolderName";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { putObjectsAsZip } from "@/data/object";
 import { updateTransaction } from "@/data/transaction";
+import { createNotification } from "@/data/notification";
 
 interface Props {
   transaction: Transaction | undefined;
@@ -71,6 +72,8 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
           detail: oldDetail?.concat([details]),
           evidenceURL: oldEvidenceURL.concat([uploadFiles.key]),
         });
+
+        createNotification(transaction.sellerId, "หนังสือ " + transaction.post.book.title + " ถูกรายงานเพิ่มเติม!");
       } else {
         await updateTransaction({
           id: transaction.id,
@@ -78,6 +81,8 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
           detail: [details],
           evidenceURL: [uploadFiles.key],
         });
+
+        createNotification(transaction.sellerId, "หนังสือ " + transaction.post.book.title + " ถูกรายงาน!");
       }
       setSendingStatus("success");
     } catch (error) {

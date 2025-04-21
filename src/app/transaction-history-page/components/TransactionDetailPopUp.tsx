@@ -17,6 +17,7 @@ import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { useTransactionContext } from "@/context/transactionContext";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
+import { createNotification } from "@/data/notification";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
@@ -425,6 +426,11 @@ const TransactionDetailsPopup = () => {
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({ trackingNumber, trackingURL, status: "DELIVERING" }),
                         });
+
+                        createNotification(
+                          transaction.buyerId,
+                          "หนังสือ " + transaction.post.book.title + " ที่คุณสั่งกำลังถูกจัดส่ง",
+                        );
                         router.refresh(); // or router.push(...) if needed
                       } catch (e) {
                         console.error("Update failed", e);
@@ -486,6 +492,16 @@ const TransactionDetailsPopup = () => {
                               diff: transaction.amount,
                             }),
                           });
+
+                          createNotification(
+                            transaction.sellerId,
+                            transaction.buyer.firstName +
+                              " รับหนังสือ" +
+                              transaction.post.book.title +
+                              "เรียบร้อย เงินจำนวน " +
+                              transaction.amount +
+                              " บาทได้ถูกโอนถ่ายไปให้คุณ",
+                          );
 
                           router.push(`/review/${transaction.id}`);
                         } catch (err) {
