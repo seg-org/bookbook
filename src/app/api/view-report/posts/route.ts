@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import { getUrl } from "@/app/api/objects/s3";
 import { prisma } from "@/lib/prisma";
 
-export async function GET(_: NextRequest) {
+export async function GET() {
   try {
     const postReports = await prisma.postReport.findMany({
       include: {

@@ -1,8 +1,8 @@
 "use client";
 
 import { User } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
 
 import { Card } from "@/components/ui/card/Card";
 import { apiClient } from "@/data/axios";
