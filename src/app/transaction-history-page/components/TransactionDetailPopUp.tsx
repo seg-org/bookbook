@@ -407,7 +407,9 @@ const TransactionDetailsPopup = () => {
                   )}
                   <ShippingDetailsDialog
                     open={shippingDialogOpen}
-                    onClose={() => setShippingDialogOpen(false)}
+                    onClose={() => {
+                      setShippingDialogOpen(false);
+                    }}
                     onConfirm={async (trackingNumber, trackingURL) => {
                       try {
                         await fetch(`/api/transaction/${transaction.id}`, {
@@ -482,6 +484,8 @@ const TransactionDetailsPopup = () => {
                           alert("เกิดข้อผิดพลาดขณะอัปเดตรายการ");
                           console.error(err);
                         }
+                        setSelectingTransaction("");
+                        setSelectingTransaction(selectingTransaction);
                       }}
                     >
                       รับสำเร็จ
