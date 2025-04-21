@@ -469,6 +469,7 @@ const TransactionDetailsPopup = () => {
                             }
                           } catch (error) {
                             if (!window.confirm("เกิดข้อผิดพลาด")) {
+                              console.log(error);
                               return;
                             }
                           }
