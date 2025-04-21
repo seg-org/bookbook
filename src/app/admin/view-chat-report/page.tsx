@@ -11,7 +11,7 @@ import ReportCard from "./ReportCard";
 export default function ChatReportsPage() {
   const { reports, loading, error } = useGetAllReports();
   const [clickedChat, setClickedChat] = useState(false);
-
+  const getChatSuccess = !loading && !error;
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
 
   const { chatMessages, loading: chatLoading } = useGetChatMessages(selectedRoomId || "");
@@ -28,9 +28,9 @@ export default function ChatReportsPage() {
 
       {loading && <p>Loading reports...</p>}
       {error && <p className="text-red-500">{error.message || "Failed to load reports"}</p>}
-      {!loading && !error && reports.length === 0 && <p>No reports found.</p>}
+      {getChatSuccess && reports.length === 0 && <p>No reports found.</p>}
 
-      {!loading && !error && reports.length > 0 && (
+      {getChatSuccess && reports.length > 0 && (
         <div className="flex space-x-6">
           {/* Left Panel - Reports */}
           <div className="max-h-[80vh] w-1/2 space-y-4 overflow-y-auto pr-2">
