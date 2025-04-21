@@ -30,13 +30,17 @@ export const getAllBooks = async () => {
 
 export type GetBookQuery = {
   title?: string;
+  verifiedStatus?: string;
 };
 
 export const getBooks = async (query?: GetBookQuery) => {
   const { title } = query ?? {};
 
   try {
-    const url = title ? `/books?title=${title}` : "/books";
+    const url =
+      `/books` +
+      (query?.verifiedStatus ? `?verifiedStatus=${query.verifiedStatus}` : "") +
+      (title ? `&title=${title}` : "");
 
     const res: AxiosResponse<Book[]> = await apiClient.get(url);
 
