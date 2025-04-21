@@ -52,7 +52,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
           lastName: r.transaction.buyer.lastName,
         },
         post: {
-          title: r.transaction.post.title,
+          id: r.transaction.post.id,
           book: {
             title: r.transaction.post.book.title,
             coverImageUrl: getUrl("book_images", r.transaction.post.book.coverImageKey),
