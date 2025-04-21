@@ -14,14 +14,17 @@ import { getObjectUrl, putObject } from "@/data/object";
 import { useGetBook } from "@/hooks/useGetBook";
 
 const bookSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  author: z.string().min(1, "Author is required"),
-  genre: z.string().min(1, "Genre is required"),
-  description: z.string(),
-  isbn: z.string().min(10, "ISBN must be at least 10 characters"),
-  publisher: z.string().min(1, "Publisher is required"),
+  title: z.string().min(5, "Title must be at least 5 characters long"),
+  author: z.string().min(5, "Author must be at least 5 characters long"),
+  genre: z.string().min(3, "Genre must be at least 3 characters long"),
+  description: z.string().min(20, "Description must be at least 20 characters long"),
+  isbn: z.string().refine((val) => /^\d{10}$|^\d{13}$/.test(val), {
+    message: "ISBN must be either 10 or 13 digits",
+  }),
+  publisher: z.string().min(5, "Publisher must be at least 5 characters long"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
-  coverImageKey: z.string(),
+  coverImageKey: z.string().optional(),
+  recommendPrice: z.coerce.number().min(0, "Recommend price must be greater than or equal to 0").optional(),
 });
 export type EditBookFormData = z.infer<typeof bookSchema>;
 
@@ -63,6 +66,7 @@ export default function EditBookPage() {
       setValue("publisher", book.publisher);
       setValue("pages", book.pages);
       setValue("coverImageKey", book.coverImageKey);
+      setValue("recommendPrice", book.recommendPrice ?? undefined);
       setImageUrl(book.coverImageUrl);
     }
   }, [book, setValue]);
@@ -143,6 +147,7 @@ export default function EditBookPage() {
             placeholder="เนื้อเรื่องย่อ"
             className="mt-1 block w-full rounded p-2"
           ></textarea>
+          {errors.description?.message && <p className="text-red-500">{String(errors.description.message)}</p>}
         </label>
 
         <label>
@@ -184,6 +189,17 @@ export default function EditBookPage() {
           {errors.coverImageKey?.message && <p className="text-red-500">{String(errors.coverImageKey.message)}</p>}
         </label>
         {imageUrl && <Image src={imageUrl} alt="Cover Image" width={200} height={200} />}
+
+        <label>
+          ราคาขายแนะนำ:
+          <input
+            type="number"
+            {...register("recommendPrice")}
+            placeholder="(ราคาขายแนะนำ)"
+            className="mt-1 block w-full rounded p-2"
+          />
+          {errors.recommendPrice?.message && <p className="text-red-500">{String(errors.recommendPrice.message)}</p>}
+        </label>
 
         <button
           type="submit"

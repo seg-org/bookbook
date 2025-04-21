@@ -1,4 +1,4 @@
-import { TransactionFailType, TransactionStatus } from "@prisma/client";
+import { DamageType, PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -22,6 +22,18 @@ const TransactionDetailsPopup = () => {
     [TransactionStatus.FAIL]: { label: "ยกเลิก", color: "text-red-500" },
   };
 
+  const paymentMethodMap: Record<PaymentMethod, { label: string; color: string }> = {
+    [PaymentMethod.CREDIT_CARD]: { label: "เครดิตการ์ด", color: "text-slate-500" },
+    [PaymentMethod.ONLINE_BANKING]: { label: "โอนจ่าย", color: "text-slate-500" },
+    [PaymentMethod.UNDEFINED]: { label: "ไม่ระบุ", color: "text-slate-500" },
+  };
+
+  const shipmentMethodMap: Record<ShipmentMethod, { label: string; color: string }> = {
+    [ShipmentMethod.STANDARD]: { label: "ปกติ", color: "text-slate-500" },
+    [ShipmentMethod.EXPRESS]: { label: "เร่งด่วน", color: "text-slate-500" },
+    [ShipmentMethod.UNDEFINED]: { label: "ไม่ระบุ", color: "text-slate-500" },
+  };
+
   const FailTypeMap: Record<TransactionFailType, { label: string }> = {
     [TransactionFailType.UNDELIVERED]: { label: "ไม่จัดส่ง" },
     [TransactionFailType.UNQUALIFIED]: { label: "ของขาดคุณภาพ" },
@@ -29,6 +41,22 @@ const TransactionDetailsPopup = () => {
     [TransactionFailType.TERMINATION]: { label: "บังคับยกเลิก" },
     [TransactionFailType.OTHER]: { label: "อื่น" },
     [TransactionFailType.UNDEFINED]: { label: "ไม่ระบุ" },
+  };
+
+  const DamageTypeMap: Record<DamageType, { label: string }> = {
+    [DamageType.NO_DAMAGED]: { label: "สมบูรณ์" },
+    [DamageType.SLIGHTLY_DAMAGED]: { label: "เกือบสมบูรณ์" },
+    [DamageType.DAMAGED]: { label: "ได้รับความเสียหาย" },
+  };
+
+  const dateString = (date: Date | undefined) => {
+    if (date === undefined) return "";
+    return date.toLocaleDateString("en-GB").replace(/\//g, "/");
+  };
+
+  const displayLink = (URLs: string | undefined) => {
+    if (URLs === undefined) return "";
+    return URLs.replace(/,/g, "\n");
   };
 
   const oneWeekAgo = new Date();
@@ -50,17 +78,16 @@ const TransactionDetailsPopup = () => {
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
         <div className="rounded-lg bg-white p-6 shadow-lg">
           <h2 className="mb-4 text-2xl font-semibold">รายละเอียด</h2>
-
           <div className="flex items-center gap-4">
             <Image
               className="rounded-lg object-cover"
-              src={transaction?.post?.book?.coverImageUrl || "f"}
+              src={transaction?.post?.book?.coverImageUrl || "../pic/defaultBook.png"}
               alt="Book Cover"
               height={312}
               width={220}
             />
             <div>
-              <div className="grid max-h-64 w-80 grid-cols-[auto_1fr] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
+              <div className="grid max-h-64 max-w-80 grid-cols-[100px_220px] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
                 <p className="text-lg font-extrabold underline">สถานะ :</p>
                 <p>
                   <label className={`text-lg ${statusMap[transaction.status]?.color} font-extrabold`}>
@@ -68,50 +95,107 @@ const TransactionDetailsPopup = () => {
                   </label>
                 </p>
                 <p className="font-bold text-slate-500">สร้าง : </p>
-                <p className="text-slate-500">
-                  {transaction?.createdAt.getDay().toString() +
-                    "/" +
-                    transaction?.createdAt.getMonth().toString() +
-                    "/" +
-                    transaction?.createdAt.getFullYear().toString()}
-                </p>
+                <p className="text-slate-500">{dateString(transaction?.createdAt)}</p>
                 <p className="font-bold text-slate-500">แก้ไขล่าสุด : </p>
-                <p className="text-slate-500">
-                  {transaction?.updatedAt.getDay().toString() +
-                    "/" +
-                    transaction?.updatedAt.getMonth().toString() +
-                    "/" +
-                    transaction?.updatedAt.getFullYear().toString()}
-                </p>
+                <p className="text-slate-500">{dateString(transaction?.updatedAt)}</p>
+                <p className="font-bold text-slate-500">การจ่าย : </p>
+                <p className="text-slate-500">{paymentMethodMap[transaction.paymentMethod]?.label}</p>
+                <p className="font-bold text-slate-500">การส่ง : </p>
+                <p className="text-slate-500">{shipmentMethodMap[transaction.shipmentMethod]?.label}</p>
+                <p className="font-bold text-slate-500">ที่อยู่ : </p>
+                <p className="text-slate-500">{transaction?.address}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.title}</p>
+                <p className="font-bold text-slate-500">รหัส isbn : </p>
+                <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">ผู้เขียน : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.author}</p>
+                <p className="font-bold text-slate-500">ผู้ตีพิมพ์ : </p>
+                <p className="text-slate-500">{transaction?.post?.book?.publisher}</p>
                 <p className="font-bold text-slate-500">คำอธิบาย : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.description}</p>
                 <p className="font-bold text-slate-500">จำนวนหน้า : </p>
                 <p className="text-slate-500">{transaction?.post?.book?.pages}</p>
-                {/* ------------------------------------------------------------
-                    temporary hard fix
-                    ------------------------------------------------------------
-                
                 <p className="font-bold text-slate-500">หมวดหมู่ : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.genre}</p>
-                
-                
-                  ---------------------------------------------------------------
-                */}
+                <p className="text-slate-500">
+                  {transaction?.post?.book?.bookGenres
+                    ? transaction?.post?.book?.bookGenres
+                        .map((str) =>
+                          str
+                            .toLowerCase()
+                            .split("_")
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(" "),
+                        )
+                        .join(" ,")
+                    : ""}
+                </p>
+                <p className="font-bold text-slate-500">แท็ก : </p>
+                <p className="text-slate-500">
+                  {transaction?.post?.book?.bookTags
+                    ? transaction?.post?.book?.bookTags
+                        .map((str) =>
+                          str
+                            .toLowerCase()
+                            .split("_")
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(" "),
+                        )
+                        .join(" ,")
+                    : ""}
+                </p>
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
                 <p className="text-slate-500">{transaction?.post?.title}</p>
                 <p className="font-bold text-slate-500">เนื้อหา : </p>
                 <p className="text-slate-500">{transaction?.post?.content}</p>
-                <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
-                <p className="font-bold text-slate-500">ชื่อ : </p>
-                <p className="text-slate-500">{transaction?.seller?.firstName + " " + transaction?.seller?.lastName}</p>
-                <p className="font-bold text-slate-500">อีเมล : </p>
-                <p className="text-slate-500">{transaction?.seller?.email}</p>
+                <p className="font-bold text-slate-500">ความพิเศษ : </p>
+                <p className="text-slate-500">
+                  {transaction?.post?.specialDescriptions
+                    ? transaction?.post?.specialDescriptions
+                        .map((str) =>
+                          str
+                            .toLowerCase()
+                            .split("_")
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(" "),
+                        )
+                        .join(" ,")
+                    : ""}
+                </p>
+                <p className="font-bold text-slate-500">ความสมบูรณ์ : </p>
+                <p className="text-slate-500">
+                  {DamageTypeMap[transaction?.post.damage]?.label}
+                  {"\n\n"}
+                  {transaction?.post.damageURLs.map((url) => {
+                    {
+                      return displayLink(url);
+                    }
+                  })}
+                </p>
+                {transaction.buyerId == userId && (
+                  <>
+                    <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
+                    <p className="font-bold text-slate-500">ชื่อ : </p>
+                    <p className="text-slate-500">
+                      {transaction?.seller?.firstName + " " + transaction?.seller?.lastName}
+                    </p>
+                    <p className="font-bold text-slate-500">อีเมล : </p>
+                    <p className="text-slate-500">{transaction?.seller?.email}</p>
+                  </>
+                )}
+                {transaction.sellerId == userId && (
+                  <>
+                    <p className="col-span-2 text-lg font-extrabold underline">ผู้ซื้อ</p>
+                    <p className="font-bold text-slate-500">ชื่อ : </p>
+                    <p className="text-slate-500">
+                      {transaction?.buyer?.firstName + " " + transaction?.buyer?.lastName}
+                    </p>
+                    <p className="font-bold text-slate-500">อีเมล : </p>
+                    <p className="text-slate-500">{transaction?.buyer?.email}</p>
+                  </>
+                )}
                 {transaction?.status !== "PACKING" && (transaction?.trackingNumber || transaction?.trackingURL) && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold underline">รายละเอียดการจัดส่ง</p>
@@ -140,7 +224,6 @@ const TransactionDetailsPopup = () => {
                     )}
                   </>
                 )}
-
                 {transaction?.status == TransactionStatus.FAIL && (
                   <>
                     <p className="col-span-2 text-lg font-extrabold text-red-600 underline">สาเหตุการยกเลิก</p>
@@ -272,6 +355,13 @@ const TransactionDetailsPopup = () => {
                             method: "PATCH",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ status: "COMPLETE" }),
+                          });
+                          await fetch(`/api/profile/seller/balance/${transaction.sellerId}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              diff: transaction.amount,
+                            }),
                           });
 
                           router.push(`/review/${transaction.id}`);

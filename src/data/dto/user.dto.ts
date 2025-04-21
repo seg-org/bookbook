@@ -22,8 +22,9 @@ export type User = {
     bankAccount: string;
     bankName: string;
     isApproved: boolean;
-    approvedAt: string;
+    approvedAt: Date;
     userId: string;
+    balance: number;
   };
 };
 

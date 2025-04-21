@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import { Menu, MessageCircleQuestion } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -55,6 +55,12 @@ function Header() {
       <div className="flex items-center gap-4">
         {/* Notifications */}
         {isAuthenticated && <NotificationBell />}
+
+        <div>
+          <Link href="/report-problem" title="แจ้งปัญหาการใช้งาน">
+            <MessageCircleQuestion className="h-8 w-8" />
+          </Link>
+        </div>
 
         {/* Authentication */}
         {isAuthenticated ? (

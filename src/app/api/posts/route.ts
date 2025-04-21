@@ -68,8 +68,15 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
     }
 
-    const { page, limit, sortPrice, ...filters } = validatedParams.data;
-    const orderBy = sortPrice ? { price: sortPrice } : {};
+    const { page, limit, sortBy, sortOrder, ...filters } = validatedParams.data;
+    const orderBy: { [key: string]: "asc" | "desc" }[] = [];
+
+    if (sortBy && sortOrder) {
+      orderBy.push({ [sortBy]: sortOrder });
+    } else {
+      orderBy.push({ createdAt: "desc" }); // default sort
+    }
+
     const skip = (page - 1) * limit;
 
     const bookFilter: Prisma.BookWhereInput = {
@@ -78,6 +85,10 @@ export async function GET(req: NextRequest) {
       description: filters.description ? { contains: filters.description, mode: "insensitive" } : undefined,
       isbn: filters.isbn ? { contains: filters.isbn, mode: "insensitive" } : undefined,
       publisher: filters.publisher ? { contains: filters.publisher, mode: "insensitive" } : undefined,
+      pages: {
+        gte: filters.minPages ? filters.minPages : undefined,
+        lte: filters.maxPages ? filters.maxPages : undefined,
+      },
     };
 
     const posts = await prisma.post.findMany({

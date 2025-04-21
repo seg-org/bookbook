@@ -15,29 +15,36 @@ datasource db {
 }
 
 model User {
-  id               String         @id @default(cuid())
-  email            String         @unique
-  firstName        String         @map("first_name")
-  lastName         String         @map("last_name")
-  password         String
-  phoneNumber      String?        @unique @map("phone_number")
-  address          String?
-  isAdmin          Boolean        @default(false) @map("is_admin")
-  isSeller         Boolean        @default(false) @map("is_seller")
-  isVerified       Boolean        @default(false) @map("is_verified")
-  emailVerified    DateTime?      @map("email_verified")
-  phoneVerified    DateTime?      @map("phone_verified")
-  pdpaConsent      Boolean        @default(false) @map("pdpa_consent")
-  buyTransactions  Transaction[]  @relation("BuyerTransaction")
-  sellTransactions Transaction[]  @relation("SellerTransaction")
-  createdAt        DateTime       @default(now()) @map("created_at")
-  updatedAt        DateTime       @updatedAt @map("updated_at")
-  sellerProfile    SellerProfile?
-  posts            Post[]
-  chatMessages     ChatMessage[]
-  Bookmark         Bookmark[]
-  ChatReport       ChatReport[]
-  Notification     Notification[]
+  id                     String          @id @default(cuid())
+  email                  String          @unique
+  firstName              String          @map("first_name")
+  lastName               String          @map("last_name")
+  password               String
+  phoneNumber            String?         @unique @map("phone_number")
+  address                String?
+  isAdmin                Boolean         @default(false) @map("is_admin")
+  isSeller               Boolean         @default(false) @map("is_seller")
+  isVerified             Boolean         @default(false) @map("is_verified")
+  emailVerified          DateTime?       @map("email_verified")
+  phoneVerified          DateTime?       @map("phone_verified")
+  pdpaConsent            Boolean         @default(false) @map("pdpa_consent")
+  buyTransactions        Transaction[]   @relation("BuyerTransaction")
+  sellTransactions       Transaction[]   @relation("SellerTransaction")
+  createdAt              DateTime        @default(now()) @map("created_at")
+  updatedAt              DateTime        @updatedAt @map("updated_at")
+  sellerProfile          SellerProfile?
+  posts                  Post[]
+  chatMessages           ChatMessage[]
+  Bookmark               Bookmark[]
+  ChatReport             ChatReport[]
+  Notification           Notification[]
+  reportedPosts          PostReport[]    @relation(name: "UserReport")
+  resolvedPostReports    PostReport[]    @relation(name: "AdminResolve")
+  reportedGeneral        GeneralReport[] @relation(name: "UserReport")
+  resolvedGeneralReports GeneralReport[] @relation(name: "AdminResolve")
+
+  bannedUntil DateTime? @map("banned_until")
+  banReason   String?   @map("ban_reason")
 
   @@map("users")
 }
@@ -65,21 +72,24 @@ model SellerProfile {
   user           User      @relation(fields: [userId], references: [id])
   userId         String    @unique @map("user_id")
 
+  balance Int @default(0)
+
   @@map("seller_profiles")
 }
 
 model Book {
-  id            String        @id @default(cuid())
-  title         String
-  author        String
-  description   String
-  isbn          String        @unique
-  pages         Int
-  publisher     String
-  coverImageKey String        @map("cover_image_key")
-  posts         Post[]
-  bookGenres    GenreType[]
-  bookTags      BookTagType[]
+  id             String        @id @default(cuid())
+  title          String
+  author         String
+  description    String
+  isbn           String        @unique
+  pages          Int
+  publisher      String
+  coverImageKey  String        @map("cover_image_key")
+  posts          Post[]
+  bookGenres     GenreType[]
+  bookTags       BookTagType[]
+  recommendPrice Float?
   // TODO verifiedBy Admin
 
   @@map("books")
@@ -103,6 +113,7 @@ model Post {
   damage              DamageType               @map("damage")
   createdAt           DateTime                 @default(now())
   updatedAt           DateTime                 @updatedAt() @map("updated_at")
+  reports             PostReport[]
 
   @@map("posts")
 }
@@ -158,6 +169,40 @@ model ChatReport {
   createdAt  DateTime @default(now()) @map("created_at")
 
   @@map("chat_reports")
+}
+
+model GeneralReport {
+  id         String @id @default(cuid())
+  reporterId String @map("reporter_id")
+  reporter   User   @relation(name: "UserReport", fields: [reporterId], references: [id])
+
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  resolvedById String? @map("resolved_by_id")
+  resolvedBy   User?   @relation(name: "AdminResolve", fields: [resolvedById], references: [id])
+  resolvedNote String? @map("resolved_note")
+
+  @@map("general_reports")
+}
+
+model PostReport {
+  id String @id @default(cuid())
+
+  reporterId String @map("reporter_id")
+  reporter   User   @relation(name: "UserReport", fields: [reporterId], references: [id])
+
+  postId String @map("post_id")
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  resolvedById String? @map("resolved_by_id")
+  resolvedBy   User?   @relation(name: "AdminResolve", fields: [resolvedById], references: [id])
+  resolvedNote String? @map("resolved_note")
+
+  @@map("post_reports")
 }
 
 model Transaction {

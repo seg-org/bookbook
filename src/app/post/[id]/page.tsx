@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { getUrl } from "@/app/api/objects/s3";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 import BookmarkAction from "./BookmarkAction";
 import PostAction from "./PostAction";
@@ -77,12 +78,19 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
             </p>
             <p>
               <span className="font-bold">ประเภท </span>
-              {/* fix this*/}
-              {/* <span>{post.book.genre}</span> */}
+              <span>{post.book.bookGenres.map((key) => genreInThai[key]).join(", ")}</span>
+            </p>
+            <p>
+              <span className="font-bold">แท็ก </span>
+              <span>{post.book.bookTags.map((key) => bookTagInThai[key]).join(", ")}</span>
             </p>
             <p>
               <span className="font-bold">สำนักพิมพ์ </span>
               <span>{post.book.publisher}</span>
+            </p>
+            <p>
+              <span className="font-bold">จำนวนหน้า </span>
+              <span>{post.book.pages}</span>
             </p>
           </div>
 

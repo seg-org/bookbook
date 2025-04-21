@@ -1,6 +1,5 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { compare } from "bcrypt";
-import { redirect } from "next/navigation";
 import { NextAuthOptions } from "next-auth";
 import type { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -14,6 +13,9 @@ export type SessionUser = {
   image?: string | null;
   phoneNumber?: string | null;
   isAdmin: boolean;
+  emailVerified: boolean;
+  phoneVerified: boolean;
+  pdpaConsent: boolean;
 };
 
 export const authOptions: NextAuthOptions = {
@@ -33,7 +35,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          throw new Error("Wrong username or password");
         }
 
         const user = await prisma.user.findUnique({
@@ -43,15 +45,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user) {
-          throw new Error("Invalid credentials");
-        }
-
-        if (!user.emailVerified) {
-          redirect("/verify/email");
-        }
-
-        if (!user.phoneVerified) {
-          redirect("/verify/phone");
+          throw new Error("Wrong username or password");
         }
 
         const isValid = await compare(credentials.password, user.password);
@@ -66,31 +60,43 @@ export const authOptions: NextAuthOptions = {
           phoneNumber: user.phoneNumber,
           name: `${user.firstName} ${user.lastName}`,
           isAdmin: user.isAdmin,
+          emailVerified: user.emailVerified !== null,
+          phoneVerified: user.phoneVerified !== null,
+          pdpaConsent: user.pdpaConsent,
         };
       },
     }),
   ],
+  // In your authOptions.ts
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        session.user.id = token.id;
+        session.user.id = token.id as string;
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.phoneNumber = token.phoneNumber;
-        session.user.isAdmin = token.isAdmin;
+        session.user.isAdmin = token.isAdmin as boolean;
+        session.user.emailVerified = token.emailVerified as boolean;
+        session.user.phoneVerified = token.phoneVerified as boolean;
+        session.user.pdpaConsent = token.pdpaConsent as boolean;
       }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.name = user.name;
-        token.email = user.email;
-        token.phoneNumber = user.phoneNumber;
-        token.isAdmin = user.isAdmin;
+        const dbUser = await prisma.user.findUnique({ where: { id: user.id } });
+        if (dbUser) {
+          token.id = dbUser.id;
+          token.name = `${dbUser.firstName} ${dbUser.lastName}`;
+          token.email = dbUser.email;
+          token.phoneNumber = dbUser.phoneNumber;
+          token.isAdmin = dbUser.isAdmin;
+          token.emailVerified = dbUser.emailVerified !== null;
+          token.phoneVerified = dbUser.phoneVerified !== null;
+          token.pdpaConsent = dbUser.pdpaConsent;
+        }
       }
       return token;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
 };

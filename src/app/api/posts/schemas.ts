@@ -14,11 +14,14 @@ export const GetPostsRequest = z.object({
   genre: z.string().optional(),
   description: z.string().optional(),
   isbn: z.string().optional(),
+  minPages: z.preprocess((val) => (val ? Number(val) : undefined), z.number().optional()),
+  maxPages: z.preprocess((val) => (val ? Number(val) : undefined), z.number().optional()),
   pages: z.preprocess((val) => (val ? Number(val) : undefined), z.number().optional()),
   publisher: z.string().optional(),
   page: z.preprocess((val) => (val ? Number(val) : 1), z.number().min(1).default(1)),
   limit: z.preprocess((val) => (val ? Number(val) : 10), z.number().min(1).max(30).default(30)),
-  sortPrice: z.enum(["asc", "desc"]).default("asc"),
+  sortBy: z.enum(["createdAt", "price"]).optional(),
+  sortOrder: z.enum(["asc", "desc"]).optional(),
 });
 
 export const CreatePostRequest = z.object({

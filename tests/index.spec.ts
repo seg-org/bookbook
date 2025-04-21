@@ -14,8 +14,8 @@ test("Search Page", async ({ page }) => {
 
   await expect(page).toHaveURL("http://localhost:3000/search");
 
-  // expect to find text Mao Tse-Tung
-  await expect(page.getByText("Mao Tse-Tung").first()).toBeVisible();
+  // expect to find text ภาษาพาที
+  await expect(page.getByText("ภาษาพาที").first()).toBeVisible();
 });
 
 test("Login Failure", async ({ page }) => {
@@ -35,7 +35,7 @@ test("Login Failure", async ({ page }) => {
 
   // Expect Failure
   await expect(page).toHaveURL("http://localhost:3000/login?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
-  await expect(page.getByText("Invalid credentials")).toBeVisible();
+  await expect(page.getByText("Wrong username or password")).toBeVisible();
 });
 
 async function login(page: Page) {

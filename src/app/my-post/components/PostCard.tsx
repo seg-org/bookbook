@@ -3,11 +3,11 @@ import { Wrench } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
-import { PostWithBookmark } from "@/context/postContext";
+import { Post } from "@/data/dto/post.dto";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 type PostCardProps = {
-  post: PostWithBookmark;
-  isRecommended?: boolean;
+  post: Post;
 };
 
 const cut = (str: string, maxLength: number) => {
@@ -17,14 +17,13 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
-function PostCard({ post, isRecommended }: PostCardProps) {
+function PostCard({ post }: PostCardProps) {
   return (
     <>
       <div
         data-test-id="post-card"
         className={clsx(
           "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
-          isRecommended && "border-4 border-amber-300",
         )}
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
@@ -53,15 +52,18 @@ function PostCard({ post, isRecommended }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                {/* <strong>ประเภท </strong>
-                {cut(post.book.genre, 65)} */}
+                <strong>ประเภท </strong>
+                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
+              </div>
+              <div>
+                <strong>แท็ก </strong>
+                {cut(post.book.bookTags?.map((key) => bookTagInThai[key]).join(", ") || "", 65)}
               </div>
               <div>
                 <strong>สำนักพิมพ์ </strong>
                 {cut(post.book.publisher, 40)}
               </div>
             </div>
-            {isRecommended && <h3 className="self-end dark:text-white">(RECOMMENDED)</h3>}
           </div>
         </div>
         <div className="mt-auto flex gap-2 self-end">
