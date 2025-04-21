@@ -5,16 +5,14 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
 import { z } from "zod";
 
 import { bookImageFolderName } from "@/constants/s3FolderName";
 import { getObjectUrl, putObject } from "@/data/object";
 
 import { BookTagType, GenreType } from "../api/books/book_enum";
-
-import Select from "react-select";
-import { Controller } from "react-hook-form";
 
 const bookSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -25,8 +23,8 @@ const bookSchema = z.object({
   publisher: z.string().min(1, "Publisher is required"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
-  bookGenres: z.array(GenreType),
-  bookTags: z.array(BookTagType),
+  // bookGenres: z.array(z.string()),
+  // bookTags: z.array(z.string()),
 });
 type CreateBookFormData = z.infer<typeof bookSchema>;
 
@@ -43,12 +41,15 @@ export default function AddBookPage() {
 
   const { status } = useSession();
   const isAuthenticated = status === "authenticated";
+  if (!isAuthenticated) {
+    redirect("/login");
+  }
 
   type GenreOption = {
     value: GenreType;
     label: string;
   };
-  const genreOptions = GenreType.options.map((g) => ({
+  const genreOptions = Object.values(GenreType.enum).map((g) => ({
     value: g,
     label: g.replace(/_/g, " "),
   }));
@@ -57,14 +58,10 @@ export default function AddBookPage() {
     value: BookTagType;
     label: string;
   };
-  const bookTagOptions = BookTagType.options.map((tag) => ({
+  const bookTagOptions = Object.values(BookTagType.enum).map((tag) => ({
     value: tag,
     label: tag.replace(/_/g, " "),
   }));
-
-  // if (!isAuthenticated) {
-  //   redirect("/login");
-  // }
 
   const [message, setMessage] = useState("");
   const [loadingDescription, setLoadingDescription] = useState(false);
@@ -117,6 +114,7 @@ export default function AddBookPage() {
   };
 
   const onSubmit = async (data: CreateBookFormData) => {
+    console.log("submit", data);
     setLoading(true);
     if (data !== undefined) console.log("recieve");
     try {
@@ -170,7 +168,7 @@ export default function AddBookPage() {
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
-        <label>
+        {/* <label>
           หมวดหมู่ (Genres):
           <Controller
             control={control}
@@ -202,7 +200,7 @@ export default function AddBookPage() {
             )}
           />
           {errors.bookTags?.message && <p className="text-red-500">{String(errors.bookTags.message)}</p>}
-        </label>
+        </label> */}
 
         <label>
           เนื้อเรื่องย่อ:
