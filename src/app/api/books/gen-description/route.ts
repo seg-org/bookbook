@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       }),
     });
     const data: { generated_text: string }[] = await response.json();
-    console.log(data);
+    // console.log(data);
     const description = data[0].generated_text.split("\n\n").slice(1).join("\n\n");
 
     return NextResponse.json(

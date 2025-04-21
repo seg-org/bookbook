@@ -17,14 +17,13 @@ import { BookTagType, GenreType } from "../api/books/book_enum";
 const bookSchema = z.object({
   title: z.string().min(1, "Title is required"),
   author: z.string().min(1, "Author is required"),
-  genre: z.string().min(1, "Genre is required"),
   description: z.string(),
   isbn: z.string().min(10, "ISBN must be at least 10 characters"),
   publisher: z.string().min(1, "Publisher is required"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
-  // bookGenres: z.array(z.string()),
-  // bookTags: z.array(z.string()),
+  bookGenres: z.array(z.string()),
+  bookTags: z.array(z.string()),
 });
 type CreateBookFormData = z.infer<typeof bookSchema>;
 
@@ -150,7 +149,10 @@ export default function AddBookPage() {
         ผู้ใช้จะต้องสร้างโพสต์ขายหนังสือที่แนบหนังสือที่สร้างแล้วเพื่อให้สามารถประกาศขายได้
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
+      <form
+        onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation failed", errors))}
+        className="flex flex-col space-y-4"
+      >
         <label>
           ชื่อหนังสือ:
           <input
@@ -168,7 +170,7 @@ export default function AddBookPage() {
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
-        {/* <label>
+        <label>
           หมวดหมู่ (Genres):
           <Controller
             control={control}
@@ -200,7 +202,7 @@ export default function AddBookPage() {
             )}
           />
           {errors.bookTags?.message && <p className="text-red-500">{String(errors.bookTags.message)}</p>}
-        </label> */}
+        </label>
 
         <label>
           เนื้อเรื่องย่อ:
