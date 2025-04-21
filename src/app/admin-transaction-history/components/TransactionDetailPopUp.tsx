@@ -16,9 +16,9 @@ import { useRouter } from "next/navigation";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
+import { createNotification } from "@/data/notification";
 import { updateTransaction } from "@/data/transaction";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
-import { createNotification } from "@/data/notification";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();

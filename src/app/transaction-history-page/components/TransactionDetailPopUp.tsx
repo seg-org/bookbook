@@ -16,8 +16,8 @@ import { ShippingDetailsDialog } from "@/app/transaction-history-page/components
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { useTransactionContext } from "@/context/transactionContext";
-import { useGetTransaction } from "@/hooks/useGetTransactions";
 import { createNotification } from "@/data/notification";
+import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
