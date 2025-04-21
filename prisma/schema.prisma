@@ -42,6 +42,9 @@ model User {
   reportedGeneral        GeneralReport[] @relation(name: "UserReport")
   resolvedGeneralReports GeneralReport[] @relation(name: "AdminResolve")
 
+  bannedUntil DateTime? @map("banned_until")
+  banReason   String?   @map("ban_reason")
+
   @@map("users")
 }
 
