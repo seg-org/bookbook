@@ -1,4 +1,5 @@
 import { verifyAdmin } from "@/lib/authorization";
+
 import TransactionDenyPage from "../components/TransactionDenyPage";
 
 async function TransactionDenyPageEntry() {

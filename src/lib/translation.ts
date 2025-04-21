@@ -1,4 +1,4 @@
-import { BookTagType, GenreType, SpecialDescriptionType, DamageType } from "@prisma/client";
+import { BookTagType, DamageType, GenreType, SpecialDescriptionType } from "@prisma/client";
 
 export const genreInThai = {
   FICTION: "นิยาย",
