@@ -15,11 +15,13 @@ import { getObjectUrl, putObject } from "@/data/object";
 import { BookTagType, GenreType } from "../api/books/book_enum";
 
 const bookSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  author: z.string().min(1, "Author is required"),
-  description: z.string(),
-  isbn: z.string().min(10, "ISBN must be at least 10 characters"),
-  publisher: z.string().min(1, "Publisher is required"),
+  title: z.string().min(5, "Title must be at least 5 characters long"),
+  author: z.string().min(5, "Author must be at least 5 characters long"),
+  description: z.string().min(20, "Description must be at least 20 characters long"),
+  isbn: z.string().refine((val) => /^\d{10}$|^\d{13}$/.test(val), {
+    message: "ISBN must be either 10 or 13 digits",
+  }),
+  publisher: z.string().min(5, "Publisher must be at least 5 characters long"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
   bookGenres: z.array(z.string()),
