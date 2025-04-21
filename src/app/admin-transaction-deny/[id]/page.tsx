@@ -20,7 +20,16 @@ function TransactionDenyPage() {
   if (loading) {
     return <LoadingAnimation />;
   } else if (error) {
-    return <label className="text-5xl font-extrabold text-red-600">เกิดข้อผิดพลาด</label>;
+    return (
+      <>
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <label className="block text-5xl font-extrabold text-red-600">เกิดข้อผิดพลาด</label>
+            <p className="mt-4 text-lg text-gray-600">โปรดลองอีกครั้งภายหลัง หรือรีเฟรชหน้า</p>
+          </div>
+        </div>
+      </>
+    );
   } else {
     return (
       <main className="flex min-h-screen items-center justify-center p-6">

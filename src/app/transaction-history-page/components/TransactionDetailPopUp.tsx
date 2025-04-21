@@ -13,8 +13,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
-
 import { ShippingDetailsDialog } from "@/app/transaction-history-page/components/ShippingDetailsDialog";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
@@ -341,11 +339,20 @@ const TransactionDetailsPopup = () => {
                   <>
                     <p className="col-span-2 text-lg font-extrabold text-red-600 underline">สาเหตุการยกเลิก</p>
                     <p className="font-bold text-red-400">หมวดหมู่ : </p>
-                    <p className="max-w-56 break-words text-red-400">
+                    <p className="text-red-400">
                       {FailTypeMap[transaction?.failData?.failType || TransactionFailType.UNDEFINED].label}
                     </p>
                     <p className="font-bold text-red-400">รายละเอียด : </p>
-                    <p className="max-w-56 break-words text-red-400">{transaction?.failData?.detail}</p>
+                    <p className="text-red-400">{transaction?.failData?.detail}</p>
+                    <p className="font-bold text-red-400">หลักฐาน : </p>
+                    <a
+                      href={transaction?.failData?.evidenceURL[0]}
+                      className="max-w-56 break-words text-blue-600 underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {displayLink(transaction?.failData?.evidenceURL[0])}
+                    </a>
                   </>
                 )}
                 {transaction?.review && (
@@ -409,6 +416,8 @@ const TransactionDetailsPopup = () => {
                     open={shippingDialogOpen}
                     onClose={() => {
                       setShippingDialogOpen(false);
+                      setSelectingTransaction("");
+                      window.location.reload();
                     }}
                     onConfirm={async (trackingNumber, trackingURL) => {
                       try {
@@ -485,7 +494,7 @@ const TransactionDetailsPopup = () => {
                           console.error(err);
                         }
                         setSelectingTransaction("");
-                        setSelectingTransaction(selectingTransaction);
+                        window.location.reload();
                       }}
                     >
                       รับสำเร็จ

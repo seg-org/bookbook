@@ -6,8 +6,6 @@ import Image from "next/image";
 import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 
-import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
-
 import BoughtIcon from "../pic/boughtIcon.png";
 import SoldIcon from "../pic/soldIcon.png";
 
@@ -55,6 +53,7 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
             <div className="flex flex-col">
               <label className="text-xl font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>
               <label className="text-md text-gray-400">
+                {"สร้าง : "}
                 {transaction.createdAt.toLocaleDateString("th-TH", {
                   day: "2-digit",
                   month: "2-digit",
