@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/Button";
+import { apiClient } from "@/data/axios";
 import { Book } from "@/data/dto/book.dto";
 
 const BookCard = ({ book }: { book: Book }) => {
@@ -18,6 +19,11 @@ const BookCard = ({ book }: { book: Book }) => {
       return s.slice(0, n) + "...";
     }
     return s;
+  };
+
+  const handleOnClick = async (verifiedStatus: string) => {
+    await apiClient.patch(`/books/${book.id}`, { verifiedStatus });
+    router.refresh();
   };
 
   return (
@@ -45,8 +51,12 @@ const BookCard = ({ book }: { book: Book }) => {
           </p>
         </div>
         <div className="mt-4 space-x-2">
-          <Button className="bg-green-500 text-white hover:bg-green-600">Approve</Button>
-          <Button className="bg-red-500 text-white hover:bg-red-600">Reject</Button>
+          <Button className="bg-green-500 text-white hover:bg-green-600" onClick={() => handleOnClick("APPROVED")}>
+            Approve
+          </Button>
+          <Button className="bg-red-500 text-white hover:bg-red-600" onClick={() => handleOnClick("REJECTED")}>
+            Reject
+          </Button>
         </div>
       </div>
     </div>
