@@ -1,12 +1,22 @@
 import { TransactionFailType } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
+import { getServerSession } from "next-auth";
+
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../../objects/s3";
-import { TransactionRespone, TransactionUpdateRespone, UpdateTransactionRequest } from "../schemas";
+import {
+  TransactionCountRespone,
+  TransactionRespone,
+  TransactionUpdateRespone,
+  UpdateTransactionRequest,
+} from "../schemas";
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const session = await getServerSession(authOptions);
+
   const { id } = await props.params;
   try {
     const parsedData = UpdateTransactionRequest.safeParse(await req.json());
@@ -23,6 +33,12 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 
     if (!transaction) {
       return NextResponse.json({ error: `Transaction with id ${id} not found` }, { status: 404 });
+    }
+
+    if (parsedData.data.status == "FAIL" || (transaction.status == "HOLD" && parsedData.data.status != "HOLD")) {
+      if (!session?.user?.isAdmin) {
+        return new NextResponse("Unauthorized", { status: 401 });
+      }
     }
 
     const updateTransaction = await prisma.$transaction(async (prisma) => {
