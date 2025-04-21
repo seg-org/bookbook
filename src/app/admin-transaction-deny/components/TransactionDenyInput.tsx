@@ -65,13 +65,16 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
       if (transaction === undefined) {
         throw new Error("Failed to upload files");
       }
-      await updateTransaction({
+      let res = await updateTransaction({
         id: transaction.id,
         status: "FAIL",
         detail: [details],
         evidenceURL: [uploadFiles.key],
         failType: failType.toUpperCase(),
       });
+      if (res instanceof Error) {
+        throw Error("error");
+      }
       setSendingStatus("success");
     } catch (error) {
       console.error(error);
