@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 
+import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
+
 import BoughtIcon from "../pic/boughtIcon.png";
 import SoldIcon from "../pic/soldIcon.png";
 
@@ -59,6 +61,7 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
                   year: "numeric",
                 })}{" "}
                 {transaction.createdAt.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
+                {"น."}
               </label>
             </div>
           </div>
