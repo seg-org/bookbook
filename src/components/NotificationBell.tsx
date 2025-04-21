@@ -84,8 +84,8 @@ export default function NotificationBell() {
       </button>
 
       {isOpen && (
-        <div 
-          className="notification-dropdown absolute right-0 mt-2 max-h-96 w-80 overflow-y-auto rounded-lg bg-white shadow-lg z-50"
+        <div
+          className="notification-dropdown absolute right-0 z-50 mt-2 max-h-96 w-80 overflow-y-auto rounded-lg bg-white shadow-lg"
           style={{ top: "100%" }}
         >
           <div className="p-4 font-bold text-gray-700">Notifications</div>
