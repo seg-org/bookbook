@@ -356,6 +356,13 @@ const TransactionDetailsPopup = () => {
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ status: "COMPLETE" }),
                           });
+                          await fetch(`/api/profile/seller/balance/${transaction.sellerId}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              diff: transaction.amount,
+                            }),
+                          });
 
                           router.push(`/review/${transaction.id}`);
                         } catch (err) {
