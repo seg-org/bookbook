@@ -6,25 +6,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Card } from "@/components/ui/card/Card";
 import { apiClient } from "@/data/axios";
 
-interface Review {
+interface GeneralReport {
   id: string;
-  sellerId: string;
-  rating: number;
-  comment: string;
+  reason: string;
   createdAt: string;
-  transaction: {
-    buyer: {
-      id: string;
-      firstName: string;
-      lastName: string;
-      avatar?: string;
-    };
-    post: {
-      book: {
-        title: string;
-        coverImageUrl?: string;
-      };
-    };
+  reporter: {
+    id: string;
+    firstName: string;
+    lastName: string;
   };
 }
 
@@ -37,13 +26,13 @@ const formatDate = (dateString: string) => {
 };
 
 export default function SellerReviewsPage() {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviews, setReviews] = useState<GeneralReport[]>([]);
   const [sortBy, setSortBy] = useState("newest");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [rRes] = await Promise.all([apiClient.get(`/reviews/seller/user_1`)]);
+        const [rRes] = await Promise.all([apiClient.get(`/view-report/general`)]);
         setReviews(rRes.data);
       } catch (err) {
         console.error("Failed to load general reports", err);
@@ -62,7 +51,7 @@ export default function SellerReviewsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold">General Report</h1>
+      <h1 className="mb-6 text-3xl font-bold">รายงานปัญหาการใช้งานทั่วไป</h1>
 
       <div className="mb-4 flex justify-end">
         <select
@@ -78,13 +67,13 @@ export default function SellerReviewsPage() {
       {sortedReviews.length === 0 ? (
         <Card>
           <div className="p-8 text-center">
-            <h3 className="text-xl font-medium text-gray-500">ยังไม่มีรีวิว</h3>
+            <h3 className="text-xl font-medium text-gray-500">ยังไม่มีรายงานปัญหา</h3>
           </div>
         </Card>
       ) : (
         <div className="space-y-4">
-          {sortedReviews.map((review) => (
-            <Card key={review.id} className="overflow-hidden">
+          {sortedReviews.map((report) => (
+            <Card key={report.id} className="overflow-hidden">
               <div className="p-4">
                 <div className="mb-4 flex items-start justify-between">
                   <div className="flex items-center gap-3">
@@ -94,13 +83,13 @@ export default function SellerReviewsPage() {
                       </div>
                     </div>
                     <div>
-                      {review.transaction?.buyer?.firstName} {review.transaction?.buyer?.lastName}
-                      <div className="text-sm text-gray-500">{formatDate(review.createdAt)}</div>
+                      {report.reporter.firstName} {report.reporter.lastName}
+                      <div className="text-sm text-gray-500">{formatDate(report.createdAt)}</div>
                     </div>
                   </div>
                 </div>
                 <div className="mb-4 flex items-center gap-3 rounded-md bg-gray-50 p-3">
-                  <div className="font-medium">{review.comment}</div>
+                  <div className="font-medium">{report.reason}</div>
                 </div>
               </div>
             </Card>
