@@ -45,6 +45,11 @@ export default async function Home() {
       icon: <BookMarked />,
       text: "ยืนยันผู้ขาย",
     });
+    links.push({
+      href: "/admin-transaction-history",
+      icon: <FileText />,
+      text: "จัดการการซื้อขาย",
+    });
   }
 
   return (
@@ -113,7 +118,8 @@ export default async function Home() {
                 const isAdminLink =
                   item.href === "/admin/dashboard" ||
                   item.href === "/admin/view-chat-report" ||
-                  item.href === "/admin/verify-sellers";
+                  item.href === "/admin/verify-sellers" ||
+                  item.href === "/admin-transaction-history";
 
                 return (
                   <Link

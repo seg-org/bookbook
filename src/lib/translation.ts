@@ -1,4 +1,4 @@
-import { BookTagType, GenreType } from "@prisma/client";
+import { BookTagType, GenreType, SpecialDescriptionType } from "@prisma/client";
 
 export const genreInThai = {
   FICTION: "นิยาย",
@@ -50,3 +50,36 @@ export const bookTagInThai = {
   THRILLER: "ระทึกขวัญ",
   ROMANTIC_COMEDY: "โรแมนติกคอมเมดี้",
 } as const satisfies Record<BookTagType, string>;
+
+export const specialDescriptionInThai = {
+  AUTHOR_SIGNATURE: "ลายเซ็นผู้เขียน",
+  LIMITED_EDITION: "มีจำกัด",
+  FIRST_EDITION: "ฉบับแรก",
+  SPECIAL_COVER_ART: "ปกอาร์ต",
+  ILLUSTRATED_EDITION: "ฉบับภาพประกอบ",
+  COLLECTORS_EDITION: "ฉบับสะสม",
+  SLIPCASE_EDITION: "ฉบับกล่องแข็ง",
+  LEATHER_BOUND: "ปกหนัง",
+  GILDED_EDGES: "ขอบทอง",
+  DECKLE_EDGES: "ขอบกระดาษหยัก",
+  POP_UP_ELEMENTS: "องค์ประกอบป๊อปอัพ",
+  FOLD_OUT_PAGES: "หน้ากระดาษพับขยายได้",
+  HANDWRITTEN_NOTES_BY_AUTHOR: "บันทึกลายมือผู้เขียน",
+  PERSONALIZED_MESSAGE: "ข้อความเฉพาะบุคคล",
+  NUMBERED_EDITION: "ฉบับลำดับเลข",
+  EXCLUSIVE_ARTWORK: "ภาพประกอบพิเศษ",
+  EMBOSSED_COVER: "ปกนูน",
+  GOLD_FOIL_STAMPING: "ปั๊มฟอยล์ทอง",
+  BOX_SET: "ชุดกล่อง",
+  ANNIVERSARY_EDITION: "ฉบับครบรอบ",
+  HARDCOVER_WITH_DUST_JACKET: "ปกแข็งพร้อมปกกระดาษ",
+  TRANSPARENT_COVER: "ปกโปร่งใส",
+  ANNOTATED_EDITION: "ฉบับมีคำอธิบายประกอบ",
+  SIGNED_BY_ILLUSTRATOR: "ลายเซ็นนักวาดภาพประกอบ",
+  MAP_INSERT: "แผนที่แนบ",
+  SUPPLEMENTARY_MATERIALS: "เอกสารเสริม",
+  EXCLUSIVE_CONTENT: "เนื้อหาพิเศษ",
+  FAN_ART_EDITION: "ฉบับแฟนอาร์ต",
+  INTERACTIVE_ELEMENTS: "องค์ประกอบเชิงโต้ตอบ",
+  BILINGUAL_EDITION: "ฉบับสองภาษา",
+} as const satisfies Record<SpecialDescriptionType, string>;

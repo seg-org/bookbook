@@ -1,16 +1,30 @@
-import { DamageType, PaymentMethod, ShipmentMethod, TransactionFailType, TransactionStatus } from "@prisma/client";
+"use client";
+
+import {
+  BookTagType,
+  DamageType,
+  GenreType,
+  PaymentMethod,
+  ShipmentMethod,
+  SpecialDescriptionType,
+  TransactionFailType,
+  TransactionStatus,
+} from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
+import { createNotification } from "@/data/notification";
+import { updateTransaction } from "@/data/transaction";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
   const { selectingTransaction, setSelectingTransaction, userId } = useTransactionAdminContext();
   const { transaction, loading, error } = useGetTransaction(selectingTransaction);
+  // pardon me with this curse code, I just want to code to work
   const statusMap: Record<TransactionStatus, { label: string; color: string }> = {
     [TransactionStatus.PACKING]: { label: "กำลังเตรียม", color: "text-gray-300" },
     [TransactionStatus.DELIVERING]: { label: "จัดส่ง", color: "text-gray-300" },
@@ -46,9 +60,102 @@ const TransactionDetailsPopup = () => {
     [DamageType.DAMAGED]: { label: "ได้รับความเสียหาย" },
   };
 
+  const GenresTypeMap: Record<GenreType, { label: string }> = {
+    [GenreType.FICTION]: { label: "นิยาย" },
+    [GenreType.NON_FICTION]: { label: "สารคดี" },
+    [GenreType.MYSTERY]: { label: "ลึกลับ" },
+    [GenreType.THRILLER]: { label: "ระทึกขวัญ" },
+    [GenreType.ROMANCE]: { label: "โรแมนติก" },
+    [GenreType.SCIENCE_FICTION]: { label: "นิยายวิทยาศาสตร์" },
+    [GenreType.FANTASY]: { label: "แฟนตาซี" },
+    [GenreType.HISTORICAL_FICTION]: { label: "นิยายอิงประวัติศาสตร์" },
+    [GenreType.HORROR]: { label: "สยองขวัญ" },
+    [GenreType.BIOGRAPHY]: { label: "ชีวประวัติ" },
+    [GenreType.MEMOIR]: { label: "บันทึกความทรงจำ" },
+    [GenreType.SELF_HELP]: { label: "พัฒนาตนเอง" },
+    [GenreType.HEALTH_WELLNESS]: { label: "สุขภาพและสุขภาวะ" },
+    [GenreType.PSYCHOLOGY]: { label: "จิตวิทยา" },
+    [GenreType.POETRY]: { label: "บทกวี" },
+    [GenreType.DRAMA]: { label: "ละคร" },
+    [GenreType.ADVENTURE]: { label: "ผจญภัย" },
+    [GenreType.CHILDRENS_LITERATURE]: { label: "วรรณกรรมเด็ก" },
+    [GenreType.YOUNG_ADULT]: { label: "วรรณกรรมวัยรุ่น" },
+    [GenreType.GRAPHIC_NOVELS_COMICS]: { label: "นิยายภาพและการ์ตูน" },
+    [GenreType.CRIME]: { label: "อาชญากรรม" },
+    [GenreType.TRUE_CRIME]: { label: "อาชญากรรมจริง" },
+    [GenreType.DYSTOPIAN]: { label: "ดิสโทเปีย" },
+    [GenreType.CONTEMPORARY]: { label: "ร่วมสมัย" },
+    [GenreType.RELIGIOUS_SPIRITUAL]: { label: "ศาสนาและจิตวิญญาณ" },
+  };
+
+  const TagTypeMap: Record<BookTagType, { label: string }> = {
+    [BookTagType.BESTSELLER]: { label: "หนังสือขายดี" },
+    [BookTagType.NEW_RELEASE]: { label: "ออกใหม่" },
+    [BookTagType.CLASSIC]: { label: "คลาสสิก" },
+    [BookTagType.AWARD_WINNING]: { label: "รางวัลยอดเยี่ยม" },
+    [BookTagType.MUST_READ]: { label: "ต้องอ่าน" },
+    [BookTagType.HIGHLY_RECOMMENDED]: { label: "แนะนำอย่างยิ่ง" },
+    [BookTagType.INSPIRATIONAL]: { label: "สร้างแรงบันดาลใจ" },
+    [BookTagType.COMING_OF_AGE]: { label: "การเติบโตของตัวละคร" },
+    [BookTagType.FAMILY_SAGA]: { label: "เรื่องราวครอบครัว" },
+    [BookTagType.HISTORICAL]: { label: "ประวัติศาสตร์" },
+    [BookTagType.DARK_FANTASY]: { label: "ดาร์คแฟนตาซี" },
+    [BookTagType.DETECTIVE]: { label: "นักสืบ" },
+    [BookTagType.LGBTQ_PLUS]: { label: "LGBTQ+" },
+    [BookTagType.YOUNG_ADULT]: { label: "วรรณกรรมวัยรุ่น" },
+    [BookTagType.CHILDRENS_BOOK]: { label: "หนังสือเด็ก" },
+    [BookTagType.SHORT_STORIES]: { label: "เรื่องสั้น" },
+    [BookTagType.MYSTERY]: { label: "ลึกลับ" },
+    [BookTagType.SELF_HELP]: { label: "พัฒนาตนเอง" },
+    [BookTagType.THRILLER]: { label: "ระทึกขวัญ" },
+    [BookTagType.ROMANTIC_COMEDY]: { label: "โรแมนติกคอมเมดี้" },
+  };
+
+  const SpecialDescriptionMap: Record<SpecialDescriptionType, { label: string }> = {
+    [SpecialDescriptionType.AUTHOR_SIGNATURE]: { label: "ลายเซ็นผู้เขียน" },
+    [SpecialDescriptionType.LIMITED_EDITION]: { label: "มีจำกัด" },
+    [SpecialDescriptionType.FIRST_EDITION]: { label: "ฉบับแรก" },
+    [SpecialDescriptionType.SPECIAL_COVER_ART]: { label: "ปกอาร์ต" },
+    [SpecialDescriptionType.ILLUSTRATED_EDITION]: { label: "ฉบับภาพประกอบ" },
+    [SpecialDescriptionType.COLLECTORS_EDITION]: { label: "ฉบับสะสม" },
+    [SpecialDescriptionType.SLIPCASE_EDITION]: { label: "ฉบับกล่องแข็ง" },
+    [SpecialDescriptionType.LEATHER_BOUND]: { label: "ปกหนัง" },
+    [SpecialDescriptionType.GILDED_EDGES]: { label: "ขอบทอง" },
+    [SpecialDescriptionType.DECKLE_EDGES]: { label: "ขอบกระดาษหยัก" },
+    [SpecialDescriptionType.POP_UP_ELEMENTS]: { label: "องค์ประกอบป๊อปอัพ" },
+    [SpecialDescriptionType.FOLD_OUT_PAGES]: { label: "หน้ากระดาษพับขยายได้" },
+    [SpecialDescriptionType.HANDWRITTEN_NOTES_BY_AUTHOR]: { label: "บันทึกลายมือผู้เขียน" },
+    [SpecialDescriptionType.PERSONALIZED_MESSAGE]: { label: "ข้อความเฉพาะบุคคล" },
+    [SpecialDescriptionType.NUMBERED_EDITION]: { label: "ฉบับลำดับเลข" },
+    [SpecialDescriptionType.EXCLUSIVE_ARTWORK]: { label: "ภาพประกอบพิเศษ" },
+    [SpecialDescriptionType.EMBOSSED_COVER]: { label: "ปกนูน" },
+    [SpecialDescriptionType.GOLD_FOIL_STAMPING]: { label: "ปั๊มฟอยล์ทอง" },
+    [SpecialDescriptionType.BOX_SET]: { label: "ชุดกล่อง" },
+    [SpecialDescriptionType.ANNIVERSARY_EDITION]: { label: "ฉบับครบรอบ" },
+    [SpecialDescriptionType.HARDCOVER_WITH_DUST_JACKET]: { label: "ปกแข็งพร้อมปกกระดาษ" },
+    [SpecialDescriptionType.TRANSPARENT_COVER]: { label: "ปกโปร่งใส" },
+    [SpecialDescriptionType.ANNOTATED_EDITION]: { label: "ฉบับมีคำอธิบายประกอบ" },
+    [SpecialDescriptionType.SIGNED_BY_ILLUSTRATOR]: { label: "ลายเซ็นนักวาดภาพประกอบ" },
+    [SpecialDescriptionType.MAP_INSERT]: { label: "แผนที่แนบ" },
+    [SpecialDescriptionType.SUPPLEMENTARY_MATERIALS]: { label: "เอกสารเสริม" },
+    [SpecialDescriptionType.EXCLUSIVE_CONTENT]: { label: "เนื้อหาพิเศษ" },
+    [SpecialDescriptionType.FAN_ART_EDITION]: { label: "ฉบับแฟนอาร์ต" },
+    [SpecialDescriptionType.INTERACTIVE_ELEMENTS]: { label: "องค์ประกอบเชิงโต้ตอบ" },
+    [SpecialDescriptionType.BILINGUAL_EDITION]: { label: "ฉบับสองภาษา" },
+  };
+
   const dateString = (date: Date | undefined) => {
     if (date === undefined) return "";
-    return date.toLocaleDateString("en-GB").replace(/\//g, "/");
+    return date.toLocaleDateString("th-TH", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
+  const timeString = (date: Date | undefined) => {
+    if (date === undefined) return "";
+    return date.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" });
   };
 
   const displayLink = (URLs: string | undefined) => {
@@ -95,7 +202,7 @@ const TransactionDetailsPopup = () => {
               width={220}
             />
             <div>
-              <div className="grid max-h-64 w-80 grid-cols-[100px_220px] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
+              <div className="max-w- grid max-h-64 grid-cols-[100px_232px] gap-2 overflow-y-auto rounded-lg border bg-white p-4 shadow-md">
                 <p className="text-lg font-extrabold underline">สถานะ :</p>
                 <p>
                   <label className={`text-lg ${statusMap[transaction.status]?.color} font-extrabold`}>
@@ -103,91 +210,94 @@ const TransactionDetailsPopup = () => {
                   </label>
                 </p>
                 <p className="font-bold text-slate-500">รหัส : </p>
-                <p className="text-slate-500">{transaction?.id}</p>
+                <p className="break-words text-slate-500">{transaction?.id}</p>
                 <p className="font-bold text-slate-500">สร้าง : </p>
-                <p className="text-slate-500">{dateString(transaction?.createdAt)}</p>
+                <p className="max-w-56 break-words text-slate-500">
+                  {dateString(transaction?.createdAt)} {timeString(transaction?.createdAt)}
+                  {"น."}
+                </p>
                 <p className="font-bold text-slate-500">แก้ไขล่าสุด : </p>
-                <p className="text-slate-500">{dateString(transaction?.updatedAt)}</p>
+                <p className="max-w-56 break-words text-slate-500">
+                  {dateString(transaction?.updatedAt)} {timeString(transaction?.updatedAt)}
+                  {"น."}
+                </p>
                 <p className="font-bold text-slate-500">การจ่าย : </p>
-                <p className="text-slate-500">{paymentMethodMap[transaction.paymentMethod]?.label}</p>
+                <p className="break-words text-slate-500">{paymentMethodMap[transaction.paymentMethod]?.label}</p>
                 <p className="font-bold text-slate-500">การส่ง : </p>
-                <p className="text-slate-500">{shipmentMethodMap[transaction.shipmentMethod]?.label}</p>
+                <p className="break-words text-slate-500">{shipmentMethodMap[transaction.shipmentMethod]?.label}</p>
                 <p className="font-bold text-slate-500">ที่อยู่ : </p>
-                <p className="text-slate-500">{transaction?.address}</p>
+                <p className="break-words text-slate-500">{transaction?.address}</p>
                 <p className="col-span-2 text-lg font-extrabold underline">ข้อมูลหนังสือ</p>
                 <p className="font-bold text-slate-500">รหัส : </p>
-                <p className="text-slate-500">{transaction?.post.book.id}</p>
+                <p className="break-words text-slate-500">{transaction?.post.book.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.title}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.book?.title}</p>
                 <p className="font-bold text-slate-500">รหัส isbn : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.isbn}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.book?.isbn}</p>
                 <p className="font-bold text-slate-500">ผู้เขียน : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.author}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.book?.author}</p>
                 <p className="font-bold text-slate-500">ผู้ตีพิมพ์ : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.publisher}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.book?.publisher}</p>
                 <p className="font-bold text-slate-500">คำอธิบาย : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.description}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.book?.description}</p>
                 <p className="font-bold text-slate-500">จำนวนหน้า : </p>
-                <p className="text-slate-500">{transaction?.post?.book?.pages}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.book?.pages}</p>
                 <p className="font-bold text-slate-500">หมวดหมู่ : </p>
-                <p className="text-slate-500">
+                <p className="max-w-56 break-words text-slate-500">
                   {transaction?.post?.book?.bookGenres
-                    ? transaction?.post?.book?.bookGenres
-                        .map((str) =>
-                          str
-                            .toLowerCase()
-                            .split("_")
-                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(" "),
-                        )
-                        .join(",")
+                    ? transaction.post.book.bookGenres
+                        .map((genre) => {
+                          return GenresTypeMap[genre].label;
+                        })
+                        .join(", ")
                     : ""}
                 </p>
                 <p className="font-bold text-slate-500">แท็ก : </p>
-                <p className="text-slate-500">
+                <p className="max-w-56 break-words text-slate-500">
                   {transaction?.post?.book?.bookTags
-                    ? transaction?.post?.book?.bookTags
-                        .map((str) =>
-                          str
-                            .toLowerCase()
-                            .split("_")
-                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(" "),
-                        )
-                        .join(" ,")
+                    ? transaction.post.book.bookTags
+                        .map((tag) => {
+                          return TagTypeMap[tag].label;
+                        })
+                        .join(", ")
                     : ""}
                 </p>
                 <p className="col-span-2 text-lg font-extrabold underline">โพสต์</p>
                 <p className="font-bold text-slate-500">รหัส : </p>
-                <p className="text-slate-500">{transaction?.post.id}</p>
+                <p className="break-words text-slate-500">{transaction?.post.id}</p>
                 <p className="font-bold text-slate-500">ชื่อ : </p>
-                <p className="text-slate-500">{transaction?.post?.title}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.title}</p>
                 <p className="font-bold text-slate-500">เนื้อหา : </p>
-                <p className="text-slate-500">{transaction?.post?.content}</p>
+                <p className="break-words text-slate-500">{transaction?.post?.content}</p>
                 <p className="font-bold text-slate-500">ความพิเศษ : </p>
-                <p className="text-slate-500">
+                <p className="max-w-56 break-words text-slate-500">
                   {transaction?.post?.specialDescriptions
-                    ? transaction?.post?.specialDescriptions
-                        .map((str) =>
-                          str
-                            .toLowerCase()
-                            .split("_")
-                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(" "),
-                        )
-                        .join(" ,")
+                    ? transaction.post.specialDescriptions
+                        .map((desc) => {
+                          return SpecialDescriptionMap[desc].label;
+                        })
+                        .join(", ")
                     : ""}
                 </p>
                 <p className="font-bold text-slate-500">ความสมบูรณ์ : </p>
-                <p className="text-slate-500">
-                  {DamageTypeMap[transaction?.post.damage]?.label}
-                  {"\n\n"}
-                  {transaction?.post.damageURLs.map((url) => {
-                    {
-                      return displayLink(url);
-                    }
-                  })}
-                </p>
+                <p className="max-w-56 break-words text-slate-500">{DamageTypeMap[transaction?.post.damage]?.label}</p>
+                {transaction?.post.damageURLs.map((url) => {
+                  {
+                    return (
+                      <>
+                        <p></p>
+                        <a
+                          href={url}
+                          className="max-w-56 break-words text-blue-600 underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {displayLink(url)}
+                        </a>
+                      </>
+                    );
+                  }
+                })}
                 <p className="col-span-2 text-lg font-extrabold underline">ผู้ขาย</p>
                 <p className="font-bold text-slate-500">รหัส : </p>
                 <p className="text-slate-500">{transaction?.seller.id}</p>
@@ -238,13 +348,24 @@ const TransactionDetailsPopup = () => {
                   <>
                     <p className="col-span-2 text-lg font-extrabold text-yellow-700 underline">การรายงาน</p>
                     <p className="font-bold text-yellow-500">รายละเอียด : </p>
-                    <p className="text-yellow-500">{transaction?.failData?.detail.join(" ,")}</p>
+                    <p className="text-yellow-500">{transaction?.failData?.detail.join(" , ")}</p>
                     <p className="font-bold text-yellow-500">หลักฐาน : </p>
-                    <p className="text-yellow-500">
-                      {transaction?.failData?.evidenceURL.map((str) => {
-                        return displayLink(str);
-                      })}
-                    </p>
+                    <p className="font-bold text-yellow-500">link :</p>
+                    {transaction?.failData?.evidenceURL.map((url) => {
+                      return (
+                        <>
+                          <p></p>
+                          <a
+                            href={url}
+                            className="max-w-56 break-words text-blue-600 underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {displayLink(url)}
+                          </a>
+                        </>
+                      );
+                    })}
                   </>
                 )}
 
@@ -257,6 +378,15 @@ const TransactionDetailsPopup = () => {
                     </p>
                     <p className="font-bold text-red-400">รายละเอียด : </p>
                     <p className="text-red-400">{transaction?.failData?.detail}</p>
+                    <p className="font-bold text-red-400">หลักฐาน : </p>
+                    <a
+                      href={transaction?.failData?.evidenceURL[0]}
+                      className="max-w-56 break-words text-blue-600 underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {displayLink(transaction?.failData?.evidenceURL[0])}
+                    </a>
                   </>
                 )}
                 {transaction?.review && (
@@ -316,6 +446,49 @@ const TransactionDetailsPopup = () => {
                       }}
                     >
                       รายงานเพิ่มเติม
+                    </Button>
+                  )}
+                  {transaction?.status == TransactionStatus.HOLD && (
+                    <Button
+                      className="mt-4 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 focus:outline-none"
+                      onClick={() => {
+                        (async () => {
+                          if (!window.confirm("คุณต้องการปฎิเสธการร้องเรียนของลูกค้าหรือไม่")) {
+                            return;
+                          }
+                          try {
+                            if (transaction.trackingNumber) {
+                              await updateTransaction({
+                                id: transaction.id,
+                                status: "DELIVERING",
+                              });
+                            } else {
+                              await updateTransaction({
+                                id: transaction.id,
+                                status: "PACKING",
+                              });
+                            }
+
+                            createNotification(
+                              transaction.sellerId,
+                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
+                            );
+                            createNotification(
+                              transaction.buyerId,
+                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
+                            );
+                          } catch (error) {
+                            if (!window.confirm("เกิดข้อผิดพลาด")) {
+                              console.log(error);
+                              return;
+                            }
+                          }
+                          setSelectingTransaction("");
+                          window.location.reload();
+                        })();
+                      }}
+                    >
+                      ปฏิเสธ
                     </Button>
                   )}
                   {transaction?.status != TransactionStatus.FAIL &&

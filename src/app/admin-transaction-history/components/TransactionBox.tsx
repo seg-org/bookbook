@@ -57,6 +57,7 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
                   year: "numeric",
                 })}{" "}
                 {transaction.updatedAt.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
+                {"น."}
               </label>
               <label className="text-md text-gray-400">
                 {"สร้าง : "}
@@ -66,6 +67,7 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
                   year: "numeric",
                 })}{" "}
                 {transaction.createdAt.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
+                {"น."}
               </label>
             </div>
           </div>

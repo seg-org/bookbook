@@ -95,7 +95,7 @@ const TransactionList = () => {
 
     return (
       <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
-        {[...categories].reverse().map((category) => {
+        {[...categories].map((category) => {
           const transactionsList = categorizedTransactions[category];
 
           if (Array.isArray(transactionsList) && transactionsList.length === 0) {

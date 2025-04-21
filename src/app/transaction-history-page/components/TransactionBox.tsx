@@ -53,12 +53,14 @@ const TransactionBox = ({ transaction }: { transaction: Transaction }) => {
             <div className="flex flex-col">
               <label className="text-xl font-semibold">{cap_overflow_string(transaction.post.book.title)}</label>
               <label className="text-md text-gray-400">
+                {"สร้าง : "}
                 {transaction.createdAt.toLocaleDateString("th-TH", {
                   day: "2-digit",
                   month: "2-digit",
                   year: "numeric",
                 })}{" "}
                 {transaction.createdAt.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
+                {"น."}
               </label>
             </div>
           </div>
