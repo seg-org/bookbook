@@ -26,7 +26,7 @@ export function BookSearch({ children }: { children: ReactNode }) {
 
       {children}
 
-      <BookList query={{ title: queryTitle }} />
+      <BookList query={{ title: queryTitle, verifiedStatus: "APPROVED" }} />
     </>
   );
 }
