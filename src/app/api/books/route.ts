@@ -50,19 +50,21 @@ export async function GET(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams;
     const title = searchParams.get("title");
+    const verifiedStatus = searchParams.get("verifiedStatus");
 
-    const books = await prisma.book.findMany(
-      title
-        ? {
-            where: {
-              title: {
-                contains: title,
-                mode: "insensitive",
-              },
-            },
-          }
-        : undefined,
-    );
+    const books = await prisma.book.findMany({
+      where: {
+        ...(title && {
+          title: {
+            contains: title,
+            mode: "insensitive",
+          },
+        }),
+        ...(verifiedStatus && {
+          verifiedStatus,
+        }),
+      },
+    });
     const booksWithImageUrl = books.map((book) => {
       const url = getUrl("book_images", book.coverImageKey);
       return {

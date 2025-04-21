@@ -48,6 +48,7 @@ export const UpdateBookRequest = z.object({
     .array(BookTagType)
     .optional()
     .openapi({ example: ["BESTSELLER"] }),
+  verifiedStatus: z.string().optional().openapi({ example: "UNVERIFIED" }),
 });
 
 export const GenBookDescRequest = z.object({
