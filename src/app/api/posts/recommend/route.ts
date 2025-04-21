@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 
+import { getUrl } from "../../objects/s3";
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -87,7 +89,17 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    return NextResponse.json(limitedPosts, { status: 200 });
+    const postsWithImageUrl = limitedPosts.map((post) => {
+      return {
+        ...post,
+        book: {
+          ...post.book,
+          coverImageUrl: getUrl("book_images", post.book.coverImageKey),
+        },
+      };
+    });
+
+    return NextResponse.json(postsWithImageUrl, { status: 200 });
   } catch (error) {
     if (error instanceof Error) console.error("Error in recommendations", error.stack);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
