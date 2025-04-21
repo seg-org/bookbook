@@ -19,17 +19,28 @@ import { authOptions } from "@/lib/auth";
 export default async function Home() {
   const session = await getServerSession(authOptions);
   const isAdmin = session?.user?.isAdmin;
+  const isSeller = session?.user?.isSeller;
 
   const links = [
+    // ✅ Everyone
     { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
     { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
     { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
-    { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
-    { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
   ];
 
-  const adminLinks = [];
+  // ✅ User or Admin (not Seller)
+  if (!isSeller || isAdmin) {
+    links.push({ href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" });
+  }
 
+  // ✅ Seller or Admin (not User)
+  const sellerLinks = [];
+  if (isSeller || isAdmin) {
+    sellerLinks.push({ href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" });
+  }
+
+  // ✅ Admin only
+  const adminLinks = [];
   if (isAdmin) {
     adminLinks.push({ href: "/admin/dashboard", icon: <LayoutDashboard />, text: "แดชบอร์ดผู้ดูแลระบบ" });
     adminLinks.push({ href: "/admin/view-post", icon: <Store />, text: "ดูโพสต์ทั้งหมด" });
@@ -99,18 +110,41 @@ export default async function Home() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {links.map((item, index) => (
                 <Link
-                  key={index}
+                  key={`link-${index}`}
                   href={item.href}
-                  className="group flex items-center rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
+                  className="group flex items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
                 >
-                  <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                    {item.icon}
+                  <div className="flex items-center">
+                    <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                      {item.icon}
+                    </div>
+                    <span className="font-medium text-gray-700 transition-colors duration-300 group-hover:text-blue-600">
+                      {item.text}
+                    </span>
                   </div>
-                  <span className="font-medium text-gray-700 transition-colors duration-300 group-hover:text-blue-600">
-                    {item.text}
-                  </span>
                 </Link>
               ))}
+
+              {(isSeller || isAdmin) &&
+                sellerLinks.map((item, index) => (
+                  <Link
+                    key={`seller-${index}`}
+                    href={item.href}
+                    className="group flex items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-gray-100 transition-all duration-300 hover:scale-[1.02] hover:bg-blue-50 hover:shadow-lg"
+                  >
+                    <div className="flex items-center">
+                      <div className="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                        {item.icon}
+                      </div>
+                      <span className="font-medium text-gray-700 transition-colors duration-300 group-hover:text-blue-600">
+                        {item.text}
+                      </span>
+                    </div>
+                    <span className="ml-2 rounded-full bg-purple-300 px-2 py-0.5 text-xs font-semibold text-purple-900 shadow-sm">
+                      SELLER
+                    </span>
+                  </Link>
+                ))}
 
               {isAdmin &&
                 adminLinks.map((item, index) => (
