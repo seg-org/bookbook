@@ -6,12 +6,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../../objects/s3";
-import {
-  TransactionCountRespone,
-  TransactionRespone,
-  TransactionUpdateRespone,
-  UpdateTransactionRequest,
-} from "../schemas";
+import { TransactionRespone, TransactionUpdateRespone, UpdateTransactionRequest } from "../schemas";
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);

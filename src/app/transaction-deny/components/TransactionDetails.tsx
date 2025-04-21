@@ -1,5 +1,4 @@
 import {
-  Book,
   BookTagType,
   DamageType,
   GenreType,
