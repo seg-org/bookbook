@@ -8,7 +8,7 @@ export const adminRegistry = new OpenAPIRegistry();
 adminRegistry.registerPath({
   tags: ["Admin"],
   method: "get",
-  path: "/api/admin/manage-post",
+  path: "/admin/manage-post",
   summary: "/api/admin/manage-post",
   description: "Admin can view all posts.",
   request: {},
