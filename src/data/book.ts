@@ -94,3 +94,14 @@ export const deleteBook = async (id: string) => {
     return Error(`Failed to delete book with id ${id}`);
   }
 };
+
+export const getUnverifiedBooks = async () => {
+  try {
+    const res: AxiosResponse<Book[]> = await apiClient.get("/admin/new-book");
+
+    return res.data;
+  } catch (error) {
+    console.error("Failed to get unverified books", error);
+    return Error("Failed to get unverified books");
+  }
+};
