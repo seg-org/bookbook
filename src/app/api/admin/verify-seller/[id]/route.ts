@@ -4,12 +4,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(req: Request) {
+export async function PATCH(req: Request, props: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.isAdmin) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
+
+  const { id } = await props.params;
+  console.log(id);
 
   try {
     const { sellerId, approved } = await req.json();
