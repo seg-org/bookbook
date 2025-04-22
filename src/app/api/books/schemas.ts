@@ -49,14 +49,11 @@ export const UpdateBookRequest = z.object({
     .array(BookTagType)
     .optional()
     .openapi({ example: ["BESTSELLER"] }),
-<<<<<<< HEAD
   verifiedStatus: z.string().optional().openapi({ example: "UNVERIFIED" }),
-=======
   recommendPrice: z.number().min(0).optional().openapi({
     example: 299.99,
     description: "Admin-recommended selling price for this book",
   }),
->>>>>>> main
 });
 
 export const GenBookDescRequest = z.object({

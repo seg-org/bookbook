@@ -87,6 +87,3 @@ export default function VerifyBookDetailPage({ params }: { params: Promise<{ id:
     </div>
   );
 }
-function setHidden(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
