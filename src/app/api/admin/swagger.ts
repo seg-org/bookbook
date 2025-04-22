@@ -1,7 +1,8 @@
-import { z } from "zod";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
-import { PostResponse, PostsResponse } from "@/app/api/posts/schemas";
+import { z } from "zod";
+
 import { BooksResponse } from "@/app/api/books/schemas";
+import { PostResponse, PostsResponse } from "@/app/api/posts/schemas";
 
 export const adminRegistry = new OpenAPIRegistry();
 
