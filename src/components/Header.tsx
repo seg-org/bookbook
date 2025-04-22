@@ -6,6 +6,8 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
+import NotificationBell from "@/components/NotificationBell";
+
 function Header() {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
@@ -51,11 +53,16 @@ function Header() {
 
       {/* Authentication & Mobile Menu */}
       <div className="flex items-center gap-4">
+        {/* Notifications */}
+        {isAuthenticated && <NotificationBell />}
+
         <div>
           <Link href="/report-problem" title="แจ้งปัญหาการใช้งาน">
             <MessageCircleQuestion className="h-8 w-8" />
           </Link>
         </div>
+
+        {/* Authentication */}
         {isAuthenticated ? (
           <div className="flex items-center gap-4">
             <Link href="/profile">

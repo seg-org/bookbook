@@ -221,11 +221,9 @@ export const updateTransaction = async (query: TransactionUpdate) => {
       ...(query.failType !== undefined ? { failType: query.failType } : {}),
     };
 
-    await apiClient.patch(`/transaction/${id}`, params);
-
-    return;
+    return await apiClient.patch(`/transaction/${id}`, params);
   } catch (error) {
-    console.error("Failed to get transaction count", error);
-    return Error("Failed to get transaction count");
+    console.error("Failed to update transaction", error);
+    return Error("Failed to update transaction");
   }
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 
 const PageBox = ({ pageNumber }: { pageNumber: number }) => {

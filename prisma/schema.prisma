@@ -37,6 +37,7 @@ model User {
   chatMessages           ChatMessage[]
   Bookmark               Bookmark[]
   ChatReport             ChatReport[]
+  Notification           Notification[]
   reportedPosts          PostReport[]    @relation(name: "UserReport")
   resolvedPostReports    PostReport[]    @relation(name: "AdminResolve")
   reportedGeneral        GeneralReport[] @relation(name: "UserReport")
@@ -70,6 +71,8 @@ model SellerProfile {
   approvedAt     DateTime? @map("approved_at")
   user           User      @relation(fields: [userId], references: [id])
   userId         String    @unique @map("user_id")
+
+  balance Int @default(0)
 
   @@map("seller_profiles")
 }
@@ -388,4 +391,17 @@ enum BookTagType {
   SELF_HELP          @map("self_help")
   THRILLER           @map("thriller")
   ROMANTIC_COMEDY    @map("romantic_comedy")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @map("user_id")
+  message   String
+  link      String?
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId, isRead])
+  @@map("notifications")
 }

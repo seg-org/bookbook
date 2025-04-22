@@ -7,7 +7,8 @@
     "bankName": "Siam Commercial Bank",
     "isApproved": true,
     "approvedAt": "2020-07-15T03:19:21.003Z",
-    "userId": "user_1"
+    "userId": "user_1",
+    "balance": 100
   },
   {
     "id": "seller_profile_2",
@@ -17,7 +18,8 @@
     "bankName": "Bangkok Bank",
     "isApproved": true,
     "approvedAt": "2020-05-24T07:11:28.805Z",
-    "userId": "user_2"
+    "userId": "user_2",
+    "balance": 200
   },
   {
     "id": "seller_profile_3",
@@ -27,7 +29,8 @@
     "bankName": "CIMB Thai Bank",
     "isApproved": true,
     "approvedAt": "2020-02-23T17:35:12.802Z",
-    "userId": "user_3"
+    "userId": "user_3",
+    "balance": 300
   },
   {
     "id": "seller_profile_4",
@@ -37,7 +40,8 @@
     "bankName": "Government Savings Bank",
     "isApproved": true,
     "approvedAt": "2023-09-28T12:22:16.203Z",
-    "userId": "user_4"
+    "userId": "user_4",
+    "balance": 400
   },
   {
     "id": "seller_profile_5",
@@ -47,7 +51,8 @@
     "bankName": "Bangkok Bank",
     "isApproved": true,
     "approvedAt": "2022-09-06T20:32:10.095Z",
-    "userId": "user_5"
+    "userId": "user_5",
+    "balance": 500
   },
   {
     "id": "seller_profile_6",
@@ -57,7 +62,8 @@
     "bankName": "Bangkok Bank",
     "isApproved": true,
     "approvedAt": "2020-10-17T21:22:18.954Z",
-    "userId": "user_6"
+    "userId": "user_6",
+    "balance": 600
   },
   {
     "id": "seller_profile_7",
@@ -67,7 +73,8 @@
     "bankName": "Bangkok Bank",
     "isApproved": true,
     "approvedAt": "2021-11-25T06:56:10.301Z",
-    "userId": "user_7"
+    "userId": "user_7",
+    "balance": 700
   },
   {
     "id": "seller_profile_8",
@@ -77,7 +84,8 @@
     "bankName": "TMBThanachart Bank (TTB)",
     "isApproved": true,
     "approvedAt": "2023-07-10T14:07:43.870Z",
-    "userId": "user_8"
+    "userId": "user_8",
+    "balance": 800
   },
   {
     "id": "seller_profile_9",
@@ -87,7 +95,8 @@
     "bankName": "Bank of Ayudhya (Krungsri Bank)",
     "isApproved": true,
     "approvedAt": "2021-07-20T22:56:40.147Z",
-    "userId": "user_9"
+    "userId": "user_9",
+    "balance": 900
   },
   {
     "id": "seller_profile_10",
@@ -97,6 +106,7 @@
     "bankName": "Government Savings Bank",
     "isApproved": true,
     "approvedAt": "2023-12-11T17:02:33.049Z",
-    "userId": "user_10"
+    "userId": "user_10",
+    "balance": 1000
   }
 ]

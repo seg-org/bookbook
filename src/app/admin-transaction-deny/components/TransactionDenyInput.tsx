@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/card";
 import { reportEvidenceFolderName } from "@/constants/s3FolderName";
 import { Transaction } from "@/data/dto/transaction.dto";
+import { createNotification } from "@/data/notification";
 import { putObjectsAsZip } from "@/data/object";
-import { updateTransaction } from "@/data/transaction";
+import { validateRefund } from "@/data/refund";
 
 interface Props {
   transaction: Transaction | undefined;
@@ -65,13 +66,19 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
       if (transaction === undefined) {
         throw new Error("Failed to upload files");
       }
-      await updateTransaction({
+      const res = await validateRefund({
         id: transaction.id,
         status: "FAIL",
         detail: [details],
         evidenceURL: [uploadFiles.key],
         failType: failType.toUpperCase(),
       });
+      if (res instanceof Error) {
+        throw Error("error");
+      }
+
+      createNotification(transaction.sellerId, "การซื้อหนังสือ " + transaction.post.book.title + " ถูกยกเลิก");
+      createNotification(transaction.buyerId, "การซื้อหนังสือ " + transaction.post.book.title + " ถูกยกเลิก");
       setSendingStatus("success");
     } catch (error) {
       console.error(error);
@@ -105,7 +112,7 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
           type="file"
           multiple
           onChange={handleFileChange}
-          className="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-blue-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-600"
+          className="block w-full text-sm text-white file:mr-4 file:rounded-md file:border-0 file:bg-blue-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-600"
         />
         <select
           className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm transition focus:outline-none focus:ring-2 focus:ring-blue-400"

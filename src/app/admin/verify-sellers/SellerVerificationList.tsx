@@ -18,8 +18,8 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
     setLoading((prev) => ({ ...prev, [sellerId]: true }));
 
     try {
-      const response = await fetch("/api/admin/verify-seller", {
-        method: "POST",
+      const response = await fetch(`/api/admin/verify-seller/${sellerId}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sellerId, approved }),
       });
