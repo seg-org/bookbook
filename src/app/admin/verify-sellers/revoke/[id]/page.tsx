@@ -1,11 +1,10 @@
-import { redirect } from "next/navigation";
+import { forbidden, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { getUserProfile } from "@/data/user";
 import { authOptions } from "@/lib/auth";
 
 import { ProfileForm } from "./ProfileForm";
-import { forbidden } from "next/navigation";
 
 export default async function ProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
