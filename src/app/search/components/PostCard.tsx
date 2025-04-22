@@ -126,7 +126,7 @@ function PostCard({ post, isRecommended, enableBookmark }: PostCardProps) {
           </Button>
           <Button variant="default" onClick={initiate_transaction}>
             <div className="flex items-center justify-center gap-x-2">
-              <FaShoppingBasket className="h-6 w-6" /> สั่งซื้อ {/* เพิ่มใส่ตะกร้า */}
+              <FaShoppingBasket className="h-6 w-6" /> สั่งซื้อ
             </div>
           </Button>
         </div>
