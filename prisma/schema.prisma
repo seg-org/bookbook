@@ -78,19 +78,21 @@ model SellerProfile {
 }
 
 model Book {
-  id             String        @id @default(cuid())
-  title          String
-  author         String
-  description    String
-  isbn           String        @unique
-  pages          Int
-  publisher      String
-  coverImageKey  String        @map("cover_image_key")
-  posts          Post[]
-  bookGenres     GenreType[]
-  bookTags       BookTagType[]
+  id            String        @id @default(cuid())
+  title         String
+  author        String
+  description   String
+  isbn          String        @unique
+  pages         Int
+  publisher     String
+  coverImageKey String        @map("cover_image_key")
+  posts         Post[]
+  bookGenres    GenreType[]
+  bookTags      BookTagType[]
+
   recommendPrice Float?
   // TODO verifiedBy Admin
+  verifiedStatus String @default("UNVERIFIED") @map("verified_status")
 
   @@map("books")
 }

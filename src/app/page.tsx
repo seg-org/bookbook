@@ -7,6 +7,7 @@ import {
   ClipboardMinus,
   FileText,
   LayoutDashboard,
+  ListCheck,
   MessageCircleWarning,
   PlusCircle,
   Search,
@@ -53,6 +54,8 @@ export default async function Home() {
 
     adminLinks.push({ href: "/admin/verify-sellers", icon: <Store />, text: "ยืนยันผู้ขาย" });
     adminLinks.push({ href: "/admin-transaction-history", icon: <Store />, text: "จัดการการซื้อขาย" });
+
+    adminLinks.push({ href: "/admin/verify-new-book", icon: <ListCheck />, text: "ตรวจสอบหนังสือใหม่" });
   }
 
   return (

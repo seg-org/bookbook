@@ -29,6 +29,7 @@ export const BookResponse = z.object({
   coverImageUrl: z.string().openapi({ example: "https://example.com/the-hobbit.jpg" }),
   bookGenres: z.array(GenreType).openapi({ example: ["FANTASY", "ADVENTURE"] }),
   bookTags: z.array(BookTagType).openapi({ example: ["BESTSELLER"] }),
+  verifiedStatus: z.string().openapi({ example: "UNVERIFIED" }),
 });
 
 export const BooksResponse = z.array(BookResponse);
@@ -48,6 +49,7 @@ export const UpdateBookRequest = z.object({
     .array(BookTagType)
     .optional()
     .openapi({ example: ["BESTSELLER"] }),
+  verifiedStatus: z.string().optional().openapi({ example: "UNVERIFIED" }),
   recommendPrice: z.number().min(0).optional().openapi({
     example: 299.99,
     description: "Admin-recommended selling price for this book",
