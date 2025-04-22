@@ -3,8 +3,10 @@
 import { User } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/card/Card";
 import { apiClient } from "@/data/axios";
+import { deleteGeneralReport } from "@/data/report";
 
 interface GeneralReport {
   id: string;
@@ -28,6 +30,11 @@ const formatDate = (dateString: string) => {
 export default function SellerReviewsPage() {
   const [reviews, setReviews] = useState<GeneralReport[]>([]);
   const [sortBy, setSortBy] = useState("newest");
+
+  const handleDeleteReport = async (reportId: string) => {
+    await deleteGeneralReport(reportId);
+    setReviews((prev) => prev.filter((report) => report.id !== reportId));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,6 +99,9 @@ export default function SellerReviewsPage() {
                   <div className="font-medium">{report.reason}</div>
                 </div>
               </div>
+              <Button className="m-4 bg-blue-500 hover:bg-blue-600" onClick={() => handleDeleteReport(report.id)}>
+                ยอมรับ
+              </Button>
             </Card>
           ))}
         </div>
