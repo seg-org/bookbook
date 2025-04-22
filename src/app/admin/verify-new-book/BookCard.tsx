@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { apiClient } from "@/data/axios";
@@ -9,22 +10,24 @@ import { Book } from "@/data/dto/book.dto";
 
 const BookCard = ({ book }: { book: Book }) => {
   const router = useRouter();
+  const [hidden, setHidden] = useState(false);
 
   const goToDetail = () => {
     router.push(`/admin/verify-new-book/${book.id}`);
   };
 
   const cut = (s: string, n: number) => {
-    if (s.length > n) {
-      return s.slice(0, n) + "...";
-    }
+    if (s.length > n) return s.slice(0, n) + "...";
     return s;
   };
 
-  const handleOnClick = async (verifiedStatus: string) => {
+  const handleOnClick = async (e: React.MouseEvent, verifiedStatus: string) => {
+    e.stopPropagation();
     await apiClient.patch(`/books/${book.id}`, { verifiedStatus });
-    router.refresh();
+    setHidden(true); // hide the card
   };
+
+  if (hidden) return null; // don't render anything if card is hidden
 
   return (
     <div
@@ -51,10 +54,10 @@ const BookCard = ({ book }: { book: Book }) => {
           </p>
         </div>
         <div className="mt-4 space-x-2">
-          <Button className="bg-green-500 text-white hover:bg-green-600" onClick={() => handleOnClick("APPROVED")}>
+          <Button className="bg-green-500 text-white hover:bg-green-600" onClick={(e) => handleOnClick(e, "APPROVED")}>
             Approve
           </Button>
-          <Button className="bg-red-500 text-white hover:bg-red-600" onClick={() => handleOnClick("REJECTED")}>
+          <Button className="bg-red-500 text-white hover:bg-red-600" onClick={(e) => handleOnClick(e, "REJECTED")}>
             Reject
           </Button>
         </div>

@@ -1,13 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { use } from "react";
 
+import { Button } from "@/components/ui/Button";
+import { apiClient } from "@/data/axios";
 import { useGetBook } from "@/hooks/useGetBook";
 
 export default function VerifyBookDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { book, loading, error } = useGetBook(id);
+  const router = useRouter();
+  const handleOnClick = async (e: React.MouseEvent, verifiedStatus: string) => {
+    e.stopPropagation();
+    await apiClient.patch(`/books/${id}`, { verifiedStatus });
+    router.push(`/admin/verify-new-book`);
+  };
 
   return (
     <div className="p-6">
@@ -57,12 +66,18 @@ export default function VerifyBookDetailPage({ params }: { params: Promise<{ id:
                 </p>
 
                 <div className="flex justify-center space-x-4">
-                  <button className="rounded-lg bg-green-600 px-6 py-2 text-white shadow-md transition hover:bg-green-700">
+                  <Button
+                    className="bg-green-500 text-white hover:bg-green-600"
+                    onClick={(e) => handleOnClick(e, "APPROVED")}
+                  >
                     Approve
-                  </button>
-                  <button className="rounded-lg bg-red-600 px-6 py-2 text-white shadow-md transition hover:bg-red-700">
+                  </Button>
+                  <Button
+                    className="bg-red-500 text-white hover:bg-red-600"
+                    onClick={(e) => handleOnClick(e, "REJECTED")}
+                  >
                     Reject
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -71,4 +86,7 @@ export default function VerifyBookDetailPage({ params }: { params: Promise<{ id:
       )}
     </div>
   );
+}
+function setHidden(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }
