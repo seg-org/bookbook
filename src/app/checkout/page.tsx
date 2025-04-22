@@ -335,10 +335,7 @@ export default function CheckoutPage() {
               <SelectValue placeholder="Fill payment details" />
             </SelectTrigger>
             <SelectContent>
-              {/* Add your payment options here */}
               <SelectItem value="creditCard">Credit Card</SelectItem>
-              <SelectItem value="paypal">PayPal</SelectItem>
-              <SelectItem value="bankTransfer">Bank Transfer</SelectItem>
             </SelectContent>
           </Select>
 

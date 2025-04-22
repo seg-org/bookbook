@@ -4,12 +4,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-export async function POST(req: Request) {
+export async function PATCH(req: Request, props: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.isAdmin) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
+
+  const { id } = await props.params;
+  console.log(id);
 
   try {
     const { sellerId, approved } = await req.json();
@@ -27,7 +30,7 @@ export async function POST(req: Request) {
         },
       });
 
-      return NextResponse.json(updatedSeller);
+      return NextResponse.json({ sellerId: updatedSeller.id, approved: approved });
     } else {
       // Reject and delete the seller profile
       const sellerProfile = await prisma.sellerProfile.findUnique({
@@ -52,6 +55,8 @@ export async function POST(req: Request) {
     }
   } catch (error) {
     console.error("Error verifying seller:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json({
+      error: "An error occurred while verifying the seller",
+    });
   }
 }

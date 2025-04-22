@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Post } from "@/data/dto/post.dto";
 import { getAllPosts, getMyPosts, GetPostsFilters } from "@/data/post";
@@ -23,20 +23,26 @@ export const useGetAllPosts = (params: GetPostsFilters) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [pagination, setPagination] = useState<PaginationInfo | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      const res = await getAllPosts(params);
-      if (res instanceof Error) {
-        return setError(res);
-      }
-
-      setPosts(res.posts);
-      setPagination({ ...res });
+  const fetchPosts = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    const res = await getAllPosts(params);
+    if (res instanceof Error) {
+      setError(res);
       setLoading(false);
-    })();
+      return;
+    }
+
+    setPosts(res.posts);
+    setPagination({ ...res });
+    setLoading(false);
   }, [params]);
 
-  return { posts, pagination, loading, error };
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
+  return { posts, pagination, loading, error, refetch: fetchPosts };
 };
 
 export const useGetMyPost = (params: MypostParam) => {

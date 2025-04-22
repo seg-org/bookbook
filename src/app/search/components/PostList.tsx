@@ -17,12 +17,9 @@ export const PostList = () => {
   const { posts, recommendedPosts, loading, error, setPostsFilters } = usePostContext();
 
   const filteredPosts = useMemo(() => {
-    let filteredPosts = posts.filter((post) => post.sellerId !== session?.user.id);
-    if (isBookmarkOnly) {
-      filteredPosts = filteredPosts.filter((post) => post.isBookmarked);
-    }
-    return filteredPosts;
-  }, [posts, session?.user.id, isBookmarkOnly]);
+    if (isBookmarkOnly) return posts.filter((post) => post.isBookmarked);
+    return posts;
+  }, [posts, isBookmarkOnly]);
 
   const filteredRecommendedPosts = useMemo(() => {
     const filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);

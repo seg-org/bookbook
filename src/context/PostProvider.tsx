@@ -23,7 +23,14 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
     sortOrder: "desc",
   });
 
-  const { posts, pagination, loading: loadingAll, error: errorAll } = useGetAllPosts(postsFilters);
+  const {
+    posts,
+    pagination,
+    loading: loadingAll,
+    error: errorAll,
+    refetch: refetchAllPosts,
+  } = useGetAllPosts(postsFilters);
+
   const {
     posts: recommendedPosts,
     loading: loadingRecommended,
@@ -65,6 +72,7 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
         error,
         changeBookmark,
         setPostsFilters,
+        refetchPosts: refetchAllPosts,
       }}
     >
       {children}
