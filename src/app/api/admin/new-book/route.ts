@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { getUrl } from "@/app/api/objects/s3";
-import { BooksResponse } from "@/app/api/books/schemas";
-
-import { authOptions } from "@/lib/auth";
-
 import { getServerSession } from "next-auth";
 
+import { BooksResponse } from "@/app/api/books/schemas";
+import { getUrl } from "@/app/api/objects/s3";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+
 export async function GET(req: NextRequest) {
+  if (req.method !== "GET") {
+    return new NextResponse("Method Not Allowed", { status: 405 });
+  }
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return new NextResponse("Unauthorized", { status: 401 });
