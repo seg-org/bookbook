@@ -1,7 +1,9 @@
 import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../objects/s3";
@@ -91,10 +93,14 @@ export async function GET(req: NextRequest) {
       },
     };
 
+    const session = await getServerSession(authOptions);
     const posts = await prisma.post.findMany({
       where: {
         book: bookFilter,
         published: true,
+        sellerId: {
+          not: session?.user.id,
+        },
       },
       include: { book: true },
       skip,
