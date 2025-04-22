@@ -29,6 +29,7 @@ export const BookResponse = z.object({
   coverImageUrl: z.string().openapi({ example: "https://example.com/the-hobbit.jpg" }),
   bookGenres: z.array(GenreType).openapi({ example: ["FANTASY", "ADVENTURE"] }),
   bookTags: z.array(BookTagType).openapi({ example: ["BESTSELLER"] }),
+  verifiedStatus: z.string().openapi({ example: "UNVERIFIED" }),
 });
 
 export const BooksResponse = z.array(BookResponse);
