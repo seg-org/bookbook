@@ -30,7 +30,7 @@ export async function PATCH(req: Request, props: { params: Promise<{ id: string 
         },
       });
 
-      return NextResponse.json(updatedSeller);
+      return NextResponse.json({ sellerId: updatedSeller.id, approved: approved });
     } else {
       // Reject and delete the seller profile
       const sellerProfile = await prisma.sellerProfile.findUnique({
@@ -55,6 +55,8 @@ export async function PATCH(req: Request, props: { params: Promise<{ id: string 
     }
   } catch (error) {
     console.error("Error verifying seller:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json({
+      error: "An error occurred while verifying the seller",
+    });
   }
 }
