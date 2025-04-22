@@ -8,7 +8,7 @@ import { reportEvidenceFolderName } from "@/constants/s3FolderName";
 import { Transaction } from "@/data/dto/transaction.dto";
 import { createNotification } from "@/data/notification";
 import { putObjectsAsZip } from "@/data/object";
-import { updateTransaction } from "@/data/transaction";
+import { validateRefund } from "@/data/refund";
 
 interface Props {
   transaction: Transaction | undefined;
@@ -66,7 +66,7 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
       if (transaction === undefined) {
         throw new Error("Failed to upload files");
       }
-      const res = await updateTransaction({
+      const res = await validateRefund({
         id: transaction.id,
         status: "FAIL",
         detail: [details],
