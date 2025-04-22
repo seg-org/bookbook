@@ -3,7 +3,18 @@ import { prisma } from "@/lib/prisma";
 import { getUrl } from "@/app/api/objects/s3";
 import { BooksResponse } from "@/app/api/books/schemas";
 
+import { authOptions } from "@/lib/auth";
+
+import { getServerSession } from "next-auth";
+
 export async function GET(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+  if (!session.user.isAdmin) {
+    return new NextResponse("Forbidden", { status: 403 });
+  }
   try {
     const books = await prisma.book.findMany({
       where: {
