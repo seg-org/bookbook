@@ -12,15 +12,7 @@ import { createChatRoom } from "@/data/chat";
 
 import PostReportForm from "./PostReportForm";
 
-export default function PostAction({
-  postId,
-  bookTitle,
-  postPrice,
-}: {
-  postId: string;
-  bookTitle: string;
-  postPrice: number;
-}) {
+export default function PostAction({ postId }: { postId: string; bookTitle: string; postPrice: number }) {
   const { data: session, status } = useSession();
   const isAuthenticated = status === "authenticated";
 
@@ -29,10 +21,11 @@ export default function PostAction({
   const router = useRouter();
 
   const initiate_transaction = () => {
-    const encodedPostId = encodeURIComponent(postId);
-    const encodedBookTitle = encodeURIComponent(bookTitle);
-    const encodedPostPrice = encodeURIComponent(postPrice.toString());
-    router.push(`/buy?postId=${encodedPostId}&bookTitle=${encodedBookTitle}&postPrice=${encodedPostPrice}`);
+    if (!isAuthenticated) {
+      router.push("/login");
+      return;
+    }
+    router.push("/checkout");
   };
 
   const handleChatWithSeller = async (postId: string) => {
@@ -59,7 +52,7 @@ export default function PostAction({
         </Button>
         <Button onClick={initiate_transaction}>
           <div className="flex items-center justify-center gap-x-2">
-            <FaShoppingBasket className="h-6 w-6" /> เพิ่มใส่ตะกร้า
+            <FaShoppingBasket className="h-6 w-6" /> สั่งซื้อ
           </div>
         </Button>
       </div>
