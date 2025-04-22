@@ -1,4 +1,4 @@
-import { Delete, Wrench } from "lucide-react";
+import { Check, Delete, Wrench } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -31,12 +31,14 @@ function PostCard({ post }: PostCardProps) {
     title: post.title,
     price: post.price,
     bookId: post.bookId,
+    verifiedStatus: "UNDER_REVIEW",
   });
 
   const oldPost = {
     title: post.title,
     price: post.price,
     bookId: post.bookId,
+    verifiedStatus: "UNDER_REVIEW",
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -165,6 +167,7 @@ function PostCard({ post }: PostCardProps) {
                 variant="default"
                 className="text-green-500 hover:bg-green-500 hover:text-white"
                 onClick={() => {
+                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "CHANGE_REQUESTED" }));
                   onSubmit(post.id);
                 }}
               >
@@ -180,10 +183,31 @@ function PostCard({ post }: PostCardProps) {
                   <Delete className="h-6 w-6" />
                 </div>
               </Button>
-              <Button variant="default" onClick={() => setEditMode(true)} className="bg-yellow-500 hover:bg-yellow-700">
+              <Button
+                variant="default"
+                onClick={() => {
+                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "CHANGE_REQUESTED" }));
+                  setEditMode(true);
+                }}
+                className="bg-yellow-500 hover:bg-yellow-700"
+              >
                 <div className="flex items-center justify-center gap-x-2">
                   <Wrench className="h-6 w-6" />
                   แก้ไขข้อมูลโพสต์
+                </div>
+              </Button>
+              <Button
+                variant="default"
+                className="bg-green-500 hover:bg-green-700"
+                onClick={() => {
+                  setEditedPost(oldPost);
+                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "VERIFIED" }));
+                  onSubmit(post.id);
+                }}
+              >
+                <div className="flex items-center justify-center gap-x-2">
+                  <Check className="h-6 w-6" />
+                  อนุมัติ
                 </div>
               </Button>
             </>

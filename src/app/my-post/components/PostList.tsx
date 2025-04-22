@@ -13,7 +13,7 @@ export const PostList = () => {
   const [refresh, setRefresh] = useState(0); // used to trigger refetch
   const [priceAsc, setPriceAsc] = useState(1);
   const [sortBy, setSortBy] = useState<{ field: string; order: string } | null>(null); // e.g., { field: "price", order: "asc" }
-
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [params, setParams] = useState({
     page: 1,
     limit: 27,
@@ -74,6 +74,18 @@ export const PostList = () => {
           >
             ราคา <span className="ml-2">{priceAsc === 1 ? "▲" : "▼"}</span>
           </button>
+          <div className="flex flex-row gap-4 px-4 pt-4">
+            {["VERIFIED", "CHANGE_REQUESTED", "UNDER_REVIEW"].map((status) => (
+              <label key={status} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={selectedStatus === status}
+                  onChange={() => setSelectedStatus((prev) => (prev === status ? null : status))}
+                />
+                {status}
+              </label>
+            ))}
+          </div>
         </div>
         <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
           {posts.map((post) => (

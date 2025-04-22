@@ -24,12 +24,14 @@ function PostCard({ post, onPostChange }: PostCardProps) {
     title: post.title,
     price: post.price,
     bookId: post.bookId,
+    verifiedStatus: "CHANGE_REQUESTED",
   });
 
   const oldPost = {
     title: post.title,
     price: post.price,
     bookId: post.bookId,
+    verifiedStatus: "CHANGE_REQUESTED",
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +45,7 @@ function PostCard({ post, onPostChange }: PostCardProps) {
 
   const onSubmit = async (id: string) => {
     try {
+      setEditedPost((prev) => ({ ...prev, verifiedStatus: "UNDER_REVIEW" }));
       const res = await editPost(editedPost, id);
       if (res instanceof Error) {
         console.error(res);
