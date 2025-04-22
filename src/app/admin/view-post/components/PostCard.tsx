@@ -1,14 +1,17 @@
-import { Delete, Wrench } from "lucide-react";
+import { Check, Delete, Wrench } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useContext, useState } from "react";
+import { IoLogoWechat } from "react-icons/io5";
 
 import { Button } from "@/components/ui/Button";
-import { Post } from "@/data/dto/post.dto";
+import { PostContext, PostWithBookmark } from "@/context/postContext";
+import { createChatRoom } from "@/data/chat";
 import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
-  post: Post;
-  onPostChange: () => void;
+  post: PostWithBookmark;
 };
 
 const cut = (str: string, maxLength: number) => {
@@ -18,20 +21,24 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
-function PostCard({ post, onPostChange }: PostCardProps) {
+function PostCard({ post }: PostCardProps) {
+  const { data: session, status } = useSession();
+  const { refetchPosts } = useContext(PostContext);
+  const isAuthenticated = status === "authenticated";
   const [editMode, setEditMode] = useState(false);
+  const router = useRouter();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
     price: post.price,
     bookId: post.bookId,
-    verifiedStatus: "CHANGE_REQUESTED",
+    verifiedStatus: "UNDER_REVIEW",
   });
 
   const oldPost = {
     title: post.title,
     price: post.price,
     bookId: post.bookId,
-    verifiedStatus: "CHANGE_REQUESTED",
+    verifiedStatus: "UNDER_REVIEW",
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,9 +50,18 @@ function PostCard({ post, onPostChange }: PostCardProps) {
     }
   };
 
+  const handleChatWithSeller = async (postId: string) => {
+    if (!isAuthenticated || !session?.user) {
+      router.push("/login");
+      return;
+    }
+
+    await createChatRoom({ subject: "post", subjectId: postId });
+    router.push(`/chat`);
+  };
+
   const onSubmit = async (id: string) => {
     try {
-      setEditedPost((prev) => ({ ...prev, verifiedStatus: "UNDER_REVIEW" }));
       const res = await editPost(editedPost, id);
       if (res instanceof Error) {
         console.error(res);
@@ -54,7 +70,7 @@ function PostCard({ post, onPostChange }: PostCardProps) {
       console.error("Error editing post:", error);
     }
     setEditMode(false);
-    await onPostChange();
+    refetchPosts?.();
   };
 
   const onDelete = async (id: string) => {
@@ -69,7 +85,7 @@ function PostCard({ post, onPostChange }: PostCardProps) {
     } catch (error) {
       console.error("Error posting book:", error);
     }
-    await onPostChange();
+    refetchPosts?.();
   };
 
   return (
@@ -130,6 +146,11 @@ function PostCard({ post, onPostChange }: PostCardProps) {
           </div>
         </div>
         <div className="mt-auto flex gap-2 self-end">
+          <Button variant="outline" onClick={() => handleChatWithSeller(post.id)} data-test-id="chat-with-seller">
+            <div className="flex items-center justify-center gap-x-2">
+              <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
+            </div>
+          </Button>
           {editMode && (
             <>
               <Button
@@ -146,6 +167,7 @@ function PostCard({ post, onPostChange }: PostCardProps) {
                 variant="default"
                 className="text-green-500 hover:bg-green-500 hover:text-white"
                 onClick={() => {
+                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "CHANGE_REQUESTED" }));
                   onSubmit(post.id);
                 }}
               >
@@ -161,10 +183,31 @@ function PostCard({ post, onPostChange }: PostCardProps) {
                   <Delete className="h-6 w-6" />
                 </div>
               </Button>
-              <Button variant="default" onClick={() => setEditMode(true)} className="bg-yellow-500 hover:bg-yellow-700">
+              <Button
+                variant="default"
+                onClick={() => {
+                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "CHANGE_REQUESTED" }));
+                  setEditMode(true);
+                }}
+                className="bg-yellow-500 hover:bg-yellow-700"
+              >
                 <div className="flex items-center justify-center gap-x-2">
                   <Wrench className="h-6 w-6" />
                   แก้ไขข้อมูลโพสต์
+                </div>
+              </Button>
+              <Button
+                variant="default"
+                className="bg-green-500 hover:bg-green-700"
+                onClick={() => {
+                  setEditedPost(oldPost);
+                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "VERIFIED" }));
+                  onSubmit(post.id);
+                }}
+              >
+                <div className="flex items-center justify-center gap-x-2">
+                  <Check className="h-6 w-6" />
+                  อนุมัติ
                 </div>
               </Button>
             </>

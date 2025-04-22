@@ -13,6 +13,7 @@ export type SessionUser = {
   image?: string | null;
   phoneNumber?: string | null;
   isAdmin: boolean;
+  isSeller: boolean;
   emailVerified: boolean;
   phoneVerified: boolean;
   pdpaConsent: boolean;
@@ -60,6 +61,7 @@ export const authOptions: NextAuthOptions = {
           phoneNumber: user.phoneNumber,
           name: `${user.firstName} ${user.lastName}`,
           isAdmin: user.isAdmin,
+          isSeller: user.isSeller,
           emailVerified: user.emailVerified !== null,
           phoneVerified: user.phoneVerified !== null,
           pdpaConsent: user.pdpaConsent,
@@ -76,6 +78,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         session.user.phoneNumber = token.phoneNumber;
         session.user.isAdmin = token.isAdmin as boolean;
+        session.user.isSeller = token.isSeller as boolean;
         session.user.emailVerified = token.emailVerified as boolean;
         session.user.phoneVerified = token.phoneVerified as boolean;
         session.user.pdpaConsent = token.pdpaConsent as boolean;
@@ -91,6 +94,7 @@ export const authOptions: NextAuthOptions = {
           token.email = dbUser.email;
           token.phoneNumber = dbUser.phoneNumber;
           token.isAdmin = dbUser.isAdmin;
+          token.isSeller = dbUser.isSeller;
           token.emailVerified = dbUser.emailVerified !== null;
           token.phoneVerified = dbUser.phoneVerified !== null;
           token.pdpaConsent = dbUser.pdpaConsent;
