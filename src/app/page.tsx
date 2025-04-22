@@ -2,9 +2,12 @@
 import {
   BookMarked,
   BookOpen,
+  Bug,
   ChevronRight,
+  ClipboardMinus,
   FileText,
   LayoutDashboard,
+  MessageCircleWarning,
   PlusCircle,
   Search,
   Star,
@@ -44,9 +47,12 @@ export default async function Home() {
   if (isAdmin) {
     adminLinks.push({ href: "/admin/dashboard", icon: <LayoutDashboard />, text: "แดชบอร์ดผู้ดูแลระบบ" });
     adminLinks.push({ href: "/admin/view-post", icon: <Store />, text: "ดูโพสต์ทั้งหมด" });
-    adminLinks.push({ href: "/admin/view-chat-report", icon: <Store />, text: "การรายงาน" });
+    adminLinks.push({ href: "/admin/view-report/general", icon: <Bug />, text: "การรายงานทั่วไป" });
+    adminLinks.push({ href: "/admin/view-report/posts", icon: <ClipboardMinus />, text: "การรายงานโพสต์" });
+    adminLinks.push({ href: "/admin/view-report/chat", icon: <MessageCircleWarning />, text: "การรายงานแชท" });
+
     adminLinks.push({ href: "/admin/verify-sellers", icon: <Store />, text: "ยืนยันผู้ขาย" });
-    adminLinks.push({ href: "/admin-transaction-histor", icon: <Store />, text: "จัดการการซื้อขาย" });
+    adminLinks.push({ href: "/admin-transaction-history", icon: <Store />, text: "จัดการการซื้อขาย" });
   }
 
   return (
