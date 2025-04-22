@@ -7,6 +7,7 @@ import { chatRegistry } from "@/app/api/chat/swagger";
 import { objectRegistry } from "@/app/api/objects/swagger";
 import { postRegistry } from "@/app/api/posts/swagger";
 import { transactionRegistry } from "@/app/api/transaction/swagger";
+import { adminRegistry } from "@/app/api/admin/swagger";
 
 export const getApiDocs = async () => {
   const generator = new OpenApiGeneratorV3([
@@ -16,6 +17,7 @@ export const getApiDocs = async () => {
     ...bookmarkRegistry.definitions,
     ...chatRegistry.definitions,
     ...transactionRegistry.definitions,
+    ...adminRegistry.definitions,
   ]);
   const config: OpenAPIObjectConfig = {
     openapi: "3.0.0",
