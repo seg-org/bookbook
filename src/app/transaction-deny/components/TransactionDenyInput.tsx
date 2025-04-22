@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/card";
 import { reportEvidenceFolderName } from "@/constants/s3FolderName";
 import { Transaction } from "@/data/dto/transaction.dto";
+import { createNotification } from "@/data/notification";
 import { putObjectsAsZip } from "@/data/object";
 import { updateTransaction } from "@/data/transaction";
 
@@ -40,6 +41,11 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
 
   const handleSubmitClick = async () => {
     if (!validateInput()) return;
+
+    if (!window.confirm("คุณต้องการยกเลิกการซื้อนี้ใช่หรือไม่? การดำเนินการนี้ไม่สามารถย้อนกลับได้")) {
+      return;
+    }
+
     setSendingStatus("sending");
 
     try {
@@ -66,6 +72,8 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
           detail: oldDetail?.concat([details]),
           evidenceURL: oldEvidenceURL.concat([uploadFiles.key]),
         });
+
+        createNotification(transaction.sellerId, "หนังสือ " + transaction.post.book.title + " ถูกรายงานเพิ่มเติม!");
       } else {
         await updateTransaction({
           id: transaction.id,
@@ -73,6 +81,8 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
           detail: [details],
           evidenceURL: [uploadFiles.key],
         });
+
+        createNotification(transaction.sellerId, "หนังสือ " + transaction.post.book.title + " ถูกรายงาน!");
       }
       setSendingStatus("success");
     } catch (error) {
@@ -106,7 +116,7 @@ const TransactionDenyInput = ({ transaction, setSendingStatus }: Props) => {
         type="file"
         multiple
         onChange={handleFileChange}
-        className="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-blue-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-600"
+        className="block w-full text-sm text-white file:mr-4 file:rounded-md file:border-0 file:bg-blue-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-600"
       />
       {files.length > 0 && (
         <div className="mt-2 w-full space-y-2">

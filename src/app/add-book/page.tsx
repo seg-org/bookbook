@@ -5,7 +5,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
 import { z } from "zod";
 
 import { bookImageFolderName } from "@/constants/s3FolderName";
@@ -14,16 +15,17 @@ import { getObjectUrl, putObject } from "@/data/object";
 import { BookTagType, GenreType } from "../api/books/book_enum";
 
 const bookSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  author: z.string().min(1, "Author is required"),
-  genre: z.string().min(1, "Genre is required"),
-  description: z.string(),
-  isbn: z.string().min(10, "ISBN must be at least 10 characters"),
-  publisher: z.string().min(1, "Publisher is required"),
+  title: z.string().min(5, "Title must be at least 5 characters long"),
+  author: z.string().min(5, "Author must be at least 5 characters long"),
+  description: z.string().min(20, "Description must be at least 20 characters long"),
+  isbn: z.string().refine((val) => /^\d{10}$|^\d{13}$/.test(val), {
+    message: "ISBN must be either 10 or 13 digits",
+  }),
+  publisher: z.string().min(5, "Publisher must be at least 5 characters long"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
   coverImageKey: z.string(),
-  bookGenres: z.array(GenreType),
-  bookTags: z.array(BookTagType),
+  bookGenres: z.array(z.string()),
+  bookTags: z.array(z.string()),
 });
 type CreateBookFormData = z.infer<typeof bookSchema>;
 
@@ -32,6 +34,7 @@ export default function AddBookPage() {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<CreateBookFormData>({
     resolver: zodResolver(bookSchema),
@@ -39,10 +42,27 @@ export default function AddBookPage() {
 
   const { status } = useSession();
   const isAuthenticated = status === "authenticated";
-
   if (!isAuthenticated) {
     redirect("/login");
   }
+
+  type GenreOption = {
+    value: GenreType;
+    label: string;
+  };
+  const genreOptions = Object.values(GenreType.enum).map((g) => ({
+    value: g,
+    label: g.replace(/_/g, " "),
+  }));
+
+  type BookTagOption = {
+    value: BookTagType;
+    label: string;
+  };
+  const bookTagOptions = Object.values(BookTagType.enum).map((tag) => ({
+    value: tag,
+    label: tag.replace(/_/g, " "),
+  }));
 
   const [message, setMessage] = useState("");
   const [loadingDescription, setLoadingDescription] = useState(false);
@@ -94,35 +114,33 @@ export default function AddBookPage() {
     }
   };
 
-  // ------------------------------------------
-  // fix this to support genres and book tags plesase
-  // --------------------------------------------
   const onSubmit = async (data: CreateBookFormData) => {
+    console.log("submit", data);
     setLoading(true);
     if (data !== undefined) console.log("recieve");
-    // try {
-    //   if (!data.coverImageKey) {
-    //     throw new Error("Cover image upload is required.");
-    //   }
-    //   const response = await fetch("/api/books", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       ...data,
-    //     }),
-    //   });
-    //   const result = await response.json();
-    //   if (response.ok) {
-    //     setMessage("Book posted successfully!");
-    //   } else {
-    //     setMessage(`Error: ${result.error}`);
-    //   }
-    // } catch (error) {
-    //   console.error("Error posting book:", error);
-    //   setMessage("Failed to post book.");
-    // } finally {
-    setLoading(false);
-    // }
+    try {
+      if (!data.coverImageKey) {
+        throw new Error("Cover image upload is required.");
+      }
+      const response = await fetch("/api/books", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+        }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setMessage("Book posted successfully!");
+      } else {
+        setMessage(`Error: ${result.error}`);
+      }
+    } catch (error) {
+      console.error("Error posting book:", error);
+      setMessage("Failed to post book.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -133,7 +151,10 @@ export default function AddBookPage() {
         ผู้ใช้จะต้องสร้างโพสต์ขายหนังสือที่แนบหนังสือที่สร้างแล้วเพื่อให้สามารถประกาศขายได้
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
+      <form
+        onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation failed", errors))}
+        className="flex flex-col space-y-4"
+      >
         <label>
           ชื่อหนังสือ:
           <input
@@ -151,15 +172,39 @@ export default function AddBookPage() {
           {errors.author?.message && <p className="text-red-500">{String(errors.author.message)}</p>}
         </label>
 
-        {/* ------------------------------------------
-         need genres input
-         -----------------------------------------
-        
         <label>
-          ประเภทหนังสือ:
-          <input {...register("genre")} placeholder="ประเภทหนังสือ" className="mt-1 block w-full rounded p-2" />
-          {errors.genre?.message && <p className="text-red-500">{String(errors.genre.message)}</p>}
-        </label> */}
+          หมวดหมู่ (Genres):
+          <Controller
+            control={control}
+            name="bookGenres"
+            render={({ field }) => (
+              <Select<GenreOption, true>
+                isMulti
+                options={genreOptions}
+                value={genreOptions.filter((opt) => field.value?.includes(opt.value))}
+                onChange={(selected) => field.onChange(selected.map((opt) => opt.value))}
+              />
+            )}
+          />
+          {errors.bookGenres?.message && <p className="text-red-500">{String(errors.bookGenres.message)}</p>}
+        </label>
+
+        <label>
+          แท็กหนังสือ (Tags):
+          <Controller
+            control={control}
+            name="bookTags"
+            render={({ field }) => (
+              <Select<BookTagOption, true>
+                isMulti
+                options={bookTagOptions}
+                value={bookTagOptions.filter((opt) => field.value?.includes(opt.value))}
+                onChange={(selected) => field.onChange(selected.map((opt) => opt.value))}
+              />
+            )}
+          />
+          {errors.bookTags?.message && <p className="text-red-500">{String(errors.bookTags.message)}</p>}
+        </label>
 
         <label>
           เนื้อเรื่องย่อ:

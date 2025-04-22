@@ -5,23 +5,29 @@ import Image from "next/image";
 import { redirect, useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
 import { z } from "zod";
 
+import { BookTagType, GenreType } from "@/app/api/books/book_enum";
 import { bookImageFolderName } from "@/constants/s3FolderName";
 import { editBook } from "@/data/book";
 import { getObjectUrl, putObject } from "@/data/object";
 import { useGetBook } from "@/hooks/useGetBook";
 
 const bookSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  author: z.string().min(1, "Author is required"),
-  genre: z.string().min(1, "Genre is required"),
-  description: z.string(),
-  isbn: z.string().min(10, "ISBN must be at least 10 characters"),
-  publisher: z.string().min(1, "Publisher is required"),
+  title: z.string().min(5, "Title must be at least 5 characters long"),
+  author: z.string().min(5, "Author must be at least 5 characters long"),
+  description: z.string().min(20, "Description must be at least 20 characters long"),
+  isbn: z.string().refine((val) => /^\d{10}$|^\d{13}$/.test(val), {
+    message: "ISBN must be either 10 or 13 digits",
+  }),
+  publisher: z.string().min(5, "Publisher must be at least 5 characters long"),
   pages: z.coerce.number().min(1, "Pages must be greater than 0"),
-  coverImageKey: z.string(),
+  coverImageKey: z.string().optional(),
+  recommendPrice: z.coerce.number().min(0, "Recommend price must be greater than or equal to 0").optional(),
+  bookGenres: z.array(z.string()),
+  bookTags: z.array(z.string()),
 });
 export type EditBookFormData = z.infer<typeof bookSchema>;
 
@@ -33,6 +39,7 @@ export default function EditBookPage() {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<EditBookFormData>({
     resolver: zodResolver(bookSchema),
@@ -48,6 +55,24 @@ export default function EditBookPage() {
     redirect("/");
   }
 
+  type GenreOption = {
+    value: GenreType;
+    label: string;
+  };
+  const genreOptions = Object.values(GenreType.enum).map((g) => ({
+    value: g,
+    label: g.replace(/_/g, " "),
+  }));
+
+  type BookTagOption = {
+    value: BookTagType;
+    label: string;
+  };
+  const bookTagOptions = Object.values(BookTagType.enum).map((tag) => ({
+    value: tag,
+    label: tag.replace(/_/g, " "),
+  }));
+
   const { book, loading: bookLoading, error: bookError } = useGetBook(id);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -57,12 +82,14 @@ export default function EditBookPage() {
     if (book) {
       setValue("title", book.title);
       setValue("author", book.author);
-      setValue("genre", /*book.genre*/ "oo");
       setValue("description", book.description);
       setValue("isbn", book.isbn);
       setValue("publisher", book.publisher);
       setValue("pages", book.pages);
       setValue("coverImageKey", book.coverImageKey);
+      setValue("recommendPrice", book.recommendPrice ?? undefined);
+      setValue("bookGenres", book.bookGenres ?? []);
+      setValue("bookTags", book.bookTags ?? []);
       setImageUrl(book.coverImageUrl);
     }
   }, [book, setValue]);
@@ -131,9 +158,37 @@ export default function EditBookPage() {
         </label>
 
         <label>
-          ประเภทหนังสือ:
-          <input {...register("genre")} placeholder="ประเภทหนังสือ" className="mt-1 block w-full rounded p-2" />
-          {errors.genre?.message && <p className="text-red-500">{String(errors.genre.message)}</p>}
+          หมวดหมู่ (Genres):
+          <Controller
+            control={control}
+            name="bookGenres"
+            render={({ field }) => (
+              <Select<GenreOption, true>
+                isMulti
+                options={genreOptions}
+                value={genreOptions.filter((opt) => field.value?.includes(opt.value))}
+                onChange={(selected) => field.onChange(selected.map((opt) => opt.value))}
+              />
+            )}
+          />
+          {errors.bookGenres?.message && <p className="text-red-500">{String(errors.bookGenres.message)}</p>}
+        </label>
+
+        <label>
+          แท็กหนังสือ (Tags):
+          <Controller
+            control={control}
+            name="bookTags"
+            render={({ field }) => (
+              <Select<BookTagOption, true>
+                isMulti
+                options={bookTagOptions}
+                value={bookTagOptions.filter((opt) => field.value?.includes(opt.value))}
+                onChange={(selected) => field.onChange(selected.map((opt) => opt.value))}
+              />
+            )}
+          />
+          {errors.bookTags?.message && <p className="text-red-500">{String(errors.bookTags.message)}</p>}
         </label>
 
         <label>
@@ -143,6 +198,7 @@ export default function EditBookPage() {
             placeholder="เนื้อเรื่องย่อ"
             className="mt-1 block w-full rounded p-2"
           ></textarea>
+          {errors.description?.message && <p className="text-red-500">{String(errors.description.message)}</p>}
         </label>
 
         <label>
@@ -184,6 +240,17 @@ export default function EditBookPage() {
           {errors.coverImageKey?.message && <p className="text-red-500">{String(errors.coverImageKey.message)}</p>}
         </label>
         {imageUrl && <Image src={imageUrl} alt="Cover Image" width={200} height={200} />}
+
+        <label>
+          ราคาขายแนะนำ:
+          <input
+            type="number"
+            {...register("recommendPrice")}
+            placeholder="(ราคาขายแนะนำ)"
+            className="mt-1 block w-full rounded p-2"
+          />
+          {errors.recommendPrice?.message && <p className="text-red-500">{String(errors.recommendPrice.message)}</p>}
+        </label>
 
         <button
           type="submit"

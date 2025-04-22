@@ -13,4 +13,5 @@ export type Book = {
   bookGenres?: GenreType[];
   bookTags?: BookTagType[];
   verifiedStatus: string;
+  recommendPrice?: number;
 };

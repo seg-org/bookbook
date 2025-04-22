@@ -70,6 +70,9 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
     }
 
+    const forNotifications = searchParams.get("forNotifications") === "true";
+    const userId = searchParams.get("userId");
+
     const transactions = await prisma.transaction.findMany({
       skip: parsedData.data.skip,
       ...(parsedData.data.take !== -1 ? { take: parsedData.data.take } : {}),
@@ -119,11 +122,24 @@ export async function GET(req: NextRequest) {
         ...(parsedData.data.sortBy
           ? {
               ...(parsedData.data.sortBy == "createdAt" ? { createdAt: "desc" } : {}),
-              ...(parsedData.data.sortBy == "updatedAt" ? { createdAt: "asc" } : {}),
+              ...(parsedData.data.sortBy == "updatedAt" ? { updatedAt: "asc" } : {}),
             }
           : { createdAt: "desc" }),
       },
     });
+
+    if (forNotifications) {
+      const simplifiedTransactions = transactions.map((transaction) => ({
+        id: transaction.id,
+        status: transaction.status,
+        postTitle: transaction.post?.title || "Unknown Title",
+        coverImageUrl: transaction.post?.book ? getUrl("book_images", transaction.post.book.coverImageKey) : "",
+        isBuyer: transaction.buyerId === userId,
+        isSeller: transaction.sellerId === userId,
+      }));
+
+      return NextResponse.json(simplifiedTransactions, { status: 200 });
+    }
 
     const transactionsWithURL = await Promise.all(
       transactions.map((transaction) => {

@@ -80,3 +80,6 @@ jobs:
             ABLY_SERVER_API_KEY=${{ secrets.ABLY_SERVER_API_KEY }}
             NEXT_PUBLIC_ABLY_CLIENT_API_KEY=${{ secrets.NEXT_PUBLIC_ABLY_CLIENT_API_KEY }}
             STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
+            TWILIO_PHONE_NUMBER=${{ secrets.TWILIO_PHONE_NUMBER }}
+            WEBHOOK_URL=${{ secrets.WEBHOOK_URL }}
+            WEBHOOK_SECRET=${{ secrets.WEBHOOK_SECRET }}

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GenBookDescRequest, GenBookDescResponse } from "../schemas";
 
 const API_KEY = process.env.HF_API_KEY;
-const MODEL = "mistralai/Mistral-7B-Instruct-v0.2";
+const MODEL = "distilgpt2";
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,11 +24,11 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        inputs: `Describe the book '${title}' briefly. Do not put other things, I wany ONLY the description (no quotations)`,
+        inputs: `Describe the book '${title}' briefly. Provide only the description.`,
       }),
     });
-
     const data: { generated_text: string }[] = await response.json();
+    // console.log(data);
     const description = data[0].generated_text.split("\n\n").slice(1).join("\n\n");
 
     return NextResponse.json(

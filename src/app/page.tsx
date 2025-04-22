@@ -22,10 +22,10 @@ export default async function Home() {
   const isAdmin = session?.user?.isAdmin;
 
   const links = [
-    { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
     { href: "/transaction-history-page", icon: <FileText />, text: "📜 ประวัติการสั่งซื้อ" },
-    { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
     { href: "/seller-reviews", icon: <Star />, text: "ดูรีวิวผู้ขาย" },
+    { href: "/add-book", icon: <PlusCircle />, text: "📖 เพิ่มหนังสือ" },
+    { href: "/seller-registration", icon: <UserPlus />, text: "ลงทะเบียนผู้ขาย" },
     { href: "/my-post", icon: <Store />, text: "โพสต์ของฉัน" },
   ];
 
@@ -36,6 +36,22 @@ export default async function Home() {
       text: "แดชบอร์ดผู้ดูแลระบบ",
     });
     links.push({ href: "/admin/verify-new-book", icon: <ListCheck />, text: "ตรวจสอบหนังสือใหม่" });
+
+    links.push({
+      href: "/admin/view-chat-report",
+      icon: <LayoutDashboard />,
+      text: "การรายงาน",
+    });
+    links.push({
+      href: "/admin/verify-sellers",
+      icon: <BookMarked />,
+      text: "ยืนยันผู้ขาย",
+    });
+    links.push({
+      href: "/admin-transaction-history",
+      icon: <FileText />,
+      text: "จัดการการซื้อขาย",
+    });
   }
 
   return (
@@ -101,7 +117,12 @@ export default async function Home() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {links.map((item, index) => {
-                const isAdminLink = item.href === "/admin/dashboard" || item.href === "/admin/verify-new-book";
+                const isAdminLink =
+                  item.href === "/admin/dashboard" ||
+                  item.href === "/admin/verify-new-book" ||
+                  item.href === "/admin/view-chat-report" ||
+                  item.href === "/admin/verify-sellers" ||
+                  item.href === "/admin-transaction-history";
 
                 return (
                   <Link

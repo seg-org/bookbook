@@ -37,10 +37,14 @@ model User {
   chatMessages           ChatMessage[]
   Bookmark               Bookmark[]
   ChatReport             ChatReport[]
+  Notification           Notification[]
   reportedPosts          PostReport[]    @relation(name: "UserReport")
   resolvedPostReports    PostReport[]    @relation(name: "AdminResolve")
   reportedGeneral        GeneralReport[] @relation(name: "UserReport")
   resolvedGeneralReports GeneralReport[] @relation(name: "AdminResolve")
+
+  bannedUntil DateTime? @map("banned_until")
+  banReason   String?   @map("ban_reason")
 
   @@map("users")
 }
@@ -68,6 +72,8 @@ model SellerProfile {
   user           User      @relation(fields: [userId], references: [id])
   userId         String    @unique @map("user_id")
 
+  balance Int @default(0)
+
   @@map("seller_profiles")
 }
 
@@ -84,6 +90,7 @@ model Book {
   bookGenres    GenreType[]
   bookTags      BookTagType[]
 
+  recommendPrice Float?
   // TODO verifiedBy Admin
   verifiedStatus String @default("UNVERIFIED") @map("verified_status")
 
@@ -386,4 +393,17 @@ enum BookTagType {
   SELF_HELP          @map("self_help")
   THRILLER           @map("thriller")
   ROMANTIC_COMEDY    @map("romantic_comedy")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @map("user_id")
+  message   String
+  link      String?
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId, isRead])
+  @@map("notifications")
 }

@@ -31,7 +31,15 @@ export const putObjectsAsZip = async (files: File[], folder: string) => {
     const zipBlob = await zip.generateAsync({ type: "blob" });
     const zippedFile = new File([zipBlob], "zippedFile", { type: "application/zip" });
 
-    return await putObject(zippedFile, folder);
+    const formData = new FormData();
+    formData.append("file", zippedFile);
+    formData.append("folder", folder);
+
+    const res: AxiosResponse<PutObjectResponse> = await apiClient.put("/objects", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    return res.data;
   } catch (error) {
     console.error("Error uploading zipped files:", error);
     throw new Error("Failed to upload zipped files");
@@ -41,10 +49,9 @@ export const putObjectsAsZip = async (files: File[], folder: string) => {
 export const getObjectUrl = async (key: string, folder: string) => {
   try {
     const res: AxiosResponse<GetObjectUrlResponse> = await apiClient.get(`/objects/${key}?folder=${folder}`);
-
     return res.data;
   } catch (error) {
-    console.error("Failed to get object", error);
-    return Error("Failed to get object");
+    console.error("Failed to get object URL", error);
+    return Error("Failed to get object URL");
   }
 };

@@ -68,8 +68,15 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
     }
 
-    const { page, limit, sortPrice, ...filters } = validatedParams.data;
-    const orderBy = sortPrice ? { price: sortPrice } : {};
+    const { page, limit, sortBy, sortOrder, ...filters } = validatedParams.data;
+    const orderBy: { [key: string]: "asc" | "desc" }[] = [];
+
+    if (sortBy && sortOrder) {
+      orderBy.push({ [sortBy]: sortOrder });
+    } else {
+      orderBy.push({ createdAt: "desc" }); // default sort
+    }
+
     const skip = (page - 1) * limit;
 
     const bookFilter: Prisma.BookWhereInput = {

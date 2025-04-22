@@ -6,7 +6,7 @@ import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { useTransactionContext } from "@/context/transactionContext";
 import { Transaction } from "@/data/dto/transaction.dto";
 
-import LineSeparator from "./LineSperator";
+import LineSeparator from "./LineSeperator";
 import TransactionBox from "./TransactionBox";
 
 interface CategorizedTransactions {
@@ -93,7 +93,7 @@ const TransactionList = () => {
 
   return (
     <div className="5xl:grid-cols_5 3xl:grid-cols-4 grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
-      {categories.map((category) => {
+      {[...categories].map((category) => {
         const transactionsList = categorizedTransactions[category];
 
         if (Array.isArray(transactionsList) && transactionsList.length === 0) {

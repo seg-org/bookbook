@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     });
 
     if (existingUser) {
-      return NextResponse.json({ error: "Email already exists" }, { status: 400 });
+      return NextResponse.json({ error: "มีอีเมลนี้ในระบบแล้ว โปรดตรวจสอบอีกครั้ง" }, { status: 400 });
     }
 
     const hashedPassword = await hash(password, 10);

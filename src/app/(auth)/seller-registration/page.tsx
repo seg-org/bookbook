@@ -8,7 +8,7 @@ export default function SellerRegistrationPage() {
     <main className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center">ลงทะเบียนผู้ขาย</CardTitle>
+          <CardTitle className="text-center text-2xl font-bold">ลงทะเบียนผู้ขาย</CardTitle>
         </CardHeader>
         <CardContent>
           <SellerRegistration />

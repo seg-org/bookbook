@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
@@ -14,15 +13,13 @@ interface Props {
 }
 
 export const ShippingDetailsDialog = ({ open, onClose, onConfirm }: Props) => {
-  const router = useRouter();
-
   const [trackingNumber, setTrackingNumber] = useState("");
   const [trackingURL, setTrackingURL] = useState("");
 
   const handleConfirm = () => {
     onConfirm(trackingNumber, trackingURL);
     onClose();
-    router.refresh();
+    window.location.href = "/transaction-history-page";
   };
 
   return (

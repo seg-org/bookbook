@@ -3,13 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import { getUrl } from "@/app/api/objects/s3";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { sellerIdCardFolderName } from "@/constants/s3FolderName";
 import { Seller } from "@/data/dto/user.dto";
 import { useToast } from "@/hooks/useToast";
-
-import { getUrl } from "../api/objects/s3";
 
 export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
   const [loading, setLoading] = useState<Record<string, boolean>>({});
@@ -19,8 +18,8 @@ export function SellerVerificationList({ sellers }: { sellers: Seller[] }) {
     setLoading((prev) => ({ ...prev, [sellerId]: true }));
 
     try {
-      const response = await fetch("/api/admin/verify-seller", {
-        method: "POST",
+      const response = await fetch(`/api/admin/verify-seller/${sellerId}`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sellerId, approved }),
       });
