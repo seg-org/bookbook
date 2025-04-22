@@ -204,6 +204,7 @@ if (books.length === 0) {
             (tag == "ROMANTIC_COMEDY" && BookTagType.ROMANTIC_COMEDY) ||
             BookTagType.BESTSELLER,
         ),
+        verifiedStatus: book.verifiedStatus,
       };
     }),
   );
