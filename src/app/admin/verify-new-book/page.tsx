@@ -1,16 +1,13 @@
 "use client";
 
-import { useMemo } from "react";
-
-import { useGetBooks } from "@/hooks/useGetAllBooks";
+import { useGetUnverifiedBooks } from "@/hooks/useGetUnverifiedBooks";
 
 import BookCard from "./BookCard";
 
 const VerifyBooksPage = () => {
   //useGetAllBook. idk how to get new book
 
-  const query = useMemo(() => ({ verifiedStatus: "UNVERIFIED" }), []);
-  const { books, loading, error } = useGetBooks(query);
+  const { books, loading, error } = useGetUnverifiedBooks();
   console.log(books[0]);
   return (
     <div className="p-6">

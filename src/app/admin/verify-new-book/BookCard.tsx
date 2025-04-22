@@ -23,7 +23,7 @@ const BookCard = ({ book }: { book: Book }) => {
 
   const handleOnClick = async (e: React.MouseEvent, verifiedStatus: string) => {
     e.stopPropagation();
-    await apiClient.patch(`/books/${book.id}`, { verifiedStatus });
+    await apiClient.patch(`/admin/new-book/${book.id}`, { verifiedStatus });
     setHidden(true); // hide the card
   };
 

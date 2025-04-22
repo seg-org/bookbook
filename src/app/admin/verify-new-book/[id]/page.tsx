@@ -14,7 +14,7 @@ export default function VerifyBookDetailPage({ params }: { params: Promise<{ id:
   const router = useRouter();
   const handleOnClick = async (e: React.MouseEvent, verifiedStatus: string) => {
     e.stopPropagation();
-    await apiClient.patch(`/books/${id}`, { verifiedStatus });
+    await apiClient.patch(`/admin/new-book/${id}`, { verifiedStatus });
     router.push(`/admin/verify-new-book`);
   };
 
