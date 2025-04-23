@@ -413,7 +413,6 @@ const TransactionDetailsPopup = () => {
                 )}
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-xl font-bold">{transaction?.amount}.-</p>
                 <div className="flex flex-row justify-end space-x-2">
                   <Button className="mt-4 px-6 py-3 text-xl font-bold hover:bg-transparent" variant="ghost">
                     {transaction?.amount}.-
