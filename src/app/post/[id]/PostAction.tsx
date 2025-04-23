@@ -4,7 +4,7 @@ import { Megaphone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { FaShoppingBasket } from "react-icons/fa";
+// import { FaShoppingBasket } from "react-icons/fa";
 import { IoLogoWechat } from "react-icons/io5";
 
 import { Button } from "@/components/ui/Button";
@@ -20,13 +20,13 @@ export default function PostAction({ postId }: { postId: string; bookTitle: stri
 
   const router = useRouter();
 
-  const initiate_transaction = () => {
-    if (!isAuthenticated) {
-      router.push("/login");
-      return;
-    }
-    router.push("/checkout");
-  };
+  // const initiate_transaction = () => {
+  //   if (!isAuthenticated) {
+  //     router.push("/login");
+  //     return;
+  //   }
+  //   router.push("/checkout");
+  // };
 
   const handleChatWithSeller = async (postId: string) => {
     if (!isAuthenticated || !session?.user) {
@@ -50,11 +50,11 @@ export default function PostAction({ postId }: { postId: string; bookTitle: stri
             <IoLogoWechat className="h-6 w-6" /> แชทกับผู้ขาย
           </div>
         </Button>
-        <Button onClick={initiate_transaction}>
+        {/* <Button onClick={initiate_transaction}>
           <div className="flex items-center justify-center gap-x-2">
             <FaShoppingBasket className="h-6 w-6" /> สั่งซื้อ
           </div>
-        </Button>
+        </Button> */}
       </div>
       {openReportMenu && <PostReportForm postId={postId} />}
     </>
