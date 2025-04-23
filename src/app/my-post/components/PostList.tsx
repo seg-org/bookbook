@@ -23,7 +23,8 @@ export const PostList = () => {
   const [page, setPage] = useState(1);
 
   const [posts, setPosts] = useState<PostWithBookmark[]>([]);
-  useEffect(() => {
+
+  const fetchPosts = () => {
     setLoading(true);
     fetch(
       `/api/posts/get-own-posts?page=${page}&limit=10&sortBy=${sortBy}&sortOrder=${sortOrder}&verifiedStatus=${selectedStatus}`,
@@ -42,6 +43,10 @@ export const PostList = () => {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
+  };
+
+  useEffect(() => {
+    fetchPosts();
   }, [sortBy, sortOrder, selectedStatus, page]);
 
   useEffect(() => {
@@ -104,7 +109,7 @@ export const PostList = () => {
         ) : (
           <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
             {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.id} post={post} onPostUpdate={fetchPosts} />
             ))}
           </div>
         )}

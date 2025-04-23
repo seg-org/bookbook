@@ -49,7 +49,6 @@ export async function GET(req: NextRequest) {
     const posts = await prisma.post.findMany({
       where: {
         book: bookFilter,
-        published: true,
         sellerId: {
           not: session?.user.id,
         },
@@ -65,7 +64,6 @@ export async function GET(req: NextRequest) {
     const totalPosts = await prisma.post.count({
       where: {
         book: bookFilter,
-        published: true,
         verifiedStatus,
         id: postId ? { equals: postId } : undefined,
       },

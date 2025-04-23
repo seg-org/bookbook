@@ -8,7 +8,7 @@ import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
   post: Post;
-  // onPostChange: () => void; TODO
+  onPostUpdate: () => void;
 };
 
 const cut = (str: string, maxLength: number) => {
@@ -19,42 +19,56 @@ const cut = (str: string, maxLength: number) => {
 };
 
 // TODO
-function PostCard({ post }: PostCardProps) {
+function PostCard({ post, onPostUpdate }: PostCardProps) {
   const [editMode, setEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({
     title: post.title,
-    price: post.price,
+    price: post.price.toString(),
     bookId: post.bookId,
-    verifiedStatus: "CHANGE_REQUESTED",
+    verifiedStatus: post.verifiedStatus,
   });
 
   const oldPost = {
     title: post.title,
-    price: post.price,
+    price: post.price.toString(),
     bookId: post.bookId,
-    verifiedStatus: "CHANGE_REQUESTED",
+    verifiedStatus: post.verifiedStatus,
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "price") {
-      setEditedPost((prev) => ({ ...prev, [name]: Number(value) }));
-    } else {
-      setEditedPost((prev) => ({ ...prev, [name]: value }));
-    }
+
+    setEditedPost((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSubmit = async (id: string) => {
+  const onSubmit = async (
+    id: string,
+    postPayload: {
+      title: string;
+      price: string;
+      bookId: string;
+      verifiedStatus: string;
+    },
+  ) => {
     try {
-      setEditedPost((prev) => ({ ...prev, verifiedStatus: "UNDER_REVIEW" }));
-      const res = await editPost(editedPost, id);
+      const res = await editPost(
+        {
+          ...postPayload,
+          price: Number(postPayload.price),
+          verifiedStatus: post.verifiedStatus === "VERIFIED" ? "VERIFIED" : "UNDER_REVIEW",
+        },
+        id,
+      );
       if (res instanceof Error) {
         console.error(res);
       }
+      setEditMode(false);
     } catch (error) {
       console.error("Error editing post:", error);
+      setEditMode(false);
+    } finally {
+      onPostUpdate();
     }
-    setEditMode(false);
     // await onPostChange(); TODO
   };
 
@@ -69,6 +83,8 @@ function PostCard({ post }: PostCardProps) {
       }
     } catch (error) {
       console.error("Error posting book:", error);
+    } finally {
+      onPostUpdate();
     }
     // await onPostChange(); TODO
   };
@@ -147,7 +163,10 @@ function PostCard({ post }: PostCardProps) {
                 variant="default"
                 className="text-green-500 hover:bg-green-500 hover:text-white"
                 onClick={() => {
-                  onSubmit(post.id);
+                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "UNDER_REVIEW" }));
+                  onSubmit(post.id, {
+                    ...editedPost,
+                  });
                 }}
               >
                 <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>

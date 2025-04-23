@@ -13,6 +13,7 @@ type EditPostFormData = {
   title: string;
   price: number;
   bookId: string;
+  verifiedStatus?: string;
 };
 export const getAllPosts = async (params?: GetPostsFilters) => {
   try {
