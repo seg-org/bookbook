@@ -29,6 +29,10 @@ export function useIsBanned() {
   useEffect(() => {
     if (status === "authenticated") {
       fetchBanStatus();
+    } else {
+      setIsBanned(false);
+      setBannedUntil(undefined);
+      setBanReason(undefined);
     }
   }, [status]);
 

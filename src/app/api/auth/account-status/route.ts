@@ -8,7 +8,10 @@ export async function GET() {
   const user = await getServerSession(authOptions);
 
   if (!user) {
-    return new Response(JSON.stringify(JSON.stringify({ status: "OK" })), { status: 200 });
+    return new Response(JSON.stringify({ status: "OK" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   const pUser = await prisma.user.findUnique({
@@ -18,7 +21,10 @@ export async function GET() {
   });
 
   if (!pUser) {
-    return new Response(JSON.stringify({ status: "OK" }), { status: 200 });
+    return new Response(JSON.stringify({ status: "OK" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   const isBanned = isUserBanned(pUser);
@@ -26,9 +32,15 @@ export async function GET() {
   if (isBanned) {
     return new Response(
       JSON.stringify({ status: "BANNED", bannedUntil: pUser.bannedUntil, banReason: pUser.banReason }),
-      { status: 200 },
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
     );
   }
 
-  return new Response(JSON.stringify({ status: "OK" }), { status: 200 });
+  return new Response(JSON.stringify({ status: "OK" }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
