@@ -12,6 +12,7 @@ export interface PostWithBookmark extends Post {
 }
 interface PostContext {
   posts: PostWithBookmark[];
+  bookmarkedPosts: PostWithBookmark[];
   pagination: PaginationInfo | null;
   recommendedPosts: PostWithBookmark[];
   bookmarks: Bookmark[];
@@ -20,10 +21,13 @@ interface PostContext {
   changeBookmark: (postId: string) => Promise<void>;
   setPostsFilters: Dispatch<SetStateAction<GetPostsFilters>>;
   refetchPosts: () => void;
+  isBookmarkOnly: boolean;
+  setIsBookmarkOnly: Dispatch<SetStateAction<boolean>>;
 }
 
 export const PostContext = createContext<PostContext>({
   posts: [],
+  bookmarkedPosts: [],
   pagination: null,
   recommendedPosts: [],
   bookmarks: [],
@@ -32,6 +36,8 @@ export const PostContext = createContext<PostContext>({
   changeBookmark: () => Promise.resolve(),
   setPostsFilters: () => {},
   refetchPosts: () => {},
+  isBookmarkOnly: false,
+  setIsBookmarkOnly: () => {},
 });
 
 export const usePostContext = () => {
