@@ -89,17 +89,20 @@ export default function SpecialSearch() {
           </div>
         </div>
       </div>
-      {/* Debug Output */}
-      <div className="mt-6 rounded-md border border-gray-300 bg-gray-50 p-4">
+      {/* Selected */}
+      <div className="mt-6 rounded-md border border-gray-300 bg-gray-50 p-4 break-words">
         <h3 className="mb-2 font-semibold">Selected:</h3>
         <p>
-          <strong>Selected Book Genres:</strong> {JSON.stringify(selectedBookGenres, null, 2)}
+          <strong>Selected Book Genres:</strong>{" "}
+          {selectedBookGenres.map((genre) => genreInThai[genre]).join(", ")}
         </p>
         <p>
-          <strong>Selected Book Tags:</strong> {JSON.stringify(selectedBookTags, null, 2)}
+          <strong>Selected Book Tags:</strong>{" "}
+          {selectedBookTags.map((tag) => bookTagInThai[tag]).join(", ")}
         </p>
         <p>
-          <strong>Selected Special Descriptions:</strong> {JSON.stringify(selectedSpecialDescriptions, null, 2)}
+          <strong>Selected Special Descriptions:</strong>{" "}
+          {selectedSpecialDescriptions.map((description) => specialDescriptionInThai[description]).join(", ")}
         </p>
       </div>
     </>

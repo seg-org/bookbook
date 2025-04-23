@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { BookResponse } from "../books/schemas";
 import { SpecialDescriptionType } from "../posts/post_enum";
+import { GenreType, BookTagType } from "../books/book_enum";
 
 extendZodWithOpenApi(z);
 
@@ -22,6 +23,19 @@ export const GetPostsRequest = z.object({
   limit: z.preprocess((val) => (val ? Number(val) : 10), z.number().min(1).max(30).default(30)),
   sortBy: z.enum(["createdAt", "price"]).optional(),
   sortOrder: z.enum(["asc", "desc"]).optional(),
+  bookGenres: z
+    .array(GenreType)
+    .optional()
+    .transform((val) => (val && val.length > 0 ? val : undefined)),
+  bookTags: z
+    .array(BookTagType)
+    .optional()
+    .transform((val) => (val && val.length > 0 ? val : undefined)),
+  specialDescriptions: z
+    .array(SpecialDescriptionType)
+    .optional()
+    .transform((val) => (val && val.length > 0 ? val : undefined))
+    .openapi({ example: ["AUTHOR_SIGNATURE"] }),
 });
 
 export const CreatePostRequest = z.object({
