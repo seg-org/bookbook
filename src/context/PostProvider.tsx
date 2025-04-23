@@ -58,6 +58,12 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
     [recommendedPosts, bookmarks],
   );
 
+  const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
+  const bookmarkedPosts = useMemo(() => {
+    if (isBookmarkOnly) return postsWithBookmarks.filter((post) => post.isBookmarked);
+    return postsWithBookmarks;
+  }, [postsWithBookmarks, isBookmarkOnly]);
+
   const loading = loadingAll || loadingRecommended || loadingBookmark;
   const error = errorAll || errorRecommended || errorBookmark;
 
@@ -65,6 +71,7 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
     <PostContext.Provider
       value={{
         posts: postsWithBookmarks,
+        bookmarkedPosts,
         pagination,
         recommendedPosts: recommendedPostsWithBookmarks,
         bookmarks,
@@ -73,6 +80,8 @@ export const PostProvider: FC<PropsWithChildren> = ({ children }) => {
         changeBookmark,
         setPostsFilters,
         refetchPosts: refetchAllPosts,
+        isBookmarkOnly,
+        setIsBookmarkOnly,
       }}
     >
       {children}

@@ -15,7 +15,7 @@ function SearchPage() {
   const [specialSearch, setSpecialSearch] = useState(false);
   const [title, setTitle] = useState("");
 
-  const { setPostsFilters } = usePostContext();
+  const { setPostsFilters, isBookmarkOnly } = usePostContext();
   useEffect(() => {
     setPostsFilters((prev) => ({ ...prev, title }));
   }, [title, setPostsFilters]);
@@ -61,7 +61,7 @@ function SearchPage() {
             </div>
           </div>
           <PostList />
-          <Pagination />
+          {!isBookmarkOnly && <Pagination />}
         </div>
       </div>
     </>
