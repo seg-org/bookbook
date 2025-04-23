@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 
 import { getUrl } from "@/app/api/objects/s3";
 import { authOptions } from "@/lib/auth";
+import { isUserBanned } from "@/lib/ban";
 import { prisma } from "@/lib/prisma";
 import { bookTagInThai, genreInThai } from "@/lib/translation";
 
@@ -29,12 +30,20 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
     notFound();
   }
 
+  const isBanned = isUserBanned(post.seller);
+
   const session = await getServerSession(authOptions);
   const isYourPost = post.sellerId === session?.user.id;
 
   return (
     <>
       <h1 className="my-4 text-center text-2xl font-bold">รายละเอียดโพสต์</h1>
+
+      {isBanned && (
+        <div className="mx-auto w-2/3 rounded-lg border border-red-500 bg-red-300 p-4">
+          หนังสือเล่มนี้ถูกระงับการขาย เนื่องจากผู้ขายถูกแบน
+        </div>
+      )}
 
       <main className="mx-auto flex w-2/3 flex-row items-start gap-4 rounded-lg bg-white p-8 shadow">
         <aside className="m-2.5 flex flex-col items-center gap-4">

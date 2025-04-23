@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { getUrl } from "@/app/api/objects/s3";
 import { Button } from "@/components/ui/Button";
 import { authOptions } from "@/lib/auth";
+import { isUserBanned } from "@/lib/ban";
 import { prisma } from "@/lib/prisma";
 import { bookTagInThai, genreInThai } from "@/lib/translation";
 
@@ -20,10 +21,22 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
     where: {
       userId: session.user.id,
     },
+    include: {
+      user: {
+        select: {
+          bannedUntil: true,
+          banReason: true,
+        },
+      },
+    },
   });
 
   if (!seller) {
     return <h1 className="my-4 text-center text-2xl font-bold">กรุณาลงทะเบียนผู้ขายก่อนใช้งาน</h1>;
+  }
+
+  if (isUserBanned(seller.user)) {
+    return <h1 className="my-4 text-center text-2xl font-bold">ไม่สามารถโพสต์ขายขณะถูกระงับการใช้งาน</h1>;
   }
 
   const { id } = await params;

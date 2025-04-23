@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { sendMessage } from "@/data/chat";
 import { ChatMessage, ChatRoom } from "@/data/dto/chat.dto";
 import { useGetChatMessages } from "@/hooks/useGetChatMessages";
+import { useIsBanned } from "@/hooks/useIsBanned";
 import { SessionUser } from "@/lib/auth";
 
 import { MessageBubble } from "./MessageBubble";
@@ -19,6 +20,9 @@ function Chat({ chatRoom, user }: ChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const messageEnd = useRef<HTMLDivElement>(null);
   const initialMessages = useGetChatMessages(chatRoom.id);
+  const { isBanned } = useIsBanned();
+  const canSendMessage = chatRoom.userB.isAdmin || !isBanned;
+
   const { channel } = useChannel("chat", (message) => {
     if (message.data.roomId !== chatRoom.id) return;
 
@@ -102,11 +106,12 @@ function Chat({ chatRoom, user }: ChatProps) {
         <input
           type="text"
           className="flex-1 rounded-lg border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="พิมพ์ข้อความ..."
+          placeholder={canSendMessage ? "พิมพ์ข้อความ..." : "ไม่สามารถส่งข้อความได้ขณะถูกระงับการใช้งาน"}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           data-test-id="chat-input"
+          disabled={!canSendMessage}
         />
         <button
           className="ml-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
