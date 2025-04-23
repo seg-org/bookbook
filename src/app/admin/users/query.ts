@@ -10,6 +10,7 @@ export async function getUsers() {
           posts: true,
         },
       },
+      sellerProfile: true,
     },
     orderBy: {
       createdAt: "asc",
