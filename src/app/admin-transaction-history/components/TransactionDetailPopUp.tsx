@@ -16,9 +16,10 @@ import { useRouter } from "next/navigation";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
-import { createNotification } from "@/data/notification";
-import { validateRefund } from "@/data/refund";
+import { updateTransaction } from "@/data/transaction";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
+import { createNotification } from "@/data/notification";
+import { getUrl } from "@/app/api/objects/s3";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
@@ -356,7 +357,11 @@ const TransactionDetailsPopup = () => {
                         <>
                           <p></p>
                           <a
-                            href={url}
+                            href={
+                              url
+                                ? "https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/report_evidence/" + url
+                                : ""
+                            }
                             className="max-w-56 break-words text-blue-600 underline"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -380,7 +385,12 @@ const TransactionDetailsPopup = () => {
                     <p className="text-red-400">{transaction?.failData?.detail}</p>
                     <p className="font-bold text-red-400">หลักฐาน : </p>
                     <a
-                      href={transaction?.failData?.evidenceURL[0]}
+                      href={
+                        transaction?.failData?.evidenceURL[0]
+                          ? "https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/report_evidence/" +
+                            transaction.failData.evidenceURL[0]
+                          : ""
+                      }
                       className="max-w-56 break-words text-blue-600 underline"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -404,10 +414,8 @@ const TransactionDetailsPopup = () => {
                 )}
               </div>
               <div className="flex items-center justify-between">
+                <p className="text-xl font-bold">{transaction?.amount}.-</p>
                 <div className="flex flex-row justify-end space-x-2">
-                  <Button className="mt-4 px-6 py-3 text-xl font-bold hover:bg-transparent" variant="ghost">
-                    {transaction?.amount}.-
-                  </Button>
                   <Button
                     className="mt-4 px-6 py-3"
                     variant="secondary"
@@ -460,12 +468,12 @@ const TransactionDetailsPopup = () => {
                           }
                           try {
                             if (transaction.trackingNumber) {
-                              await validateRefund({
+                              await updateTransaction({
                                 id: transaction.id,
                                 status: "DELIVERING",
                               });
                             } else {
-                              await validateRefund({
+                              await updateTransaction({
                                 id: transaction.id,
                                 status: "PACKING",
                               });
@@ -473,11 +481,11 @@ const TransactionDetailsPopup = () => {
 
                             createNotification(
                               transaction.sellerId,
-                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
+                              "การซื้อหนังสือ " + transaction.post.book.title + " ถูกปฎิเสธการรายงาน",
                             );
                             createNotification(
                               transaction.buyerId,
-                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
+                              "การซื้อหนังสือ " + transaction.post.book.title + " ถูกปฎิเสธการรายงาน",
                             );
                           } catch (error) {
                             if (!window.confirm("เกิดข้อผิดพลาด")) {
@@ -490,7 +498,7 @@ const TransactionDetailsPopup = () => {
                         })();
                       }}
                     >
-                      ปฏิเสธการคืนเงิน
+                      ปฏิเสธ
                     </Button>
                   )}
                   {transaction?.status != TransactionStatus.FAIL &&
@@ -502,7 +510,7 @@ const TransactionDetailsPopup = () => {
                           router.push(`/admin-transaction-deny/${transaction.id}`);
                         }}
                       >
-                        อนุมัติการคืนเงิน
+                        ยกเลิก
                       </Button>
                     )}
                 </div>

@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 
 import { Transaction } from "@/data/dto/transaction.dto";
+import { getUrl } from "@/app/api/objects/s3";
 
 const TransactionDetails = ({ transaction }: { transaction: Transaction | undefined }) => {
   // pardon me with this curse code, I just want to code to work
@@ -317,7 +318,9 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction | undefi
                     <>
                       <p></p>
                       <a
-                        href={url}
+                        href={
+                          url ? "https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/report_evidence/" + url : ""
+                        }
                         className="max-w-56 break-words text-blue-600 underline"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -341,7 +344,12 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction | undefi
                 <p className="text-red-400">{transaction?.failData?.detail}</p>
                 <p className="font-bold text-red-400">หลักฐาน : </p>
                 <a
-                  href={transaction?.failData?.evidenceURL[0]}
+                  href={
+                    transaction?.failData?.evidenceURL[0]
+                      ? "https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/report_evidence/" +
+                        transaction.failData.evidenceURL[0]
+                      : ""
+                  }
                   className="max-w-56 break-words text-blue-600 underline"
                   target="_blank"
                   rel="noopener noreferrer"
