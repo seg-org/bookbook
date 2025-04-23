@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
+import { isUserBanned } from "@/lib/ban";
 import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../objects/s3";
@@ -108,24 +109,38 @@ export async function GET(req: NextRequest) {
     };
 
     const session = await getServerSession(authOptions);
-    const posts = await prisma.post.findMany({
-      where: {
-        book: bookFilter,
-        published: true,
-        specialDescriptions:
-          filters.specialDescriptions && filters.specialDescriptions.length > 0
-            ? { hasEvery: filters.specialDescriptions }
-            : undefined,
-        sellerId: {
-          not: session?.user.id,
+    const posts = (
+      await prisma.post.findMany({
+        where: {
+          book: bookFilter,
+          published: true,
+          specialDescriptions:
+            filters.specialDescriptions && filters.specialDescriptions.length > 0
+              ? { hasEvery: filters.specialDescriptions }
+              : undefined,
+          sellerId: {
+            not: session?.user.id,
+          },
         },
-        verifiedStatus: "VERIFIED",
-      },
-      include: { book: true },
-      skip,
-      take: limit,
-      orderBy,
-    });
+        include: {
+          book: true,
+          seller: {
+            select: {
+              bannedUntil: true,
+              banReason: true,
+            },
+          },
+        },
+        skip,
+        take: limit,
+        orderBy,
+      })
+    )
+      .filter((post) => !isUserBanned(post.seller))
+      .map((post) => ({
+        ...post,
+        seller: undefined,
+      }));
 
     const totalPosts = await prisma.post.count({
       where: {
