@@ -139,6 +139,16 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
             </div>
 
             <div className="flex w-full flex-col items-start gap-2">
+              <label htmlFor="book-condition">สภาพหนังสือ</label>
+              <select id="book-condition" name="book-condition" className="w-full rounded border border-black p-2">
+                <option value="NO_DAMAGED">ไม่มีรอยขีดข่วน</option>
+                <option value="MINOR_DAMAGED">มีรอยขีดข่วนเล็กน้อย</option>
+                <option value="MAJOR_DAMAGED">มีรอยขีดข่วนมาก</option>
+              </select>
+            </div>
+
+
+            <div className="flex w-full flex-col items-start gap-2">
               <label htmlFor="book-price">
                 ราคาที่ขาย {recommendPrice ? `(ราคาขายแนะนำ: ${Math.round(recommendPrice)} บาท)` : undefined}
               </label>
