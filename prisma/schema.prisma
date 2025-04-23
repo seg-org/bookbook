@@ -116,6 +116,7 @@ model Post {
   createdAt           DateTime                 @default(now())
   updatedAt           DateTime                 @updatedAt() @map("updated_at")
   reports             PostReport[]
+  verifiedStatus      String                   @default("UNVERIFIED") @map("verified_status")
 
   @@map("posts")
 }
