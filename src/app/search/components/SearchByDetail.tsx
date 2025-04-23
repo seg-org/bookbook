@@ -4,7 +4,7 @@ import { usePostContext } from "@/context/postContext";
 
 function SearchByDetail() {
   const [author, setAuthor] = useState<string>("");
-  const [genre, setGenre] = useState<string>("");
+  // const [genre, setGenre] = useState<string>("");
   const [publisher, setPublisher] = useState<string>("");
   const [isbn, setIsbn] = useState<string>("");
   const [minPages, setMinPages] = useState<string>("");
@@ -14,13 +14,13 @@ function SearchByDetail() {
     setPostsFilters((prev) => ({
       ...prev,
       author: author.length !== 0 ? author : undefined,
-      genre: genre.length !== 0 ? genre : undefined,
+      // genre: genre.length !== 0 ? genre : undefined,
       publisher: publisher.length !== 0 ? publisher : undefined,
       isbn: isbn.length !== 0 ? isbn : undefined,
       minPages: minPages.length !== 0 && !isNaN(parseInt(minPages, 10)) ? parseInt(minPages, 10) : undefined,
       maxPages: maxPages.length !== 0 && !isNaN(parseInt(maxPages, 10)) ? parseInt(maxPages, 10) : undefined,
     }));
-  }, [author, genre, publisher, isbn, minPages, maxPages, setPostsFilters]);
+  }, [author, publisher, isbn, minPages, maxPages, setPostsFilters]);
 
   return (
     <>

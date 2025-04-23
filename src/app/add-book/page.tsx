@@ -11,9 +11,9 @@ import { z } from "zod";
 
 import { bookImageFolderName } from "@/constants/s3FolderName";
 import { getObjectUrl, putObject } from "@/data/object";
+import { bookTagInThai, genreInThai } from "@/lib/translation";
 
 import { BookTagType, GenreType } from "../api/books/book_enum";
-import { bookTagInThai, genreInThai} from "@/lib/translation";
 
 const bookSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters long"),

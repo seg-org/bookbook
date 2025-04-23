@@ -7,7 +7,6 @@ import { SpecialDescriptionType } from "@/app/api/posts/post_enum";
 import { usePostContext } from "@/context/postContext";
 import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
 
-
 export default function SpecialSearch() {
   const { setPostsFilters } = usePostContext();
   const [selectedSpecialDescriptions, setSelectedSpecialDescriptions] = useState<SpecialDescriptionType[]>([]);
@@ -91,8 +90,8 @@ export default function SpecialSearch() {
         </div>
       </div>
       {/* Debug Output */}
-      <div className="mt-6 p-4 border border-gray-300 rounded-md bg-gray-50">
-        <h3 className="font-semibold mb-2">Selected:</h3>
+      <div className="mt-6 rounded-md border border-gray-300 bg-gray-50 p-4">
+        <h3 className="mb-2 font-semibold">Selected:</h3>
         <p>
           <strong>Selected Book Genres:</strong> {JSON.stringify(selectedBookGenres, null, 2)}
         </p>

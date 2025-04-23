@@ -1,16 +1,15 @@
 // src/app/book/sell/[id]/page.tsx
 
 import Image from "next/image";
-import { notFound, redirect } from "next/navigation"
+import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { getUrl } from "@/app/api/objects/s3";
+import { DamageType, SpecialDescriptionType } from "@/app/api/posts/post_enum";
 import { Button } from "@/components/ui/Button";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
-import { SpecialDescriptionType, DamageType } from "@/app/api/posts/post_enum";
-
 
 export default async function SellBookConfirmPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -148,7 +147,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
             <div className="flex w-full flex-col items-start gap-2">
               <label htmlFor="book-condition">สภาพหนังสือ</label>
               <select id="book-condition" name="book-condition" className="w-full rounded border border-black p-2">
-                <option value="NO_DAMEGE">ไม่มีรอยขีดข่วน</option>
+                <option value="NO_DAMEGED">ไม่มีรอยขีดข่วน</option>
                 <option value="SLIGHTLY_DAMAGED">มีรอยขีดข่วนเล็กน้อย</option>
                 <option value="DAMAGED">มีรอยขีดข่วน</option>
               </select>
@@ -159,11 +158,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                 {SpecialDescriptionType.options.map((description) => (
                   <label key={description} className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      name="specialDescriptions"
-                      value={description}
-                    />
+                    <input type="checkbox" name="specialDescriptions" value={description} />
                     {specialDescriptionInThai[description]}
                   </label>
                 ))}

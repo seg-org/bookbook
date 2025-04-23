@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { getUrl } from "@/app/api/objects/s3";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { bookTagInThai, genreInThai, specialDescriptionInThai, damageInThai } from "@/lib/translation";
+import { bookTagInThai, damageInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
 
 import BookmarkAction from "./BookmarkAction";
 import PostAction from "./PostAction";
