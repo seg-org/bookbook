@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+
+import { getUrl } from "@/app/api/objects/s3";
+import { PostResponse, UpdatePostRequest } from "@/app/api/posts/schemas";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { UpdatePostRequest, PostResponse } from "@/app/api/posts/schemas";
-import { getUrl } from "@/app/api/objects/s3";
 
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
