@@ -101,6 +101,7 @@ export async function GET(req: NextRequest) {
         sellerId: {
           not: session?.user.id,
         },
+        verifiedStatus: "VERIFIED",
       },
       include: { book: true },
       skip,
@@ -112,6 +113,7 @@ export async function GET(req: NextRequest) {
       where: {
         book: bookFilter,
         published: true,
+        verifiedStatus: "VERIFIED",
       },
     });
     const totalPages = Math.ceil(totalPosts / limit);
