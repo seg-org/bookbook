@@ -38,7 +38,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-28T08:08:40.352Z",
-    "updatedAt": "2025-02-22T16:04:27.573Z"
+    "updatedAt": "2025-02-22T16:04:27.573Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_2",
@@ -79,12 +80,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-02T21:54:19.568Z",
-    "updatedAt": "2025-03-25T04:00:51.096Z"
+    "updatedAt": "2025-03-25T04:00:51.096Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_3",
     "title": "Fantastic Deals on Used Books - Hurry, Limited Time!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 353,
     "published": true,
     "sellerId": "user_6",
@@ -124,7 +126,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-11-22T18:10:21.093Z",
-    "updatedAt": "2025-03-28T16:58:46.149Z"
+    "updatedAt": "2025-03-28T16:58:46.149Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_4",
@@ -158,7 +161,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-07-02T08:01:53.293Z",
-    "updatedAt": "2024-07-11T22:57:58.285Z"
+    "updatedAt": "2024-07-11T22:57:58.285Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_5",
@@ -192,7 +196,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-12-26T07:38:55.579Z",
-    "updatedAt": "2023-03-10T09:42:22.268Z"
+    "updatedAt": "2023-03-10T09:42:22.268Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_6",
@@ -227,7 +232,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-09-04T20:58:59.249Z",
-    "updatedAt": "2024-01-15T07:13:00.616Z"
+    "updatedAt": "2024-01-15T07:13:00.616Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_7",
@@ -271,7 +277,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-03-03T09:56:08.007Z",
-    "updatedAt": "2024-06-27T20:43:23.470Z"
+    "updatedAt": "2024-06-27T20:43:23.470Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_8",
@@ -309,7 +316,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-01-17T06:28:27.688Z",
-    "updatedAt": "2024-10-02T18:58:06.845Z"
+    "updatedAt": "2024-10-02T18:58:06.845Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_9",
@@ -346,7 +354,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-10-01T15:46:22.357Z",
-    "updatedAt": "2025-01-22T08:04:40.890Z"
+    "updatedAt": "2025-01-22T08:04:40.890Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_10",
@@ -384,7 +393,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-05-19T00:50:18.525Z",
-    "updatedAt": "2024-10-29T07:27:48.876Z"
+    "updatedAt": "2024-10-29T07:27:48.876Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_11",
@@ -424,7 +434,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-02-06T04:47:44.752Z",
-    "updatedAt": "2025-03-14T09:04:32.993Z"
+    "updatedAt": "2025-03-14T09:04:32.993Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_12",
@@ -464,7 +475,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-17T21:26:22.323Z",
-    "updatedAt": "2025-02-23T15:35:26.177Z"
+    "updatedAt": "2025-02-23T15:35:26.177Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_13",
@@ -500,7 +512,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-10T23:32:50.753Z",
-    "updatedAt": "2024-12-27T00:23:23.948Z"
+    "updatedAt": "2024-12-27T00:23:23.948Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_14",
@@ -540,7 +553,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-02-06T16:14:27.961Z",
-    "updatedAt": "2024-02-12T16:00:40.444Z"
+    "updatedAt": "2024-02-12T16:00:40.444Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_15",
@@ -583,12 +597,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-03-30T13:36:05.875Z",
-    "updatedAt": "2024-07-26T20:06:50.885Z"
+    "updatedAt": "2024-07-26T20:06:50.885Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_16",
     "title": "Selling Gently Used Books - Great Deals Inside!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 458,
     "published": true,
     "sellerId": "user_6",
@@ -620,7 +635,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-08-15T01:09:00.990Z",
-    "updatedAt": "2024-09-14T20:49:04.436Z"
+    "updatedAt": "2024-09-14T20:49:04.436Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_17",
@@ -663,7 +679,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-06-25T00:20:37.971Z",
-    "updatedAt": "2023-09-05T17:26:07.012Z"
+    "updatedAt": "2023-09-05T17:26:07.012Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_18",
@@ -704,7 +721,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-07-09T20:45:49.784Z",
-    "updatedAt": "2024-09-19T21:56:09.986Z"
+    "updatedAt": "2024-09-19T21:56:09.986Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_19",
@@ -740,7 +758,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-10-23T21:23:36.529Z",
-    "updatedAt": "2024-05-22T00:19:40.020Z"
+    "updatedAt": "2024-05-22T00:19:40.020Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_20",
@@ -775,7 +794,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-01-20T14:57:20.440Z",
-    "updatedAt": "2023-06-27T04:11:33.075Z"
+    "updatedAt": "2023-06-27T04:11:33.075Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_21",
@@ -820,7 +840,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-10-29T06:24:25.503Z",
-    "updatedAt": "2024-11-23T18:37:14.506Z"
+    "updatedAt": "2024-11-23T18:37:14.506Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_22",
@@ -854,7 +875,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-02-16T15:45:56.942Z",
-    "updatedAt": "2024-05-07T18:29:30.022Z"
+    "updatedAt": "2024-05-07T18:29:30.022Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_23",
@@ -891,12 +913,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-02-01T19:57:29.646Z",
-    "updatedAt": "2023-04-03T15:31:03.955Z"
+    "updatedAt": "2023-04-03T15:31:03.955Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_24",
     "title": "Fantastic Deals on Used Books - Hurry, Limited Time!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 137,
     "published": true,
     "sellerId": "user_9",
@@ -928,7 +951,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-06-05T12:37:15.645Z",
-    "updatedAt": "2024-10-06T19:08:50.930Z"
+    "updatedAt": "2024-10-06T19:08:50.930Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_25",
@@ -966,12 +990,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-02-15T08:04:32.785Z",
-    "updatedAt": "2023-12-18T17:01:42.765Z"
+    "updatedAt": "2023-12-18T17:01:42.765Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_26",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 121,
     "published": true,
     "sellerId": "user_2",
@@ -1003,7 +1028,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-08-09T22:37:22.195Z",
-    "updatedAt": "2024-03-27T18:03:43.234Z"
+    "updatedAt": "2024-03-27T18:03:43.234Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_27",
@@ -1036,7 +1062,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-07-17T12:16:54.197Z",
-    "updatedAt": "2024-12-19T01:59:12.829Z"
+    "updatedAt": "2024-12-19T01:59:12.829Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_28",
@@ -1070,7 +1097,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-05-01T14:57:08.115Z",
-    "updatedAt": "2025-03-14T09:43:16.300Z"
+    "updatedAt": "2025-03-14T09:43:16.300Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_29",
@@ -1109,12 +1137,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-28T03:14:59.743Z",
-    "updatedAt": "2025-01-07T06:43:29.740Z"
+    "updatedAt": "2025-01-07T06:43:29.740Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_30",
     "title": "Find Your Next Read - Books for Sale!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 259,
     "published": true,
     "sellerId": "user_8",
@@ -1142,12 +1171,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-06-18T02:44:15.109Z",
-    "updatedAt": "2024-08-15T12:33:52.917Z"
+    "updatedAt": "2024-08-15T12:33:52.917Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_31",
     "title": "Book Sale - Your Next Favorite Read is Here!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 175,
     "published": true,
     "sellerId": "user_4",
@@ -1178,7 +1208,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-23T20:02:29.965Z",
-    "updatedAt": "2025-02-02T19:23:26.170Z"
+    "updatedAt": "2025-02-02T19:23:26.170Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_32",
@@ -1215,7 +1246,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-01-18T06:38:23.519Z",
-    "updatedAt": "2025-02-25T15:35:41.628Z"
+    "updatedAt": "2025-02-25T15:35:41.628Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_33",
@@ -1255,7 +1287,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-24T22:32:38.669Z",
-    "updatedAt": "2025-04-03T04:17:36.588Z"
+    "updatedAt": "2025-04-03T04:17:36.588Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_34",
@@ -1297,7 +1330,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-24T15:57:43.509Z",
-    "updatedAt": "2024-07-08T10:52:37.960Z"
+    "updatedAt": "2024-07-08T10:52:37.960Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_35",
@@ -1337,12 +1371,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-26T09:40:22.281Z",
-    "updatedAt": "2025-04-02T04:36:59.260Z"
+    "updatedAt": "2025-04-02T04:36:59.260Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_36",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 467,
     "published": true,
     "sellerId": "user_8",
@@ -1375,7 +1410,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-22T12:28:46.124Z",
-    "updatedAt": "2023-03-05T03:57:31.467Z"
+    "updatedAt": "2023-03-05T03:57:31.467Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_37",
@@ -1410,7 +1446,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2025-01-11T12:38:43.720Z",
-    "updatedAt": "2025-02-06T05:37:26.877Z"
+    "updatedAt": "2025-02-06T05:37:26.877Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_38",
@@ -1451,12 +1488,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-06-27T13:39:59.326Z",
-    "updatedAt": "2024-12-03T22:44:40.698Z"
+    "updatedAt": "2024-12-03T22:44:40.698Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_39",
     "title": "Find Your Next Favorite Book - For Sale Now!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 267,
     "published": true,
     "sellerId": "user_2",
@@ -1486,7 +1524,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-10-04T19:46:25.378Z",
-    "updatedAt": "2025-04-07T22:53:12.344Z"
+    "updatedAt": "2025-04-07T22:53:12.344Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_40",
@@ -1519,12 +1558,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-07-25T11:06:48.256Z",
-    "updatedAt": "2025-01-18T14:25:01.330Z"
+    "updatedAt": "2025-01-18T14:25:01.330Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_41",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 201,
     "published": true,
     "sellerId": "user_3",
@@ -1555,7 +1595,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-05-06T09:13:57.008Z",
-    "updatedAt": "2023-01-08T16:11:45.292Z"
+    "updatedAt": "2023-01-08T16:11:45.292Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_42",
@@ -1592,7 +1633,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-28T08:48:22.585Z",
-    "updatedAt": "2024-04-18T06:15:38.936Z"
+    "updatedAt": "2024-04-18T06:15:38.936Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_43",
@@ -1626,7 +1668,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-10-24T22:45:07.347Z",
-    "updatedAt": "2024-01-20T18:28:29.600Z"
+    "updatedAt": "2024-01-20T18:28:29.600Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_44",
@@ -1656,7 +1699,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-10-17T22:24:44.355Z",
-    "updatedAt": "2024-04-13T19:28:28.963Z"
+    "updatedAt": "2024-04-13T19:28:28.963Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_45",
@@ -1694,7 +1738,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-09-11T02:38:37.737Z",
-    "updatedAt": "2024-02-05T22:57:07.287Z"
+    "updatedAt": "2024-02-05T22:57:07.287Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_46",
@@ -1729,7 +1774,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-05-07T12:11:32.263Z",
-    "updatedAt": "2024-05-29T06:36:56.967Z"
+    "updatedAt": "2024-05-29T06:36:56.967Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_47",
@@ -1769,12 +1815,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-05T20:16:09.927Z",
-    "updatedAt": "2024-01-26T21:31:02.977Z"
+    "updatedAt": "2024-01-26T21:31:02.977Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_48",
     "title": "Book Sale - Your Next Favorite Read is Here!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 180,
     "published": true,
     "sellerId": "user_4",
@@ -1803,7 +1850,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-01-13T05:49:50.255Z",
-    "updatedAt": "2024-05-03T06:35:14.431Z"
+    "updatedAt": "2024-05-03T06:35:14.431Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_49",
@@ -1844,7 +1892,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-18T14:24:17.778Z",
-    "updatedAt": "2025-03-05T05:32:47.612Z"
+    "updatedAt": "2025-03-05T05:32:47.612Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_50",
@@ -1876,7 +1925,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-03-24T17:18:01.506Z",
-    "updatedAt": "2024-09-21T11:06:20.484Z"
+    "updatedAt": "2024-09-21T11:06:20.484Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_51",
@@ -1916,7 +1966,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-12-24T10:46:51.323Z",
-    "updatedAt": "2024-09-16T19:42:47.978Z"
+    "updatedAt": "2024-09-16T19:42:47.978Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_52",
@@ -1947,7 +1998,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-06-19T00:06:13.383Z",
-    "updatedAt": "2025-02-09T00:00:12.899Z"
+    "updatedAt": "2025-02-09T00:00:12.899Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_53",
@@ -1985,7 +2037,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-05-11T15:21:13.563Z",
-    "updatedAt": "2023-10-07T08:13:56.144Z"
+    "updatedAt": "2023-10-07T08:13:56.144Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_54",
@@ -2021,7 +2074,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-12-10T10:27:48.224Z",
-    "updatedAt": "2025-03-21T07:18:22.711Z"
+    "updatedAt": "2025-03-21T07:18:22.711Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_55",
@@ -2060,12 +2114,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-06-01T02:50:19.778Z",
-    "updatedAt": "2024-12-09T11:37:44.449Z"
+    "updatedAt": "2024-12-09T11:37:44.449Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_56",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 210,
     "published": true,
     "sellerId": "user_10",
@@ -2091,7 +2146,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-06-25T21:17:56.174Z",
-    "updatedAt": "2024-05-11T10:31:03.333Z"
+    "updatedAt": "2024-05-11T10:31:03.333Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_57",
@@ -2126,7 +2182,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-08-23T07:53:56.584Z",
-    "updatedAt": "2022-09-03T13:54:57.935Z"
+    "updatedAt": "2022-09-03T13:54:57.935Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_58",
@@ -2165,12 +2222,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-07-16T21:52:56.113Z",
-    "updatedAt": "2022-08-06T06:41:42.521Z"
+    "updatedAt": "2022-08-06T06:41:42.521Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_59",
     "title": "Affordable Reads - Selling My Book Collection!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 480,
     "published": true,
     "sellerId": "user_2",
@@ -2198,7 +2256,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-02-10T08:13:10.327Z",
-    "updatedAt": "2024-07-27T20:33:52.937Z"
+    "updatedAt": "2024-07-27T20:33:52.937Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_60",
@@ -2237,7 +2296,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-05T02:12:46.857Z",
-    "updatedAt": "2022-01-12T15:47:33.731Z"
+    "updatedAt": "2022-01-12T15:47:33.731Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_61",
@@ -2277,12 +2337,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-11-26T04:00:18.979Z",
-    "updatedAt": "2024-11-28T03:45:20.119Z"
+    "updatedAt": "2024-11-28T03:45:20.119Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_62",
     "title": "Affordable Books for Every Reader - Check It Out!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 216,
     "published": true,
     "sellerId": "user_4",
@@ -2319,7 +2380,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-04-03T13:15:31.180Z",
-    "updatedAt": "2024-09-21T22:00:56.308Z"
+    "updatedAt": "2024-09-21T22:00:56.308Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_63",
@@ -2356,7 +2418,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-15T21:40:17.309Z",
-    "updatedAt": "2024-08-24T06:13:11.589Z"
+    "updatedAt": "2024-08-24T06:13:11.589Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_64",
@@ -2392,7 +2455,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-08T00:15:30.521Z",
-    "updatedAt": "2024-06-27T00:44:26.260Z"
+    "updatedAt": "2024-06-27T00:44:26.260Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_65",
@@ -2429,7 +2493,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-10-10T07:41:19.299Z",
-    "updatedAt": "2024-02-21T14:47:10.778Z"
+    "updatedAt": "2024-02-21T14:47:10.778Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_66",
@@ -2464,12 +2529,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-05-04T00:16:54.206Z",
-    "updatedAt": "2023-09-11T06:30:30.120Z"
+    "updatedAt": "2023-09-11T06:30:30.120Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_67",
     "title": "Affordable Reads - Selling My Book Collection!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 447,
     "published": true,
     "sellerId": "user_5",
@@ -2505,7 +2571,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-25T21:51:05.749Z",
-    "updatedAt": "2024-05-24T13:58:57.080Z"
+    "updatedAt": "2024-05-24T13:58:57.080Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_68",
@@ -2542,7 +2609,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-17T17:18:19.321Z",
-    "updatedAt": "2024-06-01T15:56:45.276Z"
+    "updatedAt": "2024-06-01T15:56:45.276Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_69",
@@ -2580,7 +2648,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-07-31T15:52:39.644Z",
-    "updatedAt": "2023-08-03T10:20:21.350Z"
+    "updatedAt": "2023-08-03T10:20:21.350Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_70",
@@ -2617,7 +2686,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-10-26T20:53:06.316Z",
-    "updatedAt": "2025-02-08T22:41:23.607Z"
+    "updatedAt": "2025-02-08T22:41:23.607Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_71",
@@ -2658,7 +2728,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-05-04T22:32:25.417Z",
-    "updatedAt": "2023-01-07T08:38:25.299Z"
+    "updatedAt": "2023-01-07T08:38:25.299Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_72",
@@ -2692,7 +2763,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-01-11T14:25:05.902Z",
-    "updatedAt": "2024-12-22T19:34:25.809Z"
+    "updatedAt": "2024-12-22T19:34:25.809Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_73",
@@ -2737,7 +2809,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-07T18:33:19.093Z",
-    "updatedAt": "2024-10-17T11:55:06.215Z"
+    "updatedAt": "2024-10-17T11:55:06.215Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_74",
@@ -2773,7 +2846,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-03-02T21:43:43.644Z",
-    "updatedAt": "2023-11-23T17:49:52.888Z"
+    "updatedAt": "2023-11-23T17:49:52.888Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_75",
@@ -2802,7 +2876,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-08T22:42:40.080Z",
-    "updatedAt": "2024-10-14T23:06:11.729Z"
+    "updatedAt": "2024-10-14T23:06:11.729Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_76",
@@ -2836,7 +2911,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-09-20T19:24:56.255Z",
-    "updatedAt": "2024-12-27T14:29:59.937Z"
+    "updatedAt": "2024-12-27T14:29:59.937Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_77",
@@ -2876,7 +2952,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-03-20T06:47:54.820Z",
-    "updatedAt": "2023-12-08T01:39:44.633Z"
+    "updatedAt": "2023-12-08T01:39:44.633Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_78",
@@ -2916,7 +2993,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-09-16T03:59:02.709Z",
-    "updatedAt": "2024-10-03T14:47:50.546Z"
+    "updatedAt": "2024-10-03T14:47:50.546Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_79",
@@ -2953,7 +3031,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-01-15T05:07:20.043Z",
-    "updatedAt": "2024-04-22T16:03:54.934Z"
+    "updatedAt": "2024-04-22T16:03:54.934Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_80",
@@ -2988,7 +3067,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-10T22:53:45.470Z",
-    "updatedAt": "2024-08-25T09:59:14.604Z"
+    "updatedAt": "2024-08-25T09:59:14.604Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_81",
@@ -3029,12 +3109,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-03-31T08:26:32.230Z",
-    "updatedAt": "2024-05-15T15:57:01.315Z"
+    "updatedAt": "2024-05-15T15:57:01.315Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_82",
     "title": "Looking for Book Lovers - My Collection for Sale!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 518,
     "published": true,
     "sellerId": "user_4",
@@ -3067,7 +3148,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-11-21T11:31:55.019Z",
-    "updatedAt": "2025-03-04T17:38:17.317Z"
+    "updatedAt": "2025-03-04T17:38:17.317Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_83",
@@ -3109,7 +3191,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-09-26T05:18:47.153Z",
-    "updatedAt": "2023-06-17T15:22:19.787Z"
+    "updatedAt": "2023-06-17T15:22:19.787Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_84",
@@ -3153,7 +3236,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-08-30T01:31:16.770Z",
-    "updatedAt": "2024-11-24T04:19:21.896Z"
+    "updatedAt": "2024-11-24T04:19:21.896Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_85",
@@ -3195,7 +3279,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-09-13T23:54:59.857Z",
-    "updatedAt": "2025-02-13T10:08:23.095Z"
+    "updatedAt": "2025-02-13T10:08:23.095Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_86",
@@ -3221,15 +3306,19 @@
       "EXCLUSIVE_CONTENT",
       "INTERACTIVE_ELEMENTS"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-08-13T20:45:03.302Z",
-    "updatedAt": "2023-10-11T02:11:41.125Z"
+    "updatedAt": "2023-10-11T02:11:41.125Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_87",
     "title": "Find Your Next Read - Books for Sale!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 143,
     "published": true,
     "sellerId": "user_9",
@@ -3262,7 +3351,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-03-12T21:36:31.956Z",
-    "updatedAt": "2025-02-24T05:51:04.463Z"
+    "updatedAt": "2025-02-24T05:51:04.463Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_88",
@@ -3300,12 +3390,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-18T10:05:20.706Z",
-    "updatedAt": "2024-05-20T01:10:15.938Z"
+    "updatedAt": "2024-05-20T01:10:15.938Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_89",
     "title": "Books Looking for a New Shelf - Get Yours Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 315,
     "published": true,
     "sellerId": "user_5",
@@ -3332,7 +3423,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-19T02:55:23.645Z",
-    "updatedAt": "2025-02-10T00:11:17.814Z"
+    "updatedAt": "2025-02-10T00:11:17.814Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_90",
@@ -3370,7 +3462,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-05-06T15:17:27.950Z",
-    "updatedAt": "2024-10-09T18:02:12.087Z"
+    "updatedAt": "2024-10-09T18:02:12.087Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_91",
@@ -3412,7 +3505,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-21T18:27:24.026Z",
-    "updatedAt": "2024-10-21T20:46:30.266Z"
+    "updatedAt": "2024-10-21T20:46:30.266Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_92",
@@ -3452,7 +3546,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-06-05T08:16:21.557Z",
-    "updatedAt": "2023-05-30T11:59:06.543Z"
+    "updatedAt": "2023-05-30T11:59:06.543Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_93",
@@ -3491,12 +3586,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-12-22T09:48:51.863Z",
-    "updatedAt": "2023-03-24T10:39:55.900Z"
+    "updatedAt": "2023-03-24T10:39:55.900Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_94",
     "title": "Looking for Book Lovers - My Collection for Sale!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 232,
     "published": true,
     "sellerId": "user_7",
@@ -3531,7 +3627,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-30T17:41:09.564Z",
-    "updatedAt": "2024-09-07T08:00:13.379Z"
+    "updatedAt": "2024-09-07T08:00:13.379Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_95",
@@ -3565,12 +3662,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-08-12T01:17:16.498Z",
-    "updatedAt": "2024-12-19T05:59:57.780Z"
+    "updatedAt": "2024-12-19T05:59:57.780Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_96",
     "title": "Find Your Next Read - Books for Sale!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 149,
     "published": true,
     "sellerId": "user_1",
@@ -3603,7 +3701,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-01T03:14:17.448Z",
-    "updatedAt": "2024-12-14T04:11:55.336Z"
+    "updatedAt": "2024-12-14T04:11:55.336Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_97",
@@ -3644,7 +3743,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-09-28T01:55:01.739Z",
-    "updatedAt": "2024-02-07T13:48:21.883Z"
+    "updatedAt": "2024-02-07T13:48:21.883Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_98",
@@ -3682,7 +3782,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-30T07:44:42.452Z",
-    "updatedAt": "2024-10-16T07:40:52.641Z"
+    "updatedAt": "2024-10-16T07:40:52.641Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_99",
@@ -3720,7 +3821,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-11-19T16:37:43.004Z",
-    "updatedAt": "2024-06-18T01:33:01.702Z"
+    "updatedAt": "2024-06-18T01:33:01.702Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_100",
@@ -3752,7 +3854,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-01-24T02:17:39.612Z",
-    "updatedAt": "2023-08-04T17:04:06.230Z"
+    "updatedAt": "2023-08-04T17:04:06.230Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_101",
@@ -3790,7 +3893,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-05-17T16:37:37.036Z",
-    "updatedAt": "2023-10-24T18:21:38.029Z"
+    "updatedAt": "2023-10-24T18:21:38.029Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_102",
@@ -3823,7 +3927,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-02-01T11:19:40.971Z",
-    "updatedAt": "2024-03-18T18:07:29.419Z"
+    "updatedAt": "2024-03-18T18:07:29.419Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_103",
@@ -3864,12 +3969,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-09-13T00:45:47.498Z",
-    "updatedAt": "2023-06-03T16:15:56.889Z"
+    "updatedAt": "2023-06-03T16:15:56.889Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_104",
     "title": "Find Your Next Favorite Book - For Sale Now!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 446,
     "published": true,
     "sellerId": "user_6",
@@ -3905,7 +4011,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-01-27T03:15:54.377Z",
-    "updatedAt": "2023-10-09T19:12:50.953Z"
+    "updatedAt": "2023-10-09T19:12:50.953Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_105",
@@ -3944,7 +4051,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-03-30T06:18:55.483Z",
-    "updatedAt": "2023-02-27T01:22:58.761Z"
+    "updatedAt": "2023-02-27T01:22:58.761Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_106",
@@ -3977,7 +4085,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-08-26T13:39:18.568Z",
-    "updatedAt": "2024-07-15T13:46:02.524Z"
+    "updatedAt": "2024-07-15T13:46:02.524Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_107",
@@ -4010,7 +4119,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-04-23T12:08:26.948Z",
-    "updatedAt": "2024-09-06T02:41:51.946Z"
+    "updatedAt": "2024-09-06T02:41:51.946Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_108",
@@ -4051,7 +4161,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-12-03T06:11:46.885Z",
-    "updatedAt": "2025-02-25T00:48:57.509Z"
+    "updatedAt": "2025-02-25T00:48:57.509Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_109",
@@ -4089,7 +4200,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-10-03T12:16:52.152Z",
-    "updatedAt": "2025-03-06T09:54:11.619Z"
+    "updatedAt": "2025-03-06T09:54:11.619Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_110",
@@ -4125,7 +4237,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-14T10:26:18.978Z",
-    "updatedAt": "2022-10-26T02:05:21.382Z"
+    "updatedAt": "2022-10-26T02:05:21.382Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_111",
@@ -4164,7 +4277,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-23T02:36:55.554Z",
-    "updatedAt": "2025-02-09T11:26:36.067Z"
+    "updatedAt": "2025-02-09T11:26:36.067Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_112",
@@ -4200,7 +4314,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-18T23:09:54.090Z",
-    "updatedAt": "2024-09-30T09:10:55.688Z"
+    "updatedAt": "2024-09-30T09:10:55.688Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_113",
@@ -4242,7 +4357,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-06-12T17:57:18.720Z",
-    "updatedAt": "2025-02-24T06:16:45.235Z"
+    "updatedAt": "2025-02-24T06:16:45.235Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_114",
@@ -4278,7 +4394,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-10-08T14:46:33.491Z",
-    "updatedAt": "2024-03-05T10:10:09.495Z"
+    "updatedAt": "2024-03-05T10:10:09.495Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_115",
@@ -4313,7 +4430,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-08-15T09:21:34.856Z",
-    "updatedAt": "2024-09-19T05:33:27.871Z"
+    "updatedAt": "2024-09-19T05:33:27.871Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_116",
@@ -4345,7 +4463,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-08-25T08:20:25.000Z",
-    "updatedAt": "2024-09-29T03:17:07.749Z"
+    "updatedAt": "2024-09-29T03:17:07.749Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_117",
@@ -4378,7 +4497,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-05-03T04:36:48.535Z",
-    "updatedAt": "2025-01-02T00:02:38.062Z"
+    "updatedAt": "2025-01-02T00:02:38.062Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_118",
@@ -4422,7 +4542,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-11-22T02:59:18.362Z",
-    "updatedAt": "2024-10-20T14:19:34.857Z"
+    "updatedAt": "2024-10-20T14:19:34.857Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_119",
@@ -4455,7 +4576,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-09-06T14:44:18.207Z",
-    "updatedAt": "2024-01-25T10:17:45.168Z"
+    "updatedAt": "2024-01-25T10:17:45.168Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_120",
@@ -4488,7 +4610,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-07-25T01:26:04.416Z",
-    "updatedAt": "2024-12-30T01:29:52.133Z"
+    "updatedAt": "2024-12-30T01:29:52.133Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_121",
@@ -4526,7 +4649,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-03-18T22:58:17.917Z",
-    "updatedAt": "2024-07-26T23:36:13.634Z"
+    "updatedAt": "2024-07-26T23:36:13.634Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_122",
@@ -4563,7 +4687,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-03-15T02:38:05.721Z",
-    "updatedAt": "2024-05-28T14:06:17.363Z"
+    "updatedAt": "2024-05-28T14:06:17.363Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_123",
@@ -4602,12 +4727,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-22T10:51:39.191Z",
-    "updatedAt": "2023-03-29T19:55:30.540Z"
+    "updatedAt": "2023-03-29T19:55:30.540Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_124",
     "title": "Fantastic Deals on Used Books - Hurry, Limited Time!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 423,
     "published": true,
     "sellerId": "user_1",
@@ -4638,7 +4764,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-03T20:00:15.444Z",
-    "updatedAt": "2025-01-20T17:33:18.573Z"
+    "updatedAt": "2025-01-20T17:33:18.573Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_125",
@@ -4678,7 +4805,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-04-08T14:20:17.947Z",
-    "updatedAt": "2022-09-06T15:51:27.685Z"
+    "updatedAt": "2022-09-06T15:51:27.685Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_126",
@@ -4713,7 +4841,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-14T07:30:48.191Z",
-    "updatedAt": "2022-09-27T20:24:49.628Z"
+    "updatedAt": "2022-09-27T20:24:49.628Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_127",
@@ -4754,7 +4883,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-11-23T11:39:12.258Z",
-    "updatedAt": "2023-12-02T03:07:54.447Z"
+    "updatedAt": "2023-12-02T03:07:54.447Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_128",
@@ -4792,7 +4922,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-03-22T02:04:14.113Z",
-    "updatedAt": "2024-12-26T12:31:59.003Z"
+    "updatedAt": "2024-12-26T12:31:59.003Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_129",
@@ -4825,7 +4956,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-09-22T00:56:54.158Z",
-    "updatedAt": "2024-10-28T13:46:29.695Z"
+    "updatedAt": "2024-10-28T13:46:29.695Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_130",
@@ -4864,7 +4996,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-04-04T10:48:35.674Z",
-    "updatedAt": "2024-01-16T12:04:45.834Z"
+    "updatedAt": "2024-01-16T12:04:45.834Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_131",
@@ -4898,12 +5031,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-26T19:48:14.216Z",
-    "updatedAt": "2024-09-01T20:22:45.795Z"
+    "updatedAt": "2024-09-01T20:22:45.795Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_132",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 151,
     "published": true,
     "sellerId": "user_9",
@@ -4935,12 +5069,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-24T11:49:50.920Z",
-    "updatedAt": "2023-09-28T17:30:35.039Z"
+    "updatedAt": "2023-09-28T17:30:35.039Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_133",
     "title": "Affordable Reads - Selling My Book Collection!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 304,
     "published": true,
     "sellerId": "user_4",
@@ -4968,12 +5103,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-05-26T13:20:24.848Z",
-    "updatedAt": "2024-06-18T14:55:54.261Z"
+    "updatedAt": "2024-06-18T14:55:54.261Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_134",
     "title": "Selling My Book Collection - Don't Miss Out!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 381,
     "published": true,
     "sellerId": "user_2",
@@ -5008,12 +5144,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-05-16T00:57:36.744Z",
-    "updatedAt": "2024-05-19T12:19:08.012Z"
+    "updatedAt": "2024-05-19T12:19:08.012Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_135",
     "title": "Books for Sale - Pick Your Next Read Today!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 514,
     "published": true,
     "sellerId": "user_5",
@@ -5046,7 +5183,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-03-16T09:04:11.525Z",
-    "updatedAt": "2025-03-19T13:02:37.755Z"
+    "updatedAt": "2025-03-19T13:02:37.755Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_136",
@@ -5082,12 +5220,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-17T06:23:56.605Z",
-    "updatedAt": "2024-06-04T07:59:43.383Z"
+    "updatedAt": "2024-06-04T07:59:43.383Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_137",
     "title": "Give My Books a New Home - Check Out the Sale!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 469,
     "published": true,
     "sellerId": "user_2",
@@ -5121,7 +5260,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-10-04T07:46:26.339Z",
-    "updatedAt": "2024-11-11T20:30:03.207Z"
+    "updatedAt": "2024-11-11T20:30:03.207Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_138",
@@ -5155,7 +5295,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-01-13T07:35:00.615Z",
-    "updatedAt": "2024-07-08T03:23:10.856Z"
+    "updatedAt": "2024-07-08T03:23:10.856Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_139",
@@ -5194,7 +5335,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-03-16T21:54:45.960Z",
-    "updatedAt": "2023-08-02T07:46:55.937Z"
+    "updatedAt": "2023-08-02T07:46:55.937Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_140",
@@ -5233,7 +5375,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-03-26T07:54:03.860Z",
-    "updatedAt": "2025-02-23T17:46:16.192Z"
+    "updatedAt": "2025-02-23T17:46:16.192Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_141",
@@ -5266,7 +5409,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-01-04T00:51:46.224Z",
-    "updatedAt": "2024-03-09T22:27:51.306Z"
+    "updatedAt": "2024-03-09T22:27:51.306Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_142",
@@ -5299,7 +5443,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-11-08T02:12:55.407Z",
-    "updatedAt": "2024-12-03T06:01:52.321Z"
+    "updatedAt": "2024-12-03T06:01:52.321Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_143",
@@ -5329,7 +5474,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-03T22:10:32.265Z",
-    "updatedAt": "2023-11-12T03:12:16.443Z"
+    "updatedAt": "2023-11-12T03:12:16.443Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_144",
@@ -5371,12 +5517,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-07-13T12:44:22.844Z",
-    "updatedAt": "2024-12-01T22:01:13.428Z"
+    "updatedAt": "2024-12-01T22:01:13.428Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_145",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 308,
     "published": true,
     "sellerId": "user_4",
@@ -5407,7 +5554,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-01-05T21:16:46.241Z",
-    "updatedAt": "2024-02-29T19:51:08.469Z"
+    "updatedAt": "2024-02-29T19:51:08.469Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_146",
@@ -5446,7 +5594,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-05-17T00:37:11.375Z",
-    "updatedAt": "2024-10-21T07:32:31.713Z"
+    "updatedAt": "2024-10-21T07:32:31.713Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_147",
@@ -5487,7 +5636,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-08-10T04:06:38.779Z",
-    "updatedAt": "2024-07-12T12:06:16.668Z"
+    "updatedAt": "2024-07-12T12:06:16.668Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_148",
@@ -5524,7 +5674,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-10-14T22:45:11.851Z",
-    "updatedAt": "2024-10-18T03:07:12.158Z"
+    "updatedAt": "2024-10-18T03:07:12.158Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_149",
@@ -5563,7 +5714,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-08-20T15:29:44.620Z",
-    "updatedAt": "2023-08-05T06:35:00.544Z"
+    "updatedAt": "2023-08-05T06:35:00.544Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_150",
@@ -5601,7 +5753,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-03-24T21:59:51.130Z",
-    "updatedAt": "2025-04-07T17:55:40.946Z"
+    "updatedAt": "2025-04-07T17:55:40.946Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_151",
@@ -5638,7 +5791,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-01-21T18:08:21.354Z",
-    "updatedAt": "2024-04-08T12:59:40.810Z"
+    "updatedAt": "2024-04-08T12:59:40.810Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_152",
@@ -5678,7 +5832,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-10-19T17:13:53.950Z",
-    "updatedAt": "2024-06-24T05:25:03.528Z"
+    "updatedAt": "2024-06-24T05:25:03.528Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_153",
@@ -5718,7 +5873,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2025-01-25T07:03:34.784Z",
-    "updatedAt": "2025-01-26T19:28:13.696Z"
+    "updatedAt": "2025-01-26T19:28:13.696Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_154",
@@ -5756,7 +5912,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-01T14:43:40.121Z",
-    "updatedAt": "2024-12-14T09:57:47.033Z"
+    "updatedAt": "2024-12-14T09:57:47.033Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_155",
@@ -5789,12 +5946,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-09-23T10:43:35.744Z",
-    "updatedAt": "2024-04-07T16:48:02.275Z"
+    "updatedAt": "2024-04-07T16:48:02.275Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_156",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 340,
     "published": true,
     "sellerId": "user_2",
@@ -5822,12 +5980,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-07-21T03:20:19.474Z",
-    "updatedAt": "2023-11-25T11:27:52.502Z"
+    "updatedAt": "2023-11-25T11:27:52.502Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_157",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 248,
     "published": true,
     "sellerId": "user_2",
@@ -5854,7 +6013,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-11-18T21:24:20.427Z",
-    "updatedAt": "2025-01-18T06:01:19.261Z"
+    "updatedAt": "2025-01-18T06:01:19.261Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_158",
@@ -5890,12 +6050,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-07-02T00:23:50.755Z",
-    "updatedAt": "2023-10-25T18:56:10.222Z"
+    "updatedAt": "2023-10-25T18:56:10.222Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_159",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 252,
     "published": true,
     "sellerId": "user_7",
@@ -5927,7 +6088,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-09-05T00:08:54.769Z",
-    "updatedAt": "2025-01-29T16:59:36.763Z"
+    "updatedAt": "2025-01-29T16:59:36.763Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_160",
@@ -5964,12 +6126,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-11-27T12:34:47.674Z",
-    "updatedAt": "2025-01-22T14:48:30.105Z"
+    "updatedAt": "2025-01-22T14:48:30.105Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_161",
     "title": "Books Looking for a New Shelf - Get Yours Now!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 486,
     "published": true,
     "sellerId": "user_4",
@@ -6004,7 +6167,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-01-11T08:39:08.218Z",
-    "updatedAt": "2024-11-24T17:12:41.187Z"
+    "updatedAt": "2024-11-24T17:12:41.187Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_162",
@@ -6041,7 +6205,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-11T18:40:38.962Z",
-    "updatedAt": "2024-07-28T03:50:35.576Z"
+    "updatedAt": "2024-07-28T03:50:35.576Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_163",
@@ -6080,7 +6245,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-20T14:31:16.026Z",
-    "updatedAt": "2023-12-20T16:48:37.433Z"
+    "updatedAt": "2023-12-20T16:48:37.433Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_164",
@@ -6114,7 +6280,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-13T21:14:21.763Z",
-    "updatedAt": "2023-05-06T18:30:26.106Z"
+    "updatedAt": "2023-05-06T18:30:26.106Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_165",
@@ -6150,7 +6317,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-06-27T22:36:54.203Z",
-    "updatedAt": "2024-02-22T01:33:14.153Z"
+    "updatedAt": "2024-02-22T01:33:14.153Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_166",
@@ -6192,12 +6360,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-16T09:30:47.386Z",
-    "updatedAt": "2023-07-23T06:18:52.574Z"
+    "updatedAt": "2023-07-23T06:18:52.574Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_167",
     "title": "Selling Gently Used Books - Great Deals Inside!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 497,
     "published": true,
     "sellerId": "user_7",
@@ -6228,7 +6397,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2025-01-05T07:16:36.113Z",
-    "updatedAt": "2025-03-28T12:49:42.438Z"
+    "updatedAt": "2025-03-28T12:49:42.438Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_168",
@@ -6262,7 +6432,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-03T15:10:56.120Z",
-    "updatedAt": "2024-09-29T01:31:59.171Z"
+    "updatedAt": "2024-09-29T01:31:59.171Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_169",
@@ -6297,7 +6468,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-04-07T13:30:17.303Z",
-    "updatedAt": "2025-01-18T02:59:56.687Z"
+    "updatedAt": "2025-01-18T02:59:56.687Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_170",
@@ -6333,7 +6505,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-09-15T22:09:52.489Z",
-    "updatedAt": "2024-06-14T13:02:52.963Z"
+    "updatedAt": "2024-06-14T13:02:52.963Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_171",
@@ -6375,7 +6548,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-01-13T06:47:51.187Z",
-    "updatedAt": "2024-03-10T21:45:54.094Z"
+    "updatedAt": "2024-03-10T21:45:54.094Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_172",
@@ -6415,7 +6589,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-12T23:51:49.714Z",
-    "updatedAt": "2023-04-16T00:16:47.556Z"
+    "updatedAt": "2023-04-16T00:16:47.556Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_173",
@@ -6453,7 +6628,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-22T23:04:33.579Z",
-    "updatedAt": "2024-01-09T19:17:21.317Z"
+    "updatedAt": "2024-01-09T19:17:21.317Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_174",
@@ -6481,7 +6657,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-21T10:47:37.188Z",
-    "updatedAt": "2022-08-26T11:40:36.423Z"
+    "updatedAt": "2022-08-26T11:40:36.423Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_175",
@@ -6520,7 +6697,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-12-14T22:00:00.227Z",
-    "updatedAt": "2023-10-13T18:37:14.653Z"
+    "updatedAt": "2023-10-13T18:37:14.653Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_176",
@@ -6563,7 +6741,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-15T14:24:37.445Z",
-    "updatedAt": "2025-02-15T01:22:11.423Z"
+    "updatedAt": "2025-02-15T01:22:11.423Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_177",
@@ -6600,12 +6779,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-09-04T22:06:44.735Z",
-    "updatedAt": "2025-02-18T15:56:45.386Z"
+    "updatedAt": "2025-02-18T15:56:45.386Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_178",
     "title": "Affordable Books for Every Reader - Check It Out!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 342,
     "published": true,
     "sellerId": "user_10",
@@ -6636,7 +6816,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-07T13:01:04.786Z",
-    "updatedAt": "2024-09-29T07:04:27.190Z"
+    "updatedAt": "2024-09-29T07:04:27.190Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_179",
@@ -6670,12 +6851,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-11-02T19:44:39.476Z",
-    "updatedAt": "2025-01-14T02:24:36.823Z"
+    "updatedAt": "2025-01-14T02:24:36.823Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_180",
     "title": "Selling My Book Collection - Don't Miss Out!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 329,
     "published": true,
     "sellerId": "user_4",
@@ -6702,7 +6884,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-08-15T03:28:08.926Z",
-    "updatedAt": "2024-09-04T01:57:54.554Z"
+    "updatedAt": "2024-09-04T01:57:54.554Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_181",
@@ -6739,7 +6922,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-04-30T21:38:00.293Z",
-    "updatedAt": "2024-07-31T14:58:37.830Z"
+    "updatedAt": "2024-07-31T14:58:37.830Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_182",
@@ -6778,12 +6962,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-29T10:28:54.217Z",
-    "updatedAt": "2024-09-25T10:22:15.437Z"
+    "updatedAt": "2024-09-25T10:22:15.437Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_183",
     "title": "Find Your Next Read - Books for Sale!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 248,
     "published": true,
     "sellerId": "user_9",
@@ -6816,7 +7001,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-30T22:37:25.580Z",
-    "updatedAt": "2024-11-04T22:34:37.047Z"
+    "updatedAt": "2024-11-04T22:34:37.047Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_184",
@@ -6856,12 +7042,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-03-27T23:32:34.654Z",
-    "updatedAt": "2024-03-19T15:45:49.550Z"
+    "updatedAt": "2024-03-19T15:45:49.550Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_185",
     "title": "Clearance Sale: Books at Unbeatable Prices!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 167,
     "published": true,
     "sellerId": "user_6",
@@ -6898,7 +7085,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-10-19T06:39:11.577Z",
-    "updatedAt": "2024-10-07T20:33:28.205Z"
+    "updatedAt": "2024-10-07T20:33:28.205Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_186",
@@ -6928,7 +7116,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-21T22:09:00.107Z",
-    "updatedAt": "2024-12-23T19:56:35.617Z"
+    "updatedAt": "2024-12-23T19:56:35.617Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_187",
@@ -6963,7 +7152,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-01-01T13:37:15.945Z",
-    "updatedAt": "2024-04-12T19:08:09.827Z"
+    "updatedAt": "2024-04-12T19:08:09.827Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_188",
@@ -6997,7 +7187,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-12-22T17:34:20.849Z",
-    "updatedAt": "2025-03-15T14:47:08.296Z"
+    "updatedAt": "2025-03-15T14:47:08.296Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_189",
@@ -7035,12 +7226,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-06-07T11:50:35.703Z",
-    "updatedAt": "2024-11-27T06:05:47.052Z"
+    "updatedAt": "2024-11-27T06:05:47.052Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_190",
     "title": "Books for Sale - Pick Your Next Read Today!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 348,
     "published": true,
     "sellerId": "user_3",
@@ -7068,7 +7260,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-12-14T21:10:31.919Z",
-    "updatedAt": "2025-04-05T01:15:51.367Z"
+    "updatedAt": "2025-04-05T01:15:51.367Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_191",
@@ -7107,7 +7300,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-31T07:23:27.605Z",
-    "updatedAt": "2025-02-09T22:41:32.633Z"
+    "updatedAt": "2025-02-09T22:41:32.633Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_192",
@@ -7141,12 +7335,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-03-19T11:59:39.822Z",
-    "updatedAt": "2024-07-07T08:02:06.694Z"
+    "updatedAt": "2024-07-07T08:02:06.694Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_193",
     "title": "Book Sale - Your Next Favorite Read is Here!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 371,
     "published": true,
     "sellerId": "user_9",
@@ -7175,7 +7370,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-08-02T00:05:36.843Z",
-    "updatedAt": "2023-08-10T05:33:51.138Z"
+    "updatedAt": "2023-08-10T05:33:51.138Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_194",
@@ -7209,7 +7405,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-07-14T21:36:13.287Z",
-    "updatedAt": "2022-07-19T05:39:51.043Z"
+    "updatedAt": "2022-07-19T05:39:51.043Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_195",
@@ -7247,7 +7444,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-06T22:45:30.487Z",
-    "updatedAt": "2025-01-04T15:07:01.813Z"
+    "updatedAt": "2025-01-04T15:07:01.813Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_196",
@@ -7283,7 +7481,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-07-19T10:34:12.912Z",
-    "updatedAt": "2025-01-05T08:24:50.514Z"
+    "updatedAt": "2025-01-05T08:24:50.514Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_197",
@@ -7324,7 +7523,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-02-08T01:37:34.176Z",
-    "updatedAt": "2023-10-04T19:14:04.346Z"
+    "updatedAt": "2023-10-04T19:14:04.346Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_198",
@@ -7365,7 +7565,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-12-26T07:38:25.458Z",
-    "updatedAt": "2025-02-07T08:32:39.441Z"
+    "updatedAt": "2025-02-07T08:32:39.441Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_199",
@@ -7397,7 +7598,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-10-07T00:39:42.007Z",
-    "updatedAt": "2025-03-22T23:40:03.649Z"
+    "updatedAt": "2025-03-22T23:40:03.649Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_200",
@@ -7435,7 +7637,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-08-02T01:11:09.539Z",
-    "updatedAt": "2025-01-19T12:12:15.808Z"
+    "updatedAt": "2025-01-19T12:12:15.808Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_201",
@@ -7463,7 +7666,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-02-16T04:47:38.234Z",
-    "updatedAt": "2023-02-21T10:46:10.788Z"
+    "updatedAt": "2023-02-21T10:46:10.788Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_202",
@@ -7499,7 +7703,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-02-01T13:23:30.983Z",
-    "updatedAt": "2024-11-29T21:30:07.348Z"
+    "updatedAt": "2024-11-29T21:30:07.348Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_203",
@@ -7535,7 +7740,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-03-14T08:27:51.846Z",
-    "updatedAt": "2025-03-27T18:45:11.805Z"
+    "updatedAt": "2025-03-27T18:45:11.805Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_204",
@@ -7572,12 +7778,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-10-12T18:00:43.896Z",
-    "updatedAt": "2024-12-05T08:08:07.277Z"
+    "updatedAt": "2024-12-05T08:08:07.277Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_205",
     "title": "Clearance Sale: Books at Unbeatable Prices!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 305,
     "published": true,
     "sellerId": "user_7",
@@ -7607,7 +7814,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-30T16:26:21.382Z",
-    "updatedAt": "2023-12-19T08:43:30.031Z"
+    "updatedAt": "2023-12-19T08:43:30.031Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_206",
@@ -7644,7 +7852,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-08-21T05:04:45.948Z",
-    "updatedAt": "2023-11-13T10:56:56.618Z"
+    "updatedAt": "2023-11-13T10:56:56.618Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_207",
@@ -7682,7 +7891,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-11-05T02:02:40.233Z",
-    "updatedAt": "2022-12-15T17:20:11.423Z"
+    "updatedAt": "2022-12-15T17:20:11.423Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_208",
@@ -7723,7 +7933,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-02-10T18:35:18.227Z",
-    "updatedAt": "2024-05-05T23:25:55.911Z"
+    "updatedAt": "2024-05-05T23:25:55.911Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_209",
@@ -7761,7 +7972,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-03-05T15:22:44.845Z",
-    "updatedAt": "2023-09-17T07:27:14.691Z"
+    "updatedAt": "2023-09-17T07:27:14.691Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_210",
@@ -7794,7 +8006,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-27T12:16:25.778Z",
-    "updatedAt": "2024-10-16T23:22:36.434Z"
+    "updatedAt": "2024-10-16T23:22:36.434Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_211",
@@ -7834,7 +8047,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-03-30T19:50:29.251Z",
-    "updatedAt": "2024-07-31T06:03:15.393Z"
+    "updatedAt": "2024-07-31T06:03:15.393Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_212",
@@ -7866,10 +8080,14 @@
       "EXCLUSIVE_CONTENT",
       "INTERACTIVE_ELEMENTS"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-01-03T16:36:36.266Z",
-    "updatedAt": "2023-08-29T18:26:09.514Z"
+    "updatedAt": "2023-08-29T18:26:09.514Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_213",
@@ -7904,12 +8122,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-04-17T01:04:23.411Z",
-    "updatedAt": "2022-06-20T14:15:58.087Z"
+    "updatedAt": "2022-06-20T14:15:58.087Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_214",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 432,
     "published": true,
     "sellerId": "user_4",
@@ -7947,7 +8166,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-09-29T20:11:15.872Z",
-    "updatedAt": "2025-01-23T02:11:49.187Z"
+    "updatedAt": "2025-01-23T02:11:49.187Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_215",
@@ -7984,7 +8204,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-05-07T11:22:41.122Z",
-    "updatedAt": "2025-03-18T13:24:37.859Z"
+    "updatedAt": "2025-03-18T13:24:37.859Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_216",
@@ -8020,12 +8241,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-12T16:22:50.225Z",
-    "updatedAt": "2025-01-27T07:28:29.176Z"
+    "updatedAt": "2025-01-27T07:28:29.176Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_217",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 408,
     "published": true,
     "sellerId": "user_6",
@@ -8060,7 +8282,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-03-26T08:26:58.245Z",
-    "updatedAt": "2024-03-15T06:48:31.042Z"
+    "updatedAt": "2024-03-15T06:48:31.042Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_218",
@@ -8097,12 +8320,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-14T18:31:50.304Z",
-    "updatedAt": "2022-11-20T09:15:29.361Z"
+    "updatedAt": "2022-11-20T09:15:29.361Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_219",
     "title": "Give My Books a New Home - Check Out the Sale!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 172,
     "published": true,
     "sellerId": "user_8",
@@ -8134,12 +8358,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-03-22T20:35:12.233Z",
-    "updatedAt": "2024-06-14T09:39:38.551Z"
+    "updatedAt": "2024-06-14T09:39:38.551Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_220",
     "title": "Clearance Sale: Books at Unbeatable Prices!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 183,
     "published": true,
     "sellerId": "user_2",
@@ -8170,7 +8395,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-07-19T13:21:23.580Z",
-    "updatedAt": "2024-10-24T15:10:16.446Z"
+    "updatedAt": "2024-10-24T15:10:16.446Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_221",
@@ -8203,7 +8429,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-11-02T20:26:38.766Z",
-    "updatedAt": "2024-07-29T22:30:15.281Z"
+    "updatedAt": "2024-07-29T22:30:15.281Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_222",
@@ -8234,7 +8461,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-09-24T07:02:12.904Z",
-    "updatedAt": "2023-11-02T19:28:06.548Z"
+    "updatedAt": "2023-11-02T19:28:06.548Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_223",
@@ -8268,12 +8496,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-08-14T23:50:57.000Z",
-    "updatedAt": "2025-03-20T04:04:18.121Z"
+    "updatedAt": "2025-03-20T04:04:18.121Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_224",
     "title": "Books Looking for a New Shelf - Get Yours Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 124,
     "published": true,
     "sellerId": "user_2",
@@ -8302,7 +8531,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-02T14:30:27.767Z",
-    "updatedAt": "2025-02-09T17:50:56.601Z"
+    "updatedAt": "2025-02-09T17:50:56.601Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_225",
@@ -8327,10 +8557,14 @@
       "EXCLUSIVE_CONTENT",
       "BILINGUAL_EDITION"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "DAMAGED",
     "createdAt": "2023-07-15T12:06:46.018Z",
-    "updatedAt": "2024-07-30T06:18:49.289Z"
+    "updatedAt": "2024-07-30T06:18:49.289Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_226",
@@ -8370,7 +8604,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-10-30T23:22:19.797Z",
-    "updatedAt": "2025-03-13T15:25:04.231Z"
+    "updatedAt": "2025-03-13T15:25:04.231Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_227",
@@ -8405,12 +8640,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-02-11T07:49:11.700Z",
-    "updatedAt": "2025-02-03T14:07:27.968Z"
+    "updatedAt": "2025-02-03T14:07:27.968Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_228",
     "title": "Find Your Next Favorite Book - For Sale Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 276,
     "published": true,
     "sellerId": "user_10",
@@ -8445,7 +8681,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-02-27T18:21:04.681Z",
-    "updatedAt": "2023-10-03T06:50:43.283Z"
+    "updatedAt": "2023-10-03T06:50:43.283Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_229",
@@ -8479,7 +8716,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-20T21:12:06.147Z",
-    "updatedAt": "2024-09-18T02:10:54.071Z"
+    "updatedAt": "2024-09-18T02:10:54.071Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_230",
@@ -8510,7 +8748,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-26T22:44:36.124Z",
-    "updatedAt": "2024-09-10T08:11:43.450Z"
+    "updatedAt": "2024-09-10T08:11:43.450Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_231",
@@ -8549,7 +8788,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-09-14T13:58:23.992Z",
-    "updatedAt": "2025-02-25T00:05:49.025Z"
+    "updatedAt": "2025-02-25T00:05:49.025Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_232",
@@ -8590,7 +8830,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-11-30T19:57:46.397Z",
-    "updatedAt": "2025-03-19T03:04:57.220Z"
+    "updatedAt": "2025-03-19T03:04:57.220Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_233",
@@ -8634,7 +8875,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-10-10T04:29:07.495Z",
-    "updatedAt": "2023-02-02T15:35:30.606Z"
+    "updatedAt": "2023-02-02T15:35:30.606Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_234",
@@ -8682,7 +8924,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-01-26T21:28:51.860Z",
-    "updatedAt": "2024-05-31T01:46:14.619Z"
+    "updatedAt": "2024-05-31T01:46:14.619Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_235",
@@ -8722,7 +8965,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-10T04:05:59.319Z",
-    "updatedAt": "2024-02-11T16:05:04.672Z"
+    "updatedAt": "2024-02-11T16:05:04.672Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_236",
@@ -8750,10 +8994,14 @@
       "MAP_INSERT",
       "BILINGUAL_EDITION"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-28T22:08:38.071Z",
-    "updatedAt": "2024-05-06T00:08:26.209Z"
+    "updatedAt": "2024-05-06T00:08:26.209Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_237",
@@ -8792,7 +9040,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-11-24T19:59:39.812Z",
-    "updatedAt": "2025-01-17T18:50:38.109Z"
+    "updatedAt": "2025-01-17T18:50:38.109Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_238",
@@ -8828,7 +9077,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-30T13:25:34.244Z",
-    "updatedAt": "2024-09-30T09:45:01.610Z"
+    "updatedAt": "2024-09-30T09:45:01.610Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_239",
@@ -8860,12 +9110,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-22T06:33:33.226Z",
-    "updatedAt": "2024-08-30T03:04:10.181Z"
+    "updatedAt": "2024-08-30T03:04:10.181Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_240",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 360,
     "published": true,
     "sellerId": "user_3",
@@ -8899,7 +9150,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-12-02T16:00:45.011Z",
-    "updatedAt": "2024-04-29T20:43:51.107Z"
+    "updatedAt": "2024-04-29T20:43:51.107Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_241",
@@ -8935,7 +9187,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-11-14T15:04:44.687Z",
-    "updatedAt": "2025-03-06T19:07:58.924Z"
+    "updatedAt": "2025-03-06T19:07:58.924Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_242",
@@ -8969,12 +9222,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-09T22:55:18.701Z",
-    "updatedAt": "2024-08-16T19:58:47.255Z"
+    "updatedAt": "2024-08-16T19:58:47.255Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_243",
     "title": "Give My Books a New Home - Check Out the Sale!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 431,
     "published": true,
     "sellerId": "user_2",
@@ -9000,7 +9254,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-07-17T04:36:43.765Z",
-    "updatedAt": "2024-09-18T10:45:47.115Z"
+    "updatedAt": "2024-09-18T10:45:47.115Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_244",
@@ -9040,7 +9295,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-10-25T09:01:26.745Z",
-    "updatedAt": "2025-01-14T23:33:37.358Z"
+    "updatedAt": "2025-01-14T23:33:37.358Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_245",
@@ -9074,7 +9330,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-12-31T21:06:45.829Z",
-    "updatedAt": "2025-03-13T15:01:16.384Z"
+    "updatedAt": "2025-03-13T15:01:16.384Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_246",
@@ -9113,7 +9370,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-09-20T05:05:31.634Z",
-    "updatedAt": "2024-12-02T17:23:11.154Z"
+    "updatedAt": "2024-12-02T17:23:11.154Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_247",
@@ -9149,12 +9407,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-06-24T23:04:04.376Z",
-    "updatedAt": "2024-09-18T13:30:50.470Z"
+    "updatedAt": "2024-09-18T13:30:50.470Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_248",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 396,
     "published": true,
     "sellerId": "user_8",
@@ -9181,7 +9440,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-05-16T22:20:20.082Z",
-    "updatedAt": "2023-02-18T00:12:02.418Z"
+    "updatedAt": "2023-02-18T00:12:02.418Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_249",
@@ -9217,12 +9477,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-04-26T06:34:12.228Z",
-    "updatedAt": "2023-02-25T20:52:05.390Z"
+    "updatedAt": "2023-02-25T20:52:05.390Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_250",
     "title": "Books Looking for a New Shelf - Get Yours Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 411,
     "published": true,
     "sellerId": "user_5",
@@ -9255,7 +9516,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-25T04:48:43.272Z",
-    "updatedAt": "2024-10-09T09:14:14.336Z"
+    "updatedAt": "2024-10-09T09:14:14.336Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_251",
@@ -9284,10 +9546,14 @@
       "INTERACTIVE_ELEMENTS",
       "BILINGUAL_EDITION"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-07T21:23:14.338Z",
-    "updatedAt": "2024-12-02T21:55:10.602Z"
+    "updatedAt": "2024-12-02T21:55:10.602Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_252",
@@ -9330,12 +9596,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-04-06T06:14:07.410Z",
-    "updatedAt": "2024-08-22T18:53:03.551Z"
+    "updatedAt": "2024-08-22T18:53:03.551Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_253",
     "title": "Selling Gently Used Books - Great Deals Inside!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 140,
     "published": true,
     "sellerId": "user_3",
@@ -9368,7 +9635,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-04-26T23:20:29.989Z",
-    "updatedAt": "2023-04-27T21:53:26.989Z"
+    "updatedAt": "2023-04-27T21:53:26.989Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_254",
@@ -9406,7 +9674,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-01-09T09:59:10.580Z",
-    "updatedAt": "2024-12-02T03:52:18.817Z"
+    "updatedAt": "2024-12-02T03:52:18.817Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_255",
@@ -9441,12 +9710,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-03-20T03:49:15.967Z",
-    "updatedAt": "2023-12-24T08:15:00.028Z"
+    "updatedAt": "2023-12-24T08:15:00.028Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_256",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 257,
     "published": true,
     "sellerId": "user_2",
@@ -9480,7 +9750,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-09-25T21:43:17.992Z",
-    "updatedAt": "2025-01-01T20:32:30.350Z"
+    "updatedAt": "2025-01-01T20:32:30.350Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_257",
@@ -9514,7 +9785,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-07-28T22:44:51.848Z",
-    "updatedAt": "2024-09-27T05:19:04.870Z"
+    "updatedAt": "2024-09-27T05:19:04.870Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_258",
@@ -9550,7 +9822,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-07-01T19:04:02.659Z",
-    "updatedAt": "2024-09-07T03:05:15.226Z"
+    "updatedAt": "2024-09-07T03:05:15.226Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_259",
@@ -9593,12 +9866,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-08-18T21:16:59.281Z",
-    "updatedAt": "2024-11-14T02:47:24.412Z"
+    "updatedAt": "2024-11-14T02:47:24.412Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_260",
     "title": "Books for Sale - Pick Your Next Read Today!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 269,
     "published": true,
     "sellerId": "user_6",
@@ -9633,7 +9907,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-06-19T11:01:53.691Z",
-    "updatedAt": "2024-01-06T21:51:22.099Z"
+    "updatedAt": "2024-01-06T21:51:22.099Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_261",
@@ -9670,12 +9945,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-10-05T08:59:18.571Z",
-    "updatedAt": "2025-01-04T10:57:06.562Z"
+    "updatedAt": "2025-01-04T10:57:06.562Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_262",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 455,
     "published": true,
     "sellerId": "user_3",
@@ -9707,7 +9983,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-04T14:58:07.893Z",
-    "updatedAt": "2024-07-19T16:12:58.986Z"
+    "updatedAt": "2024-07-19T16:12:58.986Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_263",
@@ -9744,12 +10021,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-05-14T08:01:55.437Z",
-    "updatedAt": "2022-06-29T08:39:03.921Z"
+    "updatedAt": "2022-06-29T08:39:03.921Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_264",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 120,
     "published": true,
     "sellerId": "user_4",
@@ -9778,12 +10056,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-11-21T20:12:02.315Z",
-    "updatedAt": "2024-04-11T03:58:44.696Z"
+    "updatedAt": "2024-04-11T03:58:44.696Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_265",
     "title": "Clearance Sale: Books at Unbeatable Prices!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 413,
     "published": true,
     "sellerId": "user_9",
@@ -9813,7 +10092,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-05-23T02:44:30.154Z",
-    "updatedAt": "2024-07-04T00:22:16.969Z"
+    "updatedAt": "2024-07-04T00:22:16.969Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_266",
@@ -9848,7 +10128,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-01-25T07:19:21.041Z",
-    "updatedAt": "2023-03-30T07:33:17.689Z"
+    "updatedAt": "2023-03-30T07:33:17.689Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_267",
@@ -9885,7 +10166,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-16T20:11:16.960Z",
-    "updatedAt": "2024-11-15T18:04:39.365Z"
+    "updatedAt": "2024-11-15T18:04:39.365Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_268",
@@ -9924,7 +10206,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-12T12:19:15.183Z",
-    "updatedAt": "2023-11-11T12:51:45.181Z"
+    "updatedAt": "2023-11-11T12:51:45.181Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_269",
@@ -9963,7 +10246,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-09-20T08:56:35.226Z",
-    "updatedAt": "2024-02-01T10:18:48.041Z"
+    "updatedAt": "2024-02-01T10:18:48.041Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_270",
@@ -10006,7 +10290,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-10-23T16:24:54.053Z",
-    "updatedAt": "2024-09-10T23:02:22.229Z"
+    "updatedAt": "2024-09-10T23:02:22.229Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_271",
@@ -10045,7 +10330,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-11T03:28:01.705Z",
-    "updatedAt": "2024-10-07T17:09:57.087Z"
+    "updatedAt": "2024-10-07T17:09:57.087Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_272",
@@ -10081,7 +10367,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-06T08:54:15.191Z",
-    "updatedAt": "2024-06-25T14:55:15.319Z"
+    "updatedAt": "2024-06-25T14:55:15.319Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_273",
@@ -10121,7 +10408,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-07-07T02:26:55.938Z",
-    "updatedAt": "2024-06-28T21:36:26.029Z"
+    "updatedAt": "2024-06-28T21:36:26.029Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_274",
@@ -10157,7 +10445,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-19T00:52:52.740Z",
-    "updatedAt": "2025-03-30T05:46:20.662Z"
+    "updatedAt": "2025-03-30T05:46:20.662Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_275",
@@ -10194,7 +10483,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-30T02:19:51.058Z",
-    "updatedAt": "2024-08-10T18:28:06.591Z"
+    "updatedAt": "2024-08-10T18:28:06.591Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_276",
@@ -10229,7 +10519,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-10-17T13:31:17.968Z",
-    "updatedAt": "2023-11-06T18:04:42.520Z"
+    "updatedAt": "2023-11-06T18:04:42.520Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_277",
@@ -10260,7 +10551,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-05T06:44:45.382Z",
-    "updatedAt": "2024-06-03T21:29:18.937Z"
+    "updatedAt": "2024-06-03T21:29:18.937Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_278",
@@ -10294,7 +10586,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-10T08:35:15.669Z",
-    "updatedAt": "2024-11-01T05:55:24.307Z"
+    "updatedAt": "2024-11-01T05:55:24.307Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_279",
@@ -10331,7 +10624,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-24T00:31:41.279Z",
-    "updatedAt": "2024-11-22T15:36:34.898Z"
+    "updatedAt": "2024-11-22T15:36:34.898Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_280",
@@ -10362,7 +10656,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-03-18T19:59:19.681Z",
-    "updatedAt": "2023-06-29T17:42:05.958Z"
+    "updatedAt": "2023-06-29T17:42:05.958Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_281",
@@ -10404,12 +10699,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-10-17T08:46:25.449Z",
-    "updatedAt": "2024-10-04T01:21:00.396Z"
+    "updatedAt": "2024-10-04T01:21:00.396Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_282",
     "title": "Looking for Book Lovers - My Collection for Sale!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 329,
     "published": true,
     "sellerId": "user_4",
@@ -10438,12 +10734,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-22T13:46:22.880Z",
-    "updatedAt": "2025-02-21T12:41:30.931Z"
+    "updatedAt": "2025-02-21T12:41:30.931Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_283",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 155,
     "published": true,
     "sellerId": "user_2",
@@ -10477,12 +10774,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-25T00:59:14.585Z",
-    "updatedAt": "2024-03-10T09:29:13.206Z"
+    "updatedAt": "2024-03-10T09:29:13.206Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_284",
     "title": "Find Your Next Favorite Book - For Sale Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 482,
     "published": true,
     "sellerId": "user_1",
@@ -10513,7 +10811,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-02-18T13:35:04.124Z",
-    "updatedAt": "2024-06-15T22:09:25.553Z"
+    "updatedAt": "2024-06-15T22:09:25.553Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_285",
@@ -10544,12 +10843,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-03T15:26:23.090Z",
-    "updatedAt": "2024-12-06T23:28:18.717Z"
+    "updatedAt": "2024-12-06T23:28:18.717Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_286",
     "title": "Find Your Next Favorite Book - For Sale Now!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 348,
     "published": true,
     "sellerId": "user_2",
@@ -10581,7 +10881,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-04-14T11:51:55.394Z",
-    "updatedAt": "2024-08-21T04:34:04.226Z"
+    "updatedAt": "2024-08-21T04:34:04.226Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_287",
@@ -10624,7 +10925,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-06-13T05:59:50.466Z",
-    "updatedAt": "2022-12-24T00:17:02.047Z"
+    "updatedAt": "2022-12-24T00:17:02.047Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_288",
@@ -10664,12 +10966,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-10-06T07:28:55.798Z",
-    "updatedAt": "2024-11-11T03:42:15.665Z"
+    "updatedAt": "2024-11-11T03:42:15.665Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_289",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 372,
     "published": true,
     "sellerId": "user_7",
@@ -10695,7 +10998,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-12-20T17:16:37.216Z",
-    "updatedAt": "2025-03-30T22:04:52.072Z"
+    "updatedAt": "2025-03-30T22:04:52.072Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_290",
@@ -10732,7 +11036,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-12-09T21:56:27.874Z",
-    "updatedAt": "2024-12-30T05:47:02.528Z"
+    "updatedAt": "2024-12-30T05:47:02.528Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_291",
@@ -10767,7 +11072,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-17T17:19:58.741Z",
-    "updatedAt": "2024-09-08T08:45:46.817Z"
+    "updatedAt": "2024-09-08T08:45:46.817Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_292",
@@ -10799,7 +11105,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-07-10T04:07:04.020Z",
-    "updatedAt": "2023-11-07T08:53:44.161Z"
+    "updatedAt": "2023-11-07T08:53:44.161Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_293",
@@ -10835,7 +11142,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-08-13T20:35:00.751Z",
-    "updatedAt": "2024-12-01T07:07:43.599Z"
+    "updatedAt": "2024-12-01T07:07:43.599Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_294",
@@ -10872,7 +11180,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-03-30T23:42:40.235Z",
-    "updatedAt": "2023-12-30T12:23:45.621Z"
+    "updatedAt": "2023-12-30T12:23:45.621Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_295",
@@ -10918,12 +11227,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-12T14:54:08.550Z",
-    "updatedAt": "2025-03-05T05:39:12.458Z"
+    "updatedAt": "2025-03-05T05:39:12.458Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_296",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 442,
     "published": true,
     "sellerId": "user_9",
@@ -10957,7 +11267,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-09-26T20:45:16.138Z",
-    "updatedAt": "2024-11-02T09:54:37.853Z"
+    "updatedAt": "2024-11-02T09:54:37.853Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_297",
@@ -10990,7 +11301,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-03T11:34:58.275Z",
-    "updatedAt": "2024-12-29T05:47:57.048Z"
+    "updatedAt": "2024-12-29T05:47:57.048Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_298",
@@ -11026,7 +11338,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-10-11T00:55:22.141Z",
-    "updatedAt": "2025-02-24T18:47:57.375Z"
+    "updatedAt": "2025-02-24T18:47:57.375Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_299",
@@ -11059,12 +11372,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-08T12:02:45.036Z",
-    "updatedAt": "2022-04-14T19:10:05.491Z"
+    "updatedAt": "2022-04-14T19:10:05.491Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_300",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 148,
     "published": true,
     "sellerId": "user_5",
@@ -11096,7 +11410,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-07-03T13:49:50.187Z",
-    "updatedAt": "2023-11-28T03:11:31.864Z"
+    "updatedAt": "2023-11-28T03:11:31.864Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_301",
@@ -11133,7 +11448,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-18T07:59:03.040Z",
-    "updatedAt": "2023-04-22T20:14:45.507Z"
+    "updatedAt": "2023-04-22T20:14:45.507Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_302",
@@ -11174,7 +11490,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-01-24T17:50:51.944Z",
-    "updatedAt": "2024-01-07T10:31:27.378Z"
+    "updatedAt": "2024-01-07T10:31:27.378Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_303",
@@ -11209,7 +11526,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-07-22T02:50:45.318Z",
-    "updatedAt": "2024-09-10T15:38:51.189Z"
+    "updatedAt": "2024-09-10T15:38:51.189Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_304",
@@ -11245,7 +11563,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-21T21:46:46.106Z",
-    "updatedAt": "2025-02-12T17:18:15.420Z"
+    "updatedAt": "2025-02-12T17:18:15.420Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_305",
@@ -11282,7 +11601,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-07-19T12:13:46.861Z",
-    "updatedAt": "2024-04-27T11:00:05.183Z"
+    "updatedAt": "2024-04-27T11:00:05.183Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_306",
@@ -11318,7 +11638,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-05-25T17:01:44.353Z",
-    "updatedAt": "2022-10-20T15:42:18.746Z"
+    "updatedAt": "2022-10-20T15:42:18.746Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_307",
@@ -11352,7 +11673,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-02-18T11:34:44.791Z",
-    "updatedAt": "2024-08-10T11:47:38.256Z"
+    "updatedAt": "2024-08-10T11:47:38.256Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_308",
@@ -11395,7 +11717,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-06-22T15:53:53.002Z",
-    "updatedAt": "2024-07-14T06:36:06.101Z"
+    "updatedAt": "2024-07-14T06:36:06.101Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_309",
@@ -11436,7 +11759,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-09-02T06:15:11.610Z",
-    "updatedAt": "2022-12-03T19:30:28.318Z"
+    "updatedAt": "2022-12-03T19:30:28.318Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_310",
@@ -11474,7 +11798,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-17T10:04:11.573Z",
-    "updatedAt": "2024-06-22T10:47:30.185Z"
+    "updatedAt": "2024-06-22T10:47:30.185Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_311",
@@ -11510,7 +11835,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-23T06:56:09.758Z",
-    "updatedAt": "2025-02-23T18:21:59.011Z"
+    "updatedAt": "2025-02-23T18:21:59.011Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_312",
@@ -11551,7 +11877,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-18T14:00:57.592Z",
-    "updatedAt": "2025-02-19T02:33:17.696Z"
+    "updatedAt": "2025-02-19T02:33:17.696Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_313",
@@ -11594,7 +11921,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-10-01T04:52:13.468Z",
-    "updatedAt": "2024-08-20T03:07:00.432Z"
+    "updatedAt": "2024-08-20T03:07:00.432Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_314",
@@ -11632,12 +11960,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-03-16T07:59:30.331Z",
-    "updatedAt": "2024-09-13T10:14:47.065Z"
+    "updatedAt": "2024-09-13T10:14:47.065Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_315",
     "title": "Books for Sale - Pick Your Next Read Today!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 341,
     "published": true,
     "sellerId": "user_6",
@@ -11670,12 +11999,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-04-03T06:33:51.178Z",
-    "updatedAt": "2023-09-25T03:00:19.493Z"
+    "updatedAt": "2023-09-25T03:00:19.493Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_316",
     "title": "Books Looking for a New Shelf - Get Yours Now!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 241,
     "published": true,
     "sellerId": "user_1",
@@ -11708,7 +12038,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-06-14T15:50:37.539Z",
-    "updatedAt": "2024-04-30T16:33:27.053Z"
+    "updatedAt": "2024-04-30T16:33:27.053Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_317",
@@ -11749,7 +12080,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-30T10:09:54.510Z",
-    "updatedAt": "2024-06-09T10:55:57.596Z"
+    "updatedAt": "2024-06-09T10:55:57.596Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_318",
@@ -11788,7 +12120,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-08-10T15:48:39.442Z",
-    "updatedAt": "2023-06-19T16:29:59.854Z"
+    "updatedAt": "2023-06-19T16:29:59.854Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_319",
@@ -11822,7 +12155,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-06T22:36:11.306Z",
-    "updatedAt": "2024-04-08T23:02:29.522Z"
+    "updatedAt": "2024-04-08T23:02:29.522Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_320",
@@ -11855,7 +12189,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-08-24T14:19:10.194Z",
-    "updatedAt": "2024-05-04T08:44:16.140Z"
+    "updatedAt": "2024-05-04T08:44:16.140Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_321",
@@ -11885,12 +12220,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-03-20T14:12:05.854Z",
-    "updatedAt": "2024-07-12T00:42:27.002Z"
+    "updatedAt": "2024-07-12T00:42:27.002Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_322",
     "title": "Affordable Reads - Selling My Book Collection!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 313,
     "published": true,
     "sellerId": "user_9",
@@ -11920,7 +12256,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-03T18:50:45.427Z",
-    "updatedAt": "2025-01-20T06:33:48.614Z"
+    "updatedAt": "2025-01-20T06:33:48.614Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_323",
@@ -11958,7 +12295,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-09-17T09:27:04.365Z",
-    "updatedAt": "2025-01-01T16:34:44.022Z"
+    "updatedAt": "2025-01-01T16:34:44.022Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_324",
@@ -11995,7 +12333,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-01-19T23:56:01.121Z",
-    "updatedAt": "2025-03-08T11:52:53.193Z"
+    "updatedAt": "2025-03-08T11:52:53.193Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_325",
@@ -12024,7 +12363,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-09-20T20:27:39.710Z",
-    "updatedAt": "2024-12-31T13:17:46.757Z"
+    "updatedAt": "2024-12-31T13:17:46.757Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_326",
@@ -12061,12 +12401,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-11T08:33:36.516Z",
-    "updatedAt": "2023-07-30T11:52:28.937Z"
+    "updatedAt": "2023-07-30T11:52:28.937Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_327",
     "title": "Fantastic Deals on Used Books - Hurry, Limited Time!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 376,
     "published": true,
     "sellerId": "user_5",
@@ -12092,7 +12433,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-04T14:11:53.806Z",
-    "updatedAt": "2024-02-26T17:52:20.252Z"
+    "updatedAt": "2024-02-26T17:52:20.252Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_328",
@@ -12130,7 +12472,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-06-27T12:04:48.201Z",
-    "updatedAt": "2024-10-04T04:39:21.218Z"
+    "updatedAt": "2024-10-04T04:39:21.218Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_329",
@@ -12164,7 +12507,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-02-09T15:08:14.613Z",
-    "updatedAt": "2024-03-02T12:50:04.128Z"
+    "updatedAt": "2024-03-02T12:50:04.128Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_330",
@@ -12199,7 +12543,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-09-08T05:28:35.835Z",
-    "updatedAt": "2025-02-28T06:32:07.977Z"
+    "updatedAt": "2025-02-28T06:32:07.977Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_331",
@@ -12237,7 +12582,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-11-05T16:11:08.176Z",
-    "updatedAt": "2023-11-27T08:53:20.196Z"
+    "updatedAt": "2023-11-27T08:53:20.196Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_332",
@@ -12279,12 +12625,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-01-28T04:38:28.112Z",
-    "updatedAt": "2022-04-08T21:33:26.980Z"
+    "updatedAt": "2022-04-08T21:33:26.980Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_333",
     "title": "Give My Books a New Home - Check Out the Sale!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 426,
     "published": true,
     "sellerId": "user_10",
@@ -12315,7 +12662,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-04-27T04:17:35.117Z",
-    "updatedAt": "2024-03-27T07:46:29.825Z"
+    "updatedAt": "2024-03-27T07:46:29.825Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_334",
@@ -12352,7 +12700,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-02T02:50:54.643Z",
-    "updatedAt": "2023-01-16T04:04:46.914Z"
+    "updatedAt": "2023-01-16T04:04:46.914Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_335",
@@ -12387,7 +12736,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-12-02T22:44:00.259Z",
-    "updatedAt": "2023-08-12T01:57:18.837Z"
+    "updatedAt": "2023-08-12T01:57:18.837Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_336",
@@ -12423,7 +12773,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-06-23T01:54:42.895Z",
-    "updatedAt": "2024-12-16T16:51:51.224Z"
+    "updatedAt": "2024-12-16T16:51:51.224Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_337",
@@ -12461,12 +12812,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-15T02:08:53.247Z",
-    "updatedAt": "2024-12-12T07:05:51.392Z"
+    "updatedAt": "2024-12-12T07:05:51.392Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_338",
     "title": "Fantastic Deals on Used Books - Hurry, Limited Time!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 452,
     "published": true,
     "sellerId": "user_5",
@@ -12499,12 +12851,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-12-20T18:49:46.577Z",
-    "updatedAt": "2024-12-30T01:50:18.846Z"
+    "updatedAt": "2024-12-30T01:50:18.846Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_339",
     "title": "Affordable Reads - Selling My Book Collection!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 414,
     "published": true,
     "sellerId": "user_9",
@@ -12538,12 +12891,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-18T12:28:53.685Z",
-    "updatedAt": "2023-04-27T19:12:12.704Z"
+    "updatedAt": "2023-04-27T19:12:12.704Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_340",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 143,
     "published": true,
     "sellerId": "user_1",
@@ -12574,7 +12928,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-12T00:56:48.777Z",
-    "updatedAt": "2024-07-21T06:51:48.338Z"
+    "updatedAt": "2024-07-21T06:51:48.338Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_341",
@@ -12615,7 +12970,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-12-22T05:44:06.924Z",
-    "updatedAt": "2025-03-05T16:08:45.808Z"
+    "updatedAt": "2025-03-05T16:08:45.808Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_342",
@@ -12655,7 +13011,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-12T09:29:14.561Z",
-    "updatedAt": "2023-03-18T23:16:09.180Z"
+    "updatedAt": "2023-03-18T23:16:09.180Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_343",
@@ -12693,7 +13050,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-03-11T12:17:01.862Z",
-    "updatedAt": "2023-04-16T16:54:50.799Z"
+    "updatedAt": "2023-04-16T16:54:50.799Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_344",
@@ -12726,12 +13084,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-10-14T11:45:27.281Z",
-    "updatedAt": "2023-03-04T19:53:23.999Z"
+    "updatedAt": "2023-03-04T19:53:23.999Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_345",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 465,
     "published": true,
     "sellerId": "user_4",
@@ -12764,7 +13123,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-02-02T15:30:54.998Z",
-    "updatedAt": "2023-10-30T14:37:07.571Z"
+    "updatedAt": "2023-10-30T14:37:07.571Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_346",
@@ -12803,7 +13163,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-26T11:35:48.478Z",
-    "updatedAt": "2023-09-12T09:35:29.301Z"
+    "updatedAt": "2023-09-12T09:35:29.301Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_347",
@@ -12844,7 +13205,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-04-23T00:36:58.637Z",
-    "updatedAt": "2023-08-09T14:00:20.682Z"
+    "updatedAt": "2023-08-09T14:00:20.682Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_348",
@@ -12880,7 +13242,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-07-08T14:14:57.263Z",
-    "updatedAt": "2024-04-01T15:12:52.410Z"
+    "updatedAt": "2024-04-01T15:12:52.410Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_349",
@@ -12918,7 +13281,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-06-06T01:22:50.686Z",
-    "updatedAt": "2024-12-28T19:02:00.696Z"
+    "updatedAt": "2024-12-28T19:02:00.696Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_350",
@@ -12955,12 +13319,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-07-28T15:10:27.782Z",
-    "updatedAt": "2024-10-10T06:43:50.948Z"
+    "updatedAt": "2024-10-10T06:43:50.948Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_351",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 341,
     "published": true,
     "sellerId": "user_9",
@@ -12990,7 +13355,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-09-11T06:41:04.402Z",
-    "updatedAt": "2024-12-26T03:18:55.853Z"
+    "updatedAt": "2024-12-26T03:18:55.853Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_352",
@@ -13031,7 +13397,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-24T21:53:44.834Z",
-    "updatedAt": "2024-06-07T19:47:07.522Z"
+    "updatedAt": "2024-06-07T19:47:07.522Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_353",
@@ -13064,7 +13431,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-06-28T10:44:24.421Z",
-    "updatedAt": "2025-01-03T11:43:27.869Z"
+    "updatedAt": "2025-01-03T11:43:27.869Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_354",
@@ -13102,7 +13470,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-12-25T01:05:49.172Z",
-    "updatedAt": "2024-09-17T16:04:32.249Z"
+    "updatedAt": "2024-09-17T16:04:32.249Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_355",
@@ -13150,12 +13519,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-07-25T23:03:35.885Z",
-    "updatedAt": "2024-02-14T02:20:00.194Z"
+    "updatedAt": "2024-02-14T02:20:00.194Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_356",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 367,
     "published": true,
     "sellerId": "user_10",
@@ -13183,12 +13553,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-06-28T20:41:42.767Z",
-    "updatedAt": "2023-10-31T09:33:06.111Z"
+    "updatedAt": "2023-10-31T09:33:06.111Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_357",
     "title": "Affordable Reads - Selling My Book Collection!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 121,
     "published": true,
     "sellerId": "user_2",
@@ -13221,7 +13592,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-19T15:15:01.034Z",
-    "updatedAt": "2024-03-27T12:47:34.219Z"
+    "updatedAt": "2024-03-27T12:47:34.219Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_358",
@@ -13257,7 +13629,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-05T14:09:46.173Z",
-    "updatedAt": "2024-06-27T10:17:47.741Z"
+    "updatedAt": "2024-06-27T10:17:47.741Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_359",
@@ -13291,7 +13664,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-09-21T12:18:31.693Z",
-    "updatedAt": "2025-01-09T10:04:56.848Z"
+    "updatedAt": "2025-01-09T10:04:56.848Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_360",
@@ -13336,12 +13710,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-12-02T02:34:19.319Z",
-    "updatedAt": "2024-02-01T13:35:14.170Z"
+    "updatedAt": "2024-02-01T13:35:14.170Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_361",
     "title": "Books for Sale - Pick Your Next Read Today!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 291,
     "published": true,
     "sellerId": "user_5",
@@ -13375,7 +13750,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-12-03T23:29:42.043Z",
-    "updatedAt": "2023-11-27T00:11:06.765Z"
+    "updatedAt": "2023-11-27T00:11:06.765Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_362",
@@ -13406,12 +13782,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-09-23T21:53:35.570Z",
-    "updatedAt": "2024-10-03T03:35:11.534Z"
+    "updatedAt": "2024-10-03T03:35:11.534Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_363",
     "title": "Book Sale - Your Next Favorite Read is Here!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 256,
     "published": true,
     "sellerId": "user_2",
@@ -13444,12 +13821,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-05-21T08:41:46.331Z",
-    "updatedAt": "2025-02-09T09:04:32.608Z"
+    "updatedAt": "2025-02-09T09:04:32.608Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_364",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 376,
     "published": true,
     "sellerId": "user_10",
@@ -13485,7 +13863,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-02-27T07:42:45.437Z",
-    "updatedAt": "2023-05-19T21:07:25.193Z"
+    "updatedAt": "2023-05-19T21:07:25.193Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_365",
@@ -13529,7 +13908,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-02-25T06:46:30.925Z",
-    "updatedAt": "2022-11-30T09:33:45.686Z"
+    "updatedAt": "2022-11-30T09:33:45.686Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_366",
@@ -13567,7 +13947,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-11-01T03:35:58.826Z",
-    "updatedAt": "2023-06-17T23:01:56.328Z"
+    "updatedAt": "2023-06-17T23:01:56.328Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_367",
@@ -13603,7 +13984,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-05-07T23:51:08.487Z",
-    "updatedAt": "2024-12-26T18:56:31.584Z"
+    "updatedAt": "2024-12-26T18:56:31.584Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_368",
@@ -13639,7 +14021,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-09-22T23:15:04.490Z",
-    "updatedAt": "2024-11-13T12:46:01.143Z"
+    "updatedAt": "2024-11-13T12:46:01.143Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_369",
@@ -13674,7 +14057,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-03-19T04:58:24.321Z",
-    "updatedAt": "2025-01-20T23:07:02.282Z"
+    "updatedAt": "2025-01-20T23:07:02.282Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_370",
@@ -13712,7 +14096,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-10-20T20:27:30.489Z",
-    "updatedAt": "2023-12-29T16:21:42.182Z"
+    "updatedAt": "2023-12-29T16:21:42.182Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_371",
@@ -13745,7 +14130,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-01-31T22:00:43.829Z",
-    "updatedAt": "2024-12-01T06:10:31.077Z"
+    "updatedAt": "2024-12-01T06:10:31.077Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_372",
@@ -13785,7 +14171,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-03-05T09:01:50.171Z",
-    "updatedAt": "2024-10-21T02:20:03.331Z"
+    "updatedAt": "2024-10-21T02:20:03.331Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_373",
@@ -13819,7 +14206,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-02-14T02:38:08.561Z",
-    "updatedAt": "2022-10-26T20:05:51.609Z"
+    "updatedAt": "2022-10-26T20:05:51.609Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_374",
@@ -13857,12 +14245,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-10-30T10:06:16.091Z",
-    "updatedAt": "2023-01-27T07:36:24.012Z"
+    "updatedAt": "2023-01-27T07:36:24.012Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_375",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 138,
     "published": true,
     "sellerId": "user_7",
@@ -13900,7 +14289,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-11-01T12:37:38.036Z",
-    "updatedAt": "2022-11-11T20:05:01.154Z"
+    "updatedAt": "2022-11-11T20:05:01.154Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_376",
@@ -13944,12 +14334,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-12-05T17:31:21.910Z",
-    "updatedAt": "2025-01-08T16:06:58.294Z"
+    "updatedAt": "2025-01-08T16:06:58.294Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_377",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 359,
     "published": true,
     "sellerId": "user_10",
@@ -13978,7 +14369,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-08-30T18:50:12.498Z",
-    "updatedAt": "2022-12-12T06:21:49.065Z"
+    "updatedAt": "2022-12-12T06:21:49.065Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_378",
@@ -14019,7 +14411,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-11-11T14:55:20.138Z",
-    "updatedAt": "2024-03-06T09:00:19.526Z"
+    "updatedAt": "2024-03-06T09:00:19.526Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_379",
@@ -14057,7 +14450,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-02-18T15:18:58.912Z",
-    "updatedAt": "2024-02-23T15:48:14.908Z"
+    "updatedAt": "2024-02-23T15:48:14.908Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_380",
@@ -14090,7 +14484,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-10-14T03:36:16.404Z",
-    "updatedAt": "2025-02-11T01:53:16.105Z"
+    "updatedAt": "2025-02-11T01:53:16.105Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_381",
@@ -14127,7 +14522,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-11-27T10:31:11.689Z",
-    "updatedAt": "2023-10-15T15:51:09.950Z"
+    "updatedAt": "2023-10-15T15:51:09.950Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_382",
@@ -14160,7 +14556,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-07-03T19:17:14.439Z",
-    "updatedAt": "2025-02-24T18:02:57.811Z"
+    "updatedAt": "2025-02-24T18:02:57.811Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_383",
@@ -14195,7 +14592,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-03-13T14:06:40.877Z",
-    "updatedAt": "2024-11-01T08:26:20.531Z"
+    "updatedAt": "2024-11-01T08:26:20.531Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_384",
@@ -14233,7 +14631,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-11-23T12:56:47.860Z",
-    "updatedAt": "2024-12-14T13:49:43.494Z"
+    "updatedAt": "2024-12-14T13:49:43.494Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_385",
@@ -14271,7 +14670,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-11-25T09:39:40.940Z",
-    "updatedAt": "2025-02-15T23:44:13.179Z"
+    "updatedAt": "2025-02-15T23:44:13.179Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_386",
@@ -14307,7 +14707,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-12-24T12:26:37.095Z",
-    "updatedAt": "2025-03-02T06:37:23.500Z"
+    "updatedAt": "2025-03-02T06:37:23.500Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_387",
@@ -14346,7 +14747,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-02-04T04:19:51.125Z",
-    "updatedAt": "2023-05-29T04:47:23.141Z"
+    "updatedAt": "2023-05-29T04:47:23.141Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_388",
@@ -14381,7 +14783,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-02-19T04:40:32.572Z",
-    "updatedAt": "2023-04-21T02:16:16.489Z"
+    "updatedAt": "2023-04-21T02:16:16.489Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_389",
@@ -14417,7 +14820,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-12-27T12:47:38.944Z",
-    "updatedAt": "2023-08-27T16:07:01.963Z"
+    "updatedAt": "2023-08-27T16:07:01.963Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_390",
@@ -14451,7 +14855,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-04-23T13:28:51.655Z",
-    "updatedAt": "2024-06-06T13:25:26.173Z"
+    "updatedAt": "2024-06-06T13:25:26.173Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_391",
@@ -14487,7 +14892,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-07-25T04:50:25.168Z",
-    "updatedAt": "2023-06-06T11:24:45.534Z"
+    "updatedAt": "2023-06-06T11:24:45.534Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_392",
@@ -14525,12 +14931,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-06T23:09:33.546Z",
-    "updatedAt": "2024-05-01T22:21:34.225Z"
+    "updatedAt": "2024-05-01T22:21:34.225Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_393",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 208,
     "published": true,
     "sellerId": "user_3",
@@ -14561,7 +14968,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-26T16:58:38.840Z",
-    "updatedAt": "2024-12-14T02:00:58.757Z"
+    "updatedAt": "2024-12-14T02:00:58.757Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_394",
@@ -14598,7 +15006,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-07-11T01:27:27.961Z",
-    "updatedAt": "2023-12-13T02:24:30.794Z"
+    "updatedAt": "2023-12-13T02:24:30.794Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_395",
@@ -14631,7 +15040,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-01-16T06:40:43.332Z",
-    "updatedAt": "2024-03-16T04:27:53.337Z"
+    "updatedAt": "2024-03-16T04:27:53.337Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_396",
@@ -14666,7 +15076,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-03-28T14:37:37.400Z",
-    "updatedAt": "2023-12-07T02:37:52.527Z"
+    "updatedAt": "2023-12-07T02:37:52.527Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_397",
@@ -14707,7 +15118,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-31T21:53:59.426Z",
-    "updatedAt": "2025-01-16T23:11:43.651Z"
+    "updatedAt": "2025-01-16T23:11:43.651Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_398",
@@ -14742,7 +15154,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-02-11T00:33:59.866Z",
-    "updatedAt": "2024-08-09T00:01:48.528Z"
+    "updatedAt": "2024-08-09T00:01:48.528Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_399",
@@ -14788,7 +15201,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-05-31T10:33:40.431Z",
-    "updatedAt": "2025-02-01T02:34:00.615Z"
+    "updatedAt": "2025-02-01T02:34:00.615Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_400",
@@ -14823,7 +15237,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-12-19T23:06:56.496Z",
-    "updatedAt": "2024-06-14T18:36:58.798Z"
+    "updatedAt": "2024-06-14T18:36:58.798Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_401",
@@ -14856,7 +15271,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-11-03T10:55:03.234Z",
-    "updatedAt": "2024-11-23T14:32:47.499Z"
+    "updatedAt": "2024-11-23T14:32:47.499Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_402",
@@ -14891,12 +15307,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-04-28T01:18:53.264Z",
-    "updatedAt": "2024-08-08T10:56:23.031Z"
+    "updatedAt": "2024-08-08T10:56:23.031Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_403",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 501,
     "published": true,
     "sellerId": "user_4",
@@ -14930,7 +15347,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-12-07T19:18:58.411Z",
-    "updatedAt": "2024-10-17T19:14:54.982Z"
+    "updatedAt": "2024-10-17T19:14:54.982Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_404",
@@ -14974,7 +15392,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-07-19T23:37:11.612Z",
-    "updatedAt": "2025-02-13T01:57:44.328Z"
+    "updatedAt": "2025-02-13T01:57:44.328Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_405",
@@ -15007,7 +15426,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-31T12:09:16.719Z",
-    "updatedAt": "2025-03-14T08:30:03.269Z"
+    "updatedAt": "2025-03-14T08:30:03.269Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_406",
@@ -15033,10 +15453,14 @@
       "EXCLUSIVE_CONTENT",
       "BILINGUAL_EDITION"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-12T03:26:10.219Z",
-    "updatedAt": "2023-08-27T19:49:39.553Z"
+    "updatedAt": "2023-08-27T19:49:39.553Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_407",
@@ -15074,12 +15498,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-12-08T08:32:42.370Z",
-    "updatedAt": "2024-07-29T21:54:20.542Z"
+    "updatedAt": "2024-07-29T21:54:20.542Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_408",
     "title": "Up for Grabs: My Personal Book Collection!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 377,
     "published": true,
     "sellerId": "user_7",
@@ -15114,7 +15539,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-01-25T14:23:59.944Z",
-    "updatedAt": "2024-11-04T11:32:01.745Z"
+    "updatedAt": "2024-11-04T11:32:01.745Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_409",
@@ -15149,7 +15575,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-03-25T14:44:53.423Z",
-    "updatedAt": "2023-07-11T23:02:19.055Z"
+    "updatedAt": "2023-07-11T23:02:19.055Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_410",
@@ -15179,12 +15606,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-01-08T18:43:11.445Z",
-    "updatedAt": "2023-08-09T20:52:33.788Z"
+    "updatedAt": "2023-08-09T20:52:33.788Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_411",
     "title": "Give My Books a New Home - Check Out the Sale!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 340,
     "published": true,
     "sellerId": "user_3",
@@ -15209,12 +15637,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-11-09T00:16:07.238Z",
-    "updatedAt": "2024-02-16T16:37:01.592Z"
+    "updatedAt": "2024-02-16T16:37:01.592Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_412",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 257,
     "published": true,
     "sellerId": "user_7",
@@ -15248,7 +15677,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-07-31T20:15:43.801Z",
-    "updatedAt": "2024-10-25T17:22:17.293Z"
+    "updatedAt": "2024-10-25T17:22:17.293Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_413",
@@ -15281,7 +15711,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-02-10T21:00:51.098Z",
-    "updatedAt": "2023-12-22T17:30:52.227Z"
+    "updatedAt": "2023-12-22T17:30:52.227Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_414",
@@ -15314,7 +15745,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-07-04T18:30:55.314Z",
-    "updatedAt": "2025-02-27T02:06:05.908Z"
+    "updatedAt": "2025-02-27T02:06:05.908Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_415",
@@ -15357,7 +15789,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-06-01T00:18:00.260Z",
-    "updatedAt": "2023-09-06T20:01:51.206Z"
+    "updatedAt": "2023-09-06T20:01:51.206Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_416",
@@ -15395,12 +15828,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-16T02:13:05.338Z",
-    "updatedAt": "2024-06-10T13:52:17.990Z"
+    "updatedAt": "2024-06-10T13:52:17.990Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_417",
     "title": "Clearance Sale: Books at Unbeatable Prices!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 339,
     "published": true,
     "sellerId": "user_9",
@@ -15430,7 +15864,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-05-03T01:28:30.327Z",
-    "updatedAt": "2022-10-07T22:42:26.801Z"
+    "updatedAt": "2022-10-07T22:42:26.801Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_418",
@@ -15465,7 +15900,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-12T02:43:07.990Z",
-    "updatedAt": "2025-02-19T06:04:38.008Z"
+    "updatedAt": "2025-02-19T06:04:38.008Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_419",
@@ -15507,7 +15943,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-01-23T03:21:28.403Z",
-    "updatedAt": "2023-03-17T04:26:50.745Z"
+    "updatedAt": "2023-03-17T04:26:50.745Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_420",
@@ -15543,7 +15980,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-02-11T11:18:05.155Z",
-    "updatedAt": "2024-11-09T09:15:09.848Z"
+    "updatedAt": "2024-11-09T09:15:09.848Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_421",
@@ -15586,7 +16024,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-07-08T20:10:45.424Z",
-    "updatedAt": "2024-03-16T03:18:19.432Z"
+    "updatedAt": "2024-03-16T03:18:19.432Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_422",
@@ -15621,7 +16060,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-06-04T19:05:18.985Z",
-    "updatedAt": "2024-02-20T19:37:14.536Z"
+    "updatedAt": "2024-02-20T19:37:14.536Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_423",
@@ -15655,12 +16095,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-02-29T11:34:53.664Z",
-    "updatedAt": "2024-06-23T23:37:55.557Z"
+    "updatedAt": "2024-06-23T23:37:55.557Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_424",
     "title": "Give My Books a New Home - Check Out the Sale!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 501,
     "published": true,
     "sellerId": "user_8",
@@ -15688,7 +16129,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-05-21T09:27:25.976Z",
-    "updatedAt": "2024-09-30T09:33:49.645Z"
+    "updatedAt": "2024-09-30T09:33:49.645Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_425",
@@ -15726,7 +16168,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-03T11:55:54.455Z",
-    "updatedAt": "2024-12-16T00:47:57.412Z"
+    "updatedAt": "2024-12-16T00:47:57.412Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_426",
@@ -15764,7 +16207,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-06-10T15:55:07.784Z",
-    "updatedAt": "2023-12-15T16:41:32.625Z"
+    "updatedAt": "2023-12-15T16:41:32.625Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_427",
@@ -15792,10 +16236,13 @@
       "INTERACTIVE_ELEMENTS",
       "BILINGUAL_EDITION"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-11-14T08:41:22.942Z",
-    "updatedAt": "2025-01-16T17:08:35.379Z"
+    "updatedAt": "2025-01-16T17:08:35.379Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_428",
@@ -15831,7 +16278,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-25T13:37:51.072Z",
-    "updatedAt": "2023-11-29T14:38:31.817Z"
+    "updatedAt": "2023-11-29T14:38:31.817Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_429",
@@ -15868,7 +16316,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-02-03T13:10:01.165Z",
-    "updatedAt": "2023-07-10T21:17:49.510Z"
+    "updatedAt": "2023-07-10T21:17:49.510Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_430",
@@ -15903,7 +16352,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-09-04T20:10:08.811Z",
-    "updatedAt": "2024-01-31T17:54:53.356Z"
+    "updatedAt": "2024-01-31T17:54:53.356Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_431",
@@ -15937,12 +16387,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-08-20T23:23:28.609Z",
-    "updatedAt": "2025-02-23T03:34:32.347Z"
+    "updatedAt": "2025-02-23T03:34:32.347Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_432",
     "title": "Fantastic Deals on Used Books - Hurry, Limited Time!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 129,
     "published": true,
     "sellerId": "user_4",
@@ -15978,12 +16429,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-13T03:45:20.512Z",
-    "updatedAt": "2024-01-20T04:58:08.645Z"
+    "updatedAt": "2024-01-20T04:58:08.645Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_433",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 200,
     "published": true,
     "sellerId": "user_2",
@@ -16019,12 +16471,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-03-20T04:23:33.986Z",
-    "updatedAt": "2024-02-25T21:43:30.721Z"
+    "updatedAt": "2024-02-25T21:43:30.721Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_434",
     "title": "A Treasure Trove of Books - Available Now!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 131,
     "published": true,
     "sellerId": "user_1",
@@ -16060,7 +16513,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-08-13T19:57:19.336Z",
-    "updatedAt": "2024-04-12T05:36:50.154Z"
+    "updatedAt": "2024-04-12T05:36:50.154Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_435",
@@ -16091,7 +16545,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-06-18T05:48:48.853Z",
-    "updatedAt": "2023-07-01T07:49:27.244Z"
+    "updatedAt": "2023-07-01T07:49:27.244Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_436",
@@ -16130,7 +16585,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-05-08T16:19:20.519Z",
-    "updatedAt": "2023-12-08T01:15:35.254Z"
+    "updatedAt": "2023-12-08T01:15:35.254Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_437",
@@ -16166,7 +16622,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-02-09T13:50:52.695Z",
-    "updatedAt": "2023-12-19T06:23:36.164Z"
+    "updatedAt": "2023-12-19T06:23:36.164Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_438",
@@ -16204,12 +16661,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-03-09T20:01:51.507Z",
-    "updatedAt": "2023-10-26T17:21:24.376Z"
+    "updatedAt": "2023-10-26T17:21:24.376Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_439",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 321,
     "published": true,
     "sellerId": "user_3",
@@ -16238,7 +16696,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-07-14T04:03:12.616Z",
-    "updatedAt": "2024-08-01T07:11:07.802Z"
+    "updatedAt": "2024-08-01T07:11:07.802Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_440",
@@ -16276,7 +16735,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-06-14T16:18:20.179Z",
-    "updatedAt": "2024-12-07T14:34:43.070Z"
+    "updatedAt": "2024-12-07T14:34:43.070Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_441",
@@ -16313,12 +16773,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-04T06:40:17.728Z",
-    "updatedAt": "2023-11-22T05:12:43.692Z"
+    "updatedAt": "2023-11-22T05:12:43.692Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_442",
     "title": "Book Sale - Your Next Favorite Read is Here!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 238,
     "published": true,
     "sellerId": "user_2",
@@ -16353,7 +16814,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-12T13:01:41.711Z",
-    "updatedAt": "2025-02-07T23:52:10.701Z"
+    "updatedAt": "2025-02-07T23:52:10.701Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_443",
@@ -16390,7 +16852,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-12-08T07:01:12.951Z",
-    "updatedAt": "2023-12-17T02:10:43.548Z"
+    "updatedAt": "2023-12-17T02:10:43.548Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_444",
@@ -16428,12 +16891,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-01-02T05:28:49.690Z",
-    "updatedAt": "2023-11-30T06:00:59.175Z"
+    "updatedAt": "2023-11-30T06:00:59.175Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_445",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 227,
     "published": true,
     "sellerId": "user_6",
@@ -16469,7 +16933,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-07-12T02:27:31.564Z",
-    "updatedAt": "2024-12-19T20:26:05.923Z"
+    "updatedAt": "2024-12-19T20:26:05.923Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_446",
@@ -16502,12 +16967,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-05-02T10:45:11.434Z",
-    "updatedAt": "2024-11-01T19:38:28.313Z"
+    "updatedAt": "2024-11-01T19:38:28.313Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_447",
     "title": "Give My Books a New Home - Check Out the Sale!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 193,
     "published": true,
     "sellerId": "user_4",
@@ -16535,7 +17001,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-09-14T02:46:39.628Z",
-    "updatedAt": "2024-10-14T06:55:11.808Z"
+    "updatedAt": "2024-10-14T06:55:11.808Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_448",
@@ -16573,7 +17040,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-02-13T04:08:37.447Z",
-    "updatedAt": "2024-05-28T18:34:41.630Z"
+    "updatedAt": "2024-05-28T18:34:41.630Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_449",
@@ -16603,7 +17071,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-06-10T22:22:29.978Z",
-    "updatedAt": "2024-06-23T01:36:56.744Z"
+    "updatedAt": "2024-06-23T01:36:56.744Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_450",
@@ -16638,7 +17107,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-09-10T02:11:57.641Z",
-    "updatedAt": "2024-08-12T08:40:58.417Z"
+    "updatedAt": "2024-08-12T08:40:58.417Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_451",
@@ -16671,12 +17141,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2025-01-25T03:38:36.863Z",
-    "updatedAt": "2025-02-24T15:55:10.041Z"
+    "updatedAt": "2025-02-24T15:55:10.041Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_452",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 278,
     "published": true,
     "sellerId": "user_8",
@@ -16712,7 +17183,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-10T13:08:15.422Z",
-    "updatedAt": "2024-12-13T10:20:44.951Z"
+    "updatedAt": "2024-12-13T10:20:44.951Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_453",
@@ -16750,7 +17222,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-11T22:53:15.404Z",
-    "updatedAt": "2025-02-14T00:33:58.885Z"
+    "updatedAt": "2025-02-14T00:33:58.885Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_454",
@@ -16790,7 +17263,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-03-13T17:35:50.867Z",
-    "updatedAt": "2025-02-06T12:07:07.125Z"
+    "updatedAt": "2025-02-06T12:07:07.125Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_455",
@@ -16827,7 +17301,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-04-13T14:07:05.485Z",
-    "updatedAt": "2024-12-31T14:39:51.467Z"
+    "updatedAt": "2024-12-31T14:39:51.467Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_456",
@@ -16868,7 +17343,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-03-20T20:40:26.869Z",
-    "updatedAt": "2024-04-15T21:45:59.987Z"
+    "updatedAt": "2024-04-15T21:45:59.987Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_457",
@@ -16903,7 +17379,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-02-29T20:33:12.464Z",
-    "updatedAt": "2024-03-30T10:41:06.015Z"
+    "updatedAt": "2024-03-30T10:41:06.015Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_458",
@@ -16938,12 +17415,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-02-14T09:17:05.732Z",
-    "updatedAt": "2024-10-08T04:43:30.395Z"
+    "updatedAt": "2024-10-08T04:43:30.395Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_459",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 187,
     "published": true,
     "sellerId": "user_2",
@@ -16979,7 +17457,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-05-06T18:30:18.780Z",
-    "updatedAt": "2025-03-05T13:42:00.705Z"
+    "updatedAt": "2025-03-05T13:42:00.705Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_460",
@@ -17012,7 +17491,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-10-24T14:21:25.971Z",
-    "updatedAt": "2024-01-23T01:00:42.615Z"
+    "updatedAt": "2024-01-23T01:00:42.615Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_461",
@@ -17046,7 +17526,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-12-12T12:15:32.735Z",
-    "updatedAt": "2024-10-20T01:45:20.237Z"
+    "updatedAt": "2024-10-20T01:45:20.237Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_462",
@@ -17080,7 +17561,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-02-04T05:03:43.032Z",
-    "updatedAt": "2024-08-16T11:11:19.256Z"
+    "updatedAt": "2024-08-16T11:11:19.256Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_463",
@@ -17118,7 +17600,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-07-30T00:45:45.966Z",
-    "updatedAt": "2024-12-10T10:46:15.925Z"
+    "updatedAt": "2024-12-10T10:46:15.925Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_464",
@@ -17154,12 +17637,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-12-01T17:25:03.794Z",
-    "updatedAt": "2025-02-02T21:52:43.980Z"
+    "updatedAt": "2025-02-02T21:52:43.980Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_465",
     "title": "A Treasure Trove of Books - Available Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 296,
     "published": true,
     "sellerId": "user_4",
@@ -17192,7 +17676,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-06-05T05:27:24.054Z",
-    "updatedAt": "2024-04-29T00:52:08.667Z"
+    "updatedAt": "2024-04-29T00:52:08.667Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_466",
@@ -17228,7 +17713,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-06-11T13:01:13.808Z",
-    "updatedAt": "2025-02-12T12:28:49.800Z"
+    "updatedAt": "2025-02-12T12:28:49.800Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_467",
@@ -17264,7 +17750,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-08-16T03:59:53.448Z",
-    "updatedAt": "2024-09-01T10:50:19.184Z"
+    "updatedAt": "2024-09-01T10:50:19.184Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_468",
@@ -17300,7 +17787,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-11-24T00:43:36.215Z",
-    "updatedAt": "2024-11-14T01:37:37.734Z"
+    "updatedAt": "2024-11-14T01:37:37.734Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_469",
@@ -17337,7 +17825,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-12-21T03:44:42.881Z",
-    "updatedAt": "2024-12-19T04:08:56.985Z"
+    "updatedAt": "2024-12-19T04:08:56.985Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_470",
@@ -17368,12 +17857,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-08-28T09:08:54.037Z",
-    "updatedAt": "2024-10-17T18:12:47.508Z"
+    "updatedAt": "2024-10-17T18:12:47.508Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_471",
     "title": "Used Books at Discount Prices - Grab Yours Now!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 195,
     "published": true,
     "sellerId": "user_8",
@@ -17411,7 +17901,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-05-11T10:43:01.965Z",
-    "updatedAt": "2024-10-29T15:21:04.628Z"
+    "updatedAt": "2024-10-29T15:21:04.628Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_472",
@@ -17448,12 +17939,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-15T08:47:19.337Z",
-    "updatedAt": "2024-07-05T01:38:45.520Z"
+    "updatedAt": "2024-07-05T01:38:45.520Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_473",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Freshen up your bookshelf with these gently used books. See what’s available!",
+    "content": "Freshen up your bookshelf with these gently used books. See what\u2019s available!",
     "price": 366,
     "published": true,
     "sellerId": "user_1",
@@ -17485,7 +17977,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-01-23T04:40:19.229Z",
-    "updatedAt": "2022-12-10T08:51:37.325Z"
+    "updatedAt": "2022-12-10T08:51:37.325Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_474",
@@ -17527,7 +18020,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-09-30T23:26:04.348Z",
-    "updatedAt": "2024-09-20T17:48:32.799Z"
+    "updatedAt": "2024-09-20T17:48:32.799Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_475",
@@ -17566,7 +18060,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-04-25T09:38:54.370Z",
-    "updatedAt": "2022-09-16T01:56:57.711Z"
+    "updatedAt": "2022-09-16T01:56:57.711Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_476",
@@ -17611,7 +18106,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-05T19:24:48.507Z",
-    "updatedAt": "2024-04-10T03:52:32.508Z"
+    "updatedAt": "2024-04-10T03:52:32.508Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_477",
@@ -17652,12 +18148,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-09-13T08:18:30.029Z",
-    "updatedAt": "2024-04-22T18:52:31.447Z"
+    "updatedAt": "2024-04-22T18:52:31.447Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_478",
     "title": "Find Your Next Favorite Book - For Sale Now!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 336,
     "published": true,
     "sellerId": "user_2",
@@ -17689,7 +18186,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-01-09T16:14:47.759Z",
-    "updatedAt": "2023-10-16T14:16:58.550Z"
+    "updatedAt": "2023-10-16T14:16:58.550Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_479",
@@ -17724,7 +18222,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-04-26T13:21:37.008Z",
-    "updatedAt": "2024-04-16T12:05:15.755Z"
+    "updatedAt": "2024-04-16T12:05:15.755Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_480",
@@ -17769,12 +18268,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-02-01T21:47:54.186Z",
-    "updatedAt": "2023-01-22T05:21:10.632Z"
+    "updatedAt": "2023-01-22T05:21:10.632Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_481",
     "title": "Selling Books in Excellent Condition - Limited Offer!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 199,
     "published": true,
     "sellerId": "user_1",
@@ -17806,7 +18306,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-06-01T19:56:47.112Z",
-    "updatedAt": "2024-06-24T05:55:25.465Z"
+    "updatedAt": "2024-06-24T05:55:25.465Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_482",
@@ -17848,7 +18349,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-07-29T02:58:09.613Z",
-    "updatedAt": "2024-02-17T05:40:35.670Z"
+    "updatedAt": "2024-02-17T05:40:35.670Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_483",
@@ -17883,12 +18385,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-03-30T01:09:02.353Z",
-    "updatedAt": "2024-06-29T05:53:21.859Z"
+    "updatedAt": "2024-06-29T05:53:21.859Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_484",
     "title": "Books Looking for a New Shelf - Get Yours Now!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 497,
     "published": true,
     "sellerId": "user_9",
@@ -17911,10 +18414,14 @@
       "EXCLUSIVE_CONTENT",
       "INTERACTIVE_ELEMENTS"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-04-08T15:58:58.899Z",
-    "updatedAt": "2024-07-01T18:09:06.184Z"
+    "updatedAt": "2024-07-01T18:09:06.184Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_485",
@@ -17953,7 +18460,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-06-29T08:50:29.787Z",
-    "updatedAt": "2024-02-05T01:45:04.928Z"
+    "updatedAt": "2024-02-05T01:45:04.928Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_486",
@@ -17985,7 +18493,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-12-17T10:58:45.151Z",
-    "updatedAt": "2024-08-23T08:47:45.241Z"
+    "updatedAt": "2024-08-23T08:47:45.241Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_487",
@@ -18024,7 +18533,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-10-29T13:50:39.569Z",
-    "updatedAt": "2024-11-06T15:03:55.545Z"
+    "updatedAt": "2024-11-06T15:03:55.545Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_488",
@@ -18070,7 +18580,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-04-01T15:32:07.729Z",
-    "updatedAt": "2024-08-02T03:12:18.846Z"
+    "updatedAt": "2024-08-02T03:12:18.846Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_489",
@@ -18108,7 +18619,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-11-05T21:01:57.680Z",
-    "updatedAt": "2024-08-03T02:50:34.863Z"
+    "updatedAt": "2024-08-03T02:50:34.863Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_490",
@@ -18145,7 +18657,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-02-07T16:37:38.992Z",
-    "updatedAt": "2023-09-20T00:30:05.054Z"
+    "updatedAt": "2023-09-20T00:30:05.054Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_491",
@@ -18177,7 +18690,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-12-04T11:54:05.345Z",
-    "updatedAt": "2024-06-15T22:53:28.410Z"
+    "updatedAt": "2024-06-15T22:53:28.410Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_492",
@@ -18214,7 +18728,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-08-28T03:45:59.925Z",
-    "updatedAt": "2023-06-27T06:46:22.880Z"
+    "updatedAt": "2023-06-27T06:46:22.880Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_493",
@@ -18249,12 +18764,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-20T11:08:11.395Z",
-    "updatedAt": "2024-08-11T11:43:59.124Z"
+    "updatedAt": "2024-08-11T11:43:59.124Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_494",
     "title": "Affordable Books for Every Reader - Check It Out!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 185,
     "published": true,
     "sellerId": "user_5",
@@ -18285,7 +18801,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-09-22T22:05:48.165Z",
-    "updatedAt": "2023-08-11T18:01:40.438Z"
+    "updatedAt": "2023-08-11T18:01:40.438Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_495",
@@ -18325,7 +18842,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-02-13T03:46:00.043Z",
-    "updatedAt": "2025-02-03T05:15:57.464Z"
+    "updatedAt": "2025-02-03T05:15:57.464Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_496",
@@ -18363,7 +18881,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-04T02:41:13.228Z",
-    "updatedAt": "2023-12-19T16:45:15.737Z"
+    "updatedAt": "2023-12-19T16:45:15.737Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_497",
@@ -18400,7 +18919,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-12-30T06:54:20.948Z",
-    "updatedAt": "2025-01-09T03:34:52.592Z"
+    "updatedAt": "2025-01-09T03:34:52.592Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_498",
@@ -18434,7 +18954,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-06-24T21:20:07.461Z",
-    "updatedAt": "2024-01-18T05:24:49.195Z"
+    "updatedAt": "2024-01-18T05:24:49.195Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_499",
@@ -18475,7 +18996,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-05-19T03:12:07.963Z",
-    "updatedAt": "2025-03-29T19:58:38.255Z"
+    "updatedAt": "2025-03-29T19:58:38.255Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_500",
@@ -18515,7 +19037,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-12-06T19:25:10.656Z",
-    "updatedAt": "2023-04-30T01:53:08.403Z"
+    "updatedAt": "2023-04-30T01:53:08.403Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_501",
@@ -18552,7 +19075,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-12-09T06:34:47.303Z",
-    "updatedAt": "2024-11-13T10:36:23.241Z"
+    "updatedAt": "2024-11-13T10:36:23.241Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_502",
@@ -18585,7 +19109,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-07-04T16:15:52.361Z",
-    "updatedAt": "2024-07-07T15:13:18.423Z"
+    "updatedAt": "2024-07-07T15:13:18.423Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_503",
@@ -18624,7 +19149,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2025-01-15T08:11:08.102Z",
-    "updatedAt": "2025-03-10T11:04:38.712Z"
+    "updatedAt": "2025-03-10T11:04:38.712Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_504",
@@ -18657,12 +19183,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-05-27T20:14:40.446Z",
-    "updatedAt": "2024-08-19T03:17:50.654Z"
+    "updatedAt": "2024-08-19T03:17:50.654Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_505",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 327,
     "published": true,
     "sellerId": "user_3",
@@ -18692,7 +19219,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-11-09T03:23:10.721Z",
-    "updatedAt": "2024-07-02T19:31:49.976Z"
+    "updatedAt": "2024-07-02T19:31:49.976Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_506",
@@ -18729,7 +19257,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-12-04T23:53:13.209Z",
-    "updatedAt": "2024-01-12T01:26:34.503Z"
+    "updatedAt": "2024-01-12T01:26:34.503Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_507",
@@ -18765,7 +19294,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2025-01-31T08:18:49.469Z",
-    "updatedAt": "2025-02-20T13:40:17.777Z"
+    "updatedAt": "2025-02-20T13:40:17.777Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_508",
@@ -18800,12 +19330,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-05-20T01:47:00.094Z",
-    "updatedAt": "2023-10-12T16:55:05.693Z"
+    "updatedAt": "2023-10-12T16:55:05.693Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_509",
     "title": "Affordable Reads - Selling My Book Collection!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 343,
     "published": true,
     "sellerId": "user_10",
@@ -18837,7 +19368,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2025-01-14T04:34:56.471Z",
-    "updatedAt": "2025-02-28T21:56:58.874Z"
+    "updatedAt": "2025-02-28T21:56:58.874Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_510",
@@ -18877,12 +19409,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-01-06T08:17:42.680Z",
-    "updatedAt": "2022-07-27T04:20:32.783Z"
+    "updatedAt": "2022-07-27T04:20:32.783Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_511",
     "title": "Find Your Next Read - Books for Sale!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 215,
     "published": true,
     "sellerId": "user_1",
@@ -18908,7 +19441,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-01-06T01:22:52.164Z",
-    "updatedAt": "2024-07-18T12:42:01.449Z"
+    "updatedAt": "2024-07-18T12:42:01.449Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_512",
@@ -18939,12 +19473,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-09-19T08:32:17.336Z",
-    "updatedAt": "2024-08-15T16:24:25.428Z"
+    "updatedAt": "2024-08-15T16:24:25.428Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_513",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 249,
     "published": true,
     "sellerId": "user_2",
@@ -18975,7 +19510,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2022-12-03T10:58:43.516Z",
-    "updatedAt": "2023-07-20T15:09:17.950Z"
+    "updatedAt": "2023-07-20T15:09:17.950Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_514",
@@ -19015,7 +19551,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-05-31T04:23:10.590Z",
-    "updatedAt": "2025-01-20T04:00:32.731Z"
+    "updatedAt": "2025-01-20T04:00:32.731Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_515",
@@ -19052,12 +19589,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-03-10T10:47:21.788Z",
-    "updatedAt": "2023-09-20T08:29:46.190Z"
+    "updatedAt": "2023-09-20T08:29:46.190Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_516",
     "title": "A Treasure Trove of Books - Available Now!",
-    "content": "Books for every taste and interest – all priced for a quick sale.",
+    "content": "Books for every taste and interest \u2013 all priced for a quick sale.",
     "price": 442,
     "published": true,
     "sellerId": "user_9",
@@ -19091,7 +19629,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2022-07-14T11:26:57.827Z",
-    "updatedAt": "2022-08-09T10:49:54.073Z"
+    "updatedAt": "2022-08-09T10:49:54.073Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_517",
@@ -19129,12 +19668,13 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-06-23T03:03:12.994Z",
-    "updatedAt": "2025-01-24T04:08:03.533Z"
+    "updatedAt": "2025-01-24T04:08:03.533Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_518",
     "title": "Amazing Book Deals - Used, Loved, and Waiting for You!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 280,
     "published": true,
     "sellerId": "user_2",
@@ -19167,7 +19707,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-04-27T01:15:12.318Z",
-    "updatedAt": "2024-09-01T23:29:36.946Z"
+    "updatedAt": "2024-09-01T23:29:36.946Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_519",
@@ -19203,7 +19744,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-01-13T16:16:51.934Z",
-    "updatedAt": "2025-01-30T15:50:08.269Z"
+    "updatedAt": "2025-01-30T15:50:08.269Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_520",
@@ -19240,7 +19782,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-01-19T03:27:46.111Z",
-    "updatedAt": "2023-01-30T07:49:10.916Z"
+    "updatedAt": "2023-01-30T07:49:10.916Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_521",
@@ -19277,7 +19820,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-08-14T07:08:39.042Z",
-    "updatedAt": "2024-08-31T01:04:07.477Z"
+    "updatedAt": "2024-08-31T01:04:07.477Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_522",
@@ -19310,12 +19854,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-02-26T14:39:24.286Z",
-    "updatedAt": "2023-05-31T05:13:57.186Z"
+    "updatedAt": "2023-05-31T05:13:57.186Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_523",
     "title": "Discover Great Books at a Discount Price!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 460,
     "published": true,
     "sellerId": "user_6",
@@ -19346,7 +19891,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-10-23T19:09:32.635Z",
-    "updatedAt": "2024-02-16T01:14:39.352Z"
+    "updatedAt": "2024-02-16T01:14:39.352Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_524",
@@ -19382,7 +19928,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-04-07T11:39:31.298Z",
-    "updatedAt": "2023-08-30T23:00:01.665Z"
+    "updatedAt": "2023-08-30T23:00:01.665Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_525",
@@ -19423,12 +19970,13 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-05-02T01:05:21.338Z",
-    "updatedAt": "2024-10-26T14:55:41.949Z"
+    "updatedAt": "2024-10-26T14:55:41.949Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_526",
     "title": "Book Sale - Your Next Favorite Read is Here!",
-    "content": "Selling my collection of books – a perfect opportunity to refresh your bookshelf.",
+    "content": "Selling my collection of books \u2013 a perfect opportunity to refresh your bookshelf.",
     "price": 502,
     "published": true,
     "sellerId": "user_6",
@@ -19451,10 +19999,13 @@
       "SUPPLEMENTARY_MATERIALS",
       "INTERACTIVE_ELEMENTS"
     ],
-    "damageURLs": ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+    "damageURLs": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
     "damage": "DAMAGED",
     "createdAt": "2023-03-20T04:30:33.177Z",
-    "updatedAt": "2024-07-06T14:55:50.524Z"
+    "updatedAt": "2024-07-06T14:55:50.524Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_527",
@@ -19496,7 +20047,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-06-12T14:16:36.497Z",
-    "updatedAt": "2024-07-05T03:25:08.660Z"
+    "updatedAt": "2024-07-05T03:25:08.660Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_528",
@@ -19534,7 +20086,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-05-17T07:05:24.642Z",
-    "updatedAt": "2025-03-07T07:30:23.719Z"
+    "updatedAt": "2025-03-07T07:30:23.719Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_529",
@@ -19569,7 +20122,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-03-18T08:39:50.544Z",
-    "updatedAt": "2023-11-27T20:17:54.272Z"
+    "updatedAt": "2023-11-27T20:17:54.272Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_530",
@@ -19615,12 +20169,13 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2023-02-13T14:52:34.690Z",
-    "updatedAt": "2024-01-23T12:55:04.910Z"
+    "updatedAt": "2024-01-23T12:55:04.910Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_531",
     "title": "Selling Gently Used Books - Great Deals Inside!",
-    "content": "Perfect for avid readers – gently used books at great prices!",
+    "content": "Perfect for avid readers \u2013 gently used books at great prices!",
     "price": 386,
     "published": true,
     "sellerId": "user_1",
@@ -19653,7 +20208,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-02-07T20:18:19.539Z",
-    "updatedAt": "2024-12-10T16:58:41.251Z"
+    "updatedAt": "2024-12-10T16:58:41.251Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_532",
@@ -19693,7 +20249,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-10-25T20:03:33.558Z",
-    "updatedAt": "2024-11-10T12:15:01.350Z"
+    "updatedAt": "2024-11-10T12:15:01.350Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_533",
@@ -19729,7 +20286,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-10-24T15:06:41.083Z",
-    "updatedAt": "2025-01-30T17:35:45.386Z"
+    "updatedAt": "2025-01-30T17:35:45.386Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_534",
@@ -19771,7 +20329,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2022-09-21T04:23:03.776Z",
-    "updatedAt": "2025-01-06T00:52:06.029Z"
+    "updatedAt": "2025-01-06T00:52:06.029Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_535",
@@ -19805,7 +20364,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-04-29T10:53:23.926Z",
-    "updatedAt": "2024-01-03T13:43:51.604Z"
+    "updatedAt": "2024-01-03T13:43:51.604Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_536",
@@ -19842,7 +20402,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2024-10-17T00:49:15.771Z",
-    "updatedAt": "2024-11-19T21:40:24.045Z"
+    "updatedAt": "2024-11-19T21:40:24.045Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_537",
@@ -19880,7 +20441,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2024-06-20T21:25:54.613Z",
-    "updatedAt": "2024-07-15T00:38:48.606Z"
+    "updatedAt": "2024-07-15T00:38:48.606Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_538",
@@ -19915,7 +20477,8 @@
     ],
     "damage": "SLIGHTLY_DAMAGED",
     "createdAt": "2025-01-21T04:15:06.856Z",
-    "updatedAt": "2025-03-23T16:37:06.442Z"
+    "updatedAt": "2025-03-23T16:37:06.442Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_539",
@@ -19957,7 +20520,8 @@
     ],
     "damage": "DAMAGED",
     "createdAt": "2023-08-11T20:25:47.750Z",
-    "updatedAt": "2024-10-06T00:11:57.863Z"
+    "updatedAt": "2024-10-06T00:11:57.863Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_540",
@@ -19990,7 +20554,8 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2024-03-14T11:46:38.301Z",
-    "updatedAt": "2024-09-29T22:03:14.095Z"
+    "updatedAt": "2024-09-29T22:03:14.095Z",
+    "verifiedStatus": "VERIFIED"
   },
   {
     "id": "post_541",
@@ -20039,6 +20604,7 @@
     ],
     "damage": "NO_DAMAGED",
     "createdAt": "2023-12-10T06:26:48.530Z",
-    "updatedAt": "2024-12-21T13:54:07.594Z"
+    "updatedAt": "2024-12-21T13:54:07.594Z",
+    "verifiedStatus": "VERIFIED"
   }
 ]

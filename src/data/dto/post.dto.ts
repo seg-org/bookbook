@@ -15,6 +15,7 @@ export type Post = {
   damage: DamageType;
   createdAt: Date;
   updatedAt: Date;
+  verifiedStatus: string;
 };
 
 export type GetPostsResponse = {

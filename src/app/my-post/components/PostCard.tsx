@@ -8,7 +8,7 @@ import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
   post: Post;
-  onPostChange: () => void;
+  // onPostChange: () => void; TODO
 };
 
 const cut = (str: string, maxLength: number) => {
@@ -18,7 +18,8 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
-function PostCard({ post, onPostChange }: PostCardProps) {
+// TODO
+function PostCard({ post }: PostCardProps) {
   const [editMode, setEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({
     title: post.title,
@@ -54,7 +55,7 @@ function PostCard({ post, onPostChange }: PostCardProps) {
       console.error("Error editing post:", error);
     }
     setEditMode(false);
-    await onPostChange();
+    // await onPostChange(); TODO
   };
 
   const onDelete = async (id: string) => {
@@ -69,7 +70,7 @@ function PostCard({ post, onPostChange }: PostCardProps) {
     } catch (error) {
       console.error("Error posting book:", error);
     }
-    await onPostChange();
+    // await onPostChange(); TODO
   };
 
   return (

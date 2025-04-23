@@ -1,70 +1,77 @@
 "use client";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { useGetMyPost } from "@/hooks/useGetAllPosts";
+import { PostWithBookmark } from "@/context/postContext";
 
 import { Pagination } from "./Pagination";
 import PostCard from "./PostCard";
 
 export const PostList = () => {
-  const { data: session } = useSession();
-  const [refresh, setRefresh] = useState(0); // used to trigger refetch
-  const [priceAsc, setPriceAsc] = useState(1);
-  const [sortBy, setSortBy] = useState<{ field: string; order: string } | null>(null); // e.g., { field: "price", order: "asc" }
-  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
-  const [params, setParams] = useState({
-    page: 1,
-    limit: 27,
-    sortBy: "price",
-    sortOrder: "asc",
-    author: session?.user.id || "",
-  });
-
-  const setpage = (page: number) => {
-    setParams((prev) => ({
-      ...prev,
-      page: page,
-    }));
+  const statusLabels: Record<string, string> = {
+    VERIFIED: "ตรวจสอบแล้ว",
+    CHANGE_REQUESTED: "รอการแก้ไข",
+    UNDER_REVIEW: "รอการตรวจสอบ",
   };
+  const [selectedStatus, setSelectedStatus] = useState<string>("VERIFIED");
+  const [priceAsc, setPriceAsc] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+
+  const [posts, setPosts] = useState<PostWithBookmark[]>([]);
+  useEffect(() => {
+    setLoading(true);
+    fetch(
+      `/api/posts/get-own-posts?page=${page}&limit=10&sortBy=${sortBy}&sortOrder=${sortOrder}&verifiedStatus=${selectedStatus}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setPosts(data.posts);
+        setTotalPages(data.totalPages);
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+      });
+  }, [sortBy, sortOrder, selectedStatus, page]);
 
   useEffect(() => {
-    if (sortBy) {
-      setParams((prev) => ({
-        ...prev,
-        sortBy: sortBy.field,
-        sortOrder: sortBy.order,
-      }));
-    }
-  }, [sortBy, refresh]);
+    setLoading(false);
+  }, [posts]);
 
-  const { posts, totalPages, loading, error } = useGetMyPost(params);
+  useEffect(() => {
+    setSortBy("price");
+    setSortOrder(priceAsc === 1 ? "asc" : "desc");
+  }, [priceAsc]);
 
   const handleSortPrice = () => {
-    const newOrder = priceAsc === 1 ? "desc" : "asc";
-    setSortBy({ field: "price", order: newOrder });
     setPriceAsc(-1 * priceAsc);
+  };
+
+  const handleCheckbox = (status: string) => {
+    setSelectedStatus(status);
   };
 
   if (loading) {
     return <LoadingAnimation />;
   }
-  if (error) {
-    return <div>Failed to get posts</div>;
-  }
 
-  if (posts.length === 0) {
-    return (
-      <div data-test-id="no-posts-found" className="mt-10">
-        ไม่พบโพสต์ของคุณ
-      </div>
-    );
-  }
+  // if (error) {
+  //   return <div>Failed to get posts</div>;
+  // }
 
   return (
     <>
-      <div className="item-center flex flex-col pt-8">
+      <div className="item-center flex min-w-full flex-col pt-8">
         <div className="flex flex-row items-center gap-5 self-start">
           <div className="ml-3.5 mr-auto mt-1 text-lg">เรียงโดย</div>
           <button
@@ -80,20 +87,29 @@ export const PostList = () => {
                 <input
                   type="checkbox"
                   checked={selectedStatus === status}
-                  onChange={() => setSelectedStatus((prev) => (prev === status ? null : status))}
+                  onChange={() => {
+                    handleCheckbox(status);
+                  }}
+                  className="h-4 w-4 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
-                {status}
+                {statusLabels[status]}
               </label>
             ))}
           </div>
         </div>
-        <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
-          {posts.map((post) => (
-            <PostCard post={post} key={post.id} onPostChange={() => setRefresh((prev) => prev + 1)} />
-          ))}
-        </div>
+        {posts.length == 0 ? (
+          <div className="flex h-96 w-full items-center justify-center">
+            <div className="text-lg">ไม่พบโพสต์</div>
+          </div>
+        ) : (
+          <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
+            {posts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
+        )}
       </div>
-      <Pagination totalPages={totalPages} setPage={setpage} cur_page={params.page} />
+      <Pagination totalPages={totalPages} setPage={setPage} cur_page={page} />
     </>
   );
 };

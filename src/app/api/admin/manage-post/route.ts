@@ -1,67 +1,19 @@
 import { Prisma } from "@prisma/client";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
+import { getUrl } from "@/app/api/objects/s3";
+import { GetPostsRequest, PostsResponsePaginated } from "@/app/api/posts/schemas";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-import { getUrl } from "../objects/s3";
-import { CreatePostRequest, GetPostsRequest, PostResponse, PostsResponsePaginated } from "./schemas";
-
-export async function POST(req: NextRequest) {
-  try {
-    const parsedData = CreatePostRequest.safeParse(await req.json());
-    console.log(parsedData);
-    if (!parsedData.success) {
-      return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });
-    }
-
-    const book = await prisma.book.findUnique({
-      where: { id: parsedData.data.bookId },
-    });
-    if (!book) {
-      return NextResponse.json({ error: `Book with id ${parsedData.data.bookId} not found` }, { status: 404 });
-    }
-
-    const seller = await prisma.user.findUnique({
-      where: { id: parsedData.data.sellerId },
-    });
-    if (!seller) {
-      return NextResponse.json({ error: `seller with id ${parsedData.data.sellerId} not found` }, { status: 404 });
-    }
-
-    const data = {
-      ...parsedData.data,
-    };
-
-    const newPost = await prisma.post.create({
-      data,
-      include: { book: true },
-    });
-
-    const newPostWithImageUrl = {
-      ...newPost,
-      book: {
-        ...newPost.book,
-        coverImageUrl: getUrl("book_images", newPost.book.coverImageKey),
-      },
-    };
-
-    return NextResponse.json(PostResponse.parse(newPostWithImageUrl), { status: 201 });
-  } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
-      return NextResponse.json(
-        { error: "Duplicate key violation (there is already a post with this book id)" },
-        { status: 409 },
-      );
-    }
-    if (error instanceof Error) console.error("Error creating post", error.stack);
-    return NextResponse.json({ error: "Cannot create a post" }, { status: 500 });
-  }
-}
-
 export async function GET(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.isAdmin) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
   try {
     const url = new URL(req.url);
     const rawQueryParams = Object.fromEntries(url.searchParams.entries());
@@ -70,7 +22,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
     }
 
-    const { page, limit, sortBy, sortOrder, ...filters } = validatedParams.data;
+    const { page, limit, sortBy, sortOrder, verifiedStatus, postId, ...filters } = validatedParams.data;
     const orderBy: { [key: string]: "asc" | "desc" }[] = [];
 
     if (sortBy && sortOrder) {
@@ -101,7 +53,8 @@ export async function GET(req: NextRequest) {
         sellerId: {
           not: session?.user.id,
         },
-        verifiedStatus: "VERIFIED",
+        verifiedStatus,
+        id: postId ? { equals: postId } : undefined,
       },
       include: { book: true },
       skip,
@@ -113,7 +66,8 @@ export async function GET(req: NextRequest) {
       where: {
         book: bookFilter,
         published: true,
-        verifiedStatus: "VERIFIED",
+        verifiedStatus,
+        id: postId ? { equals: postId } : undefined,
       },
     });
     const totalPages = Math.ceil(totalPosts / limit);
