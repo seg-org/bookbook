@@ -1,7 +1,9 @@
 import { Prisma } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 import { getUrl } from "../objects/s3";
@@ -105,6 +107,7 @@ export async function GET(req: NextRequest) {
       bookTags: filters.bookTags && filters.bookTags.length > 0 ? { hasEvery: filters.bookTags } : undefined,
     };
 
+    const session = await getServerSession(authOptions);
     const posts = await prisma.post.findMany({
       where: {
         book: bookFilter,
@@ -113,6 +116,10 @@ export async function GET(req: NextRequest) {
           filters.specialDescriptions && filters.specialDescriptions.length > 0
             ? { hasEvery: filters.specialDescriptions }
             : undefined,
+        sellerId: {
+          not: session?.user.id,
+        },
+        verifiedStatus: "VERIFIED",
       },
       include: { book: true },
       skip,
@@ -124,6 +131,7 @@ export async function GET(req: NextRequest) {
       where: {
         book: bookFilter,
         published: true,
+        verifiedStatus: "VERIFIED",
       },
     });
     const totalPages = Math.ceil(totalPosts / limit);

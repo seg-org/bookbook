@@ -42,7 +42,6 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
     if (!post) {
       return NextResponse.json({ error: `Post with id ${id} not found` }, { status: 404 });
     }
-
     const parsedData = UpdatePostRequest.safeParse(await req.json());
     if (!parsedData.success) {
       return NextResponse.json({ error: parsedData.error.errors }, { status: 400 });

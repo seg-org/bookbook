@@ -8,6 +8,12 @@ import { apiClient } from "./axios";
 import { GetPostsResponse, Post } from "./dto/post.dto";
 
 export type GetPostsFilters = z.infer<typeof GetPostsRequest>;
+
+type EditPostFormData = {
+  title: string;
+  price: number;
+  bookId: string;
+};
 export const getAllPosts = async (params?: GetPostsFilters) => {
   try {
     const res: AxiosResponse<GetPostsResponse> = await apiClient.get("/posts", {
@@ -55,6 +61,28 @@ export const getRecommendedPosts = async (userId: string) => {
   } catch (error) {
     console.error("Failed to get all posts", error);
     return Error("Failed to get all posts");
+  }
+};
+
+export const editPost = async (data: EditPostFormData, id: string) => {
+  try {
+    const res: AxiosResponse<Post> = await apiClient.patch(`/posts/${id}`, data);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to patch post with id ${id}`, error);
+    return Error(`Failed to patch post with id ${id}`);
+  }
+};
+
+export const deletePost = async (id: string) => {
+  try {
+    const res: AxiosResponse = await apiClient.delete(`/posts/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to delete post with id ${id}`, error);
+    return Error(`Failed to delete post with id ${id}`);
   }
 };
 

@@ -30,13 +30,17 @@ export const getAllBooks = async () => {
 
 export type GetBookQuery = {
   title?: string;
+  verifiedStatus?: string;
 };
 
 export const getBooks = async (query?: GetBookQuery) => {
   const { title } = query ?? {};
 
   try {
-    const url = title ? `/books?title=${title}` : "/books";
+    const url =
+      `/books` +
+      (query?.verifiedStatus ? `?verifiedStatus=${query.verifiedStatus}` : "") +
+      (title ? `&title=${title}` : "");
 
     const res: AxiosResponse<Book[]> = await apiClient.get(url);
 
@@ -88,5 +92,16 @@ export const deleteBook = async (id: string) => {
   } catch (error) {
     console.error(`Failed to delete book with id ${id}`, error);
     return Error(`Failed to delete book with id ${id}`);
+  }
+};
+
+export const getUnverifiedBooks = async () => {
+  try {
+    const res: AxiosResponse<Book[]> = await apiClient.get("/admin/new-book");
+
+    return res.data;
+  } catch (error) {
+    console.error("Failed to get unverified books", error);
+    return Error("Failed to get unverified books");
   }
 };

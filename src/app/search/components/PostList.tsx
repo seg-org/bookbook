@@ -12,17 +12,9 @@ export const PostList = () => {
   const isAuthenticated = status === "authenticated";
 
   const [priceAsc, setPriceAsc] = useState(1);
-  const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
 
-  const { posts, recommendedPosts, loading, error, setPostsFilters } = usePostContext();
-
-  const filteredPosts = useMemo(() => {
-    let filteredPosts = posts.filter((post) => post.sellerId !== session?.user.id);
-    if (isBookmarkOnly) {
-      filteredPosts = filteredPosts.filter((post) => post.isBookmarked);
-    }
-    return filteredPosts;
-  }, [posts, session?.user.id, isBookmarkOnly]);
+  const { recommendedPosts, loading, error, setPostsFilters, isBookmarkOnly, setIsBookmarkOnly, bookmarkedPosts } =
+    usePostContext();
 
   const filteredRecommendedPosts = useMemo(() => {
     const filteredRecommendedPosts = recommendedPosts.filter((post) => post.sellerId !== session?.user.id);
@@ -59,7 +51,7 @@ export const PostList = () => {
     return <div>Failed to get posts</div>;
   }
 
-  if (filteredPosts.length === 0 && filteredRecommendedPosts.length === 0) {
+  if (bookmarkedPosts.length === 0 && filteredRecommendedPosts.length === 0) {
     return (
       <div data-test-id="no-posts-found" className="mt-10">
         ไม่พบโพสต์ตามที่ระบุไว้ฮะ
@@ -97,7 +89,7 @@ export const PostList = () => {
               enableBookmark={false}
             />
           )}
-          {filteredPosts.map((post) => (
+          {bookmarkedPosts.map((post) => (
             <PostCard post={post} key={post.id} enableBookmark />
           ))}
         </div>
