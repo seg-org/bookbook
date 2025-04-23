@@ -27,9 +27,9 @@ export const GetPostsRequest = z.object({
 });
 
 export const CreatePostRequest = z.object({
-  title: z.string().openapi({ example: "Selling old copy of The Hobbit" }),
+  title: z.string().min(5).openapi({ example: "Selling old copy of The Hobbit" }),
   content: z.string().openapi({ example: "Selling my old copy of The Hobbit. It's in good condition." }),
-  price: z.number().openapi({ example: 10.0 }),
+  price: z.number().min(1).openapi({ example: 10.0 }),
   published: z.boolean().openapi({ example: true }),
   bookId: z.string().openapi({ example: "book_1" }),
   sellerId: z.string().openapi({ example: "user_1" }),
