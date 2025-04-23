@@ -33,13 +33,13 @@ function SearchByDetail() {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
-        <input
+        {/* <input
           className="rounded-sm border border-gray-300 p-2.5"
           type="text"
           placeholder="ประเภท"
           value={genre}
           onChange={(e) => setGenre(e.target.value)}
-        />
+        /> */}
         <input
           className="rounded-sm border border-gray-300 p-2.5"
           type="text"
