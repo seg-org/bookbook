@@ -1,13 +1,15 @@
 // src/app/book/sell/[id]/page.tsx
+
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { getUrl } from "@/app/api/objects/s3";
+import { DamageType, SpecialDescriptionType } from "@/app/api/posts/post_enum";
 import { Button } from "@/components/ui/Button";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { bookTagInThai, genreInThai } from "@/lib/translation";
+import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
 
 export default async function SellBookConfirmPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -66,6 +68,9 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
 
     const postTitle = formData.get("post-title");
     const price = formData.get("book-price");
+    const damage = formData.get("book-condition");
+    const damageEnum = damage as DamageType;
+    const specialDescriptions = formData.getAll("specialDescriptions");
 
     if (typeof postTitle !== "string") {
       throw new Error("Post title is required");
@@ -81,7 +86,8 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
         published: true,
         sellerId: session.user.id,
         bookId: book.id,
-        damage: "NO_DAMAGED",
+        damage: damageEnum as DamageType,
+        specialDescriptions: specialDescriptions as SpecialDescriptionType[],
       },
     });
 
@@ -136,6 +142,27 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
                 type="text"
                 required
               />
+            </div>
+
+            <div className="flex w-full flex-col items-start gap-2">
+              <label htmlFor="book-condition">สภาพหนังสือ</label>
+              <select id="book-condition" name="book-condition" className="w-full rounded border border-black p-2">
+                <option value="NO_DAMAGED">ไม่มีรอยขีดข่วน</option>
+                <option value="SLIGHTLY_DAMAGED">มีรอยขีดข่วนเล็กน้อย</option>
+                <option value="DAMAGED">มีรอยขีดข่วน</option>
+              </select>
+            </div>
+
+            <div className="flex w-full flex-col items-start gap-2">
+              <label htmlFor="book-description">คำอธิบายพิเศษ</label>
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                {SpecialDescriptionType.options.map((description) => (
+                  <label key={description} className="flex items-center gap-2">
+                    <input type="checkbox" name="specialDescriptions" value={description} />
+                    {specialDescriptionInThai[description]}
+                  </label>
+                ))}
+              </div>
             </div>
 
             <div className="flex w-full flex-col items-start gap-2">

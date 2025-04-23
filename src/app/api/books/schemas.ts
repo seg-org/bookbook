@@ -39,7 +39,7 @@ export const UpdateBookRequest = z.object({
   author: z.string().optional().openapi({ example: "J.R.R. Tolkien" }),
   description: z.string().optional().openapi({ example: "The Hobbit is a fantasy novel by J.R.R. Tolkien" }),
   isbn: z.string().optional().openapi({ example: "9783161484100" }),
-  pages: z.number().optional().openapi({ example: 310 }),
+  pages: z.number().min(0).optional().openapi({ example: 310 }),
   coverImageKey: z.string().optional().openapi({ example: "the-hobbit.jpg" }),
   bookGenres: z
     .array(GenreType)

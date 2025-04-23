@@ -1,15 +1,11 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 import { BookTagType, GenreType } from "@/app/api/books/book_enum";
 import { SpecialDescriptionType } from "@/app/api/posts/post_enum";
 import { usePostContext } from "@/context/postContext";
-
-const formatEnumLabel = (value: string) =>
-  value
-    .toLowerCase()
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
 
 export default function SpecialSearch() {
   const { setPostsFilters } = usePostContext();
@@ -17,6 +13,7 @@ export default function SpecialSearch() {
   const [selectedBookGenres, setSelectedBookGenres] = useState<GenreType[]>([]);
   const [selectedBookTags, setSelectedBookTags] = useState<BookTagType[]>([]);
 
+  // Update filters in the context whenever the selected enums change
   useEffect(() => {
     setPostsFilters((prev) => ({
       ...prev,
@@ -26,6 +23,7 @@ export default function SpecialSearch() {
     }));
   }, [selectedSpecialDescriptions, selectedBookGenres, selectedBookTags, setPostsFilters]);
 
+  // Toggle selection for checkboxes
   const toggleSelection = <T,>(item: T, selectedItems: T[], setSelectedItems: (items: T[]) => void) => {
     if (selectedItems.includes(item)) {
       setSelectedItems(selectedItems.filter((i) => i !== item));
@@ -49,7 +47,7 @@ export default function SpecialSearch() {
                   checked={selectedBookGenres.includes(genre)}
                   onChange={() => toggleSelection(genre, selectedBookGenres, setSelectedBookGenres)}
                 />
-                {formatEnumLabel(genre)}
+                {genreInThai[genre]}
               </label>
             ))}
           </div>
@@ -66,11 +64,12 @@ export default function SpecialSearch() {
                   checked={selectedBookTags.includes(tag)}
                   onChange={() => toggleSelection(tag, selectedBookTags, setSelectedBookTags)}
                 />
-                {formatEnumLabel(tag)}
+                {bookTagInThai[tag]}
               </label>
             ))}
           </div>
         </div>
+
         {/* Special Descriptions (from posts) */}
         <div>
           <p className="font-semibold">คุณสมบัติพิเศษของหนังสือ</p>
@@ -84,11 +83,25 @@ export default function SpecialSearch() {
                     toggleSelection(description, selectedSpecialDescriptions, setSelectedSpecialDescriptions)
                   }
                 />
-                {formatEnumLabel(description)}
+                {specialDescriptionInThai[description]}
               </label>
             ))}
           </div>
         </div>
+      </div>
+      {/* Selected */}
+      <div className="mt-6 max-w-3xl break-words rounded-md border border-gray-300 bg-gray-50 p-4">
+        <h3 className="mb-2 font-semibold">เงื่อนไขพิเศษ:</h3>
+        <p>
+          <strong>ประเภทหนังสือ:</strong> {selectedBookGenres.map((genre) => genreInThai[genre]).join(", ")}
+        </p>
+        <p>
+          <strong>แท็กหนังสือ:</strong> {selectedBookTags.map((tag) => bookTagInThai[tag]).join(", ")}
+        </p>
+        <p>
+          <strong>คุณสมบัติพิเศษของหนังสือ:</strong>{" "}
+          {selectedSpecialDescriptions.map((description) => specialDescriptionInThai[description]).join(", ")}
+        </p>
       </div>
     </>
   );

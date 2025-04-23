@@ -1,3 +1,4 @@
+@chat
 Feature: Chat functionality (US3-1)
 
   Scenario: buyer adds seller to chat
