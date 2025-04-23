@@ -2,16 +2,16 @@ import { Check, Delete, Wrench } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { IoLogoWechat } from "react-icons/io5";
 
 import { Button } from "@/components/ui/Button";
-import { PostContext, PostWithBookmark } from "@/context/postContext";
+import { PostWithBookmark } from "@/context/postContext";
 import { createChatRoom } from "@/data/chat";
-import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
   post: PostWithBookmark;
+  onPostUpdate: () => void;
 };
 
 const cut = (str: string, maxLength: number) => {
@@ -21,33 +21,28 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
-function PostCard({ post }: PostCardProps) {
+function PostCard({ post, onPostUpdate }: PostCardProps) {
   const { data: session, status } = useSession();
-  const { refetchPosts } = useContext(PostContext);
   const isAuthenticated = status === "authenticated";
   const [editMode, setEditMode] = useState(false);
   const router = useRouter();
   const [editedPost, setEditedPost] = useState({
     title: post.title,
-    price: post.price,
+    price: post.price.toString(),
     bookId: post.bookId,
-    verifiedStatus: "UNDER_REVIEW",
+    verifiedStatus: post.verifiedStatus,
   });
 
   const oldPost = {
     title: post.title,
-    price: post.price,
+    price: post.price.toString(),
     bookId: post.bookId,
-    verifiedStatus: "UNDER_REVIEW",
+    verifiedStatus: post.verifiedStatus,
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "price") {
-      setEditedPost((prev) => ({ ...prev, [name]: Number(value) }));
-    } else {
-      setEditedPost((prev) => ({ ...prev, [name]: value }));
-    }
+    setEditedPost((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleChatWithSeller = async (postId: string) => {
@@ -60,17 +55,33 @@ function PostCard({ post }: PostCardProps) {
     router.push(`/chat`);
   };
 
-  const onSubmit = async (id: string) => {
+  const onSubmit = async (
+    id: string,
+    postPayload: {
+      title: string;
+      price: number;
+      bookId: string;
+      verifiedStatus: string;
+    },
+  ) => {
     try {
-      const res = await editPost(editedPost, id);
+      const res = await fetch(`/api/admin/manage-post/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(postPayload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (res instanceof Error) {
         console.error(res);
       }
+      setEditMode(false);
     } catch (error) {
       console.error("Error editing post:", error);
+      setEditMode(false);
+    } finally {
+      onPostUpdate();
     }
-    setEditMode(false);
-    refetchPosts?.();
   };
 
   const onDelete = async (id: string) => {
@@ -78,14 +89,20 @@ function PostCard({ post }: PostCardProps) {
     if (!confirmed) return;
 
     try {
-      const res = await deletePost(id);
+      const res = await fetch(`/api/admin/manage-post/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (res instanceof Error) {
         console.error(res);
       }
     } catch (error) {
       console.error("Error posting book:", error);
+    } finally {
+      onPostUpdate();
     }
-    refetchPosts?.();
   };
 
   return (
@@ -168,7 +185,11 @@ function PostCard({ post }: PostCardProps) {
                 className="text-green-500 hover:bg-green-500 hover:text-white"
                 onClick={() => {
                   setEditedPost((prev) => ({ ...prev, verifiedStatus: "CHANGE_REQUESTED" }));
-                  onSubmit(post.id);
+                  onSubmit(post.id, {
+                    ...editedPost,
+                    price: Number(editedPost.price),
+                    verifiedStatus: "CHANGE_REQUESTED",
+                  });
                 }}
               >
                 <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>
@@ -200,9 +221,11 @@ function PostCard({ post }: PostCardProps) {
                 variant="default"
                 className="bg-green-500 hover:bg-green-700"
                 onClick={() => {
-                  setEditedPost(oldPost);
-                  setEditedPost((prev) => ({ ...prev, verifiedStatus: "VERIFIED" }));
-                  onSubmit(post.id);
+                  setEditedPost({
+                    ...oldPost,
+                    verifiedStatus: "VERIFIED",
+                  });
+                  onSubmit(post.id, { ...oldPost, price: Number(oldPost.price), verifiedStatus: "VERIFIED" });
                 }}
               >
                 <div className="flex items-center justify-center gap-x-2">

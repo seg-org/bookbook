@@ -26,7 +26,8 @@ export const PostList = () => {
   const [page, setPage] = useState(1);
 
   const [posts, setPosts] = useState<PostWithBookmark[]>([]);
-  useEffect(() => {
+
+  const fetchPosts = () => {
     setLoading(true);
     fetch(
       `/api/admin/manage-post?page=${page}&limit=10&sortBy=${sortBy}&sortOrder=${sortOrder}&verifiedStatus=${selectedStatus}&postId=${postId}`,
@@ -45,6 +46,10 @@ export const PostList = () => {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
+  };
+
+  useEffect(() => {
+    fetchPosts();
   }, [sortBy, sortOrder, selectedStatus, postId, page]);
 
   useEffect(() => {
@@ -122,7 +127,7 @@ export const PostList = () => {
         ) : (
           <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
             {posts.map((post) => (
-              <PostCard post={post} key={post.id} />
+              <PostCard post={post} onPostUpdate={fetchPosts} key={post.id} />
             ))}
           </div>
         )}

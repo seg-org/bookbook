@@ -1,39 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
+import { getUrl } from "@/app/api/objects/s3";
+import { PostResponse, UpdatePostRequest } from "@/app/api/posts/schemas";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-import { getUrl } from "../../objects/s3";
-import { PostResponse, UpdatePostRequest } from "../schemas";
-
-export async function GET(_: NextRequest, props: { params: Promise<{ id: string }> }) {
-  const { id } = await props.params;
-  try {
-    const post = await prisma.post.findUnique({
-      where: { id },
-      include: { book: true },
-    });
-
-    if (!post) {
-      return NextResponse.json({ error: `Post with id ${id} not found` }, { status: 404 });
-    }
-
-    const postWithImageUrl = {
-      ...post,
-      book: {
-        ...post.book,
-        coverImageUrl: getUrl("book_images", post.book.coverImageKey),
-      },
-    };
-
-    return NextResponse.json(PostResponse.parse(postWithImageUrl));
-  } catch (error) {
-    if (error instanceof Error) console.error(`Error getting post with id ${id}`, error.stack);
-    return NextResponse.json({ error: "Cannot get a post" }, { status: 500 });
-  }
-}
-
 export async function PATCH(req: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.isAdmin) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
   const { id } = await props.params;
+
   try {
     const post = await prisma.post.findUnique({
       where: { id },
@@ -81,6 +61,11 @@ export async function PATCH(req: NextRequest, props: { params: Promise<{ id: str
 }
 
 export async function DELETE(_: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.isAdmin) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
   const { id } = await props.params;
   try {
     const post = await prisma.post.findUnique({ where: { id } });
