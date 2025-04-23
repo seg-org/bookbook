@@ -18,7 +18,8 @@
       "NON_FICTION",
       "RELIGIOUS_SPIRITUAL"
     ],
-    "bookTags": ["YOUNG_ADULT"]
+    "bookTags": ["YOUNG_ADULT"],
+    "verifiedStatus": "APPROVED"
   },
   {
     "id": "book_2",
@@ -31,7 +32,8 @@
     "publisher": "KADOKAWA",
     "coverImagePath": "./prisma/seed/images/book/hitozuma-1.jpg",
     "bookGenres": ["NON_FICTION", "TRUE_CRIME"],
-    "bookTags": ["BESTSELLER", "HIGHLY_RECOMMENDED", "CLASSIC", "MYSTERY", "DARK_FANTASY"]
+    "bookTags": ["BESTSELLER", "HIGHLY_RECOMMENDED", "CLASSIC", "MYSTERY", "DARK_FANTASY"],
+    "verifiedStatus": "APPROVED"
   },
   {
     "id": "book_3",
@@ -44,7 +46,8 @@
     "publisher": "KADOKAWA",
     "coverImagePath": "./prisma/seed/images/book/hitozuma-2.jpg",
     "bookGenres": ["HISTORICAL_FICTION", "FICTION", "CONTEMPORARY", "ROMANCE", "DRAMA"],
-    "bookTags": ["CHILDRENS_BOOK", "FAMILY_SAGA", "YOUNG_ADULT"]
+    "bookTags": ["CHILDRENS_BOOK", "FAMILY_SAGA", "YOUNG_ADULT"],
+    "verifiedStatus": "APPROVED"
   },
   {
     "id": "book_4",
@@ -57,7 +60,8 @@
     "publisher": "ภาควิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย",
     "coverImagePath": "./prisma/seed/images/book/somchai-algo.jpg",
     "bookGenres": ["RELIGIOUS_SPIRITUAL", "PSYCHOLOGY", "SELF_HELP"],
-    "bookTags": ["NEW_RELEASE", "AWARD_WINNING", "ROMANTIC_COMEDY"]
+    "bookTags": ["NEW_RELEASE", "AWARD_WINNING", "ROMANTIC_COMEDY"],
+    "verifiedStatus": "APPROVED"
   },
   {
     "id": "book_5",
@@ -70,7 +74,8 @@
     "publisher": "Think Beyond",
     "coverImagePath": "./prisma/seed/images/book/pid-med.jpg",
     "bookGenres": ["GRAPHIC_NOVELS_COMICS", "SCIENCE_FICTION", "FANTASY", "DYSTOPIAN", "HORROR", "MYSTERY"],
-    "bookTags": ["LGBTQ_PLUS", "INSPIRATIONAL", "MUST_READ", "SHORT_STORIES"]
+    "bookTags": ["LGBTQ_PLUS", "INSPIRATIONAL", "MUST_READ", "SHORT_STORIES"],
+    "verifiedStatus": "APPROVED"
   },
   {
     "id": "book_6",
@@ -83,7 +88,8 @@
     "publisher": "Salt",
     "coverImagePath": "./prisma/seed/images/book/ethical-algo.webp",
     "bookGenres": ["FANTASY", "ADVENTURE", "YOUNG_ADULT", "CHILDRENS_LITERATURE"],
-    "bookTags": ["HISTORICAL", "CLASSIC"]
+    "bookTags": ["HISTORICAL", "CLASSIC"],
+    "verifiedStatus": "APPROVED"
   },
   {
     "id": "book_7",
@@ -96,7 +102,8 @@
     "publisher": "スリーエーネットワーク",
     "coverImagePath": "./prisma/seed/images/book/n1-dokkai.jpg",
     "bookGenres": ["FICTION"],
-    "bookTags": ["ROMANTIC_COMEDY", "FAMILY_SAGA", "COMING_OF_AGE", "CHILDRENS_BOOK"]
+    "bookTags": ["ROMANTIC_COMEDY", "FAMILY_SAGA", "COMING_OF_AGE", "CHILDRENS_BOOK"],
+    "verifiedStatus": "UNVERIFIED"
   },
   {
     "id": "book_8",
@@ -109,7 +116,8 @@
     "publisher": "ภาควิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย",
     "coverImagePath": "./prisma/seed/images/book/formal-verification.jpg",
     "bookGenres": ["DRAMA", "POETRY"],
-    "bookTags": ["INSPIRATIONAL", "SELF_HELP", "HIGHLY_RECOMMENDED"]
+    "bookTags": ["INSPIRATIONAL", "SELF_HELP", "HIGHLY_RECOMMENDED"],
+    "verifiedStatus": "UNVERIFIED"
   },
   {
     "id": "book_9",
@@ -122,7 +130,8 @@
     "publisher": "กระทรวงศึกษาธิการ",
     "coverImagePath": "./prisma/seed/images/book/pasa-patee.jpg",
     "bookGenres": ["CRIME", "TRUE_CRIME", "MYSTERY", "THRILLER"],
-    "bookTags": ["THRILLER", "MYSTERY", "DETECTIVE", "DARK_FANTASY"]
+    "bookTags": ["THRILLER", "MYSTERY", "DETECTIVE", "DARK_FANTASY"],
+    "verifiedStatus": "UNVERIFIED"
   },
   {
     "id": "book_10",
@@ -135,7 +144,8 @@
     "publisher": "nanmeebooks",
     "coverImagePath": "./prisma/seed/images/book/who-sutep.gif",
     "bookGenres": ["SELF_HELP", "NON_FICTION", "HEALTH_WELLNESS", "BIOGRAPHY", "MEMOIR"],
-    "bookTags": ["CLASSIC", "AWARD_WINNING"]
+    "bookTags": ["CLASSIC", "AWARD_WINNING"],
+    "verifiedStatus": "APPROVED"
   },
   {
     "id": "book_11",
@@ -147,6 +157,7 @@
     "publisher": "เผยแพร่โดยอิสระ",
     "coverImagePath": "./prisma/seed/images/book/mao-quotes.jpg",
     "bookGenres": ["ROMANCE", "SCIENCE_FICTION", "HORROR"],
-    "bookTags": ["BESTSELLER", "NEW_RELEASE", "MUST_READ"]
+    "bookTags": ["BESTSELLER", "NEW_RELEASE", "MUST_READ"],
+    "verifiedStatus": "APPROVED"
   }
 ]

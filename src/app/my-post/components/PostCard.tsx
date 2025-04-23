@@ -1,13 +1,14 @@
-import clsx from "clsx";
-import { Wrench } from "lucide-react";
+import { Delete, Wrench } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Post } from "@/data/dto/post.dto";
-import { bookTagInThai, genreInThai } from "@/lib/translation";
+import { deletePost, editPost } from "@/data/post";
 
 type PostCardProps = {
   post: Post;
+  // onPostChange: () => void; TODO
 };
 
 const cut = (str: string, maxLength: number) => {
@@ -17,19 +18,90 @@ const cut = (str: string, maxLength: number) => {
   return str;
 };
 
+// TODO
 function PostCard({ post }: PostCardProps) {
+  const [editMode, setEditMode] = useState(false);
+  const [editedPost, setEditedPost] = useState({
+    title: post.title,
+    price: post.price,
+    bookId: post.bookId,
+    verifiedStatus: "CHANGE_REQUESTED",
+  });
+
+  const oldPost = {
+    title: post.title,
+    price: post.price,
+    bookId: post.bookId,
+    verifiedStatus: "CHANGE_REQUESTED",
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === "price") {
+      setEditedPost((prev) => ({ ...prev, [name]: Number(value) }));
+    } else {
+      setEditedPost((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const onSubmit = async (id: string) => {
+    try {
+      setEditedPost((prev) => ({ ...prev, verifiedStatus: "UNDER_REVIEW" }));
+      const res = await editPost(editedPost, id);
+      if (res instanceof Error) {
+        console.error(res);
+      }
+    } catch (error) {
+      console.error("Error editing post:", error);
+    }
+    setEditMode(false);
+    // await onPostChange(); TODO
+  };
+
+  const onDelete = async (id: string) => {
+    const confirmed = window.confirm("คุณแน่ใจหรือไม่ว่าต้องการลบโพสต์นี้?");
+    if (!confirmed) return;
+
+    try {
+      const res = await deletePost(id);
+      if (res instanceof Error) {
+        console.error(res);
+      }
+    } catch (error) {
+      console.error("Error posting book:", error);
+    }
+    // await onPostChange(); TODO
+  };
+
   return (
     <>
       <div
         data-test-id="post-card"
-        className={clsx(
-          "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2 max-md:w-full md:w-[100%] lg:w-[48%] 2xl:w-[32%]",
-        )}
+        className={"flex w-full flex-col overflow-hidden rounded-lg border border-gray-300 bg-white p-2"}
       >
         <div className="m-2.5 flex flex-row justify-between text-lg">
-          <h3>{post.title}</h3>
+          {editMode ? (
+            <input
+              name="title"
+              value={editedPost.title}
+              onChange={handleChange}
+              className="rounded border border-gray-300 p-1"
+            />
+          ) : (
+            <h3>{post.title}</h3>
+          )}
           <div className="flex items-center space-x-4">
-            <span data-test-id="post-price">{post.price} ฿</span>
+            {editMode ? (
+              <input
+                name="price"
+                type="number"
+                value={editedPost.price}
+                onChange={handleChange}
+                className="w-20 rounded border border-gray-300 p-1"
+              />
+            ) : (
+              <span data-test-id="post-price">{post.price} ฿</span>
+            )}
           </div>
         </div>
         <div className="m-2 flex w-full flex-row max-sm:text-sm">
@@ -52,14 +124,6 @@ function PostCard({ post }: PostCardProps) {
                 {cut(post.book.author, 40)}
               </div>
               <div>
-                <strong>ประเภท </strong>
-                {cut(post.book.bookGenres?.map((key) => genreInThai[key]).join(", ") || "", 65)}
-              </div>
-              <div>
-                <strong>แท็ก </strong>
-                {cut(post.book.bookTags?.map((key) => bookTagInThai[key]).join(", ") || "", 65)}
-              </div>
-              <div>
                 <strong>สำนักพิมพ์ </strong>
                 {cut(post.book.publisher, 40)}
               </div>
@@ -67,11 +131,45 @@ function PostCard({ post }: PostCardProps) {
           </div>
         </div>
         <div className="mt-auto flex gap-2 self-end">
-          <Button variant="default">
-            <div className="flex items-center justify-center gap-x-2">
-              <Wrench className="h-6 w-6" /> แก้ไขข้อมูลโพสต์
-            </div>
-          </Button>
+          {editMode && (
+            <>
+              <Button
+                variant="default"
+                className="bg-white text-red-500 hover:bg-red-500 hover:text-white"
+                onClick={() => {
+                  setEditedPost(oldPost);
+                  setEditMode(false);
+                }}
+              >
+                <div className="flex items-center justify-center gap-x-2">ยกเลิกการแก้ไข</div>
+              </Button>
+              <Button
+                variant="default"
+                className="text-green-500 hover:bg-green-500 hover:text-white"
+                onClick={() => {
+                  onSubmit(post.id);
+                }}
+              >
+                <div className="flex items-center justify-center gap-x-2">บันทึกการแก้ไข</div>
+              </Button>
+            </>
+          )}
+          {!editMode && (
+            <>
+              <Button variant="default" className="bg-red-500 hover:bg-red-700" onClick={() => onDelete(post.id)}>
+                <div className="flex items-center justify-center gap-x-2">
+                  ลบโพสต์นี้
+                  <Delete className="h-6 w-6" />
+                </div>
+              </Button>
+              <Button variant="default" onClick={() => setEditMode(true)} className="bg-yellow-500 hover:bg-yellow-700">
+                <div className="flex items-center justify-center gap-x-2">
+                  <Wrench className="h-6 w-6" />
+                  แก้ไขข้อมูลโพสต์
+                </div>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </>

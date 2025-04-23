@@ -12,5 +12,6 @@ export type Book = {
   coverImageKey: string;
   bookGenres?: GenreType[];
   bookTags?: BookTagType[];
+  verifiedStatus: string;
   recommendPrice?: number;
 };

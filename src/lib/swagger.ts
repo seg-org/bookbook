@@ -1,6 +1,7 @@
 import { OpenApiGeneratorV3 } from "@asteasolutions/zod-to-openapi";
 import { OpenAPIObjectConfig } from "@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator";
 
+import { adminRegistry } from "@/app/api/admin/swagger";
 import { bookmarkRegistry } from "@/app/api/bookmarks/swagger";
 import { bookRegistry } from "@/app/api/books/swagger";
 import { chatRegistry } from "@/app/api/chat/swagger";
@@ -16,6 +17,7 @@ export const getApiDocs = async () => {
     ...bookmarkRegistry.definitions,
     ...chatRegistry.definitions,
     ...transactionRegistry.definitions,
+    ...adminRegistry.definitions,
   ]);
   const config: OpenAPIObjectConfig = {
     openapi: "3.0.0",
