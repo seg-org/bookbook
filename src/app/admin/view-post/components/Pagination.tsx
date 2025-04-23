@@ -1,18 +1,22 @@
-import { usePostContext } from "@/context/postContext";
+import { useState } from "react";
 
-export const Pagination = () => {
-  const { pagination, setPostsFilters } = usePostContext();
-  if (!pagination) return null;
+type PaginationProps = {
+  totalPages: number;
+  setPage: (page: number) => void;
+  cur_page: number;
+};
 
-  const { page, totalPages } = pagination;
+export const Pagination = ({ totalPages, setPage, cur_page }: PaginationProps) => {
+  const [currentPage, setCurrentpage] = useState(cur_page);
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
-      setPostsFilters((prev) => ({ ...prev, page }));
+      setCurrentpage(page);
+      setPage(page);
     }
   };
 
-  const getVisiblePages = () => {
+  const getVisiblePages = (): (number | string)[] => {
     const maxVisible = 20;
     const pages: (number | string)[] = [];
 
@@ -20,7 +24,7 @@ export const Pagination = () => {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
 
-    const start = Math.max(2, page - Math.floor((maxVisible - 4) / 2));
+    const start = Math.max(2, currentPage - Math.floor((maxVisible - 4) / 2));
     const end = Math.min(totalPages - 1, start + maxVisible - 5);
 
     pages.push(1);
@@ -37,12 +41,13 @@ export const Pagination = () => {
 
     return pages;
   };
+
   const visiblePages = getVisiblePages();
 
   return (
     <div className="mt-4 flex items-center justify-center space-x-2">
-      {page > 1 && (
-        <button className="p-2 text-blue-500" onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+      {currentPage > 1 && (
+        <button className="p-2 text-blue-500" onClick={() => handlePageChange(currentPage - 1)}>
           Previous
         </button>
       )}
@@ -51,20 +56,20 @@ export const Pagination = () => {
         typeof pageNumber === "number" ? (
           <button
             key={idx}
-            className={`p-2 ${page === pageNumber ? "bg-blue-500 text-white" : "text-blue-500"}`}
+            className={`p-2 ${currentPage === pageNumber ? "bg-blue-500 text-white" : "text-blue-500"}`}
             onClick={() => handlePageChange(pageNumber)}
           >
             {pageNumber}
           </button>
         ) : (
-          <span key={idx} className="p-2 text-gray-500">
+          <span key={idx} className="select-none p-2 text-gray-500">
             ...
           </span>
         ),
       )}
 
-      {page < totalPages && (
-        <button className="p-2 text-blue-500" onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+      {currentPage < totalPages && (
+        <button className="p-2 text-blue-500" onClick={() => handlePageChange(currentPage + 1)}>
           Next
         </button>
       )}
