@@ -17,7 +17,7 @@ import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { Button } from "@/components/ui/Button";
 import { useTransactionAdminContext } from "@/context/transactionAdminContext";
 import { createNotification } from "@/data/notification";
-import { updateTransaction } from "@/data/transaction";
+import { validateRefund } from "@/data/refund";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
 
 const TransactionDetailsPopup = () => {
@@ -415,6 +415,9 @@ const TransactionDetailsPopup = () => {
               <div className="flex items-center justify-between">
                 <p className="text-xl font-bold">{transaction?.amount}.-</p>
                 <div className="flex flex-row justify-end space-x-2">
+                  <Button className="mt-4 px-6 py-3 text-xl font-bold hover:bg-transparent" variant="ghost">
+                    {transaction?.amount}.-
+                  </Button>
                   <Button
                     className="mt-4 px-6 py-3"
                     variant="secondary"
@@ -467,12 +470,12 @@ const TransactionDetailsPopup = () => {
                           }
                           try {
                             if (transaction.trackingNumber) {
-                              await updateTransaction({
+                              await validateRefund({
                                 id: transaction.id,
                                 status: "DELIVERING",
                               });
                             } else {
-                              await updateTransaction({
+                              await validateRefund({
                                 id: transaction.id,
                                 status: "PACKING",
                               });
@@ -480,11 +483,11 @@ const TransactionDetailsPopup = () => {
 
                             createNotification(
                               transaction.sellerId,
-                              "การซื้อหนังสือ " + transaction.post.book.title + " ถูกปฎิเสธการรายงาน",
+                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
                             );
                             createNotification(
                               transaction.buyerId,
-                              "การซื้อหนังสือ " + transaction.post.book.title + " ถูกปฎิเสธการรายงาน",
+                              "การซื้อหนังสือ" + transaction.post.book.title + "ถูกปฎิเสธการรายงาน",
                             );
                           } catch (error) {
                             if (!window.confirm("เกิดข้อผิดพลาด")) {
@@ -497,7 +500,7 @@ const TransactionDetailsPopup = () => {
                         })();
                       }}
                     >
-                      ปฏิเสธ
+                      ปฏิเสธการคืนเงิน
                     </Button>
                   )}
                   {transaction?.status != TransactionStatus.FAIL &&
@@ -509,7 +512,7 @@ const TransactionDetailsPopup = () => {
                           router.push(`/admin-transaction-deny/${transaction.id}`);
                         }}
                       >
-                        ยกเลิก
+                        อนุมัติการคืนเงิน
                       </Button>
                     )}
                 </div>
