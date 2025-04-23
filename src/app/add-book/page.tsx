@@ -13,6 +13,7 @@ import { bookImageFolderName } from "@/constants/s3FolderName";
 import { getObjectUrl, putObject } from "@/data/object";
 
 import { BookTagType, GenreType } from "../api/books/book_enum";
+import { bookTagInThai, genreInThai} from "@/lib/translation";
 
 const bookSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters long"),
@@ -52,7 +53,7 @@ export default function AddBookPage() {
   };
   const genreOptions = Object.values(GenreType.enum).map((g) => ({
     value: g,
-    label: g.replace(/_/g, " "),
+    label: genreInThai[g],
   }));
 
   type BookTagOption = {
@@ -61,7 +62,7 @@ export default function AddBookPage() {
   };
   const bookTagOptions = Object.values(BookTagType.enum).map((tag) => ({
     value: tag,
-    label: tag.replace(/_/g, " "),
+    label: bookTagInThai[tag],
   }));
 
   const [message, setMessage] = useState("");
