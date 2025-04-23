@@ -1,11 +1,11 @@
+import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+
+import { getUrl } from "@/app/api/objects/s3";
+import { GetPostsRequest, PostsResponsePaginated } from "@/app/api/posts/schemas";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
-import { getUrl } from "@/app/api/objects/s3";
-
-import { GetPostsRequest, PostsResponsePaginated } from "@/app/api/posts/schemas";
 
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);

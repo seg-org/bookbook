@@ -1,13 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { PostWithBookmark, usePostContext } from "@/context/postContext";
-import { Pagination } from "./Pagination";
-
-import PostCard from "./PostCard";
-
-import { Post } from "@/data/dto/post.dto";
 import { Button } from "@/components/ui/Button";
+import { PostWithBookmark } from "@/context/postContext";
+
+import { Pagination } from "./Pagination";
+import PostCard from "./PostCard";
 
 export const PostList = () => {
   const statusLabels: Record<string, string> = {
@@ -47,7 +45,7 @@ export const PostList = () => {
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-  }, [sortBy, sortOrder, selectedStatus, postId]);
+  }, [sortBy, sortOrder, selectedStatus, postId, page]);
 
   useEffect(() => {
     setLoading(false);
@@ -59,7 +57,6 @@ export const PostList = () => {
   }, [priceAsc]);
 
   const handleSortPrice = () => {
-    const newOrder = priceAsc === 1 ? "desc" : "asc";
     setPriceAsc(-1 * priceAsc);
   };
 

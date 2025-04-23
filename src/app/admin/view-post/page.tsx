@@ -1,14 +1,12 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
-import { Pagination } from "./components/Pagination";
 import { PostList } from "./components/PostList";
 
 function AdminViewPage() {
-  const { status } = useSession();
-  const isAuthenticated = status === "authenticated";
-  const router = useRouter();
+  // TODO
+  // const { status } = useSession();
+  // const isAuthenticated = status === "authenticated";
+  // const router = useRouter();
   // TODO
   // if (!isAuthenticated) {
   //   router.push("/login");

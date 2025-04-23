@@ -1,17 +1,13 @@
 "use client";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import { LoadingAnimation } from "@/components/LoadingAnimation";
-import { useGetMyPost } from "@/hooks/useGetAllPosts";
+import { PostWithBookmark } from "@/context/postContext";
 
 import { Pagination } from "./Pagination";
 import PostCard from "./PostCard";
-import { PostWithBookmark } from "@/context/postContext";
 
 export const PostList = () => {
-  const { data: session } = useSession();
-
   const statusLabels: Record<string, string> = {
     VERIFIED: "ตรวจสอบแล้ว",
     CHANGE_REQUESTED: "รอการแก้ไข",
@@ -58,13 +54,17 @@ export const PostList = () => {
   }, [priceAsc]);
 
   const handleSortPrice = () => {
-    const newOrder = priceAsc === 1 ? "desc" : "asc";
     setPriceAsc(-1 * priceAsc);
   };
 
   const handleCheckbox = (status: string) => {
     setSelectedStatus(status);
   };
+
+  if (loading) {
+    return <LoadingAnimation />;
+  }
+
   // if (error) {
   //   return <div>Failed to get posts</div>;
   // }
@@ -104,7 +104,7 @@ export const PostList = () => {
         ) : (
           <div className="m-2 ml-1.5 grid w-full grid-cols-1 gap-5 p-2 pt-8 text-lg lg:grid-cols-2 2xl:grid-cols-3">
             {posts.map((post) => (
-              <PostCard post={post} />
+              <PostCard key={post.id} post={post} />
             ))}
           </div>
         )}
