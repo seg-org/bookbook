@@ -90,18 +90,18 @@ export default function SpecialSearch() {
         </div>
       </div>
       {/* Selected */}
-      <div className="mt-6 rounded-md border border-gray-300 bg-gray-50 p-4 break-words">
-        <h3 className="mb-2 font-semibold">Selected:</h3>
+      <div className="mt-6 rounded-md border border-gray-300 bg-gray-50 p-4 break-words max-w-3xl">
+        <h3 className="mb-2 font-semibold">เงื่อนไขพิเศษ:</h3>
         <p>
-          <strong>Selected Book Genres:</strong>{" "}
+          <strong>ประเภทหนังสือ:</strong>{" "}
           {selectedBookGenres.map((genre) => genreInThai[genre]).join(", ")}
         </p>
         <p>
-          <strong>Selected Book Tags:</strong>{" "}
+          <strong>แท็กหนังสือ:</strong>{" "}
           {selectedBookTags.map((tag) => bookTagInThai[tag]).join(", ")}
         </p>
         <p>
-          <strong>Selected Special Descriptions:</strong>{" "}
+          <strong>คุณสมบัติพิเศษของหนังสือ:</strong>{" "}
           {selectedSpecialDescriptions.map((description) => specialDescriptionInThai[description]).join(", ")}
         </p>
       </div>
