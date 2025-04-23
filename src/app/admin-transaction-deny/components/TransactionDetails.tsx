@@ -11,7 +11,6 @@ import {
 import Image from "next/image";
 
 import { Transaction } from "@/data/dto/transaction.dto";
-import { getUrl } from "@/app/api/objects/s3";
 
 const TransactionDetails = ({ transaction }: { transaction: Transaction | undefined }) => {
   // pardon me with this curse code, I just want to code to work

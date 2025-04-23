@@ -18,9 +18,6 @@ import { Button } from "@/components/ui/Button";
 import { useTransactionContext } from "@/context/transactionContext";
 import { createNotification } from "@/data/notification";
 import { useGetTransaction } from "@/hooks/useGetTransactions";
-import { getUrl } from "@/app/api/objects/s3";
-import { getObjectUrl } from "@/data/object";
-import { Eraser } from "lucide-react";
 
 const TransactionDetailsPopup = () => {
   const router = useRouter();
@@ -350,7 +347,10 @@ const TransactionDetailsPopup = () => {
                     <p className="font-bold text-red-400">หลักฐาน : </p>
                     <a
                       href={
-                        transaction?.failData?.evidenceURL[0] ? getReportUrl(transaction.failData.evidenceURL[0]) : ""
+                        transaction?.failData?.evidenceURL[0]
+                          ? "https://bookbook-bucket.s3.ap-southeast-1.amazonaws.com/report_evidence/" +
+                            transaction.failData.evidenceURL[0]
+                          : ""
                       }
                       className="max-w-56 break-words text-blue-600 underline"
                       target="_blank"
