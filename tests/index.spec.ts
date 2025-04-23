@@ -85,7 +85,7 @@ test("Post Sell Book", async ({ page }) => {
   await page.getByTestId("book-price").fill("69");
   await page.getByRole("button", { name: "โพสต์ขายหนังสือ" }).click();
 
-  // await expect(page.getByText("ช่วยซื้อหนังสือเกผมหน่อย")).toBeVisible();
+  await expect(page.getByText("ช่วยซื้อหนังสือเกผมหน่อย")).toBeVisible();
 
   await expect(page.getByText("Alice Adams")).toBeVisible();
   await expect(page.getByText("69")).toBeVisible();

@@ -147,7 +147,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
             <div className="flex w-full flex-col items-start gap-2">
               <label htmlFor="book-condition">สภาพหนังสือ</label>
               <select id="book-condition" name="book-condition" className="w-full rounded border border-black p-2">
-                <option value="NO_DAMEGED">ไม่มีรอยขีดข่วน</option>
+                <option value="NO_DAMAGED">ไม่มีรอยขีดข่วน</option>
                 <option value="SLIGHTLY_DAMAGED">มีรอยขีดข่วนเล็กน้อย</option>
                 <option value="DAMAGED">มีรอยขีดข่วน</option>
               </select>
