@@ -56,6 +56,7 @@ export const PostResponse = z.object({
     .array(z.string())
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.openapi({ example: "NO_DAMAGED" }),
+  verifiedStatus: z.string().openapi({ example: "VERIFIED" }),
   createdAt: z.date().openapi({ example: "2025-04-01T10:00:00Z" }),
   updatedAt: z.date().openapi({ example: "2025-04-01T10:00:00Z" }),
 });
@@ -84,4 +85,5 @@ export const UpdatePostRequest = z.object({
     .optional()
     .openapi({ example: ["https://example.com/damage1.jpg", "https://example.com/damage2.jpg"] }),
   damage: DamageEnumType.optional().openapi({ example: "DAMAGED" }),
+  verifiedStatus: z.string().optional().openapi({ example: "VERIFIED" }),
 });
