@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { getUrl } from "@/app/api/objects/s3";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { bookTagInThai, genreInThai, specialDescriptionInThai } from "@/lib/translation";
+import { bookTagInThai, genreInThai, specialDescriptionInThai, damageInThai } from "@/lib/translation";
 
 import BookmarkAction from "./BookmarkAction";
 import PostAction from "./PostAction";
@@ -88,6 +88,11 @@ export default async function PostDetailPage({ params }: { params: Promise<{ id:
               <span className="font-bold">พิเศษ </span>
               <span>{post.specialDescriptions?.map((key) => specialDescriptionInThai[key]).join(", ")}</span>
             </p>
+            <p>
+              <span className="font-bold">สภาพหนังสือ </span>
+              <span>{damageInThai[post.damage]}</span>
+            </p>
+
             <p>
               <span className="font-bold">สำนักพิมพ์ </span>
               <span>{post.book.publisher}</span>

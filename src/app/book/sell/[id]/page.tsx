@@ -143,7 +143,7 @@ export default async function SellBookConfirmPage({ params }: { params: Promise<
               <select id="book-condition" name="book-condition" className="w-full rounded border border-black p-2">
                 <option value="NO_DAMAGED">ไม่มีรอยขีดข่วน</option>
                 <option value="MINOR_DAMAGED">มีรอยขีดข่วนเล็กน้อย</option>
-                <option value="MAJOR_DAMAGED">มีรอยขีดข่วนมาก</option>
+                <option value="MAJOR_DAMAGED">มีรอยขีดข่วน</option>
               </select>
             </div>
 

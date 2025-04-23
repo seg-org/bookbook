@@ -83,3 +83,9 @@ export const specialDescriptionInThai = {
   INTERACTIVE_ELEMENTS: "องค์ประกอบเชิงโต้ตอบ",
   BILINGUAL_EDITION: "ฉบับสองภาษา",
 } as const satisfies Record<SpecialDescriptionType, string>;
+
+export const damageInThai = {
+  NO_DAMAGED: "ไม่มีรอยขีดข่วน",
+  SLIGHTLY_DAMAGED: "มีรอยขีดข่วนเล็กน้อย",
+  DAMAGED: "มีรอยขีดข่วน",
+} as const satisfies Record<"NO_DAMAGED" | "SLIGHTLY_DAMAGED" | "DAMAGED", string>;
