@@ -65,7 +65,19 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
-    const rawQueryParams = Object.fromEntries(url.searchParams.entries());
+    // const rawQueryParams = Object.fromEntries(url.searchParams.entries());
+    const rawQueryParams: Record<string, string | string[]> = {};
+    for (const [key, value] of url.searchParams.entries()) {
+      if (key.endsWith("[]")) {
+        const cleanKey = key.slice(0, -2); // Remove "[]"
+        if (!rawQueryParams[cleanKey]) {
+          rawQueryParams[cleanKey] = [];
+        }
+        (rawQueryParams[cleanKey] as string[]).push(value);
+      } else {
+        rawQueryParams[key] = value;
+      }
+    }
     const validatedParams = GetPostsRequest.safeParse(rawQueryParams);
     if (!validatedParams.success) {
       return NextResponse.json({ error: validatedParams.error.errors }, { status: 400 });
@@ -92,6 +104,8 @@ export async function GET(req: NextRequest) {
         gte: filters.minPages ? filters.minPages : undefined,
         lte: filters.maxPages ? filters.maxPages : undefined,
       },
+      bookGenres: filters.bookGenres && filters.bookGenres.length > 0 ? { hasEvery: filters.bookGenres } : undefined,
+      bookTags: filters.bookTags && filters.bookTags.length > 0 ? { hasEvery: filters.bookTags } : undefined,
     };
 
     const session = await getServerSession(authOptions);
@@ -100,10 +114,13 @@ export async function GET(req: NextRequest) {
         where: {
           book: bookFilter,
           published: true,
+          specialDescriptions:
+            filters.specialDescriptions && filters.specialDescriptions.length > 0
+              ? { hasEvery: filters.specialDescriptions }
+              : undefined,
           sellerId: {
             not: session?.user.id,
           },
-          verifiedStatus: "VERIFIED",
         },
         include: {
           book: true,
