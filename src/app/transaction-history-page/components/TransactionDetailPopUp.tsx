@@ -509,7 +509,7 @@ const TransactionDetailsPopup = () => {
                           console.error(err);
                         }
                         setSelectingTransaction("");
-                        window.location.reload();
+                        // window.location.reload();
                       }}
                     >
                       รับสำเร็จ
