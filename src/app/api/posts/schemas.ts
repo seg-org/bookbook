@@ -1,9 +1,9 @@
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { z } from "zod";
 
+import { BookTagType, GenreType } from "../books/book_enum";
 import { BookResponse } from "../books/schemas";
 import { SpecialDescriptionType } from "../posts/post_enum";
-import { GenreType, BookTagType } from "../books/book_enum";
 
 extendZodWithOpenApi(z);
 

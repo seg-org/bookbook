@@ -109,7 +109,10 @@ export async function GET(req: NextRequest) {
       where: {
         book: bookFilter,
         published: true,
-        specialDescriptions: filters.specialDescriptions && filters.specialDescriptions.length > 0 ? { hasEvery: filters.specialDescriptions } : undefined,
+        specialDescriptions:
+          filters.specialDescriptions && filters.specialDescriptions.length > 0
+            ? { hasEvery: filters.specialDescriptions }
+            : undefined,
       },
       include: { book: true },
       skip,
