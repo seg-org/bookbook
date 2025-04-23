@@ -16,7 +16,9 @@ export default function UserCard({ user }: UserCardProps) {
           <span className="font-bold">
             {user.firstName} {user.lastName}
           </span>
-          {user.isSeller && <span className="mx-2 rounded-xl bg-pink-300 px-2 text-sm">ผู้ขาย</span>}
+          {user.isSeller && user.sellerProfile?.isApproved && (
+            <span className="mx-2 rounded-xl bg-pink-300 px-2 text-sm">ผู้ขาย</span>
+          )}
           {user.isAdmin && <span className="mx-2 rounded-xl bg-yellow-300 px-2 text-sm">แอดมิน</span>}
         </p>
         <p>{user.email}</p>

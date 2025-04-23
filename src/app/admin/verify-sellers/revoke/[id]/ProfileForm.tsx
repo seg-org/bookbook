@@ -114,7 +114,8 @@ export function ProfileForm({ initialData }: { initialData: UserProfile }) {
         description: "Seller profile updated successfully",
       });
       setIsEditing(false);
-      router.refresh();
+      alert("โปรไฟล์ผู้ขายถูกระงับเรียบร้อย");
+      router.push("/admin/users");
     } catch (error) {
       console.error("Error updating seller profile:", error);
       toast({

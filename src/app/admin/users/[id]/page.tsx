@@ -2,6 +2,7 @@ import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Button } from "@/components/ui/Button";
 import { verifyAdmin } from "@/lib/authorization";
 import { prisma } from "@/lib/prisma";
 
@@ -70,29 +71,6 @@ export default async function ManageUserPage({ params }: { params: Promise<{ id:
     revalidatePath("/admin/users");
   }
 
-  async function updateSellerProfile(formData: FormData) {
-    "use server";
-
-    await verifyAdmin();
-
-    const bankName = formData.get("bankName")?.toString();
-    const bankAccount = formData.get("bankAccount")?.toString();
-
-    if (!bankName || !bankAccount) {
-      throw new Error("กรุณากรอกข้อมูลให้ครบถ้วน");
-    }
-
-    await prisma.sellerProfile.update({
-      where: { userId: id },
-      data: {
-        bankName,
-        bankAccount,
-      },
-    });
-
-    revalidatePath("/admin/users");
-  }
-
   return (
     <main className="mx-auto w-screen max-w-2xl rounded-xl bg-white shadow-lg">
       <h1 className="text-2xl font-bold">จัดการผู้ใช้</h1>
@@ -128,63 +106,15 @@ export default async function ManageUserPage({ params }: { params: Promise<{ id:
         <button type="submit">บันทึกข้อมูล</button>
       </form>
 
-      {user.isSeller && user.sellerProfile && (
+      {user.isSeller && user.sellerProfile && user.sellerProfile.isApproved && (
         <>
           <h2 className="text-xl font-bold">จัดการโปรไฟล์ผู้ขาย</h2>
 
-          <form action={updateSellerProfile} className={styles.userManageForm}>
-            <div>
-              <div>
-                <label htmlFor="bankName">ชื่อธนาคาร</label>
-                <input
-                  type="text"
-                  name="bankName"
-                  id="bankName"
-                  defaultValue={user.sellerProfile.bankName ?? ""}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="bankAccount">หมายเลขบัญชีธนาคาร</label>
-                <input
-                  type="text"
-                  name="bankAccount"
-                  id="bankAccount"
-                  defaultValue={user.sellerProfile.bankAccount ?? ""}
-                  required
-                />
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <label htmlFor="idCardNumber">เลขประจำตัวประชาชน</label>
-                <input
-                  type="text"
-                  name="idCardNumber"
-                  id="idCardNumber"
-                  value={user.sellerProfile.idCardNumber ?? ""}
-                  disabled
-                />
-              </div>
-              <div>
-                <label htmlFor="idCardImage">อนุมัติเมื่อ</label>
-                <input
-                  type="text"
-                  name="idCardImage"
-                  id="idCardImage"
-                  value={
-                    user.sellerProfile.isApproved && user.sellerProfile.approvedAt
-                      ? user.sellerProfile.approvedAt.toLocaleString("th-TH")
-                      : "ยังไม่ถูกอนุมัติ"
-                  }
-                  disabled
-                />
-              </div>
-            </div>
-
-            <button type="submit">บันทึกข้อมูล</button>
-          </form>
+          <div className="mt-4 flex w-full flex-col items-center gap-4 p-4">
+            <Button variant="link" size="lg" className="w-fit bg-pink-200">
+              <Link href={`/admin/verify-sellers/revoke/${user.id}`}>ระงับบัญชีผู้ขาย</Link>
+            </Button>
+          </div>
 
           {reports.length > 0 && (
             <>
