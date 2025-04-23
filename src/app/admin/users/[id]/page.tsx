@@ -2,12 +2,12 @@ import { revalidatePath } from "next/cache";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Button } from "@/components/ui/Button";
 import { verifyAdmin } from "@/lib/authorization";
 import { prisma } from "@/lib/prisma";
 
 import styles from "./styles.module.scss";
 import UserBan from "./UserBan";
-import { Button } from "@/components/ui/Button";
 
 export default async function ManageUserPage({ params }: { params: Promise<{ id: string }> }) {
   await verifyAdmin();
@@ -106,37 +106,35 @@ export default async function ManageUserPage({ params }: { params: Promise<{ id:
         <button type="submit">บันทึกข้อมูล</button>
       </form>
 
-      {user.isSeller &&
-        user.sellerProfile &&
-        user.sellerProfile.isApproved && (
-          <>
-            <h2 className="text-xl font-bold">จัดการโปรไฟล์ผู้ขาย</h2>
+      {user.isSeller && user.sellerProfile && user.sellerProfile.isApproved && (
+        <>
+          <h2 className="text-xl font-bold">จัดการโปรไฟล์ผู้ขาย</h2>
 
-            <div className="mt-4 flex w-full flex-col items-center gap-4 p-4">
-              <Button variant="link" size="lg" className="w-fit bg-pink-200">
-                <Link href={`/admin/verify-sellers/revoke/${user.id}`}>ระงับบัญชีผู้ขาย</Link>
-              </Button>
-            </div>
+          <div className="mt-4 flex w-full flex-col items-center gap-4 p-4">
+            <Button variant="link" size="lg" className="w-fit bg-pink-200">
+              <Link href={`/admin/verify-sellers/revoke/${user.id}`}>ระงับบัญชีผู้ขาย</Link>
+            </Button>
+          </div>
 
-            {reports.length > 0 && (
-              <>
-                <h2 className="text-xl font-bold">ประวัติการถูกรายงานโพสต์</h2>
+          {reports.length > 0 && (
+            <>
+              <h2 className="text-xl font-bold">ประวัติการถูกรายงานโพสต์</h2>
 
-                <div className="mt-2 flex w-full flex-col gap-2 px-4">
-                  {reports.map((report) => (
-                    <div key={report.id} className="rounded-lg border border-black p-2">
-                      <Link href={`/post/${report.postId}`} className="text-blue-500">
-                        ดูรายละเอียดโพสต์
-                      </Link>
-                      <p>เหตุผล: {report.reason}</p>
-                      <p>เวลาที่รายงาน: {report.createdAt.toLocaleString("th-TH")}</p>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </>,
-        )}
+              <div className="mt-2 flex w-full flex-col gap-2 px-4">
+                {reports.map((report) => (
+                  <div key={report.id} className="rounded-lg border border-black p-2">
+                    <Link href={`/post/${report.postId}`} className="text-blue-500">
+                      ดูรายละเอียดโพสต์
+                    </Link>
+                    <p>เหตุผล: {report.reason}</p>
+                    <p>เวลาที่รายงาน: {report.createdAt.toLocaleString("th-TH")}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
 
       <UserBan user={user} />
     </main>
